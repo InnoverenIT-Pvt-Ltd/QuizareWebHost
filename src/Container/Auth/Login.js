@@ -81,8 +81,10 @@ class Login extends Component {
                 </Link>
 </div>
 <div class="mt-4">
+<Link to="/select">
 <Button type="primary"  htmlType="submit" style={{width:"15rem",height:"2rem",backgroundColor:"white",borderBlockColor:"#126c5e",borderRadius:"0"}}>
-<h3 class="font-extrabold"> Google Login</h3></Button>  
+<h3 class="font-extrabold"> Google Login</h3></Button> 
+</Link> 
 </div>    
 </div>
               </MainWrapper>
