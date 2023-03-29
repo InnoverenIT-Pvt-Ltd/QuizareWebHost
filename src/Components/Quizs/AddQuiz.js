@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button } from "antd";
 import { Formik, Form } from "formik";
+import { Link ,withRouter } from "react-router-dom";
 import * as Yup from "yup";
 import { MainWrapper} from "../UI/Elements";
 import JobHeader from "./JobHeader";
@@ -58,7 +59,7 @@ class AddQuiz extends Component {
               <MainWrapper style={{ width: "100%", margin: "auto",height:"35rem" }}>
 
                 <div class="flex justify-center mt-28">
-                    <h1 class="text-3xl">14 feb 2023</h1></div>
+                    <h1 class="text-3xl"></h1></div>
                 <hr/>
                 <div class="flex justify-center">
                     <h3 class="font-extrabold mt-4">30</h3></div>
@@ -68,8 +69,10 @@ class AddQuiz extends Component {
                     <hr/>
                 <div class="flex items-center flex-col">
 <div class="mt-12">
+<Link to="/question">
 <Button type="primary"  htmlType="submit" style={{width:"15rem",height:"2rem",backgroundColor:"white",borderBlockColor:"#126c5e",borderRadius:"0"}}>
-<h3 class="font-extrabold"> Add Quiz</h3></Button>  
+<h3 class="font-extrabold"> Add Quiz</h3></Button>
+</Link>  
 </div>    
 </div>
               </MainWrapper>
