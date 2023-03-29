@@ -39,6 +39,7 @@ module.exports = {
       'margin10':'10%',
       'margin65':'65%',
       'margin50':'50%',
+      'margin39.5':'39.5rem',
       'margin2':'2%',
       'margin40':'40%',
       'margin31':'33%',
