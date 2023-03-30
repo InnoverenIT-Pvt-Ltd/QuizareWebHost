@@ -21,8 +21,9 @@ import { createBrowserHistory } from "history";
       //console.log(res.data);   
       
        dispatch(getQuizName(res.data.quizId))   
-       console.log("hi",history);  
-       history.push("/addquiz")
+      //  console.log("hi",history);  
+       history.push("/addquiz");
+       window.location.reload()
       dispatch({
         type: types.ADD_QUIZ_NAME_SUCCESS,
         payload: res.data,
