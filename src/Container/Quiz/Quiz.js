@@ -1,11 +1,12 @@
 import React, {useEffect,useState } from 'react';
-import {Formik} from 'formik';
+import {Field, Formik} from 'formik';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import { Link ,withRouter} from "react-router-dom";
 // import MainHeader from '../../Navigation/MainHeader';
 import {deleteQuestion,addQuestion,getQuizName,getCategory} from './QuizAction';
 import { Button, Card, Input } from 'antd';
+import { InputComponent } from "../../Components/Forms/Formik/InputComponent";
 
 //import AllQuiz from './AllQuiz';
 
@@ -71,9 +72,10 @@ function Quiz(props) {
           errors,
           values,
         }) => (
+          <Card style={{ width: 350, height: 450,borderRadius: 1,borderWidth:1,boxShadow: '1px 2px 2px 2px rgba(40,40,40,39)' }}>
           <div >
               <div style={{alignItems: 'center',alignSelf:"center"}}>
-               <Input>{props.showQuiz&&props.showQuiz.quizName}</Input>          
+               <h1>{props.showQuiz&&props.showQuiz.quizName}</h1>          
               </div>
               <div>
                 <Button
@@ -91,19 +93,22 @@ function Quiz(props) {
               {/* Container */}
               <div >
                 <Card >
-                  <Card.Title style={{fontSize: 22, alignSelf:'center'}}>
-                    <Input > Question {count || null}</Input>
-                  </Card.Title>
+                  <Card style={{fontSize: 22, alignSelf:'center'}}>
+                    <h1 > Question {count || null}</h1>
+                  </Card>
 
                   {/* <TouchableOpacity
                   // we can't use perscentge in reactNative
                   
                     > */}
                    
-                      <Input
-                        multiline={true}
-                       value={values.questionName}
-                       numberOfLines={10}
+                      <Field
+                      //   multiline={true}
+                      //  value={values.questionName}
+                      //  numberOfLines={10}
+                      component={InputComponent}
+                      onChangeText={handleChange('questionName')}
+                      style={{textAlign: 'center'}}
                         placeholder="Question"
                         name="questionName"                        
                        
@@ -116,10 +121,13 @@ function Quiz(props) {
                  
                   
                   > */}
-                    <Input
-                    multiline
-                    value={values.option1}
-                    numberOfLines={5}
+                    <Field
+                    // multiline
+                    // value={values.option1}
+                    // numberOfLines={5}
+                    component={InputComponent}
+                    onChangeText={handleChange('option1')}
+                    style={{textAlign: 'center'}}
                       placeholder="Correct answer"
                       name="option1"
                  
@@ -131,10 +139,13 @@ function Quiz(props) {
                     
                     
                     > */}
-                    <Input
-                    multiline
-                    value={values.option2}
-                    numberOfLines={5}
+                    <Field
+                    // multiline
+                    // value={values.option2}
+                    // numberOfLines={5}
+                    component={InputComponent}
+                    onChangeText={handleChange('option2')}
+                    style={{textAlign: 'center'}}
                       placeholder="Option 2"
                       name="option2"                      
                    
@@ -146,36 +157,41 @@ function Quiz(props) {
                   
                 
                     > */}
-                    <Input
-                    multiline
-                    value={values.option3}
-                    numberOfLines={5}
+                    <Field
+                    // multiline
+                    // value={values.option3}
+                    // numberOfLines={5}
+                    component={InputComponent}
+                    onChangeText={handleChange('option3')}
+                    style={{textAlign: 'center'}}
                       placeholder="Option 3"
                       name="option3"
                      
-                      onChangeText={handleChange('option3')}
+                      
                     />
                   {/* </TouchableOpacity> */}
 
                   {/* <TouchableOpacity
                 > */}
-                    <Input
-                    multiline
-                    value={values.option4}
-                    numberOfLines={5}
+                    <Field
+                    // multiline
+                    // value={values.option4}
+                    // numberOfLines={5}
                       placeholder="Option 4"
                       name="option4"
                   
+                      component={InputComponent}
                       onChangeText={handleChange('option4')}
+                      style={{textAlign: 'center'}}
                     />
                   {/* </TouchableOpacity> */}
 
-                  <div style={{ flexDirection: 'row',flexWrap:"wrap" }}> 
+                  <div class="flex flex-wrap justify-center"> 
                   {!!props.category.length&&props.category.map((item)=>{
                     return(
                       <div>
                       <Card>
-                      <Button
+                      <p
                           style={{
                               textAlign: 'center',
                               //color: '#6949FD',
@@ -183,7 +199,7 @@ function Quiz(props) {
                               color:item.categoryId===selectedCategory?"red":'#6949FD'
                           }}
                           onClick={() => handleCategory(item.categoryId)}
-                      >{item.categoryName}</Button>
+                      >{item.categoryName}</p>
                   </Card>
                   </div> 
                     )
@@ -225,6 +241,17 @@ function Quiz(props) {
                                 <Text style={{ textAlign: 'center', color: '#6949FD' }}>Mixed</Text>
                             </Card>
                         </View>           */}
+<div>
+<Button
+                  // title={'Add New Questions'}
+                  // titleStyle={externalStyle.titleStyle}
+                  // containerStyle={externalStyle.containerStyleBD}
+                  // buttonStyle={externalStyle.buttonStyleAdd}
+                  onClick={handleSubmit}
+                  Loading={props.addingQuestion}
+                // onPress={() => props.navigation.navigate('Quiz Addquestions')}
+                >Add New Questions</Button>
+                </div>
                 </Card>
               </div>
 
@@ -254,7 +281,7 @@ function Quiz(props) {
                    // onPress={() => props.navigation.navigate('Finalize Quiz')}
                 />
 
-                <Button
+                {/* <Button
                   title={'Add New Questions'}
                   // titleStyle={externalStyle.titleStyle}
                   // containerStyle={externalStyle.containerStyleBD}
@@ -262,11 +289,12 @@ function Quiz(props) {
                   onClick={handleSubmit}
                   Loading={props.addingQuestion}
                 // onPress={() => props.navigation.navigate('Quiz Addquestions')}
-                />
+                /> */}
               </div>
            
 
           </div>
+          </Card>
         )}
       </Formik>
      
@@ -297,7 +325,8 @@ const mapDispatchToProps = dispatch =>
 
 
 
-// import React from 'react'
+// import React from 'react';
+// import { Link ,withRouter} from "react-router-dom";
 
 // function Quiz() {
 //   return (
@@ -307,5 +336,5 @@ const mapDispatchToProps = dispatch =>
 //   )
 // }
 
-// export default Quiz
+// export default withRouter (Quiz);
 
