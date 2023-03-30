@@ -51,10 +51,6 @@ import React, { Component, lazy, Suspense } from "react";
 import 'antd/dist/reset.css';
 import { connect } from "react-redux";
 import { Route, Switch, Redirect } from "react-router-dom";
-import Job from './Jobsite/Job';
-import JobCard from "./Jobsite/JobCard";
-import JobTalent from "./Jobsite/JobTalent";
-import JobVendor from "./Jobsite/JobVendor";
 import MainApp from "./Main/MainApp";
 import Login from "./Container/Auth/Login";
 import axios from "axios";
@@ -86,11 +82,8 @@ class App extends Component {
           <Suspense fallback={<BundleLoader />}>
             <Switch>
 
-            <Route exact path="/login" component={Login }/>
-       <Route exact path="/" component={Job}/>
-       <Route  exact path="/jobCard" component={JobCard}/>
-        <Route  exact path="/jobVendor" component={JobVendor}/>
-       <Route  exact path="/jobTalent" component={JobTalent}/>
+            <Route exact path="/" component={Login }/>
+
             
               {/* {fetchingUserDetails ? (
                 <BundleLoader />
