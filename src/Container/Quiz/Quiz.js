@@ -2,8 +2,6 @@ import React, {useEffect,useState } from 'react';
 import {
   View,
   Text,
-
-  // Picker,
   StyleSheet,
   TouchableOpacity,
   Dimensions,
@@ -21,7 +19,6 @@ import {deleteQuestion,addQuestion,getQuizName,getCategory} from './QuizAction';
 
 //import AllQuiz from './AllQuiz';
 import externalStyle from '../../style/externalStyle';
-//import {white} from 'react-native-paper/lib/typescript/styles/colors';
 
 function Quiz(props) {
   const [count, setCount] = useState(1);
@@ -30,7 +27,7 @@ function Quiz(props) {
   const handleCategory = (id) => setSelectedCategory(id); 
   
   function handleCallBack(data,resetForm) {
-    //alert(data);
+
      if(data==="success"){
      setSelectedCategory(""),
       resetForm(),

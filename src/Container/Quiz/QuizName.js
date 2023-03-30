@@ -7,10 +7,7 @@ import { Button, Card, Input } from 'antd';
 
 function QuizName(props) { 
  
-//   function handeleCallBack(data) {
-//     if(data==="success"){props.navigation.navigate('Quiz')}
-//     else{alert("Wrong")}
-//  }; 
+
   
   return (
     <>
@@ -22,7 +19,7 @@ function QuizName(props) {
           quizHostId: "QH4472404666122022",         
         }}
         onSubmit={(values,{resetForm}) => {
-          //alert(JSON.stringify(values));         
+              
           props.addQuizName(values,
             // handeleCallBack
             )
