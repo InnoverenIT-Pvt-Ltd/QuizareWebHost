@@ -66,17 +66,19 @@ class Login extends Component {
             
               <MainWrapper
               
-                style={{ width: "91%", margin: "auto",height:"50%" }}
+                style={{ width: "100%", margin: "auto",height:"35rem" }}
               >
                 <div class="flex justify-center">
                     <h1 class="text-3xl bg-red-600">QUIZMAKER</h1></div>
                 <hr/>
                 <div class="flex justify-center">
-                    <h3 class="font-extrabold mt-4">Welcome</h3></div>
+                    <h3 class="font-extrabold mt-12">Welcome</h3></div>
                 <div class="flex items-center flex-col">
             <div class="mt-8">
+            <Link to="/quiz">
             <Button type="primary"  htmlType="submit" style={{width:"15rem",height:"2rem",backgroundColor:"white",borderBlockColor:"blue",borderRadius:"0"}}>
                 <h3 class="font-extrabold">FaceBook Login</h3></Button>
+                </Link>
 </div>
 <div class="mt-4">
 <Button type="primary"  htmlType="submit" style={{width:"15rem",height:"2rem",backgroundColor:"white",borderBlockColor:"#126c5e",borderRadius:"0"}}>
