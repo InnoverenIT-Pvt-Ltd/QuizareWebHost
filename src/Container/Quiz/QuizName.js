@@ -7,10 +7,7 @@ import { Button, Card, Input } from 'antd';
 
 function QuizName(props) { 
  
-//   function handeleCallBack(data) {
-//     if(data==="success"){props.navigation.navigate('Quiz')}
-//     else{alert("Wrong")}
-//  }; 
+
   
   return (
     <>
