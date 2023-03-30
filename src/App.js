@@ -13,6 +13,8 @@ import "./App.css";
 import { BundleLoader } from "./Components/Placeholder";
 import PrivateRoute from "./Helpers/Auth/PrivateRoute";
 import AddQuiz from "./Components/Quiz/AddQuiz";
+import Question1 from "./Components/Quiz/Question1";
+import SelectQuizname from "./Components/Quiz/SelectQuizname";
 // import AppErrorBoundary from "./Helpers/ErrorBoundary/AppErrorBoundary";
 
 
@@ -35,6 +37,8 @@ class App extends Component {
             <Route exact path="/" component={Login }/>
             
             <Route exact path="/quiz" component={AddQuiz }/>
+            <Route exact path="/question" component={Question1 }/>
+            <Route exact path="/select" component={SelectQuizname}/>
 
          
                 <PrivateRoute path="/" component={MainApp} />
