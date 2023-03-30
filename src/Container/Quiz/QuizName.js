@@ -22,7 +22,7 @@ function QuizName(props) {
           quizHostId: "QH4472404666122022",         
         }}
         onSubmit={(values,{resetForm}) => {
-          //alert(JSON.stringify(values));         
+              
           props.addQuizName(values,
             // handeleCallBack
             )

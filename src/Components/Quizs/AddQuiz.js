@@ -9,7 +9,6 @@ import { MainWrapper} from "../UI/Elements";
 import JobHeader from "./JobHeader";
 
 const CandidateSchema = Yup.object().shape({
-  // contactOwner: Yup.string().required("Please Select contact owner"),
   emailId: Yup.string().email("Enter a valid Email").required("Input needed!"),
   firstName: Yup.string().required("Input needed!"),
 });

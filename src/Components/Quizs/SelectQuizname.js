@@ -12,7 +12,6 @@ import JobHeader from "./JobHeader";
 
 
 
-// import SkillsLoadMore from "./CandidateTable/SkillsLoadMore";
 const { Option } = Select;
 /**
  * yup validation scheme for creating a contact
