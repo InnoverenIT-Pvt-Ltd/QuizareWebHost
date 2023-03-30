@@ -16,7 +16,7 @@ import AddQuiz from "./Components/Quizs/AddQuiz";
 import Question1 from "./Components/Quizs/Question1";
 import SelectQuizname from "./Components/Quizs/SelectQuizname";
 import CreateQuiz from "./Components/Quizs/CreateQuiz";
-// import QuizName from "./Container/Quiz/QuizName";
+import QuizName from "./Container/Quiz/QuizName";
 // import AppErrorBoundary from "./Helpers/ErrorBoundary/AppErrorBoundary";
 
 
@@ -42,7 +42,7 @@ class App extends Component {
             <Route exact path="/question" component={Question1 }/>
             <Route exact path="/select" component={SelectQuizname}/>
             <Route exact path="/create" component={CreateQuiz}/>
-            {/* <Route exact path="/" component={QuizName}/> */}
+            <Route exact path="/quizzes" component={QuizName}/>
 
          
                 <PrivateRoute path="/" component={MainApp} />

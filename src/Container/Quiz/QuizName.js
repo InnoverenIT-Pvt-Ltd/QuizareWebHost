@@ -20,11 +20,16 @@ function QuizName(props) {
         }}
         onSubmit={(values,{resetForm}) => {
               
-          props.addQuizName(values,
+          props.addQuizName(
+            {
+              ...values
+            },
+            resetForm()
             // handeleCallBack
             )
-          resetForm();
-        }}>
+         
+        }}
+        >
         {({
           handleChange,
           handleBlur,
@@ -54,8 +59,8 @@ function QuizName(props) {
                   Standard                  
                   </Text> */}
                 <Button
-              
-                onClick={handleSubmit}
+                //  Loading={props.addingQuizName}
+                 onClick={handleSubmit}
                // onClick={() => props.navigation.navigate('Quiz')}
                 >Add quiz</Button>
                 {/* <AntIcon name="enter" color="green" size={40} /> */}
