@@ -24,7 +24,7 @@ import store from '../../Store';
         payload: res.data,
       });
         cb && cb("success");
-          history.push("/question")
+          history.push("/addquiz")
     })
     .catch(err => {      
      // console.log(err);

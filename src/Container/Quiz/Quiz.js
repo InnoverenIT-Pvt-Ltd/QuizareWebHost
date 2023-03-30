@@ -1,24 +1,12 @@
 import React, {useEffect,useState } from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  Dimensions,
-  ScrollView,
-  SafeAreaView,
-  ActivityIndicator,
-} from 'react-native';
 import {Formik} from 'formik';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {TextInput} from 'react-native-paper';
-import {Card, Input, Button, withTheme} from 'react-native-elements';
-import MainHeader from '../../Navigation/MainHeader';
+// import MainHeader from '../../Navigation/MainHeader';
 import {deleteQuestion,addQuestion,getQuizName,getCategory} from './QuizAction';
+import { Button, Card, Input } from 'antd';
 
 //import AllQuiz from './AllQuiz';
-import externalStyle from '../../style/externalStyle';
 
 function Quiz(props) {
   const [count, setCount] = useState(1);
@@ -26,15 +14,15 @@ function Quiz(props) {
   const handleCount = () => setCount(count + 1); 
   const handleCategory = (id) => setSelectedCategory(id); 
   
-  function handleCallBack(data,resetForm) {
-
-     if(data==="success"){
-     setSelectedCategory(""),
-      resetForm(),
-      handleCount()
-     }
-     else{console.log("Wrong")}
-  };  
+  // function handleCallBack(data,resetForm) {
+  //   //alert(data);
+  //    if(data==="success"){
+  //    setSelectedCategory(""),
+  //     resetForm(),
+  //     handleCount()
+  //    }
+  //    else{console.log("Wrong")}
+  // };  
 
   
    useEffect(()=>{
@@ -43,17 +31,10 @@ function Quiz(props) {
    console.log(props.category);
    //alert(props.category);
   
-  //console.log(questionId);
-  const navigate = props.navigation.navigate;
-
-  const navigation = props;
-
-  const onhandleClick = () => {
-    props.navigation.navigate('home');
-  };   
+   
   return (
     <>
-      <MainHeader />
+      {/* <MainHeader /> */}
       <Formik
         initialValues={{
          // duration: "",
@@ -74,7 +55,10 @@ function Quiz(props) {
             ...values,
              quizId:props.showQuiz&&props.showQuiz.quizId,
             categoryId: selectedCategory
-          },(data)=>handleCallBack(data,resetForm))        
+          },
+          (data)=>
+          // handleCallBack
+          (data,resetForm))        
           // resetForm();
           // handleCount();
         }}>
@@ -86,108 +70,110 @@ function Quiz(props) {
           errors,
           values,
         }) => (
-          <View style={externalStyle.firstView}>
-            <ScrollView>
-              <View style={{alignItems: 'center',alignSelf:"center"}}>
-               <Text style={externalStyle.headplayquizhost}>{props.showQuiz&&props.showQuiz.quizName}</Text>          
-              </View>
-              <View>
+          <div >
+              <div style={{alignItems: 'center',alignSelf:"center"}}>
+               <Input>{props.showQuiz&&props.showQuiz.quizName}</Input>          
+              </div>
+              <div>
                 <Button
                     title={'Finalize Quiz'}
-                    titleStyle={externalStyle.titleStyle}
+                   
                    // containerStyle={externalStyle.containerStyleB}
                    containerStyle={{
                     width: 'auto',
                     alignSelf:"flex-end"                   
                   }}
-                    buttonStyle={externalStyle.buttonStyleFinal}
+                   
                     onPress={() => props.navigation.navigate('Finalize Quiz')}
-                /></View>
+                />
+                </div>
               {/* Container */}
-              <View style={externalStyle.container}>
-                <Card containerStyle={externalStyle.mainCard}>
+              <div >
+                <Card >
                   <Card.Title style={{fontSize: 22, alignSelf:'center'}}>
-                    <Text > Question {count || null}</Text>
+                    <Input > Question {count || null}</Input>
                   </Card.Title>
 
-                  <TouchableOpacity
+                  {/* <TouchableOpacity
                   // we can't use perscentge in reactNative
-                    style={externalStyle.questions}>
-                    <SafeAreaView>
-                      <TextInput
+                  
+                    > */}
+                   
+                      <Input
                         multiline={true}
                        value={values.questionName}
                        numberOfLines={10}
                         placeholder="Question"
                         name="questionName"                        
-                        style={externalStyle.question}
+                       
                         onChangeText={handleChange('questionName')}
                       />
-                    </SafeAreaView>
-                  </TouchableOpacity>
-              
+    
+                  {/* </TouchableOpacity> */}
+{/*               
                   <TouchableOpacity
-                    style={externalStyle.viewOption}
+                 
                   
-                  >
-                    <TextInput
+                  > */}
+                    <Input
                     multiline
                     value={values.option1}
                     numberOfLines={5}
                       placeholder="Correct answer"
                       name="option1"
-                      style={externalStyle.option}
+                 
                       onChangeText={handleChange('option1')}
                     />
-                  </TouchableOpacity>
+                  {/* </TouchableOpacity> */}
 
-                  <TouchableOpacity
+                  {/* <TouchableOpacity
                     
-                    style={externalStyle.viewOption}>
-                    <TextInput
+                    
+                    > */}
+                    <Input
                     multiline
                     value={values.option2}
                     numberOfLines={5}
                       placeholder="Option 2"
                       name="option2"                      
-                      style={externalStyle.option}
+                   
                       onChangeText={handleChange('option2')}
                     />
-                  </TouchableOpacity>
+                  {/* </TouchableOpacity>
 
                   <TouchableOpacity
                   
-                    style={externalStyle.viewOption}>
-                    <TextInput
+                
+                    > */}
+                    <Input
                     multiline
                     value={values.option3}
                     numberOfLines={5}
                       placeholder="Option 3"
                       name="option3"
-                      style={externalStyle.option}
+                     
                       onChangeText={handleChange('option3')}
                     />
-                  </TouchableOpacity>
+                  {/* </TouchableOpacity> */}
 
-                  <TouchableOpacity
-                    
-                    style={externalStyle.viewOption}>
-                    <TextInput
+                  {/* <TouchableOpacity
+                > */}
+                    <Input
                     multiline
                     value={values.option4}
                     numberOfLines={5}
                       placeholder="Option 4"
                       name="option4"
-                      style={externalStyle.option}
+                  
                       onChangeText={handleChange('option4')}
                     />
-                  </TouchableOpacity>
+                  {/* </TouchableOpacity> */}
 
-                  <View style={{ flexDirection: 'row',flexWrap:"wrap" }}> 
+                  <div style={{ flexDirection: 'row',flexWrap:"wrap" }}> 
                   {!!props.category.length&&props.category.map((item)=>{
                     return(
-                      <View>
-                      <Card containerStyle={externalStyle.containerStyleC}>
+                      <div>
+                      <Card>
                       <Button
                           style={{
                               textAlign: 'center',
@@ -198,7 +184,7 @@ function Quiz(props) {
                           onClick={() => handleCategory(item.categoryId)}
                       >{item.categoryName}</Button>
                   </Card>
-                  </View> 
+                  </div> 
                     )
                   })}                           
                             {/* <Card containerStyle={externalStyle.containerStyleC}>
@@ -226,7 +212,7 @@ function Quiz(props) {
                                     History
                                 </Text>
                             </Card> */}
-                        </View>
+                        </div>
                         {/* <View style={{ flexDirection: 'row' }}>
                         <Card containerStyle={externalStyle.containerStyleC}>
                                 <Text style={{ textAlign: 'center', color: '#6949FD' }}>Sports</Text>
@@ -239,11 +225,11 @@ function Quiz(props) {
                             </Card>
                         </View>           */}
                 </Card>
-              </View>
+              </div>
 
               {/* Buttons */}
 
-              <View
+              <div
                 style={{
                   flexDirection: 'row',
                   margin:5,
@@ -251,32 +237,35 @@ function Quiz(props) {
                 }}>
                 <Button
                         title={'Delete Question'}
-                        titleStyle={externalStyle.titleStyle}
-                        containerStyle={externalStyle.containerStyleBD}
-                        buttonStyle={externalStyle.buttonStyleDelete}
-                        onPress={() => props.navigation.navigate('Swipecard')}
+                        // titleStyle={externalStyle.titleStyle}
+                        // containerStyle={externalStyle.containerStyleBD}
+                        // buttonStyle={externalStyle.buttonStyleDelete}
+                        // onPress={() => props.navigation.navigate('Swipecard')}
                     />
 
                 <Button
                     title={'Update Quiz'}
-                    titleStyle={externalStyle.titleStyle}
-                    containerStyle={externalStyle.containerStyleBD}
-                    buttonStyle={externalStyle.buttonStyleFinal}
+                    onClick={handleSubmit}
+                    Loading={props.addingQuestion}
+                    // titleStyle={externalStyle.titleStyle}
+                    // containerStyle={externalStyle.containerStyleBD}
+                    // buttonStyle={externalStyle.buttonStyleFinal}
                    // onPress={() => props.navigation.navigate('Finalize Quiz')}
                 />
 
                 <Button
                   title={'Add New Questions'}
-                  titleStyle={externalStyle.titleStyle}
-                  containerStyle={externalStyle.containerStyleBD}
-                  buttonStyle={externalStyle.buttonStyleAdd}
-                  onPress={handleSubmit}
+                  // titleStyle={externalStyle.titleStyle}
+                  // containerStyle={externalStyle.containerStyleBD}
+                  // buttonStyle={externalStyle.buttonStyleAdd}
+                  onClick={handleSubmit}
+                  Loading={props.addingQuestion}
                 // onPress={() => props.navigation.navigate('Quiz Addquestions')}
                 />
-              </View>
+              </div>
            
-            </ScrollView>
-          </View>
+
+          </div>
         )}
       </Formik>
      

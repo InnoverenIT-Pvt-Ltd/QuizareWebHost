@@ -66,7 +66,7 @@ class CreateQuiz extends Component {
             
               <MainWrapper
               
-                style={{ width: "100%", margin: "auto",height:"35rem" }}
+                style={{ width: "100%", margin: "auto",height:"35rem",borderRadius:"0" }}
               >
                 <div class="flex justify-center">
                     <h1 class="text-3xl">QUIZMAKER</h1></div>
@@ -118,11 +118,3 @@ const mapDispatchToProps = (dispatch) =>
   );
 
   export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CreateQuiz));
-
-
-
-
-
-
-
-
