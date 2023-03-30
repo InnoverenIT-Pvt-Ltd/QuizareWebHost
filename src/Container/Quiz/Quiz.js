@@ -2,6 +2,7 @@ import React, {useEffect,useState } from 'react';
 import {Formik} from 'formik';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import { Link ,withRouter} from "react-router-dom";
 // import MainHeader from '../../Navigation/MainHeader';
 import {deleteQuestion,addQuestion,getQuizName,getCategory} from './QuizAction';
 import { Button, Card, Input } from 'antd';
@@ -84,7 +85,7 @@ function Quiz(props) {
                     alignSelf:"flex-end"                   
                   }}
                    
-                    onPress={() => props.navigation.navigate('Finalize Quiz')}
+                    // onPress={() => props.navigation.navigate('Finalize Quiz')}
                 />
                 </div>
               {/* Container */}
@@ -106,7 +107,7 @@ function Quiz(props) {
                         placeholder="Question"
                         name="questionName"                        
                        
-                        onChangeText={handleChange('questionName')}
+                        // onChangeText={handleChange('questionName')}
                       />
     
                   {/* </TouchableOpacity> */}
@@ -122,7 +123,7 @@ function Quiz(props) {
                       placeholder="Correct answer"
                       name="option1"
                  
-                      onChangeText={handleChange('option1')}
+                      // onChangeText={handleChange('option1')}
                     />
                   {/* </TouchableOpacity> */}
 
@@ -137,7 +138,7 @@ function Quiz(props) {
                       placeholder="Option 2"
                       name="option2"                      
                    
-                      onChangeText={handleChange('option2')}
+                      // onChangeText={handleChange('option2')}
                     />
                   {/* </TouchableOpacity>
 
@@ -291,4 +292,20 @@ const mapDispatchToProps = dispatch =>
     dispatch,
   );
 
-export default connect(mapStateToProps, mapDispatchToProps)(Quiz);
+  export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Quiz));
+
+
+
+
+// import React from 'react'
+
+// function Quiz() {
+//   return (
+//     <div>
+//       <h1>hello</h1>
+//     </div>
+//   )
+// }
+
+// export default Quiz
+
