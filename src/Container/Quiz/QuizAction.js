@@ -6,7 +6,7 @@ import store from '../../Store';
 /**
  * request for adding a quiz name
  */
- export const addQuizName = (quiz,cb) => dispatch => {
+ export const addQuizName = (quiz,cb,history) => dispatch => {
   
  // console.log('name',quiz );
   dispatch({
@@ -24,7 +24,7 @@ import store from '../../Store';
         payload: res.data,
       });
         cb && cb("success");
-        // history.push("/home")
+          history.push("/question")
     })
     .catch(err => {      
      // console.log(err);
@@ -33,6 +33,7 @@ import store from '../../Store';
         payload: err,
       });
        cb && cb("failuer");
+      //  history.push("/question")
     });
 };
 
