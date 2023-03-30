@@ -25,7 +25,7 @@ const CandidateSchema = Yup.object().shape({
   firstName: Yup.string().required("Input needed!"),
 });
 
-class Login extends Component {
+class CreateQuiz extends Component {
 
  
 
@@ -72,20 +72,26 @@ class Login extends Component {
                     <h1 class="text-3xl">QUIZMAKER</h1></div>
                 <hr/>
                 <div class="flex justify-center">
-                    <h3 class="font-extrabold mt-12">Welcome</h3></div>
+                    <h3 class="font-extrabold mt-12">Welcome Øystein</h3></div>
                 <div class="flex items-center flex-col">
             <div class="mt-8">
-            <Link to="/create">
+            <Link to="/quiz">
             <Button type="primary"  htmlType="submit" style={{width:"15rem",height:"2rem",backgroundColor:"white",borderBlockColor:"blue",borderRadius:"0"}}>
-                <h3 class="font-extrabold">Register with FaceBook</h3></Button>
+                <h3 class="font-extrabold">Create a new quiz</h3></Button>
                 </Link>
 </div>
 <div class="mt-4">
 <Link to="/select">
 <Button type="primary"  htmlType="submit" style={{width:"15rem",height:"2rem",backgroundColor:"white",borderBlockColor:"#126c5e",borderRadius:"0"}}>
-<h3 class="font-extrabold">Register with Google</h3></Button> 
+<h3 class="font-extrabold">Ongoing quizzes</h3></Button> 
 </Link> 
-</div>    
+</div>   
+<div class="mt-4">
+<Link to="/select">
+<Button type="primary"  htmlType="submit" style={{width:"15rem",height:"2rem",backgroundColor:"white",borderBlockColor:"#126c5e",borderRadius:"0"}}>
+<h3 class="font-extrabold">My quiz library </h3></Button> 
+</Link> 
+</div>   
 </div>
               </MainWrapper>
                      
@@ -109,7 +115,7 @@ const mapDispatchToProps = (dispatch) =>
     dispatch
   );
 
-  export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login));
+  export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CreateQuiz));
 
 
 
