@@ -70,7 +70,7 @@ class AddQuiz extends Component {
 <div class="mt-12">
 <Link to="/question">
 <Button type="primary"  htmlType="submit" style={{width:"15rem",height:"2rem",backgroundColor:"white",borderBlockColor:"#126c5e",borderRadius:"0"}}>
-<h3 class="font-extrabold"> Add Quiz</h3></Button>
+<h3 class="font-extrabold"> </h3></Button>
 </Link>  
 </div>    
 </div>

@@ -66,7 +66,7 @@ class CreateQuiz extends Component {
             
               <MainWrapper
               
-                style={{ width: "100%", margin: "auto",height:"35rem" }}
+                style={{ width: "100%", margin: "auto",height:"35rem",borderRadius:"0" }}
               >
                 <div class="flex justify-center">
                     <h1 class="text-3xl">QUIZMAKER</h1></div>
@@ -75,8 +75,10 @@ class CreateQuiz extends Component {
                     <h3 class="font-extrabold mt-12">Welcome Øystein</h3></div>
                 <div class="flex items-center flex-col">
             <div class="mt-8">
-            <Link to="/quiz">
-            <Button type="primary"  htmlType="submit" style={{width:"15rem",height:"2rem",backgroundColor:"white",borderBlockColor:"blue",borderRadius:"0"}}>
+            <Link to="/quizzes">
+            <Button type="primary"
+              htmlType="submit" 
+              style={{width:"15rem",height:"2rem",backgroundColor:"white",borderBlockColor:"blue",borderRadius:"0"}}>
                 <h3 class="font-extrabold">Create a new quiz</h3></Button>
                 </Link>
 </div>
@@ -116,11 +118,3 @@ const mapDispatchToProps = (dispatch) =>
   );
 
   export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CreateQuiz));
-
-
-
-
-
-
-
-

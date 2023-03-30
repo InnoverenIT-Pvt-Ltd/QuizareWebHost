@@ -2,12 +2,14 @@ import * as types from './QuizActionTypes';
 import axios from 'axios';
 import {base_url} from '../../Config/Auth';
 import store from '../../Store';
+import { createBrowserHistory } from "history";
 
 /**
  * request for adding a quiz name
  */
- export const addQuizName = (quiz,cb) => dispatch => {
-  
+ const history = createBrowserHistory();
+ export const addQuizName = (quiz,) => dispatch => {
+  console.log('name',history );
  // console.log('name',quiz );
   dispatch({
     type: types.ADD_QUIZ_NAME_REQUEST,
@@ -17,14 +19,16 @@ import store from '../../Store';
     .post(`${base_url}/quiz/save`, quiz,)
     .then(res => {  
       //console.log(res.data);   
-       dispatch(getQuizName(res.data.quizId))     
-
+      
+       dispatch(getQuizName(res.data.quizId))   
+       console.log("hi",history);  
+       history.push("/addquiz")
       dispatch({
         type: types.ADD_QUIZ_NAME_SUCCESS,
         payload: res.data,
       });
-        cb && cb("success");
-        // history.push("/home")
+        //  cb && cb("success");
+          // history.push("/addquiz")
     })
     .catch(err => {      
      // console.log(err);
@@ -32,7 +36,7 @@ import store from '../../Store';
         type: types.ADD_QUIZ_NAME_FAILURE,
         payload: err,
       });
-       cb && cb("failuer");
+        // cb && cb("failuer");
     });
 };
 

@@ -1,7 +1,8 @@
 import React, {useEffect} from 'react';
-import {Formik} from 'formik';
 import {connect} from 'react-redux';
+import { Formik, Form, FastField, Field, FieldArray } from "formik";
 import {bindActionCreators} from 'redux';
+import { InputComponent } from "../../Components/Forms/Formik/InputComponent";
 import {addQuizName} from './QuizAction';
 import { Button, Card, Input } from 'antd';
 
@@ -20,11 +21,16 @@ function QuizName(props) {
         }}
         onSubmit={(values,{resetForm}) => {
               
-          props.addQuizName(values,
+          props.addQuizName(
+            {
+              ...values
+            },
+            resetForm()
             // handeleCallBack
             )
-          resetForm();
-        }}>
+         
+        }}
+        >
         {({
           handleChange,
           handleBlur,
@@ -34,30 +40,44 @@ function QuizName(props) {
           values,
         }) => (
         
-            <div>
+            <div class="flex flex-col items-center mt-8">
                 <Card >
-                <Input
+                  <div class="w-80">
+                  <Field
                   name="quizName"
-                  onChangeText={handleChange('quizName')}
+                  isColumn
+                  component={InputComponent}
+                  //onChangeText={handleChange('quizName')}
                   style={{textAlign: 'center'}}
                   placeholder="Enter Quiz Name"
+                 
                 />
-                 <Input
+                </div>
+                <div class="w-80 mt-6">
+                <Field
                   name="duration"
+                  component={InputComponent}
                   onChangeText={handleChange('duration')}
                   style={{textAlign: 'center'}}
                   placeholder="Enter Response time per question"
+                 
                 />
+                </div>
                  {/* <Text                 
                   onChangeText={handleChange('quizName')}
                   style={externalStyle.firstCardText}>
                   Standard                  
                   </Text> */}
+                  <div class="mt-8">
                 <Button
-              
-                onClick={handleSubmit}
+                type="primary"
+                htmlType="submit" 
+                //  Loading={props.addingQuizName}
+                 onClick={handleSubmit}
+                 style={{width:"20rem",backgroundColor:"white",borderBlockColor:"blue",borderRadius:"0"}}
                // onClick={() => props.navigation.navigate('Quiz')}
-                >Add quiz</Button>
+                ><h3 class="font-extrabold">Add quiz</h3></Button>
+                </div>
                 {/* <AntIcon name="enter" color="green" size={40} /> */}
               </Card>
               </div>
