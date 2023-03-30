@@ -5,7 +5,7 @@
 import React, { Component, lazy, Suspense } from "react";
 import 'antd/dist/reset.css';
 import { connect } from "react-redux";
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch, Redirect, withRouter } from "react-router-dom";
 import MainApp from "./Main/MainApp";
 import Login from "./Container/Auth/Login";
 import axios from "axios";
@@ -39,7 +39,7 @@ class App extends Component {
           <Suspense fallback={<BundleLoader />}>
           {/* <Router history={history}> */}
             <Switch>
-            <Route exact path="/addquiz" component={Quiz}/>
+            <Route exact path="/addquiz" component={withRouter(Quiz)}/>
             <Route exact path="/" component={Login }/>
             
             {/* <Route exact path="/quiz" component={AddQuiz}/> */}

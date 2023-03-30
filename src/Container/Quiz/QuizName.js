@@ -2,16 +2,20 @@ import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 import { Formik, Form, FastField, Field, FieldArray } from "formik";
 import {bindActionCreators} from 'redux';
-import { withRouter} from "react-router-dom";
+// import { withRouter} from "react-router-dom";
 import { InputComponent } from "../../Components/Forms/Formik/InputComponent";
 import {addQuizName} from './QuizAction';
 import { Button, Card, Input } from 'antd';
-import { Link } from 'react-router-dom';
+import {withRouter } from "react-router-dom";
+
 
 function QuizName(props) { 
+  // const history = useHistory();
  
+  // function handleCallBack(data) {
+  //   history.push(`/addquiz`);
+  // }
 
-  
   return (
     <>
     
@@ -27,10 +31,10 @@ function QuizName(props) {
             {
               ...values
             },
+           
+            // handleCallBack
+            );
             resetForm()
-            // handeleCallBack
-            )
-         
         }}
         >
         {({
@@ -106,4 +110,4 @@ const mapDispatchToProps = dispatch =>
     dispatch,
   );
 
-export default connect(mapStateToProps, mapDispatchToProps)(QuizName);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(QuizName));
