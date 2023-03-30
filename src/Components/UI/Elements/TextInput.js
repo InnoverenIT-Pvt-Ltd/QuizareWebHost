@@ -4,7 +4,8 @@ const TextInput = styled.input.attrs({
   type: "text",
   size: props => (props.small ? 4 : undefined)
 })`
-  border-radius: 0.6rem;
+  border-radius: 0;
+  width:20rem;
     // border: 0.0625em solid ${props => props.theme.inputBorderColor};
      border: 0.0625em solid gainsboro;
     background-color: ${props => props.theme.backgroundColor};
