@@ -2,8 +2,6 @@ import React, {useEffect,useState } from 'react';
 import {
   View,
   Text,
-
-  // Picker,
   StyleSheet,
   TouchableOpacity,
   Dimensions,
