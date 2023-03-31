@@ -6,15 +6,16 @@ import {bindActionCreators} from 'redux';
 import { InputComponent } from "../../Components/Forms/Formik/InputComponent";
 import {addQuizName} from './QuizAction';
 import { Button, Card, Input } from 'antd';
+import { useHistory } from "react-router-dom";
 import {withRouter } from "react-router-dom";
 
 
 function QuizName(props) { 
-  // const history = useHistory();
+ const history = useHistory();
  
-  // function handleCallBack(data) {
-  //   history.push(`/addquiz`);
-  // }
+  function handleCallBack(data) {
+    history.push(`/addquiz`);
+  }
 
   return (
     <>
@@ -32,7 +33,7 @@ function QuizName(props) {
               ...values
             },
            
-            // handleCallBack
+             handleCallBack
             );
             resetForm()
         }}

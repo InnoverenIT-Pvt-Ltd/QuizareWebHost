@@ -8,7 +8,7 @@ import { createBrowserHistory } from "history";
  * request for adding a quiz name
  */
  const history = createBrowserHistory();
- export const addQuizName = (quiz) => dispatch => {
+ export const addQuizName = (quiz,cb) => dispatch => {
   console.log('name',history );
  // console.log('name',quiz );
   dispatch({
@@ -22,13 +22,13 @@ import { createBrowserHistory } from "history";
       
        dispatch(getQuizName(res.data.quizId))   
       //  console.log("hi",history);  
-       history.push("/addquiz");
+      //  history.push("/addquiz");
       //  window.location.reload()
       dispatch({
         type: types.ADD_QUIZ_NAME_SUCCESS,
         payload: res.data,
       });
-        //  cb && cb("success");
+         cb && cb("success");
           // history.push("/addquiz")
     })
     .catch(err => {      
@@ -37,7 +37,7 @@ import { createBrowserHistory } from "history";
         type: types.ADD_QUIZ_NAME_FAILURE,
         payload: err,
       });
-        // cb && cb("failuer");
+        cb && cb("failuer");
     });
 };
 
