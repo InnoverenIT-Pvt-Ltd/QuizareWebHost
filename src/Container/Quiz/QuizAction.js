@@ -8,7 +8,7 @@ import { createBrowserHistory } from "history";
  * request for adding a quiz name
  */
  const history = createBrowserHistory();
- export const addQuizName = (quiz,) => dispatch => {
+ export const addQuizName = (quiz,cb) => dispatch => {
   console.log('name',history );
  // console.log('name',quiz );
   dispatch({
@@ -16,19 +16,19 @@ import { createBrowserHistory } from "history";
   });
 
   axios
-    .post(`${base_url}/quiz/save`, quiz,)
+    .post(`${base_url}/quiz/save`, quiz)
     .then(res => {  
       //console.log(res.data);   
       
        dispatch(getQuizName(res.data.quizId))   
       //  console.log("hi",history);  
-       history.push("/addquiz");
-       window.location.reload()
+      //  history.push("/addquiz");
+      //  window.location.reload()
       dispatch({
         type: types.ADD_QUIZ_NAME_SUCCESS,
         payload: res.data,
       });
-        //  cb && cb("success");
+         cb && cb("success");
           // history.push("/addquiz")
     })
     .catch(err => {      
@@ -37,7 +37,7 @@ import { createBrowserHistory } from "history";
         type: types.ADD_QUIZ_NAME_FAILURE,
         payload: err,
       });
-        // cb && cb("failuer");
+        cb && cb("failuer");
     });
 };
 
@@ -327,7 +327,7 @@ export const addCategory = category => dispatch => {
 /**
  * delete a quiz from table
  */
- export const deleteHostQuiz = (quizId)=> dispatch => {
+ export const deleteHostQuiz = (quizId,cb)=> dispatch => {
   dispatch({
     type: types.DELETE_QUIZ_FROM_HOST_REQUEST,
   });
@@ -339,11 +339,12 @@ export const addCategory = category => dispatch => {
     })
     .then(res => {
       console.log(res.data);
-      dispatch(getFinalizeQuiz(quizId));
+      // dispatch(getFinalizeQuiz(quizId));
       dispatch({
         type: types.DELETE_QUIZ_FROM_HOST_SUCCESS,
         payload: quizId,
       });
+      cb && cb("success");
     })
     .catch(err => {
       console.log(err);
@@ -351,6 +352,7 @@ export const addCategory = category => dispatch => {
         type: types.DELETE_QUIZ_FROM_HOST_FAILURE,
         payload: err,
       });
+      cb && cb("failuer");
     });
 };
 //Host quiz
@@ -408,5 +410,35 @@ export const hostQuiz = quizId => dispatch => {
         type: types.GET_PLAYERS_DETAILS_GAME_FAILURE,
         payload: err,
       });
+    });
+};
+
+export const updateQuizNameByQuizId = (data, quizId, cb) => dispatch => {
+  console.log('inside update question',data);
+  dispatch({
+    type: types.UPDATE_QUIZ_NAME_REQUEST,
+  });
+  axios
+    .put(`${base_url}/quiz/update/${quizId}`, data, {
+      headers: {
+        Authorization: 'Bearer ' + store.getState().auth.token || '',
+      },
+    })
+    .then(res => {
+      console.log(res.data);
+      dispatch({
+        type: types.UPDATE_QUIZ_NAME_SUCCESS,
+        payload: res.data,
+      });
+      cb && cb('success');
+    })
+    .catch(err => {
+      console.log(err);
+      dispatch({
+        type: types.UPDATE_QUIZ_NAME_FAILURE,
+        payload: err,
+      });
+      // cb && cb();
+      cb && cb("failuer");
     });
 };

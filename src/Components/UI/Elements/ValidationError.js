@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const ValidationError = styled.div`
-  color: white;
+  color: #ff4d4f;
   font-weight: 600;
   padding: 0.1rem 0;
   /* margin: 0.5rem 0.2rem; */

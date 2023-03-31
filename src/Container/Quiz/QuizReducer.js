@@ -15,7 +15,19 @@ const initialState = {
 
   fetchingPlayersDetails: false,
   fetchingPlayersDetailsError: false,
-  playersDetails: [],
+  playersDetails: {},
+
+  fetchingQuizNameList: false,
+  fetchingQuizNameListError: false,
+  quizNameList: [],
+
+  fetchingQuizNameDetails: false,
+  fetchingQuizNameDetailsError: false,
+  quizNameDetails:{},
+
+  fetchingFeedback: false,
+  fetchingFeedbackError: false,
+  feedback:[],
 
   fetchingQuizName: false,
   fetchingQuizNameError: false,
@@ -45,6 +57,19 @@ const initialState = {
 
   deletingQuizHost: false,
   deletingQuizHostError: false,
+
+  closeQuizByQuizId:false,
+  closeQuizByQuizIdError:false,
+
+  updateQuizNameQuizId:false,
+  updateQuizNameQuizIdError:false,
+
+  fetchingQuestionList:false,
+  fetchingQuestionListError:false,
+  questionList:[],
+
+  updateQuestions: false,
+  updateQuestionsError:false,
 };
 
 export const quizReducer = (state = initialState, action) => {
@@ -92,7 +117,7 @@ export const quizReducer = (state = initialState, action) => {
       return {
         ...state,
         deletingQuestion: false,
-        questionsByUserId: state.questionsByUserId.filter(
+        questionList: state.questionList.filter(
           item => item.questionId !== action.payload,
         ),
       };
@@ -218,6 +243,148 @@ case types.GET_PLAYERS_DETAILS_GAME_FAILURE:
     fetchingPlayersDetails: false,
     fetchingPlayersDetailsError: true,
   };
+
+  // get quizname list  
+case types.GET_QUIZ_NAME_LIST_GAME_REQUEST:
+  return {...state, fetchingQuizNameList: true};
+case types.GET_QUIZ_NAME_LIST_GAME_SUCCESS:
+  return {
+    ...state,
+    fetchingQuizNameList: false,
+    quizNameList: action.payload,
+  };
+case types.GET_QUIZ_NAME_LIST_GAME_FAILURE:
+  return {
+    ...state,
+    fetchingQuizNameList: false,
+    fetchingQuizNameListError: true,
+  };
+
+  // close quiz
+  case types.CLOSE_QUIZ_REQUEST:
+    return {...state, closeQuizByQuizId: true};
+  case types.CLOSE_QUIZ_SUCCESS:
+    return {
+      ...state,
+      closeQuizByQuizId: false,
+      finalizeQuiz: action.payload,
+    };
+  case types.CLOSE_QUIZ_FAILURE:
+    return {
+      ...state,
+      closeQuizByQuizId: false,
+      closeQuizByQuizIdError: true,
+    };
+    //UPDATE QUIZ NAME    
+  case types.UPDATE_QUIZ_NAME_REQUEST:
+    return {...state, updateQuizNameQuizId: true};
+  case types.UPDATE_QUIZ_NAME_SUCCESS:
+    return {
+      ...state,
+      updateQuizNameQuizId: false,
+      showQuiz: action.payload,
+    };
+  case types.UPDATE_QUIZ_NAME_FAILURE:
+    return {
+      ...state,
+      updateQuizNameQuizId: false,
+      updateQuizNameQuizIdError: true,
+    };
+// get quizname details 
+case types.GET_QUIZ_NAME_DETAILS_GAME_REQUEST:
+  return {...state, fetchingQuizNameDetails: true};
+case types.GET_QUIZ_NAME_DETAILS_GAME_SUCCESS:
+  return {
+    ...state,
+    fetchingQuizNameDetails: false,
+    quizNameDetails: action.payload,
+  };
+case types.GET_QUIZ_NAME_DETAILS_GAME_FAILURE:
+  return {
+    ...state,
+    fetchingQuizNameDetails: false,
+    fetchingQuizNameDetailsError: true,
+  };
+//clear quiz details data
+
+case types.CLEAR_QUIZ_NAME_DETAILS_GAME:
+  return {
+    ...state,   
+    quizNameDetails: {},
+    showQuiz:{},
+    feedback:[],
+    questionList:[],
+  };
+
+
+  // get questions list  
+case types.GET_QUESTIONS_LIST_IN_QUIZ_REQUEST:
+  return {...state, fetchingQuestionList: true};
+case types.GET_QUESTIONS_LIST_IN_QUIZ_SUCCESS:
+  return {
+    ...state,
+    fetchingQuestionList: false,
+    questionList: action.payload,
+  };
+case types.GET_QUESTIONS_LIST_IN_QUIZ_FAILURE:
+  return {
+    ...state,
+    fetchingQuestionList: false,
+    fetchingQuestionListError: true,
+  };
+
+ //UPDATE QUESTIONS LIST IN QUIZ    
+ case types.UPDATE_QUESTIONS_IN_QUIZ_REQUEST:
+  return {...state, updateQuestions: true};
+case types.UPDATE_QUESTIONS_IN_QUIZ_SUCCESS:
+  return {
+    ...state,
+    updateQuestions: false,
+    // questionList: state.questionList.filter((item)=>item.id === action.payload.id).map((data)=>{
+    //   const newData=[...action.payload,...data]
+    //   console.log(action.payload,data,newData)
+    // return newData
+    questionList: state.questionList.map(item => {
+      return item.id === action.payload.id ? { ...item, ...action.payload } : item;
+    })
+    // questionList: state.questionList.filter((item)=>{
+    //   if(item.id===action.payload.id){
+    //     return(
+    //       [...questionList,action.payload]
+    //     )
+    //   }
+    //   else{
+    //     return(
+    //       state.questionList
+    //     )
+    //   }
+    // })
+  };
+case types.UPDATE_QUESTIONS_IN_QUIZ_FAILURE:
+  return {
+    ...state,
+    updateQuestions: false,
+    updateQuestionsError: true,
+  };
+
+
+
+// get feedback
+case types.GET_QUIZ_FEEDBACK_REQUEST:
+  return {...state, fetchingFeedback: true};
+case types.GET_QUIZ_FEEDBACK_SUCCESS:
+  return {
+    ...state,
+    fetchingFeedback: false,
+    feedback: action.payload,
+  };
+case types.GET_QUIZ_FEEDBACK_FAILURE:
+  return {
+    ...state,
+    fetchingFeedback: false,
+    fetchingFeedbackError: true,
+  };
+
     default:
       return state;
   }

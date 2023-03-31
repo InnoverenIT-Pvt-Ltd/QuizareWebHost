@@ -5,7 +5,7 @@
 import React, { Component, lazy, Suspense } from "react";
 import 'antd/dist/reset.css';
 import { connect } from "react-redux";
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch, Redirect, withRouter } from "react-router-dom";
 import MainApp from "./Main/MainApp";
 import Login from "./Container/Auth/Login";
 import axios from "axios";
@@ -19,6 +19,9 @@ import SelectQuizname from "./Components/Quizs/SelectQuizname";
 import CreateQuiz from "./Components/Quizs/CreateQuiz";
 import QuizName from "./Container/Quiz/QuizName";
 import Quiz from "./Container/Quiz/Quiz";
+import FinalizeQuiz from "./Container/Quiz/Child/HostQuizes/FinalizeQuiz";
+import UpdateQuizName from "./Container/Quiz/EditQuiz/UpdateQuizName";
+import QuizDetails from "./Container/Quiz/EditQuiz/QuizDetails";
 // import AppErrorBoundary from "./Helpers/ErrorBoundary/AppErrorBoundary";
 
 
@@ -39,14 +42,20 @@ class App extends Component {
           <Suspense fallback={<BundleLoader />}>
           {/* <Router history={history}> */}
             <Switch>
-            <Route exact path="/addquiz" component={Quiz}/>
             <Route exact path="/" component={Login }/>
+            <Route exact path="/create" component={CreateQuiz}/>
+            <Route exact path="/quizzes" component={QuizName}/>
+            <Route exact path="/addquiz" component={Quiz}/>
+            <Route exact path="/finalize" component={FinalizeQuiz}/>
+            <Route exact path="/updatequiz" component={UpdateQuizName}/>
+            <Route exact path="/hostquiz" component={QuizDetails}/>
+  
             
             {/* <Route exact path="/quiz" component={AddQuiz}/> */}
              <Route exact path="/question" component={Question1 }/>
             <Route exact path="/select" component={SelectQuizname}/>
-            <Route exact path="/create" component={CreateQuiz}/>
-            <Route exact path="/quizzes" component={QuizName}/>
+  
+
            
 
 
