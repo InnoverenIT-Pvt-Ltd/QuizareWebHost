@@ -8,7 +8,7 @@ import { createBrowserHistory } from "history";
  * request for adding a quiz name
  */
  const history = createBrowserHistory();
- export const addQuizName = (quiz,) => dispatch => {
+ export const addQuizName = (quiz) => dispatch => {
   console.log('name',history );
  // console.log('name',quiz );
   dispatch({
@@ -16,14 +16,14 @@ import { createBrowserHistory } from "history";
   });
 
   axios
-    .post(`${base_url}/quiz/save`, quiz,)
+    .post(`${base_url}/quiz/save`, quiz)
     .then(res => {  
       //console.log(res.data);   
       
        dispatch(getQuizName(res.data.quizId))   
       //  console.log("hi",history);  
        history.push("/addquiz");
-       window.location.reload()
+      //  window.location.reload()
       dispatch({
         type: types.ADD_QUIZ_NAME_SUCCESS,
         payload: res.data,
