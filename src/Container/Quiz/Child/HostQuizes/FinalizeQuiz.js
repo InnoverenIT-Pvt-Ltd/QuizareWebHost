@@ -1,142 +1,103 @@
-import React from 'react';
-import {useEffect,useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { Button, Card } from 'react-native-elements';
-import {Formik} from 'formik';
-import MainHeader from '../../../../Navigation/MainHeader';
-import {bindActionCreators} from 'redux';
-import MainHeaderBackButton from '../../../../Navigation/MainHeaderBackButton';
-import {getFinalizeQuiz,deleteHostQuiz,hostQuiz} from "../../QuizAction";
-import {connect} from 'react-redux';
-import externalStyle from '../../../../style/externalStyle';
+import React, { useEffect } from "react";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import { getFinalizeQuiz, deleteHostQuiz, hostQuiz } from "../../QuizAction";
+import { Button, Card } from "antd";
+import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
+
 function FinalizeQuiz(props) {
-
-    useEffect(()=>{
-           props.getFinalizeQuiz(props.showQuiz&&props.showQuiz.quizId);
-          },[]) 
-    const navigate = props.navigation.navigate;
-
-    const navigation = props;   
-    const onhandleClick = () => {
-        props.navigation.navigate('home');
-    };
-    // const onhandleClickHost = () => {
-    //     props.navigation.navigate('Play Quiz');
-    // };
-   // const quizName = this.props.quizId.quizName;
-
-    return (
-        <>
-            <MainHeader />
-            <View
-                style={{
-                    flex: 1,
-                    paddingHorizontal: 16,
-                    position: 'relative',
-                    backgroundColor: '#ffffff',
-                }}
-            >
-                  <View style={externalStyle.container}>
-                    <Card containerStyle={externalStyle.mainCardF}>
-                        {/* <Text style={styles.norwegian}> Norwegian explorers</Text> */}
-                        <Text style={externalStyle.headplayquizhost} >
-                                    {`${props.finalizeQuiz.quizName || ""}`}
-                                </Text>
+    const history = useHistory();
+ 
+  function handleCallBack(data) {
+    history.push(`/create`);
+  }
+  useEffect(() => {
+    props.getFinalizeQuiz(props.showQuiz && props.showQuiz.quizId);
+  }, []);
+  return (
+    <>
+      <div>
+      <h1>{`${props.finalizeQuiz.quizName || ""}`}</h1>
+      <Card>
+        <h2>Created:</h2>
+        <h2>Questions:  {`${props.finalizeQuiz.noOfQuestions || ""}`}</h2>
+        <h2>Categories:</h2>
+      </Card>
+      <div style={{ marginTop: '14%' }}>
+                            <h1 >Select quiz rules</h1>
+                        </div>
                         <Card
-                            containerStyle={{
-                                borderRadius: 10,
-                                marginTop: '8%',
-                                borderColor: 'lightgray',
-                                width: '95%',
-                                marginLeft: '3%',
-                                height: 125,
-                            }}
-                        >
-                            <Text style={externalStyle.firstCardTextF}>Created:</Text>
-                            <Text style={externalStyle.firstCardTextF}>Questions:  {`${props.finalizeQuiz.noOfQuestions || ""}`}</Text>
-                            <Text style={externalStyle.firstCardTextF}>Categories:</Text>
-                        </Card>
-
-                        <View style={{ marginTop: '14%' }}>
-                            <Text style={externalStyle.selectF}>Select quiz rules</Text>
-                        </View>
-                        <Card
-                            containerStyle={externalStyle.resultCardF}
-                        >
-                            <View style={{ flexDirection: 'row' }}>
-                                <Text style={externalStyle.textViewFP}>
-                                    Question response time:
-                                </Text>
-                                <Text style={externalStyle.timeTextFP}>
-                                    {`${props.finalizeQuiz.duration || ""}`} sec
-                                </Text>
-                            </View>
-                            <View style={{ flexDirection: 'row', marginVertical: '3%' }}>
-                                <Text style={externalStyle.textViewFP}>
-                                    Scoring system:
-                                </Text>
-                                <Text style={externalStyle.timeTextFP}>
-                                    Standard
-                                </Text>
-                            </View>                           
-                        </Card>
-                        <View style={{ flexDirection: 'row', alignSelf:'center',marginTop:'5%', }}>
+                            
+                            >
+                                <div style={{ flexDirection: 'row' }}>
+                                    <h1 >
+                                        Question response time:
+                                    </h1>
+                                    <h1 >
+                                        {`${props.finalizeQuiz.duration || ""}`} sec
+                                    </h1>
+                                </div>
+                                <div style={{ flexDirection: 'row', marginVertical: '3%' }}>
+                                    <h1 >
+                                        Scoring system:
+                                    </h1>
+                                    <h1 >
+                                        Standard
+                                    </h1>
+                                </div>                           
+                            </Card>
+                            <div style={{ flexDirection: 'row', alignSelf:'center',marginTop:'5%', }}>
+                            <Link to="/create">
                             <Button
-                                title={'Delete This Quiz'} 
-                                titleStyle={externalStyle.titleStyleFP}                               
-                                containerStyle={externalStyle.containerStyleFP}
-                                buttonStyle={externalStyle.buttonStyleHP}
-                                onPress={() => props.deleteHostQuiz(props.showQuiz&&props.showQuiz.quizId,onhandleClick())}                              
-                            />
-                            <Button
-                                title={'Edit This Quiz'}  
-                                titleStyle={externalStyle.titleStyleFP}                             
-                                containerStyle={externalStyle.containerStyleFP}
-                                buttonStyle={externalStyle.buttonStyleHP}
-                                onPress={() => props.navigation.navigate('Quiz Invite')}
-                            />
-                        </View>
+                              type="primary"
+                              
+                              onClick={() => props.deleteHostQuiz(props.showQuiz&&props.showQuiz.quizId,handleCallBack())}
+                            >Delete This Quiz</Button>
+                            </Link>
+                         <Link to="/create">
+                           <Button
+                              type="primary"
+                              
+                            //   onClick={() => props.navigation.navigate('Quiz Invite')}
+                            >Edit This Quiz</Button>
+                            </Link> 
+                            
+                        </div>
                         <Button
-                            title={'Host This Quiz'}
-                            titleStyle={externalStyle.titleStyleLB}
-                            containerStyle={externalStyle.containerStyleLB}
-                            buttonStyle={externalStyle.buttonStyleHP}
-                            onPress={() => props.hostQuiz(props.navigation.navigate('Play Quiz'))}
-                        />
-                    </Card>
-                </View>
+                              type="primary"
+                              
+                              onClick={() => props.hostQuiz()}
+                            >Host This Quiz</Button>
 
-            </View >
-          
-        </>
-    );
+
+
+      </div>
+    </>
+  );
 }
-const mapStateToProps = ({auth, quiz}) => ({  
-    showQuiz: quiz.showQuiz, 
-    noOfQuestions:quiz.noOfQuestions,
-  quizId:quiz.showQuiz.quizId,
+
+const mapStateToProps = ({ auth, quiz }) => ({
+  showQuiz: quiz.showQuiz,
+  noOfQuestions: quiz.noOfQuestions,
+  quizId: quiz.showQuiz.quizId,
   fetchingFinalizeQuiz: quiz.fetchingFinalizeQuiz,
- fetchingFinalizeQuizError: quiz.fetchingFinalizeQuizError,
- finalizeQuiz: quiz.finalizeQuiz,
- deletingQuizHost:quiz.deletingQuizHost,
- deletingQuizHostError: quiz.deletingQuizHostError,
- hostQuizByQuizId:quiz.hostQuizByQuizId,
- hostQuizByQuizIdError: quiz.hostQuizByQuizIdError,
-   
-  });
-  
-  const mapDispatchToProps = dispatch =>
-    bindActionCreators(
-      {     
-         getFinalizeQuiz,
-         deleteHostQuiz,
-         hostQuiz    
-      },
-      dispatch,
-    );
-  
-  export default connect(mapStateToProps, mapDispatchToProps)(FinalizeQuiz);
+  fetchingFinalizeQuizError: quiz.fetchingFinalizeQuizError,
+  finalizeQuiz: quiz.finalizeQuiz,
+  deletingQuizHost: quiz.deletingQuizHost,
+  deletingQuizHostError: quiz.deletingQuizHostError,
+  hostQuizByQuizId: quiz.hostQuizByQuizId,
+  hostQuizByQuizIdError: quiz.hostQuizByQuizIdError,
+});
 
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      getFinalizeQuiz,
+      deleteHostQuiz,
+      hostQuiz,
+    },
+    dispatch
+  );
 
-
-
+export default connect(mapStateToProps, mapDispatchToProps)(FinalizeQuiz);
