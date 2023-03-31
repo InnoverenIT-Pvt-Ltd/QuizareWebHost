@@ -5,6 +5,7 @@ import { getFinalizeQuiz, deleteHostQuiz, hostQuiz } from "../../QuizAction";
 import { Button, Card } from "antd";
 import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
+import MainHeader from "../../../../Components/Mainheader";
 
 function FinalizeQuiz(props) {
     const history = useHistory();
@@ -17,63 +18,78 @@ function FinalizeQuiz(props) {
   }, []);
   return (
     <>
-      <div>
+    <MainHeader/>
+     <div className="bg-white rounded-rounded2.8 mt-3 ">
+           
+           <div class="shadow-2xl border-solid  p-1 max-sm:m-0 h-h34 rounded-rounded2.8 md:m-auto">
       <h1>{`${props.finalizeQuiz.quizName || ""}`}</h1>
-      <Card>
-        <h2>Created:</h2>
-        <h2>Questions:  {`${props.finalizeQuiz.noOfQuestions || ""}`}</h2>
-        <h2>Categories:</h2>
-      </Card>
-      <div style={{ marginTop: '14%' }}>
-                            <h1 >Select quiz rules</h1>
+     <div class="mt-20">
+     <div style={{boxShadow: "0.01rem 0.01rem 0.12rem 0.01rem"}} className="bg-white rounded-2xl  w-full flex justify-center ">
+           
+           <div class="shadow-2xl border-solid w-full  p-1 max-sm:m-0 h-28 rounded-2xl md:m-auto">
+        <h3>Created:</h3>
+        <h3>Questions:  {`${props.finalizeQuiz.noOfQuestions || ""}`}</h3>
+        <h3>Categories:</h3>
+        </div>
+        </div>
+      </div>
+      <div class="flex justify-center mt-8">
+    
+                            <h2 class="text-2xl font-bold" >Select quiz rules</h2>
                         </div>
-                        <Card
-                            
-                            >
-                                <div style={{ flexDirection: 'row' }}>
-                                    <h1 >
+                        <div >
+                        <div style={{boxShadow: "0.01rem 0.01rem 0.12rem 0.01rem"}} className="bg-white rounded-2xl  w-full flex justify-center mt-2 ">
+           
+           <div class="shadow-2xl border-solid w-full  p-1 max-sm:m-0 h-28 rounded-2xl md:m-auto">
+                                <div class="flex flex-row">
+                                    <h2 class="text-base font-bold" >
                                         Question response time:
-                                    </h1>
-                                    <h1 >
+                                    </h2>
+                                    <h2 class="text-base font-bold" >
                                         {`${props.finalizeQuiz.duration || ""}`} sec
-                                    </h1>
+                                    </h2>
                                 </div>
-                                <div style={{ flexDirection: 'row', marginVertical: '3%' }}>
-                                    <h1 >
+                                <div class="flex flex-row">
+                                <h2 class="text-base font-bold" >
                                         Scoring system:
-                                    </h1>
-                                    <h1 >
+                                    </h2>
+                                    <h2 class="text-base font-bold" >
                                         Standard
-                                    </h1>
+                                    </h2>
                                 </div>                           
-                            </Card>
-                            <div style={{ flexDirection: 'row', alignSelf:'center',marginTop:'5%', }}>
+                            </div>
+                            </div>
+                            </div>
+                            <div class="flex flex-row mt-8 justify-between">
                             <Link to="/create">
                             <Button
                               type="primary"
-                              
+                              style={{ width:"11rem",backgroundColor:"white"}}
                               onClick={() => props.deleteHostQuiz(props.showQuiz&&props.showQuiz.quizId,handleCallBack())}
-                            >Delete This Quiz</Button>
+                            ><h3>Delete This Quiz</h3></Button>
                             </Link>
                          <Link to="/create">
                            <Button
+                           style={{ width:"11rem",backgroundColor:"white"}}
                               type="primary"
-                              
+                             
                             //   onClick={() => props.navigation.navigate('Quiz Invite')}
-                            >Edit This Quiz</Button>
+                            ><h3>Edit This Quiz</h3></Button>
                             </Link> 
                             
                         </div>
+                        <div class="mt-3">
                         <Link to="/hostquiz">
                         <Button
                               type="primary"
-                              
+                              style={{backgroundColor:"white"}}
                               onClick={() => props.hostQuiz()}
-                            >Host This Quiz</Button>
+                            ><h3>Host This Quiz</h3></Button>
                             </Link>
+                            </div>
 
 
-
+</div>
       </div>
     </>
   );
