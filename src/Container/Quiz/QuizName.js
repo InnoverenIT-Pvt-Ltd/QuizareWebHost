@@ -57,7 +57,7 @@ function QuizName(props) {
                   //onChangeText={handleChange('quizName')}
                   style={{textAlign: 'center'}}
                   placeholder="Enter Quiz Name"
-                  inlineLabel
+                 
                 />
                 </div>
                 <div class="w-80 mt-6">
@@ -67,7 +67,7 @@ function QuizName(props) {
                   onChangeText={handleChange('duration')}
                   style={{textAlign: 'center'}}
                   placeholder="Enter Response time per question"
-                  inlineLabel
+                 
                 />
                 </div>
                  {/* <Text                 
@@ -82,7 +82,7 @@ function QuizName(props) {
                 htmlType="submit" 
                 //  Loading={props.addingQuizName}
                    onClick={handleSubmit}
-                 style={{width:"19rem",height:"2rem",backgroundColor:"white",borderBlockColor:"blue",borderRadius:"0"}}
+                 style={{width:"20rem",backgroundColor:"white",borderBlockColor:"blue",borderRadius:"0"}}
                // onClick={() => props.navigation.navigate('Quiz')}
                 ><h3 class="font-extrabold">Add quiz</h3></Button>
                   {/* </Link> */}

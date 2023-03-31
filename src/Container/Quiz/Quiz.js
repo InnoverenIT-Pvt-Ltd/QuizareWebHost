@@ -72,7 +72,7 @@ function Quiz(props) {
           errors,
           values,
         }) => (
-          <Card style={{ width: 350, height: 450,borderRadius: 1,borderWidth:1,boxShadow: '1px 2px 2px 2px rgba(40,40,40,39)' }}>
+          <Card >
           <div >
               <div style={{alignItems: 'center',alignSelf:"center"}}>
                <h1>{props.showQuiz&&props.showQuiz.quizName}</h1>          
@@ -91,10 +91,10 @@ function Quiz(props) {
                 />
                 </div>
               {/* Container */}
-              <div >
+              <div class=" flex justify-center">
                 <Card >
-                  <Card style={{fontSize: 22, alignSelf:'center'}}>
-                    <h1 > Question {count || null}</h1>
+                  <Card class="flex justify-center">
+                    <h1 class="flex justify-center"> Question {count || null}</h1>
                   </Card>
 
                   {/* <TouchableOpacity
@@ -244,6 +244,7 @@ function Quiz(props) {
   <div class="max-sm: flex flex-row justify-center items-center"
              >
 <div>
+
 <Button
   type="primary"
                   // title={'Add New Questions'}
@@ -254,6 +255,7 @@ function Quiz(props) {
                   Loading={props.addingQuestion}
                 // onPress={() => props.navigation.navigate('Quiz Addquestions')}
                 >Add New Questions</Button>
+               
                 </div>
                 <div>
 <Button
