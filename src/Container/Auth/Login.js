@@ -8,6 +8,8 @@ import * as Yup from "yup";
 import { MainWrapper, Spacer } from "../../Components/UI/Elements";
 
 import moment from "moment";
+import MainHeader from "../../Components/Mainheader";
+import SubHeader from "../../Components/SubHeader";
 
 
 
@@ -50,6 +52,7 @@ class Login extends Component {
     // console.log("sec",sectorOption)
     return (
       <>
+      <div>
         <Formik
       
         >
@@ -61,15 +64,18 @@ class Login extends Component {
             setFieldValue,
             setFieldTouched,
           }) => (
-            <Form class=" max-sm:w-11/12 mt-8 m-auto md:mt-12  w-1/5  h-h50  ">
+            <Form class=" max-sm:w-4/5 mt-8 m-auto md:mt-12  w-1/5  h-h50  ">
              
             
-              <MainWrapper
+              {/* <MainWrapper
               
                 style={{ width: "100%", margin: "auto",height:"35rem" }}
-              >
+              > */}
+               <div className="bg-white rounded-md  w-full my-2 ">
+        <div class="shadow-2xl border-solid w-w95  p-1 max-sm:m-0 h-h36 rounded-rounded2.8 md:m-auto">
                 <div class="flex justify-center">
-                    <h1 class="text-3xl">QUIZMAKER</h1></div>
+                    <SubHeader/>
+                    </div>
                 <hr/>
                 <div class="flex justify-center">
                     <h3 class="font-extrabold mt-12">Welcome</h3></div>
@@ -87,11 +93,13 @@ class Login extends Component {
 </Link> 
 </div>    
 </div>
-              </MainWrapper>
-                     
+              {/* </MainWrapper> */}
+              </div>
+              </div>      
             </Form>
           )}
         </Formik>
+        </div>
       </>
     );
   }

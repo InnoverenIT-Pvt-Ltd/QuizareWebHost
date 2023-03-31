@@ -3,13 +3,20 @@ import {connect} from 'react-redux';
 import { Formik, Form, FastField, Field, FieldArray } from "formik";
 import {bindActionCreators} from 'redux';
 // import { withRouter} from "react-router-dom";
+import * as Yup from "yup";
 import { InputComponent } from "../../Components/Forms/Formik/InputComponent";
 import {addQuizName} from './QuizAction';
 import { Button, Card, Input } from 'antd';
 import { useHistory } from "react-router-dom";
 import {withRouter } from "react-router-dom";
+import MainHeader from '../../Components/Mainheader';
 
-
+const QuizSchema = Yup.object().shape({
+ 
+  quizName: Yup.string().required("Input needed!"),
+  duration: Yup.string().required("Input needed!"),
+   
+});
 function QuizName(props) { 
  const history = useHistory();
  
@@ -19,15 +26,16 @@ function QuizName(props) {
 
   return (
     <>
-    
+     <MainHeader/>
       <Formik
         initialValues={{
           duration: "",
           quizName: "",        
           quizHostId: "QH4472404666122022",         
         }}
+        validationSchema={QuizSchema}   
         onSubmit={(values,{resetForm}) => {
-              
+         
           props.addQuizName(
             {
               ...values
@@ -35,7 +43,7 @@ function QuizName(props) {
            
              handleCallBack
             );
-            resetForm()
+            //resetForm()
         }}
         >
         {({
@@ -46,10 +54,13 @@ function QuizName(props) {
           errors,
           values,
         }) => (
-        
+          <Form class=" max-sm:w-3/4 mt-8 m-auto md:mt-12  w-1/5  h-h50  ">
+          <div className="bg-white rounded-rounded2.8  w-full ">
+           
+          <div class="shadow-2xl border-solid w-w95  p-1 max-sm:m-0 h-h34 rounded-rounded2.8 md:m-auto">
             <div class="flex flex-col items-center mt-8">
-                <Card >
-                  <div class="w-80">
+               <div class="mt-32">
+                  <div >
                   <Field
                   name="quizName"
                   isColumn
@@ -60,7 +71,7 @@ function QuizName(props) {
                  
                 />
                 </div>
-                <div class="w-80 mt-6">
+                <div class="mt-6">
                 <Field
                   name="duration"
                   component={InputComponent}
@@ -82,16 +93,20 @@ function QuizName(props) {
                 htmlType="submit" 
                 //  Loading={props.addingQuizName}
                    onClick={handleSubmit}
-                 style={{width:"20rem",backgroundColor:"white",borderBlockColor:"blue",borderRadius:"0"}}
+                 style={{width:"16.5rem",backgroundColor:"white",borderBlockColor:"black",borderRadius:"0",height:"2rem"}}
                // onClick={() => props.navigation.navigate('Quiz')}
                 ><h3 class="font-extrabold">Add quiz</h3></Button>
                   {/* </Link> */}
                 </div>
                 {/* <AntIcon name="enter" color="green" size={40} /> */}
-              </Card>
+           
               </div>
-          
+              </div>
+              </div>
+        </div>
+        </Form>
         )}
+       
       </Formik>
      
     </>
