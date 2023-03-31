@@ -412,3 +412,33 @@ export const hostQuiz = quizId => dispatch => {
       });
     });
 };
+
+export const updateQuizNameByQuizId = (data, quizId, cb) => dispatch => {
+  console.log('inside update question',data);
+  dispatch({
+    type: types.UPDATE_QUIZ_NAME_REQUEST,
+  });
+  axios
+    .put(`${base_url}/quiz/update/${quizId}`, data, {
+      headers: {
+        Authorization: 'Bearer ' + store.getState().auth.token || '',
+      },
+    })
+    .then(res => {
+      console.log(res.data);
+      dispatch({
+        type: types.UPDATE_QUIZ_NAME_SUCCESS,
+        payload: res.data,
+      });
+      cb && cb('success');
+    })
+    .catch(err => {
+      console.log(err);
+      dispatch({
+        type: types.UPDATE_QUIZ_NAME_FAILURE,
+        payload: err,
+      });
+      // cb && cb();
+      cb && cb("failuer");
+    });
+};
