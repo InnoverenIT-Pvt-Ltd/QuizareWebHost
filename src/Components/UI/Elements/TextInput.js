@@ -38,6 +38,7 @@ const TextInput = styled.input.attrs({
     }
     @media only screen and (max-width:640px) {
           height: 2rem;
+          border-color: black;
        }
    `;
 export default TextInput;
