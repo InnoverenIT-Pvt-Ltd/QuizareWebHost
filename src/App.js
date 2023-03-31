@@ -39,14 +39,17 @@ class App extends Component {
           <Suspense fallback={<BundleLoader />}>
           {/* <Router history={history}> */}
             <Switch>
-            <Route exact path="/addquiz" component={withRouter(Quiz)}/>
             <Route exact path="/" component={Login }/>
+            <Route exact path="/create" component={CreateQuiz}/>
+            <Route exact path="/quizzes" component={QuizName}/>
+            <Route exact path="/addquiz" component={Quiz}/>
+  
             
             {/* <Route exact path="/quiz" component={AddQuiz}/> */}
              <Route exact path="/question" component={Question1 }/>
             <Route exact path="/select" component={SelectQuizname}/>
-            <Route exact path="/create" component={CreateQuiz}/>
-            <Route exact path="/quizzes" component={QuizName}/>
+  
+
            
 
 
