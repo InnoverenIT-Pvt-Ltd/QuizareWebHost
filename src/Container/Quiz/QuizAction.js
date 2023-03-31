@@ -327,7 +327,7 @@ export const addCategory = category => dispatch => {
 /**
  * delete a quiz from table
  */
- export const deleteHostQuiz = (quizId)=> dispatch => {
+ export const deleteHostQuiz = (quizId,cb)=> dispatch => {
   dispatch({
     type: types.DELETE_QUIZ_FROM_HOST_REQUEST,
   });
@@ -339,11 +339,12 @@ export const addCategory = category => dispatch => {
     })
     .then(res => {
       console.log(res.data);
-      dispatch(getFinalizeQuiz(quizId));
+      // dispatch(getFinalizeQuiz(quizId));
       dispatch({
         type: types.DELETE_QUIZ_FROM_HOST_SUCCESS,
         payload: quizId,
       });
+      cb && cb("success");
     })
     .catch(err => {
       console.log(err);
@@ -351,6 +352,7 @@ export const addCategory = category => dispatch => {
         type: types.DELETE_QUIZ_FROM_HOST_FAILURE,
         payload: err,
       });
+      cb && cb("failuer");
     });
 };
 //Host quiz

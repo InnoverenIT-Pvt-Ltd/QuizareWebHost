@@ -19,6 +19,7 @@ import SelectQuizname from "./Components/Quizs/SelectQuizname";
 import CreateQuiz from "./Components/Quizs/CreateQuiz";
 import QuizName from "./Container/Quiz/QuizName";
 import Quiz from "./Container/Quiz/Quiz";
+import FinalizeQuiz from "./Container/Quiz/Child/HostQuizes/FinalizeQuiz";
 // import AppErrorBoundary from "./Helpers/ErrorBoundary/AppErrorBoundary";
 
 
@@ -43,6 +44,7 @@ class App extends Component {
             <Route exact path="/create" component={CreateQuiz}/>
             <Route exact path="/quizzes" component={QuizName}/>
             <Route exact path="/addquiz" component={Quiz}/>
+            <Route exact path="/finalize" component={FinalizeQuiz}/>
   
             
             {/* <Route exact path="/quiz" component={AddQuiz}/> */}
