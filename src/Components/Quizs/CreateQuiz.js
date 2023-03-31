@@ -8,6 +8,7 @@ import * as Yup from "yup";
 import { MainWrapper, Spacer } from "../../Components/UI/Elements";
 
 import moment from "moment";
+import SubHeader from "../SubHeader";
 
 
 
@@ -61,15 +62,13 @@ class CreateQuiz extends Component {
             setFieldValue,
             setFieldTouched,
           }) => (
-            <Form class=" max-sm:w-11/12 mt-8 m-auto md:mt-12  w-1/5  h-h50  ">
+            <Form class=" max-sm:w-4/5 mt-8 m-auto md:mt-12  w-1/5  h-h50  ">
              
             
-              <MainWrapper
-              
-                style={{ width: "100%", margin: "auto",height:"35rem",borderRadius:"0" }}
-              >
+             <div className="bg-white rounded-md  w-full my-2 ">
+        <div class="shadow-2xl border-solid w-w95  p-1 max-sm:m-0 h-h36 rounded-rounded2.8 md:m-auto">
                 <div class="flex justify-center">
-                    <h1 class="text-3xl">QUIZMAKER</h1></div>
+                <SubHeader/></div>
                 <hr/>
                 <div class="flex justify-center">
                     <h3 class="font-extrabold mt-12">Welcome Øystein</h3></div>
@@ -95,7 +94,8 @@ class CreateQuiz extends Component {
 </Link> 
 </div>   
 </div>
-              </MainWrapper>
+            </div>
+            </div>
                      
             </Form>
           )}
