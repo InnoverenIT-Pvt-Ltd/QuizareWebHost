@@ -6,13 +6,18 @@ import { Button, Card } from "antd";
 import QuizDetailsPlayerTable from './QuizDetailsPlayerTable';
 import { Link } from 'react-router-dom';
 function QuizDetails(props) {
-  const shareMessage = () => {
-    Share.share({
-      message: `http://player.quizledge.no${
-        props.quizNameDetails.quizLink || ''
-      }`,
-    })
-  };
+  const link = `http://player.quizledge.no${props.quizNameDetails.quizLink || ''}`
+  function copyToClipboard(link) {
+    navigator.clipboard.writeText(link)
+  .then(() => {
+    console.log(`Copied text to clipboard: ${link}`);
+    //alert(`Copied text to clipboard: ${link}`);
+  })
+  .catch((error) => {
+    console.error(`Could not copy text: ${error}`);
+  });
+  }
+  
   const viewData = props.quizNameDetails.playerViewDTOs;
   const viewmessage = props.quizNameDetails.message;
   const ID = props.quizNameDetails.quizId;
@@ -27,9 +32,9 @@ function QuizDetails(props) {
           <h1>{`http://player.quizledge.no${props.quizNameDetails.quizLink || ''}`}</h1>:""}
         </Card>
         <Button
-        onClick={shareMessage}
+        onClick={copyToClipboard(link)}
         >
-        Share This Url
+        Click Copy The Url
         </Button>
         <h1>Who is playing your quiz?</h1>
         <Card>
