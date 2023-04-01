@@ -21,8 +21,8 @@ function QuizDetails(props) {
 //   };
 //   const navigation = useNavigation();
 
-//   const viewData = props.quizNameDetails.playerViewDTOs;
-//   const viewmessage = props.quizNameDetails.message;
+  const viewData = props.quizNameDetails.playerViewDTOs;
+  const viewmessage = props.quizNameDetails.message;
 //   const ID = props.quizNameDetails.quizId;
 
   return (
@@ -77,13 +77,13 @@ function QuizDetails(props) {
             <h2 class="text-xl mt-2" >Who is playing your quiz?</h2>
             <div >
 
-              {/* {viewData === null ? (
+              {viewData === null ? (
                 <h1>{viewmessage}</h1>
-              ) : ( */}
+              ) : (
                 <QuizDetailsPlayerTable
                 // data={props.quizNameDetails} 
                 />
-              {/* )} */}
+               )} 
             </div>
             <div
               style={{

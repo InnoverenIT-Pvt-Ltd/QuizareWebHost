@@ -21,18 +21,18 @@ function QuizDetailsPlayerTable (props)  {
     const columns = [
         {
             title: "UserName",
-            //dataIndex: "logo",
+            dataIndex: "playerName",
             width:"2%",
         },
         {
           title: "Score",
-          //dataIndex: "logo",
+          dataIndex: "score",
           width:"10%",
       },
       {
         title: "Status",
-        //dataIndex: "logo",
-        width:"10%",
+        dataIndex: "status",
+        width:"2%",
     },
 
      
