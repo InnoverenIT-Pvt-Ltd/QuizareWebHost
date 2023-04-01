@@ -1,63 +1,57 @@
 import React, { useEffect, useState } from "react";
-import { Field, Formik } from "formik";
+import { Field, Form, Formik } from "formik";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import {
-  getQuestionList,
-  updateQuestionsInQuiz,
-  deleteQuestion,
-} from "../QuizAction";
-import AddModal from "./AddModal";
+import { getQuestionList, updateQuestionsInQuiz, deleteQuestion } from "../QuizAction";
+// import AddModal from "./AddModal";
 import { Button, Card } from "antd";
 import { useHistory } from "react-router-dom";
-import { InputComponent } from "../../Components/Forms/Formik/InputComponent";
+import { InputComponent } from '../../../Components/Forms/Formik/InputComponent';
 
-function Quiz(props) {
-
+function UpdateQuiz(props) {
+//  useEffect(()=>{
+//     setCount(props.i);
+//     // getQuestionList(props.route.params.quizId);
+//    },[props.i])
   const history = useHistory();
- 
-  function handleCallBack(data) {
-    history.push(`/updatequiz`);
-  }
+
+  
+  function handleCallBack(data,resetForm) {
+   
+    alert("Question updated successfully")
+    history.push(`/create`)
+   setSelectedCategory("")
+    resetForm()
+   // handleCount()
+  
+ }
+
   const [count, setCount] = useState(props.i);
   const [selectedCategory, setSelectedCategory] = useState("");
   // const handleCount = () => setCount(count + 1);
   const handleCategory = (id) => setSelectedCategory(id);
   const [modalVisible, setModalVisible] = useState(false);
-  function handleCallBack(data, resetForm) {
-    if (data === "success") {
-      //  alert("Question updated successfully")
-      // setSelectedCategory("")
-      // resetForm()
-      //  handleCount()
-    } else {
-      console.log("Wrong");
-    }
-  }
-  //  useEffect(()=>{
-  //   setCount(props.i)
-  //  },[props.i])
+
   return (
     <>
       <Formik
         initialValues={{
           quizHostId: "QH4472404666122022",
-          quizId: props.item.quizId,
-          // categoryId: props.item.categoryId,
+           quizId: props.item.quizId,          
+           categoryId: props.item.categoryId,
           question: props.item.question,
           option1: props.item.option1,
           option2: props.item.option2,
           option3: props.item.option3,
           option4: props.item.option4,
         }}
-        onSubmit={(values, { resetForm }) => {
+        onSubmit={(values,{resetForm}) => {
           // alert(JSON.stringify(values))
           props.updateQuestionsInQuiz(
             {
               ...values,
             },
-            props.item.id,
-            (data) => handleCallBack(data, resetForm)
+            props.item.id,(data)=>handleCallBack(data,resetForm)
           );
         }}
       >
@@ -69,82 +63,92 @@ function Quiz(props) {
           errors,
           values,
         }) => (
-          <div>
+          <Form>
             <div>
-              {/* Container */}
               <div>
-                <Card>
-                  <Card style={{ fontSize: 22, alignSelf: "center" }}>
-                    <h1>Question{count || null}</h1>
+                {/* Container */}
+                <div>
+                  <Card>
+                    <Card style={{ fontSize: 22, alignSelf: "center" }}>
+                      <h1>Question{count || null}</h1>
+                    </Card>
+
+                    <Field
+                      style={{ textAlign: "center" }}
+                      name="question"
+                      value={`${values.question}`}
+                      component={InputComponent}
+                      onChangeText={handleChange("question")}
+                    />
+
+                    <Field
+                      component={InputComponent}
+                      value={`${values.option1}`}
+                      placeholder="Correct answer"
+                      name="option1"
+                      onChangeText={handleChange("option1")}
+                    />
+
+                    <Field
+                      component={InputComponent}
+                      value={`${values.option2}`}
+                      placeholder="Option 2"
+                      name="option2"
+                      onChangeText={handleChange("option2")}
+                    />
+
+                    <Field
+                      component={InputComponent}
+                      value={`${values.option3}`}
+                      placeholder="Option 3"
+                      name="option3"
+                      onChangeText={handleChange("option3")}
+                    />
+
+                    <Field
+                      component={InputComponent}
+                      value={`${values.option4}`}
+                      placeholder="Option 4"
+                      name="option4"
+                      style={{ textAlign: "center" }}
+                      onChangeText={handleChange("option4")}
+                    />
                   </Card>
+                </div>
 
-                  <Field
-                    style={{ textAlign: "center" }}
-                    placeholder="Question"
-                    name="question"
-                    component={InputComponent}
-                    onChangeText={handleChange("question")}
-                  />
+                {/* Buttons */}
+                <div
+                  style={{
+                    flexDirection: "row",
+                    margin: 5,
+                    alignSelf: "center",
+                  }}
+                >
+                  <Button
+                    title={''}
 
-                  <Field
-                    component={InputComponent}
-                    value={`${values.option1}`}
-                    placeholder="Correct answer"
-                    name="option1"
-                    onChangeText={handleChange("option1")}
-                  />
+                    onClick={() => props.deleteQuestion(props.item.id)}
+                  >Delete</Button>
+                  <Button
+                    title={''}
 
-                  <Field
-                    component={InputComponent}
-                    value={`${values.option2}`}
-                    placeholder="Option 2"
-                    name="option2"
-                    onChangeText={handleChange("option2")}
-                  />
+                    onClick={handleSubmit}
+                  >Update</Button>
+                  <Button
 
-                  <Field
-                    component={InputComponent}
-                    value={`${values.option3}`}
-                    placeholder="Option 3"
-                    name="option3"
-                    onChangeText={handleChange("option3")}
-                  />
 
-                  <Field
-                    component={InputComponent}
-                    value={`${values.option4}`}
-                    placeholder="Option 4"
-                    name="option4"
-                    style={{ textAlign: "center" }}
-                    onChangeText={handleChange("option4")}
-                  />
-                </Card>
-              </div>
-
-              {/* Buttons */}
-              <div
-                style={{
-                  flexDirection: "row",
-                  margin: 5,
-                  alignSelf: "center",
-                }}
-              >
-                <Button
-                  onClick={() => props.deleteQuestion(props.item.id)}
-                >Delete</Button>
-                <Button  onClick={handleSubmit}>
-                  {" "}
-                  Update
-                </Button>
-                <Button  onClick={() => setModalVisible(true)}>Add</Button>
-              </div>
-              <AddModal
+                    onClick={() => setModalVisible(true)}
+                  // onPress={() => props.navigation.navigate('Quiz Addquestions')}
+                  >Add</Button>
+                </div>
+                {/* <AddModal
                 setModalVisible={setModalVisible}
                 modalVisible={modalVisible}
                 item={props.item}
-              />
+              /> */}
+              </div>
             </div>
-          </div>
+          </Form>
         )}
       </Formik>
     </>
@@ -156,6 +160,7 @@ const mapStateToProps = ({ auth, quiz }) => ({
   showQuiz: quiz.showQuiz,
   quizId: quiz.showQuiz.quizId,
   category: quiz.category,
+  questionList:quiz.questionList,
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -163,9 +168,9 @@ const mapDispatchToProps = (dispatch) =>
     {
       getQuestionList,
       updateQuestionsInQuiz,
-      deleteQuestion,
+      deleteQuestion
     },
     dispatch
   );
 
-export default connect(mapStateToProps, mapDispatchToProps)(Quiz);
+export default connect(mapStateToProps, mapDispatchToProps)(UpdateQuiz);

@@ -82,7 +82,7 @@ class CreateQuiz extends Component {
                 </Link>
 </div>
 <div class="mt-4">
-<Link to="/hostquiz">
+<Link to="/ongoingQuiz">
 <Button type="primary"  htmlType="submit" style={{width:"15rem",height:"2rem",backgroundColor:"white",borderBlockColor:"#126c5e",borderRadius:"0"}}>
 <h3 class="font-extrabold">Ongoing quizzes</h3></Button> 
 </Link> 

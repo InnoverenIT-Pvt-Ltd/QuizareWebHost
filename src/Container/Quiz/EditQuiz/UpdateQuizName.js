@@ -1,47 +1,39 @@
-import React, {useEffect} from 'react';
-import {Field, Formik} from 'formik';
+import React from 'react'
 import {connect} from 'react-redux';
+import { Formik, Form, FastField, Field, FieldArray } from "formik";
 import {bindActionCreators} from 'redux';
 import { useHistory } from "react-router-dom";
-import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
-import {updateQuizNameByQuizId,getQuizName} from '../QuizAction';
-import { Button, Card } from 'antd';
-
-function UpdateQuizName(props) { 
-  const history = useHistory();
- 
-  function handleCallBack(data) {
-    history.push(`/updatequiz`);
-  }
-  useEffect(()=>{
-    props.getQuizName(props.route.params.quizId);   
-   },[])
-  function handeleCallBack(data) {
-    if(data==="success"){
-   // alert("success")
-   props.navigation.navigate('Edit Quiz')
-  }
-   // else{alert("Wrong")}
- }
- // const duration=props.showQuiz&&props.showQuiz.duration;
+import {withRouter } from "react-router-dom";
+import { updateQuizNameByQuizId, getQuizName} from '../QuizAction';
+import { Card,Button } from 'antd';
+import { InputComponent } from '../../../Components/Forms/Formik/InputComponent';
+import { useEffect } from 'react';
+function UpdateQuizName(props) {
   
-  console.log("quiz",props.showQuiz)
+  const history = useHistory();
+  function handleCallBack(data) {
+    history.push(`/create`);
+  }
   return (
     <>
-      <Formik
-      enableReinitialize
+     <Formik
         initialValues={{
           duration: props.showQuiz&&props.showQuiz.duration,
           quizName: props.showQuiz&&props.showQuiz.quizName,                
         }}
-        onSubmit={(values) => {     
-         // alert(values)
-          props.updateQuizNameByQuizId({
-            ...values,
-          },
-          props.showQuiz&&props.showQuiz.quizId,
-          (data)=>handeleCallBack(data))
-        }}>
+        
+        onSubmit={(values) => {
+         
+          props.updateQuizNameByQuizId(
+            {
+              ...values
+            },
+            props.showQuiz&&props.showQuiz.quizId,
+             handleCallBack
+            );
+            //resetForm()
+        }}
+        >
         {({
           handleChange,
           handleBlur,
@@ -50,48 +42,36 @@ function UpdateQuizName(props) {
           errors,
           values,
         }) => (
-          <div >
-            
-            <div >
+          <Form>
             <div>
-                <Card>
-                <Field
+              <Card>
+              <Field
                   name="quizName"
                   onChangeText={handleChange('quizName')}
                   component={InputComponent}
                   value={`${values.quizName}`}
-                  placeholder="Enter Quiz Name"
+                 // placeholder="Enter Quiz Name"
                 />
                  <Field
                   name="duration"
                   onChangeText={handleChange('duration')}
                   component={InputComponent}
                   value={`${values.duration}`}
-                  placeholder="Enter Response time per question"
+                 // placeholder="Enter Response time per question"
                 />
-                 
-                 {/* <TextInput                 
-                 // onChangeText={handleChange('quizName')}
-                  defaultValue="Standard"
-                  style={externalStyle.textinputbox}
-                  />                                    */}
-                 
-                <Button
+                 <Button
                 type="primary"
-                onPress={handleSubmit}
-                >Update Quiz</Button>
+                onClick={handleSubmit}
+                >Update Quiz Name</Button>
               </Card>
-              </div>
-              </div>           
-           
-            
-          </div>
-        )}
-      </Formik>
-     
+            </div>
+          </Form>
+           )}
+          </Formik>
     </>
-  );
+  )
 }
+
 const mapStateToProps = ({auth, quiz}) => ({
   updateQuizNameQuizId:quiz.updateQuizNameQuizId,
   updateQuizNameQuizIdError:quiz.updateQuizNameQuizIdError,
