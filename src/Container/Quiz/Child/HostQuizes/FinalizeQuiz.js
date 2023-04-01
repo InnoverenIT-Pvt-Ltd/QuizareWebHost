@@ -64,11 +64,13 @@ function FinalizeQuiz(props) {
                             </Link> 
                             
                         </div>
+                        <Link to="/hostquiz">
                         <Button
                               type="primary"
                               
                               onClick={() => props.hostQuiz()}
                             >Host This Quiz</Button>
+                            </Link>
 
 
 
