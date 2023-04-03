@@ -209,8 +209,8 @@ function Quiz(props) {
                     {!!props.category.length &&
                       props.category.map((item) => {
                         return (
-                          <div>
-                            <Button style={{borderColor:"black",marginRight:"0.5rem"}}>
+                          <div class="m-2">
+                            <Button style={{borderColor:"black"}}>
                               <p
                                 style={{
                                   textAlign: "center",
