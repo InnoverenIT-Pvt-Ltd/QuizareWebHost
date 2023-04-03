@@ -13,7 +13,7 @@ function QuizNameList(props) {
    },[])
   return (
     <>
-    <div>
+    <div  class="flex justify-center mt-2">
       <StyledSelect
       style={{
         maxWidth:"15rem"
