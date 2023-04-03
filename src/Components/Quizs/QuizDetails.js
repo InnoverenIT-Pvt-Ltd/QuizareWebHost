@@ -31,19 +31,22 @@ function QuizDetails(props) {
      <div className="bg-white rounded-rounded2.8 mt-3 ">
            
            <div class="shadow-2xl border-solid  p-1 max-sm:m-0 h-h34 rounded-rounded2.8 md:m-auto">
-           <h2 class="text-xl mt-4 ml-4 flex justify-center" >You are hosting</h2>
+           <h2 class="text-base mt-4 ml-4 flex justify-center" >You are hosting</h2>
         <h2>{`${props.quizNameDetails.quizName || ''}`}{' '}</h2>
-        <h2 class="text-xl mt-2 flex justify-center" >Share URL for others to access.</h2>
+        <h2 class="text-base mt-2 flex justify-center" >Share URL for others to access.</h2>
         <Card>
           {props.quizNameDetails.quizLink?
           <h1>{`http://player.quizledge.no${props.quizNameDetails.quizLink || ''}`}</h1>:""}
         </Card>
+        <div class="flex justify-center mt-1">
         <Button
+        style={{backgroundColor:"#4096ff",width:"-webkit-fill-available",borderRadius:"0.4rem",height:"auto"}}
         onClick={copyToClipboard(link)}
         >
-        Click Copy The Url
+        <h2 class="text-white">Click Copy The Url</h2>
         </Button>
-        <h2 class="text-xl mt-2" >Who is playing your quiz?</h2>
+        </div>
+        <h2 class="text-xl mt-2 flex justify-center" >Who is playing your quiz?</h2>
         <div>
         {viewData === null ? (
                 <h1>{viewmessage}</h1>
@@ -70,7 +73,7 @@ function QuizDetails(props) {
         <div class="mt-3"> 
            <Button
           type='primary'
-          style={{ width: "17rem", backgroundColor: "white" }}
+          style={{ backgroundColor: "white" }}
           onClick={() => props.hostQuiz(ID)}
           ><h3>Host This Quiz</h3></Button></div>
       </div>

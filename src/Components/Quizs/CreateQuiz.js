@@ -62,11 +62,11 @@ class CreateQuiz extends Component {
             setFieldValue,
             setFieldTouched,
           }) => (
-            <Form class=" max-sm:w-4/5 mt-8 m-auto md:mt-12  w-1/5 h-full ">
+            <Form class=" max-sm:w-4/5 mt-8 m-auto h-h33 md:mt-12  w-1/5  ">
              
             
-             <div className="bg-white rounded-md  w-full my-2 h-h34">
-        <div class="shadow-2xl border-solid w-w95  p-1 max-sm:m-0 h-5/6 rounded-rounded2.8 md:m-auto">
+             
+        <div class="shadow-2xl border-solid w-w95  p-1 max-sm:m-0 h-full rounded-rounded2.8 md:m-auto">
                 <div class="flex justify-center">
                 <SubHeader/></div>
                 <hr/>
@@ -95,7 +95,7 @@ class CreateQuiz extends Component {
 </div>   
 </div>
             </div>
-            </div>
+           
                      
             </Form>
           )}

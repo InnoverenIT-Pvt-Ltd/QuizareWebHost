@@ -54,10 +54,10 @@ function QuizName(props) {
           errors,
           values,
         }) => (
-          <Form class=" max-sm:w-3/4 mt-8 m-auto md:mt-12  w-1/5  h-h50  ">
-          <div className="bg-white rounded-rounded2.8  w-full ">
+          <Form class="flex justify-center max-sm:w-3/4 mt-8 m-auto md:mt-12  w-1/5 ">
+         
            
-          <div class="shadow-2xl border-solid w-w95  p-1 max-sm:m-0 h-h34 rounded-rounded2.8 md:m-auto">
+          <div class="shadow-2xl border-solid w-fit  p-1 max-sm:m-0 h-h34 rounded-rounded2.8 md:m-auto">
             <div class="flex flex-col items-center mt-8">
                <div class="mt-32">
                   <div >
@@ -86,7 +86,7 @@ function QuizName(props) {
                   style={externalStyle.firstCardText}>
                   Standard                  
                   </Text> */}
-                  <div class="mt-8">
+                  <div class="mt-8 flex">
                   {/* <Link to="/addquiz"> */}
                 <Button
                 type="primary"
@@ -103,7 +103,7 @@ function QuizName(props) {
               </div>
               </div>
               </div>
-        </div>
+     
         </Form>
         )}
        
