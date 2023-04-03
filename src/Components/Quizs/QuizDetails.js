@@ -3,8 +3,10 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { closeQuiz, hostQuiz } from '../../Container/Quiz/QuizAction';
 import { Button, Card } from "antd";
+import { Field, Formik,Form } from 'formik';
 import QuizDetailsPlayerTable from './QuizDetailsPlayerTable';
 import { Link } from 'react-router-dom';
+import MainHeader from '../Mainheader';
 function QuizDetails(props) {
   const link = `http://player.quizledge.no${props.quizNameDetails.quizLink || ''}`
   function copyToClipboard(link) {
@@ -23,10 +25,15 @@ function QuizDetails(props) {
   const ID = props.quizNameDetails.quizId;
   return (
     <>
-      <div>
-        <h1>You are hosting</h1>
+   
+     <Formik>
+     <Form class=" max-sm:w-3/4 mt-8 m-auto md:mt-12  w-1/5  h-h50  ">
+     <div className="bg-white rounded-rounded2.8 mt-3 ">
+           
+           <div class="shadow-2xl border-solid  p-1 max-sm:m-0 h-h34 rounded-rounded2.8 md:m-auto">
+           <h2 class="text-xl mt-4 ml-4 flex justify-center" >You are hosting</h2>
         <h2>{`${props.quizNameDetails.quizName || ''}`}{' '}</h2>
-        <h1>Share URL for others to access.</h1>
+        <h2 class="text-xl mt-2 flex justify-center" >Share URL for others to access.</h2>
         <Card>
           {props.quizNameDetails.quizLink?
           <h1>{`http://player.quizledge.no${props.quizNameDetails.quizLink || ''}`}</h1>:""}
@@ -36,35 +43,40 @@ function QuizDetails(props) {
         >
         Click Copy The Url
         </Button>
-        <h1>Who is playing your quiz?</h1>
-        <Card>
+        <h2 class="text-xl mt-2" >Who is playing your quiz?</h2>
+        <div>
         {viewData === null ? (
                 <h1>{viewmessage}</h1>
               ) : (
                 <QuizDetailsPlayerTable data={props.quizNameDetails} />
               )}
-        </Card>
-        <div>
+        </div>
+        <div class="flex justify-between">
           <Button
-          style={{ width: "9rem", backgroundColor: "white" }}
+          style={{ width: "8rem", backgroundColor: "white" }}
           type='primary'
           onClick={()=>props.closeQuiz(ID)}
           ><h3>Close Quiz</h3></Button>
            <Link to="/updateQuizName">
                   <Button
-                    style={{ width: "9rem", backgroundColor: "white" }}
+                    style={{ width: "8rem", backgroundColor: "white" }}
                     type="primary"
 
                      onClick={ID}
                   ><h3>Edit This Quiz</h3></Button>
                 </Link>
-          <Button
-          type='primary'
-          style={{ width: "9rem", backgroundColor: "white" }}
-          onClick={() => props.hostQuiz(ID)}
-          ><h3>Host This Quiz</h3></Button>
+        
         </div>
+        <div class="mt-3"> 
+           <Button
+          type='primary'
+          style={{ width: "17rem", backgroundColor: "white" }}
+          onClick={() => props.hostQuiz(ID)}
+          ><h3>Host This Quiz</h3></Button></div>
       </div>
+      </div>
+      </Form>
+      </Formik>
     </>
   )
 }

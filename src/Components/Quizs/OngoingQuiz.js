@@ -5,6 +5,7 @@ import { getQuizNameDetails,getFeedback } from '../../Container/Quiz/QuizAction'
 import QuizNameList from './QuizNameList';
 import { Formik } from 'formik';
 import QuizDetails from './QuizDetails';
+import MainHeader from '../Mainheader';
 
 function OngoingQuiz(props) {
     const [item,setItem]=useState(undefined)
@@ -17,8 +18,9 @@ function OngoingQuiz(props) {
      }
   return (
    <>
+    <MainHeader/>
     <Formik>
-      <div >        
+      <div class="flex justify-center mt-2" >        
         <div style={{alignItems: 'center',alignSelf:"center"}}>
          <QuizNameList handleGetQuizData={handleGetQuizData} item={item}/>
          <QuizDetails item={item}/>        
