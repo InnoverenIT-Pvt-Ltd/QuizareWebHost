@@ -5,7 +5,7 @@ import {bindActionCreators} from 'redux';
 // import {closeQuiz,hostQuiz} from '../../Quiz/QuizAction';
   import QuizDetailsPlayerTable from './QuizDetailsPlayerTable';
 import MainHeader from '../../../Components/Mainheader';
-import { Field } from 'formik';
+import { Field, Formik,Form } from 'formik';
 import { InputComponent } from '../../../Components/Forms/Formik/InputComponent';
 // import FeedbackTable from '../FeedbackTable';
 
@@ -28,6 +28,8 @@ function QuizDetails(props) {
   return (
     <>
      <MainHeader/>
+     <Formik>
+     <Form class=" max-sm:w-3/4 mt-8 m-auto md:mt-12  w-1/5  h-h50  ">
      <div className="bg-white rounded-rounded2.8 mt-3 ">
            
            <div class="shadow-2xl border-solid  p-1 max-sm:m-0 h-h34 rounded-rounded2.8 md:m-auto">
@@ -118,6 +120,8 @@ function QuizDetails(props) {
         </div>
       </div>
       </div>
+      </Form>
+      </Formik>
     </>
   );
 }
