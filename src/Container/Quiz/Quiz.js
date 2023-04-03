@@ -108,7 +108,7 @@ function Quiz(props) {
               {/* Container */}
               <Form class=" max-sm:w-4/5 mt-8 m-auto md:mt-12  w-1/5  h-h50  ">
               <div className="w-full my-2 flex justify-center m-auto ">
-        <div class="shadow-2xl border-solid w-5/6  p-1 max-sm:m-0 h-h29 rounded-rounded2.8 md:m-auto">
+        <div class="shadow-2xl border-solid w-9/12  p-1 max-sm:m-0 h-h29 rounded-rounded2.8 md:m-auto">
               <div class=" flex justify-center flex-col mt-8">
                
                 
@@ -122,7 +122,7 @@ function Quiz(props) {
                   // we can't use perscentge in reactNative
                   
                     > */}
- <div class="mt-4 ml-5">
+ <div class="mt-4">
   <div>
                   <Field
                     component={InputComponent}
@@ -209,7 +209,7 @@ function Quiz(props) {
                     {!!props.category.length &&
                       props.category.map((item) => {
                         return (
-                          <div class="m-2">
+                          <div class="m-1">
                             <Button style={{borderColor:"black"}}>
                               <p
                                 style={{

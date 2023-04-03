@@ -5,7 +5,7 @@ const TextInput = styled.input.attrs({
   size: props => (props.small ? 4 : undefined)
 })`
   border-radius: 0;
-  width:16.5rem;
+  width:100%;
     // border: 0.0625em solid ${props => props.theme.inputBorderColor};
      border: 0.0625em solid gainsboro;
     background-color: ${props => props.theme.backgroundColor};
@@ -17,7 +17,7 @@ const TextInput = styled.input.attrs({
     margin: 0 0 0.2rem 0;
   //  border-radius: 0.3rem ;
     outline: none;
-    margin-left:0.5rem;
+    //margin-left:0.5rem;
     width:${props => (props ? props.width : "100%")};
     height:${props => (false ? props.height : "2.8rem")};
     Left:${props => props.Left || "auto"}

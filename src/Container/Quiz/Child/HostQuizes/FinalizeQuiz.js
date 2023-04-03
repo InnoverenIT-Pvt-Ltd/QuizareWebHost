@@ -21,12 +21,12 @@ function FinalizeQuiz(props) {
     <>
       <MainHeader />
       <Formik>
-        <Form class=" max-sm:w-5/6 mt-8 m-auto md:mt-12  w-1/5  h-h50  ">
-          <div className="bg-white rounded-rounded2.8 mt-3 ">
+        <Form class="flex justify-center max-sm:w-full mt-8 m-auto md:mt-12  w-1/5  h-h50  ">
+          {/* <div className="bg-white rounded-rounded2.8 mt-3 "> */}
 
-            <div class="shadow-2xl border-solid  p-1 max-sm:m-0 h-h34 rounded-rounded2.8 md:m-auto">
-              <h1>{`${props.finalizeQuiz.quizName || ""}`}</h1>
-              <div class="mt-20">
+            <div class="shadow-2xl border-solid  p-1 max-sm:m-0 h-h34 w-3/4 rounded-rounded2.8 md:m-auto">
+            <h2 class="text-xl mt-4 ml-4 flex justify-center" >{`${props.finalizeQuiz.quizName || ""}`}</h2>
+              <div class="mt-4">
                 <div style={{ boxShadow: "0.01rem 0.01rem 0.12rem 0.01rem" }} className="bg-white rounded-2xl  w-full flex justify-center ">
 
                   <div class="shadow-2xl border-solid w-full  p-1 max-sm:m-0 h-28 rounded-2xl md:m-auto">
@@ -36,7 +36,7 @@ function FinalizeQuiz(props) {
                   </div>
                 </div>
               </div>
-              <div class="flex justify-center mt-8">
+              <div class="flex justify-center mt-4">
 
                 <h2 class="text-2xl font-bold" >Select quiz rules</h2>
               </div>
@@ -67,13 +67,13 @@ function FinalizeQuiz(props) {
                 <Link to="/create">
                   <Button
                     type="primary"
-                    style={{ width: "9rem", backgroundColor: "white" }}
+                    style={{ width: "8rem", backgroundColor: "white" }}
                     onClick={() => props.deleteHostQuiz(props.showQuiz && props.showQuiz.quizId, handleCallBack())}
                   ><h3>Delete This Quiz</h3></Button>
                 </Link>
                 <Link to="/updateQuizName">
                   <Button
-                    style={{ width: "9rem", backgroundColor: "white" }}
+                    style={{ width: "8rem", backgroundColor: "white" }}
                     type="primary"
 
                   //   onClick={() => props.navigation.navigate('Quiz Invite')}
@@ -93,7 +93,7 @@ function FinalizeQuiz(props) {
 
 
             </div>
-          </div>
+          {/* </div> */}
         </Form>
       </Formik>
 

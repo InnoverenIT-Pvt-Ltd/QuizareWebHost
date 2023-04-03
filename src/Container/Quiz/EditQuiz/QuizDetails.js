@@ -37,12 +37,12 @@ function QuizDetails(props) {
           <div>
            
          
-            <h2 class="text-xl mt-4 ml-4 flex justify-center" >You are hosting</h2>
+            <h2 class="text-base mt-4 ml-4 flex justify-center" >You are hosting</h2>
             {/* <h1 >
                 {`${props.quizNameDetails.quizName || ''}`}{' '}
                 </h1> */}
 
-<h2 class="text-xl mt-2 flex justify-center" >
+<h2 class="text-base mt-2 flex justify-center" >
               Share URL for others to access.
             </h2>
             {/* <Card
