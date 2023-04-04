@@ -1,12 +1,11 @@
-import React, {useEffect} from 'react';
-import Swiper from 'react-native-swiper';
-import UpdateQuiz from './UpdateQuiz';
-import {Container} from './Style';
+import React, { useEffect } from 'react'
+import Swiper from 'react-slider-swiper';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {getQuestionList,clearQuizNameDetails} from '../QuizAction';
+import UpdateQuiz from './UpdateQuiz';
+import { getQuestionList,clearQuizNameDetails } from '../QuizAction';
+import { Card } from 'antd';
 function EditQuizS(props) {
-  console.log("quiz page",props)
   useEffect(() => {
     props.getQuestionList(props.showQuiz && props.showQuiz.quizId);
     return()=>{
@@ -17,35 +16,36 @@ function EditQuizS(props) {
   if(props.fetchingQuestionList){
     alert("Hello")
     return(
-      <div></div>
+      <>
+      <div>new</div>
+        </>
     )
   }
-  console.log("component lebel",props.questionList)
   return (
     <>
-      <div style={{alignItems: 'center', backgroundColor: 'white'}}>
-        <h1>{props.showQuiz&&props.showQuiz.quizName}</h1>
-      </div>
-
-      <div>
-      <Swiper showsPagination={false} showsButtons>
-        {props.questionList.length &&
+    <div>
+    <div>
+      <h1>{props.showQuiz&&props.showQuiz.quizName}</h1>
+    </div>
+    <Swiper>
+    {props.questionList.length &&
           props.questionList.map((item, i) => {
             return (
-              
-              <Container key={item.id}>
-                <View>
-                <UpdateQuiz item={item} i={i + 1} />
-                </View>
-              </Container>
-              
-            );
-          })}
-      </Swiper>    
-      </div>  
+              <div key={item.id}>
+                <Card>
+                <UpdateQuiz item={item} i={i + 1}/>
+                </Card>
+                
+              </div>
+              );
+            })}
+    </Swiper>
+
+    </div>
     </>
-  );
+  )
 }
+
 const mapStateToProps = ({auth, quiz}) => ({
   showQuiz: quiz.showQuiz,
   questionList: quiz.questionList,

@@ -28,6 +28,7 @@
         "react-router-dom": "^5.0.0",
         "react-scripts": "^5.0.1",
         "react-select": "^2.4.2",
+        "react-slider-swiper": "^2.0.6",
         "reactstrap": "^9.1.4",
         "redux": "^4.2.0",
         "redux-thunk": "^2.4.1",

@@ -12,7 +12,7 @@ function UpdateQuizName(props) {
   
   const history = useHistory();
   function handleCallBack(data) {
-    history.push(`/create`);
+    history.push(`/editQuizS`);
   }
   return (
     <>
@@ -29,8 +29,8 @@ function UpdateQuizName(props) {
               ...values
             },
             props.showQuiz&&props.showQuiz.quizId,
-             handleCallBack
-            );
+            (data)=>handleCallBack(data))
+            
             //resetForm()
         }}
         >

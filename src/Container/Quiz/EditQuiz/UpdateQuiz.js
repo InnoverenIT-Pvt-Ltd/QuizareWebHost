@@ -19,7 +19,7 @@ function UpdateQuiz(props) {
   function handleCallBack(data,resetForm) {
    
     alert("Question updated successfully")
-    history.push(`/create`)
+    // history.push(`/create`)
    setSelectedCategory("")
     resetForm()
    // handleCount()
@@ -154,23 +154,21 @@ function UpdateQuiz(props) {
     </>
   );
 }
-const mapStateToProps = ({ auth, quiz }) => ({
+const mapStateToProps = ({auth, quiz}) => ({  
   fetchingQuizName: quiz.fetchingQuizName,
   fetchingQuizNameError: quiz.fetchingQuizNameError,
-  showQuiz: quiz.showQuiz,
-  quizId: quiz.showQuiz.quizId,
+  showQuiz: quiz.showQuiz, 
+  quizId:quiz.showQuiz.quizId,
   category: quiz.category,
-  questionList:quiz.questionList,
 });
 
-const mapDispatchToProps = (dispatch) =>
+const mapDispatchToProps = dispatch =>
   bindActionCreators(
-    {
+    {     
       getQuestionList,
-      updateQuestionsInQuiz,
+      updateQuestionsInQuiz ,
       deleteQuestion
     },
-    dispatch
+    dispatch,
   );
-
 export default connect(mapStateToProps, mapDispatchToProps)(UpdateQuiz);
