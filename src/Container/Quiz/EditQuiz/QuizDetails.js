@@ -29,10 +29,10 @@ function QuizDetails(props) {
     <>
      <MainHeader/>
      <Formik>
-     <Form class=" max-sm:w-3/4 mt-8 m-auto md:mt-12  w-1/5  h-h50  ">
-     <div className="bg-white rounded-rounded2.8 mt-3 ">
+     <Form class=" max-sm:w-11/12 mt-8 m-auto md:mt-12  w-1/5  h-h50  ">
+     <div className="bg-white rounded-2xl mt-3 flex justify-center ">
            
-           <div class="shadow-2xl border-solid  p-1 max-sm:m-0 h-h34 rounded-rounded2.8 md:m-auto">
+           <div class="shadow-2xl border-solid w-11/12 flex justify-center  p-1 max-sm:m-0 h-h34 rounded-2xl md:m-auto">
         <div >
           <div>
            
