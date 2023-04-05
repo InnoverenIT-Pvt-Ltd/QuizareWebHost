@@ -24,14 +24,14 @@ function FinalizeQuiz(props) {
         <Form class="flex justify-center max-sm:w-11/12 mt-8 m-auto md:mt-12  w-1/5  h-h50  ">
           {/* <div className="bg-white rounded-rounded2.8 mt-3 "> */}
 
-            <div class="shadow-2xl border-solid flex justify-center flex-col  p-4 max-sm:m-0 h-h34 w-11/12 rounded-xl md:m-auto">
+            <div class="shadow-2xl border-solid flex justify-center flex-col  p-4 max-sm:m-0 h-h34 w-11/12 rounded-xl mt-2 md:m-auto">
             <h2 class="text-xl mt-4 ml-4 flex justify-center" >{`${props.finalizeQuiz.quizName || ""}`}</h2>
               <div>
                 <div style={{ boxShadow: "0.01rem 0.01rem 0.12rem 0.01rem" }} className="bg-white rounded-2xl  w-full flex justify-center ">
 
                   <div class="shadow-2xl border-solid w-full flex justify-center flex-col  p-2  max-sm:m-0 h-28 rounded-2xl md:m-auto">
-                    
-                    <h3>Created:</h3>
+                    <div class="flex flex-row">
+                    <h3 class="mr-2">Created:</h3><h3 class="text-xsm leading-l" >{`${props.finalizeQuiz.creationDate || ""}`}</h3></div>
                     <h3>Questions:  {`${props.finalizeQuiz.noOfQuestions || ""}`}</h3>
                     <h3>Categories:</h3>
                     

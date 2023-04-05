@@ -18,7 +18,7 @@ import MainHeader from "../../Components/Mainheader";
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 const QuizzSchema = Yup.object().shape({
  
-  questionName: Yup.string().required("Input needed!"),
+  question: Yup.string().required("Input needed!"),
   option1: Yup.string().required("Input needed!"),
   option2: Yup.string().required("Input needed!"),
    
@@ -58,7 +58,7 @@ function Quiz(props) {
           quizId: props.showQuiz && props.showQuiz.quizId,
           categoryId: selectedCategory,
           //categoryId:"CAT33389270105262022",
-          questionName: "",
+          question: "",
           option1: "",
           option2: "",
           option3: "",
@@ -103,12 +103,12 @@ function Quiz(props) {
                 >
                   Finalize Quiz
                 </Button>
-                </Link> 
+                </Link>      
               </div>
               {/* Container */}
-              <Form class=" max-sm:w-11/12 mt-8 m-auto md:mt-12  w-1/5  h-h50  ">
+              <Form class=" max-sm:w-11/12  m-auto md:mt-12  w-1/5  h-h50  ">
               <div className="w-11/12 my-2 flex justify-center m-auto ">
-        <div class="shadow-2xl border-solid w-11/12 flex justify-center flex-col items-center  p-1 max-sm:m-0 h-h29 rounded-xl md:m-auto">
+        <div class="shadow-2xl border-solid w-11/12 flex justify-center flex-col items-center  p-2 max-sm:m-0 h-h29 rounded-2xl md:m-auto">
               <div class=" flex justify-center flex-col">
                
                 
@@ -126,9 +126,9 @@ function Quiz(props) {
   <div>
                   <Field
                     component={InputComponent}
-                    onChangeText={handleChange("questionName")}
+                    onChangeText={handleChange("question")}
                     placeholder="Question"
-                    name="questionName"
+                    name="question"
 
                     // onChangeText={handleChange('questionName')}
                   />
