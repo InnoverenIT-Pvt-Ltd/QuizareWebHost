@@ -46,7 +46,7 @@ function UpdateQuizName(props) {
         }) => (
           <Form class="flex justify-center max-sm:w-11/12 mt-8 m-auto md:mt-12  w-1/5 ">
            <div class="shadow-2xl border-solid w-11/12 flex justify-center items-center  p-1 max-sm:m-0 h-h34 rounded-2xl md:m-auto">
-              <div >
+              <div class="w-11/12" >
                 <div>
               <Field
                   name="quizName"

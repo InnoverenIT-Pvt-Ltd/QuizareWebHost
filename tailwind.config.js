@@ -24,6 +24,7 @@ module.exports = {
 'h8':'22.666667%',
 'h36':'36rem',
 'h34':'34rem',
+'h31':'31rem',
 'h33':'33rem',
 'h29':'27rem',
 'h85':'85rem',
@@ -34,6 +35,12 @@ module.exports = {
           },
           flexGrow: {
             '3': '3'
+          },
+          lineHeight:{
+'l':'1.6rem'
+          },
+          fontSize:{
+            'xsm':'0.85rem'
           },
           borderWidth:{
 'border-l-5':'5px'

@@ -27,48 +27,51 @@ function QuizDetails(props) {
     <>
    
      <Formik>
-     <Form class=" max-sm:w-3/4 mt-8 m-auto md:mt-12  w-1/5  h-h50  ">
-     <div className="bg-white rounded-rounded2.8 mt-3 ">
+     <Form class=" max-sm:w-11/12 mt-8 m-auto md:mt-12  w-1/5  h-h50  ">
+     <div className="bg-white rounded-2xl flex justify-center mt-3 ">
            
-           <div class="shadow-2xl border-solid  p-1 max-sm:m-0 h-h34 rounded-rounded2.8 md:m-auto">
-           <h2 class="text-base mt-4 ml-4 flex justify-center" >You are hosting</h2>
-        <h2>{`${props.quizNameDetails.quizName || ''}`}{' '}</h2>
-        <h2 class="text-base mt-2 flex justify-center" >Share URL for others to access.</h2>
-        <Card>
+           <div class="shadow-2xl border-solid w-11/12 flex justify-center flex-col  p-4 max-sm:m-0 h-h31 rounded-2xl md:m-auto">
+           <h2 class="text-base  ml-4 flex justify-center" >You are hosting</h2>
+        <h2 class="text-base flex justify-center">{`${props.quizNameDetails.quizName || ''}`}{' '}</h2>
+        <h2 class="text-base mt-2 flex justify-center " >Share URL for others to access.</h2>
+        <Card class="mt-4">
           {props.quizNameDetails.quizLink?
-          <h1>{`http://player.quizledge.no${props.quizNameDetails.quizLink || ''}`}</h1>:""}
+          <h2 class="text-base overflow-hidden">{`http://player.quizledge.no${props.quizNameDetails.quizLink || ''}`}</h2>:""}
         </Card>
         <div class="flex justify-center mt-1">
         <Button
         style={{backgroundColor:"#4096ff",width:"-webkit-fill-available",borderRadius:"0.4rem",height:"auto"}}
         onClick={copyToClipboard(link)}
         >
-        <h2 class="text-white">Click Copy The Url</h2>
+        <h2 class="text-white">Click to Copy The Url</h2>
         </Button>
         </div>
         <h2 class="text-xl mt-2 flex justify-center" >Who is playing your quiz?</h2>
         <div>
         {viewData === null ? (
-                <h1>{viewmessage}</h1>
+                <h2 class="text-base">{viewmessage}</h2>
               ) : (
                 <QuizDetailsPlayerTable data={props.quizNameDetails} />
               )}
         </div>
         <div class="flex justify-between">
+        <div class="w-36"> 
           <Button
-          style={{ width: "8rem", backgroundColor: "white" }}
+          style={{ backgroundColor: "white" }}
           type='primary'
           onClick={()=>props.closeQuiz(ID)}
           ><h3>Close Quiz</h3></Button>
+          </div>
+          <div class="w-36"> 
            <Link to="/updateQuizName">
                   <Button
-                    style={{ width: "8rem", backgroundColor: "white" }}
+                    style={{backgroundColor: "white" }}
                     type="primary"
 
                      onClick={ID}
                   ><h3>Edit This Quiz</h3></Button>
                 </Link>
-        
+                </div>
         </div>
         <div class="mt-3"> 
            <Button

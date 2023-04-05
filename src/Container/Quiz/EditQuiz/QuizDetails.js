@@ -1,8 +1,8 @@
 import { Button, Card } from 'antd';
-import React from 'react';
+import React,{useEffect} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-// import {closeQuiz,hostQuiz} from '../../Quiz/QuizAction';
+ import {closeQuiz,hostQuiz} from '../../Quiz/QuizAction';
   import QuizDetailsPlayerTable from './QuizDetailsPlayerTable';
 import MainHeader from '../../../Components/Mainheader';
 import { Field, Formik,Form } from 'formik';
@@ -10,6 +10,21 @@ import { InputComponent } from '../../../Components/Forms/Formik/InputComponent'
 // import FeedbackTable from '../FeedbackTable';
 
 function QuizDetails(props) {
+  // useEffect(()=>{
+    
+  //   props.closeQuiz(props.quizNameDetails.quizId);
+  //  },[]) 
+  const link = `http://player.quizledge.no${props.quizNameDetails.quizLink || ''}`
+  function copyToClipboard(link) {
+    navigator.clipboard.writeText(link)
+  .then(() => {
+    console.log(`Copied text to clipboard: ${link}`);
+    //alert(`Copied text to clipboard: ${link}`);
+  })
+  .catch((error) => {
+    console.error(`Could not copy text: ${error}`);
+  });
+  }
 //   const shareMessage = () => {
 //     Share.share({
 //       message: `http://player.quizledge.no${
@@ -21,9 +36,9 @@ function QuizDetails(props) {
 //   };
 //   const navigation = useNavigation();
 
-  // const viewData = props.quizNameDetails.playerViewDTOs;
-  // const viewmessage = props.quizNameDetails.message;
-//   const ID = props.quizNameDetails.quizId;
+  const viewData = props.quizNameDetails.playerViewDTOs;
+  const viewmessage = props.quizNameDetails.message;
+  const ID = props.quizNameDetails.quizId;
 
   return (
     <>
@@ -33,7 +48,7 @@ function QuizDetails(props) {
      <div className="bg-white rounded-2xl mt-3 flex justify-center ">
            
            <div class="shadow-2xl border-solid w-11/12 flex justify-center  p-1 max-sm:m-0 h-h34 rounded-2xl md:m-auto">
-        <div >
+        <div class="w-11/12" >
           <div>
            
          
@@ -45,6 +60,18 @@ function QuizDetails(props) {
 <h2 class="text-base mt-2 flex justify-center" >
               Share URL for others to access.
             </h2>
+            <Card class="mt-4">
+          {props.quizNameDetails.quizLink?
+          <h2 class="text-base overflow-hidden">{`http://player.quizledge.no${props.quizNameDetails.quizLink || ''}`}</h2>:""}
+        </Card>
+        <div class="flex justify-center mt-1">
+        <Button
+        style={{backgroundColor:"#4096ff",width:"-webkit-fill-available",borderRadius:"0.4rem",height:"auto"}}
+        onClick={copyToClipboard(link)}
+        >
+        <h2 class="text-white">Click to Copy The Url</h2>
+        </Button>
+        </div>
             {/* <Card
               containerStyle={{
                 borderColor: '#32167C',
@@ -54,8 +81,8 @@ function QuizDetails(props) {
               }}>
               <h1 >{`http://player.quizledge.no${props.quizNameDetails.quizLink ||''}`}</h1>
             </Card> */}
-            <div>
-            {/* <Field
+            {/* <div>
+            <Field
                   //name="quizName"
                   isColumn
                   component={InputComponent}
@@ -64,13 +91,13 @@ function QuizDetails(props) {
                   //placeholder="Enter Quiz Name"
                   inlineLabel
                  
-                /> */}
-            </div>
-             <Button
+                />
+            </div> */}
+             {/* <Button
                               type="primary"
                               style={{backgroundColor:"white"}}
               ><h3>Copy URL</h3>
-            </Button>
+            </Button> */}
             <Button
               title={'Share This Url'}
 
@@ -96,9 +123,7 @@ function QuizDetails(props) {
               <Button
                type="primary"
                style={{backgroundColor:"#61845b"}}
-                // onPress={() => {
-                //   props.closeQuiz(props.item, navigation.navigate('home'));
-                // }}
+               onClick={()=>props.closeQuiz(ID)}
                 
               ><h3>Close Quiz</h3></Button>
               {/* <Button
@@ -126,17 +151,17 @@ function QuizDetails(props) {
   );
 }
 const mapStateToProps = ({quiz}) => ({
-//   quizNameDetails: quiz.quizNameDetails,
-//   fetchingFeedback: quiz.fetchingFeedback,
-//   feedback: quiz.feedback,
-//   fetchingFeedbackErrot: quiz.fetchingFeedbackErrot,
+  quizNameDetails: quiz.quizNameDetails,
+  fetchingFeedback: quiz.fetchingFeedback,
+  feedback: quiz.feedback,
+  fetchingFeedbackErrot: quiz.fetchingFeedbackErrot,
 });
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-    //   closeQuiz,
-    //   hostQuiz
+       closeQuiz,
+       hostQuiz
     },
     dispatch,
   );
