@@ -54,12 +54,12 @@ function QuizName(props) {
           errors,
           values,
         }) => (
-          <Form class="flex justify-center max-sm:w-3/4 mt-8 m-auto md:mt-12  w-1/5 ">
+          <Form class="flex justify-center  max-sm:w-11/12 mt-8 m-auto md:mt-12  w-1/5 ">
          
            
-          <div class="shadow-2xl border-solid w-fit  p-1 max-sm:m-0 h-h34 rounded-rounded2.8 md:m-auto">
+          <div class="shadow-2xl border-solid w-11/12 flex justify-center items-center  p-1 max-sm:m-0 h-h34 rounded-xl md:m-auto">
             <div class="flex flex-col items-center mt-8">
-               <div class="mt-32">
+               <div >
                   <div >
                   <Field
                   name="quizName"
@@ -90,7 +90,7 @@ function QuizName(props) {
                   {/* <Link to="/addquiz"> */}
                 <Button
                 type="primary"
-                htmlType="submit" 
+                htmlType="submit"  
                 //  Loading={props.addingQuizName}
                    onClick={handleSubmit}
                  style={{width:"16.5rem",backgroundColor:"white",borderBlockColor:"black",borderRadius:"0",height:"2rem"}}

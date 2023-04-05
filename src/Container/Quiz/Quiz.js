@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Field, Formik } from "formik";
+import { Field, Formik,Form } from "formik";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Yup from "yup";
@@ -11,7 +11,7 @@ import {
   getQuizName,
   getCategory,
 } from "./QuizAction";
-import { Button, Card, Form, Input } from "antd";
+import { Button, Card,  Input } from "antd";
 import { InputComponent } from "../../Components/Forms/Formik/InputComponent";
 import SubHeader from "../../Components/SubHeader";
 import MainHeader from "../../Components/Mainheader";
@@ -106,10 +106,10 @@ function Quiz(props) {
                 </Link> 
               </div>
               {/* Container */}
-              <Form class=" max-sm:w-4/5 mt-8 m-auto md:mt-12  w-1/5  h-h50  ">
-              <div className="w-full my-2 flex justify-center m-auto ">
-        <div class="shadow-2xl border-solid w-9/12  p-1 max-sm:m-0 h-h29 rounded-rounded2.8 md:m-auto">
-              <div class=" flex justify-center flex-col mt-8">
+              <Form class=" max-sm:w-11/12 mt-8 m-auto md:mt-12  w-1/5  h-h50  ">
+              <div className="w-11/12 my-2 flex justify-center m-auto ">
+        <div class="shadow-2xl border-solid w-11/12 flex justify-center flex-col items-center  p-1 max-sm:m-0 h-h29 rounded-xl md:m-auto">
+              <div class=" flex justify-center flex-col">
                
                 
                     <h3 class="flex justify-center text-xl">
