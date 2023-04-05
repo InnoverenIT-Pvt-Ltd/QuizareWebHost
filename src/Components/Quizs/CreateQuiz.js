@@ -9,6 +9,7 @@ import { MainWrapper, Spacer } from "../../Components/UI/Elements";
 
 import moment from "moment";
 import SubHeader from "../SubHeader";
+import MainHeader from "../Mainheader";
 
 
 
@@ -51,9 +52,8 @@ class CreateQuiz extends Component {
     // console.log("sec",sectorOption)
     return (
       <>
-        <Formik
-      
-        >
+      <MainHeader/>
+        <Formik >
           {({
             values,
             errors,
@@ -66,12 +66,9 @@ class CreateQuiz extends Component {
              
             
              
-        <div class="shadow-2xl border-solid w-w95  p-1 max-sm:m-0 h-full rounded-rounded2.8 md:m-auto">
+        <div class="shadow-2xl border-solid w-w95 flex justify-center flex-col  p-1 max-sm:m-0 h-full rounded-xl md:m-auto">
                 <div class="flex justify-center">
-                <SubHeader/></div>
-                <hr/>
-                <div class="flex justify-center">
-                    <h3 class="font-extrabold mt-12">Welcome Øystein</h3></div>
+                    <h3 class="font-extrabold ">Welcome Øystein</h3></div>
                 <div class="flex items-center flex-col">
             <div class="mt-8">
             <Link to="/quizzes">

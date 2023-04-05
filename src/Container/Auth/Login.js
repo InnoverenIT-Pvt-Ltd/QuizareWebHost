@@ -52,6 +52,7 @@ class Login extends Component {
     // console.log("sec",sectorOption)
     return (
       <>
+      <MainHeader/>
       <div>
         <Formik
       
@@ -72,13 +73,10 @@ class Login extends Component {
                 style={{ width: "100%", margin: "auto",height:"35rem" }}
               > */}
                {/* <div className="bg-white rounded-md  w-full my-2 "> */}
-        <div class="shadow-2xl border-solid w-w95  p-1 max-sm:m-0 h-h34 rounded-rounded2.8 md:m-auto">
+        <div class="shadow-2xl border-solid w-w95 flex justify-center items-center  p-1 max-sm:m-0 h-h34 rounded-2xl md:m-auto">
+               <div>
                 <div class="flex justify-center">
-                    <SubHeader/>
-                    </div>
-                <hr/>
-                <div class="flex justify-center">
-                    <h3 class="font-extrabold mt-12">Welcome</h3></div>
+                    <h3 class="font-extrabold ">Welcome</h3></div>
                 <div class="flex items-center flex-col">
             <div class="mt-8">
             <Link to="/create">
@@ -92,6 +90,7 @@ class Login extends Component {
 <h3 class="font-extrabold">Register with Google</h3></Button> 
 </Link> 
 </div>    
+</div>
 </div>
               {/* </MainWrapper> */}
               </div>

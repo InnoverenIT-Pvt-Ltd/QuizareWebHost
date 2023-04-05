@@ -8,6 +8,7 @@ import { updateQuizNameByQuizId, getQuizName} from '../QuizAction';
 import { Card,Button } from 'antd';
 import { InputComponent } from '../../../Components/Forms/Formik/InputComponent';
 import { useEffect } from 'react';
+import MainHeader from '../../../Components/Mainheader';
 function UpdateQuizName(props) {
   
   const history = useHistory();
@@ -16,6 +17,7 @@ function UpdateQuizName(props) {
   }
   return (
     <>
+    <MainHeader/>
      <Formik
         initialValues={{
           duration: props.showQuiz&&props.showQuiz.duration,
@@ -42,16 +44,19 @@ function UpdateQuizName(props) {
           errors,
           values,
         }) => (
-          <Form>
-            <div>
-              <Card>
+          <Form class="flex justify-center max-sm:w-11/12 mt-8 m-auto md:mt-12  w-1/5 ">
+           <div class="shadow-2xl border-solid w-11/12 flex justify-center items-center  p-1 max-sm:m-0 h-h34 rounded-2xl md:m-auto">
+              <div >
+                <div>
               <Field
                   name="quizName"
                   onChangeText={handleChange('quizName')}
                   component={InputComponent}
                   value={`${values.quizName}`}
-                 // placeholder="Enter Quiz Name"
+                 // placeholder="Enter Quiz Name" 
                 />
+                </div>
+                <div class="mt-6">
                  <Field
                   name="duration"
                   onChangeText={handleChange('duration')}
@@ -59,11 +64,15 @@ function UpdateQuizName(props) {
                   value={`${values.duration}`}
                  // placeholder="Enter Response time per question"
                 />
+                </div>
+                <div class="mt-8">
                  <Button
                 type="primary"
+                style={{backgroundColor:"white",borderBlockColor:"black",borderRadius:"0",height:"2rem"}}
                 onClick={handleSubmit}
-                >Update Quiz Name</Button>
-              </Card>
+                ><h3 class="font-extrabold">Update Quiz Name</h3></Button>
+                </div>
+              </div>
             </div>
           </Form>
            )}

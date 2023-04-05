@@ -17,7 +17,7 @@ function MainHeader() {
     return (
         <>
           <div className="bg-slate-200 w-full  ">
-        <div class="shadow-2xl border-solid w-w95  max-sm:m-0 md:m-auto">
+        <div class=" border-solid w-w95  max-sm:m-0 md:m-auto">
            <div class="flex justify-center border">
                 
                     <div class="flex flex-row">
