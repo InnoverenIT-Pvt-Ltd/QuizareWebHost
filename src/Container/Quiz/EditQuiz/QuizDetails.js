@@ -69,7 +69,7 @@ function QuizDetails(props) {
         style={{backgroundColor:"#4096ff",width:"-webkit-fill-available",borderRadius:"0.4rem",height:"auto"}}
         onClick={copyToClipboard(link)}
         >
-        <h2 class="text-white">Click to Copy The Url</h2>
+        <h2 class="text-white">Click to copy the url</h2>
         </Button>
         </div>
             {/* <Card
