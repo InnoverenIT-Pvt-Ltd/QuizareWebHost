@@ -442,7 +442,7 @@ export const getQuizNameList = userId => dispatch => {
       });
     });
 };
-export const closeQuiz = (quizId) => dispatch => {
+export const closeQuiz = (quizId,cb) => dispatch => {
   //console.log('inside update question');
   dispatch({
     type: types.CLOSE_QUIZ_REQUEST,
@@ -459,7 +459,7 @@ export const closeQuiz = (quizId) => dispatch => {
         type: types.CLOSE_QUIZ_SUCCESS,
         payload: quizId,
       });      
-      // cb && cb('success');
+       cb && cb('success');
     })
     .catch(err => {
       console.log(err);
@@ -467,7 +467,7 @@ export const closeQuiz = (quizId) => dispatch => {
         type: types.CLOSE_QUIZ_FAILURE,
         payload: err,
       });
-      // cb && cb();
+      cb && cb("failuer");
     });
 };
 
