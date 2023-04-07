@@ -55,7 +55,7 @@ class AddQuiz extends Component {
             <Form class=" max-sm:w-11/12 mt-8 m-auto md:mt-12  w-1/5  h-h50  ">
              
             
-              <MainWrapper style={{ width: "100%", margin: "auto",height:"35rem" }}>
+              <MainWrapper style={{ width: "91%", margin: "auto",height:"35rem" }}>
 
                 <div class="flex justify-center mt-28">
                     <h1 class="text-3xl"></h1></div>
