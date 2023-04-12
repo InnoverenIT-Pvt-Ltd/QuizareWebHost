@@ -21,8 +21,14 @@ function QuizName(props) {
  const history = useHistory();
  
   function handleCallBack(data) {
+    if (data === "success") {
     history.push(`/addquiz`);
+  } else {
+    history.push(`/quizzes`);
   }
+  }
+ 
+
 
   return (
     <>
