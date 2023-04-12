@@ -39,8 +39,11 @@ function QuizDetails(props) {
 <div class="shadow-2xl border-solid w-11/12 flex justify-center items-center flex-col  p-1 max-sm:m-0 h-h34 rounded-xl md:m-auto">
   <div class="w-full flex justify-center items-center">
 <h2 class="text-base  ml-4 flex justify-center flex-col" >You are hosting</h2>
+</div>
+<div class="flex justify-center">
         <h2 class="text-base flex justify-center">{`${props.showQuiz.quizName || ''}`}{' '}</h2>
         </div>
+       
         
         <div class="w-full flex justify-center items-center flex-col">
   <h2 class="text-base mt-2 flex  items-center " >Share URL for others to access.</h2>

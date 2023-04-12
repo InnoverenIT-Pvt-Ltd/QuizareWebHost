@@ -3,6 +3,7 @@ import axios from 'axios';
 import {base_url} from '../../Config/Auth';
 import store from '../../Store';
 import { createBrowserHistory } from "history";
+import { message } from "antd";
 
 /**
  * request for adding a quiz name
@@ -40,6 +41,7 @@ export const addQuizName = (quiz,cb) => dispatch => {
         payload: err,
       });
         cb && cb("failuer");
+        message.error("Quiz name already exists!")
     });
 };
 
