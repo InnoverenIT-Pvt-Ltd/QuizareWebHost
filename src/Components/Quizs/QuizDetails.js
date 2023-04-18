@@ -34,7 +34,7 @@ function QuizDetails(props) {
            <h2 class="text-base  ml-4 flex justify-center" >You are hosting</h2>
         <h2 class="text-base flex justify-center">{`${props.quizNameDetails.quizName || ''}`}{' '}</h2>
         <h2 class="text-base mt-2 flex justify-center " >Share URL for others to access.</h2>
-        <Card class="mt-4">
+        <Card class="mt-4"> 
           {props.quizNameDetails.quizLink?
           <h2 class="text-base overflow-hidden">{`http://player.quizledge.no${props.quizNameDetails.quizLink || ''}`}</h2>:""}
         </Card>
