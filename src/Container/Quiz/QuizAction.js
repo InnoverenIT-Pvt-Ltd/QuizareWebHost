@@ -509,11 +509,7 @@ export const getQuizNameDetails = quizId => dispatch => {
     type: types.GET_QUIZ_NAME_DETAILS_GAME_REQUEST,
   });
   axios
-    .get(`${base_url}/userDetails/getOnGoingQuizDetails/${quizId}`, {
-      headers: {
-        Authorization: 'Bearer ' + store.getState().auth.token || '',
-      },
-    })
+    .get(`${base_url}/userDetails/getOnGoingQuizDetails/${quizId}`)
     .then(res => {
       // console.log(res.data);
       dispatch({

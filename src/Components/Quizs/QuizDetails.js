@@ -9,16 +9,16 @@ import { Link } from 'react-router-dom';
 import MainHeader from '../Mainheader';
 function QuizDetails(props) {
   const link = `http://player.quizledge.no${props.quizNameDetails.quizLink || ''}`
-  function copyToClipboard(link) {
-    navigator.clipboard.writeText(link)
-  .then(() => {
-    console.log(`Copied text to clipboard: ${link}`);
-    //alert(`Copied text to clipboard: ${link}`);
-  })
-  .catch((error) => {
-    console.error(`Could not copy text: ${error}`);
-  });
-  }
+  // function copyToClipboard(link) {
+  //   navigator.clipboard.writeText(link)
+  // .then(() => {
+  //   console.log(`Copied text to clipboard: ${link}`);
+  //   //alert(`Copied text to clipboard: ${link}`);
+  // })
+  // .catch((error) => {
+  //   console.error(`Could not copy text: ${error}`);
+  // });
+  // }
   
   const viewData = props.quizNameDetails.playerViewDTOs;
   const viewmessage = props.quizNameDetails.message;
@@ -34,14 +34,14 @@ function QuizDetails(props) {
            <h2 class="text-base  ml-4 flex justify-center" >You are hosting</h2>
         <h2 class="text-base flex justify-center">{`${props.quizNameDetails.quizName || ''}`}{' '}</h2>
         <h2 class="text-base mt-2 flex justify-center " >Share URL for others to access.</h2>
-        <Card class="mt-4">
+        <Card class="mt-4"> 
           {props.quizNameDetails.quizLink?
           <h2 class="text-base overflow-hidden">{`http://player.quizledge.no${props.quizNameDetails.quizLink || ''}`}</h2>:""}
         </Card>
         <div class="flex justify-center mt-1">
         <Button
         style={{backgroundColor:"#4096ff",width:"-webkit-fill-available",borderRadius:"0.4rem",height:"auto"}}
-        onClick={copyToClipboard(link)}
+        // onClick={copyToClipboard(link)}
         >
         <h2 class="text-white">Click to copy the url</h2>
         </Button>
