@@ -1,4 +1,4 @@
-import React,{Share}from 'react'
+import React from 'react'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { closeQuiz, hostQuiz } from '../../Container/Quiz/QuizAction';
@@ -9,16 +9,16 @@ import { Link } from 'react-router-dom';
 import MainHeader from '../Mainheader';
 function QuizDetails(props) {
   const link = `http://player.quizledge.no${props.quizNameDetails.quizLink || ''}`
-  // function copyToClipboard(link) {
-  //   navigator.clipboard.writeText(link)
-  // .then(() => {
-  //   console.log(`Copied text to clipboard: ${link}`);
-  //   //alert(`Copied text to clipboard: ${link}`);
-  // })
-  // .catch((error) => {
-  //   console.error(`Could not copy text: ${error}`);
-  // });
-  // }
+  function copyToClipboard(link) {
+    navigator.clipboard.writeText(link)
+  .then(() => {
+    console.log(`Copied text to clipboard: ${link}`);
+    //alert(`Copied text to clipboard: ${link}`);
+  })
+  .catch((error) => {
+    console.error(`Could not copy text: ${error}`);
+  });
+  }
   
   const viewData = props.quizNameDetails.playerViewDTOs;
   const viewmessage = props.quizNameDetails.message;
@@ -26,8 +26,7 @@ function QuizDetails(props) {
   return (
     <>
    
-     <Formik>
-     <Form class=" max-sm:w-11/12 mt-8 m-auto md:mt-12  w-1/5  h-h50  ">
+     <div class=" max-sm:w-11/12 mt-8 m-auto md:mt-12  w-1/5  h-h50  ">
      <div className="bg-white rounded-2xl flex justify-center mt-3 ">
            
            <div class="shadow-2xl border-solid w-11/12 flex justify-center flex-col  p-4 max-sm:m-0 h-h31 rounded-2xl md:m-auto">
@@ -41,7 +40,7 @@ function QuizDetails(props) {
         <div class="flex justify-center mt-1">
         <Button
         style={{backgroundColor:"#4096ff",width:"-webkit-fill-available",borderRadius:"0.4rem",height:"auto"}}
-        // onClick={copyToClipboard(link)}
+        onClick={()=>copyToClipboard(link)}
         >
         <h2 class="text-white">Click to copy the url</h2>
         </Button>
@@ -81,8 +80,7 @@ function QuizDetails(props) {
           ><h3>Host This Quiz</h3></Button></div>
       </div>
       </div>
-      </Form>
-      </Formik>
+      </div>
     </>
   )
 }

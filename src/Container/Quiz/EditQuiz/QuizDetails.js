@@ -1,4 +1,4 @@
-import React,{Share}from 'react'
+import React from 'react'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { closeQuiz, hostQuiz } from '../../../Container/Quiz/QuizAction';
@@ -34,8 +34,8 @@ function QuizDetails(props) {
   return (
     <>
     <MainHeader/>
-<Formik>
-<Form class="flex justify-center  items-center max-sm:w-11/12 mt-8 m-auto md:mt-12  w-1/5 ">
+
+<div class="flex justify-center  items-center max-sm:w-11/12 mt-8 m-auto md:mt-12  w-1/5 ">
 <div class="shadow-2xl border-solid w-11/12 flex justify-center items-center flex-col  p-1 max-sm:m-0 h-h34 rounded-xl md:m-auto">
   <div class="w-full flex justify-center items-center">
 <h2 class="text-base  ml-4 flex justify-center flex-col" >You are hosting</h2>
@@ -55,7 +55,7 @@ function QuizDetails(props) {
     <div class="mt-4 w-full">
       <Button
         style={{backgroundColor:"#4096ff",width:"100%",borderRadius:"0.4rem",height:"auto"}}
-        onClick={copyToClipboard(link)}
+        onClick= {()=> copyToClipboard(link)}
         >
         <h2 class="text-white">Click to copy the url</h2>
         </Button>
@@ -76,8 +76,8 @@ function QuizDetails(props) {
           </div>
           </div>
           </div>
-          </Form>
-          </Formik>
+          </div>
+         
     </>
   )
 }
