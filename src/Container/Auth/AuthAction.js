@@ -1,13 +1,12 @@
-import * as types from './AuthActionTypes';
-import {base_url, login_url} from '../../Config/Auth';
+import * as types from './AuthTypes';
+import { base_url, login_url } from '../../Config/Auth';
 import axios from 'axios';
-import store from '../../Store';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+// import AsyncStorage from '@react-native-async-storage/async-storage';
 
 /**
  * login url
  */
- export const login = ({ username, password }, history, cb) => (dispatch) => {
+export const login = ({ username, password }, history, cb) => (dispatch) => {
   dispatch({
     type: types.LOGIN_REQUEST,
   });
@@ -39,7 +38,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
       ) {
         //message.error("You have entered an invalid username or password ");
       } else {
-       // message.error("Oops! something went wrong. Please retry.");
+        // message.error("Oops! something went wrong. Please retry.");
         //console.log(err);
         history.push({
           pathname: "/",
@@ -64,7 +63,7 @@ export const getUserDetails = userId => dispatch => {
     .get(`${base_url}/user/${userId}`)
     .then(res => {
       //console.log(res);
-      AsyncStorage.setItem('userDetails', JSON.stringify(res.data));
+      // AsyncStorage.setItem('userDetails', JSON.stringify(res.data));
       dispatch({
         type: types.GET_USER_DETAILS_SUCCESS,
         payload: res.data,
@@ -76,5 +75,40 @@ export const getUserDetails = userId => dispatch => {
         type: types.GET_USER_DETAILS_FAILURE,
         payload: err,
       });
+    });
+};
+export const facebookLogin = (token, cb) => dispatch => {
+  dispatch({
+    type: types.FACEBOOK_LOGIN_REQUEST
+  });
+
+  axios
+    .post(`${base_url}/facebooklogin`, {
+      access_token: token
+    })
+    .then(res => {
+      dispatch({
+        type: types.FACEBOOK_LOGIN_SUCCESS,
+        payload: res.data
+      });
+      console.log(res.data);
+      if (res.data.successInd === true) {
+        localStorage.setItem("userCredential", JSON.stringify(res.data));
+        cb && cb("success");
+      }
+
+      if (res.data.successInd === false) {
+        cb && cb("invalid", res.data);
+      } else {
+        // cb && cb('error')
+      }
+    })
+    .catch(err => {
+      console.log(err);
+      dispatch({
+        type: types.FACEBOOK_LOGIN_FAILURE,
+        payload: err
+      });
+      cb("failure");
     });
 };
