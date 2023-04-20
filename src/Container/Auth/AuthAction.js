@@ -112,3 +112,39 @@ export const facebookLogin = (token, cb) => dispatch => {
       cb("failure");
     });
 };
+
+export const googleLogin = (tokenId, cb) => dispatch => {
+  dispatch({
+    type: types.GOOGLE_LOGIN_REQUEST
+  });
+
+  axios
+    .post(`${base_url}/googlelogin`, {
+      idToken: tokenId,
+    })
+    .then(res => {
+      dispatch({
+        type: types.GOOGLE_LOGIN_SUCCESS,
+        payload: res.data
+      });
+      console.log(res.data);
+      if (res.data.successInd === true) {
+        localStorage.setItem("userCredential", JSON.stringify(res.data));
+        cb && cb("success");
+      }
+
+      if (res.data.successInd === false) {
+        cb && cb("invalid", res.data);
+      } else {
+        // cb && cb('error')
+      }
+    })
+    .catch(err => {
+      console.log(err);
+      dispatch({
+        type: types.GOOGLE_LOGIN_FAILURE,
+        payload: err
+      });
+      cb("failure");
+    });
+};

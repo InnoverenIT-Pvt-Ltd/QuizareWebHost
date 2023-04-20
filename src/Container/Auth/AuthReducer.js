@@ -7,6 +7,9 @@ const initialState = {
     facebooklogging: false,
     facebookloginError: false,
 
+    googlelogging: false,
+    googleloginError: false,
+
     fetchingUserDetails: false,
     fetchingUserDetailsError: false,
     userDetails: {},
@@ -56,6 +59,20 @@ export const authReducer = (state = initialState, action) => {
                 ...state,
                 facebooklogging: false,
                 facebookloginError: true
+            };
+
+        case types.GOOGLE_LOGIN_REQUEST:
+            return { ...state, googlelogging: true };
+        case types.GOOGLE_LOGIN_SUCCESS:
+            return {
+                ...state,
+                googlelogging: false
+            };
+        case types.GOOGLE_LOGIN_FAILURE:
+            return {
+                ...state,
+                googlelogging: false,
+                googleloginError: true
             };
 
         default:

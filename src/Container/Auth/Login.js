@@ -5,9 +5,9 @@ import { Link, withRouter } from "react-router-dom";
 import { Button, Select, Icon, Tag, Switch, Checkbox, message } from "antd";
 import { Formik, Form, FastField, Field, FieldArray } from "formik";
 import * as Yup from "yup";
-import { GoogleLogin } from '@react-oauth/google';
+import { GoogleLogin } from 'react-google-login';
 import MainHeader from "../../Components/Mainheader";
-import { facebookLogin } from "../Auth/AuthAction";
+import { facebookLogin, googleLogin } from "../Auth/AuthAction";
 import FacebookLogin from "react-facebook-login";
 // import SkillsLoadMore from "./CandidateTable/SkillsLoadMore";
 const { Option } = Select;
@@ -33,8 +33,9 @@ function Login(props) {
 
   //For Google login
 
-  const responseMessage = (response) => {
+  const responseGoogle = (response) => {
     console.log(response);
+    props.googleLogin(response.tokenId)
   };
   const errorMessage = (error) => {
     console.log(error);
@@ -59,7 +60,13 @@ function Login(props) {
   };
 
   let google = <div>
-    <GoogleLogin onSuccess={responseMessage} onError={errorMessage} />
+    <GoogleLogin
+      clientId="748641779898-e7jjaer4u1mf9kq0u7tcti1iv0i70bq6.apps.googleusercontent.com"
+      buttonText="Login with Google"
+      onSuccess={responseGoogle}
+      onFailure={responseGoogle}
+      cookiePolicy={'single_host_origin'}
+    />
   </div>
   let content =
     <div>
@@ -124,7 +131,8 @@ const mapStateToProps = ({ auth, job }) => ({
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      facebookLogin
+      facebookLogin,
+      googleLogin
     },
     dispatch
   );
