@@ -7,18 +7,18 @@ import { Provider } from "react-redux";
 import store from "./Store/index";
 import * as serviceWorker from "./serviceWorker";
 import Wrapper from "./Wrapper"
-import reportWebVitals from './reportWebVitals';
-import { BrowserRouter } from 'react-router-dom';
 // NetworkService.setupInterceptors(store);
 
 ReactDOM.render(
+  // <GoogleOAuthProvider clientId="748641779898-e7jjaer4u1mf9kq0u7tcti1iv0i70bq6.apps.googleusercontent.com">
   <Provider store={store}>
-  <Wrapper>
-    <Router basename={process.env.PUBLIC_URL}>
-      <App />
-    </Router>
+    <Wrapper>
+      <Router basename={process.env.PUBLIC_URL}>
+        <App />
+      </Router>
     </Wrapper>
   </Provider>,
+  // </GoogleOAuthProvider>,
   document.getElementById("root")
 );
 
