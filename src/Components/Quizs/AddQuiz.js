@@ -9,7 +9,6 @@ import { MainWrapper} from "../UI/Elements";
 import JobHeader from "./JobHeader";
 
 const CandidateSchema = Yup.object().shape({
-  // contactOwner: Yup.string().required("Please Select contact owner"),
   emailId: Yup.string().email("Enter a valid Email").required("Input needed!"),
   firstName: Yup.string().required("Input needed!"),
 });
@@ -56,7 +55,7 @@ class AddQuiz extends Component {
             <Form class=" max-sm:w-11/12 mt-8 m-auto md:mt-12  w-1/5  h-h50  ">
              
             
-              <MainWrapper style={{ width: "100%", margin: "auto",height:"35rem" }}>
+              <MainWrapper style={{ width: "91%", margin: "auto",height:"35rem" }}>
 
                 <div class="flex justify-center mt-28">
                     <h1 class="text-3xl"></h1></div>
@@ -71,7 +70,7 @@ class AddQuiz extends Component {
 <div class="mt-12">
 <Link to="/question">
 <Button type="primary"  htmlType="submit" style={{width:"15rem",height:"2rem",backgroundColor:"white",borderBlockColor:"#126c5e",borderRadius:"0"}}>
-<h3 class="font-extrabold"> Add Quiz</h3></Button>
+<h3 class="font-extrabold"> </h3></Button>
 </Link>  
 </div>    
 </div>

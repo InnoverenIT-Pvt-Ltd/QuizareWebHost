@@ -8,6 +8,8 @@ import * as Yup from "yup";
 import { MainWrapper, Spacer } from "../../Components/UI/Elements";
 
 import moment from "moment";
+import SubHeader from "../SubHeader";
+import MainHeader from "../Mainheader";
 
 
 
@@ -50,9 +52,8 @@ class CreateQuiz extends Component {
     // console.log("sec",sectorOption)
     return (
       <>
-        <Formik
-      
-        >
+      <MainHeader/>
+        <Formik >
           {({
             values,
             errors,
@@ -61,27 +62,24 @@ class CreateQuiz extends Component {
             setFieldValue,
             setFieldTouched,
           }) => (
-            <Form class=" max-sm:w-11/12 mt-8 m-auto md:mt-12  w-1/5  h-h50  ">
+            <Form class=" max-sm:w-4/5 mt-8 m-auto h-h33 md:mt-12  w-1/5  ">
              
             
-              <MainWrapper
-              
-                style={{ width: "100%", margin: "auto",height:"35rem" }}
-              >
+             
+        <div class="shadow-2xl border-solid w-w95 flex justify-center flex-col  p-1 max-sm:m-0 h-full rounded-xl md:m-auto">
                 <div class="flex justify-center">
-                    <h1 class="text-3xl">QUIZMAKER</h1></div>
-                <hr/>
-                <div class="flex justify-center">
-                    <h3 class="font-extrabold mt-12">Welcome Øystein</h3></div>
+                    <h3 class="font-extrabold ">Welcome Øystein</h3></div>
                 <div class="flex items-center flex-col">
             <div class="mt-8">
-            <Link to="/quiz">
-            <Button type="primary"  htmlType="submit" style={{width:"15rem",height:"2rem",backgroundColor:"white",borderBlockColor:"blue",borderRadius:"0"}}>
+            <Link to="/quizzes">
+            <Button type="primary"
+              htmlType="submit" 
+              style={{width:"15rem",height:"2rem",backgroundColor:"white",borderBlockColor:"blue",borderRadius:"0"}}>
                 <h3 class="font-extrabold">Create a new quiz</h3></Button>
                 </Link>
 </div>
 <div class="mt-4">
-<Link to="/select">
+<Link to="/ongoingQuiz">
 <Button type="primary"  htmlType="submit" style={{width:"15rem",height:"2rem",backgroundColor:"white",borderBlockColor:"#126c5e",borderRadius:"0"}}>
 <h3 class="font-extrabold">Ongoing quizzes</h3></Button> 
 </Link> 
@@ -93,7 +91,8 @@ class CreateQuiz extends Component {
 </Link> 
 </div>   
 </div>
-              </MainWrapper>
+            </div>
+           
                      
             </Form>
           )}
@@ -116,11 +115,3 @@ const mapDispatchToProps = (dispatch) =>
   );
 
   export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CreateQuiz));
-
-
-
-
-
-
-
-

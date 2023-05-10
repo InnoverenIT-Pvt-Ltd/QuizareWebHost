@@ -1,210 +1,236 @@
-import React, {useEffect,useState } from 'react';
+import React, { useEffect, useState } from "react";
+import { Field, Formik,Form } from "formik";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as Yup from "yup";
+import { Link, withRouter } from "react-router-dom";
+// import MainHeader from '../../Navigation/MainHeader';
 import {
-  View,
-  Text,
-
-  // Picker,
-  StyleSheet,
-  TouchableOpacity,
-  Dimensions,
-  ScrollView,
-  SafeAreaView,
-  ActivityIndicator,
-} from 'react-native';
-import {Formik} from 'formik';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import {TextInput} from 'react-native-paper';
-import {Card, Input, Button, withTheme} from 'react-native-elements';
-import MainHeader from '../../Navigation/MainHeader';
-import {deleteQuestion,addQuestion,getQuizName,getCategory} from './QuizAction';
-
+  deleteQuestion,
+  addQuestion,
+  getQuizName,
+  getCategory,
+} from "./QuizAction";
+import { Button, Card,  Input } from "antd";
+import { InputComponent } from "../../Components/Forms/Formik/InputComponent";
+import SubHeader from "../../Components/SubHeader";
+import MainHeader from "../../Components/Mainheader";
+const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+const QuizzSchema = Yup.object().shape({
+ 
+  question: Yup.string().required("Input needed!"),
+  option1: Yup.string().required("Input needed!"),
+  option2: Yup.string().required("Input needed!"),
+   
+});
 //import AllQuiz from './AllQuiz';
-import externalStyle from '../../style/externalStyle';
-//import {white} from 'react-native-paper/lib/typescript/styles/colors';
 
 function Quiz(props) {
   const [count, setCount] = useState(1);
-  const [selectedCategory,setSelectedCategory]= useState("");
-  const handleCount = () => setCount(count + 1); 
-  const handleCategory = (id) => setSelectedCategory(id); 
-  
-  function handleCallBack(data,resetForm) {
-    //alert(data);
-     if(data==="success"){
-     setSelectedCategory(""),
-      resetForm(),
-      handleCount()
-     }
-     else{console.log("Wrong")}
-  };  
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const handleCount = () => setCount(count + 1);
+  const handleCategory = (id) => setSelectedCategory(id);
 
-  
-   useEffect(()=>{
+  // function handleCallBack(data,resetForm) {
+  //   //alert(data);
+  //    if(data==="success"){
+  //    setSelectedCategory("")
+  //     resetForm(),
+  //     handleCount()
+  //    }
+  //    else{console.log("Wrong")}
+  // };
+
+  useEffect(() => {
     props.getCategory();
-   },[]) 
-   console.log(props.category);
-   //alert(props.category);
-  
-  //console.log(questionId);
-  const navigate = props.navigation.navigate;
+  }, []);
+  console.log(props.category);
+  //alert(props.category);
 
-  const navigation = props;
-
-  const onhandleClick = () => {
-    props.navigation.navigate('home');
-  };   
   return (
     <>
       <MainHeader />
       <Formik
         initialValues={{
-         // duration: "",
+          // duration: "",
           // quizName: props.showQuiz.quizName,
           quizHostId: "QH4472404666122022",
-          quizId:props.showQuiz&&props.showQuiz.quizId,
+          quizId: props.showQuiz && props.showQuiz.quizId,
           categoryId: selectedCategory,
           //categoryId:"CAT33389270105262022",
-          questionName:"",
-          option1:"",
-          option2:"",
-          option3:"",
-          option4:""
+          question: "",
+          option1: "",
+          option2: "",
+          option3: "",
+          option4: "",
         }}
-        onSubmit={(values,{resetForm}) => {
+        validationSchema={QuizzSchema}
+        onSubmit={(values, { resetForm }) => {
           //alert(JSON.stringify(values));
-          props.addQuestion({
-            ...values,
-             quizId:props.showQuiz&&props.showQuiz.quizId,
-            categoryId: selectedCategory
-          },(data)=>handleCallBack(data,resetForm))        
-          // resetForm();
-          // handleCount();
-        }}>
+          props.addQuestion(
+            {
+              ...values,
+              quizId: props.showQuiz && props.showQuiz.quizId,
+              categoryId: selectedCategory,
+            },
+            (data) => (
+              // handleCallBack
+              data, resetForm
+            )
+          );
+          resetForm();
+          setSelectedCategory("");
+          handleCount();
+        }}
+      >
         {({
           handleChange,
-          handleBlur,         
+          handleBlur,
           handleSubmit,
           setFieldValue,
           errors,
           values,
         }) => (
-          <View style={externalStyle.firstView}>
-            <ScrollView>
-              <View style={{alignItems: 'center',alignSelf:"center"}}>
-               <Text style={externalStyle.headplayquizhost}>{props.showQuiz&&props.showQuiz.quizName}</Text>          
-              </View>
-              <View>
-                <Button
-                    title={'Finalize Quiz'}
-                    titleStyle={externalStyle.titleStyle}
-                   // containerStyle={externalStyle.containerStyleB}
-                   containerStyle={{
-                    width: 'auto',
-                    alignSelf:"flex-end"                   
-                  }}
-                    buttonStyle={externalStyle.buttonStyleFinal}
-                    onPress={() => props.navigation.navigate('Finalize Quiz')}
-                /></View>
+          
+            <div>
+              <div class="flex justify-center">
+                <h2 class="text-2xl">{props.showQuiz && props.showQuiz.quizName}</h2>
+              </div>
+              <div class="flex justify-center mt-3">
+              <Link to="/finalize">
+                <Button type="primary" 
+                // onClick={handleSubmit}
+                >
+                  Finalize Quiz
+                </Button>
+                </Link>      
+              </div>
               {/* Container */}
-              <View style={externalStyle.container}>
-                <Card containerStyle={externalStyle.mainCard}>
-                  <Card.Title style={{fontSize: 22, alignSelf:'center'}}>
-                    <Text > Question {count || null}</Text>
-                  </Card.Title>
+              <Form class=" max-sm:w-11/12  m-auto md:mt-12  w-1/5  h-h50  ">
+              <div className="w-11/12 my-2 flex justify-center m-auto ">
+        <div class="shadow-2xl border-solid w-11/12 flex justify-center flex-col items-center  p-2 max-sm:m-0 h-h29 rounded-2xl md:m-auto">
+              <div class=" flex justify-center flex-col">
+               
+                
+                    <h3 class="flex justify-center text-xl">
+                      {" "}
+                      Question {count || null}
+                    </h3>
+                
 
-                  <TouchableOpacity
+                  {/* <TouchableOpacity
                   // we can't use perscentge in reactNative
-                    style={externalStyle.questions}>
-                    <SafeAreaView>
-                      <TextInput
-                        multiline={true}
-                       value={values.questionName}
-                       numberOfLines={10}
-                        placeholder="Question"
-                        name="questionName"                        
-                        style={externalStyle.question}
-                        onChangeText={handleChange('questionName')}
-                      />
-                    </SafeAreaView>
-                  </TouchableOpacity>
-              
-                  <TouchableOpacity
-                    style={externalStyle.viewOption}
                   
-                  >
-                    <TextInput
-                    multiline
-                    value={values.option1}
-                    numberOfLines={5}
-                      placeholder="Correct answer"
-                      name="option1"
-                      style={externalStyle.option}
-                      onChangeText={handleChange('option1')}
-                    />
-                  </TouchableOpacity>
+                    > */}
+ <div class="mt-4">
+  <div>
+                  <Field
+                    component={InputComponent}
+                    onChangeText={handleChange("question")}
+                    placeholder="Question"
+                    name="question"
 
+                    // onChangeText={handleChange('questionName')}
+                  />
+</div>
+                  {/* </TouchableOpacity> */}
+                  {/*               
                   <TouchableOpacity
+                 
+                  
+                  > */}
+                  <div class="mt-1">
+                  <Field
+                    // multiline
+                    // value={values.option1}
+                    // numberOfLines={5}
+                    component={InputComponent}
+                    onChangeText={handleChange("option1")}
+                    placeholder="Correct answer"
+                    name="option1"
+
+                    // onChangeText={handleChange('option1')}
+                  />
+                  </div>
+                  {/* </TouchableOpacity> */}
+
+                  {/* <TouchableOpacity
                     
-                    style={externalStyle.viewOption}>
-                    <TextInput
-                    multiline
-                    value={values.option2}
-                    numberOfLines={5}
-                      placeholder="Option 2"
-                      name="option2"                      
-                      style={externalStyle.option}
-                      onChangeText={handleChange('option2')}
-                    />
-                  </TouchableOpacity>
+                    
+                    > */}
+                    <div class="mt-1">
+                  <Field
+                    // multiline
+                    // value={values.option2}
+                    // numberOfLines={5}
+                    component={InputComponent}
+                    onChangeText={handleChange("option2")}
+                    placeholder="Option 2"
+                    name="option2"
+
+                    // onChangeText={handleChange('option2')}
+                  />
+                  </div>
+                  {/* </TouchableOpacity>
 
                   <TouchableOpacity
                   
-                    style={externalStyle.viewOption}>
-                    <TextInput
-                    multiline
-                    value={values.option3}
-                    numberOfLines={5}
-                      placeholder="Option 3"
-                      name="option3"
-                      style={externalStyle.option}
-                      onChangeText={handleChange('option3')}
-                    />
-                  </TouchableOpacity>
+                
+                    > */}
+                   <div class="mt-1">
+                  <Field
+                    // multiline
+                    // value={values.option3}
+                    // numberOfLines={5}
+                    component={InputComponent}
+                    onChangeText={handleChange("option3")}
+                    placeholder="Option 3"
+                    name="option3"
+                  />
+                  </div>
+                  {/* </TouchableOpacity> */}
 
-                  <TouchableOpacity
-                    
-                    style={externalStyle.viewOption}>
-                    <TextInput
-                    multiline
-                    value={values.option4}
-                    numberOfLines={5}
-                      placeholder="Option 4"
-                      name="option4"
-                      style={externalStyle.option}
-                      onChangeText={handleChange('option4')}
-                    />
-                  </TouchableOpacity>
-
-                  <View style={{ flexDirection: 'row',flexWrap:"wrap" }}> 
-                  {!!props.category.length&&props.category.map((item)=>{
-                    return(
-                      <View>
-                      <Card containerStyle={externalStyle.containerStyleC}>
-                      <Button
-                          style={{
-                              textAlign: 'center',
-                              //color: '#6949FD',
-                              //fontSize:16,
-                              color:item.categoryId===selectedCategory?"red":'#6949FD'
-                          }}
-                          onClick={() => handleCategory(item.categoryId)}
-                      >{item.categoryName}</Button>
-                  </Card>
-                  </View> 
-                    )
-                  })}                           
-                            {/* <Card containerStyle={externalStyle.containerStyleC}>
+                  {/* <TouchableOpacity
+                > */}
+               <div class="mt-1">
+                  <Field
+                    // multiline
+                    // value={values.option4}
+                    // numberOfLines={5}
+                    placeholder="Option 4"
+                    name="option4"
+                    component={InputComponent}
+                    onChangeText={handleChange("option4")}
+                  />
+                  </div>
+                  {/* </TouchableOpacity> */}
+                  </div>
+                  <div class="flex flex-wrap justify-center mt-1">
+                    {!!props.category.length &&
+                      props.category.map((item) => {
+                        return (
+                          <div class="m-1">
+                            <Button style={{borderColor:"black"}}>
+                              <p
+                                style={{
+                                  textAlign: "center",
+                                  //color: '#6949FD',
+                                  //fontSize:16,
+                                  color:
+                                    item.categoryId === selectedCategory
+                                      ? "red"
+                                      : "#6949FD",
+                                }}
+                                onClick={() => handleCategory(item.categoryId)}
+                              >
+                                {item.categoryName}
+                              </p>
+                              </Button>
+                          </div>
+                        );
+                      })}
+                   
+                    {/* <Card containerStyle={externalStyle.containerStyleC}>
                                 <Text
                                     style={{
                                         textAlign: 'center',
@@ -229,8 +255,8 @@ function Quiz(props) {
                                     History
                                 </Text>
                             </Card> */}
-                        </View>
-                        {/* <View style={{ flexDirection: 'row' }}>
+                  </div>
+                  {/* <View style={{ flexDirection: 'row' }}>
                         <Card containerStyle={externalStyle.containerStyleC}>
                                 <Text style={{ textAlign: 'center', color: '#6949FD' }}>Sports</Text>
                             </Card>
@@ -241,68 +267,99 @@ function Quiz(props) {
                                 <Text style={{ textAlign: 'center', color: '#6949FD' }}>Mixed</Text>
                             </Card>
                         </View>           */}
-                </Card>
-              </View>
-
+                
+              
+              </div>
+              </div>
+              </div>
+              </Form>
+              <div class="max-sm: flex flex-row justify-center items-center">
+              <div class="mr-1">
+                      <Button
+                      style={{backgroundColor:"white",borderColor:"black",borderRadius:"0.75rem",width:"5rem",height:"2.2rem"}}
+                        type="primary"
+                        // title={'Add New Questions'}
+                        // titleStyle={externalStyle.titleStyle}
+                        // containerStyle={externalStyle.containerStyleBD}
+                        // buttonStyle={externalStyle.buttonStyleAdd}
+                        onClick={handleSubmit}
+                        // Loading={props.addingQuestion}
+                        // onPress={() => props.navigation.navigate('Quiz Addquestions')}
+                      >
+                        <h4 class="">Add </h4>
+                      </Button>
+                    </div>
+                    <div class="mr-1">
+                      <Button
+                        style={{backgroundColor:"white",borderColor:"black",borderRadius:"0.75rem",width:"5rem",height:"2.2rem"}}
+                        type="primary"
+                        // title={'Add New Questions'}
+                        // titleStyle={externalStyle.titleStyle}
+                        // containerStyle={externalStyle.containerStyleBD}
+                        // buttonStyle={externalStyle.buttonStyleAdd}
+                        onClick={handleSubmit}
+                        Loading={props.addingQuestion}
+                        // onPress={() => props.navigation.navigate('Quiz Addquestions')}
+                      >
+                       <h4>Update</h4> 
+                      </Button>
+                    </div>
+                    <div class="mr-1">
+                      <Button
+                          style={{backgroundColor:"white",borderColor:"black",borderRadius:"0.75rem",width:"5rem",height:"2.2rem"}}
+                        type="primary"
+                        // title={'Add New Questions'}
+                        // titleStyle={externalStyle.titleStyle}
+                        // containerStyle={externalStyle.containerStyleBD}
+                        // buttonStyle={externalStyle.buttonStyleAdd}
+                        onClick={handleSubmit}
+                        Loading={props.addingQuestion}
+                        // onPress={() => props.navigation.navigate('Quiz Addquestions')}
+                      >
+                        <h4>Delete </h4>
+                      </Button>
+                    </div>
+                  </div>
               {/* Buttons */}
-
-              <View
-                style={{
-                  flexDirection: 'row',
-                  margin:5,
-                  alignSelf: 'center'
-                }}>
-                <Button
-                        title={'Delete Question'}
-                        titleStyle={externalStyle.titleStyle}
-                        containerStyle={externalStyle.containerStyleBD}
-                        buttonStyle={externalStyle.buttonStyleDelete}
-                        onPress={() => props.navigation.navigate('Swipecard')}
-                    />
-
-                <Button
-                    title={'Update Quiz'}
-                    titleStyle={externalStyle.titleStyle}
-                    containerStyle={externalStyle.containerStyleBD}
-                    buttonStyle={externalStyle.buttonStyleFinal}
-                   // onPress={() => props.navigation.navigate('Finalize Quiz')}
-                />
-
-                <Button
-                  title={'Add New Questions'}
-                  titleStyle={externalStyle.titleStyle}
-                  containerStyle={externalStyle.containerStyleBD}
-                  buttonStyle={externalStyle.buttonStyleAdd}
-                  onPress={handleSubmit}
-                // onPress={() => props.navigation.navigate('Quiz Addquestions')}
-                />
-              </View>
-           
-            </ScrollView>
-          </View>
+            </div>
+        
         )}
       </Formik>
-     
     </>
   );
 }
-const mapStateToProps = ({auth, quiz}) => ({  
+const mapStateToProps = ({ auth, quiz }) => ({
   fetchingQuizName: quiz.fetchingQuizName,
   fetchingQuizNameError: quiz.fetchingQuizNameError,
-  showQuiz: quiz.showQuiz, 
-  quizId:quiz.showQuiz.quizId,
+  showQuiz: quiz.showQuiz,
+  quizId: quiz.showQuiz.quizId,
   category: quiz.category,
 });
 
-const mapDispatchToProps = dispatch =>
+const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
-    {     
+    {
       deleteQuestion,
       addQuestion,
       getQuizName,
-      getCategory,      
+      getCategory,
     },
-    dispatch,
+    dispatch
   );
 
-export default connect(mapStateToProps, mapDispatchToProps)(Quiz);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Quiz));
+
+// import React from 'react';
+// import { Link ,withRouter} from "react-router-dom";
+// import CreateQuiz from '../../Components/Quizs/CreateQuiz';
+// import QuizHost from './QuizHost';
+
+// function Quiz() {
+//   return (
+//     <div>
+//       <QuizHost/>
+//     </div>
+//   )
+// }
+
+// export default withRouter (Quiz);

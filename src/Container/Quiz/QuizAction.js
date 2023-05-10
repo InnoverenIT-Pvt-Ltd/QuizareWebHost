@@ -2,29 +2,37 @@ import * as types from './QuizActionTypes';
 import axios from 'axios';
 import {base_url} from '../../Config/Auth';
 import store from '../../Store';
+import { createBrowserHistory } from "history";
+import { message } from "antd";
 
 /**
  * request for adding a quiz name
  */
- export const addQuizName = (quiz,cb) => dispatch => {
-  
+ const history = createBrowserHistory();
+
+ 
+export const addQuizName = (quiz,cb) => dispatch => {
+  console.log('name',history );
  // console.log('name',quiz );
   dispatch({
     type: types.ADD_QUIZ_NAME_REQUEST,
   });
 
   axios
-    .post(`${base_url}/quiz/save`, quiz,)
+    .post(`${base_url}/quiz/save`, quiz)
     .then(res => {  
       //console.log(res.data);   
-       dispatch(getQuizName(res.data.quizId))     
-
+      
+       dispatch(getQuizName(res.data.quizId))   
+      //  console.log("hi",history);  
+      //  history.push("/addquiz");
+      //  window.location.reload()
       dispatch({
         type: types.ADD_QUIZ_NAME_SUCCESS,
         payload: res.data,
       });
-        cb && cb("success");
-        // history.push("/home")
+         cb && cb("success");
+          // history.push("/addquiz")
     })
     .catch(err => {      
      // console.log(err);
@@ -32,28 +40,29 @@ import store from '../../Store';
         type: types.ADD_QUIZ_NAME_FAILURE,
         payload: err,
       });
-       cb && cb("failuer");
+        cb && cb("failuer");
+        message.error("Quiz name already exists!")
     });
 };
 
 /**
  * get quiz name
  */
- export const getQuizName = (quizId) => dispatch => {
+export const getQuizName = quizId => dispatch => {
   dispatch({
     type: types.GET_QUIZ_NAME_REQUEST,
   });
   axios
-    .get(`${base_url}/quiz/${quizId}`,)
+    .get(`${base_url}/quiz/${quizId}`)
     .then(res => {
-     // console.log(":::::::::::::::::::::>getQuizName",res.data);
+      console.log(':::::::::::::::::::::>getQuizName', res.data);
       dispatch({
         type: types.GET_QUIZ_NAME_SUCCESS,
         payload: res.data,
       });
     })
     .catch(err => {
-     // console.log(err.response);
+      // console.log(err.response);
       dispatch({
         type: types.GET_QUESTIONS_FAILURE,
         payload: err,
@@ -173,7 +182,8 @@ export const updateQuestion = questionId => dispatch => {
 /**
  * delete a question from table
  */
-export const deleteQuestion = (questionId,userId) => dispatch => {
+export const deleteQuestion = questionId => dispatch => {
+  console.log("inside delete question",questionId)
   dispatch({
     type: types.DELETE_QUESTION_BY_QUESTION_iD_REQUEST,
   });
@@ -184,15 +194,14 @@ export const deleteQuestion = (questionId,userId) => dispatch => {
       },
     })
     .then(res => {
-      //console.log(res);
-      dispatch(getQuestionsByUserId(userId));
+      console.log(res.data);     
       dispatch({
         type: types.DELETE_QUESTION_BY_QUESTION_ID_SUCCESS,
-        payload: questionId,
+        payload: res.data,
       });
     })
     .catch(err => {
-      //console.log(err);
+      console.log(err);
       dispatch({
         type: types.DELETE_QUESTION_BY_QUESTION_ID_FAILURE,
         payload: err,
@@ -203,7 +212,7 @@ export const deleteQuestion = (questionId,userId) => dispatch => {
 /**
  * get the category of questions
  */
-export const getCategory =() => dispatch => {
+export const getCategory = () => dispatch => {
   dispatch({
     type: types.GET_CATEGORY_REQUEST,
   });
@@ -264,9 +273,9 @@ export const addCategory = category => dispatch => {
 };
 
 /**
- * get the quiz 
+ * get the quiz
  */
- export const getFinalizeQuiz =(quizId) => dispatch => {
+export const getFinalizeQuiz = quizId => dispatch => {
   dispatch({
     type: types.GET_FINALIZE_QUIZ_REQUEST,
   });
@@ -294,7 +303,7 @@ export const addCategory = category => dispatch => {
 /**
  * put the quiz url
  */
- export const hostFinalizeQuizUrl =(quizId) => dispatch => {
+export const hostFinalizeQuizUrl = quizId => dispatch => {
   dispatch({
     type: types.GET_FINALIZE_QUIZ_URL_REQUEST,
   });
@@ -322,7 +331,7 @@ export const addCategory = category => dispatch => {
 /**
  * delete a quiz from table
  */
- export const deleteHostQuiz = (quizId)=> dispatch => {
+export const deleteHostQuiz = (quizId,cb)=> dispatch => {
   dispatch({
     type: types.DELETE_QUIZ_FROM_HOST_REQUEST,
   });
@@ -334,11 +343,12 @@ export const addCategory = category => dispatch => {
     })
     .then(res => {
       console.log(res.data);
-      dispatch(getFinalizeQuiz(quizId));
+      // dispatch(getFinalizeQuiz(quizId));
       dispatch({
         type: types.DELETE_QUIZ_FROM_HOST_SUCCESS,
         payload: quizId,
       });
+      cb && cb("success");
     })
     .catch(err => {
       console.log(err);
@@ -346,6 +356,7 @@ export const addCategory = category => dispatch => {
         type: types.DELETE_QUIZ_FROM_HOST_FAILURE,
         payload: err,
       });
+      cb && cb("failuer");
     });
 };
 //Host quiz
@@ -360,8 +371,7 @@ export const hostQuiz = quizId => dispatch => {
         Authorization: 'Bearer ' + store.getState().auth.token || '',
       },
     })
-    .then(res => {    
-
+    .then(res => {
       dispatch({
         type: types.HOST_QUIZ_SUCCESS,
         payload: res.data,
@@ -378,9 +388,9 @@ export const hostQuiz = quizId => dispatch => {
     });
 };
 /**
- * get the players in  quiz 
+ * get the players in  quiz
  */
- export const getPlayersDetails =(quizId) => dispatch => {
+export const getPlayersDetails = quizId => dispatch => {
   dispatch({
     type: types.GET_PLAYERS_DETAILS_GAME_REQUEST,
   });
@@ -401,6 +411,208 @@ export const hostQuiz = quizId => dispatch => {
       //console.log(err.response);
       dispatch({
         type: types.GET_PLAYERS_DETAILS_GAME_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+/**
+ * get the quiz name list in  quiz
+ */
+export const getQuizNameList = userId => dispatch => {
+  dispatch({
+    type: types.GET_QUIZ_NAME_LIST_GAME_REQUEST,
+  });
+  axios
+    .get(`${base_url}/userDetails/getQuizes/${userId}`, {
+      headers: {
+        Authorization: 'Bearer ' + store.getState().auth.token || '',
+      },
+    })
+    .then(res => {
+      // console.log(res.data);
+      dispatch({
+        type: types.GET_QUIZ_NAME_LIST_GAME_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch(err => {
+      //console.log(err.response);
+      dispatch({
+        type: types.GET_QUIZ_NAME_LIST_GAME_FAILURE,
+        payload: err,
+      });
+    });
+};
+export const closeQuiz = (quizId,cb) => dispatch => {
+  //console.log('inside update question');
+  dispatch({
+    type: types.CLOSE_QUIZ_REQUEST,
+  });
+  axios
+    .put(`${base_url}/quiz/updatehost/close/quiz/${quizId}`, {
+      headers: {
+        Authorization: 'Bearer ' + store.getState().auth.token || '',
+      },
+    })
+    .then(res => {
+      console.log(res.data);
+      dispatch({
+        type: types.CLOSE_QUIZ_SUCCESS,
+        payload: quizId,
+      });      
+       cb && cb('success');
+    })
+    .catch(err => {
+      console.log(err);
+      dispatch({
+        type: types.CLOSE_QUIZ_FAILURE,
+        payload: err,
+      });
+      cb && cb("failuer");
+    });
+};
+
+//UPDATE QUIZ NAME DURATION
+export const updateQuizNameByQuizId = (data, quizId, cb) => dispatch => {
+  console.log('inside update question',data);
+  dispatch({
+    type: types.UPDATE_QUIZ_NAME_REQUEST,
+  });
+  axios
+    .put(`${base_url}/quiz/update/${quizId}`, data, {
+      headers: {
+        Authorization: 'Bearer ' + store.getState().auth.token || '',
+      },
+    })
+    .then(res => {
+      console.log(res.data);
+      dispatch({
+        type: types.UPDATE_QUIZ_NAME_SUCCESS,
+        payload: res.data,
+      });
+      cb && cb('success');
+    })
+    .catch(err => {
+      console.log(err);
+      dispatch({
+        type: types.UPDATE_QUIZ_NAME_FAILURE,
+        payload: err,
+      });
+      // cb && cb();
+    });
+};
+// get the quiz name list in  quiz
+
+export const getQuizNameDetails = quizId => dispatch => {
+  dispatch({
+    type: types.GET_QUIZ_NAME_DETAILS_GAME_REQUEST,
+  });
+  axios
+    .get(`${base_url}/userDetails/getOnGoingQuizDetails/${quizId}`)
+    .then(res => {
+      // console.log(res.data);
+      dispatch({
+        type: types.GET_QUIZ_NAME_DETAILS_GAME_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch(err => {
+      //console.log(err.response);
+      dispatch({
+        type: types.GET_QUIZ_NAME_DETAILS_GAME_FAILURE,
+        payload: err,
+      });
+    });
+};
+//clear quiz details data
+export const clearQuizNameDetails = () => dispatch => {
+  console.log("clear")
+  dispatch({
+    type: types.CLEAR_QUIZ_NAME_DETAILS_GAME,
+  });
+};
+
+/**
+ * get questions list in  quiz
+ */
+export const getQuestionList = quizId => dispatch => {
+  dispatch({
+    type: types.GET_QUESTIONS_LIST_IN_QUIZ_REQUEST,
+  });
+  axios
+    .get(`${base_url}/userDetails/questions/${quizId}`, {
+      headers: {
+        Authorization: 'Bearer ' + store.getState().auth.token || '',
+      },
+    })
+    .then(res => {
+      console.log('getQuestion', res.data);
+      dispatch({
+        type: types.GET_QUESTIONS_LIST_IN_QUIZ_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch(err => {
+      //console.log(err.response);
+      dispatch({
+        type: types.GET_QUESTIONS_LIST_IN_QUIZ_FAILURE,
+        payload: err,
+      });
+    });
+};
+//UPDATE QUESTIONS IN QUIZ
+export const updateQuestionsInQuiz = (data, questionId, cb) => dispatch => {
+ // console.log('inside update question',data);
+  dispatch({
+    type: types.UPDATE_QUESTIONS_IN_QUIZ_REQUEST,
+  });
+  axios
+    .put(`${base_url}/question/updateQuestion/${questionId}`, data, {
+      headers: {
+        Authorization: 'Bearer ' + store.getState().auth.token || '',
+      },
+    })
+    .then(res => {
+     // console.log(res.data);
+      dispatch({
+        type: types.UPDATE_QUESTIONS_IN_QUIZ_SUCCESS,
+        payload: res.data,
+      });
+      cb && cb('success');
+    })
+    .catch(err => {
+      //console.log(err);
+      dispatch({
+        type: types.UPDATE_QUESTIONS_IN_QUIZ_FAILURE,
+        payload: err,
+      });
+      // cb && cb();
+    });
+};
+// get feedback  quiz
+
+export const getFeedback = quizId => dispatch => {
+  dispatch({
+    type: types.GET_QUIZ_FEEDBACK_REQUEST,
+  });
+  axios
+    .get(`${base_url}/userDetails/Playerfeedback/${quizId}`, {
+      headers: {
+        Authorization: 'Bearer ' + store.getState().auth.token || '',
+      },
+    })
+    .then(res => {
+       console.log(res.data,"feedback");
+      dispatch({
+        type: types.GET_QUIZ_FEEDBACK_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch(err => {
+      //console.log(err.response);
+      dispatch({
+        type: types.GET_QUIZ_FEEDBACK_FAILURE,
         payload: err,
       });
     });

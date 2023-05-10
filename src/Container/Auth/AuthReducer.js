@@ -4,6 +4,12 @@ const initialState = {
     logging: false,
     loginError: false,
 
+    facebooklogging: false,
+    facebookloginError: false,
+
+    googlelogging: false,
+    googleloginError: false,
+
     fetchingUserDetails: false,
     fetchingUserDetailsError: false,
     userDetails: {},
@@ -23,7 +29,7 @@ export const authReducer = (state = initialState, action) => {
             };
         case types.LOGIN_FAILURE:
             return { ...state, logging: false, loginError: true };
-            
+
         //user details
         case types.GET_USER_DETAILS_REQUEST:
             return { ...state, fetchingUserDetails: true };
@@ -39,6 +45,34 @@ export const authReducer = (state = initialState, action) => {
                 ...state,
                 fetchingUserDetails: false,
                 fetchingUserDetailsError: true,
+            };
+
+        case types.FACEBOOK_LOGIN_REQUEST:
+            return { ...state, facebooklogging: true };
+        case types.FACEBOOK_LOGIN_SUCCESS:
+            return {
+                ...state,
+                facebooklogging: false
+            };
+        case types.FACEBOOK_LOGIN_FAILURE:
+            return {
+                ...state,
+                facebooklogging: false,
+                facebookloginError: true
+            };
+
+        case types.GOOGLE_LOGIN_REQUEST:
+            return { ...state, googlelogging: true };
+        case types.GOOGLE_LOGIN_SUCCESS:
+            return {
+                ...state,
+                googlelogging: false
+            };
+        case types.GOOGLE_LOGIN_FAILURE:
+            return {
+                ...state,
+                googlelogging: false,
+                googleloginError: true
             };
 
         default:
