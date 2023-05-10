@@ -101,7 +101,11 @@ function Login(props) {
                     <h3 class="font-extrabold ">Welcome</h3></div>
                   <div class="flex items-center flex-col">
                     {/* <div class="facebook_div"> */}
-                    {content}
+                    {/* {content} */}
+                    <Link to="/create">
+            <Button type="primary"  htmlType="submit" style={{width:"15rem",height:"2rem",backgroundColor:"white",borderBlockColor:"blue",borderRadius:"0"}}>
+                <h3 class="font-extrabold">Register with FaceBook</h3></Button>
+                </Link>
                     {/* </div> */}
                     <div class="mt-4">
                       {google}
