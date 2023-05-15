@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Field, Formik,Form } from "formik";
+import { Field, Formik, Form } from "formik";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Yup from "yup";
@@ -11,17 +11,16 @@ import {
   getQuizName,
   getCategory,
 } from "./QuizAction";
-import { Button, Card,  Input } from "antd";
+import { Button, Card, Input } from "antd";
 import { InputComponent } from "../../Components/Forms/Formik/InputComponent";
 import SubHeader from "../../Components/SubHeader";
 import MainHeader from "../../Components/Mainheader";
-const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+const phoneRegExp =
+  /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 const QuizzSchema = Yup.object().shape({
- 
   question: Yup.string().required("Input needed!"),
   option1: Yup.string().required("Input needed!"),
   option2: Yup.string().required("Input needed!"),
-   
 });
 //import AllQuiz from './AllQuiz';
 
@@ -91,146 +90,146 @@ function Quiz(props) {
           errors,
           values,
         }) => (
-          
-            <div>
-              <div class="flex justify-center">
-                <h2 class="text-2xl">{props.showQuiz && props.showQuiz.quizName}</h2>
-              </div>
-              <div class="flex justify-center mt-3">
+          <div>
+            <div class="flex justify-center">
+              <h2 class="text-2xl">
+                {props.showQuiz && props.showQuiz.quizName}
+              </h2>
+            </div>
+            <div class="flex justify-center mt-3">
               <Link to="/finalize">
-                <Button type="primary" 
+                <Button type="primary"
                 // onClick={handleSubmit}
                 >
                   Finalize Quiz
                 </Button>
-                </Link>      
-              </div>
-              {/* Container */}
-              <Form class=" max-sm:w-11/12  m-auto md:mt-12  w-1/5  h-h50  ">
+              </Link>
+            </div>
+            {/* Container */}
+            <Form class=" max-sm:w-11/12  m-auto md:mt-12  w-1/5  h-h50  ">
               <div className="w-11/12 my-2 flex justify-center m-auto ">
-        <div class="shadow-2xl border-solid w-11/12 flex justify-center flex-col items-center  p-2 max-sm:m-0 h-h29 rounded-2xl md:m-auto">
-              <div class=" flex justify-center flex-col">
-               
-                
+                <div class="shadow-2xl border-solid w-11/12 flex justify-center flex-col items-center  p-2 max-sm:m-0 h-h29 rounded-2xl md:m-auto">
+                  <div class=" flex justify-center flex-col">
                     <h3 class="flex justify-center text-xl">
                       {" "}
                       Question {count || null}
                     </h3>
-                
 
-                  {/* <TouchableOpacity
+                    {/* <TouchableOpacity
                   // we can't use perscentge in reactNative
                   
                     > */}
- <div class="mt-4">
-  <div>
-                  <Field
-                    component={InputComponent}
-                    onChangeText={handleChange("question")}
-                    placeholder="Question"
-                    name="question"
+                    <div class="mt-4">
+                      <div>
+                        <Field
+                          component={InputComponent}
+                          onChangeText={handleChange("question")}
+                          placeholder="Question"
+                          name="question"
 
-                    // onChangeText={handleChange('questionName')}
-                  />
-</div>
-                  {/* </TouchableOpacity> */}
-                  {/*               
+                          // onChangeText={handleChange('questionName')}
+                        />
+                      </div>
+                      {/* </TouchableOpacity> */}
+                      {/*               
                   <TouchableOpacity
                  
                   
                   > */}
-                  <div class="mt-1">
-                  <Field
-                    // multiline
-                    // value={values.option1}
-                    // numberOfLines={5}
-                    component={InputComponent}
-                    onChangeText={handleChange("option1")}
-                    placeholder="Correct answer"
-                    name="option1"
+                      <div class="mt-1">
+                        <Field
+                          // multiline
+                          // value={values.option1}
+                          // numberOfLines={5}
+                          component={InputComponent}
+                          onChangeText={handleChange("option1")}
+                          placeholder="Correct answer"
+                          name="option1"
 
-                    // onChangeText={handleChange('option1')}
-                  />
-                  </div>
-                  {/* </TouchableOpacity> */}
+                          // onChangeText={handleChange('option1')}
+                        />
+                      </div>
+                      {/* </TouchableOpacity> */}
 
-                  {/* <TouchableOpacity
+                      {/* <TouchableOpacity
                     
                     
                     > */}
-                    <div class="mt-1">
-                  <Field
-                    // multiline
-                    // value={values.option2}
-                    // numberOfLines={5}
-                    component={InputComponent}
-                    onChangeText={handleChange("option2")}
-                    placeholder="Option 2"
-                    name="option2"
+                      <div class="mt-1">
+                        <Field
+                          // multiline
+                          // value={values.option2}
+                          // numberOfLines={5}
+                          component={InputComponent}
+                          onChangeText={handleChange("option2")}
+                          placeholder="Option 2"
+                          name="option2"
 
-                    // onChangeText={handleChange('option2')}
-                  />
-                  </div>
-                  {/* </TouchableOpacity>
+                          // onChangeText={handleChange('option2')}
+                        />
+                      </div>
+                      {/* </TouchableOpacity>
 
                   <TouchableOpacity
                   
                 
                     > */}
-                   <div class="mt-1">
-                  <Field
-                    // multiline
-                    // value={values.option3}
-                    // numberOfLines={5}
-                    component={InputComponent}
-                    onChangeText={handleChange("option3")}
-                    placeholder="Option 3"
-                    name="option3"
-                  />
-                  </div>
-                  {/* </TouchableOpacity> */}
+                      <div class="mt-1">
+                        <Field
+                          // multiline
+                          // value={values.option3}
+                          // numberOfLines={5}
+                          component={InputComponent}
+                          onChangeText={handleChange("option3")}
+                          placeholder="Option 3"
+                          name="option3"
+                        />
+                      </div>
+                      {/* </TouchableOpacity> */}
 
-                  {/* <TouchableOpacity
+                      {/* <TouchableOpacity
                 > */}
-               <div class="mt-1">
-                  <Field
-                    // multiline
-                    // value={values.option4}
-                    // numberOfLines={5}
-                    placeholder="Option 4"
-                    name="option4"
-                    component={InputComponent}
-                    onChangeText={handleChange("option4")}
-                  />
-                  </div>
-                  {/* </TouchableOpacity> */}
-                  </div>
-                  <div class="flex flex-wrap justify-center mt-1">
-                    {!!props.category.length &&
-                      props.category.map((item) => {
-                        return (
-                          <div class="m-1">
-                            <Button style={{borderColor:"black"}}>
-                              <p
-                                style={{
-                                  textAlign: "center",
-                                  //color: '#6949FD',
-                                  //fontSize:16,
-                                  color:
-                                    item.categoryId === selectedCategory
-                                      ? "red"
-                                      : "#6949FD",
-                                }}
-                                onClick={() => handleCategory(item.categoryId)}
-                              >
-                                {item.categoryName}
-                              </p>
+                      <div class="mt-1">
+                        <Field
+                          // multiline
+                          // value={values.option4}
+                          // numberOfLines={5}
+                          placeholder="Option 4"
+                          name="option4"
+                          component={InputComponent}
+                          onChangeText={handleChange("option4")}
+                        />
+                      </div>
+                      {/* </TouchableOpacity> */}
+                    </div>
+                    <div class="flex flex-wrap justify-center mt-1">
+                      {!!props.category.length &&
+                        props.category.map((item) => {
+                          return (
+                            <div class="m-1">
+                              <Button style={{ borderColor: "black" }}>
+                                <p
+                                  style={{
+                                    textAlign: "center",
+                                    //color: '#6949FD',
+                                    //fontSize:16,
+                                    color:
+                                      item.categoryId === selectedCategory
+                                        ? "red"
+                                        : "#6949FD",
+                                  }}
+                                  onClick={() =>
+                                    handleCategory(item.categoryId)
+                                  }
+                                >
+                                  {item.categoryName}
+                                </p>
                               </Button>
-                          </div>
-                        );
-                      })}
-                   
-                    {/* <Card containerStyle={externalStyle.containerStyleC}>
+                            </div>
+                          );
+                        })}
+
+                      {/* <Card containerStyle={externalStyle.containerStyleC}>
                                 <Text
                                     style={{
                                         textAlign: 'center',
@@ -255,8 +254,8 @@ function Quiz(props) {
                                     History
                                 </Text>
                             </Card> */}
-                  </div>
-                  {/* <View style={{ flexDirection: 'row' }}>
+                    </div>
+                    {/* <View style={{ flexDirection: 'row' }}>
                         <Card containerStyle={externalStyle.containerStyleC}>
                                 <Text style={{ textAlign: 'center', color: '#6949FD' }}>Sports</Text>
                             </Card>
@@ -267,62 +266,77 @@ function Quiz(props) {
                                 <Text style={{ textAlign: 'center', color: '#6949FD' }}>Mixed</Text>
                             </Card>
                         </View>           */}
-                
-              
-              </div>
-              </div>
-              </div>
-              </Form>
-              <div class="max-sm: flex flex-row justify-center items-center">
-              <div class="mr-1">
-                      <Button
-                      style={{backgroundColor:"white",borderColor:"black",borderRadius:"0.75rem",width:"5rem",height:"2.2rem"}}
-                        type="primary"
-                        // title={'Add New Questions'}
-                        // titleStyle={externalStyle.titleStyle}
-                        // containerStyle={externalStyle.containerStyleBD}
-                        // buttonStyle={externalStyle.buttonStyleAdd}
-                        onClick={handleSubmit}
-                        // Loading={props.addingQuestion}
-                        // onPress={() => props.navigation.navigate('Quiz Addquestions')}
-                      >
-                        <h4 class="">Add </h4>
-                      </Button>
-                    </div>
-                    <div class="mr-1">
-                      <Button
-                        style={{backgroundColor:"white",borderColor:"black",borderRadius:"0.75rem",width:"5rem",height:"2.2rem"}}
-                        type="primary"
-                        // title={'Add New Questions'}
-                        // titleStyle={externalStyle.titleStyle}
-                        // containerStyle={externalStyle.containerStyleBD}
-                        // buttonStyle={externalStyle.buttonStyleAdd}
-                        onClick={handleSubmit}
-                        Loading={props.addingQuestion}
-                        // onPress={() => props.navigation.navigate('Quiz Addquestions')}
-                      >
-                       <h4>Update</h4> 
-                      </Button>
-                    </div>
-                    <div class="mr-1">
-                      <Button
-                          style={{backgroundColor:"white",borderColor:"black",borderRadius:"0.75rem",width:"5rem",height:"2.2rem"}}
-                        type="primary"
-                        // title={'Add New Questions'}
-                        // titleStyle={externalStyle.titleStyle}
-                        // containerStyle={externalStyle.containerStyleBD}
-                        // buttonStyle={externalStyle.buttonStyleAdd}
-                        onClick={handleSubmit}
-                        Loading={props.addingQuestion}
-                        // onPress={() => props.navigation.navigate('Quiz Addquestions')}
-                      >
-                        <h4>Delete </h4>
-                      </Button>
-                    </div>
                   </div>
-              {/* Buttons */}
+                </div>
+              </div>
+            </Form>
+            <div class="max-sm: flex flex-row justify-center items-center">
+              <div class="mr-1">
+                <Button
+                  style={{
+                    backgroundColor: "white",
+                    borderColor: "black",
+                    borderRadius: "0.75rem",
+                    width: "5rem",
+                    height: "2.2rem",
+                  }}
+                  type="primary"
+                  // title={'Add New Questions'}
+                  // titleStyle={externalStyle.titleStyle}
+                  // containerStyle={externalStyle.containerStyleBD}
+                  // buttonStyle={externalStyle.buttonStyleAdd}
+                  onClick={handleSubmit}
+                  // Loading={props.addingQuestion}
+                  // onPress={() => props.navigation.navigate('Quiz Addquestions')}
+                >
+                  <h4 class="">Add </h4>
+                </Button>
+              </div>
+              <div class="mr-1">
+                <Button
+                  style={{
+                    backgroundColor: "white",
+                    borderColor: "black",
+                    borderRadius: "0.75rem",
+                    width: "5rem",
+                    height: "2.2rem",
+                  }}
+                  type="primary"
+                  // title={'Add New Questions'}
+                  // titleStyle={externalStyle.titleStyle}
+                  // containerStyle={externalStyle.containerStyleBD}
+                  // buttonStyle={externalStyle.buttonStyleAdd}
+                  onClick={handleSubmit}
+                  Loading={props.addingQuestion}
+                  // onPress={() => props.navigation.navigate('Quiz Addquestions')}
+                >
+                  <h4>Update</h4>
+                </Button>
+              </div>
+              <div class="mr-1">
+                <Button
+                  style={{
+                    backgroundColor: "white",
+                    borderColor: "black",
+                    borderRadius: "0.75rem",
+                    width: "5rem",
+                    height: "2.2rem",
+                  }}
+                  type="primary"
+                  // title={'Add New Questions'}
+                  // titleStyle={externalStyle.titleStyle}
+                  // containerStyle={externalStyle.containerStyleBD}
+                  // buttonStyle={externalStyle.buttonStyleAdd}
+                  onClick={handleSubmit}
+                  Loading={props.addingQuestion}
+                  // onPress={() => props.navigation.navigate('Quiz Addquestions')}
+                >
+                  <h4>Delete </h4>
+                </Button>
+              </div>
             </div>
-        
+            {/* Buttons */}
+          </div>
         )}
       </Formik>
     </>

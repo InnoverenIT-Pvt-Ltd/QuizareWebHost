@@ -14,7 +14,7 @@ import MainHeader from '../../Components/Mainheader';
 const QuizSchema = Yup.object().shape({
 
   quizName: Yup.string().required("Input needed!"),
-  duration: Yup.string().required("Input needed!"),
+ // duration: Yup.string().required("Input needed!"),
 
 });
 function QuizName(props) {
@@ -77,7 +77,7 @@ function QuizName(props) {
 
                     />
                   </div>
-                  <div class="mt-6">
+                  {/* <div class="mt-6">
                     <Field
                       name="duration"
                       component={InputComponent}
@@ -86,7 +86,7 @@ function QuizName(props) {
                       placeholder="Enter Response time per question"
 
                     />
-                  </div>
+                  </div> */}
                   {/* <Text                 
                   onChangeText={handleChange('quizName')}
                   style={externalStyle.firstCardText}>

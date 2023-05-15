@@ -9,7 +9,12 @@ import { message } from "antd";
  * request for adding a quiz name
  */
  const history = createBrowserHistory();
-
+ export const handleQuizHostModal = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_QUIZ_HOST_MODAL,
+    payload: modalProps,
+  });
+};
  
 export const addQuizName = (quiz,cb) => dispatch => {
   console.log('name',history );
@@ -615,5 +620,57 @@ export const getFeedback = quizId => dispatch => {
         type: types.GET_QUIZ_FEEDBACK_FAILURE,
         payload: err,
       });
+    });
+};
+
+export const getBugsList = quizHostId => dispatch => {
+  dispatch({
+    type: types.GET_BUGS_REQUEST,
+  });
+  axios
+    .get(`${base_url}/bugs/getBugs/${quizHostId}`, {
+      
+    })
+    .then(res => {
+       console.log(res.data);
+      dispatch({
+        type: types.GET_BUGS_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch(err => {
+      //console.log(err.response);
+      dispatch({
+        type: types.GET_BUGS_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const addBugs = (quizHostId) => dispatch => { 
+  dispatch({
+    type: types.ADD_BUGS_REQUEST,
+  });
+
+  axios
+    .post(`${base_url}/quiz/save`)
+    .then(res => {       
+      
+       dispatch(getBugsList(quizHostId))  
+     
+      dispatch({
+        type: types.ADD_BUGS_SUCCESS,
+        payload: res.data,
+      });
+       //  cb && cb("success");        
+    })
+    .catch(err => {      
+     // console.log(err);
+      dispatch({
+        type: types.ADD_BUGS_FAILURE,
+        payload: err,
+      });
+       // cb && cb("failuer");
+      //  message.error("Quiz name already exists!")
     });
 };

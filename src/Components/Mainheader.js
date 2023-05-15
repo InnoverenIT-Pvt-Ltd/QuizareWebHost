@@ -1,38 +1,64 @@
-import { Button } from "antd";
 import React from "react";
+import { Button, Card, Input } from "antd";
+import { Link, withRouter } from "react-router-dom";
 
 function MainHeader() {
+  const headerName = [
+    { letter: "Q", color: "blue" },
+    { letter: "u", color: "red" },
+    { letter: "i", color: "blue" },
+    { letter: "z", color: "red" },
+    { letter: "m", color: "blue" },
+    { letter: "a", color: "red" },
+    { letter: "k", color: "blue" },
+    { letter: "e", color: "red" },
+    { letter: "r", color: "blue" },
+  ];
 
-    const headerName =[{letter:"Q",color:'blue'},
-    {letter:"u",color:'red'},
-    {letter:"i",color:'blue'},
-    {letter:"z",color:'red'},
-    {letter:"m",color:'blue'},
-    {letter:"a",color:'red'},
-    {letter:"k",color:'blue'},
-    {letter:"e",color:'red'},
-    {letter:"r",color:'blue'}   
-]
-
-    return (
-        <>
-          <div className="bg-slate-200 w-full  ">
+  return (
+    <>
+      <div className="bg-slate-200 w-full  ">
         <div class=" border-solid w-w95  max-sm:m-0 md:m-auto">
-           <div class="flex justify-center border">
-                
-                    <div class="flex flex-row">
-                        {headerName.map((item)=>{
-                            return(                                
-                                <h2 key={item.letter} style={{color:item.color,fontSize:35}}>{item.letter}</h2>
-                            )
-                        })}
-                        
-                    </div>                  
-                    </div>
-           </div>
-           </div>
-        </>
-    );
+          <div class="flex justify-center border">
+            <div class="flex flex-col justify-center">
+              <div className="flex flex-row">
+                {headerName.map((item) => {
+                  return (
+                    <h2
+                      key={item.letter}
+                      style={{ color: item.color, fontSize: 35 }}
+                    >
+                      {item.letter}
+                    </h2>
+                  );
+                })}
+              </div>
+              <div className="flex justify-center">
+                <Link to="/create">
+                  <button className="bg-blue-900 text-white px-4 rounded-md">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="w-6 h-6"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
+                      />
+                    </svg>
+                  </button>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
 }
 
 export default MainHeader;
