@@ -9,6 +9,9 @@ const initialState = {
   fetchingFinalizeQuizError: false,
   finalizeQuiz: {},
 
+  addingBugs: false,
+   addingBugsError: false,
+
   fetchingFinalizeQuizUrl: false,
   fetchingFinalizeQuizUrlError: false,
   finalizeQuizUrl: {},
@@ -28,6 +31,10 @@ const initialState = {
   fetchingFeedback: false,
   fetchingFeedbackError: false,
   feedback:[],
+
+  fetchingBugs: false,
+  fetchingBugsError: false,
+  bugs:[],
 
   fetchingQuizName: false,
   fetchingQuizNameError: false,
@@ -55,6 +62,8 @@ const initialState = {
   addingCategory: false, 
   addingCategoryError: false,
 
+  addQuizHostModal: false,
+
   deletingQuizHost: false,
   deletingQuizHostError: false,
 
@@ -74,6 +83,13 @@ const initialState = {
 
 export const quizReducer = (state = initialState, action) => {
   switch (action.type) {
+
+    case types.HANDLE_QUIZ_HOST_MODAL:
+      return {
+        ...state,
+        addQuizHostModal: action.payload,
+      };
+
     case types.GET_QUESTIONS_REQUEST:
       return {...state, fetchingQuestions: true};
     case types.GET_QUESTIONS_SUCCESS:
@@ -385,6 +401,27 @@ case types.GET_QUIZ_FEEDBACK_FAILURE:
     fetchingFeedbackError: true,
   };
 
+  case types.GET_BUGS_REQUEST:
+  return {...state, fetchingBugs: true};
+case types.GET_BUGS_SUCCESS:
+  return {
+    ...state,
+    fetchingBugs: false,
+    bugs: action.payload,
+  };
+case types.GET_BUGS_FAILURE:
+  return {
+    ...state,
+    fetchingBugs: false,
+    fetchingBugsError: true,
+  };
+
+  case types.ADD_BUGS_REQUEST:
+      return {...state, addingBugs: true};
+    case types.ADD_BUGS_SUCCESS:
+      return {...state, addingBugs: false};
+    case types.ADD_BUGS_FAILURE:
+      return {...state, addingBugs: false, addingBugsError: true};
     default:
       return state;
   }
