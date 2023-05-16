@@ -1,36 +1,28 @@
-import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { Formik, Form, FastField, Field, FieldArray } from "formik";
 import { bindActionCreators } from "redux";
-// import { withRouter} from "react-router-dom";
-import * as Yup from "yup";
-import { InputComponent } from "../../Components/Forms/Formik/InputComponent";
+import React, { useState } from "react";
 import { addBugs } from "../../Container/Quiz/QuizAction";
+import { InputComponent } from "../Forms/Formik/InputComponent";
 import { Button, Card, Input } from "antd";
-import { useHistory } from "react-router-dom";
-import { withRouter } from "react-router-dom";
-import MainHeader from "../../Components/Mainheader";
-import ReportBugList from "./ReportBugList";
+import MainHeader from "../Mainheader";
 
 function ReportBugs(props) {
-  const history = useHistory();
-
+  const [description, setDescription] = useState("");
   return (
     <>
       <MainHeader />
       <Formik
         initialValues={{
+          description: "",
+          subject: "",
           quizHostId: "QH4472404666122022",
         }}
-
         onSubmit={(values, { resetForm }) => {
-
-          props.addBugs(
-            {
-              ...values
-            },
-          );
-
+          props.addBugs({
+            ...values,
+            description
+          });
         }}
       >
         {({
@@ -41,42 +33,29 @@ function ReportBugs(props) {
           errors,
           values,
         }) => (
-          <Form class="flex justify-center  max-sm:w-11/12 mt-8 m-auto md:mt-12  w-1/5 ">
-            <div class="shadow-2xl border-solid w-11/12 flex justify-center items-center  p-1 max-sm:m-0 h-h34 rounded-xl md:m-auto">
-              <div class="flex flex-col items-center">
-                <div>
-                  <div>
-                    
-                    <textarea
-                    className="border border-blue-900  w-full"
-                      name="bug"
-                      isColumn
-                    
-                      placeholder="Bug Description"
-                    />
-                  </div>
-                  <div class="mt-8 flex">
-                    <Button
-                      type="primary"
-                      htmlType="submit"
-                      onClick={handleSubmit}
-                      style={{
-                        width: "16.5rem",
-                        backgroundColor: "white",
-                        borderBlockColor: "black",
-                        borderRadius: "0",
-                        height: "2rem",
-                      }}
-                    >
-                      <h3 class="font-extrabold">Add quiz</h3>
-                    </Button>
-                  </div>
-                </div>
-                <div>
-                <ReportBugList />
-              </div>
-              </div>
-              
+          <Form>
+            <div>
+              <Field
+                name="subject"
+                isColumn
+                component={InputComponent}
+                placeholder="Enter Subject"
+              />
+              <textarea
+                className="w-full"
+               // name="description"
+                value={description}
+                onChange={(ev) => setDescription(ev.target.value)}
+                placeholder="Enter Description"
+              />
+              <Button
+                type="primary"
+                Loading={props.addingBugs}
+                htmlType="submit"
+                onClick={handleSubmit}
+              >
+                <h3 class="font-extrabold">Add quiz</h3>
+              </Button>
             </div>
           </Form>
         )}
@@ -84,10 +63,16 @@ function ReportBugs(props) {
     </>
   );
 }
-const mapStateToProps = ({ auth, quiz }) => ({});
+const mapStateToProps = ({ auth, quiz }) => ({
+  addingBugs: quiz.addingBugs,
+});
 
-const mapDispatchToProps = (dispatch) => bindActionCreators({addBugs}, dispatch);
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      addBugs,
+    },
+    dispatch
+  );
 
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(ReportBugs)
-);
+export default connect(mapStateToProps, mapDispatchToProps)(ReportBugs);

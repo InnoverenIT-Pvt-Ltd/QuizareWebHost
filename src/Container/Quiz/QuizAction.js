@@ -647,16 +647,17 @@ export const getBugsList = quizHostId => dispatch => {
     });
 };
 
-export const addBugs = (quizHostId) => dispatch => { 
+export const addBugs = (data) => dispatch => { 
+  console.log('name',data );
   dispatch({
     type: types.ADD_BUGS_REQUEST,
   });
 
   axios
-    .post(`${base_url}/quiz/save`)
+    .post(`${base_url}/bugs/saveBug`,data)
     .then(res => {       
-      
-       dispatch(getBugsList(quizHostId))  
+      console.log(res.data);  
+     //  dispatch(getBugsList(quizHostId))  
      
       dispatch({
         type: types.ADD_BUGS_SUCCESS,
@@ -665,7 +666,7 @@ export const addBugs = (quizHostId) => dispatch => {
        //  cb && cb("success");        
     })
     .catch(err => {      
-     // console.log(err);
+      console.log(err);
       dispatch({
         type: types.ADD_BUGS_FAILURE,
         payload: err,
