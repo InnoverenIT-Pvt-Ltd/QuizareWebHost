@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import StyledTable from "../UI/Antd/Table1";
 import { getBugsList } from "../../Container/Quiz/QuizAction";
+import moment from "moment";
 import { useEffect } from "react";
 
 function ReportBugList(props) {
@@ -12,13 +13,16 @@ function ReportBugList(props) {
 
   const columns = [
     {
-      title: "Status",
-      dataIndex: "resolved",
+      title: "Date",
+      dataIndex: "reportedTime",   
+      render: (name, item, i) => {
+        return <span>{` ${moment(item.reportedTime).format("DD MMM YYYY")}`}</span>;
+      }, 
       //  key: "name",
     },
     {
       title: "Subject",
-      dataIndex: "score",
+      dataIndex: "subject",
       // key: "name",
     },
     {
@@ -26,7 +30,12 @@ function ReportBugList(props) {
       dataIndex: "description",
       // key: "name",
     },
-   
+    {
+      title: "Status",
+      dataIndex: "resolved",
+      
+      //  key: "name",
+    },
   ];
   return (
     <>

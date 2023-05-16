@@ -657,7 +657,7 @@ export const addBugs = (data) => dispatch => {
     .post(`${base_url}/bugs/saveBug`,data)
     .then(res => {       
       console.log(res.data);  
-     //  dispatch(getBugsList(quizHostId))  
+       dispatch(getBugsList(res.data.quizHostId))  
      
       dispatch({
         type: types.ADD_BUGS_SUCCESS,

@@ -9,7 +9,7 @@ import {
   deleteHostQuiz,
   hostQuiz,
   addQuizName,
-  updateQuizNameByQuizId
+  updateQuizNameByQuizId,
 } from "../../QuizAction";
 import { Button, Card, Modal } from "antd";
 import { useHistory } from "react-router-dom";
@@ -18,13 +18,9 @@ import moment from "moment";
 import MainHeader from "../../../../Components/Mainheader";
 import { Form, Field, Formik } from "formik";
 
-
-
 const { useState } = React;
 
-function FinalizeQuiz(props) {     
-  
-
+function FinalizeQuiz(props) {
   const history = useHistory();
   const [duration, setDuration] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -34,7 +30,14 @@ function FinalizeQuiz(props) {
   const handleOk = () => {
     setIsModalOpen(false);
     history.push(`/hostquiz`);
-    props.updateQuizNameByQuizId({duration:duration},props.showQuiz && props.showQuiz.quizId);
+    props.updateQuizNameByQuizId(
+      {
+        duration: duration,
+        quizHostId: "QH4472404666122022",
+        quizName: props.showQuiz && props.showQuiz.quizName,
+      },
+      props.showQuiz && props.showQuiz.quizId
+    );
     props.hostQuiz(props.showQuiz && props.showQuiz.quizId);
   };
   const handleCancel = () => {
@@ -159,14 +162,14 @@ function FinalizeQuiz(props) {
                 onCancel={handleCancel}
               >
                 <form onSubmit={() => handleOk()}>
-                  <input className="border border-blue-900 rounded-md px-1 w-full"
+                  <input
+                    className="border border-blue-900 rounded-md px-1 w-full"
                     name="duration"
                     value={duration}
-                    onChange={(ev) => setDuration(ev.target.value)}                 
-                  
+                    onChange={(ev) => setDuration(ev.target.value)}
                     placeholder="Enter Response time per question"
                   />
-                </form>               
+                </form>
               </Modal>
             </div>
           </div>
@@ -202,7 +205,7 @@ const mapDispatchToProps = (dispatch) =>
       hostQuiz,
       handleQuizHostModal,
       addQuizName,
-      updateQuizNameByQuizId
+      updateQuizNameByQuizId,
     },
     dispatch
   );

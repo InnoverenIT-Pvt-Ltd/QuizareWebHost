@@ -6,9 +6,10 @@ import { addBugs } from "../../Container/Quiz/QuizAction";
 import { InputComponent } from "../Forms/Formik/InputComponent";
 import { Button, Card, Input } from "antd";
 import MainHeader from "../Mainheader";
+import { TextareaComponent } from "../Forms/Formik/TextareaComponent";
 
 function ReportBugs(props) {
-  const [description, setDescription] = useState("");
+ 
   return (
     <>
       <MainHeader />
@@ -21,8 +22,8 @@ function ReportBugs(props) {
         onSubmit={(values, { resetForm }) => {
           props.addBugs({
             ...values,
-            description
-          });
+              });
+          resetForm();
         }}
       >
         {({
@@ -41,11 +42,13 @@ function ReportBugs(props) {
                 component={InputComponent}
                 placeholder="Enter Subject"
               />
-              <textarea
-                className="w-full"
-               // name="description"
-                value={description}
-                onChange={(ev) => setDescription(ev.target.value)}
+              <Field
+                className="border border-blue-900 w-full"
+                name="description"
+                component={TextareaComponent}
+                isColumn
+                // value={description}
+                // onChange={(ev) =>{ setDescription(ev.target.value)}}
                 placeholder="Enter Description"
               />
               <Button
@@ -54,7 +57,7 @@ function ReportBugs(props) {
                 htmlType="submit"
                 onClick={handleSubmit}
               >
-                <h3 class="font-extrabold">Add quiz</h3>
+                <h3 class="font-extrabold">File Bug</h3>
               </Button>
             </div>
           </Form>
