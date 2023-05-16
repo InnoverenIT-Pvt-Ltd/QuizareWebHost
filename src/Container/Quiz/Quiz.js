@@ -292,7 +292,7 @@ function Quiz(props) {
                   <h4 class="">Add </h4>
                 </Button>
               </div>
-              <div class="mr-1">
+              {/* <div class="mr-1">
                 <Button
                   style={{
                     backgroundColor: "white",
@@ -333,7 +333,7 @@ function Quiz(props) {
                 >
                   <h4>Delete </h4>
                 </Button>
-              </div>
+              </div> */}
             </div>
             {/* Buttons */}
           </div>
