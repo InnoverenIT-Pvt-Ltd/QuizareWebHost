@@ -199,6 +199,7 @@ export const deleteQuestion = questionId => dispatch => {
       },
     })
     .then(res => {
+     // dispatch(getQuestionList(res.data.quizId));
       console.log(res.data);     
       dispatch({
         type: types.DELETE_QUESTION_BY_QUESTION_ID_SUCCESS,

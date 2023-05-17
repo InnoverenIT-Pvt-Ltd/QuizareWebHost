@@ -26,6 +26,7 @@ import UpdateQuiz from "./Container/Quiz/EditQuiz/UpdateQuiz";
 import OngoingQuiz from "./Components/Quizs/OngoingQuiz";
 import ReportBugs from "./Components/Quizs/ReportBugs";
 import Report from "./Components/Quizs/Report";
+import Swipe from "./Container/Quiz/EditQuiz/Swipe/Swipe";
 // import AppErrorBoundary from "./Helpers/ErrorBoundary/AppErrorBoundary";
 
 
@@ -59,6 +60,7 @@ class App extends Component {
             {/* <Route exact path="/quiz" component={AddQuiz}/> */}
              <Route exact path="/question" component={Question1 }/>
             <Route exact path="/ongoingQuiz" component={OngoingQuiz}/>
+            <Route exact path="/swipe" component={Swipe}/>
   
 
            
