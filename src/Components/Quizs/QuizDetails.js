@@ -60,13 +60,14 @@ function QuizDetails(props) {
   return (
     <>
       <div class=" max-sm:w-11/12 mt-8 m-auto md:mt-12  w-1/5  h-h50  ">
-        <div className="bg-white rounded-2xl flex justify-center mt-3 ">
-          <div class="shadow-2xl border-solid w-11/12 flex justify-center flex-col  p-4 max-sm:m-0 h-h31 rounded-2xl md:m-auto">
+        <div className="bg-white rounded-2xl shadow-2xl border-solid flex justify-center mt-3 ">
+          <div class=" w-11/12 flex justify-center flex-col  p-4 max-sm:m-0 h-h31 rounded-2xl md:m-auto">
             <h2 class="text-base  ml-4 flex justify-center">You are hosting</h2>
             {/* <h2 class="text-base flex justify-center"> */}
             {editName === false && props.quizNameDetails.quizName ? (
-              <div className="flex flex-row justify-between w-full">
+              <div className="flex flex-row justify-center w-full">
                 <h2 class="text-base flex justify-center">{`${props.quizNameDetails.quizName}`}</h2>
+                <div class="ml-2">
                 <button onClick={handleEdit}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -83,6 +84,7 @@ function QuizDetails(props) {
                     />
                   </svg>
                 </button>
+                </div>
               </div>
             ) : editName === true && props.quizNameDetails.quizName ? (
               <div className="flex flex-row justify-between w-full">
@@ -118,7 +120,7 @@ function QuizDetails(props) {
             </h2>
             <Card class="mt-4">
               {props.quizNameDetails.quizLink ? (
-                <h2 class="text-base overflow-hidden">{`http://player.quizledge.no${
+                <h2 class="text-xs flex justify-center overflow-hidden">{`http://player.quizledge.no${
                   props.quizNameDetails.quizLink || ""
                 }`}</h2>
               ) : (
@@ -148,8 +150,8 @@ function QuizDetails(props) {
                 <QuizDetailsPlayerTable data={props.quizNameDetails} />
               )}
             </div>
-            <div class="flex justify-between">
-              <div class="w-36">
+            <div class="flex justify-between mt-2">
+              <div class="w-32">
                 <Button
                   style={{ backgroundColor: "white" }}
                   type="primary"

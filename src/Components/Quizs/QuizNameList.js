@@ -16,7 +16,9 @@ function QuizNameList(props) {
     <div  class="flex justify-center mt-2">
       <StyledSelect
       style={{
-        maxWidth:"15rem"
+        maxWidth:"15rem",
+        display:"flex",
+        justifyContent:"center" 
       }}
       name="quizName"
       placeholder="Select Quiz Name"

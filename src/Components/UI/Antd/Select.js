@@ -15,6 +15,15 @@ const StyledSelect = styled(Select)`
     box-shadow: 0em 0.25em 0.625em -0.25em ${props => props.theme.boxShadowColor};
     padding: 0.3rem 1rem;
   }
+  .ant-select-selection-placeholder{
+    display: flex;
+      justify-content: center;
+      
+  }
+  .ant-select-selection-item{
+    display: flex;
+      justify-content: center;
+  }
   .ant-select-selection {
     box-shadow: 0em 0.25em 0.625em -0.25em ${props => props.theme.boxShadowColor};
    line-height: 0px;
