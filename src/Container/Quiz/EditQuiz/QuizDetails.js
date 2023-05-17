@@ -82,7 +82,7 @@ function QuizDetails(props) {
                 <QuizDetailsPlayerTable data={props.showQuiz} />
               )}
         </div> */} 
-        <div class='flex justify-between mt-2 w-80'>
+        <div class='flex justify-between mt-4 w-80'>
             <div class="w-36">
               <Button
                 style={{ backgroundColor: "white" }}
