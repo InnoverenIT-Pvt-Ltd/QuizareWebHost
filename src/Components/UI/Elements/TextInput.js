@@ -36,7 +36,7 @@ const TextInput = styled.input.attrs({
     ::placeholder {
       color: #737373;
       font-family:Calibri (Body);
-      padding-left:1rem;
+      padding-left:3px;
     }
     @media only screen and (max-width:640px) {
           height: 2rem;
