@@ -12,14 +12,16 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "./styles.css";
 import QuestionEdit from "./QuestionEdit";
+import MainHeader from "../../../../Components/Mainheader";
 
 function Swipe(props) {
   useEffect(() => {
-    props.getQuestionList("QUIZ24452475564162023");
+    props.getQuestionList(props.quizNameDetails.quizId);
   }, []);
 
   return (
     <>
+    <MainHeader />
       <Swiper
         pagination={{
           type: "fraction",
@@ -46,6 +48,7 @@ function Swipe(props) {
 
 const mapStateToProps = ({ quiz }) => ({
   questionList: quiz.questionList,
+  quizNameDetails: quiz.quizNameDetails, 
 });
 
 const mapDispatchToProps = (dispatch) =>
