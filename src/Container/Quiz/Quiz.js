@@ -108,7 +108,7 @@ function Quiz(props) {
             {/* Container */}
             <Form class=" max-sm:w-11/12  m-auto md:mt-12  w-1/5  h-h50  ">
               <div className="w-11/12 my-2 flex justify-center m-auto ">
-                <div class="shadow-2xl border-solid w-11/12 flex justify-center flex-col items-center  p-2 max-sm:m-0 h-h29 rounded-2xl md:m-auto">
+                <div class="shadow-2xl border-solid w-11/12 flex justify-center flex-col items-center  p-2 max-sm:m-0 h-max rounded-2xl md:m-auto">
                   <div class=" flex justify-center flex-col">
                     <h3 class="flex justify-center text-xl">
                       {" "}
@@ -270,8 +270,8 @@ function Quiz(props) {
                 </div>
               </div>
             </Form>
-            <div class="max-sm: flex flex-row justify-center items-center">
-              <div class="mr-1">
+            <div class="max-sm: flex flex-row justify-center items-center mt-4 ">
+              <div class="mr-1 ">
                 <Button
                   style={{
                     backgroundColor: "white",

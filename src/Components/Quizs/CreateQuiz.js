@@ -49,7 +49,7 @@ class CreateQuiz extends Component {
             setFieldValue,
             setFieldTouched,
           }) => (
-            <Form class=" max-sm:w-4/5 mt-8 m-auto h-h33 md:mt-12  w-1/5  ">
+            <Form class=" max-sm:w-4/5 mt-8 m-auto h-h31 md:mt-12  w-1/5  ">
               <div class="shadow-2xl border-solid w-w95 flex justify-center flex-col  p-1 max-sm:m-0 h-full rounded-xl md:m-auto">
                 <div class="flex justify-center">
                   <h3 class="font-extrabold ">Welcome Øystein</h3>

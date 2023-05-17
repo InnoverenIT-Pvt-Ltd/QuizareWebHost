@@ -63,13 +63,13 @@ function QuizName(props) {
           <Form class="flex justify-center  max-sm:w-11/12 mt-8 m-auto md:mt-12  w-1/5 ">
 
 
-            <div class="shadow-2xl border-solid w-11/12 flex justify-center items-center  p-1 max-sm:m-0 h-h34 rounded-xl md:m-auto">
-              <div class="flex flex-col items-center mt-8">
+            <div class="shadow-2xl border-solid w-11/12 flex justify-center items-center  p-1 max-sm:m-0 h-h31 rounded-xl md:m-auto">
+              <div class="flex flex-col items-center ">
                 <div >
                   <div >
                     <Field
                       name="quizName"
-                      isColumn
+                      //isColumn
                       component={InputComponent}
                       //onChangeText={handleChange('quizName')}
                       style={{ textAlign: 'center' }}
@@ -92,7 +92,7 @@ function QuizName(props) {
                   style={externalStyle.firstCardText}>
                   Standard                  
                   </Text> */}
-                  <div class="mt-8 flex">
+                  <div class="flex mt-4">
                     {/* <Link to="/addquiz"> */}
                     <Button
                       type="primary"

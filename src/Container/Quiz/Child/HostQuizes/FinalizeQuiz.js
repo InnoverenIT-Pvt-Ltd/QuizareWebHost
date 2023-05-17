@@ -57,7 +57,7 @@ function FinalizeQuiz(props) {
         <Form class="flex justify-center max-sm:w-11/12 mt-8 m-auto md:mt-12  w-1/5  h-h50  ">
           {/* <div className="bg-white rounded-rounded2.8 mt-3 "> */}
 
-          <div class="shadow-2xl border-solid flex justify-center flex-col  p-4 max-sm:m-0 h-h34 w-11/12 rounded-xl mt-2 md:m-auto">
+          <div class="shadow-2xl border-solid flex justify-evenly flex-col  p-4 max-sm:m-0 h-h31 w-11/12 rounded-xl  md:m-auto">
             <h2 class="text-xl mt-4 ml-4 flex justify-center">{`${
               props.finalizeQuiz.quizName || ""
             }`}</h2>
@@ -69,14 +69,14 @@ function FinalizeQuiz(props) {
                 <div class="shadow-2xl border-solid w-full flex justify-center flex-col  p-2  max-sm:m-0 h-28 rounded-2xl md:m-auto">
                   <div class="flex flex-row">
                     <h3 class="mr-2">Created:</h3>
-                    <h3 class="text-xsm leading-l">{`${
+                    <h3 class="text-base leading-l">{`${
                       moment(props.finalizeQuiz.creationDate).format("ll") || ""
                     }`}</h3>
                   </div>
                   <h3>
                     Questions: {`${props.finalizeQuiz.noOfQuestions || ""}`}
                   </h3>
-                  <h3 class="text-sm">
+                  <h3 >
                     Categories: {`${props.finalizeQuiz.categories || ""}`}
                   </h3>
                 </div>
@@ -90,7 +90,7 @@ function FinalizeQuiz(props) {
                 style={{ boxShadow: "0.01rem 0.01rem 0.12rem 0.01rem" }}
                 className="bg-white rounded-2xl  w-full flex justify-center mt-2 "
               >
-                <div class="shadow-2xl border-solid w-full flex justify-center flex-col  p-2 max-sm:m-0 h-28 rounded-2xl md:m-auto">
+                <div class="shadow-2xl border-solid w-full flex justify-center flex-col  p-2 max-sm:m-0 h-20 rounded-2xl md:m-auto">
                   <div class="flex flex-row">
                     <h2 class="text-base font-bold">Question response time:</h2>
                     &nbsp;
@@ -110,7 +110,7 @@ function FinalizeQuiz(props) {
           {/* <Link to="/create"> */}
                 <Button
                   type="primary"
-                  style={{ width: "8rem", backgroundColor: "white" }}
+                  style={{ width: "8rem", backgroundColor: "white",margin:"0" }}
                   onClick={() =>
                     props.deleteHostQuiz(
                       props.showQuiz && props.showQuiz.quizId,
@@ -132,7 +132,7 @@ function FinalizeQuiz(props) {
                 </Button>
               </Link>
             </div>
-            <div class="mt-3">
+            <div class=" flex flex-col h-24 justify-between">
               {/* <Link to="/hostquiz"> */}
               <Button
                 type="primary"
