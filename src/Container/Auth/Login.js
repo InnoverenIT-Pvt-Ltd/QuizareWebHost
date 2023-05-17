@@ -99,7 +99,7 @@ function Login(props) {
                 <div>
                   <div class="flex justify-center">
                     <h3 class="font-extrabold ">Welcome</h3></div>
-                  <div class="flex items-center flex-col">
+                  <div class="flex items-center flex-col mt-4">
                     {/* <div class="facebook_div"> */}
                     {/* {content} */}
                     <Link to="/create">
