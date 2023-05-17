@@ -33,8 +33,8 @@ function Swipe(props) {
         {props.questionList.map((item) => {
           return (
             <SwiperSlide key={item}>
-              <div>
-                <Card>
+              <div class="h-h37">
+                <Card style={{marginTop:"2rem"}}>
                   <QuestionEdit item={item} />
                 </Card>
               </div>

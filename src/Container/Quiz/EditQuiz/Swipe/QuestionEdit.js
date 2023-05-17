@@ -45,20 +45,22 @@ function QuestionEdit(props) {
           errors,
           values,
         }) => (
-          <Form>
-            <div>
+          <Form class=" max-sm:w-full h-h31  m-auto md:mt-12  w-1/5  h-h50  ">
+          <div className="w-full my-2 flex justify-center m-auto ">
               <div>
                 {/* Container */}
                 <div>
                   <Card
                     style={{
                       WebkitBoxShadow: "0 0 10px 2px rgb(46 46 46 / 39%)",
+                      width:"18rem",
+                      height:"26rem"
                     }}
                   >
                     <Card style={{ fontSize: 22, alignSelf: "center" }}>
-                      <h1>Question {count.number || null}</h1>
+                      <h3 class="flex justify-center text-xl">Question {count.number || null}</h3>
                     </Card>
-
+                    <div class="mt-1">
                     <Field
                       style={{ textAlign: "center" }}
                       name="question"
@@ -66,7 +68,8 @@ function QuestionEdit(props) {
                       component={InputComponent}
                       onChangeText={handleChange("question")}
                     />
-
+</div>
+<div class="mt-1">
                     <Field
                       component={InputComponent}
                       value={`${values.option1}`}
@@ -74,7 +77,8 @@ function QuestionEdit(props) {
                       name="option1"
                       onChangeText={handleChange("option1")}
                     />
-
+</div>
+<div class="mt-1">
                     <Field
                       component={InputComponent}
                       value={`${values.option2}`}
@@ -82,7 +86,8 @@ function QuestionEdit(props) {
                       name="option2"
                       onChangeText={handleChange("option2")}
                     />
-
+</div>
+<div class="mt-1">
                     <Field
                       component={InputComponent}
                       value={`${values.option3}`}
@@ -90,7 +95,8 @@ function QuestionEdit(props) {
                       name="option3"
                       onChangeText={handleChange("option3")}
                     />
-
+</div>
+<div class="mt-1">
                     <Field
                       component={InputComponent}
                       value={`${values.option4}`}
@@ -98,11 +104,13 @@ function QuestionEdit(props) {
                       name="option4"
                       onChangeText={handleChange("option4")}
                     />
-                     <div className="flex flex-row justify-center">
+                    </div>
+                     <div className="flex flex-row justify-center mt-8">
                     <Button
                       title={""}
                       type="primary"
                       onClick={() => props.deleteQuestion(props.item.id)}
+                      style={{width:"7rem"}}
                     >
                       Delete
                     </Button>
@@ -110,6 +118,7 @@ function QuestionEdit(props) {
                       title={""}
                       type="primary"
                       onClick={() => handleSubmit()}
+                      style={{width:"7rem"}}
                     >
                       Update
                     </Button>

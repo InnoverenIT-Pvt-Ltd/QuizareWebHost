@@ -26,6 +26,7 @@ module.exports = {
 'h34':'34rem',
 'h31':'31rem',
 'h33':'33rem',
+'h37':'37rem',
 'h29':'27rem',
 'h85':'85rem',
 'h73':'73rem'
