@@ -70,7 +70,7 @@ function UpdateQuizName(props) {
                 type="primary"
                 style={{backgroundColor:"white",borderBlockColor:"black",borderRadius:"0",height:"2rem"}}
                 onClick={handleSubmit}
-                ><h3 class="font-extrabold">Update Quiz Name</h3></Button>
+                ><h3 class="font-extrabold">Update Quiz</h3></Button>
                 </div>
               </div>
             </div>

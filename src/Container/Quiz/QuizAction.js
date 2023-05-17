@@ -298,11 +298,13 @@ export const getFinalizeQuiz = quizId => dispatch => {
       });
     })
     .catch(err => {
-      //console.log(err.response);
+      console.log(err.response);
+
       dispatch({
         type: types.GET_FINALIZE_QUIZ_FAILURE,
         payload: err,
       });
+      message.error("Please add atleast 1 question!")
     });
 };
 /**
@@ -353,6 +355,8 @@ export const deleteHostQuiz = (quizId,cb)=> dispatch => {
         type: types.DELETE_QUIZ_FROM_HOST_SUCCESS,
         payload: quizId,
       });
+      console.log(res.data);
+      message.success(res.data);
       cb && cb("success");
     })
     .catch(err => {

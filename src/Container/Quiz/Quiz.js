@@ -70,7 +70,7 @@ function Quiz(props) {
             {
               ...values,
               quizId: props.showQuiz && props.showQuiz.quizId,
-              categoryId: selectedCategory,
+              categoryId: selectedCategory,number:count,
             },
             (data) => (
               // handleCallBack
