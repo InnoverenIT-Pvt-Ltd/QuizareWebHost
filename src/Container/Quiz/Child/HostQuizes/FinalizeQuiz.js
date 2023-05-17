@@ -107,20 +107,20 @@ function FinalizeQuiz(props) {
               </div>
             </div>
             <div class="flex flex-row mt-8 justify-between">
-              <Link to="/create">
+          {/* <Link to="/create"> */}
                 <Button
                   type="primary"
                   style={{ width: "8rem", backgroundColor: "white" }}
                   onClick={() =>
                     props.deleteHostQuiz(
                       props.showQuiz && props.showQuiz.quizId,
-                      handleCallBack()
+                    //  handleCallBack()
                     )
                   }
                 >
                   <h3>Delete This Quiz</h3>
                 </Button>
-              </Link>
+              {/* </Link> */}
               <Link to="/updateQuizName">
                 <Button
                   style={{ width: "8rem", backgroundColor: "white" }}
