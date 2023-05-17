@@ -108,7 +108,7 @@ class CreateQuiz extends Component {
                   </div>
                   <div className="flex flex-row mt-4">
                   <Link to="/report">
-                  <button className="bg-blue-900 flex text-white px-4 rounded-md">
+                  <button className="bg-blue-900 flex text-white px-4 rounded-sm h-8 justify-center items-center w-60">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"

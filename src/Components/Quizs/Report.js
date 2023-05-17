@@ -4,7 +4,7 @@ import ReportBugList from './ReportBugList'
 
 function Report(props) {
   return (
-    <div>
+    <div class="w-11/12 m-margin5 absolute bottom-48">
         <div><ReportBugs /></div>   
      <div><ReportBugList /></div>
     </div>

@@ -275,13 +275,12 @@ p {
   width: 100%;
 }
 
-.ant-select-single:not(.ant-select-customize-input) .ant-select-selector {
+/* .ant-select-single:not(.ant-select-customize-input) .ant-select-selector {
   width: 100%;
   height: 1.8rem;
  
   padding: 0 50px;
-}
-
+} */
 /* .profileBtn {
   margin: 10% 0 0 35%;
 } */

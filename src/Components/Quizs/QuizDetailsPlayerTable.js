@@ -31,7 +31,7 @@ const columns = [
      dataSource={playersList}
   loading={props.fetchingQuizNameDetails}
    pagination={false}
-   scroll={{ y: 320 }}
+   scroll={{ y: 100 }}
    />
    </>
   );
