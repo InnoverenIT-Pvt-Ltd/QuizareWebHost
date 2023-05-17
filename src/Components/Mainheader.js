@@ -21,6 +21,7 @@ function MainHeader() {
         <div class=" border-solid w-w95  max-sm:m-0 md:m-auto">
           <div class="flex justify-center border">
             <div class="flex flex-col justify-center">
+            <Link to="/create">
               <div className="flex flex-row">
                 {headerName.map((item) => {
                   return (
@@ -33,7 +34,8 @@ function MainHeader() {
                   );
                 })}
               </div>
-              <div className="flex justify-center">
+              </Link>
+              {/* <div className="flex justify-center">
                 <Link to="/create">
                   <button className="bg-blue-900 text-white px-4 rounded-md">
                     <svg
@@ -52,7 +54,7 @@ function MainHeader() {
                     </svg>
                   </button>
                 </Link>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
