@@ -161,11 +161,11 @@ function QuizDetails(props) {
                 </Button>
               </div>
               <div class="w-36">
-                <Link to="/updateQuizName">
+                <Link to="/swipe">
                   <Button
                     style={{ backgroundColor: "white" }}
                     type="primary"
-                    onClick={ID}
+                   // onClick={ID}
                   >
                     <h3>Edit This Quiz</h3>
                   </Button>
