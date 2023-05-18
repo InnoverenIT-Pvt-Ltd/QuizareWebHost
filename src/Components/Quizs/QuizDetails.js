@@ -4,7 +4,7 @@ import { bindActionCreators } from "redux";
 import {
   closeQuiz,
   hostQuiz,
-  updateQuizNameByQuizId,
+  updateQuizNameByQuizId,clearQuizNameDetails
 } from "../../Container/Quiz/QuizAction";
 import { Button, Card, Modal } from "antd";
 import { Field, Formik, Form } from "formik";
@@ -102,7 +102,7 @@ function QuizDetails(props) {
                   onClick={() =>{
                     props.updateQuizNameByQuizId(
                       {
-                        quizName: quizName,
+                        quizName: quizName,quizHostId: "QH4472404666122022",
                       },props.quizNameDetails.quizId,setEditName(false),
                       
                     )}
@@ -216,7 +216,7 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       closeQuiz,
-      updateQuizNameByQuizId,
+      updateQuizNameByQuizId,clearQuizNameDetails,
       hostQuiz,
     },
     dispatch

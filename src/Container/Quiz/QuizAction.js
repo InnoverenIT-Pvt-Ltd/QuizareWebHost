@@ -199,7 +199,7 @@ export const deleteQuestion = questionId => dispatch => {
       },
     })
     .then(res => {
-     // dispatch(getQuestionList(res.data.quizId));
+       dispatch(getQuestionList(res.data.quizId));
       console.log(res.data);     
       dispatch({
         type: types.DELETE_QUESTION_BY_QUESTION_ID_SUCCESS,
@@ -497,6 +497,7 @@ export const updateQuizNameByQuizId = (data, quizId, cb) => dispatch => {
     })
     .then(res => {
       console.log(res.data);
+      dispatch(getQuizNameList(res.data.quizHostId));
       dispatch({
         type: types.UPDATE_QUIZ_NAME_SUCCESS,
         payload: res.data,
@@ -585,6 +586,7 @@ export const updateQuestionsInQuiz = (data, questionId, cb) => dispatch => {
     })
     .then(res => {
      // console.log(res.data);
+     dispatch(getQuestionList(res.data.quizId));
       dispatch({
         type: types.UPDATE_QUESTIONS_IN_QUIZ_SUCCESS,
         payload: res.data,
