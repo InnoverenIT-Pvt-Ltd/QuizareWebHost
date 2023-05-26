@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, Card, Input } from "antd";
 import { Link, withRouter } from "react-router-dom";
+import FWLogo from "../../src/images/Latest.png";
 
 function MainHeader() {
   const headerName = [
@@ -23,7 +24,7 @@ function MainHeader() {
             <div class="flex flex-col justify-center">
             <Link to="/create">
               <div className="flex flex-row">
-                {headerName.map((item) => {
+                {/* {headerName.map((item) => {
                   return (
                     <h2
                       key={item.letter}
@@ -32,7 +33,13 @@ function MainHeader() {
                       {item.letter}
                     </h2>
                   );
-                })}
+                })} */}
+                 <img
+              className="big-logo"
+              src={FWLogo}
+              style={{ width: 70 }}
+              alt="Tekorero logo"
+            />
               </div>
               </Link>
               {/* <div className="flex justify-center">
