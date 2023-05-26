@@ -43,6 +43,9 @@ module.exports = {
           fontSize:{
             'xsm':'0.85rem'
           },
+          colors: {
+            'ShopBlue': '#e0f2fe',
+          },
           borderWidth:{
 'border-l-5':'5px'
           },

@@ -18,7 +18,7 @@ function MainHeader() {
 
   return (
     <>
-      <div className=" #e5eff8 w-full  ">
+      <div className=" bg-ShopBlue w-full  ">
         <div class=" border-solid w-w95  max-sm:m-0 md:m-auto">
           <div class="flex justify-center border">
             <div class="flex flex-col justify-center">
