@@ -69,7 +69,7 @@ function FinalizeQuiz(props) {
                 <div class="shadow-2xl border-solid w-full flex justify-center flex-col  p-2  max-sm:m-0 h-28 rounded-2xl md:m-auto">
                   <div class="flex flex-row">
                     <h3 class="mr-2">Created:</h3>
-                    <h3 class="text-base leading-l">{`${
+                    <h3 class=" leading-5">{`${
                       moment(props.finalizeQuiz.creationDate).format("ll") || ""
                     }`}</h3>
                   </div>
@@ -83,13 +83,12 @@ function FinalizeQuiz(props) {
               </div>
             </div>
             <div class="flex justify-center mt-4">
-              <h2 class="text-2xl font-bold">Select quiz rules</h2>
+              <h3 class="text-xl ">Select quiz rules</h3>
             </div>
             <div>
               <div
                 style={{ boxShadow: "0.01rem 0.01rem 0.12rem 0.01rem" }}
-                className="bg-white rounded-2xl  w-full flex justify-center mt-2 "
-              >
+                className="bg-white rounded-2xl  w-full flex justify-center ">
                 <div class="shadow-2xl border-solid w-full flex justify-center flex-col  p-2 max-sm:m-0 h-20 rounded-2xl md:m-auto">
                   <div class="flex flex-row">
                     <h2 class="text-base font-bold">Question response time:</h2>
