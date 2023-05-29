@@ -51,14 +51,16 @@ function ReportBugs(props) {
                 // onChange={(ev) =>{ setDescription(ev.target.value)}}
                 placeholder="Enter Description"
               />
+              <div class="mt-3">
               <Button
                 type="primary"
                 Loading={props.addingBugs}
                 htmlType="submit"
                 onClick={handleSubmit}
               >
-                <h3 class="font-extrabold">File Bug</h3>
+                <h3 class="font-extrabold text-white ">File Bug</h3>
               </Button>
+              </div>
             </div>
           </Form>
         )}

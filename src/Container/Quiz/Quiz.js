@@ -91,7 +91,7 @@ function Quiz(props) {
           values,
         }) => (
           <div>
-            <div class="flex justify-center">
+            <div class="flex justify-center mt-2">
               <h2 class="text-2xl">
                 {props.showQuiz && props.showQuiz.quizName}
               </h2>
@@ -202,7 +202,7 @@ function Quiz(props) {
                       </div>
                       {/* </TouchableOpacity> */}
                     </div>
-                    <div class="flex flex-wrap justify-center mt-1">
+                    <div class="flex flex-wrap justify-center mt-2">
                       {!!props.category.length &&
                         props.category.map((item) => {
                           return (

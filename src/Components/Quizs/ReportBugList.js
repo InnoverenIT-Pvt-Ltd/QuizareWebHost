@@ -59,7 +59,7 @@ function ReportBugList(props) {
         dataSource={props.bugs}
         loading={props.fetchingBugs}
         pagination={false}
-        scroll={{ y: 320 }}
+        scroll={{ y: 310 }}
       />
     </>
   );
