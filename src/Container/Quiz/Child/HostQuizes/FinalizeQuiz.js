@@ -151,7 +151,7 @@ function FinalizeQuiz(props) {
                   style={{ backgroundColor: "white" }}
                   // onClick={() => props.hostQuiz(props.showQuiz.quizId)}
                 >
-                  <h3>Add quiz</h3>
+                  <h3>Add Question</h3>
                 </Button>
               </Link>
               <Modal
