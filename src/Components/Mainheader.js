@@ -2,8 +2,11 @@ import React from "react";
 import { Button, Card, Input } from "antd";
 import { Link, withRouter } from "react-router-dom";
 import FWLogo from "../../src/images/Latest.png";
+import {clearQuizNameDetails} from '../Container/Quiz/QuizAction'
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
-function MainHeader() {
+function MainHeader(props) {
   const headerName = [
     { letter: "Q", color: "blue" },
     { letter: "u", color: "red" },
@@ -23,7 +26,7 @@ function MainHeader() {
           <div class="flex justify-center border">
             <div class="flex flex-col justify-center">
             <Link to="/create">
-              <div className="flex flex-row">
+              <div className="flex flex-row" onClick={props.clearQuizNameDetails}>
                 {/* {headerName.map((item) => {
                   return (
                     <h2
@@ -39,6 +42,7 @@ function MainHeader() {
               src={FWLogo}
               style={{ width: 70 }}
               alt="Tekorero logo"
+
             />
               </div>
               </Link>
@@ -69,5 +73,16 @@ function MainHeader() {
     </>
   );
 }
+const mapStateToProps = ({ auth, quiz }) => ({
+ 
+});
 
-export default MainHeader;
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      clearQuizNameDetails
+    },
+    dispatch
+  );
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(MainHeader));

@@ -13,7 +13,7 @@ function UpdateQuizName(props) {
   
   const history = useHistory();
   function handleCallBack(data) {
-    history.push(`/create`);
+    history.push(`/swipeIn`);
   }
   return (
     <>
@@ -21,7 +21,8 @@ function UpdateQuizName(props) {
      <Formik
         initialValues={{
           duration: props.showQuiz&&props.showQuiz.duration,
-          quizName: props.showQuiz&&props.showQuiz.quizName,                
+          quizName: props.showQuiz&&props.showQuiz.quizName,  
+          quizHostId: "QH4472404666122022",              
         }}
         
         onSubmit={(values) => {
