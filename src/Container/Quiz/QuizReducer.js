@@ -36,12 +36,15 @@ const initialState = {
   fetchingBugsError: false,
   bugs: [],
 
+ 
+
   fetchingQuizName: false,
   fetchingQuizNameError: false,
   showQuiz: {},
 
   addingQuizName: false,
   addingQuizNameError: false,
+  quizDetails:{},
 
   addingQuestion: false,
   addingQuestionError: false,
@@ -174,7 +177,10 @@ export const quizReducer = (state = initialState, action) => {
     case types.ADD_QUIZ_NAME_REQUEST:
       return { ...state, addingQuizName: true };
     case types.ADD_QUIZ_NAME_SUCCESS:
-      return { ...state, addingQuizName: false };
+      return { ...state, addingQuizName: false, 
+        quizDetails:action.payload,
+      
+    };
     case types.ADD_QUIZ_NAME_FAILURE:
       return { ...state, addingQuizName: false, addingQuizNameError: true };
     //GET FINALIZED QUIZ

@@ -9,12 +9,13 @@ import {
   deleteQuestion,
   addQuestion,
   getQuizName,
-  getCategory,
-} from "./QuizAction";
+  getCategory,getQuestionList
+} from "../../QuizAction";
 import { Button, Card, Input } from "antd";
-import { InputComponent } from "../../Components/Forms/Formik/InputComponent";
-import SubHeader from "../../Components/SubHeader";
-import MainHeader from "../../Components/Mainheader";
+import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
+import SubHeader from "../../../../Components/SubHeader";
+import MainHeader from "../../../../Components/Mainheader";
+import { BundleLoader } from "../../../../Components/Placeholder";
 const phoneRegExp =
   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 const QuizzSchema = Yup.object().shape({
@@ -24,11 +25,26 @@ const QuizzSchema = Yup.object().shape({
 });
 //import AllQuiz from './AllQuiz';
 
-function Quiz(props) {
-  const [count, setCount] = useState(1);
+function QuizIn(props) {
+  useEffect(() => {
+    props.getCategory();
+    props.getQuizName(props.quizDetails.quizId);
+    props.getQuestionList(props.showQuiz.quizId);
+  }, []);
+  
+  const data=props.showQuiz.noOfQuestions&& props.showQuiz.noOfQuestions+1
+  const[questions,setQuestions]=useState(data);
+
+  function handleQuestion(){
+    setQuestions(questions+1);
+  }
+  console.log(questions,data);
+
   const [selectedCategory, setSelectedCategory] = useState("");
-  const handleCount = () => setCount(count + 1);
+  // const handleCount = () => setCount(count + 1);
+ 
   const handleCategory = (id) => setSelectedCategory(id);
+
 
   // function handleCallBack(data,resetForm) {
   //   //alert(data);
@@ -40,15 +56,19 @@ function Quiz(props) {
   //    else{console.log("Wrong")}
   // };
 
-  useEffect(() => {
-    props.getCategory();
-  }, []);
+ 
   console.log(props.category);
   //alert(props.category);
 
   return (
+   
+    <>
+     {props.fetchingQuizName?(<BundleLoader />):
+  (
     <>
       <MainHeader />
+      {/* {props.fetchingQuestionList? */}
+  
       <Formik
         initialValues={{
           // duration: "",
@@ -70,7 +90,7 @@ function Quiz(props) {
             {
               ...values,
               quizId: props.showQuiz && props.showQuiz.quizId,
-              categoryId: selectedCategory,number:count,
+              categoryId: selectedCategory,number:questions,
             },
             (data) => (
               // handleCallBack
@@ -79,7 +99,7 @@ function Quiz(props) {
           );
           resetForm();
           setSelectedCategory("");
-          handleCount();
+          handleQuestion();
         }}
       >
         {({
@@ -97,14 +117,13 @@ function Quiz(props) {
               </h2>
             </div>
             <div class="flex justify-center mt-3">
-              {count >= 2? 
               <Link to="/finalize">
-              <Button type="primary"
-              // onClick={handleSubmit}
-              >
-                Finalize Quiz
-              </Button>
-            </Link>:""}
+                <Button type="primary"
+                // onClick={handleSubmit}
+                >
+                  Finalize Quiz
+                </Button>
+              </Link>
             </div>
             {/* Container */}
             <Form class=" max-sm:w-11/12  m-auto md:mt-12  w-1/5  h-h50  ">
@@ -113,7 +132,7 @@ function Quiz(props) {
                   <div class=" flex justify-center flex-col">
                     <h3 class="flex justify-center text-xl">
                       {" "}
-                      Question {count || null}
+                      Question {questions || null}
                     </h3>
 
                     {/* <TouchableOpacity
@@ -340,6 +359,10 @@ function Quiz(props) {
           </div>
         )}
       </Formik>
+      </>
+  )
+ } 
+{/* :null} */}
     </>
   );
 }
@@ -347,8 +370,11 @@ const mapStateToProps = ({ auth, quiz }) => ({
   fetchingQuizName: quiz.fetchingQuizName,
   fetchingQuizNameError: quiz.fetchingQuizNameError,
   showQuiz: quiz.showQuiz,
+  quizDetails:quiz.quizDetails,
+  fetchingQuestionList:quiz.fetchingQuestionList,
   quizId: quiz.showQuiz.quizId,
   category: quiz.category,
+  questionList: quiz.questionList,
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -357,12 +383,12 @@ const mapDispatchToProps = (dispatch) =>
       deleteQuestion,
       addQuestion,
       getQuizName,
-      getCategory,
+      getCategory,getQuestionList
     },
     dispatch
   );
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Quiz));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(QuizIn));
 
 // import React from 'react';
 // import { Link ,withRouter} from "react-router-dom";

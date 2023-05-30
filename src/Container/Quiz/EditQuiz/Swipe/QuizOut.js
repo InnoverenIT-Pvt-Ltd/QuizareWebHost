@@ -10,11 +10,11 @@ import {
   addQuestion,
   getQuizName,
   getCategory,
-} from "./QuizAction";
+} from "../../QuizAction";
 import { Button, Card, Input } from "antd";
-import { InputComponent } from "../../Components/Forms/Formik/InputComponent";
-import SubHeader from "../../Components/SubHeader";
-import MainHeader from "../../Components/Mainheader";
+import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
+import SubHeader from "../../../../Components/SubHeader";
+import MainHeader from "../../../../Components/Mainheader";
 const phoneRegExp =
   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 const QuizzSchema = Yup.object().shape({
@@ -24,7 +24,7 @@ const QuizzSchema = Yup.object().shape({
 });
 //import AllQuiz from './AllQuiz';
 
-function Quiz(props) {
+function QuizOut(props) {
   const [count, setCount] = useState(1);
   const [selectedCategory, setSelectedCategory] = useState("");
   const handleCount = () => setCount(count + 1);
@@ -97,14 +97,13 @@ function Quiz(props) {
               </h2>
             </div>
             <div class="flex justify-center mt-3">
-              {count >= 2? 
               <Link to="/finalize">
-              <Button type="primary"
-              // onClick={handleSubmit}
-              >
-                Finalize Quiz
-              </Button>
-            </Link>:""}
+                <Button type="primary"
+                // onClick={handleSubmit}
+                >
+                  Finalize Quiz
+                </Button>
+              </Link>
             </div>
             {/* Container */}
             <Form class=" max-sm:w-11/12  m-auto md:mt-12  w-1/5  h-h50  ">
@@ -362,7 +361,7 @@ const mapDispatchToProps = (dispatch) =>
     dispatch
   );
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Quiz));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(QuizOut));
 
 // import React from 'react';
 // import { Link ,withRouter} from "react-router-dom";
