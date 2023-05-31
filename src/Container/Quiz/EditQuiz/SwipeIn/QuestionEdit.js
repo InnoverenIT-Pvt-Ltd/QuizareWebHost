@@ -3,6 +3,7 @@ import { Field, Form, Formik } from "formik";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button, Card } from "antd";
+import { Link } from "react-router-dom";
 import {
   getQuestionList,
   updateQuestionsInQuiz,
@@ -122,6 +123,26 @@ function QuestionEdit(props) {
                     >
                       Update
                     </Button>
+                    <Link to="/addquizin">
+                    <Button
+                      title={""}
+                      type="primary"
+                      onClick={() => handleSubmit()}
+                      style={{width:"7rem"}}
+                    >
+                      Add Question
+                    </Button>
+                    </Link>
+                    <Link to="/finalize">
+                    <Button
+                      title={""}
+                      type="primary"
+                      onClick={() => handleSubmit()}
+                      style={{width:"7rem"}}
+                    >
+                      Finalize Quiz
+                    </Button>
+                    </Link>
                     {/* <Button
 
 
