@@ -9,6 +9,7 @@ import {
   deleteHostQuiz,
   hostQuiz,
   addQuizName,
+  
   updateQuizNameByQuizId,
 } from "../../QuizAction";
 import { Button, Card, Modal } from "antd";
@@ -145,7 +146,7 @@ function FinalizeQuiz(props) {
                 <h3>Host This Quiz</h3>
               </Button>
               {/* </Link> */}
-              <Link to="/addquiz">
+              <Link to="/addquizin">
                 <Button
                   type="primary"
                   style={{ backgroundColor: "white" }}

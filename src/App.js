@@ -28,6 +28,8 @@ import ReportBugs from "./Components/Quizs/ReportBugs";
 import Report from "./Components/Quizs/Report";
 import Swipe from "./Container/Quiz/EditQuiz/Swipe/Swipe";
 import SwipeIn from "./Container/Quiz/EditQuiz/SwipeIn/SwipeIn";
+import QuizOut from "./Container/Quiz/EditQuiz/Swipe/QuizOut";
+import QuizIn from "./Container/Quiz/EditQuiz/SwipeIn/QuizIn";
 // import AppErrorBoundary from "./Helpers/ErrorBoundary/AppErrorBoundary";
 
 
@@ -52,6 +54,8 @@ class App extends Component {
             <Route exact path="/create" component={CreateQuiz}/>
             <Route exact path="/quizzes" component={QuizName}/>
             <Route exact path="/addquiz" component={Quiz}/>
+            <Route exact path="/addquizout" component={QuizOut}/>
+            <Route exact path="/addquizin" component={QuizIn}/>
             <Route exact path="/finalize" component={FinalizeQuiz}/>
             <Route exact path="/updateQuizName" component={UpdateQuizName}/>
             <Route exact path="/updateQuiz" component={UpdateQuiz}/>
