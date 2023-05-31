@@ -90,7 +90,7 @@ class CreateQuiz extends Component {
                     </Link>
                   </div>
                   <div class="mt-4">
-                    {/* <Link to="/select">
+                    <Link to="/quizLibrary">
                       <Button
                         type="primary"
                         htmlType="submit"
@@ -102,9 +102,9 @@ class CreateQuiz extends Component {
                           borderRadius: "0",
                         }}
                       >
-                        <h3 class="font-extrabold">My quiz library </h3>
+                        <h3 class="font-extrabold">My Quiz Library </h3>
                       </Button>
-                    </Link> */}
+                    </Link>
                   </div>
                   <div className="flex flex-row mt-4">
                   <Link to="/report">

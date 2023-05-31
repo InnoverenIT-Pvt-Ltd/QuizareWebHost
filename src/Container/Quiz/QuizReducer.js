@@ -36,6 +36,11 @@ const initialState = {
   fetchingBugsError: false,
   bugs: [],
 
+
+fetchingLibraryQuiz:false,
+fetchingLibraryQuizError:false,
+  libraryQuiz:[],
+
  
 
   fetchingQuizName: false,
@@ -64,6 +69,9 @@ const initialState = {
 
   addingCategory: false,
   addingCategoryError: false,
+
+  deletingLibraryHost:false,
+  deletingLibraryHostError:false,
 
   addQuizHostModal: false,
 
@@ -417,6 +425,41 @@ export const quizReducer = (state = initialState, action) => {
         ...state,
         fetchingBugs: false,
         fetchingBugsError: true,
+      };
+
+
+      case types.GET_LIBRARY_QUIZ_REQUEST:
+        return { ...state, fetchingLibraryQuiz: true };
+      case types.GET_LIBRARY_QUIZ_SUCCESS:
+        return {
+          ...state,
+          fetchingLibraryQuiz: false,
+          libraryQuiz: action.payload,
+        };
+      case types.GET_LIBRARY_QUIZ_FAILURE:
+        return {
+          ...state,
+          fetchingLibraryQuiz: false,
+          fetchingLibraryQuizError : true,
+        };
+
+
+        
+    case types.DELETE_LIBRARY_FROM_HOST_REQUEST:
+      return { ...state, deletingLibraryHost: true };
+    case types.DELETE_LIBRARY_FROM_HOST_SUCCESS:
+      return {
+        ...state,
+        deletingLibraryHost: false,
+        libraryQuiz: state.libraryQuiz.filter(
+          (item) => item.quizId !== action.payload
+        ),
+      };
+    case types.DELETE_LIBRARY_FROM_HOST_FAILURE:
+      return {
+        ...state,
+        deletingLibraryHost: false,
+        deletingLibraryHostError: true,
       };
 
     case types.ADD_BUGS_REQUEST:
