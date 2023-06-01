@@ -19,6 +19,7 @@ import SelectQuizname from "./Components/Quizs/SelectQuizname";
 import CreateQuiz from "./Components/Quizs/CreateQuiz";
 import QuizName from "./Container/Quiz/QuizName";
 import Quiz from "./Container/Quiz/Quiz";
+import QuizinLibrary from "./Container/Quiz/EditQuiz/SwipeIn/QuizinLibrary"
 import FinalizeQuiz from "./Container/Quiz/Child/HostQuizes/FinalizeQuiz";
 import UpdateQuizName from "./Container/Quiz/EditQuiz/UpdateQuizName";
 import QuizDetails from "./Container/Quiz/EditQuiz/QuizDetails";
@@ -57,6 +58,7 @@ class App extends Component {
             <Route exact path="/addquiz" component={Quiz}/>
             <Route exact path="/addquizout" component={QuizOut}/>
             <Route exact path="/addquizin" component={QuizIn}/>
+            <Route   path="/quizinLibrary/:quizId" component={QuizinLibrary}/>
             <Route exact path="/finalize" component={FinalizeQuiz}/>
             <Route exact path="/updateQuizName" component={UpdateQuizName}/>
             <Route exact path="/updateQuiz" component={UpdateQuiz}/>

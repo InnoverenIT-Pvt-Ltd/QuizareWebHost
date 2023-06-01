@@ -144,7 +144,10 @@ console.log(props.libraryQuiz)
                   <h3>Delete This Quiz</h3>
                 </Button>
               {/* </Link> */}
-              <Link to="/updateQuizName">
+              {/* <Link to="/updateQuizName"> */}
+              <Link
+          to={`quizinLibrary/${item.quizId}`}
+          >
                 <Button
                   style={{ width: "8rem", backgroundColor: "white" }}
                   type="primary"
@@ -170,6 +173,7 @@ console.log(props.libraryQuiz)
               </Button>
               {/* </Link> */}
               <Link to="/addquizin">
+        
                 <Button
                   type="primary"
                   style={{ backgroundColor: "white" }}
