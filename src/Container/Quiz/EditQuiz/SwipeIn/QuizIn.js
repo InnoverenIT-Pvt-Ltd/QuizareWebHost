@@ -3,7 +3,7 @@ import { Field, Formik, Form } from "formik";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Yup from "yup";
-import { Link, withRouter } from "react-router-dom";
+import { Link, withRouter, useHistory } from "react-router-dom";
 import {
   deleteQuestion,
   addQuestion,
@@ -51,7 +51,12 @@ function QuizIn(props) {
   const handleCategory = (id) => setSelectedCategory(id);
 
   console.log(props.category);
-  //alert(props.category);
+
+  const history = useHistory();
+
+  const goToFinalize = () => {
+    history.push(`/finalize`)
+  }
 
   return (
 
@@ -84,10 +89,7 @@ function QuizIn(props) {
                 quizId: props.showQuiz && props.showQuiz.quizId,
                 categoryId: selectedCategory, number: questions,
               },
-              (data) => (
-                // handleCallBack
-                data, resetForm
-              )
+              props.showQuiz && props.showQuiz.quizId
             );
             resetForm();
             setSelectedCategory("");
@@ -109,13 +111,14 @@ function QuizIn(props) {
                 </h2>
               </div>
               <div class="flex justify-center mt-3">
-                <Link to="/finalize">
-                  <Button type="primary"
-                  // onClick={handleSubmit}
-                  >
-                    Finalize Quiz
-                  </Button>
-                </Link>
+                <Button type="primary"
+                  onClick={() => {
+                    handleSubmit()
+                    goToFinalize()
+                  }}
+                >
+                  Finalize Quiz
+                </Button>
               </div>
               {/* Container */}
               <Form class=" max-sm:w-11/12  m-auto md:mt-12  w-1/5  h-h50  ">
