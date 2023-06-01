@@ -107,7 +107,7 @@ export const getQuestionsByUserId = userId => dispatch => {
 /**
  * request for adding a question
  */
-export const addQuestion = (quiz, cb) => dispatch => {
+export const addQuestion = (quiz, quizId, cb) => dispatch => {
 
   console.log('inside add question', quiz);
   dispatch({
@@ -122,7 +122,7 @@ export const addQuestion = (quiz, cb) => dispatch => {
     })
     .then(res => {
       // console.log(res);     
-      //  dispatch(getFinalizeQuiz(quizId));
+      dispatch(getFinalizeQuiz(quizId));
       dispatch({
         type: types.ADD_QUESTION_SUCCESS,
         payload: res.data,

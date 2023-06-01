@@ -76,10 +76,7 @@ function Quiz(props) {
               quizId: props.showQuiz && props.showQuiz.quizId,
               categoryId: selectedCategory, number: count,
             },
-            (data) => (
-              // handleCallBack
-              data, resetForm
-            )
+            props.showQuiz && props.showQuiz.quizId
           );
           resetForm();
           setSelectedCategory("");

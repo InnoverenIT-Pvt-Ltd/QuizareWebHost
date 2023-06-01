@@ -50,7 +50,7 @@ function FinalizeQuiz(props) {
   }
   useEffect(() => {
     props.getFinalizeQuiz(props.showQuiz && props.showQuiz.quizId);
-  }, []);
+  }, [props.showQuiz && props.showQuiz.quizId]);
   return (
     <>
       <MainHeader />
