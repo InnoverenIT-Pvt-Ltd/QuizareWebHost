@@ -682,3 +682,64 @@ export const addBugs = (data) => dispatch => {
       //  message.error("Quiz name already exists!")
     });
 };
+
+
+export const getLibraryQuiz = (userId) => dispatch => {
+  dispatch({
+    type: types.GET_LIBRARY_QUIZ_REQUEST,
+  });
+  axios
+    .get(`${base_url}/userDetails/quiz/${userId}`, {
+      headers: {
+        Authorization: 'Bearer ' + store.getState().auth.token || '',
+      },
+    })
+    .then(res => {
+      console.log(res.data);
+      dispatch({
+        type: types.GET_LIBRARY_QUIZ_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch(err => {
+      console.log(err.response);
+
+      dispatch({
+        type: types.GET_LIBRARY_QUIZ_FAILURE,
+        payload: err,
+      });
+      message.error("Please add atleast 1 question!")
+    });
+};
+
+
+export const deleteLibraryQuiz = (quizId,cb)=> dispatch => {
+  dispatch({
+    type: types.DELETE_LIBRARY_FROM_HOST_REQUEST,
+  });
+  axios
+    .delete(`${base_url}/quiz/${quizId}`, {
+      headers: {
+        Authorization: 'Bearer ' + store.getState().auth.token || '',
+      },
+    })
+    .then(res => {
+      console.log(res.data);
+      // dispatch(getFinalizeQuiz(quizId));
+      dispatch({
+        type: types.DELETE_LIBRARY_FROM_HOST_SUCCESS,
+        payload: quizId,
+      });
+      console.log(res.data);
+      message.success(res.data);
+      cb && cb("success");
+    })
+    .catch(err => {
+      console.log(err);
+      dispatch({
+        type: types.DELETE_LIBRARY_FROM_HOST_FAILURE,
+        payload: err,
+      });
+      cb && cb("failuer");
+    });
+};
