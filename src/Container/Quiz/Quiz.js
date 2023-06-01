@@ -3,7 +3,7 @@ import { Field, Formik, Form } from "formik";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Yup from "yup";
-import { Link, withRouter } from "react-router-dom";
+import { Link, withRouter, useHistory } from "react-router-dom";
 // import MainHeader from '../../Navigation/MainHeader';
 import {
   deleteQuestion,
@@ -44,8 +44,12 @@ function Quiz(props) {
     props.getCategory();
   }, []);
   console.log(props.category);
-  //alert(props.category);
 
+  const history = useHistory();
+
+  const goToFinalize = () => {
+    history.push(`/finalize`)
+  }
   return (
     <>
       <MainHeader />
@@ -70,7 +74,7 @@ function Quiz(props) {
             {
               ...values,
               quizId: props.showQuiz && props.showQuiz.quizId,
-              categoryId: selectedCategory,number:count,
+              categoryId: selectedCategory, number: count,
             },
             (data) => (
               // handleCallBack
@@ -97,14 +101,17 @@ function Quiz(props) {
               </h2>
             </div>
             <div class="flex justify-center mt-3">
-              {count >= 2? 
-              <Link to="/finalize">
-              <Button type="primary"
-              // onClick={handleSubmit}
-              >
-                Finalize Quiz
-              </Button>
-            </Link>:""}
+              {count >= 2 ?
+
+                <Button type="primary"
+                  onClick={() => {
+                    handleSubmit()
+                    goToFinalize()
+                  }}
+                >
+                  Finalize Quiz
+                </Button>
+                : ""}
             </div>
             {/* Container */}
             <Form class=" max-sm:w-11/12  m-auto md:mt-12  w-1/5  h-h50  ">
@@ -128,7 +135,7 @@ function Quiz(props) {
                           placeholder="Question"
                           name="question"
 
-                          // onChangeText={handleChange('questionName')}
+                        // onChangeText={handleChange('questionName')}
                         />
                       </div>
                       {/* </TouchableOpacity> */}
@@ -147,7 +154,7 @@ function Quiz(props) {
                           placeholder="Correct answer"
                           name="option1"
 
-                          // onChangeText={handleChange('option1')}
+                        // onChangeText={handleChange('option1')}
                         />
                       </div>
                       {/* </TouchableOpacity> */}
@@ -166,7 +173,7 @@ function Quiz(props) {
                           placeholder="Option 2"
                           name="option2"
 
-                          // onChangeText={handleChange('option2')}
+                        // onChangeText={handleChange('option2')}
                         />
                       </div>
                       {/* </TouchableOpacity>
@@ -287,8 +294,8 @@ function Quiz(props) {
                   // containerStyle={externalStyle.containerStyleBD}
                   // buttonStyle={externalStyle.buttonStyleAdd}
                   onClick={handleSubmit}
-                  // Loading={props.addingQuestion}
-                  // onPress={() => props.navigation.navigate('Quiz Addquestions')}
+                // Loading={props.addingQuestion}
+                // onPress={() => props.navigation.navigate('Quiz Addquestions')}
                 >
                   <h4 class="">Add </h4>
                 </Button>

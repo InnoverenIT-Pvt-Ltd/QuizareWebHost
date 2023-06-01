@@ -1,6 +1,6 @@
 import * as types from './QuizActionTypes';
 import axios from 'axios';
-import {base_url} from '../../Config/Auth';
+import { base_url } from '../../Config/Auth';
 import store from '../../Store';
 import { createBrowserHistory } from "history";
 import { message } from "antd";
@@ -8,27 +8,27 @@ import { message } from "antd";
 /**
  * request for adding a quiz name
  */
- const history = createBrowserHistory();
- export const handleQuizHostModal = (modalProps) => (dispatch) => {
+const history = createBrowserHistory();
+export const handleQuizHostModal = (modalProps) => (dispatch) => {
   dispatch({
     type: types.HANDLE_QUIZ_HOST_MODAL,
     payload: modalProps,
   });
 };
- 
-export const addQuizName = (quiz,cb) => dispatch => {
-  console.log('name',history );
- // console.log('name',quiz );
+
+export const addQuizName = (quiz, cb) => dispatch => {
+  console.log('name', history);
+  // console.log('name',quiz );
   dispatch({
     type: types.ADD_QUIZ_NAME_REQUEST,
   });
 
   axios
     .post(`${base_url}/quiz/save`, quiz)
-    .then(res => {  
+    .then(res => {
       //console.log(res.data);   
-      
-       dispatch(getQuizName(res.data.quizId))   
+
+      dispatch(getQuizName(res.data.quizId))
       //  console.log("hi",history);  
       //  history.push("/addquiz");
       //  window.location.reload()
@@ -36,17 +36,17 @@ export const addQuizName = (quiz,cb) => dispatch => {
         type: types.ADD_QUIZ_NAME_SUCCESS,
         payload: res.data,
       });
-         cb && cb("success");
-          // history.push("/addquiz")
+      cb && cb("success");
+      // history.push("/addquiz")
     })
-    .catch(err => {      
-     // console.log(err);
+    .catch(err => {
+      // console.log(err);
       dispatch({
         type: types.ADD_QUIZ_NAME_FAILURE,
         payload: err,
       });
-        cb && cb("failuer");
-        message.error("Quiz name already exists!")
+      cb && cb("failuer");
+      message.error("Quiz name already exists!")
     });
 };
 
@@ -107,9 +107,9 @@ export const getQuestionsByUserId = userId => dispatch => {
 /**
  * request for adding a question
  */
-export const addQuestion = (quiz,cb) => dispatch => {
-  
-  console.log('inside add question',quiz );
+export const addQuestion = (quiz, cb) => dispatch => {
+
+  console.log('inside add question', quiz);
   dispatch({
     type: types.ADD_QUESTION_REQUEST,
   });
@@ -121,13 +121,13 @@ export const addQuestion = (quiz,cb) => dispatch => {
       },
     })
     .then(res => {
-     // console.log(res);     
-
+      // console.log(res);     
+      //  dispatch(getFinalizeQuiz(quizId));
       dispatch({
         type: types.ADD_QUESTION_SUCCESS,
         payload: res.data,
       });
-       cb && cb("success");
+      cb && cb("success");
     })
     .catch(err => {
       //console.log(err);
@@ -135,7 +135,7 @@ export const addQuestion = (quiz,cb) => dispatch => {
         type: types.ADD_QUESTION_FAILURE,
         payload: err,
       });
-       cb && cb("failure");
+      cb && cb("failure");
     });
 };
 
@@ -188,7 +188,7 @@ export const updateQuestion = questionId => dispatch => {
  * delete a question from table
  */
 export const deleteQuestion = questionId => dispatch => {
-  console.log("inside delete question",questionId)
+  console.log("inside delete question", questionId)
   dispatch({
     type: types.DELETE_QUESTION_BY_QUESTION_iD_REQUEST,
   });
@@ -199,8 +199,8 @@ export const deleteQuestion = questionId => dispatch => {
       },
     })
     .then(res => {
-       dispatch(getQuestionList(res.data.quizId));
-      console.log(res.data);     
+      dispatch(getQuestionList(res.data.quizId));
+      console.log(res.data);
       dispatch({
         type: types.DELETE_QUESTION_BY_QUESTION_ID_SUCCESS,
         payload: res.data,
@@ -339,7 +339,7 @@ export const hostFinalizeQuizUrl = quizId => dispatch => {
 /**
  * delete a quiz from table
  */
-export const deleteHostQuiz = (quizId,cb)=> dispatch => {
+export const deleteHostQuiz = (quizId, cb) => dispatch => {
   dispatch({
     type: types.DELETE_QUIZ_FROM_HOST_REQUEST,
   });
@@ -454,7 +454,7 @@ export const getQuizNameList = userId => dispatch => {
       });
     });
 };
-export const closeQuiz = (quizId,cb) => dispatch => {
+export const closeQuiz = (quizId, cb) => dispatch => {
   //console.log('inside update question');
   dispatch({
     type: types.CLOSE_QUIZ_REQUEST,
@@ -470,8 +470,8 @@ export const closeQuiz = (quizId,cb) => dispatch => {
       dispatch({
         type: types.CLOSE_QUIZ_SUCCESS,
         payload: quizId,
-      });      
-       cb && cb('success');
+      });
+      cb && cb('success');
     })
     .catch(err => {
       console.log(err);
@@ -485,7 +485,7 @@ export const closeQuiz = (quizId,cb) => dispatch => {
 
 //UPDATE QUIZ NAME DURATION
 export const updateQuizNameByQuizId = (data, quizId, cb) => dispatch => {
-  console.log('inside update question',data);
+  console.log('inside update question', data);
   dispatch({
     type: types.UPDATE_QUIZ_NAME_REQUEST,
   });
@@ -574,7 +574,7 @@ export const getQuestionList = quizId => dispatch => {
 };
 //UPDATE QUESTIONS IN QUIZ
 export const updateQuestionsInQuiz = (data, questionId, cb) => dispatch => {
- // console.log('inside update question',data);
+  // console.log('inside update question',data);
   dispatch({
     type: types.UPDATE_QUESTIONS_IN_QUIZ_REQUEST,
   });
@@ -585,8 +585,8 @@ export const updateQuestionsInQuiz = (data, questionId, cb) => dispatch => {
       },
     })
     .then(res => {
-     // console.log(res.data);
-     dispatch(getQuestionList(res.data.quizId));
+      // console.log(res.data);
+      dispatch(getQuestionList(res.data.quizId));
       dispatch({
         type: types.UPDATE_QUESTIONS_IN_QUIZ_SUCCESS,
         payload: res.data,
@@ -615,7 +615,7 @@ export const getFeedback = quizId => dispatch => {
       },
     })
     .then(res => {
-       console.log(res.data,"feedback");
+      console.log(res.data, "feedback");
       dispatch({
         type: types.GET_QUIZ_FEEDBACK_SUCCESS,
         payload: res.data,
@@ -636,10 +636,10 @@ export const getBugsList = quizHostId => dispatch => {
   });
   axios
     .get(`${base_url}/bugs/getBugs/${quizHostId}`, {
-      
+
     })
     .then(res => {
-       console.log(res.data);
+      console.log(res.data);
       dispatch({
         type: types.GET_BUGS_SUCCESS,
         payload: res.data,
@@ -654,31 +654,31 @@ export const getBugsList = quizHostId => dispatch => {
     });
 };
 
-export const addBugs = (data) => dispatch => { 
-  console.log('name',data );
+export const addBugs = (data) => dispatch => {
+  console.log('name', data);
   dispatch({
     type: types.ADD_BUGS_REQUEST,
   });
 
   axios
-    .post(`${base_url}/bugs/saveBug`,data)
-    .then(res => {       
-      console.log(res.data);  
-       dispatch(getBugsList(res.data.quizHostId))  
-     
+    .post(`${base_url}/bugs/saveBug`, data)
+    .then(res => {
+      console.log(res.data);
+      dispatch(getBugsList(res.data.quizHostId))
+
       dispatch({
         type: types.ADD_BUGS_SUCCESS,
         payload: res.data,
       });
-       //  cb && cb("success");        
+      //  cb && cb("success");        
     })
-    .catch(err => {      
+    .catch(err => {
       console.log(err);
       dispatch({
         type: types.ADD_BUGS_FAILURE,
         payload: err,
       });
-       // cb && cb("failuer");
+      // cb && cb("failuer");
       //  message.error("Quiz name already exists!")
     });
 };
@@ -713,7 +713,7 @@ export const getLibraryQuiz = (userId) => dispatch => {
 };
 
 
-export const deleteLibraryQuiz = (quizId,cb)=> dispatch => {
+export const deleteLibraryQuiz = (quizId, cb) => dispatch => {
   dispatch({
     type: types.DELETE_LIBRARY_FROM_HOST_REQUEST,
   });

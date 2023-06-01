@@ -9,11 +9,11 @@ import {
   deleteHostQuiz,
   hostQuiz,
   addQuizName,
-  
+
   updateQuizNameByQuizId,
 } from "../../QuizAction";
 import { Button, Card, Modal } from "antd";
-import { useHistory } from "react-router-dom";
+import { useHistory, withRouter } from "react-router-dom";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import MainHeader from "../../../../Components/Mainheader";
@@ -59,9 +59,8 @@ function FinalizeQuiz(props) {
           {/* <div className="bg-white rounded-rounded2.8 mt-3 "> */}
 
           <div class="shadow-2xl border-solid flex justify-evenly flex-col  p-4 max-sm:m-0 h-h31 w-11/12 rounded-xl  md:m-auto">
-            <h2 class="text-xl mt-4 ml-4 flex justify-center">{`${
-              props.finalizeQuiz.quizName || ""
-            }`}</h2>
+            <h2 class="text-xl mt-4 ml-4 flex justify-center">{`${props.finalizeQuiz.quizName || ""
+              }`}</h2>
             <div>
               <div
                 style={{ boxShadow: "0.01rem 0.01rem 0.12rem 0.01rem" }}
@@ -70,9 +69,8 @@ function FinalizeQuiz(props) {
                 <div class="shadow-2xl border-solid w-full flex justify-center flex-col  p-2  max-sm:m-0 h-28 rounded-2xl md:m-auto">
                   <div class="flex flex-row">
                     <h3 class="mr-2">Created:</h3>
-                    <h3 class=" leading-5">{`${
-                      moment(props.finalizeQuiz.creationDate).format("ll") || ""
-                    }`}</h3>
+                    <h3 class=" leading-5">{`${moment(props.finalizeQuiz.creationDate).format("ll") || ""
+                      }`}</h3>
                   </div>
                   <h3>
                     Questions: {`${props.finalizeQuiz.noOfQuestions || ""}`}
@@ -107,26 +105,26 @@ function FinalizeQuiz(props) {
               </div>
             </div>
             <div class="flex flex-row mt-8 justify-between">
-          {/* <Link to="/create"> */}
-                <Button
-                  type="primary"
-                  style={{ width: "8rem", backgroundColor: "white",margin:"0" }}
-                  onClick={() =>
-                    props.deleteHostQuiz(
-                      props.showQuiz && props.showQuiz.quizId,
+              {/* <Link to="/create"> */}
+              <Button
+                type="primary"
+                style={{ width: "8rem", backgroundColor: "white", margin: "0" }}
+                onClick={() =>
+                  props.deleteHostQuiz(
+                    props.showQuiz && props.showQuiz.quizId,
                     //  handleCallBack()
-                    )
-                  }
-                >
-                  <h3>Delete This Quiz</h3>
-                </Button>
+                  )
+                }
+              >
+                <h3>Delete This Quiz</h3>
+              </Button>
               {/* </Link> */}
               <Link to="/updateQuizName">
                 <Button
                   style={{ width: "8rem", backgroundColor: "white" }}
                   type="primary"
 
-                  //   onClick={() => props.navigation.navigate('Quiz Invite')}
+                //   onClick={() => props.navigation.navigate('Quiz Invite')}
                 >
                   <h3>Edit This Quiz</h3>
                 </Button>
@@ -141,7 +139,7 @@ function FinalizeQuiz(props) {
                 //  props.handleQuizHostModal(true)
                 // }
                 onClick={showModal}
-                // onClick={() => props.hostQuiz(props.showQuiz.quizId)}
+              // onClick={() => props.hostQuiz(props.showQuiz.quizId)}
               >
                 <h3>Host This Quiz</h3>
               </Button>
@@ -150,7 +148,7 @@ function FinalizeQuiz(props) {
                 <Button
                   type="primary"
                   style={{ backgroundColor: "white" }}
-                  // onClick={() => props.hostQuiz(props.showQuiz.quizId)}
+                // onClick={() => props.hostQuiz(props.showQuiz.quizId)}
                 >
                   <h3>Add Question</h3>
                 </Button>
@@ -210,4 +208,4 @@ const mapDispatchToProps = (dispatch) =>
     dispatch
   );
 
-export default connect(mapStateToProps, mapDispatchToProps)(FinalizeQuiz);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(FinalizeQuiz));
