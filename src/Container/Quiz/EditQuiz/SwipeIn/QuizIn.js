@@ -110,7 +110,7 @@ function QuizIn(props) {
                   {props.showQuiz && props.showQuiz.quizName}
                 </h2>
               </div>
-              <div class="flex justify-center mt-3">
+              <div class="flex justify-center mt-3 ml-20 w-3/5">
                 <Button type="primary"
                   onClick={() => {
                     handleSubmit()
