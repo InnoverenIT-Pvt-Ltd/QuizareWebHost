@@ -32,6 +32,8 @@ import SwipeIn from "./Container/Quiz/EditQuiz/SwipeIn/SwipeIn";
 import QuizOut from "./Container/Quiz/EditQuiz/Swipe/QuizOut";
 import QuizIn from "./Container/Quiz/EditQuiz/SwipeIn/QuizIn";
 import QuizLibrary from "./Container/Quiz/Child/QuizLibrary/QuizLibrary"
+import SwipeInLibrary from "./Container/Quiz/EditQuiz/SwipeIn/SwipelnLibrary"
+import UpdateQuizNameLibrary from "./Container/Quiz/EditQuiz/UpdateQuizNameLibrary"
 // import AppErrorBoundary from "./Helpers/ErrorBoundary/AppErrorBoundary";
 
 
@@ -61,6 +63,7 @@ class App extends Component {
             <Route   path="/quizinLibrary/:quizId" component={QuizinLibrary}/>
             <Route exact path="/finalize" component={FinalizeQuiz}/>
             <Route exact path="/updateQuizName" component={UpdateQuizName}/>
+            <Route exact path="/updateQuizNameLibrary/:quizName/:duration/:quizId" component={UpdateQuizNameLibrary}/>
             <Route exact path="/updateQuiz" component={UpdateQuiz}/>
             <Route exact path="/hostquiz" component={QuizDetails}/>
   
@@ -70,6 +73,7 @@ class App extends Component {
             <Route exact path="/ongoingQuiz" component={OngoingQuiz}/>
             <Route exact path="/swipe" component={Swipe}/>
             <Route exact path="/swipeIn" component={SwipeIn}/>
+            <Route exact path="/swipeInLibrary/:quizId" component={SwipeInLibrary}/>
             <Route exact path="/quizLibrary" component={QuizLibrary}/>
 
             

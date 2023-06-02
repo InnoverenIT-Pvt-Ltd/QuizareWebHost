@@ -144,10 +144,8 @@ console.log(props.libraryQuiz)
                   <h3>Delete This Quiz</h3>
                 </Button>
               {/* </Link> */}
-              {/* <Link to="/updateQuizName"> */}
-              <Link
-          to={`quizinLibrary/${item.quizId}`}
-          >
+              <Link to={`updateQuizNameLibrary/${item.quizName}/${item.duration}/${item.quizId}`}>
+         
                 <Button
                   style={{ width: "8rem", backgroundColor: "white" }}
                   type="primary"
@@ -172,7 +170,9 @@ console.log(props.libraryQuiz)
                 <h3>Host This Quiz</h3>
               </Button>
               {/* </Link> */}
-              <Link to="/addquizin">
+                 <Link
+          to={`quizinLibrary/${item.quizId}`}
+          >
         
                 <Button
                   type="primary"
@@ -184,9 +184,9 @@ console.log(props.libraryQuiz)
               </Link>
               <Modal
                 title="Host Quiz"
-                // open={isModalOpen}
-                // onOk={handleOk}
-                // onCancel={handleCancel}
+                 open={isModalOpen}
+                 onOk={handleOk}
+                 onCancel={handleCancel}
               >
                 <form onSubmit={() => 
                     handleOk()
@@ -195,8 +195,8 @@ console.log(props.libraryQuiz)
                   <input
                     className="border border-blue-900 rounded-md px-1 w-full"
                     name="duration"
-                    // value={duration}
-                    // onChange={(ev) => setDuration(ev.target.value)}
+                     value={duration}
+                     onChange={(ev) => setDuration(ev.target.value)}
                     placeholder="Enter Response time per question"
                   />
                 </form>
@@ -222,21 +222,21 @@ console.log(props.libraryQuiz)
 }
 
 const mapStateToProps = ({ auth, quiz }) => ({
-    libraryQuiz:quiz.libraryQuiz
-//   showQuiz: quiz.showQuiz,
-//   noOfQuestions: quiz.noOfQuestions,
-//   quizId: quiz.showQuiz.quizId,
-//   fetchingFinalizeQuiz: quiz.fetchingFinalizeQuiz,
-//   fetchingFinalizeQuizError: quiz.fetchingFinalizeQuizError,
-//   finalizeQuiz: quiz.finalizeQuiz,
-//   deletingQuizHost: quiz.deletingQuizHost,
-//   deletingQuizHostError: quiz.deletingQuizHostError,
-//   hostQuizByQuizId: quiz.hostQuizByQuizId,
-//   hostQuizByQuizIdError: quiz.hostQuizByQuizIdError,
-//   addQuizHostModal: quiz.addQuizHostModal,
-//   addingQuizName: quiz.addingQuizName,
-//   addingQuizNameError: quiz.addingQuizNameError,
-//   quizName: quiz.quizName,
+    libraryQuiz:quiz.libraryQuiz,
+  showQuiz: quiz.showQuiz,
+  noOfQuestions: quiz.noOfQuestions,
+  quizId: quiz.showQuiz.quizId,
+  fetchingFinalizeQuiz: quiz.fetchingFinalizeQuiz,
+  fetchingFinalizeQuizError: quiz.fetchingFinalizeQuizError,
+  finalizeQuiz: quiz.finalizeQuiz,
+  deletingQuizHost: quiz.deletingQuizHost,
+  deletingQuizHostError: quiz.deletingQuizHostError,
+  hostQuizByQuizId: quiz.hostQuizByQuizId,
+  hostQuizByQuizIdError: quiz.hostQuizByQuizIdError,
+  addQuizHostModal: quiz.addQuizHostModal,
+  addingQuizName: quiz.addingQuizName,
+  addingQuizNameError: quiz.addingQuizNameError,
+  quizName: quiz.quizName,
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -246,9 +246,9 @@ const mapDispatchToProps = (dispatch) =>
     //   getFinalizeQuiz,
     deleteLibraryQuiz,
     //   hostQuiz,
-    //   handleQuizHostModal,
+       handleQuizHostModal,
     //   addQuizName,
-    //   updateQuizNameByQuizId,
+      updateQuizNameByQuizId,
     },
     dispatch
   );
