@@ -93,7 +93,7 @@ function FinalizeQuiz(props) {
                     <h2 class="text-base font-bold">Question response time:</h2>
                     &nbsp;
                     <h2 class="text-base font-bold">
-                      {`${props.finalizeQuiz.duration || ""}`} sec
+                      {`${props.finalizeQuiz.duration || ""}`} seconds
                     </h2>
                   </div>
                   <div class="flex flex-row">
@@ -108,7 +108,7 @@ function FinalizeQuiz(props) {
               {/* <Link to="/create"> */}
               <Button
                 type="primary"
-                style={{ width: "8rem", backgroundColor: "white", margin: "0" }}
+                style={{ width:"max-content", backgroundColor: "white", margin: "0" }}
                 onClick={() =>
                   props.deleteHostQuiz(
                     props.showQuiz && props.showQuiz.quizId,
@@ -165,7 +165,7 @@ function FinalizeQuiz(props) {
                     name="duration"
                     value={duration}
                     onChange={(ev) => setDuration(ev.target.value)}
-                    placeholder="Enter Response time per question"
+                    placeholder="Enter Response time in seconds"
                   />
                 </form>
               </Modal>
