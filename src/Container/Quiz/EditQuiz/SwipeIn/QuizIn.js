@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Yup from "yup";
 import { Link, withRouter } from "react-router-dom";
-// import MainHeader from '../../Navigation/MainHeader';
 import {
   deleteQuestion,
   addQuestion,
