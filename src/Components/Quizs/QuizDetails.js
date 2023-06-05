@@ -62,7 +62,7 @@ function QuizDetails(props) {
       <div class=" max-sm:w-11/12 mt-8 m-auto md:mt-12  w-1/5  h-h50  ">
         <div className="bg-white rounded-2xl shadow-2xl border-solid flex justify-center mt-3 ">
           <div class=" w-11/12 flex justify-center flex-col  p-4 max-sm:m-0 h-h31 rounded-2xl md:m-auto">
-            <h2 class="text-base  ml-4 flex justify-center">You are hosting</h2>
+            <h2 class="text-base   flex justify-center">You are hosting</h2>
             {/* <h2 class="text-base flex justify-center"> */}
             {editName === false && props.quizNameDetails.quizName ? (
               <div className="flex flex-row justify-center w-full">
@@ -120,7 +120,7 @@ function QuizDetails(props) {
             </h2>
             <Card class="mt-4">
               {props.quizNameDetails.quizLink ? (
-                <h2 class="text-xs flex justify-center overflow-hidden">{`http://player.quizledge.no${
+                <h2 class="text-xs flex justify-center "style={{overflowWrap:"break-word"}}>{`http://player.quizledge.no.s3-website.eu-west-3.amazonaws.com${
                   props.quizNameDetails.quizLink || ""
                 }`}</h2>
               ) : (
@@ -151,18 +151,7 @@ function QuizDetails(props) {
               )}
             </div>
             <div class="flex justify-between mt-2">
-              <div class="w-32">
-              {props.quizNameDetails.quizHostInd ===true && (
-                <Button
-                  style={{ backgroundColor: "white" }}
-                  type="primary"
-                  onClick={() => props.closeQuiz(ID)}
-                >
-                  <h3>Close Quiz</h3>
-                </Button>
-                 )}  
-              </div>
-              <div class="w-36">
+            <div class="w-36">
                 <Link to="/swipe">
                   <Button
                     style={{ backgroundColor: "white" }}
@@ -173,8 +162,19 @@ function QuizDetails(props) {
                   </Button>
                 </Link>
               </div>
+              <div class="w-32 ml-2">
+              {props.quizNameDetails.quizHostInd ===true && (
+                <Button
+                  style={{ backgroundColor: "white" }}
+                  type="primary"
+                  onClick={() => props.closeQuiz(ID)}
+                >
+                  <h3>Close Quiz</h3>
+                </Button>
+                 )}  
+              </div>            
             </div>
-            <div class="mt-3">
+            {/* <div class="mt-3">
             {props.quizNameDetails.quizHostInd !==true && (
               <Button
                 type="primary"
@@ -185,7 +185,7 @@ function QuizDetails(props) {
                 <h3>Host This Quiz</h3>
               </Button>
             )}
-            </div>
+            </div> */}
             <Modal
               title="Host Quiz"
               open={isModalOpen}

@@ -82,11 +82,11 @@ console.log(props.libraryQuiz)
         navigation={true}
        
         modules={[Navigation]}
-        className="mySwiper"
+        className="mySwiper "
       >
  {props.libraryQuiz.map((item,i) => {
             return (
-<SwiperSlide>
+<SwiperSlide >
       
 <div class="shadow-2xl border-solid flex justify-evenly flex-col  p-4 max-sm:m-0 h-h31 w-11/12 rounded-xl  md:m-auto">
             <h2 class="text-xl mt-4 ml-4 flex justify-center">
@@ -99,26 +99,32 @@ console.log(props.libraryQuiz)
               >
                 <div class="shadow-2xl border-solid w-full flex justify-center flex-col  p-2  max-sm:m-0 h-28 rounded-2xl md:m-auto">
                   <div class="flex flex-row">
-                    <h3 class="mr-2">Created:</h3>
-                    <h3 class=" leading-5">
+                    <h2 class="mr-2 text-base">Created:</h2>
+                    <h2 class=" text-base">
                         {`${
                       moment(item.creationDate).format("ll") || ""
                     }`}
-                    </h3>
-                  </div>
-                  <h3>
+                    </h2>
+                  </div> 
+                  <div class="flex flex-row">
+                  <h2 class=" text-base">
                     Questions: {`${item.noOfQuestions || ""}`}
-                  </h3>
-                  <h3 >
+                  </h2>
+                  </div>
+                  <div class="flex flex-row">
+                  <h2 class=" text-base">
                     Categories: {`${item.categories&&item.categories || ""}`}
-                  </h3>
-                  <h3 >
+                  </h2>
+                  </div>
+                  <div class="flex flex-row">
+                  <h2 class=" text-base">
                     Status: {item.quizHostInd===false?"Closed":"Hosted"}
-                  </h3>
+                  </h2>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="flex justify-center mt-4">
+            <div class="flex justify-center mt-6">
               <h3 class="text-xl ">Select quiz rules</h3>
             </div>
             <div>
@@ -130,7 +136,7 @@ console.log(props.libraryQuiz)
                     <h2 class="text-base font-bold">Question response time:</h2>
                     &nbsp;
                     <h2 class="text-base font-bold">
-                      {`${item.duration || ""}`} sec
+                      {`${item.duration || ""}`} seconds
                     </h2>
                   </div>
                   <div class="flex flex-row">
@@ -143,10 +149,21 @@ console.log(props.libraryQuiz)
             </div>
             <div class="flex flex-row mt-8 justify-between">
           {/* <Link to="/create"> */}
+          <Link to={`updateQuizNameLibrary/${item.quizName}/${item.duration}/${item.quizId}`}>
+         
+         <Button
+           style={{ width: "9rem", backgroundColor: "white" }}
+           type="primary"
+
+           //   onClick={() => props.navigation.navigate('Quiz Invite')}
+         >
+           <h3>Edit This Quiz</h3>
+         </Button>
+       </Link>
           {item.quizHostInd===false&&(
                 <Button
                   type="primary"
-                  style={{ width: "8rem", backgroundColor: "white",margin:"0" }}
+                  style={{ width: "9rem", backgroundColor: "white",margin:"0" }}
                   onClick={() =>
                     props.deleteLibraryQuiz(item.quizId)
                   }
@@ -155,17 +172,7 @@ console.log(props.libraryQuiz)
                 </Button>
           )}
               {/* </Link> */}
-              <Link to={`updateQuizNameLibrary/${item.quizName}/${item.duration}/${item.quizId}`}>
-         
-                <Button
-                  style={{ width: "8rem", backgroundColor: "white" }}
-                  type="primary"
-
-                  //   onClick={() => props.navigation.navigate('Quiz Invite')}
-                >
-                  <h3>Edit This Quiz</h3>
-                </Button>
-              </Link>
+            
             </div>
             <div class=" flex flex-col h-24 justify-between">
               {/* <Link to="/hostquiz"> */}
