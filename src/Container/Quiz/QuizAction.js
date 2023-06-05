@@ -743,3 +743,34 @@ export const deleteLibraryQuiz = (quizId, cb) => dispatch => {
       cb && cb("failuer");
     });
 };
+
+
+
+export const closeLibraryQuiz = (quizId, ) => dispatch => {
+  //console.log('inside update question');
+  dispatch({
+    type: types.CLOSE_LIBRARY_QUIZ_REQUEST,
+  });
+  axios
+    .put(`${base_url}/quiz/updatehost/close/quiz/${quizId}`, {
+      headers: {
+        Authorization: 'Bearer ' + store.getState().auth.token || '',
+      },
+    })
+    .then(res => {
+      console.log(res.data);
+      dispatch({
+        type: types.CLOSE_LIBRARY_QUIZ_SUCCESS,
+        payload: res.data,
+      });
+      // cb && cb('success');
+    })
+    .catch(err => {
+      console.log(err);
+      dispatch({
+        type: types.CLOSE_LIBRARY_QUIZ_FAILURE,
+        payload: err,
+      });
+      // cb && cb("failuer");
+    });
+};

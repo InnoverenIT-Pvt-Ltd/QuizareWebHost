@@ -152,6 +152,7 @@ function QuizDetails(props) {
             </div>
             <div class="flex justify-between mt-2">
               <div class="w-32">
+              {props.quizNameDetails.quizHostInd ===true && (
                 <Button
                   style={{ backgroundColor: "white" }}
                   type="primary"
@@ -159,6 +160,7 @@ function QuizDetails(props) {
                 >
                   <h3>Close Quiz</h3>
                 </Button>
+                 )}  
               </div>
               <div class="w-36">
                 <Link to="/swipe">
@@ -173,6 +175,7 @@ function QuizDetails(props) {
               </div>
             </div>
             <div class="mt-3">
+            {props.quizNameDetails.quizHostInd !==true && (
               <Button
                 type="primary"
                 style={{ backgroundColor: "white" }}
@@ -181,6 +184,7 @@ function QuizDetails(props) {
               >
                 <h3>Host This Quiz</h3>
               </Button>
+            )}
             </div>
             <Modal
               title="Host Quiz"

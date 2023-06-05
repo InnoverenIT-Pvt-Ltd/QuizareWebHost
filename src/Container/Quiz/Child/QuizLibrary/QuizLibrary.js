@@ -20,6 +20,7 @@ import {
   deleteLibraryQuiz,
   hostQuiz,
   addQuizName,
+  closeLibraryQuiz,
   
   updateQuizNameByQuizId,
 } from "../../QuizAction";
@@ -36,9 +37,14 @@ function QuizLibrary(props) {
   const history = useHistory();
   const [duration, setDuration] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentItem, setCurrentItem] = useState("");
   const showModal = () => {
     setIsModalOpen(true);
   };
+  function handleSetCurrentItem(item) {
+    setCurrentItem(item);
+  }
+  console.log(currentItem)
   const handleOk = () => {
     setIsModalOpen(false);
     history.push(`/hostquiz`);
@@ -46,11 +52,11 @@ function QuizLibrary(props) {
       {
         duration: duration,
         quizHostId: "QH4472404666122022",
-        quizName: props.showQuiz && props.showQuiz.quizName,
+        quizName: currentItem.quizName,
       },
-      props.showQuiz && props.showQuiz.quizId
+      currentItem.quizId
     );
-    props.hostQuiz(props.showQuiz && props.showQuiz.quizId);
+    props.hostQuiz(currentItem.quizId);
   };
   const handleCancel = () => {
     setIsModalOpen(false);
@@ -106,6 +112,9 @@ console.log(props.libraryQuiz)
                   <h3 >
                     Categories: {`${item.categories&&item.categories || ""}`}
                   </h3>
+                  <h3 >
+                    Status: {item.quizHostInd===false?"Closed":"Hosted"}
+                  </h3>
                 </div>
               </div>
             </div>
@@ -134,6 +143,7 @@ console.log(props.libraryQuiz)
             </div>
             <div class="flex flex-row mt-8 justify-between">
           {/* <Link to="/create"> */}
+          {item.quizHostInd===false&&(
                 <Button
                   type="primary"
                   style={{ width: "8rem", backgroundColor: "white",margin:"0" }}
@@ -143,6 +153,7 @@ console.log(props.libraryQuiz)
                 >
                   <h3>Delete This Quiz</h3>
                 </Button>
+          )}
               {/* </Link> */}
               <Link to={`updateQuizNameLibrary/${item.quizName}/${item.duration}/${item.quizId}`}>
          
@@ -158,17 +169,35 @@ console.log(props.libraryQuiz)
             </div>
             <div class=" flex flex-col h-24 justify-between">
               {/* <Link to="/hostquiz"> */}
+              {item.quizHostInd===false&&(
+              <Button
+                type="primary"
+                style={{ backgroundColor: "white" }}
+                onClick={() =>{
+                  showModal();
+                  handleSetCurrentItem(item);
+
+                }}
+                // onClick={showModal}
+                // onClick={() => props.hostQuiz(props.showQuiz.quizId)}
+              >
+                <h3>Host This Quiz</h3>
+              </Button>
+              )}
+                 {item.quizHostInd===true&&(
               <Button
                 type="primary"
                 style={{ backgroundColor: "white" }}
                 // onClick={() =>
                 //  props.handleQuizHostModal(true)
                 // }
-                onClick={showModal}
+                // onClick={showModal}
+                onClick={() => props.closeLibraryQuiz(item.quizId,)}
                 // onClick={() => props.hostQuiz(props.showQuiz.quizId)}
               >
-                <h3>Host This Quiz</h3>
+                <h3>Close This Quiz</h3>
               </Button>
+              )}
               {/* </Link> */}
                  <Link
           to={`quizinLibrary/${item.quizId}`}
@@ -245,7 +274,8 @@ const mapDispatchToProps = (dispatch) =>
         getLibraryQuiz,
     //   getFinalizeQuiz,
     deleteLibraryQuiz,
-    //   hostQuiz,
+    closeLibraryQuiz,
+      hostQuiz,
        handleQuizHostModal,
     //   addQuizName,
       updateQuizNameByQuizId,
