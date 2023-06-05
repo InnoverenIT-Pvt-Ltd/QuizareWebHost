@@ -36,6 +36,9 @@ const initialState = {
   fetchingBugsError: false,
   bugs: [],
 
+  closeQuizLibrary:false,
+  closeQuizLibraryError:false,
+
 
 fetchingLibraryQuiz:false,
 fetchingLibraryQuizError:false,
@@ -461,6 +464,29 @@ export const quizReducer = (state = initialState, action) => {
         deletingLibraryHost: false,
         deletingLibraryHostError: true,
       };
+
+
+      case types.CLOSE_LIBRARY_QUIZ_REQUEST:
+        return { ...state, closeQuizLibrary: true };
+      case types.CLOSE_LIBRARY_QUIZ_SUCCESS:
+        return {
+          ...state,
+          closeQuizLibrary: false,
+          // libraryQuiz: action.payload,
+          libraryQuiz: state.libraryQuiz.map((item) => {
+            if (item.quizId === action.payload.quizId) {
+              return action.payload;
+            } else {
+              return item;
+            }
+          }),
+        };
+      case types.CLOSE_LIBRARY_QUIZ_FAILURE:
+        return {
+          ...state,
+          closeQuizLibrary: false,
+          closeQuizLibraryError: true,
+        };
 
     case types.ADD_BUGS_REQUEST:
       return { ...state, addingBugs: true };

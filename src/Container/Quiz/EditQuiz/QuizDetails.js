@@ -11,7 +11,7 @@ import MainHeader from "../../../Components/Mainheader";
 // import MainHeader from '../Mainheader';
 
 function QuizDetails(props) {
-  const link = `http://player.quizledge.no${props.showQuiz.quizLink || ""}`;
+  const link = `http://player.quizledge.no.s3-website.eu-west-3.amazonaws.com${props.showQuiz.quizLink || ""}`;
   function copyToClipboard(link) {
     navigator.clipboard
       .writeText(link)

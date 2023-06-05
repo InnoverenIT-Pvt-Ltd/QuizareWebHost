@@ -30,12 +30,15 @@ function SwipeInLibrary(props) {
         modules={[Pagination, Navigation]}
         className="mySwiper"
       >
-        {props.questionList.map((item) => {
+        {props.questionList.map((item,index) => {
           return (
             <SwiperSlide key={item}>
               <div class="h-h37">
                 <Card style={{marginTop:"2rem"}}>
-                  <QuestionEdit item={item} />
+                  <QuestionEdit 
+                  item={item} 
+                  number={index}
+                  />
                 </Card>
               </div>
             </SwiperSlide>
