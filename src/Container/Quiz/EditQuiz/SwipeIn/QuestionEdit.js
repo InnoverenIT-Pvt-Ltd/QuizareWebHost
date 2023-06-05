@@ -55,16 +55,15 @@ function QuestionEdit(props) {
                   <Card
                     style={{
                       WebkitBoxShadow: "0 0 10px 2px rgb(46 46 46 / 39%)",
-                      width:"18rem",
-                      height:"26rem"
+                      width:"-webkit-fill-available",
+                      height:"max-content"
                     }}
                   >
-                    <Card style={{ fontSize: 22, alignSelf: "center" }}>
+                    <div style={{ fontSize: 22, alignSelf: "center" }}>
                       <h3 class="flex justify-center text-xl">Question {props.number+1}</h3>
-                    </Card>
-                    <div class="mt-1">
+                    </div>
+                    <div class="mt-4">
                     <Field
-                      style={{ textAlign: "center" }}
                       name="question"
                       value={`${values.question}`}
                       component={InputComponent}
@@ -107,31 +106,35 @@ function QuestionEdit(props) {
                       onChangeText={handleChange("option4")}
                     />
                     </div>
-                     <div className="flex flex-row justify-center mt-8">
-                    <Button
-                      title={""}
-                      type="primary"
-                      onClick={() => props.deleteQuestion(props.item.id)}
-                      style={{width:"7rem"}}
-                    >
-                      Delete
-                    </Button>
+                    <div>
+                    <div class="flex flex-row mt-4 justify-between">
                     <Button
                       title={""}
                       type="primary"
                       onClick={() => handleSubmit()}
-                      style={{width:"7rem"}}
+                      style={{ width: "9rem", backgroundColor: "white" }}
                     >
-                      Update
+                      <h3>Update This Quiz</h3>
                     </Button>
+                    <Button
+                      title={""}
+                      type="primary"
+                      onClick={() => props.deleteQuestion(props.item.id)}
+                      style={{ width:"9rem", backgroundColor: "white",marginLeft:"0.5rem" }}
+                    >
+                     <h3> Delete This Quiz</h3>
+                    </Button>
+                   
+                    </div>
+                    <div class=" flex flex-col h-24 justify-between mt-4">
                     <Link to="/addquizin">
                     <Button
                       title={""}
                       type="primary"
                       onClick={() => handleSubmit()}
-                      style={{width:"7rem"}}
+                      style={{ backgroundColor: "white" }}
                     >
-                      Add Question
+                      <h3>Add Question</h3>
                     </Button>
                     </Link>
                     <Link to="/finalize">
@@ -139,9 +142,9 @@ function QuestionEdit(props) {
                       title={""}
                       type="primary"
                       onClick={() => handleSubmit()}
-                      style={{width:"7rem"}}
+                      style={{ backgroundColor: "white" }}
                     >
-                      Finalize Quiz
+                     <h3>Finalize Quiz</h3> 
                     </Button>
                     </Link>
                     {/* <Button
@@ -150,6 +153,7 @@ function QuestionEdit(props) {
                     onClick={() => setModalVisible(true)}
                   
                   >Add</Button> */}
+                  </div>
                   </div>
                   </Card>
                  
