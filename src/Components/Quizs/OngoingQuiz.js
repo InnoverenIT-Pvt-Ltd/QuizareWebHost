@@ -22,7 +22,7 @@ function OngoingQuiz(props) {
     <Formik>
       <div class="flex justify-center mt-2 " >        
         <div style={{alignItems: 'center',alignSelf:"center",width:"92%"}}>
-         <QuizNameList handleGetQuizData={handleGetQuizData} item={item}/>
+         {/* <QuizNameList handleGetQuizData={handleGetQuizData} item={item}/> */}
          <QuizDetails item={item}/>        
         </div>        
       </div>
