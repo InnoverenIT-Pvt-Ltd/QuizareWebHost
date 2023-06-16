@@ -431,7 +431,7 @@ export const getOngoingQuiz = (userId) => dispatch => {
     type: types.GET_ONGOING_QUIZ_REQUEST,
   });
   axios
-    .get(`${base_url} /userDetails/onGoingQuizes/${userId}`, {
+    .get(`${base_url}/userDetails/onGoingQuizes/${userId}`, {
       headers: {
         Authorization: 'Bearer ' + store.getState().auth.token || '',
       },
