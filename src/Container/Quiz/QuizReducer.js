@@ -9,6 +9,11 @@ const initialState = {
   fetchingFinalizeQuizError: false,
   finalizeQuiz: {},
 
+  fetchingOngoingQuiz: false,
+  fetchingOngoingQuizError: false,
+  ongoingQuiz:[],
+
+
   addingBugs: false,
   addingBugsError: false,
 
@@ -209,6 +214,21 @@ export const quizReducer = (state = initialState, action) => {
         fetchingFinalizeQuiz: false,
         fetchingFinalizeQuizError: true,
       };
+
+      case types.GET_ONGOING_QUIZ_REQUEST:
+        return { ...state, fetchingOngoingQuiz: true };
+      case types.GET_ONGOING_QUIZ_SUCCESS:
+        return {
+          ...state,
+          fetchingOngoingQuiz: false,
+          ongoingQuiz: action.payload,
+        };
+      case types.GET_ONGOING_QUIZ_FAILURE:
+        return {
+          ...state,
+          fetchingOngoingQuiz: false,
+          fetchingOngoingQuizError: true,
+        };
 
     //GET FINALIZED QUIZ
     case types.GET_FINALIZE_QUIZ_URL_REQUEST:

@@ -426,6 +426,33 @@ export const getPlayersDetails = quizId => dispatch => {
     });
 };
 
+export const getOngoingQuiz = (userId) => dispatch => {
+  dispatch({
+    type: types.GET_ONGOING_QUIZ_REQUEST,
+  });
+  axios
+    .get(`${base_url} /userDetails/onGoingQuizes/${userId}`, {
+      headers: {
+        Authorization: 'Bearer ' + store.getState().auth.token || '',
+      },
+    })
+    .then(res => {
+      console.log(res.data);
+      dispatch({
+        type: types.GET_ONGOING_QUIZ_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch(err => {
+      //console.log(err.response);
+      dispatch({
+        type: types.GET_ONGOING_QUIZ_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+
 /**
  * get the quiz name list in  quiz
  */
