@@ -49,6 +49,7 @@ function UpdateQuizName(props) {
            <div class="shadow-2xl border-solid w-11/12 flex justify-center items-center  p-1 max-sm:m-0 h-h34 rounded-2xl md:m-auto">
               <div class="w-11/12" >
                 <div>
+                <label>Quiz name</label>
               <Field
                   name="quizName"
                   onChangeText={handleChange('quizName')}
@@ -58,6 +59,7 @@ function UpdateQuizName(props) {
                 />
                 </div>
                 <div class="mt-6">
+                  <label>Response time per Question (Seconds)</label>
                  <Field
                   name="duration"
                   onChangeText={handleChange('duration')}

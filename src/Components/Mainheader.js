@@ -4,6 +4,7 @@ import { Link, withRouter } from "react-router-dom";
 import FWLogo from "../../src/images/Latest.png";
 import {clearQuizNameDetails} from '../Container/Quiz/QuizAction'
 import { connect } from "react-redux";
+import HomeIcon from '@mui/icons-material/Home';
 import { bindActionCreators } from "redux";
 
 function MainHeader(props) {
@@ -24,7 +25,7 @@ function MainHeader(props) {
       <div className=" bg-ShopBlue w-full  ">
         <div class=" border-solid w-w95  max-sm:m-0 md:m-auto">
           <div class="flex justify-center border">
-            <div class="flex flex-col justify-center">
+            <div class="flex flex-row justify-between items-center w-wk">
             <Link to="/create">
               <div className="flex flex-row" onClick={props.clearQuizNameDetails}>
                 {/* {headerName.map((item) => {
@@ -44,6 +45,11 @@ function MainHeader(props) {
               alt="Tekorero logo"
 
             />
+              </div>
+              </Link>
+              <Link to="/create">
+              <div class="mr-4">
+              <HomeIcon/>
               </div>
               </Link>
               {/* <div className="flex justify-center">

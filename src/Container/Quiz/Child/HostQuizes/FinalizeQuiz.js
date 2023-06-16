@@ -126,7 +126,7 @@ function FinalizeQuiz(props) {
 
                 //   onClick={() => props.navigation.navigate('Quiz Invite')}
                 >
-                  <h3>Edit This Quiz</h3>
+                  <h3>Edit Quiz</h3>
                 </Button>
               </Link>
             </div>

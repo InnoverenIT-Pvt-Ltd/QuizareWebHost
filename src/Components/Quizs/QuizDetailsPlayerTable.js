@@ -8,7 +8,7 @@ const playersList = props.data.playerViewDTOs
  
 const columns = [
     {
-      title: "User Name",
+      title: "Player",
       dataIndex: "playerName",
     //  key: "name",
     },

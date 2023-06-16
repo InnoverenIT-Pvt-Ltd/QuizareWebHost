@@ -114,7 +114,7 @@ function QuestionEdit(props) {
                       onClick={() => handleSubmit()}
                       style={{ width: "9rem", backgroundColor: "white" }}
                     >
-                      <h3>Update This Quiz</h3>
+                      <h3>Update Question</h3>
                     </Button>
                     <Button
                       title={""}
@@ -122,7 +122,7 @@ function QuestionEdit(props) {
                       onClick={() => props.deleteQuestion(props.item.id)}
                       style={{ width:"9rem", backgroundColor: "white",marginLeft:"0.5rem" }}
                     >
-                     <h3> Delete This Quiz</h3>
+                     <h3> Delete Question</h3>
                     </Button>
                    
                     </div>
