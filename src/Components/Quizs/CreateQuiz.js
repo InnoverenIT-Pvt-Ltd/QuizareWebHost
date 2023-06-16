@@ -68,7 +68,7 @@ class CreateQuiz extends Component {
                           borderRadius: "0",
                         }}
                       >
-                        <h3 class="font-extrabold">Create a new quiz</h3>
+                        <h3 class="font-extrabold">Create a new Quiz</h3>
                       </Button>
                     </Link>
                   </div>
@@ -85,7 +85,7 @@ class CreateQuiz extends Component {
                           borderRadius: "0",
                         }}
                       >
-                        <h3 class="font-extrabold">Ongoing quizzes</h3>
+                        <h3 class="font-extrabold">Ongoing Quizzes</h3>
                       </Button>
                     </Link>
                   </div>

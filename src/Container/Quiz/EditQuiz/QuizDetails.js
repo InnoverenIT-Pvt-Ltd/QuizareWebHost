@@ -12,7 +12,7 @@ import MainHeader from "../../../Components/Mainheader";
 
 function QuizDetails(props) {
   const link = `http://player.quizledge.no.s3-website.eu-west-3.amazonaws.com${props.showQuiz.quizLink || ""}`;
-  function copyToClipboard(link) {
+  function copyToClipboard() {
     navigator.clipboard
       .writeText(link)
       .then(() => {
@@ -70,7 +70,7 @@ function QuizDetails(props) {
                   borderRadius: "0.4rem",
                   height: "auto",
                 }}
-                onClick={() => copyToClipboard(link)}
+                onClick={() => copyToClipboard()}
               >
                 <h2 class="text-white">Click to copy the url</h2>
               </Button>

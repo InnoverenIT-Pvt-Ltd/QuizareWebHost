@@ -101,7 +101,7 @@ function QuizName(props) {
                       onClick={handleSubmit}
                       style={{ width: "16.5rem", backgroundColor: "white", borderBlockColor: "black", borderRadius: "0", height: "2rem" }}
                     // onClick={() => props.navigation.navigate('Quiz')}
-                    ><h3 class="font-extrabold">Add quiz</h3></Button>
+                    ><h3 class="font-extrabold">Add Quiz</h3></Button>
                     {/* </Link> */}
                   </div>
                   {/* <AntIcon name="enter" color="green" size={40} /> */}

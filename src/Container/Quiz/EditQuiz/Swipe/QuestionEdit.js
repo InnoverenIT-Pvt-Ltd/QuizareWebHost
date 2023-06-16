@@ -13,6 +13,7 @@ function QuestionEdit(props) {
   const { item } = props.item;
   const [count, setCount] = useState(props.item);
   console.log("id", props.item.id);
+  console.log(props.questionNo)
   return (
     <>
       <Formik
@@ -58,7 +59,7 @@ function QuestionEdit(props) {
                     }}
                   >
                     <Card style={{ fontSize: 22, alignSelf: "center" }}>
-                      <h3 class="flex justify-center text-xl">Question {count.number || null}</h3>
+                      <h3 class="flex justify-center text-xl">Question {props.questionNo || null}</h3>
                     </Card>
                     <div class="mt-1">
                     <Field
@@ -72,7 +73,7 @@ function QuestionEdit(props) {
 <div class="mt-1">
                     <Field
                       component={InputComponent}
-                      value={`${values.option1}`}
+                      value={`${values.option1} (Correct Answer)`}
                       placeholder="Correct answer"
                       name="option1"
                       onChangeText={handleChange("option1")}

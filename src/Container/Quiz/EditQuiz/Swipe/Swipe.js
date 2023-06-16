@@ -18,7 +18,7 @@ function Swipe(props) {
   useEffect(() => {
     props.getQuestionList(props.quizNameDetails.quizId);
   }, []);
-
+ 
   return (
     <>
     <MainHeader />
@@ -30,12 +30,17 @@ function Swipe(props) {
         modules={[Pagination, Navigation]}
         className="mySwiper"
       >
-        {props.questionList.map((item) => {
+        {props.questionList.map((item,i) => {
+          console.log(i+1)
+          const questionNo=i+1
           return (
             <SwiperSlide key={item}>
               <div class="h-h37">
                 <Card style={{marginTop:"2rem"}}>
-                  <QuestionEdit item={item} />
+                  <QuestionEdit item={item}
+                 
+                  questionNo={questionNo}
+                  />
                 </Card>
               </div>
             </SwiperSlide>
