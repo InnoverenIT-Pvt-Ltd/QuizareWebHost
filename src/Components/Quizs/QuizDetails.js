@@ -38,7 +38,7 @@ function QuizDetails(props) {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-  const link = `http://player.quizledge.no${
+  const link = `http://player.quizledge.no.s3-website.eu-west-3.amazonaws.com${
     props.quizNameDetails.quizLink || ""
   }`;
   function copyToClipboard(link) {
