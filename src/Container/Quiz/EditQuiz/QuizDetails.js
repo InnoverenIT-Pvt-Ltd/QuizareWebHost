@@ -8,20 +8,14 @@ import { Field, Formik, Form } from "formik";
 // import QuizDetailsPlayerTable from './QuizDetailsPlayerTable';
 import QuizDetailsPlayerTable from "../../../Components/Quizs/QuizDetailsPlayerTable";
 import MainHeader from "../../../Components/Mainheader";
+import copy from "copy-to-clipboard";
 // import MainHeader from '../Mainheader';
 
 function QuizDetails(props) {
   const link = `http://player.quizledge.no.s3-website.eu-west-3.amazonaws.com${props.showQuiz.quizLink || ""}`;
   function copyToClipboard() {
-    navigator.clipboard
-      .writeText(link)
-      .then(() => {
-        console.log(`Copied text to clipboard: ${link}`);
-        //alert(`Copied text to clipboard: ${link}`);
-      })
-      .catch((error) => {
-        console.error(`Could not copy text: ${error}`);
-      });
+    copy(link);
+    console.log(link)
   }
   const history = useHistory();
 

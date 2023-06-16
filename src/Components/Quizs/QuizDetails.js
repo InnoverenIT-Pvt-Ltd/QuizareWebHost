@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {
   closeQuiz,
   hostQuiz,
+  getOngoingQuiz,
   updateQuizNameByQuizId,clearQuizNameDetails
 } from "../../Container/Quiz/QuizAction";
 import { Button, Card, Modal } from "antd";
@@ -11,6 +12,7 @@ import { Field, Formik, Form } from "formik";
 import QuizDetailsPlayerTable from "./QuizDetailsPlayerTable";
 import { Link } from "react-router-dom";
 import MainHeader from "../Mainheader";
+import copy from "copy-to-clipboard";
 function QuizDetails(props) {
   const [duration, setDuration] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -42,21 +44,16 @@ function QuizDetails(props) {
     props.quizNameDetails.quizLink || ""
   }`;
   function copyToClipboard() {
-    navigator.clipboard
-      .writeText(link)
-      .then(() => {
-        console.log(`Copied text to clipboard: ${link}`);
-        //alert(`Copied text to clipboard: ${link}`);
-      })
-      .catch((error) => {
-        console.error(`Could not copy text: ${error}`);
-      });
+    copy(link);
+    console.log(link)
   }
 
   const viewData = props.quizNameDetails.playerViewDTOs;
   const viewmessage = props.quizNameDetails.message;
   const ID = props.quizNameDetails.quizId;
-
+  useEffect(() => {
+    props.getOngoingQuiz("QH4472404666122022");
+  }, []);
   return (
     <>
       <div class=" max-sm:w-11/12 mt-8 m-auto md:mt-12  w-1/5  h-h50  ">
@@ -214,6 +211,7 @@ const mapStateToProps = ({ quiz }) => ({
   fetchingFeedback: quiz.fetchingFeedback,
   feedback: quiz.feedback,
   fetchingFeedbackErrot: quiz.fetchingFeedbackErrot,
+  ongoingQuiz:quiz.ongoingQuiz
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -222,6 +220,7 @@ const mapDispatchToProps = (dispatch) =>
       closeQuiz,
       updateQuizNameByQuizId,clearQuizNameDetails,
       hostQuiz,
+      getOngoingQuiz
     },
     dispatch
   );
