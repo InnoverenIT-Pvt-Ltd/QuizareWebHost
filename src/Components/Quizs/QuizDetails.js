@@ -331,7 +331,7 @@ function QuizDetails(props) {
             return (
 <SwiperSlide >
       
-<div class=" max-sm:w-11/12 mt-8 m-auto md:mt-12  w-1/5  h-h50  ">
+<div class=" max-sm:w-11/12  h-h32   m-auto md:w-1/5  h-h50  ">
 <div className="bg-white rounded-2xl shadow-2xl border-solid flex justify-center mt-3 ">
   <div class=" w-11/12 flex justify-center flex-col  p-4 max-sm:m-0 h-h31 rounded-2xl md:m-auto">
     <h2 class="text-base   flex justify-center">You are hosting</h2>
@@ -416,8 +416,14 @@ function QuizDetails(props) {
             className="copy-button"
             data-link={ongoingQuizLink}
             data-clipboard-text={ongoingQuizLink}
+            style={{
+              backgroundColor: "#4096ff",
+              width: "100%",
+              borderRadius: "0.4rem",
+              height: "auto",
+            }}
           >
-            Copy Link
+           <h2 class="text-white"> Click to copy the url</h2>
           </button>
     </div>
     <h2 class="text-xl mt-2 flex justify-center">

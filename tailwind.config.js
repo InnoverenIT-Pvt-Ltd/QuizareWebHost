@@ -29,7 +29,8 @@ module.exports = {
 'h37':'37rem',
 'h29':'27rem',
 'h85':'85rem',
-'h73':'73rem'
+'h73':'73rem',
+'h32':'32rem'
           },
           borderRadius:{
 'rounded2.8':'2.8rem'
