@@ -248,6 +248,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper";
+import Clipboard from 'clipboard';
 
 
 
@@ -258,6 +259,24 @@ function QuizDetails(props) {
   const [editName, setEditName] = useState(false);
   const [move, setMove] = useState("");
   const [quizName, setQuizName] = useState(props.ongoingQuiz.quizName);
+  const [copiedLink, setCopiedLink] = useState('');
+
+  useEffect(() => {
+    const clipboard = new Clipboard('.copy-button');
+
+    clipboard.on('success', (e) => {
+      // const link = `http://player.quizledge.no.s3-website.eu-west-3.amazonaws.com${copiedLink}`
+       const link = e.trigger.getAttribute('data-link');
+      
+       console.log(link)
+      setCopiedLink(link);
+    });
+
+    return () => {
+      clipboard.destroy();
+    };
+  }, []);
+  // console.log(copiedLink)
   const handleEdit = () => {
     setEditName(true);
   };
@@ -280,12 +299,12 @@ function QuizDetails(props) {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-  const link = `http://player.quizledge.no.s3-website.eu-west-3.amazonaws.com${move}`;
-  function copyToClipboard(quizLink) {
-    setMove(quizLink);
-    copy(link);
-  }
-  console.log(link)
+  // const link = `http://player.quizledge.no.s3-website.eu-west-3.amazonaws.com${move}`;
+  // function copyToClipboard(quizLink) {
+  //   setMove(quizLink);
+  //   copy(link);
+  // }
+  // console.log(link)
   console.log(props.ongoingQuiz.quizLink)
   const viewData = props.ongoingQuiz.playerViewDTOs;
   const viewmessage = props.ongoingQuiz.message;
@@ -308,6 +327,7 @@ function QuizDetails(props) {
         className="mySwiper "
       >
  {props.ongoingQuiz.map((item,i) => {
+  const ongoingQuizLink=`http://player.quizledge.no.s3-website.eu-west-3.amazonaws.com${item.quizLink}`
             return (
 <SwiperSlide >
       
@@ -380,7 +400,7 @@ function QuizDetails(props) {
       )}
     </Card>
     <div class="flex justify-center mt-1">
-      <Button
+      {/* <Button
         style={{
           backgroundColor: "#4096ff",
           width: "-webkit-fill-available",
@@ -390,7 +410,15 @@ function QuizDetails(props) {
         onClick={() => copyToClipboard(item.quizLink)}
       >
         <h2 class="text-white">Click to copy the url</h2>
-      </Button>
+      </Button> */}
+        <button
+         type="button"
+            className="copy-button"
+            data-link={ongoingQuizLink}
+            data-clipboard-text={ongoingQuizLink}
+          >
+            Copy Link
+          </button>
     </div>
     <h2 class="text-xl mt-2 flex justify-center">
       Who is playing your quiz?
