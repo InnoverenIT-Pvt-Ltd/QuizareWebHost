@@ -364,7 +364,7 @@ function QuizDetails(props) {
           type="text"
           placeholder="Enter quiz name"
           name="quizName"
-          className="border border-gray-300 rounded-md px-1"
+          className="border text-xs border-gray-300 rounded-md px-1"
           value={quizName}
           onChange={(ev) => setQuizName(ev.target.value)}
         />
