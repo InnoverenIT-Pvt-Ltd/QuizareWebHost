@@ -74,7 +74,6 @@ export const authReducer = (state = initialState, action) => {
                 googlelogging: false,
                 googleloginError: true
             };
-
         default:
             return state;
     }
