@@ -77,7 +77,17 @@ function Login(props) {
         callback={responseFacebook}
       />
     </div>
-
+  let loginEmail =
+    <Link to="/email">
+      <div style={{
+        backgroundColor: "rgb(81 205 243)",
+        padding: "3px",
+        marginTop: "6px",
+        textAlign: "center"
+      }}>
+        <Button>Login By Email</Button>
+      </div>
+    </Link>
   return (
     <>
       <MainHeader />
@@ -105,6 +115,7 @@ function Login(props) {
                     {/* </div> */}
                     <div class="mt-4">
                       {google}
+                      {loginEmail}
                       {/* <Link to="/select">
                           <Button type="primary" htmlType="submit" style={{ width: "15rem", height: "2rem", backgroundColor: "white", borderBlockColor: "#126c5e", borderRadius: "0" }}>
                             <h3 class="font-extrabold">Register with Google</h3></Button>

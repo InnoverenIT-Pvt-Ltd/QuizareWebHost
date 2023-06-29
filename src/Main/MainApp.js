@@ -2,7 +2,7 @@
 
 
 import React, { lazy, Suspense, useEffect, useState, useContext } from "react";
-import { Route, Routes, Switch ,Link} from "react-router-dom";
+import { Route, Routes, Switch, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {
@@ -22,64 +22,37 @@ import {
 } from "../Components/UI/Layout";
 import Quiz from "../Container/Quiz/Quiz";
 import { BundleLoader } from "../Components/Placeholder";
-
-
-
 import { MultiAvatar } from "../Components/UI/Elements";
 import { Select } from "antd";
-// import { updateCustomerById,updateCustomerLanguage,updateServiceLanguage,getServiceDetails} from "../Auth/AuthAction";
-// import { setLanguage } from "../../Language/LanguageAction";
-import {MenuUnfoldOutlined, WhatsAppOutlined} from "@ant-design/icons";
+import { MenuUnfoldOutlined, WhatsAppOutlined } from "@ant-design/icons";
 import { Button } from "reactstrap";
 import JobReport from "../Container/JobReport/JobReport"
-// import Privacy from "../Privacy";
-//import "./MainApp.css";
-
 
 const { Option } = Select;
 
 const { Header, Sider, Content } = Layout;
 
-
-
-
 function MainApp(props) {
 
-
- 
-
-
-
-  useEffect(()=>{
-    //props.getOpportunityRecord();
-    // props.getRequirementRecord();
-  //props.getServiceDetails(props.serviceId)
-  },[])
-
-
-
-
-
-
   return (
-    
-      // <LayoutWrapper className="max-sm:w-wk flex justify-center items-center md:items-start">
-        <LayoutWrapper>
-         
-          <ApplicationWrapper>
-            {/* <AppErrorBoundary> */}
-              <Content>
-                <Suspense maxDuration={6000} fallback={<BundleLoader />}>
-                  <Switch>
-                   
-                  <Route exact path="/addquiz" component={Quiz}/> 
-                  </Switch>
-                </Suspense>
-              </Content>
-            {/* </AppErrorBoundary> */}
-          </ApplicationWrapper>
-        </LayoutWrapper>
-      // </LayoutWrapper>
+
+    // <LayoutWrapper className="max-sm:w-wk flex justify-center items-center md:items-start">
+    <LayoutWrapper>
+
+      <ApplicationWrapper>
+        {/* <AppErrorBoundary> */}
+        <Content>
+          <Suspense maxDuration={6000} fallback={<BundleLoader />}>
+            <Switch>
+
+              <Route exact path="/addquiz" component={Quiz} />
+            </Switch>
+          </Suspense>
+        </Content>
+        {/* </AppErrorBoundary> */}
+      </ApplicationWrapper>
+    </LayoutWrapper>
+    // </LayoutWrapper>
   );
 }
 // }
@@ -87,7 +60,7 @@ function MainApp(props) {
 const mapStateToProps = ({ auth, theme, language }) => ({
   // fullName:auth.userDetails.fullName
 
-  
+
 
 });
 const mapDispatchToProps = (dispatch) =>

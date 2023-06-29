@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Card, Input } from "antd";
 import { Link, withRouter } from "react-router-dom";
 import FWLogo from "../../src/images/Latest.png";
-import {clearQuizNameDetails} from '../Container/Quiz/QuizAction'
+import { clearQuizNameDetails } from '../Container/Quiz/QuizAction'
 import { connect } from "react-redux";
 import HomeIcon from '@mui/icons-material/Home';
 import { bindActionCreators } from "redux";
@@ -26,9 +26,9 @@ function MainHeader(props) {
         <div class=" border-solid w-w95  max-sm:m-0 md:m-auto">
           <div class="flex justify-center border">
             <div class="flex flex-row justify-between items-center w-wk">
-            <Link to="/create">
-              <div className="flex flex-row" onClick={props.clearQuizNameDetails}>
-                {/* {headerName.map((item) => {
+              <Link to="/create">
+                <div className="flex flex-row" onClick={props.clearQuizNameDetails}>
+                  {/* {headerName.map((item) => {
                   return (
                     <h2
                       key={item.letter}
@@ -38,20 +38,20 @@ function MainHeader(props) {
                     </h2>
                   );
                 })} */}
-                 <img
-              className="big-logo"
-              src={FWLogo}
-              style={{ width: 70 }}
-              alt="Tekorero logo"
+                  <img
+                    className="big-logo"
+                    src={FWLogo}
+                    style={{ width: 70 }}
+                    alt="Tekorero logo"
 
-            />
-              </div>
+                  />
+                </div>
               </Link>
-              <Link to="/create">
+              {/* <Link to="/create"> */}
               <div class="mr-4">
-              <HomeIcon/>
+                <HomeIcon />
               </div>
-              </Link>
+              {/* </Link> */}
               {/* <div className="flex justify-center">
                 <Link to="/create">
                   <button className="bg-blue-900 text-white px-4 rounded-md">
@@ -80,7 +80,7 @@ function MainHeader(props) {
   );
 }
 const mapStateToProps = ({ auth, quiz }) => ({
- 
+
 });
 
 const mapDispatchToProps = (dispatch) =>
