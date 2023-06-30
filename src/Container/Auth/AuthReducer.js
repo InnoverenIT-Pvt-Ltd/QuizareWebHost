@@ -13,6 +13,9 @@ const initialState = {
     fetchingUserDetails: false,
     fetchingUserDetailsError: false,
     userDetails: {},
+
+    signingUpByUser: false,
+    signingUpByUserError: false
     // userDetails: JSON.parse(sessionStorage.getItem("userDetails")) || {},  
 };
 
@@ -74,6 +77,16 @@ export const authReducer = (state = initialState, action) => {
                 googlelogging: false,
                 googleloginError: true
             };
+
+        case types.SIGN_UP_BY_USER_REQUEST:
+            return { ...state, signingUpByUser: true };
+        case types.SIGN_UP_BY_USER_SUCCESS:
+            return {
+                ...state,
+                signingUpByUser: false,
+            };
+        case types.SIGN_UP_BY_USER_FAILURE:
+            return { ...state, signingUpByUser: false, signingUpByUserError: true };
         default:
             return state;
     }

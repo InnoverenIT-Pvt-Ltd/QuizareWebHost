@@ -149,3 +149,39 @@ export const googleLogin = (tokenId, cb) => dispatch => {
     });
 };
 
+export const signUpByUser = (data, history, cb) => (dispatch) => {
+  dispatch({
+    type: types.SIGN_UP_BY_USER_REQUEST,
+  });
+  axios
+    .post(`${login_url}/userDetails/save`, data)
+    .then((res) => {
+      dispatch(getUserDetails(res.data));
+      history.push("/");
+      dispatch({
+        type: types.SIGN_UP_BY_USER_SUCCESS,
+        payload: res.data,
+      });
+      cb && cb("success");
+    })
+    .catch((err) => {
+      cb && cb("failure");
+      if (
+        err &&
+        err.response &&
+        err.response.data ===
+        "You have entered an invalid username or password "
+      ) {
+      } else {
+        history.push({
+          pathname: "/",
+        });
+      }
+      dispatch({
+        type: types.SIGN_UP_BY_USER_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+

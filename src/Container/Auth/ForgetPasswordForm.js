@@ -20,7 +20,7 @@ import Mainheader from "../../Components/Mainheader";
 //  * yup validation scheme for set Password
 //  */
 
-class LoginByMail extends Component {
+class ForgetPasswordForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -102,9 +102,9 @@ class LoginByMail extends Component {
                                     otp: ""
                                 }}
 
-                                onSubmit={(values) => {
-                                    this.submit(values);
-                                }}
+                            // onSubmit={(values) => {
+                            //     this.submit(values);
+                            // }}
                             >
                                 {({ errors, touched, isSubmitting, values }) => (
                                     <Form className="form-background">
@@ -114,9 +114,9 @@ class LoginByMail extends Component {
                                         >
                                             <div style={{ width: "100%", padding: "15px" }}>
                                                 <Field
-                                                    name="email"
-                                                    type="email"
-                                                    placeholder="Email"
+                                                    name="password"
+                                                    type="password"
+                                                    placeholder="Password"
                                                     style={{ width: "100%", height: "2.5em" }}
                                                     component={this.InputComponent}
                                                 />
@@ -125,7 +125,7 @@ class LoginByMail extends Component {
                                                 <Field
                                                     name="password"
                                                     type="password"
-                                                    placeholder="Password"
+                                                    placeholder="Confirm Password"
                                                     style={{ width: "100%", height: "2.5em" }}
                                                     component={this.InputComponent}
 
@@ -138,7 +138,7 @@ class LoginByMail extends Component {
                                                     Loading={isSubmitting}
                                                     style={{ width: "100%", height: "2.5em" }}
                                                 >
-                                                    Sign In
+                                                    Submit
                                                 </Button>
                                             </div>
                                         </div>
@@ -148,20 +148,14 @@ class LoginByMail extends Component {
                             </Formik>
                             <br />
                             &nbsp;
-                            <div style={{ display: "flex", justifyContent: "space-around" }}>
+                            <div style={{ display: "flex", justifyContent: "flex-end" }}>
                                 <Link
-                                    to="/forgotPassword"
-                                    style={{ textAlign: "center", fontSize: 15, color: "#cb0009", fontWeight: "500" }}
+                                    to="/email"
+                                    style={{ textAlign: "center", fontSize: 15, color: "blue", fontWeight: "500" }}
                                 >
-                                    Forgot password?
+                                    Log In
                                 </Link>
-                                &nbsp;
-                                <Link
-                                    to="/signUp"
-                                    style={{ textAlign: "center", fontSize: 15, color: "#0a8bd7", fontWeight: "500" }}
-                                >
-                                    Sign Up
-                                </Link>
+
                             </div>
 
                         </MainWrapper>
@@ -184,4 +178,4 @@ const mapDispatchToProps = (dispatch) =>
         },
         dispatch
     );
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LoginByMail));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ForgetPasswordForm));

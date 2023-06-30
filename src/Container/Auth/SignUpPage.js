@@ -5,64 +5,24 @@ import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import FWLogo from "../../../src/images/Latest.png";
 import Button from "antd/lib/button";
-import { login, generateOtpByEmail, validateOtp } from "./AuthAction";
-import { Input } from "reactstrap";
+import { signUpByUser } from "./AuthAction";
+import Upload from "../../Components/Forms/Formik/Upload";
 import { Link, withRouter } from "react-router-dom";
+import { message } from "antd"
 import {
     AuthContainer,
     FlexContainer,
     MainWrapper,
 } from "../../Components/UI/Layout";
 import { Spacer, ValidationError } from "../../Components/UI/Elements";
-import Mainheader from "../../Components/Mainheader";
+import { InputComponent } from "../../Components/Forms/Formik/InputComponent";
 
 // /**
 //  * yup validation scheme for set Password
 //  */
 
-class LoginByMail extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            email: "",
-            password: "",
-            loading: false,
-            render: false,
-            otp: false,
-        };
-    }
-    submit = (values) => {
-        // this.enterLoading();
-        this.props.login(values, this.props.history);
-    };
-    InputComponent = ({ field, form: { touched, errors }, ...props }) => (
-        <div>
-            <div>
-                <Input {...field} {...props} />
-            </div>
-            {touched[field.name] && errors[field.name] && (
-                <ValidationError>{errors[field.name]}</ValidationError>
-            )}
-        </div>
-    );
-    componentDidMount() {
-        this.timeoutHandle = setTimeout(() => {
-            // Add your logic for the transition
-        }, 5000);
+class SignUpPage extends Component {
 
-        console.log("inside cDM login");
-        console.log(this.props);
-        const params = this.props.match.params;
-        if (params.email && params.password) {
-            this.setState({
-                email: params.email,
-                password: params.password,
-            });
-        }
-    }
-    componentWillUnmount() {
-        clearTimeout(this.timeoutHandle); // This is just necessary in the case that the screen is closed before the timeout fires, otherwise it would cause a memory leak that would trigger the transition regardless, breaking the user experience.
-    }
     render() {
         console.log(this.props);
         return (
@@ -97,28 +57,63 @@ class LoginByMail extends Component {
                             <Formik
                                 enableReinitialize
                                 initialValues={{
-                                    email: this.state.email || "",
-                                    password: this.state.password || "",
-                                    otp: ""
+                                    emailID: "",
+                                    password: "",
+                                    name: "",
+                                    confirmPassword: "",
+                                    imageId: ""
                                 }}
 
-                                onSubmit={(values) => {
-                                    this.submit(values);
+                                onSubmit={(values, { resetForm }) => {
+                                    console.log(values)
+                                    if (values.password === values.confirmPassword) {
+                                        this.props.signUpByUser({
+                                            ...values,
+                                        })
+                                    } else {
+                                        message.success("Please match your password")
+                                    }
+
                                 }}
                             >
-                                {({ errors, touched, isSubmitting, values }) => (
+                                {({
+                                    values,
+                                    errors,
+                                    touched,
+                                    isSubmitting,
+                                    setFieldValue,
+                                    setFieldTouched,
+                                }) => (
                                     <Form className="form-background">
                                         <div
 
                                             style={{ alignItems: "center", display: "flex", flexDirection: "column" }}
                                         >
+                                            <FlexContainer flexWrap="no-wrap">
+                                                <div
+                                                    style={{
+                                                        width: "40%",
+                                                    }}
+                                                >
+                                                    <Field name="imageId" component={Upload} />
+                                                </div>
+                                            </FlexContainer>
                                             <div style={{ width: "100%", padding: "15px" }}>
                                                 <Field
-                                                    name="email"
+                                                    name="name"
+                                                    type="text"
+                                                    placeholder="Full Name"
+                                                    style={{ width: "100%", height: "2.5em" }}
+                                                    component={InputComponent}
+                                                />
+                                            </div>
+                                            <div style={{ width: "100%", padding: "15px" }}>
+                                                <Field
+                                                    name="emailID"
                                                     type="email"
                                                     placeholder="Email"
                                                     style={{ width: "100%", height: "2.5em" }}
-                                                    component={this.InputComponent}
+                                                    component={InputComponent}
                                                 />
                                             </div>
                                             <div style={{ width: "100%", padding: "15px" }}>
@@ -127,7 +122,17 @@ class LoginByMail extends Component {
                                                     type="password"
                                                     placeholder="Password"
                                                     style={{ width: "100%", height: "2.5em" }}
-                                                    component={this.InputComponent}
+                                                    component={InputComponent}
+
+                                                />
+                                            </div>
+                                            <div style={{ width: "100%", padding: "15px" }}>
+                                                <Field
+                                                    name="confirmPassword"
+                                                    type="password"
+                                                    placeholder="Confirm Password"
+                                                    style={{ width: "100%", height: "2.5em" }}
+                                                    component={InputComponent}
 
                                                 />
                                             </div>
@@ -138,7 +143,7 @@ class LoginByMail extends Component {
                                                     Loading={isSubmitting}
                                                     style={{ width: "100%", height: "2.5em" }}
                                                 >
-                                                    Sign In
+                                                    Sign Up
                                                 </Button>
                                             </div>
                                         </div>
@@ -146,23 +151,6 @@ class LoginByMail extends Component {
                                     </Form>
                                 )}
                             </Formik>
-                            <br />
-                            &nbsp;
-                            <div style={{ display: "flex", justifyContent: "space-around" }}>
-                                <Link
-                                    to="/forgotPassword"
-                                    style={{ textAlign: "center", fontSize: 15, color: "#cb0009", fontWeight: "500" }}
-                                >
-                                    Forgot password?
-                                </Link>
-                                &nbsp;
-                                <Link
-                                    to="/signUp"
-                                    style={{ textAlign: "center", fontSize: 15, color: "#0a8bd7", fontWeight: "500" }}
-                                >
-                                    Sign Up
-                                </Link>
-                            </div>
 
                         </MainWrapper>
                         <Spacer />
@@ -179,9 +167,8 @@ const mapStateToProps = ({ auth, job }) => ({
 const mapDispatchToProps = (dispatch) =>
     bindActionCreators(
         {
-            login,
-
+            signUpByUser
         },
         dispatch
     );
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LoginByMail));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SignUpPage));

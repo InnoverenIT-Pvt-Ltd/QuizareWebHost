@@ -36,6 +36,8 @@ import SwipeInLibrary from "./Container/Quiz/EditQuiz/SwipeIn/SwipelnLibrary"
 import UpdateQuizNameLibrary from "./Container/Quiz/EditQuiz/UpdateQuizNameLibrary"
 import updateOngoing from "./Components/Quizs/updateOngoing";
 import LoginByMail from "./Container/Auth/LoginByMail";
+import ForgetPasswordForm from "./Container/Auth/ForgetPasswordForm";
+import SignUpPage from "./Container/Auth/SignUpPage";
 // import AppErrorBoundary from "./Helpers/ErrorBoundary/AppErrorBoundary";
 
 
@@ -60,6 +62,8 @@ class App extends Component {
             <Route exact path="/email" component={LoginByMail} />
             <Route exact path="/create" component={CreateQuiz} />
             <Route exact path="/quizzes" component={QuizName} />
+            <Route exact path="/forgotPassword" component={ForgetPasswordForm} />
+            <Route exact path="/signUp" component={SignUpPage} />
             <Route exact path="/addquiz" component={Quiz} />
             <Route exact path="/addquizout" component={QuizOut} />
             <Route exact path="/addquizin" component={QuizIn} />
