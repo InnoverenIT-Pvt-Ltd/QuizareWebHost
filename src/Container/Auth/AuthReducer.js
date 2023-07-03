@@ -12,7 +12,7 @@ const initialState = {
 
     fetchingUserDetails: false,
     fetchingUserDetailsError: false,
-    userDetails: {},
+    userDetails: JSON.parse(sessionStorage.getItem("userDetails")) || {},
 
     signingUpByUser: false,
     signingUpByUserError: false

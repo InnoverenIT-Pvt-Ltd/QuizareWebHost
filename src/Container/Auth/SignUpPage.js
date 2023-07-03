@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Formik, Form, Field } from "formik";
-import * as Yup from "yup";
 import FWLogo from "../../../src/images/Latest.png";
 import Button from "antd/lib/button";
 import { signUpByUser } from "./AuthAction";
@@ -14,7 +13,7 @@ import {
     FlexContainer,
     MainWrapper,
 } from "../../Components/UI/Layout";
-import { Spacer, ValidationError } from "../../Components/UI/Elements";
+import { Spacer } from "../../Components/UI/Elements";
 import { InputComponent } from "../../Components/Forms/Formik/InputComponent";
 
 // /**
@@ -22,9 +21,13 @@ import { InputComponent } from "../../Components/Forms/Formik/InputComponent";
 //  */
 
 class SignUpPage extends Component {
-
+    handleCallback = () => {
+        message.success("You have registered successfully !!");
+        this.props.history.push("/create");
+    };
     render() {
         console.log(this.props);
+
         return (
             <>
                 <FlexContainer>
@@ -69,7 +72,9 @@ class SignUpPage extends Component {
                                     if (values.password === values.confirmPassword) {
                                         this.props.signUpByUser({
                                             ...values,
-                                        })
+                                        },
+                                            this.handleCallback()
+                                        )
                                     } else {
                                         message.success("Please match your password")
                                     }
@@ -136,12 +141,18 @@ class SignUpPage extends Component {
 
                                                 />
                                             </div>
-                                            <div style={{ width: "35%" }}>
+                                            <div style={{ width: "86%", display: "flex", justifyContent: "space-around" }}>
+
+                                                <Link to="/email">
+                                                    <div
+                                                        style={{ color: "#21a1fd", marginTop: "5px" }}
+                                                    >Back To Login</div>
+                                                </Link>
                                                 <Button
                                                     type="primary"
                                                     htmlType="submit"
                                                     Loading={isSubmitting}
-                                                    style={{ width: "100%", height: "2.5em" }}
+                                                    style={{ width: "34%", height: "2.5em" }}
                                                 >
                                                     Sign Up
                                                 </Button>

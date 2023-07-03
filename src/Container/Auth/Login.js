@@ -83,9 +83,10 @@ function Login(props) {
         backgroundColor: "rgb(81 205 243)",
         padding: "3px",
         marginTop: "6px",
-        textAlign: "center"
+        textAlign: "center",
+
       }}>
-        <Button>Login By Email</Button>
+        <Button style={{ border: "none", color: "white" }}>Login By Email</Button>
       </div>
     </Link>
   return (

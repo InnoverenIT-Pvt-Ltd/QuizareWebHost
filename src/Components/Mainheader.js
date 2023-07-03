@@ -26,9 +26,9 @@ function MainHeader(props) {
         <div class=" border-solid w-w95  max-sm:m-0 md:m-auto">
           <div class="flex justify-center border">
             <div class="flex flex-row justify-between items-center w-wk">
-              <Link to="/create">
-                <div className="flex flex-row" onClick={props.clearQuizNameDetails}>
-                  {/* {headerName.map((item) => {
+              {/* <Link to="/create"> */}
+              <div className="flex flex-row" onClick={props.clearQuizNameDetails}>
+                {/* {headerName.map((item) => {
                   return (
                     <h2
                       key={item.letter}
@@ -38,19 +38,29 @@ function MainHeader(props) {
                     </h2>
                   );
                 })} */}
-                  <img
-                    className="big-logo"
-                    src={FWLogo}
-                    style={{ width: 70 }}
-                    alt="Tekorero logo"
+                <img
+                  className="big-logo"
+                  src={FWLogo}
+                  style={{ width: 70 }}
+                  alt="Tekorero logo"
 
+                />
+              </div>
+              {/* </Link> */}
+              {/* <Link to="/create"> */}
+              {/* <div>
+                <HomeIcon />
+              </div> */}
+              <Link to="/">
+                <div>
+                  <img
+                    height={20}
+                    width={20}
+                    src="https://icon-library.com/images/logout-icon-png/logout-icon-png-8.jpg"
                   />
                 </div>
               </Link>
-              {/* <Link to="/create"> */}
-              <div class="mr-4">
-                <HomeIcon />
-              </div>
+
               {/* </Link> */}
               {/* <div className="flex justify-center">
                 <Link to="/create">
