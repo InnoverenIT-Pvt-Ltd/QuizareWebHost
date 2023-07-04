@@ -9,7 +9,7 @@ import MainHeader from "../Mainheader";
 import { TextareaComponent } from "../Forms/Formik/TextareaComponent";
 
 function ReportBugs(props) {
- 
+
   return (
     <>
       <MainHeader />
@@ -17,12 +17,12 @@ function ReportBugs(props) {
         initialValues={{
           description: "",
           subject: "",
-          quizHostId: "QH4472404666122022",
+          quizHostId: props.quizHostId,
         }}
         onSubmit={(values, { resetForm }) => {
           props.addBugs({
             ...values,
-              });
+          });
           resetForm();
         }}
       >
@@ -52,14 +52,14 @@ function ReportBugs(props) {
                 placeholder="Enter Description"
               />
               <div class="mt-3">
-              <Button
-                type="primary"
-                Loading={props.addingBugs}
-                htmlType="submit"
-                onClick={handleSubmit}
-              >
-                <h3 class="font-extrabold text-white ">File Bug</h3>
-              </Button>
+                <Button
+                  type="primary"
+                  Loading={props.addingBugs}
+                  htmlType="submit"
+                  onClick={handleSubmit}
+                >
+                  <h3 class="font-extrabold text-white ">File Bug</h3>
+                </Button>
               </div>
             </div>
           </Form>
@@ -70,6 +70,7 @@ function ReportBugs(props) {
 }
 const mapStateToProps = ({ auth, quiz }) => ({
   addingBugs: quiz.addingBugs,
+  quizHostId: auth.userDetails.userId
 });
 
 const mapDispatchToProps = (dispatch) =>

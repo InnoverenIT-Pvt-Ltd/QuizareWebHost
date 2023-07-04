@@ -207,4 +207,72 @@ export const changePassword = (data, userId, cb) => (dispatch) => {
     });
 };
 
+export const sendOtpForValidation = (data, cb) => (dispatch) => {
+  dispatch({
+    type: types.SEND_OTP_FOR_VALIDATION_REQUEST,
+  });
+  axios
+    .post(`${login_url}/otp/save`, data)
+    .then((res) => {
+      dispatch({
+        type: types.SEND_OTP_FOR_VALIDATION_SUCCESS,
+        payload: res.data,
+      });
+      cb();
+    })
+    .catch((err) => {
+      cb()
+
+      dispatch({
+        type: types.SEND_OTP_FOR_VALIDATION_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const updatePassword = (data, cb) => (dispatch) => {
+  dispatch({
+    type: types.UPDATE_PASSWORD_REQUEST,
+  });
+  axios
+    .post(`${login_url}/otp/save`, data)
+    .then((res) => {
+      dispatch({
+        type: types.UPDATE_PASSWORD_SUCCESS,
+        payload: res.data,
+      });
+      cb();
+    })
+    .catch((err) => {
+      cb()
+
+      dispatch({
+        type: types.UPDATE_PASSWORD_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const validateOtp = (data, cb) => (dispatch) => {
+  dispatch({
+    type: types.VALIDATE_OTP_REQUEST,
+  });
+  axios
+    .post(`${login_url}//save`, data)
+    .then((res) => {
+      dispatch({
+        type: types.VALIDATE_OTP_SUCCESS,
+        payload: res.data,
+      });
+      cb();
+    })
+    .catch((err) => {
+      cb()
+
+      dispatch({
+        type: types.VALIDATE_OTP_FAILURE,
+        payload: err,
+      });
+    });
+};
 

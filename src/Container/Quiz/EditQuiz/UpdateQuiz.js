@@ -9,22 +9,22 @@ import { useHistory } from "react-router-dom";
 import { InputComponent } from '../../../Components/Forms/Formik/InputComponent';
 
 function UpdateQuiz(props) {
-//  useEffect(()=>{
-//     setCount(props.i);
-//     // getQuestionList(props.route.params.quizId);
-//    },[props.i])
+  //  useEffect(()=>{
+  //     setCount(props.i);
+  //     // getQuestionList(props.route.params.quizId);
+  //    },[props.i])
   const history = useHistory();
 
-  
-  function handleCallBack(data,resetForm) {
-   
+
+  function handleCallBack(data, resetForm) {
+
     alert("Question updated successfully")
     history.push(`/create`)
-   setSelectedCategory("")
+    setSelectedCategory("")
     resetForm()
-   // handleCount()
-  
- }
+    // handleCount()
+
+  }
 
   const [count, setCount] = useState(props.i);
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -36,22 +36,22 @@ function UpdateQuiz(props) {
     <>
       <Formik
         initialValues={{
-          quizHostId: "QH4472404666122022",
-           quizId: props.item.quizId,          
-           categoryId: props.item.categoryId,
+          quizHostId: props.quizHostId,
+          quizId: props.item.quizId,
+          categoryId: props.item.categoryId,
           question: props.item.question,
           option1: props.item.option1,
           option2: props.item.option2,
           option3: props.item.option3,
           option4: props.item.option4,
         }}
-        onSubmit={(values,{resetForm}) => {
+        onSubmit={(values, { resetForm }) => {
           // alert(JSON.stringify(values))
           props.updateQuestionsInQuiz(
             {
               ...values,
             },
-            props.item.id,(data)=>handleCallBack(data,resetForm)
+            props.item.id, (data) => handleCallBack(data, resetForm)
           );
         }}
       >
@@ -160,7 +160,8 @@ const mapStateToProps = ({ auth, quiz }) => ({
   showQuiz: quiz.showQuiz,
   quizId: quiz.showQuiz.quizId,
   category: quiz.category,
-  questionList:quiz.questionList,
+  questionList: quiz.questionList,
+  quizHostId: auth.userDetails.userId
 });
 
 const mapDispatchToProps = (dispatch) =>

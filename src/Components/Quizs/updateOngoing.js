@@ -14,15 +14,19 @@ import "swiper/css/navigation";
 // import QuestionEdit from "./QuestionEdit";
 import MainHeader from "../../Components/Mainheader";
 import OngoingQuestionedit from "./ongoingQuestionedit";
- function UpdateOngoing(props) {
-    
+function UpdateOngoing(props) {
 
-    useEffect(() => {
-        props.getQuestionList(props.match.params.quizId);
-      }, []);
+
+  useEffect(() => {
+    props.getQuestionList(props.match.params.quizId);
+  }, []);
+
+  const handleDeleteQuestion = () => {
+
+  }
   return (
     <>
-    <MainHeader />
+      <MainHeader />
       <Swiper
         pagination={{
           type: "fraction",
@@ -31,36 +35,37 @@ import OngoingQuestionedit from "./ongoingQuestionedit";
         modules={[Pagination, Navigation]}
         className="mySwiper"
       >
-        {props.questionList.map((item,i) => {
-          console.log(i+1)
+        {props.questionList.map((item, i) => {
+          console.log(i + 1)
           console.log(item)
-          const questionNo=i+1
+          const questionNo = i + 1
           return (
             <SwiperSlide key={item}>
               <div class="h-h37">
-                <Card style={{marginTop:"2rem"}}>
+                <Card style={{ marginTop: "2rem" }}>
                   <OngoingQuestionedit item={item}
-                 questionNo={questionNo}
+                    questionNo={questionNo}
+                    quizId={props.match.params.quizId}
                   />
                 </Card>
               </div>
             </SwiperSlide>
           );
-        })} 
-       </Swiper>
+        })}
+      </Swiper>
     </>
   )
 }
 const mapStateToProps = ({ quiz }) => ({
-    questionList: quiz.questionList,
-    quizNameDetails: quiz.quizNameDetails, 
-  });
-  
-  const mapDispatchToProps = (dispatch) =>
-    bindActionCreators(
-      {
-       getQuestionList,
-      },
-      dispatch
-    );
-    export default connect(mapStateToProps, mapDispatchToProps)(UpdateOngoing);
+  questionList: quiz.questionList,
+  quizNameDetails: quiz.quizNameDetails,
+});
+
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      getQuestionList,
+    },
+    dispatch
+  );
+export default connect(mapStateToProps, mapDispatchToProps)(UpdateOngoing);

@@ -11,7 +11,7 @@ const initialState = {
 
   fetchingOngoingQuiz: false,
   fetchingOngoingQuizError: false,
-  ongoingQuiz:[],
+  ongoingQuiz: [],
 
 
   addingBugs: false,
@@ -41,15 +41,15 @@ const initialState = {
   fetchingBugsError: false,
   bugs: [],
 
-  closeQuizLibrary:false,
-  closeQuizLibraryError:false,
+  closeQuizLibrary: false,
+  closeQuizLibraryError: false,
 
 
-fetchingLibraryQuiz:false,
-fetchingLibraryQuizError:false,
-  libraryQuiz:[],
+  fetchingLibraryQuiz: false,
+  fetchingLibraryQuizError: false,
+  libraryQuiz: [],
 
- 
+
 
   fetchingQuizName: false,
   fetchingQuizNameError: false,
@@ -57,7 +57,7 @@ fetchingLibraryQuizError:false,
 
   addingQuizName: false,
   addingQuizNameError: false,
-  quizDetails:{},
+  quizDetails: {},
 
   addingQuestion: false,
   addingQuestionError: false,
@@ -78,8 +78,8 @@ fetchingLibraryQuizError:false,
   addingCategory: false,
   addingCategoryError: false,
 
-  deletingLibraryHost:false,
-  deletingLibraryHostError:false,
+  deletingLibraryHost: false,
+  deletingLibraryHostError: false,
 
   addQuizHostModal: false,
 
@@ -152,7 +152,7 @@ export const quizReducer = (state = initialState, action) => {
         ...state,
         deletingQuestion: false,
         questionList: state.questionList.filter(
-          (item) => item.questionId !== action.payload
+          (item) => item.id !== action.payload
         ),
       };
     case types.DELETE_QUESTION_BY_QUESTION_ID_FAILURE:
@@ -193,10 +193,11 @@ export const quizReducer = (state = initialState, action) => {
     case types.ADD_QUIZ_NAME_REQUEST:
       return { ...state, addingQuizName: true };
     case types.ADD_QUIZ_NAME_SUCCESS:
-      return { ...state, addingQuizName: false, 
-        quizDetails:action.payload,
-      
-    };
+      return {
+        ...state, addingQuizName: false,
+        quizDetails: action.payload,
+
+      };
     case types.ADD_QUIZ_NAME_FAILURE:
       return { ...state, addingQuizName: false, addingQuizNameError: true };
     //GET FINALIZED QUIZ
@@ -215,20 +216,20 @@ export const quizReducer = (state = initialState, action) => {
         fetchingFinalizeQuizError: true,
       };
 
-      case types.GET_ONGOING_QUIZ_REQUEST:
-        return { ...state, fetchingOngoingQuiz: true };
-      case types.GET_ONGOING_QUIZ_SUCCESS:
-        return {
-          ...state,
-          fetchingOngoingQuiz: false,
-          ongoingQuiz: action.payload,
-        };
-      case types.GET_ONGOING_QUIZ_FAILURE:
-        return {
-          ...state,
-          fetchingOngoingQuiz: false,
-          fetchingOngoingQuizError: true,
-        };
+    case types.GET_ONGOING_QUIZ_REQUEST:
+      return { ...state, fetchingOngoingQuiz: true };
+    case types.GET_ONGOING_QUIZ_SUCCESS:
+      return {
+        ...state,
+        fetchingOngoingQuiz: false,
+        ongoingQuiz: action.payload,
+      };
+    case types.GET_ONGOING_QUIZ_FAILURE:
+      return {
+        ...state,
+        fetchingOngoingQuiz: false,
+        fetchingOngoingQuizError: true,
+      };
 
     //GET FINALIZED QUIZ
     case types.GET_FINALIZE_QUIZ_URL_REQUEST:
@@ -451,23 +452,23 @@ export const quizReducer = (state = initialState, action) => {
       };
 
 
-      case types.GET_LIBRARY_QUIZ_REQUEST:
-        return { ...state, fetchingLibraryQuiz: true };
-      case types.GET_LIBRARY_QUIZ_SUCCESS:
-        return {
-          ...state,
-          fetchingLibraryQuiz: false,
-          libraryQuiz: action.payload,
-        };
-      case types.GET_LIBRARY_QUIZ_FAILURE:
-        return {
-          ...state,
-          fetchingLibraryQuiz: false,
-          fetchingLibraryQuizError : true,
-        };
+    case types.GET_LIBRARY_QUIZ_REQUEST:
+      return { ...state, fetchingLibraryQuiz: true };
+    case types.GET_LIBRARY_QUIZ_SUCCESS:
+      return {
+        ...state,
+        fetchingLibraryQuiz: false,
+        libraryQuiz: action.payload,
+      };
+    case types.GET_LIBRARY_QUIZ_FAILURE:
+      return {
+        ...state,
+        fetchingLibraryQuiz: false,
+        fetchingLibraryQuizError: true,
+      };
 
 
-        
+
     case types.DELETE_LIBRARY_FROM_HOST_REQUEST:
       return { ...state, deletingLibraryHost: true };
     case types.DELETE_LIBRARY_FROM_HOST_SUCCESS:
@@ -486,27 +487,27 @@ export const quizReducer = (state = initialState, action) => {
       };
 
 
-      case types.CLOSE_LIBRARY_QUIZ_REQUEST:
-        return { ...state, closeQuizLibrary: true };
-      case types.CLOSE_LIBRARY_QUIZ_SUCCESS:
-        return {
-          ...state,
-          closeQuizLibrary: false,
-          // libraryQuiz: action.payload,
-          libraryQuiz: state.libraryQuiz.map((item) => {
-            if (item.quizId === action.payload.quizId) {
-              return action.payload;
-            } else {
-              return item;
-            }
-          }),
-        };
-      case types.CLOSE_LIBRARY_QUIZ_FAILURE:
-        return {
-          ...state,
-          closeQuizLibrary: false,
-          closeQuizLibraryError: true,
-        };
+    case types.CLOSE_LIBRARY_QUIZ_REQUEST:
+      return { ...state, closeQuizLibrary: true };
+    case types.CLOSE_LIBRARY_QUIZ_SUCCESS:
+      return {
+        ...state,
+        closeQuizLibrary: false,
+        // libraryQuiz: action.payload,
+        libraryQuiz: state.libraryQuiz.map((item) => {
+          if (item.quizId === action.payload.quizId) {
+            return action.payload;
+          } else {
+            return item;
+          }
+        }),
+      };
+    case types.CLOSE_LIBRARY_QUIZ_FAILURE:
+      return {
+        ...state,
+        closeQuizLibrary: false,
+        closeQuizLibraryError: true,
+      };
 
     case types.ADD_BUGS_REQUEST:
       return { ...state, addingBugs: true };

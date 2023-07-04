@@ -152,10 +152,9 @@ import Button from "antd/lib/button";
 import styled from "styled-components";
 import { EyeInvisibleOutlined, EyeOutlined } from "@ant-design/icons";
 import {
-    // doSignUp,
-    // getCountries,
-    // verifyEmailurL,
-    //validateOtpurL,
+    sendOtpForValidation,
+    updatePassword,
+    validateOtp
 } from "./AuthAction";
 class ForgotPassword extends Component {
     state = {
@@ -222,7 +221,7 @@ class ForgotPassword extends Component {
                                         // validationSchema={ChangePasswordSchema}
                                         onSubmit={(values) => {
                                             console.log(values);
-                                            this.props.forgetPassword(
+                                            this.props.updatePassword(
                                                 {
                                                     email: this.props.email,
                                                 },
@@ -252,7 +251,7 @@ class ForgotPassword extends Component {
                                                                 //disabled={!values.defaultUser.email.length}
                                                                 // loading={isSubmitting}
                                                                 onClick={() => {
-                                                                    this.props.verifyEmailurL({
+                                                                    this.props.sendOtpForValidation({
                                                                         emailId: values.defaultUser.email,
                                                                         otp: 0,
                                                                     });
@@ -287,7 +286,7 @@ class ForgotPassword extends Component {
                                                                 // htmlType="submit"
                                                                 //disabled={!values.defaultUser.validateotp.length}
                                                                 onClick={() => {
-                                                                    //   this.props.validateOtpurL({
+                                                                    //   this.props.validateOtp({
                                                                     //     emailId: values.defaultUser.email,
                                                                     //     otp: values.defaultUser.validateotp,
                                                                     //   });
@@ -440,8 +439,9 @@ const mapStateToProps = ({ auth }) => ({
 const mapDispatchToProps = (dispatch) =>
     bindActionCreators(
         {
-            // changePassword,
-            // validateOtpurL,
+            updatePassword,
+            sendOtpForValidation,
+            validateOtp
         },
         dispatch
     );

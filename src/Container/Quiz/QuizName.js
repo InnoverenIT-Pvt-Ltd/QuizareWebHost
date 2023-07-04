@@ -37,7 +37,7 @@ function QuizName(props) {
         initialValues={{
           duration: "",
           quizName: "",
-          quizHostId: "QH4472404666122022",
+          quizHostId: props.quizHostId,
         }}
         validationSchema={QuizSchema}
         onSubmit={(values, { resetForm }) => {
@@ -122,6 +122,7 @@ const mapStateToProps = ({ auth, quiz }) => ({
   addingQuizName: quiz.addingQuizName,
   addingQuizNameError: quiz.addingQuizNameError,
   quizName: quiz.quizName,
+  quizHostId: auth.userDetails.userId
 });
 
 const mapDispatchToProps = dispatch =>

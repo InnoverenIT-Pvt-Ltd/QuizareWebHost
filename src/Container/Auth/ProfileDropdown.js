@@ -29,7 +29,19 @@ const ProfileMenu = ({ logout, history }) => (
                     </a>
                 </StyledMenuItem>
 
-
+                <StyledMenuItem
+                    key="1"
+                    style={{
+                        marginTop: 0,
+                        marginBottom: 0,
+                        paddingTop: 0,
+                        paddingBottom: 0,
+                    }}
+                >
+                    <a href="#" onClick={() => history.push("/create")}>
+                        Home
+                    </a>
+                </StyledMenuItem>
                 <StyledMenuItem
                     key="3"
                     style={{

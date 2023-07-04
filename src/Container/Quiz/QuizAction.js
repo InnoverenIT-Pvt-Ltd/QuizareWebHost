@@ -187,7 +187,7 @@ export const updateQuestion = questionId => dispatch => {
 /**
  * delete a question from table
  */
-export const deleteQuestion = questionId => dispatch => {
+export const deleteQuestion = (questionId, quizId) => dispatch => {
   console.log("inside delete question", questionId)
   dispatch({
     type: types.DELETE_QUESTION_BY_QUESTION_iD_REQUEST,
@@ -199,11 +199,11 @@ export const deleteQuestion = questionId => dispatch => {
       },
     })
     .then(res => {
-      dispatch(getQuestionList(res.data.quizId));
+      dispatch(getQuestionList(quizId));
       console.log(res.data);
       dispatch({
         type: types.DELETE_QUESTION_BY_QUESTION_ID_SUCCESS,
-        payload: res.data,
+        payload: questionId,
       });
     })
     .catch(err => {
@@ -773,7 +773,7 @@ export const deleteLibraryQuiz = (quizId, cb) => dispatch => {
 
 
 
-export const closeLibraryQuiz = (quizId, ) => dispatch => {
+export const closeLibraryQuiz = (quizId,) => dispatch => {
   //console.log('inside update question');
   dispatch({
     type: types.CLOSE_LIBRARY_QUIZ_REQUEST,
