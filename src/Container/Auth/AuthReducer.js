@@ -12,7 +12,13 @@ const initialState = {
 
     fetchingUserDetails: false,
     fetchingUserDetailsError: false,
-    userDetails: {},
+    userDetails: JSON.parse(sessionStorage.getItem("userDetails")) || {},
+
+    signingUpByUser: false,
+    signingUpByUserError: false,
+
+    changingPassword: false,
+    changingPasswordError: false
     // userDetails: JSON.parse(sessionStorage.getItem("userDetails")) || {},  
 };
 
@@ -75,6 +81,32 @@ export const authReducer = (state = initialState, action) => {
                 googleloginError: true
             };
 
+        case types.SIGN_UP_BY_USER_REQUEST:
+            return { ...state, signingUpByUser: true };
+        case types.SIGN_UP_BY_USER_SUCCESS:
+            return {
+                ...state,
+                signingUpByUser: false,
+            };
+        case types.SIGN_UP_BY_USER_FAILURE:
+            return {
+                ...state, signingUpByUser: false,
+                signingUpByUserError: true
+            };
+
+        case types.CHANGE_PASSWORD_REQUEST:
+            return { ...state, changingPassword: true };
+        case types.CHANGE_PASSWORD_SUCCESS:
+            return {
+                ...state,
+                changingPassword: false
+            };
+        case types.CHANGE_PASSWORD_FAILURE:
+            return {
+                ...state,
+                changingPassword: false,
+                changingPasswordError: true
+            };
         default:
             return state;
     }

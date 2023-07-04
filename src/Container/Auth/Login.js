@@ -6,7 +6,7 @@ import { Button, Select, Icon, Tag, Switch, Checkbox, message } from "antd";
 import { Formik, Form, FastField, Field, FieldArray } from "formik";
 import * as Yup from "yup";
 import { GoogleLogin } from 'react-google-login';
-import MainHeader from "../../Components/Mainheader";
+import FWLogo from "../../../src/images/Latest.png";
 import { facebookLogin, googleLogin } from "../Auth/AuthAction";
 import FacebookLogin from "react-facebook-login";
 // import SkillsLoadMore from "./CandidateTable/SkillsLoadMore";
@@ -77,10 +77,21 @@ function Login(props) {
         callback={responseFacebook}
       />
     </div>
+  let loginEmail =
+    <Link to="/email">
+      <div style={{
+        backgroundColor: "rgb(81 205 243)",
+        padding: "3px",
+        marginTop: "6px",
+        textAlign: "center",
 
+      }}>
+        <Button style={{ border: "none", color: "white" }}>Login By Email</Button>
+      </div>
+    </Link>
   return (
     <>
-      <MainHeader />
+      {/* <MainHeader /> */}
       <div>
         <Formik
 
@@ -97,18 +108,24 @@ function Login(props) {
 
               <div class="shadow-2xl border-solid w-w95 flex justify-center items-center  p-1 max-sm:m-0 h-h34 rounded-2xl md:m-auto">
                 <div>
+                  {/* <img
+                    className="big-logo"
+                    src={FWLogo}
+                    style={{ width: 50 }}
+                    alt="Tekorero logo"
+
+                  /> */}
                   <div class="flex justify-center">
-                    <h3 class="font-extrabold ">Welcome</h3></div>
-                  <div class="flex items-center flex-col mt-4">
+                    <h3 class="font-extrabold ">Welcome</h3>
+
+                  </div>
+                  <div class="flex items-center flex-col">
                     {/* <div class="facebook_div"> */}
-                    {/* {content} */}
-                    <Link to="/create">
-            <Button type="primary"  htmlType="submit" style={{width:"15rem",height:"2rem",backgroundColor:"white",borderBlockColor:"blue",borderRadius:"0"}}>
-                <h3 class="font-extrabold">Register with FaceBook</h3></Button>
-                </Link>
+                    {content}
                     {/* </div> */}
                     <div class="mt-4">
                       {google}
+                      {loginEmail}
                       {/* <Link to="/select">
                           <Button type="primary" htmlType="submit" style={{ width: "15rem", height: "2rem", backgroundColor: "white", borderBlockColor: "#126c5e", borderRadius: "0" }}>
                             <h3 class="font-extrabold">Register with Google</h3></Button>

@@ -1,26 +1,29 @@
 import * as types from './AuthTypes';
 import { base_url, login_url } from '../../Config/Auth';
 import axios from 'axios';
+import { message } from "antd"
+import { createBrowserHistory } from "history";
+
+const history = createBrowserHistory();
 // import AsyncStorage from '@react-native-async-storage/async-storage';
 
 /**
  * login url
  */
-export const login = ({ username, password }, history, cb) => (dispatch) => {
+export const login = ({ email, password }, history, cb) => (dispatch) => {
   dispatch({
     type: types.LOGIN_REQUEST,
   });
   axios
-    .post(`${login_url}/login`, {
-      username: username,
+    .post(`${login_url}/userDetails/login`, {
+      email: email,
       password: password,
     })
     .then((res) => {
       //console.log(res);
       //console.log('get response');
-      dispatch(getUserDetails(res.data));
-      // dispatch(getUserDetailsByOrgId(res.data));
-      history.push("/");
+      dispatch(getUserDetails(res.data.userId));
+      history.push("/create");
       dispatch({
         type: types.LOGIN_SUCCESS,
         payload: res.data,
@@ -30,20 +33,7 @@ export const login = ({ username, password }, history, cb) => (dispatch) => {
     .catch((err) => {
       //console.log(err && err.response && err.response.data);
       cb && cb("failure");
-      if (
-        err &&
-        err.response &&
-        err.response.data ===
-        "You have entered an invalid username or password "
-      ) {
-        //message.error("You have entered an invalid username or password ");
-      } else {
-        // message.error("Oops! something went wrong. Please retry.");
-        //console.log(err);
-        history.push({
-          pathname: "/",
-        });
-      }
+      message.error("Oops! something went wrong. Please retry.")
       dispatch({
         type: types.LOGIN_FAILURE,
         payload: err,
@@ -60,10 +50,9 @@ export const getUserDetails = userId => dispatch => {
     type: types.GET_USER_DETAILS_REQUEST,
   });
   axios
-    .get(`${base_url}/user/${userId}`)
+    .get(`${base_url}/userDetails/profile/${userId}`)
     .then(res => {
-      //console.log(res);
-      // AsyncStorage.setItem('userDetails', JSON.stringify(res.data));
+      sessionStorage.setItem("userDetails", JSON.stringify(res.data));
       dispatch({
         type: types.GET_USER_DETAILS_SUCCESS,
         payload: res.data,
@@ -148,3 +137,74 @@ export const googleLogin = (tokenId, cb) => dispatch => {
       cb("failure");
     });
 };
+
+export const signUpByUser = (data, cb) => (dispatch) => {
+  dispatch({
+    type: types.SIGN_UP_BY_USER_REQUEST,
+  });
+  axios
+    .post(`${login_url}/userDetails/save`, data)
+    .then((res) => {
+      dispatch(getUserDetails(res.data.userId));
+      dispatch({
+        type: types.SIGN_UP_BY_USER_SUCCESS,
+        payload: res.data,
+      });
+      cb();
+    })
+    .catch((err) => {
+      cb()
+      if (
+        err &&
+        err.response &&
+        err.response.data ===
+        "You have entered an invalid username or password "
+      ) {
+      } else {
+        history.push({
+          pathname: "/",
+        });
+      }
+      dispatch({
+        type: types.SIGN_UP_BY_USER_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const changePassword = (data, userId, cb) => (dispatch) => {
+  dispatch({
+    type: types.CHANGE_PASSWORD_REQUEST,
+  });
+  axios
+    .post(`${login_url}/userDetails/changePassword/${userId}`, data)
+    .then((res) => {
+      dispatch(getUserDetails(userId));
+      dispatch({
+        type: types.CHANGE_PASSWORD_SUCCESS,
+        payload: res.data,
+      });
+      cb();
+      message.success(res.data)
+    })
+    .catch((err) => {
+      cb()
+      if (
+        err &&
+        err.response &&
+        err.response.data ===
+        "You have entered an invalid username or password "
+      ) {
+      } else {
+        history.push({
+          pathname: "/",
+        });
+      }
+      dispatch({
+        type: types.CHANGE_PASSWORD_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+

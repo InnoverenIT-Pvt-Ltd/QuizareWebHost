@@ -2,10 +2,12 @@ import React from "react";
 import { Button, Card, Input } from "antd";
 import { Link, withRouter } from "react-router-dom";
 import FWLogo from "../../src/images/Latest.png";
-import {clearQuizNameDetails} from '../Container/Quiz/QuizAction'
+import { clearQuizNameDetails } from '../Container/Quiz/QuizAction'
 import { connect } from "react-redux";
 import HomeIcon from '@mui/icons-material/Home';
 import { bindActionCreators } from "redux";
+import ProfileDropdown from "../Container/Auth/ProfileDropdown";
+
 
 function MainHeader(props) {
   const headerName = [
@@ -26,7 +28,7 @@ function MainHeader(props) {
         <div class=" border-solid w-w95  max-sm:m-0 md:m-auto">
           <div class="flex justify-center border">
             <div class="flex flex-row justify-between items-center w-wk">
-            <Link to="/create">
+              {/* <Link to="/create"> */}
               <div className="flex flex-row" onClick={props.clearQuizNameDetails}>
                 {/* {headerName.map((item) => {
                   return (
@@ -38,20 +40,31 @@ function MainHeader(props) {
                     </h2>
                   );
                 })} */}
-                 <img
-              className="big-logo"
-              src={FWLogo}
-              style={{ width: 70 }}
-              alt="Tekorero logo"
+                <img
+                  className="big-logo"
+                  src={FWLogo}
+                  style={{ width: 70 }}
+                  alt="Tekorero logo"
 
-            />
+                />
               </div>
-              </Link>
-              <Link to="/create">
-              <div class="mr-4">
-              <HomeIcon/>
-              </div>
-              </Link>
+              {/* </Link> */}
+              {/* <Link to="/create"> */}
+              {/* <div>
+                <HomeIcon />
+              </div> */}
+              <ProfileDropdown />
+              {/* <Link to="/">
+                <div>
+                  <img
+                    height={20}
+                    width={20}
+                    src="https://icon-library.com/images/logout-icon-png/logout-icon-png-8.jpg"
+                  />
+                </div>
+              </Link> */}
+
+              {/* </Link> */}
               {/* <div className="flex justify-center">
                 <Link to="/create">
                   <button className="bg-blue-900 text-white px-4 rounded-md">
@@ -80,7 +93,7 @@ function MainHeader(props) {
   );
 }
 const mapStateToProps = ({ auth, quiz }) => ({
- 
+
 });
 
 const mapDispatchToProps = (dispatch) =>

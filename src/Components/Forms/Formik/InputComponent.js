@@ -1,8 +1,9 @@
 import React from "react";
 import { get } from "lodash";
-import { TextInput,ValidationError, StyledLabel } from "../../UI/Elements";
+import { Input } from "antd";
+import { TextInput, ValidationError, StyledLabel } from "../../UI/Elements";
 import { FlexContainer } from "../../UI/Layout";
-// const Option = SelectInput.Option;
+
 export const InputComponent = ({
   field,
   form,
@@ -23,7 +24,7 @@ export const InputComponent = ({
     return (
       <>
         {!noLabel && (
-          <StyledLabel style={{ flexBasis: labelWidth || "20%"}}>
+          <StyledLabel style={{ flexBasis: labelWidth || "-1%" }}>
             {label}
           </StyledLabel>
         )}
@@ -36,7 +37,6 @@ export const InputComponent = ({
           isRequired={isRequired}
           isShadow={isShadow}
           isDisabled={isDisabled}
-          // style={{borderRadius:"0.3rem",height:"2.5rem"}}
         />
 
         {get(touched, field.name) && get(errors, field.name) && (
@@ -50,7 +50,7 @@ export const InputComponent = ({
       <FlexContainer>
         <FlexContainer alignItems="center" flexWrap={inlineLabel && "nowrap"}>
           {!noLabel && (
-            <StyledLabel style={{ flexBasis: labelWidth || "20%"}}>
+            <StyledLabel style={{ flexBasis: labelWidth || "-1%" }}>
               {label}
             </StyledLabel>
           )}
@@ -72,4 +72,7 @@ export const InputComponent = ({
       )}
     </>
   );
+};
+export default ({ value, field, label, isRequired, noLabel, inlineLabel, form: { setFieldValue, setFieldTouched, touched, errors }, ...props }) => {
+  return <Input {...field} {...props} />
 };

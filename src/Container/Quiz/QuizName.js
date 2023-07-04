@@ -1,12 +1,12 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { Formik, Form, FastField, Field, FieldArray } from "formik";
+import { Formik, Form, Field } from "formik";
 import { bindActionCreators } from 'redux';
 // import { withRouter} from "react-router-dom";
 import * as Yup from "yup";
 import { InputComponent } from "../../Components/Forms/Formik/InputComponent";
 import { addQuizName } from './QuizAction';
-import { Button, Card, Input } from 'antd';
+import { Button } from 'antd';
 import { useHistory } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 import MainHeader from '../../Components/Mainheader';
@@ -14,7 +14,7 @@ import MainHeader from '../../Components/Mainheader';
 const QuizSchema = Yup.object().shape({
 
   quizName: Yup.string().required("Input needed!"),
- // duration: Yup.string().required("Input needed!"),
+  // duration: Yup.string().required("Input needed!"),
 
 });
 function QuizName(props) {

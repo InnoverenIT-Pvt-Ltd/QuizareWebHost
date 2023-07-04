@@ -1,7 +1,7 @@
 import React from "react";
 import { message } from "antd";
-import { PlusOutlined} from '@ant-design/icons';
 import { StyledUpload, StyledModal } from "../../UI/Antd";
+import { PlusOutlined } from '@ant-design/icons';
 import { base_url } from "../../../Config/Auth";
 import axios from "axios";
 const token = sessionStorage.getItem("token");
@@ -10,19 +10,19 @@ class Upload extends React.Component {
   state = {
     previewVisible: false,
     previewImage: "",
-    fileList: []
+    fileList: [],
   };
-  beforeUpload = file => {
+  beforeUpload = (file) => {
     const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
     if (!isJpgOrPng) {
       message.error("You can upload only JPG or PNG file!");
       file.flag = true;
       return false;
     }
-    const isLt2M = file.size / 1024 < 50;
+    const isLt2M = file.size / 1024 < 150;
     // file.size/1024/1024 <25
     if (!isLt2M) {
-      message.error("Image size must be smaller than 50KB!");
+      message.error("Image size must be smaller than 150KB!");
       file.flag = true;
       return false;
     }
@@ -31,34 +31,34 @@ class Upload extends React.Component {
     ////debugger;
     console.log(file);
     let formData = new FormData();
-    formData.append("image", file);
+    formData.append("file", file);
     console.log(formData);
     ////debugger;
     axios
       .post(`${base_url}/image`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       })
-      .then(res => {
+      .then((res) => {
         ////debugger;
         console.log(res);
         onSuccess();
-        this.props.form.setFieldValue(this.props.field.name, res.data);
+        this.props.form.setFieldValue(this.props.field.name, res.data.imageId);
         this.setState({ previewVisible: false, previewImage: "" });
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
         onError();
       });
   };
   handleCancel = () => this.setState({ previewVisible: false });
 
-  handlePreview = file => {
+  handlePreview = (file) => {
     this.setState({
       previewImage: file.url || file.thumbUrl,
-      previewVisible: true
+      previewVisible: true,
     });
   };
 
@@ -76,7 +76,8 @@ class Upload extends React.Component {
     const { previewVisible, previewImage, fileList } = this.state;
     const uploadButton = (
       <div>
-      <PlusOutlined/>
+        {/* <Icon type="plus" /> */}
+        <PlusOutlined />
         <div className="ant-upload-text">Upload</div>
       </div>
     );
@@ -89,7 +90,6 @@ class Upload extends React.Component {
           listType="picture-card"
           fileList={fileList}
           onPreview={this.handlePreview}
-
           onChange={this.handleChange}
         >
           {fileList.length >= 1 ? null : uploadButton}

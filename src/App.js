@@ -35,6 +35,11 @@ import QuizLibrary from "./Container/Quiz/Child/QuizLibrary/QuizLibrary"
 import SwipeInLibrary from "./Container/Quiz/EditQuiz/SwipeIn/SwipelnLibrary"
 import UpdateQuizNameLibrary from "./Container/Quiz/EditQuiz/UpdateQuizNameLibrary"
 import updateOngoing from "./Components/Quizs/updateOngoing";
+import LoginByMail from "./Container/Auth/LoginByMail";
+import ForgetPasswordForm from "./Container/Auth/ForgetPasswordForm";
+import SignUpPage from "./Container/Auth/SignUpPage";
+import ChangePassword from "./Container/Auth/ChangePassword";
+import Profile from "./Container/Auth/Profile";
 // import AppErrorBoundary from "./Helpers/ErrorBoundary/AppErrorBoundary";
 
 
@@ -44,54 +49,59 @@ import updateOngoing from "./Components/Quizs/updateOngoing";
  * lazy loaded compenents
  */
 
- const history = createBrowserHistory();
+const history = createBrowserHistory();
 class App extends Component {
   render() {
     const { fetchingUserDetails } = this.props;
     return (
-     
+
       <div>
-     
-          <Suspense fallback={<BundleLoader />}>
+
+        <Suspense fallback={<BundleLoader />}>
           {/* <Router history={history}> */}
-            <Switch>
-            <Route exact path="/" component={Login }/>
-            <Route exact path="/create" component={CreateQuiz}/>
-            <Route exact path="/quizzes" component={QuizName}/>
-            <Route exact path="/addquiz" component={Quiz}/>
-            <Route exact path="/addquizout" component={QuizOut}/>
-            <Route exact path="/addquizin" component={QuizIn}/>
-            <Route   path="/quizinLibrary/:quizId" component={QuizinLibrary}/>
-            <Route exact path="/finalize" component={FinalizeQuiz}/>
-            <Route exact path="/updateQuizName" component={UpdateQuizName}/>
-            <Route exact path="/updateQuizNameLibrary/:quizName/:duration/:quizId" component={UpdateQuizNameLibrary}/>
-            <Route exact path="/updateQuiz" component={UpdateQuiz}/>
-            <Route exact path="/hostquiz" component={QuizDetails}/>
-            <Route exact path="/updateOngoing/:quizId" component={updateOngoing}/>
-            <Route exact path="/report" component={Report}/>
+          <Switch>
+            <Route exact path="/" component={Login} />
+            <Route exact path="/email" component={LoginByMail} />
+            <Route exact path="/create" component={CreateQuiz} />
+            <Route exact path="/profile" component={Profile} />
+            <Route exact path="/changepassword" component={ChangePassword} />
+            <Route exact path="/quizzes" component={QuizName} />
+            <Route exact path="/forgotPassword" component={ForgetPasswordForm} />
+            <Route exact path="/signUp" component={SignUpPage} />
+            <Route exact path="/addquiz" component={Quiz} />
+            <Route exact path="/addquizout" component={QuizOut} />
+            <Route exact path="/addquizin" component={QuizIn} />
+            <Route path="/quizinLibrary/:quizId" component={QuizinLibrary} />
+            <Route exact path="/finalize" component={FinalizeQuiz} />
+            <Route exact path="/updateQuizName" component={UpdateQuizName} />
+            <Route exact path="/updateQuizNameLibrary/:quizName/:duration/:quizId" component={UpdateQuizNameLibrary} />
+            <Route exact path="/updateQuiz" component={UpdateQuiz} />
+            <Route exact path="/hostquiz" component={QuizDetails} />
+            <Route exact path="/updateOngoing/:quizId" component={updateOngoing} />
+            <Route exact path="/report" component={Report} />
             {/* <Route exact path="/quiz" component={AddQuiz}/> */}
-             <Route exact path="/question" component={Question1 }/>
-            <Route exact path="/ongoingQuiz" component={OngoingQuiz}/>
-            <Route exact path="/swipe" component={Swipe}/>
-            <Route exact path="/swipeIn" component={SwipeIn}/>
-            <Route exact path="/swipeInLibrary/:quizId" component={SwipeInLibrary}/>
-            <Route exact path="/quizLibrary" component={QuizLibrary}/>
-
-            
-
-  
-
-           
+            <Route exact path="/question" component={Question1} />
+            <Route exact path="/ongoingQuiz" component={OngoingQuiz} />
+            <Route exact path="/swipe" component={Swipe} />
+            <Route exact path="/swipeIn" component={SwipeIn} />
+            <Route exact path="/swipeInLibrary/:quizId" component={SwipeInLibrary} />
+            <Route exact path="/quizLibrary" component={QuizLibrary} />
 
 
-         
-                {/* <PrivateRoute path="/" component={MainApp} /> */}
-          
-            </Switch>
-            {/* </Router> */}
-          </Suspense>
+
+
+
+
+
+
+
+            {/* <PrivateRoute path="/" component={MainApp} /> */}
+
+          </Switch>
+          {/* </Router> */}
+        </Suspense>
       </div>
-    
+
     );
   }
 }
