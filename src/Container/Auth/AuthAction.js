@@ -1,6 +1,7 @@
 import * as types from './AuthTypes';
 import { base_url, login_url } from '../../Config/Auth';
 import axios from 'axios';
+import { message } from "antd"
 import { createBrowserHistory } from "history";
 
 const history = createBrowserHistory();
@@ -32,20 +33,7 @@ export const login = ({ email, password }, history, cb) => (dispatch) => {
     .catch((err) => {
       //console.log(err && err.response && err.response.data);
       cb && cb("failure");
-      if (
-        err &&
-        err.response &&
-        err.response.data ===
-        "You have entered an invalid username or password "
-      ) {
-        //message.error("You have entered an invalid username or password ");
-      } else {
-        // message.error("Oops! something went wrong. Please retry.");
-        //console.log(err);
-        history.push({
-          pathname: "/",
-        });
-      }
+      message.error("Oops! something went wrong. Please retry.")
       dispatch({
         type: types.LOGIN_FAILURE,
         payload: err,
@@ -179,6 +167,41 @@ export const signUpByUser = (data, cb) => (dispatch) => {
       }
       dispatch({
         type: types.SIGN_UP_BY_USER_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const changePassword = (data, userId, cb) => (dispatch) => {
+  dispatch({
+    type: types.CHANGE_PASSWORD_REQUEST,
+  });
+  axios
+    .post(`${login_url}/userDetails/changePassword/${userId}`, data)
+    .then((res) => {
+      dispatch(getUserDetails(userId));
+      dispatch({
+        type: types.CHANGE_PASSWORD_SUCCESS,
+        payload: res.data,
+      });
+      cb();
+      message.success(res.data)
+    })
+    .catch((err) => {
+      cb()
+      if (
+        err &&
+        err.response &&
+        err.response.data ===
+        "You have entered an invalid username or password "
+      ) {
+      } else {
+        history.push({
+          pathname: "/",
+        });
+      }
+      dispatch({
+        type: types.CHANGE_PASSWORD_FAILURE,
         payload: err,
       });
     });

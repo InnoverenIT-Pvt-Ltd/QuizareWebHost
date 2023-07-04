@@ -15,7 +15,10 @@ const initialState = {
     userDetails: JSON.parse(sessionStorage.getItem("userDetails")) || {},
 
     signingUpByUser: false,
-    signingUpByUserError: false
+    signingUpByUserError: false,
+
+    changingPassword: false,
+    changingPasswordError: false
     // userDetails: JSON.parse(sessionStorage.getItem("userDetails")) || {},  
 };
 
@@ -86,7 +89,24 @@ export const authReducer = (state = initialState, action) => {
                 signingUpByUser: false,
             };
         case types.SIGN_UP_BY_USER_FAILURE:
-            return { ...state, signingUpByUser: false, signingUpByUserError: true };
+            return {
+                ...state, signingUpByUser: false,
+                signingUpByUserError: true
+            };
+
+        case types.CHANGE_PASSWORD_REQUEST:
+            return { ...state, changingPassword: true };
+        case types.CHANGE_PASSWORD_SUCCESS:
+            return {
+                ...state,
+                changingPassword: false
+            };
+        case types.CHANGE_PASSWORD_FAILURE:
+            return {
+                ...state,
+                changingPassword: false,
+                changingPasswordError: true
+            };
         default:
             return state;
     }

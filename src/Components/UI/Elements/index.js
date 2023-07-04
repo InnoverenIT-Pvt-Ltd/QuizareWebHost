@@ -1,4 +1,5 @@
 export { default as MainWrapper } from "./MainWrapper";
+export { default as FormWrapper } from "./FormWrapper";
 export { default as StyledSkeleton } from "./StyledSkeleton";
 export { default as CodeSkeleton } from "./CodeSkeleton";
 export { default as GroupSkeleton } from "./GroupSkeleton";

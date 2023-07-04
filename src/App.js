@@ -39,6 +39,7 @@ import LoginByMail from "./Container/Auth/LoginByMail";
 import ForgetPasswordForm from "./Container/Auth/ForgetPasswordForm";
 import SignUpPage from "./Container/Auth/SignUpPage";
 import ChangePassword from "./Container/Auth/ChangePassword";
+import Profile from "./Container/Auth/Profile";
 // import AppErrorBoundary from "./Helpers/ErrorBoundary/AppErrorBoundary";
 
 
@@ -62,6 +63,7 @@ class App extends Component {
             <Route exact path="/" component={Login} />
             <Route exact path="/email" component={LoginByMail} />
             <Route exact path="/create" component={CreateQuiz} />
+            <Route exact path="/profile" component={Profile} />
             <Route exact path="/changepassword" component={ChangePassword} />
             <Route exact path="/quizzes" component={QuizName} />
             <Route exact path="/forgotPassword" component={ForgetPasswordForm} />

@@ -6,6 +6,8 @@ import { clearQuizNameDetails } from '../Container/Quiz/QuizAction'
 import { connect } from "react-redux";
 import HomeIcon from '@mui/icons-material/Home';
 import { bindActionCreators } from "redux";
+import ProfileDropdown from "../Container/Auth/ProfileDropdown";
+
 
 function MainHeader(props) {
   const headerName = [
@@ -51,7 +53,8 @@ function MainHeader(props) {
               {/* <div>
                 <HomeIcon />
               </div> */}
-              <Link to="/">
+              <ProfileDropdown />
+              {/* <Link to="/">
                 <div>
                   <img
                     height={20}
@@ -59,7 +62,7 @@ function MainHeader(props) {
                     src="https://icon-library.com/images/logout-icon-png/logout-icon-png-8.jpg"
                   />
                 </div>
-              </Link>
+              </Link> */}
 
               {/* </Link> */}
               {/* <div className="flex justify-center">
