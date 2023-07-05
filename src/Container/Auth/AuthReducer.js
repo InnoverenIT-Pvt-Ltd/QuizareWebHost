@@ -18,7 +18,16 @@ const initialState = {
     signingUpByUserError: false,
 
     changingPassword: false,
-    changingPasswordError: false
+    changingPasswordError: false,
+
+    sendingOtpForValidation: false,
+    sendingOtpForValidationError: false,
+
+    updatingPasswordOfUser: false,
+    updatingPasswordOfUserError: false,
+
+    validatingOtp: false,
+    validatingOtpError: false
     // userDetails: JSON.parse(sessionStorage.getItem("userDetails")) || {},  
 };
 
@@ -106,6 +115,48 @@ export const authReducer = (state = initialState, action) => {
                 ...state,
                 changingPassword: false,
                 changingPasswordError: true
+            };
+
+        case types.SEND_OTP_FOR_VALIDATION_REQUEST:
+            return { ...state, sendingOtpForValidation: true };
+        case types.SEND_OTP_FOR_VALIDATION_SUCCESS:
+            return {
+                ...state,
+                sendingOtpForValidation: false
+            };
+        case types.SEND_OTP_FOR_VALIDATION_FAILURE:
+            return {
+                ...state,
+                sendingOtpForValidation: false,
+                sendingOtpForValidationError: true
+            };
+
+        case types.UPDATE_PASSWORD_REQUEST:
+            return { ...state, updatingPasswordOfUser: true };
+        case types.UPDATE_PASSWORD_SUCCESS:
+            return {
+                ...state,
+                updatingPasswordOfUser: false
+            };
+        case types.UPDATE_PASSWORD_FAILURE:
+            return {
+                ...state,
+                updatingPasswordOfUser: false,
+                updatingPasswordOfUserError: true
+            };
+
+        case types.VALIDATE_OTP_REQUEST:
+            return { ...state, validatingOtp: true };
+        case types.VALIDATE_OTP_SUCCESS:
+            return {
+                ...state,
+                validatingOtp: false
+            };
+        case types.VALIDATE_OTP_FAILURE:
+            return {
+                ...state,
+                validatingOtp: false,
+                validatingOtpError: true
             };
         default:
             return state;

@@ -31,15 +31,15 @@ function FinalizeQuiz(props) {
   const handleOk = () => {
     setIsModalOpen(false);
     history.push(`/hostquiz`);
-    props.updateQuizNameByQuizId(
+    props.hostQuiz(
       {
         duration: duration,
-        quizHostId: "QH4472404666122022",
+        quizHostId: props.quizHostId,
         quizName: props.showQuiz && props.showQuiz.quizName,
       },
       props.showQuiz && props.showQuiz.quizId
     );
-    props.hostQuiz(props.showQuiz && props.showQuiz.quizId);
+    // props.hostQuiz(props.showQuiz && props.showQuiz.quizId);
   };
   const handleCancel = () => {
     setIsModalOpen(false);
@@ -108,7 +108,7 @@ function FinalizeQuiz(props) {
               {/* <Link to="/create"> */}
               <Button
                 type="primary"
-                style={{ width:"max-content", backgroundColor: "white", margin: "0" }}
+                style={{ width: "max-content", backgroundColor: "white", margin: "0" }}
                 onClick={() =>
                   props.deleteHostQuiz(
                     props.showQuiz && props.showQuiz.quizId,
@@ -193,6 +193,7 @@ const mapStateToProps = ({ auth, quiz }) => ({
   addingQuizName: quiz.addingQuizName,
   addingQuizNameError: quiz.addingQuizNameError,
   quizName: quiz.quizName,
+  quizHostId: auth.userDetails.userId
 });
 
 const mapDispatchToProps = (dispatch) =>

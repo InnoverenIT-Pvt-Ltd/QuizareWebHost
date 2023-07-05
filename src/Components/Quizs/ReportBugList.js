@@ -1,4 +1,4 @@
-import React, {  useEffect,useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import StyledTable from "../UI/Antd/Table1";
@@ -10,23 +10,23 @@ function ReportBugList(props) {
   const [showFull, setShowFull] = React.useState(false);
   const [currentRId, setCurrentRId] = useState("");
   useEffect(() => {
-    props.getBugsList("QH4472404666122022");
+    props.getBugsList(props.quizHostId);
   }, []);
 
   const columns = [
     {
       title: "Date",
-      dataIndex: "reportedTime",   
+      dataIndex: "reportedTime",
       render: (name, item, i) => {
         return <span>{` ${moment(item.reportedTime).format("DD MMM YYYY")}`}</span>;
-      }, 
+      },
       //  key: "name",
     },
     {
       title: "Subject",
       dataIndex: "subject",
       // key: "name",
-    }, 
+    },
     {
       title: "Description",
       dataIndex: "description",
@@ -34,21 +34,21 @@ function ReportBugList(props) {
         return <span> {showFull && currentRId === item.description ? (
           <>
             <div>{item.description}</div>
-            <h4 class="text-sm font-bold" onClick={() =>{ setShowFull(false);setCurrentRId(item.description)}}>Show less</h4>
+            <h4 class="text-sm font-bold" onClick={() => { setShowFull(false); setCurrentRId(item.description) }}>Show less</h4>
           </>
         ) : (
           <>
-            {item.description.slice(0, 30)}... 
-            <h4 class="text-sm font-bold" onClick={() =>{ setShowFull(true);setCurrentRId(item.description)}}>Show more</h4>
+            {item.description.slice(0, 30)}...
+            <h4 class="text-sm font-bold" onClick={() => { setShowFull(true); setCurrentRId(item.description) }}>Show more</h4>
           </>
         )}</span>;
-      }, 
+      },
       // key: "name",
     },
     {
       title: "Status",
       dataIndex: "resolved",
-      
+
       //  key: "name",
     },
   ];
@@ -69,6 +69,7 @@ const mapStateToProps = ({ auth, quiz }) => ({
   bugs: quiz.bugs,
   fetchingBugs: quiz.fetchingBugs,
   fetchingBugsError: quiz.fetchingBugsError,
+  quizHostId: auth.userDetails.userId
 });
 
 const mapDispatchToProps = (dispatch) =>

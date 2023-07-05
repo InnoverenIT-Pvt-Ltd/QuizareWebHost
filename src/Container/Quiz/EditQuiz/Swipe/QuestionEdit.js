@@ -18,7 +18,7 @@ function QuestionEdit(props) {
     <>
       <Formik
         initialValues={{
-          quizHostId: "QH4472404666122022",
+          quizHostId: props.quizHostId,
           quizId: props.item.quizId,
           categoryId: props.item.categoryId,
           question: props.item.question,
@@ -47,91 +47,91 @@ function QuestionEdit(props) {
           values,
         }) => (
           <Form class=" max-sm:w-full h-h31  m-auto md:mt-12  w-1/5  h-h50  ">
-          <div className="w-full my-2 flex justify-center m-auto ">
+            <div className="w-full my-2 flex justify-center m-auto ">
               <div>
                 {/* Container */}
                 <div>
                   <Card
                     style={{
                       WebkitBoxShadow: "0 0 10px 2px rgb(46 46 46 / 39%)",
-                      width:"18rem",
-                      height:"26rem"
+                      width: "18rem",
+                      height: "26rem"
                     }}
                   >
                     <Card style={{ fontSize: 22, alignSelf: "center" }}>
                       <h3 class="flex justify-center text-xl">Question {props.questionNo || null}</h3>
                     </Card>
                     <div class="mt-1">
-                    <Field
-                      style={{ textAlign: "center" }}
-                      name="question"
-                      value={`${values.question}`}
-                      component={InputComponent}
-                      onChangeText={handleChange("question")}
-                    />
-</div>
-<div class="mt-1">
-                    <Field
-                      component={InputComponent}
-                      value={`${values.option1} (Correct Answer)`}
-                      placeholder="Correct answer"
-                      name="option1"
-                      onChangeText={handleChange("option1")}
-                    />
-</div>
-<div class="mt-1">
-                    <Field
-                      component={InputComponent}
-                      value={`${values.option2}`}
-                      placeholder="Option 2"
-                      name="option2"
-                      onChangeText={handleChange("option2")}
-                    />
-</div>
-<div class="mt-1">
-                    <Field
-                      component={InputComponent}
-                      value={`${values.option3}`}
-                      placeholder="Option 3"
-                      name="option3"
-                      onChangeText={handleChange("option3")}
-                    />
-</div>
-<div class="mt-1">
-                    <Field
-                      component={InputComponent}
-                      value={`${values.option4}`}
-                      placeholder="Option 4"
-                      name="option4"
-                      onChangeText={handleChange("option4")}
-                    />
+                      <Field
+                        style={{ textAlign: "center" }}
+                        name="question"
+                        value={`${values.question}`}
+                        component={InputComponent}
+                        onChangeText={handleChange("question")}
+                      />
                     </div>
-                     <div className="flex flex-row justify-center mt-8">
-                    <Button
-                      title={""}
-                      type="primary"
-                      onClick={() => props.deleteQuestion(props.item.id)}
-                      style={{width:"7rem"}}
-                    >
-                      Delete
-                    </Button>
-                    <Button
-                      title={""}
-                      type="primary"
-                      onClick={() => handleSubmit()}
-                      style={{width:"7rem"}}
-                    >
-                      Update
-                    </Button>
-                    {/* <Button
+                    <div class="mt-1">
+                      <Field
+                        component={InputComponent}
+                        value={`${values.option1} (Correct Answer)`}
+                        placeholder="Correct answer"
+                        name="option1"
+                        onChangeText={handleChange("option1")}
+                      />
+                    </div>
+                    <div class="mt-1">
+                      <Field
+                        component={InputComponent}
+                        value={`${values.option2}`}
+                        placeholder="Option 2"
+                        name="option2"
+                        onChangeText={handleChange("option2")}
+                      />
+                    </div>
+                    <div class="mt-1">
+                      <Field
+                        component={InputComponent}
+                        value={`${values.option3}`}
+                        placeholder="Option 3"
+                        name="option3"
+                        onChangeText={handleChange("option3")}
+                      />
+                    </div>
+                    <div class="mt-1">
+                      <Field
+                        component={InputComponent}
+                        value={`${values.option4}`}
+                        placeholder="Option 4"
+                        name="option4"
+                        onChangeText={handleChange("option4")}
+                      />
+                    </div>
+                    <div className="flex flex-row justify-center mt-8">
+                      <Button
+                        title={""}
+                        type="primary"
+                        onClick={() => props.deleteQuestion(props.item.id)}
+                        style={{ width: "7rem" }}
+                      >
+                        Delete
+                      </Button>
+                      <Button
+                        title={""}
+                        type="primary"
+                        onClick={() => handleSubmit()}
+                        style={{ width: "7rem" }}
+                      >
+                        Update
+                      </Button>
+                      {/* <Button
 
 
                     onClick={() => setModalVisible(true)}
                   
                   >Add</Button> */}
-                  </div>
+                    </div>
                   </Card>
-                 
+
                 </div>
 
                 {/* Buttons */}
@@ -150,6 +150,7 @@ const mapStateToProps = ({ auth, quiz }) => ({
   quizId: quiz.showQuiz.quizId,
   category: quiz.category,
   questionList: quiz.questionList,
+  quizHostId: auth.userDetails.userId
 });
 
 const mapDispatchToProps = (dispatch) =>

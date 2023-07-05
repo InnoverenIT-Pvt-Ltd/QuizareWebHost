@@ -70,7 +70,7 @@ function QuizinLibrary(props) {
           initialValues={{
             // duration: "",
             // quizName: props.showQuiz.quizName,
-            quizHostId: "QH4472404666122022",
+            quizHostId: props.quizHostId,
             quizId: props.showQuiz && props.showQuiz.quizId,
             categoryId: selectedCategory,
             //categoryId:"CAT33389270105262022",
@@ -365,9 +365,10 @@ const mapStateToProps = ({ auth, quiz }) => ({
   showQuiz: quiz.showQuiz,
   quizDetails: quiz.quizDetails,
   fetchingQuestionList: quiz.fetchingQuestionList,
-//   quizId: quiz.showQuiz.quizId,
+  //   quizId: quiz.showQuiz.quizId,
   category: quiz.category,
   questionList: quiz.questionList,
+  quizHostId: auth.userDetails.userId
 });
 
 const mapDispatchToProps = (dispatch) =>
