@@ -315,7 +315,7 @@ function QuizDetails(props) {
   return (
     <>
        <Formik>
-        <Form class="flex justify-center max-sm:w-11/12 mt-8 m-auto md:mt-12  w-1/5  h-h50  ">
+        <Form class="flex justify-center max-sm:w-11/12 mt-8 m-auto md:mt-12 w-full  h-h50  ">
           {/* <div className="bg-white rounded-rounded2.8 mt-3 "> */}
         
         
@@ -331,7 +331,7 @@ function QuizDetails(props) {
             return (
 <SwiperSlide >
       
-<div class=" max-sm:w-11/12  h-h32   m-auto md:w-1/5  h-h50  ">
+<div class=" max-sm:w-11/12  h-h32   m-auto md:w-2/5  h-h50  ">
 <div className="bg-white rounded-2xl shadow-2xl border-solid flex justify-center mt-3 ">
   <div class=" w-11/12 flex justify-center flex-col  p-4 max-sm:m-0 h-h31 rounded-2xl md:m-auto">
     <h2 class="text-base   flex justify-center">You are hosting</h2>
@@ -399,18 +399,7 @@ function QuizDetails(props) {
         ""
       )}
     </Card>
-    <div class="flex justify-center mt-1">
-      {/* <Button
-        style={{
-          backgroundColor: "#4096ff",
-          width: "-webkit-fill-available",
-          borderRadius: "0.4rem",
-          height: "auto",
-        }}
-        onClick={() => copyToClipboard(item.quizLink)}
-      >
-        <h2 class="text-white">Click to copy the url</h2>
-      </Button> */}
+    <div class="flex justify-center mt-1">     
         <button
          type="button"
             className="copy-button"
