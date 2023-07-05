@@ -19,10 +19,10 @@ function UpdateOngoing(props) {
   const [data, setdata] = useState([props.questionList])
   useEffect(() => {
     props.getQuestionList(props.match.params.quizId);
-  }, []);
+  }, [props.match.params.quizId]);
 
   const handleDeleteQuestion = (id) => {
-    props.deleteQuestion(id, handleCallBack)
+    props.deleteQuestion(id, handleCallBack, props.match.params.quizId)
   }
   const handleCallBack = () => {
     props.getQuestionList(props.match.params.quizId);

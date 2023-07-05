@@ -312,6 +312,11 @@ function QuizDetails(props) {
   useEffect(() => {
     props.getOngoingQuiz(props.quizHostId);
   }, []);
+  // const [quizData, setQuizData] = useEffect([props.ongoingQuiz])
+  // useEffect(() => {
+  //   setQuizData(props.ongoingQuiz)
+  // }, [props.ongoingQuiz])
+
   return (
     <>
       <Formik>
@@ -455,7 +460,7 @@ function QuizDetails(props) {
                               <Button
                                 style={{ backgroundColor: "white" }}
                                 type="primary"
-                                onClick={() => props.closeQuiz(item.quizId)}
+                                onClick={() => props.closeQuiz(item.quizId, props.quizHostId)}
                               >
                                 <h3>Close Quiz</h3>
                               </Button>

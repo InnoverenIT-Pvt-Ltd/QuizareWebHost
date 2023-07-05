@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 import {
   getQuestionList,
   updateQuestionsInQuiz,
-  deleteQuestion,
 } from "../../QuizAction";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
 function QuestionEdit(props) {
@@ -119,7 +118,7 @@ function QuestionEdit(props) {
                         <Button
                           title={""}
                           type="primary"
-                          onClick={() => props.deleteQuestion(props.item.id)}
+                          onClick={() => props.handleDeleteQuestion(props.item.id)}
                           style={{ width: "9rem", backgroundColor: "white", marginLeft: "0.5rem" }}
                         >
                           <h3> Delete Question</h3>
@@ -183,7 +182,6 @@ const mapDispatchToProps = (dispatch) =>
     {
       getQuestionList,
       updateQuestionsInQuiz,
-      deleteQuestion,
     },
     dispatch
   );

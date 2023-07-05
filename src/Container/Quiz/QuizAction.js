@@ -187,7 +187,7 @@ export const updateQuestion = questionId => dispatch => {
 /**
  * delete a question from table
  */
-export const deleteQuestion = (questionId, cb) => dispatch => {
+export const deleteQuestion = (questionId, cb, quizId) => dispatch => {
   console.log("inside delete question", questionId)
   dispatch({
     type: types.DELETE_QUESTION_BY_QUESTION_iD_REQUEST,
@@ -199,6 +199,7 @@ export const deleteQuestion = (questionId, cb) => dispatch => {
       },
     })
     .then(res => {
+      dispatch(getQuestionList(quizId))
       dispatch({
         type: types.DELETE_QUESTION_BY_QUESTION_ID_SUCCESS,
         payload: questionId,
@@ -473,7 +474,7 @@ export const getQuizNameList = userId => dispatch => {
       });
     });
 };
-export const closeQuiz = (quizId, cb) => dispatch => {
+export const closeQuiz = (quizId, quizHostId, cb) => dispatch => {
   //console.log('inside update question');
   dispatch({
     type: types.CLOSE_QUIZ_REQUEST,
@@ -486,6 +487,7 @@ export const closeQuiz = (quizId, cb) => dispatch => {
     })
     .then(res => {
       console.log(res.data);
+      dispatch(getOngoingQuiz(quizHostId))
       dispatch({
         type: types.CLOSE_QUIZ_SUCCESS,
         payload: quizId,

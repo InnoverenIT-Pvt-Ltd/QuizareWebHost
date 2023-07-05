@@ -151,9 +151,6 @@ export const quizReducer = (state = initialState, action) => {
       return {
         ...state,
         deletingQuestion: false,
-        questionList: state.questionList.filter(
-          (item) => item.id !== action.payload
-        ),
       };
     case types.DELETE_QUESTION_BY_QUESTION_ID_FAILURE:
       return {
