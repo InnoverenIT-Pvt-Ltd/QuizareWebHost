@@ -29,7 +29,19 @@ const ProfileMenu = ({ logout, history }) => (
                     </a>
                 </StyledMenuItem>
 
-
+                {/* <StyledMenuItem
+                    key="1"
+                    style={{
+                        marginTop: 0,
+                        marginBottom: 0,
+                        paddingTop: 0,
+                        paddingBottom: 0,
+                    }}
+                >
+                    <a href="#" onClick={() => history.push("/create")}>
+                        Home
+                    </a>
+                </StyledMenuItem> */}
                 <StyledMenuItem
                     key="3"
                     style={{
@@ -75,7 +87,7 @@ class ProfileDropdown extends Component {
                 {imageId ? (
                     <img
                         src={`${base_url}/image/${imageId}`}
-                        style={{ width: 32, height: 32, borderRadius: "50%", lineHeight: "30px", fontSize: "1.2em" }}
+                        style={{ width: 32, height: 32, borderRadius: "50%", lineHeight: "32px", fontSize: "1.2em" }}
                     />
                 ) : (
                     <Avatar

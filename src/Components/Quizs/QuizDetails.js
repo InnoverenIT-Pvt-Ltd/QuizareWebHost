@@ -101,7 +101,7 @@
 //                       {
 //                         quizName: quizName,quizHostId: "QH4472404666122022",
 //                       },props.quizNameDetails.quizId,setEditName(false),
-                      
+
 //                     )}
 //                   }
 //                 >
@@ -227,14 +227,14 @@
 // export default connect(mapStateToProps, mapDispatchToProps)(QuizDetails);
 
 
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {
   closeQuiz,
   hostQuiz,
   getOngoingQuiz,
-  updateQuizNameByQuizId,clearQuizNameDetails
+  updateQuizNameByQuizId, clearQuizNameDetails
 } from "../../Container/Quiz/QuizAction";
 import moment from "moment";
 import { Button, Card, Modal } from "antd";
@@ -266,9 +266,9 @@ function QuizDetails(props) {
 
     clipboard.on('success', (e) => {
       // const link = `http://player.quizledge.no.s3-website.eu-west-3.amazonaws.com${copiedLink}`
-       const link = e.trigger.getAttribute('data-link');
-      
-       console.log(link)
+      const link = e.trigger.getAttribute('data-link');
+
+      console.log(link)
       setCopiedLink(link);
     });
 
@@ -289,7 +289,7 @@ function QuizDetails(props) {
     props.updateQuizNameByQuizId(
       {
         duration: duration,
-        quizHostId: "QH4472404666122022",
+        quizHostId: props.quizHostId,
         quizName: props.ongoingQuiz.quizName,
       },
       props.ongoingQuiz.quizId
@@ -310,15 +310,20 @@ function QuizDetails(props) {
   const viewmessage = props.ongoingQuiz.message;
   const ID = props.ongoingQuiz.quizId;
   useEffect(() => {
-    props.getOngoingQuiz("QH4472404666122022");
+    props.getOngoingQuiz(props.quizHostId);
   }, []);
+  // const [quizData, setQuizData] = useEffect([props.ongoingQuiz])
+  // useEffect(() => {
+  //   setQuizData(props.ongoingQuiz)
+  // }, [props.ongoingQuiz])
+
   return (
     <>
        <Formik>
         <Form class="flex justify-center max-sm:w-11/12 mt-8 m-auto md:mt-12 w-full  h-h50  ">
           {/* <div className="bg-white rounded-rounded2.8 mt-3 "> */}
-        
-        
+
+
           <Swiper
        
         navigation={true}
@@ -331,7 +336,7 @@ function QuizDetails(props) {
             return (
 <SwiperSlide >
       
-<div class=" max-sm:w-11/12  h-h32   m-auto md:w-2/5  h-h50  ">
+<div class=" max-sm:w-11/12  h-h32   m-auto md:w-1/5  h-h50  ">
 <div className="bg-white rounded-2xl shadow-2xl border-solid flex justify-center mt-3 ">
   <div class=" w-11/12 flex justify-center flex-col  p-4 max-sm:m-0 h-h31 rounded-2xl md:m-auto">
     <h2 class="text-base   flex justify-center">You are hosting</h2>
@@ -385,7 +390,7 @@ function QuizDetails(props) {
       </div>
     ) : null}
 
-    {/* </h2> */}
+                        {/* </h2> */}
 
     <h2 class="text-base mt-2 flex justify-center ">
       Share URL for others to access.
@@ -399,7 +404,18 @@ function QuizDetails(props) {
         ""
       )}
     </Card>
-    <div class="flex justify-center mt-1">     
+    <div class="flex justify-center mt-1">
+      {/* <Button
+        style={{
+          backgroundColor: "#4096ff",
+          width: "-webkit-fill-available",
+          borderRadius: "0.4rem",
+          height: "auto",
+        }}
+        onClick={() => copyToClipboard(item.quizLink)}
+      >
+        <h2 class="text-white">Click to copy the url</h2>
+      </Button> */}
         <button
          type="button"
             className="copy-button"
@@ -462,36 +478,36 @@ function QuizDetails(props) {
       </Button>
     )}
     </div> */}
-    <Modal
-      title="Host Quiz"
-      open={isModalOpen}
-      onOk={handleOk}
-      onCancel={handleCancel}
-    >
-      <form onSubmit={() => handleOk()}>
-        <input
-          className="border border-blue-900 rounded-md px-1 w-full"
-          name="duration"
-          value={duration}
-          onChange={(ev) => setDuration(ev.target.value)}
-          placeholder="Enter Response time per question"
-        />
-      </form>
-    </Modal>
-  </div>
-</div>
-</div>
-            </SwiperSlide>
-                );
-            })} 
-            </Swiper>
+                        <Modal
+                          title="Host Quiz"
+                          open={isModalOpen}
+                          onOk={handleOk}
+                          onCancel={handleCancel}
+                        >
+                          <form onSubmit={() => handleOk()}>
+                            <input
+                              className="border border-blue-900 rounded-md px-1 w-full"
+                              name="duration"
+                              value={duration}
+                              onChange={(ev) => setDuration(ev.target.value)}
+                              placeholder="Enter Response time per question"
+                            />
+                          </form>
+                        </Modal>
+                      </div>
+                    </div>
+                  </div>
+                </SwiperSlide>
+              );
+            })}
+          </Swiper>
 
-          
-         
-          
-          
-        
-          
+
+
+
+
+
+
           {/* </div> */}
         </Form>
       </Formik>
@@ -499,19 +515,20 @@ function QuizDetails(props) {
   );
 }
 
-const mapStateToProps = ({ quiz }) => ({
+const mapStateToProps = ({ quiz, auth }) => ({
   quizNameDetails: quiz.quizNameDetails,
   fetchingFeedback: quiz.fetchingFeedback,
   feedback: quiz.feedback,
   fetchingFeedbackErrot: quiz.fetchingFeedbackErrot,
-  ongoingQuiz:quiz.ongoingQuiz
+  ongoingQuiz: quiz.ongoingQuiz,
+  quizHostId: auth.userDetails.userId
 });
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       closeQuiz,
-      updateQuizNameByQuizId,clearQuizNameDetails,
+      updateQuizNameByQuizId, clearQuizNameDetails,
       hostQuiz,
       getOngoingQuiz
     },

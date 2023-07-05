@@ -53,7 +53,7 @@ function QuizOut(props) {
         initialValues={{
           // duration: "",
           // quizName: props.showQuiz.quizName,
-          quizHostId: "QH4472404666122022",
+          quizHostId: props.quizHostId,
           quizId: props.showQuiz && props.showQuiz.quizId,
           categoryId: selectedCategory,
           //categoryId:"CAT33389270105262022",
@@ -70,7 +70,7 @@ function QuizOut(props) {
             {
               ...values,
               quizId: props.showQuiz && props.showQuiz.quizId,
-              categoryId: selectedCategory,number:count,
+              categoryId: selectedCategory, number: count,
             },
             (data) => (
               // handleCallBack
@@ -127,7 +127,7 @@ function QuizOut(props) {
                           placeholder="Question"
                           name="question"
 
-                          // onChangeText={handleChange('questionName')}
+                        // onChangeText={handleChange('questionName')}
                         />
                       </div>
                       {/* </TouchableOpacity> */}
@@ -146,7 +146,7 @@ function QuizOut(props) {
                           placeholder="Correct answer"
                           name="option1"
 
-                          // onChangeText={handleChange('option1')}
+                        // onChangeText={handleChange('option1')}
                         />
                       </div>
                       {/* </TouchableOpacity> */}
@@ -165,7 +165,7 @@ function QuizOut(props) {
                           placeholder="Option 2"
                           name="option2"
 
-                          // onChangeText={handleChange('option2')}
+                        // onChangeText={handleChange('option2')}
                         />
                       </div>
                       {/* </TouchableOpacity>
@@ -286,8 +286,8 @@ function QuizOut(props) {
                   // containerStyle={externalStyle.containerStyleBD}
                   // buttonStyle={externalStyle.buttonStyleAdd}
                   onClick={handleSubmit}
-                  // Loading={props.addingQuestion}
-                  // onPress={() => props.navigation.navigate('Quiz Addquestions')}
+                // Loading={props.addingQuestion}
+                // onPress={() => props.navigation.navigate('Quiz Addquestions')}
                 >
                   <h4 class="">Add </h4>
                 </Button>
@@ -348,6 +348,7 @@ const mapStateToProps = ({ auth, quiz }) => ({
   showQuiz: quiz.showQuiz,
   quizId: quiz.showQuiz.quizId,
   category: quiz.category,
+  quizHostId: auth.userDetails.userId
 });
 
 const mapDispatchToProps = (dispatch) =>

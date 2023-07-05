@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { useEffect } from "react";
-import { getQuestionList } from "../../Container/Quiz/QuizAction";
+import { getQuestionList, deleteQuestion } from "../../Container/Quiz/QuizAction";
 import { Card } from "antd";
 import React, { useRef, useState } from "react";
 // Import Swiper React components
@@ -14,15 +14,26 @@ import "swiper/css/navigation";
 // import QuestionEdit from "./QuestionEdit";
 import MainHeader from "../../Components/Mainheader";
 import OngoingQuestionedit from "./ongoingQuestionedit";
- function UpdateOngoing(props) {
-    
+function UpdateOngoing(props) {
 
-    useEffect(() => {
-        props.getQuestionList(props.match.params.quizId);
-      }, []);
+  const [data, setdata] = useState([props.questionList])
+  useEffect(() => {
+    props.getQuestionList(props.match.params.quizId);
+  }, [props.match.params.quizId]);
+
+  const handleDeleteQuestion = (id) => {
+    props.deleteQuestion(id, handleCallBack, props.match.params.quizId)
+  }
+  const handleCallBack = () => {
+    props.getQuestionList(props.match.params.quizId);
+  }
+  useEffect(() => {
+    setdata(props.questionList)
+  }, [props.questionList])
+  console.log(data)
   return (
     <>
-    <MainHeader />
+      <MainHeader />
       <Swiper
         pagination={{
           type: "fraction",
@@ -31,36 +42,39 @@ import OngoingQuestionedit from "./ongoingQuestionedit";
         modules={[Pagination, Navigation]}
         className="mySwiper"
       >
-        {props.questionList.map((item,i) => {
-          console.log(i+1)
+        {data.map((item, i) => {
+          console.log(i + 1)
           console.log(item)
-          const questionNo=i+1
+          const questionNo = i + 1
           return (
             <SwiperSlide key={item}>
               <div class="h-h37">
-                <Card style={{marginTop:"2rem"}}>
+                <Card style={{ marginTop: "2rem" }}>
                   <OngoingQuestionedit item={item}
-                 questionNo={questionNo}
+                    questionNo={questionNo}
+                    handleDeleteQuestion={handleDeleteQuestion}
                   />
                 </Card>
               </div>
             </SwiperSlide>
           );
-        })} 
-       </Swiper>
+        })}
+      </Swiper>
     </>
   )
 }
 const mapStateToProps = ({ quiz }) => ({
-    questionList: quiz.questionList,
-    quizNameDetails: quiz.quizNameDetails, 
-  });
-  
-  const mapDispatchToProps = (dispatch) =>
-    bindActionCreators(
-      {
-       getQuestionList,
-      },
-      dispatch
-    );
-    export default connect(mapStateToProps, mapDispatchToProps)(UpdateOngoing);
+  questionList: quiz.questionList,
+  quizNameDetails: quiz.quizNameDetails,
+});
+
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      getQuestionList,
+      deleteQuestion
+    },
+
+    dispatch
+  );
+export default connect(mapStateToProps, mapDispatchToProps)(UpdateOngoing);
