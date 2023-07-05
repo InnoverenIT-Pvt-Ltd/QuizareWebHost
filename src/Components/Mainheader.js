@@ -49,11 +49,15 @@ function MainHeader(props) {
                 />
               </div>
               {/* </Link> */}
-              {/* <Link to="/create"> */}
-              {/* <div>
-                <HomeIcon />
-              </div> */}
-              <ProfileDropdown />
+              <div style={{ display: "flex", justifyContent: "space-around" }}>
+                <Link to="/create">
+                  <div style={{ marginTop: "5px" }}>
+                    <HomeIcon />
+                  </div>
+                </Link>
+                <ProfileDropdown />
+              </div>
+
               {/* <Link to="/">
                 <div>
                   <img

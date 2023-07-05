@@ -212,7 +212,7 @@ export const sendOtpForValidation = (data, cb) => (dispatch) => {
     type: types.SEND_OTP_FOR_VALIDATION_REQUEST,
   });
   axios
-    .post(`${login_url}/otp/save`, data)
+    .post(`${login_url}/otp/generateOTP`, data)
     .then((res) => {
       dispatch({
         type: types.SEND_OTP_FOR_VALIDATION_SUCCESS,
@@ -235,13 +235,14 @@ export const updatePassword = (data, cb) => (dispatch) => {
     type: types.UPDATE_PASSWORD_REQUEST,
   });
   axios
-    .post(`${login_url}/otp/save`, data)
+    .post(`${login_url}/userDetails/forgotPassword`, data)
     .then((res) => {
       dispatch({
         type: types.UPDATE_PASSWORD_SUCCESS,
         payload: res.data,
       });
       cb();
+      message.success("Password has changed successfully !!")
     })
     .catch((err) => {
       cb()
@@ -258,7 +259,7 @@ export const validateOtp = (data, cb) => (dispatch) => {
     type: types.VALIDATE_OTP_REQUEST,
   });
   axios
-    .post(`${login_url}//save`, data)
+    .post(`${login_url}/otp/validateOtp`, data)
     .then((res) => {
       dispatch({
         type: types.VALIDATE_OTP_SUCCESS,

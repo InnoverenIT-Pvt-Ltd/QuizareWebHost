@@ -187,7 +187,7 @@ export const updateQuestion = questionId => dispatch => {
 /**
  * delete a question from table
  */
-export const deleteQuestion = (questionId, quizId) => dispatch => {
+export const deleteQuestion = (questionId, cb) => dispatch => {
   console.log("inside delete question", questionId)
   dispatch({
     type: types.DELETE_QUESTION_BY_QUESTION_iD_REQUEST,
@@ -199,12 +199,11 @@ export const deleteQuestion = (questionId, quizId) => dispatch => {
       },
     })
     .then(res => {
-      dispatch(getQuestionList(quizId));
-      console.log(res.data);
       dispatch({
         type: types.DELETE_QUESTION_BY_QUESTION_ID_SUCCESS,
         payload: questionId,
       });
+      cb && cb("success");
     })
     .catch(err => {
       console.log(err);
@@ -212,6 +211,7 @@ export const deleteQuestion = (questionId, quizId) => dispatch => {
         type: types.DELETE_QUESTION_BY_QUESTION_ID_FAILURE,
         payload: err,
       });
+      cb && cb("error");
     });
 };
 
@@ -316,11 +316,7 @@ export const hostFinalizeQuizUrl = quizId => dispatch => {
     type: types.GET_FINALIZE_QUIZ_URL_REQUEST,
   });
   axios
-    .put(`${base_url}/quiz/updatehost/${quizId}`, {
-      headers: {
-        Authorization: 'Bearer ' + store.getState().auth.token || '',
-      },
-    })
+    .put(`${base_url}/quiz/updatehost/${quizId}`,)
     .then(res => {
       console.log(res.data);
       dispatch({
@@ -370,17 +366,13 @@ export const deleteHostQuiz = (quizId, cb) => dispatch => {
     });
 };
 //Host quiz
-export const hostQuiz = quizId => dispatch => {
+export const hostQuiz = (data, quizId) => dispatch => {
   //console.log('inside update question');
   dispatch({
     type: types.HOST_QUIZ_REQUEST,
   });
   axios
-    .put(`${base_url}/quiz/updatehost/${quizId}`, {
-      headers: {
-        Authorization: 'Bearer ' + store.getState().auth.token || '',
-      },
-    })
+    .put(`${base_url}/quiz/updatehost/${quizId}`, data)
     .then(res => {
       dispatch({
         type: types.HOST_QUIZ_SUCCESS,

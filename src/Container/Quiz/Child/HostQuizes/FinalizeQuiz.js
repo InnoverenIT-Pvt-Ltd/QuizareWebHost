@@ -31,7 +31,7 @@ function FinalizeQuiz(props) {
   const handleOk = () => {
     setIsModalOpen(false);
     history.push(`/hostquiz`);
-    props.updateQuizNameByQuizId(
+    props.hostQuiz(
       {
         duration: duration,
         quizHostId: props.quizHostId,
@@ -39,7 +39,7 @@ function FinalizeQuiz(props) {
       },
       props.showQuiz && props.showQuiz.quizId
     );
-    props.hostQuiz(props.showQuiz && props.showQuiz.quizId);
+    // props.hostQuiz(props.showQuiz && props.showQuiz.quizId);
   };
   const handleCancel = () => {
     setIsModalOpen(false);

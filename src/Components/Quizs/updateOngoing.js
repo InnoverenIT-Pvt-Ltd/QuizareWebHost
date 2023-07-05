@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { useEffect } from "react";
-import { getQuestionList } from "../../Container/Quiz/QuizAction";
+import { getQuestionList, deleteQuestion } from "../../Container/Quiz/QuizAction";
 import { Card } from "antd";
 import React, { useRef, useState } from "react";
 // Import Swiper React components
@@ -16,14 +16,21 @@ import MainHeader from "../../Components/Mainheader";
 import OngoingQuestionedit from "./ongoingQuestionedit";
 function UpdateOngoing(props) {
 
-
+  const [data, setdata] = useState([props.questionList])
   useEffect(() => {
     props.getQuestionList(props.match.params.quizId);
   }, []);
 
-  const handleDeleteQuestion = () => {
-
+  const handleDeleteQuestion = (id) => {
+    props.deleteQuestion(id, handleCallBack)
   }
+  const handleCallBack = () => {
+    props.getQuestionList(props.match.params.quizId);
+  }
+  useEffect(() => {
+    setdata(props.questionList)
+  }, [props.questionList])
+  console.log(data)
   return (
     <>
       <MainHeader />
@@ -35,7 +42,7 @@ function UpdateOngoing(props) {
         modules={[Pagination, Navigation]}
         className="mySwiper"
       >
-        {props.questionList.map((item, i) => {
+        {data.map((item, i) => {
           console.log(i + 1)
           console.log(item)
           const questionNo = i + 1
@@ -45,7 +52,7 @@ function UpdateOngoing(props) {
                 <Card style={{ marginTop: "2rem" }}>
                   <OngoingQuestionedit item={item}
                     questionNo={questionNo}
-                    quizId={props.match.params.quizId}
+                    handleDeleteQuestion={handleDeleteQuestion}
                   />
                 </Card>
               </div>
@@ -65,7 +72,9 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       getQuestionList,
+      deleteQuestion
     },
+
     dispatch
   );
 export default connect(mapStateToProps, mapDispatchToProps)(UpdateOngoing);

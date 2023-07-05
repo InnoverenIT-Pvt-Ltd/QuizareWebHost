@@ -186,11 +186,7 @@ class ForgotPassword extends Component {
         console.log("inside cDM login");
     }
     callback = () => {
-        if (this.props.userType === "Admin") {
-            this.props.history.push("/dashboard");
-        } else {
-            this.props.history.push("/home");
-        }
+        this.props.history.push("/email");
     };
 
     render() {
@@ -213,7 +209,7 @@ class ForgotPassword extends Component {
                                     <Spacer />
                                     <Formik
                                         initialValues={{
-                                            email: "",
+                                            emailId: "",
                                             otp: "",
                                             password: "",
                                             confirmPassword: "",
@@ -223,7 +219,7 @@ class ForgotPassword extends Component {
                                             console.log(values);
                                             this.props.updatePassword(
                                                 {
-                                                    email: this.props.email,
+                                                    ...values,
                                                 },
                                                 this.callback
                                             );
@@ -236,7 +232,7 @@ class ForgotPassword extends Component {
                                                         <div style={{ width: "70%" }}>
                                                             <Field
                                                                 placeholder="Enter your email"
-                                                                name="defaultUser.email"
+                                                                name="emailId"
                                                                 isColumn
                                                                 width={"100%"}
                                                                 style={{ height: "40px" }}
@@ -248,12 +244,11 @@ class ForgotPassword extends Component {
                                                             <Button
                                                                 type="primary"
                                                                 // htmlType="submit"
-                                                                //disabled={!values.defaultUser.email.length}
+                                                                disabled={!values.emailId.length}
                                                                 // loading={isSubmitting}
                                                                 onClick={() => {
                                                                     this.props.sendOtpForValidation({
-                                                                        emailId: values.defaultUser.email,
-                                                                        otp: 0,
+                                                                        emailId: values.emailId,
                                                                     });
                                                                     // this.handleOtpField()
                                                                 }}
@@ -272,7 +267,7 @@ class ForgotPassword extends Component {
                                                         <div style={{ width: "70%" }}>
                                                             <Field
                                                                 // disabled={!this.state.otp}
-                                                                name="defaultUser.validateotp"
+                                                                name="otp"
                                                                 placeholder="Validate OTP"
                                                                 isColumn
                                                                 width={"100%"}
@@ -284,12 +279,12 @@ class ForgotPassword extends Component {
                                                             <Button
                                                                 type="primary"
                                                                 // htmlType="submit"
-                                                                //disabled={!values.defaultUser.validateotp.length}
+                                                                disabled={!values.otp.length}
                                                                 onClick={() => {
-                                                                    //   this.props.validateOtp({
-                                                                    //     emailId: values.defaultUser.email,
-                                                                    //     otp: values.defaultUser.validateotp,
-                                                                    //   });
+                                                                    this.props.validateOtp({
+                                                                        emailId: values.emailId,
+                                                                        otp: values.otp,
+                                                                    });
 
                                                                 }}
                                                                 style={{
@@ -379,7 +374,7 @@ class ForgotPassword extends Component {
                                                         >
                                                             {" "}
                                                             <Link
-                                                                to="/login"
+                                                                to="/email"
                                                                 style={{ textAlign: "center", fontSize: 14, color: "blue" }}
                                                             >
                                                                 Back to login
@@ -391,7 +386,8 @@ class ForgotPassword extends Component {
                                                         <Button
                                                             type="primary"
                                                             htmlType="submit"
-                                                            Loading={this.props.changingPassword}
+                                                            disabled={values.password.length === values.confirmPassword.length}
+                                                            // Loading={this.props.changingPassword}
                                                             style={{ width: "10em", height: "2.4em" }}
                                                         // onClick={() => this.props.login('prabeen.strange@gmail.com', 'chicharito14')}
                                                         >

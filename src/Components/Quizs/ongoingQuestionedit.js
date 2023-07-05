@@ -6,7 +6,6 @@ import { Button, Card } from "antd";
 import {
   getQuestionList,
   updateQuestionsInQuiz,
-  deleteQuestion,
 } from "../../Container/Quiz/QuizAction";
 import { InputComponent } from "../../Components/Forms/Formik/InputComponent";
 function ongoingQuestionedit(props) {
@@ -28,7 +27,6 @@ function ongoingQuestionedit(props) {
           option4: props.item.option4,
         }}
         onSubmit={(values, { resetForm }) => {
-          alert(JSON.stringify(values))
           props.updateQuestionsInQuiz
             (
               {
@@ -69,16 +67,15 @@ function ongoingQuestionedit(props) {
                         name="question"
                         value={`${values.question}`}
                         component={InputComponent}
-                        onChangeText={handleChange("question")}
+                        onChangeText={() => handleChange("question")}
                       />
                     </div>
                     <div class="mt-1">
                       <Field
                         component={InputComponent}
-                        value={`${values.option1} (Correct Answer)`}
-                        placeholder="Correct answer"
+                        value={`${values.option1}`}
                         name="option1"
-                        onChangeText={handleChange("option1")}
+                        onChangeText={() => handleChange("option1")}
                       />
                     </div>
                     <div class="mt-1">
@@ -87,7 +84,7 @@ function ongoingQuestionedit(props) {
                         value={`${values.option2}`}
                         placeholder="Option 2"
                         name="option2"
-                        onChangeText={handleChange("option2")}
+                        onChangeText={() => handleChange("option2")}
                       />
                     </div>
                     <div class="mt-1">
@@ -96,7 +93,7 @@ function ongoingQuestionedit(props) {
                         value={`${values.option3}`}
                         placeholder="Option 3"
                         name="option3"
-                        onChangeText={handleChange("option3")}
+                        onChangeText={() => handleChange("option3")}
                       />
                     </div>
                     <div class="mt-1">
@@ -112,7 +109,7 @@ function ongoingQuestionedit(props) {
                       <Button
                         title={""}
                         type="primary"
-                        onClick={() => props.deleteQuestion(props.item.id)}
+                        onClick={() => props.handleDeleteQuestion(props.item.id)}
                         style={{ width: "7rem" }}
                       >
                         Delete
@@ -160,7 +157,6 @@ const mapDispatchToProps = (dispatch) =>
     {
       getQuestionList,
       updateQuestionsInQuiz,
-      deleteQuestion,
     },
     dispatch
   );
