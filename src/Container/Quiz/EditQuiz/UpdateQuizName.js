@@ -20,8 +20,8 @@ function UpdateQuizName(props) {
       <MainHeader />
       <Formik
         initialValues={{
-          duration: props.showQuiz && props.showQuiz.duration,
-          quizName: props.showQuiz && props.showQuiz.quizName,
+          duration: props.finalizeQuiz && props.finalizeQuiz.duration,
+          quizName: props.finalizeQuiz && props.finalizeQuiz.quizName,
           quizHostId: props.quizHostId,
         }}
 
@@ -31,7 +31,7 @@ function UpdateQuizName(props) {
             {
               ...values
             },
-            props.showQuiz && props.showQuiz.quizId,
+            props.finalizeQuiz && props.finalizeQuiz.quizId,
             handleCallBack
           );
           //resetForm()
@@ -88,6 +88,7 @@ const mapStateToProps = ({ auth, quiz }) => ({
   updateQuizNameQuizId: quiz.updateQuizNameQuizId,
   updateQuizNameQuizIdError: quiz.updateQuizNameQuizIdError,
   showQuiz: quiz.showQuiz,
+  finalizeQuiz: quiz.finalizeQuiz,
   fetchingQuizName: quiz.fetchingQuizName,
   quizHostId: auth.userDetails.userId
   // quizId:quiz.showQuiz.quizId

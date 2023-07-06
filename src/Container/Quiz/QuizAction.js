@@ -199,7 +199,6 @@ export const deleteQuestion = (questionId, cb, quizId) => dispatch => {
       },
     })
     .then(res => {
-      dispatch(getQuestionList(quizId))
       dispatch({
         type: types.DELETE_QUESTION_BY_QUESTION_ID_SUCCESS,
         payload: questionId,

@@ -7,13 +7,17 @@ import { Link } from "react-router-dom";
 import {
   getQuestionList,
   updateQuestionsInQuiz,
+  deleteQuestion
 } from "../../QuizAction";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
 function QuestionEdit(props) {
-  const { item } = props.item;
-  const [count, setCount] = useState(props.item);
-  console.log("id", props.item.id);
-  console.log(props.number + 1)
+
+  const handleDeleteQuestion = (id) => {
+    props.deleteQuestion(id, handleCallBack, props.finalizeQuiz && props.finalizeQuiz.quizId)
+  }
+  const handleCallBack = () => {
+    props.getQuestionList(props.finalizeQuiz && props.finalizeQuiz.quizId);
+  }
   return (
     <>
       <Formik
@@ -118,7 +122,7 @@ function QuestionEdit(props) {
                         <Button
                           title={""}
                           type="primary"
-                          onClick={() => props.handleDeleteQuestion(props.item.id)}
+                          onClick={() => handleDeleteQuestion(props.item.id, handleCallBack)}
                           style={{ width: "9rem", backgroundColor: "white", marginLeft: "0.5rem" }}
                         >
                           <h3> Delete Question</h3>
@@ -146,12 +150,6 @@ function QuestionEdit(props) {
                             <h3>Finalize Quiz</h3>
                           </Button>
                         </Link>
-                        {/* <Button
-
-
-                    onClick={() => setModalVisible(true)}
-                  
-                  >Add</Button> */}
                       </div>
                     </div>
                   </Card>
@@ -174,7 +172,8 @@ const mapStateToProps = ({ auth, quiz }) => ({
   quizId: quiz.showQuiz.quizId,
   category: quiz.category,
   questionList: quiz.questionList,
-  quizHostId: auth.userDetails.userId
+  quizHostId: auth.userDetails.userId,
+  finalizeQuiz: quiz.finalizeQuiz,
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -182,6 +181,7 @@ const mapDispatchToProps = (dispatch) =>
     {
       getQuestionList,
       updateQuestionsInQuiz,
+      deleteQuestion
     },
     dispatch
   );

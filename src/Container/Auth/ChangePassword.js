@@ -64,7 +64,7 @@ class ForgetPasswordForm extends Component {
                                 initialValues={{
                                     email: this.props.user.emailId || "",
                                     password: "",
-                                    consfirmpassword: ""
+                                    confirmPassword: ""
                                 }}
 
                                 onSubmit={(values) => {
@@ -94,7 +94,7 @@ class ForgetPasswordForm extends Component {
                                             </div>
                                             <div style={{ width: "100%", padding: "15px" }}>
                                                 <Field
-                                                    name="consfirmpassword"
+                                                    name="confirmPassword"
                                                     type="password"
                                                     placeholder="Confirm New Password"
                                                     style={{ width: "100%", height: "2.5em" }}
@@ -105,7 +105,7 @@ class ForgetPasswordForm extends Component {
                                         </div>
                                         <div style={{ display: "flex", justifyContent: "space-around" }}>
                                             <Link
-                                                to="/create"
+                                                to="/"
                                                 style={{ textAlign: "center", fontSize: 13, color: "blue", fontWeight: "500" }}
                                             >
                                                 Back To Home
@@ -114,7 +114,7 @@ class ForgetPasswordForm extends Component {
                                                 <Button
                                                     type="primary"
                                                     htmlType="submit"
-                                                    disabled={values.password === values.consfirmpassword ? false : true}
+                                                    disabled={values.password === values.confirmPassword ? false : true}
                                                     loading={this.props.changingPassword}
                                                     style={{ width: "100%", height: "2.5em" }}
                                                 >

@@ -23,7 +23,7 @@ export const login = ({ email, password }, history, cb) => (dispatch) => {
       //console.log(res);
       //console.log('get response');
       dispatch(getUserDetails(res.data.userId));
-      history.push("/create");
+      history.push("/");
       dispatch({
         type: types.LOGIN_SUCCESS,
         payload: res.data,
@@ -138,14 +138,23 @@ export const googleLogin = (tokenId, cb) => dispatch => {
     });
 };
 
-export const signUpByUser = (data, cb) => (dispatch) => {
+export const signUpByUser = ({ emailID, password, name, confirmPassword, imageId }, history, cb) => (dispatch) => {
   dispatch({
     type: types.SIGN_UP_BY_USER_REQUEST,
   });
   axios
-    .post(`${login_url}/userDetails/save`, data)
+    .post(`${login_url}/userDetails/save`,
+      {
+        emailID: emailID,
+        password: password,
+        name: name,
+        confirmPassword: confirmPassword,
+        imageId: imageId
+      })
     .then((res) => {
       dispatch(getUserDetails(res.data.userId));
+      history.push("/");
+      message.success("You have registered successfully !!")
       dispatch({
         type: types.SIGN_UP_BY_USER_SUCCESS,
         payload: res.data,
@@ -154,17 +163,7 @@ export const signUpByUser = (data, cb) => (dispatch) => {
     })
     .catch((err) => {
       cb()
-      if (
-        err &&
-        err.response &&
-        err.response.data ===
-        "You have entered an invalid username or password "
-      ) {
-      } else {
-        history.push({
-          pathname: "/",
-        });
-      }
+
       dispatch({
         type: types.SIGN_UP_BY_USER_FAILURE,
         payload: err,

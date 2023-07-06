@@ -21,10 +21,6 @@ import { InputComponent } from "../../Components/Forms/Formik/InputComponent";
 //  */
 
 class SignUpPage extends Component {
-    handleCallback = () => {
-        message.success("You have registered successfully !!");
-        this.props.history.push("/create");
-    };
     render() {
         console.log(this.props);
 
@@ -73,7 +69,7 @@ class SignUpPage extends Component {
                                         this.props.signUpByUser({
                                             ...values,
                                         },
-                                            this.handleCallback()
+                                            this.props.history
                                         )
                                     } else {
                                         message.success("Please match your password")

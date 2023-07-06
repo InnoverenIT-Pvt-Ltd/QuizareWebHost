@@ -50,7 +50,7 @@ function MainHeader(props) {
               </div>
               {/* </Link> */}
               <div style={{ display: "flex", justifyContent: "space-around" }}>
-                <Link to="/create">
+                <Link to="/">
                   <div style={{ marginTop: "5px" }}>
                     <HomeIcon />
                   </div>
