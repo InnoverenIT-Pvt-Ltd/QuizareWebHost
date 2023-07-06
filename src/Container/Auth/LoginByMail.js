@@ -68,17 +68,7 @@ class LoginByMail extends Component {
         return (
             <>
                 <FlexContainer>
-                    <AuthContainer
-                        style={{
-                            backgroundColor: "#F5F5F5",
-                            width: "50%",
-                            minHeight: "100vh",
-                            flexDirection: "column",
-                            position: "relative",
-                            alignItems: "center",
-                            margin: "auto",
-                        }}
-                    >
+                   <div class="w-full flex-col min-h-screen overflow-auto flex justify-center items-center  ">
                         {/* <img
                             className="big-logo"
                             src={LogoNew}
@@ -93,7 +83,7 @@ class LoginByMail extends Component {
                             alt="Tekorero logo"
 
                         />
-                        <MainWrapper style={{ width: "50%" }}>
+                       <div className="bg-white rounded-2xl shadow-2xl border-solid flex justify-center mt-3 flex-col max-sm:w-11/12 h-80 md:w-2/6 ">
                             <Formik
                                 enableReinitialize
                                 initialValues={{
@@ -164,9 +154,9 @@ class LoginByMail extends Component {
                                 </Link>
                             </div>
 
-                        </MainWrapper>
+                        </div>
                         <Spacer />
-                    </AuthContainer>
+                    </div>
                 </FlexContainer>
             </>
         );

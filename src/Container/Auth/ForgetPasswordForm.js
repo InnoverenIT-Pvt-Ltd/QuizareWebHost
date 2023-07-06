@@ -195,15 +195,8 @@ class ForgotPassword extends Component {
                 <div className="main" style={{ display: "flex", justifyContent: "space-evenly" }}>
                     <div className="forgot_password">
                         <FlexContainer>
-                            <AuthContainer
-                                style={{
-                                    backgroundColor: "white",
-                                    flexDirection: "column",
-                                    width: "100%",
-                                    padding: "4em"
-                                }}
-                            >
-                                <FormWrapper style={{ padding: "2.2em" }}>
+                        <div class="w-full flex-col min-h-screen overflow-auto flex justify-center items-center  ">
+                                <FormWrapper >
                                     <Title style={{ color: "#08cb08" }}>Forgot Password</Title>
                                     <SubTitle>Link will be sent to your registered email id</SubTitle>
                                     <Spacer />
@@ -226,7 +219,7 @@ class ForgotPassword extends Component {
                                         }}
                                     >
                                         {({ errors, touched, values, isSubmitting }) => (
-                                            <Form style={{ width: "25vw" }}>
+                                            <Form class="w-wk ">
                                                 <div >
                                                     <div style={{ width: "100%", display: "flex" }}>
                                                         <div style={{ width: "70%" }}>
@@ -411,7 +404,7 @@ class ForgotPassword extends Component {
                                     }}>
                                     © {new Date().getFullYear()},  {` `} teKorero.com, All rights reserved.
                                 </div>
-                            </AuthContainer>
+                            </div>
 
                         </FlexContainer>
                     </div>
@@ -467,7 +460,7 @@ width: ${(props) => props.width}
     border: 0.0625em solid #ddd;
     background: #fff;
     @media only screen and (max-width: 37.5em) {
-       width:89%
+       width:100%
          }
  @media only screen 
 and (min-device-width : 48em) 

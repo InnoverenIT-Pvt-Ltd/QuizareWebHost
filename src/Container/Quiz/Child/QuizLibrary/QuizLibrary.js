@@ -73,7 +73,7 @@ function QuizLibrary(props) {
     <>
       <MainHeader />
       <Formik>
-        <Form class="flex justify-center max-sm:w-11/12 mt-8 m-auto md:mt-12  w-1/5  h-h50  ">
+        <Form class="flex justify-center max-sm:w-11/12 mt-8 m-auto md:mt-12  w-2/5  h-h50  ">
           {/* <div className="bg-white rounded-rounded2.8 mt-3 "> */}
 
 

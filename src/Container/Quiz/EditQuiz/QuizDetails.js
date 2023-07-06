@@ -29,7 +29,7 @@ function QuizDetails(props) {
     <>
       <MainHeader />
 
-      <div class="flex justify-center  items-center max-sm:w-11/12 mt-8 m-auto md:mt-12  w-1/5 ">
+      <div class="flex justify-center  items-center max-sm:w-11/12 mt-8 m-auto md:mt-12  w-2/5 ">
         <div class="shadow-2xl border-solid w-11/12 flex justify-center items-center flex-col  p-1 max-sm:m-0 h-h31 rounded-xl md:m-auto">
           <div class="w-full flex justify-center items-center">
             <h2 class="text-base  flex justify-center flex-col">
@@ -76,7 +76,7 @@ function QuizDetails(props) {
                 <QuizDetailsPlayerTable data={props.showQuiz} />
               )}
         </div> */} 
-        <div class='flex justify-between mt-4 w-80'>
+        <div class='flex justify-between mt-4 w-80 md:w-wk'>
             <div class="w-36">
               <Button
                 style={{ backgroundColor: "white" }}

@@ -319,94 +319,93 @@ function QuizDetails(props) {
 
   return (
     <>
-      <Formik>
-        <Form class="flex justify-center max-sm:w-11/12 mt-8 m-auto md:mt-12  w-1/5  h-h50  ">
+       <Formik>
+        <Form class="flex justify-center max-sm:w-11/12 mt-8 m-auto md:mt-12 w-full  h-h50  ">
           {/* <div className="bg-white rounded-rounded2.8 mt-3 "> */}
 
 
           <Swiper
-
-            navigation={true}
-
-            modules={[Navigation]}
-            className="mySwiper "
+       
+        navigation={true}
+       
+        modules={[Navigation]}
+        className="mySwiper "
+      >
+ {props.ongoingQuiz.map((item,i) => {
+  const ongoingQuizLink=`http://player.quizledge.no.s3-website.eu-west-3.amazonaws.com${item.quizLink}`
+            return (
+<SwiperSlide >
+      
+<div class=" max-sm:w-11/12  h-h32   m-auto md:w-1/5  h-h50  ">
+<div className="bg-white rounded-2xl shadow-2xl border-solid flex justify-center mt-3 ">
+  <div class=" w-11/12 flex justify-center flex-col  p-4 max-sm:m-0 h-h31 rounded-2xl md:m-auto">
+    <h2 class="text-base   flex justify-center">You are hosting</h2>
+    {/* <h2 class="text-base flex justify-center"> */}
+    {editName === false && item.quizName ? (
+      <div className="flex flex-row justify-center w-full">
+        <h2 class="text-base flex justify-center">{item.quizName}</h2>
+        <div class="ml-2">
+        <button onClick={handleEdit}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-6 h-6"
           >
-            {props.ongoingQuiz.map((item, i) => {
-              const ongoingQuizLink = `http://player.quizledge.no.s3-website.eu-west-3.amazonaws.com${item.quizLink}`
-              return (
-                <SwiperSlide >
-
-                  <div class=" max-sm:w-11/12  h-h32   m-auto md:w-1/5  h-h50  ">
-                    <div className="bg-white rounded-2xl shadow-2xl border-solid flex justify-center mt-3 ">
-                      <div class=" w-11/12 flex justify-center flex-col  p-4 max-sm:m-0 h-h31 rounded-2xl md:m-auto">
-                        <h2 class="text-base   flex justify-center">You are hosting</h2>
-                        {/* <h2 class="text-base flex justify-center"> */}
-                        {editName === false && item.quizName ? (
-                          <div className="flex flex-row justify-center w-full">
-                            <h2 class="text-base flex justify-center">{item.quizName}</h2>
-                            <div class="ml-2">
-                              <button onClick={handleEdit}>
-                                <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  fill="none"
-                                  viewBox="0 0 24 24"
-                                  strokeWidth={1.5}
-                                  stroke="currentColor"
-                                  className="w-6 h-6"
-                                >
-                                  <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
-                                  />
-                                </svg>
-                              </button>
-                            </div>
-                          </div>
-                        ) : editName === true && item.quizName ? (
-                          <div className="flex flex-row justify-between w-full">
-                            <input
-                              type="text"
-                              placeholder="Enter quiz name"
-                              name="quizName"
-                              className="border text-xs border-gray-300 rounded-md px-1"
-                              value={quizName}
-                              onChange={(ev) => setQuizName(ev.target.value)}
-                            />
-                            <button
-                              type="submit"
-                              className="bg-blue-900 text-white px-4 rounded-md"
-                              onClick={() => {
-                                props.updateQuizNameByQuizId(
-                                  {
-                                    quizName: quizName,
-                                    quizHostId: props.quizHostId,
-                                  }, item.quizId, setEditName(false),
-
-                                )
-                              }
-                              }
-                            >
-                              save
-                            </button>
-                          </div>
-                        ) : null}
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
+            />
+          </svg>
+        </button>
+        </div>
+      </div>
+    ) : editName === true && item.quizName ? (
+      <div className="flex flex-row justify-between w-full">
+        <input
+          type="text"
+          placeholder="Enter quiz name"
+          name="quizName"
+          className="border text-xs border-gray-300 rounded-md px-1"
+          value={quizName}
+          onChange={(ev) => setQuizName(ev.target.value)}
+        />
+        <button
+          type="submit"
+          className="bg-blue-900 text-white px-4 rounded-md"
+          onClick={() =>{
+            props.updateQuizNameByQuizId(
+              {
+                quizName: quizName,quizHostId: "QH4472404666122022",
+              },item.quizId,setEditName(false),
+              
+            )}
+          }
+        >
+          save
+        </button>
+      </div>
+    ) : null}
 
                         {/* </h2> */}
 
-                        <h2 class="text-base mt-2 flex justify-center ">
-                          Share URL for others to access.
-                        </h2>
-                        <Card class="mt-4">
-                          {item.quizLink ? (
-                            <h2 class="text-xs flex justify-center " style={{ overflowWrap: "break-word" }}>{`http://player.quizledge.no.s3-website.eu-west-3.amazonaws.com${item.quizLink || ""
-                              }`}</h2>
-                          ) : (
-                            ""
-                          )}
-                        </Card>
-                        <div class="flex justify-center mt-1">
-                          {/* <Button
+    <h2 class="text-base mt-2 flex justify-center ">
+      Share URL for others to access.
+    </h2>
+    <Card class="mt-4">
+      {item.quizLink ? (
+        <h2 class="text-xs flex justify-center "style={{overflowWrap:"break-word"}}>{`http://player.quizledge.no.s3-website.eu-west-3.amazonaws.com${
+          item.quizLink || ""
+        }`}</h2>
+      ) : (
+        ""
+      )}
+    </Card>
+    <div class="flex justify-center mt-1">
+      {/* <Button
         style={{
           backgroundColor: "#4096ff",
           width: "-webkit-fill-available",
@@ -417,57 +416,57 @@ function QuizDetails(props) {
       >
         <h2 class="text-white">Click to copy the url</h2>
       </Button> */}
-                          <button
-                            type="button"
-                            className="copy-button"
-                            data-link={ongoingQuizLink}
-                            data-clipboard-text={ongoingQuizLink}
-                            style={{
-                              backgroundColor: "#4096ff",
-                              width: "100%",
-                              borderRadius: "0.4rem",
-                              height: "auto",
-                            }}
-                          >
-                            <h2 class="text-white"> Click to copy the url</h2>
-                          </button>
-                        </div>
-                        <h2 class="text-xl mt-2 flex justify-center">
-                          Who is playing your quiz?
-                        </h2>
-                        <div>
-                          {viewData === null ? (
-                            <h2 class="text-base">{viewmessage}</h2>
-                          ) : (
-                            <QuizDetailsPlayerTable data={item} />
-                          )}
-                        </div>
-                        <div class="flex justify-between mt-2">
-                          <div class="w-36">
-                            {/* <Link to="/updateOngoing"> */}
-                            <Link to={`updateOngoing/${item.quizId}`}>
-                              <Button
-                                style={{ backgroundColor: "white" }}
-                                type="primary"
-                              // onClick={ID}
-                              >
-                                <h3>Edit Quiz</h3>
-                              </Button>
-                            </Link>
-                          </div>
-                          <div class="w-32 ml-2">
-                            {item.quizHostInd === true && (
-                              <Button
-                                style={{ backgroundColor: "white" }}
-                                type="primary"
-                                onClick={() => props.closeQuiz(item.quizId, props.quizHostId)}
-                              >
-                                <h3>Close Quiz</h3>
-                              </Button>
-                            )}
-                          </div>
-                        </div>
-                        {/* <div class="mt-3">
+        <button
+         type="button"
+            className="copy-button"
+            data-link={ongoingQuizLink}
+            data-clipboard-text={ongoingQuizLink}
+            style={{
+              backgroundColor: "#4096ff",
+              width: "100%",
+              borderRadius: "0.4rem",
+              height: "auto",
+            }}
+          >
+           <h2 class="text-white"> Click to copy the url</h2>
+          </button>
+    </div>
+    <h2 class="text-xl mt-2 flex justify-center">
+      Who is playing your quiz?
+    </h2>
+    <div>
+      {viewData === null ? (
+        <h2 class="text-base">{viewmessage}</h2>
+      ) : (
+        <QuizDetailsPlayerTable data={item} />
+      )}
+    </div>
+    <div class="flex justify-between mt-2">
+    <div class="w-36">
+        {/* <Link to="/updateOngoing"> */}
+        <Link to={`updateOngoing/${item.quizId}`}>
+          <Button
+            style={{ backgroundColor: "white" }}
+            type="primary"
+           // onClick={ID}
+          >
+            <h3>Edit Quiz</h3>
+          </Button>
+        </Link>
+      </div>
+      <div class="w-32 ml-2">
+      {item.quizHostInd ===true && (
+        <Button
+          style={{ backgroundColor: "white" }}
+          type="primary"
+          onClick={() => props.closeQuiz(item.quizId)}
+        >
+          <h3>Close Quiz</h3>
+        </Button>
+         )}  
+      </div>            
+    </div>
+    {/* <div class="mt-3">
     {props.quizNameDetails.quizHostInd !==true && (
       <Button
         type="primary"

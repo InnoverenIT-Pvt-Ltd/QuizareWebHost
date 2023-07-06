@@ -50,8 +50,8 @@ function QuestionEdit(props) {
           errors,
           values,
         }) => (
-          <Form class=" max-sm:w-full h-h31  m-auto md:mt-12  w-1/5  h-h50  ">
-            <div className="w-full my-2 flex justify-center m-auto ">
+          <Form class=" max-sm:w-full h-h31  m-auto md:mt-12  w-2/5  h-h50  ">
+          <div className="w-full my-2 flex justify-center m-auto ">
               <div>
                 {/* Container */}
                 <div>

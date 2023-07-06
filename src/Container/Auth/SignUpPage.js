@@ -27,24 +27,7 @@ class SignUpPage extends Component {
         return (
             <>
                 <FlexContainer>
-                    <AuthContainer
-                        style={{
-                            backgroundColor: "#F5F5F5",
-                            width: "50%",
-                            minHeight: "100vh",
-                            flexDirection: "column",
-                            position: "relative",
-                            alignItems: "center",
-                            margin: "auto",
-                        }}
-                    >
-                        {/* <img
-                            className="big-logo"
-                            src={LogoNew}
-                            style={{ width: 200 }}
-                            alt="Tekorero logo"
-                        />
-                        <br /> */}
+                <div class="w-full flex-col  overflow-auto flex justify-center items-center max-sm:h-h36 md:min-h-screen  ">                   
                         <img
                             className="big-logo"
                             src={FWLogo}
@@ -52,7 +35,7 @@ class SignUpPage extends Component {
                             alt="Tekorero logo"
 
                         />
-                        <MainWrapper style={{ width: "50%" }}>
+                       <div className="bg-white rounded-2xl shadow-2xl border-solid flex justify-center mt-3 flex-col max-sm:w-11/12 md:w-2/6 ">
                             <Formik
                                 enableReinitialize
                                 initialValues={{
@@ -85,11 +68,8 @@ class SignUpPage extends Component {
                                     setFieldValue,
                                     setFieldTouched,
                                 }) => (
-                                    <Form className="form-background">
-                                        <div
-
-                                            style={{ alignItems: "center", display: "flex", flexDirection: "column" }}
-                                        >
+                                    <Form className="form-background h-h29">
+                                        <div class="flex justify-center items-center flex-col" >
                                             <FlexContainer flexWrap="no-wrap">
                                                 <div
                                                     style={{
@@ -159,9 +139,9 @@ class SignUpPage extends Component {
                                 )}
                             </Formik>
 
-                        </MainWrapper>
+                        </div>
                         <Spacer />
-                    </AuthContainer>
+                    </div>
                 </FlexContainer>
             </>
         );
