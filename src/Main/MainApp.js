@@ -46,6 +46,7 @@ import UpdateQuizNameLibrary from "../Container/Quiz/EditQuiz/UpdateQuizNameLibr
 import updateOngoing from "../Components/Quizs/updateOngoing";
 import ProfileDropdown from "../Container/Auth/ProfileDropdown";
 import ChangePassword from "../Container/Auth/ChangePassword";
+import Test from "../Container/Auth/Test";
 const { Option } = Select;
 
 const { Header, Sider, Content } = Layout;
@@ -86,6 +87,7 @@ function MainApp(props) {
               <Route exact path="/swipeInLibrary/:quizId" component={SwipeInLibrary} />
               <Route exact path="/quizLibrary" component={QuizLibrary} />
               <Route exact path="/addquiz" component={Quiz} />
+              <Route exact path="/test" component={Test} />
             </Switch>
           </Suspense>
         </Content>

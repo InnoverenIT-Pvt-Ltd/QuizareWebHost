@@ -9,7 +9,7 @@ import { GoogleLogin } from 'react-google-login';
 import FWLogo from "../../../src/images/Latest.png";
 import { facebookLogin, googleLogin } from "../Auth/AuthAction";
 import FacebookLogin from "react-facebook-login";
-// import SkillsLoadMore from "./CandidateTable/SkillsLoadMore";
+
 const { Option } = Select;
 /**
  * yup validation scheme for creating a contact
@@ -25,43 +25,19 @@ const CandidateSchema = Yup.object().shape({
 
 function Login(props) {
 
-  //For Facebook login
   const responseFacebook = (response) => {
     console.log(response);
     props.facebookLogin(response.accessToken)
   }
 
-  //For Google login
-
   const responseGoogle = (response) => {
     console.log(response);
     props.googleLogin(response.tokenId)
   };
-  const errorMessage = (error) => {
-    console.log(error);
-  };
-
-  const handleLoginCallback = (status, data) => {
-    if (data) {
-      message.error(data.message);
-      // props.handleAuthLoginModal(false);
-    } else {
-      if (status === "success") {
-        // props.handleAuthLoginModal(false);
-        // props.history.push("/userdashboard");
-        message.success("Login successful.");
-      } else {
-        // props.handleAuthLoginModal(false);
-        message.error(
-          "We encountered the following error : Email id and Password not match . Please try again later, or contact us for assistance"
-        );
-      }
-    }
-  };
 
   let google = <div>
     <GoogleLogin
-      clientId="872903236452-j5ck0dt7g4efaforvhoujdd3aaesf0tj.apps.googleusercontent.com"
+      clientId="748641779898-e7jjaer4u1mf9kq0u7tcti1iv0i70bq6.apps.googleusercontent.com"
       buttonText="Login with Google"
       onSuccess={responseGoogle}
       onFailure={responseGoogle}
@@ -73,6 +49,7 @@ function Login(props) {
       <FacebookLogin
         appId="1216755315881273"
         autoLoad={false}
+        scope="public_profile, email, user_birthday"
         fields="name,email,picture"
         callback={responseFacebook}
       />

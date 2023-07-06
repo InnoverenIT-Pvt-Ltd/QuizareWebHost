@@ -70,7 +70,6 @@ export const facebookLogin = (token, cb) => dispatch => {
   dispatch({
     type: types.FACEBOOK_LOGIN_REQUEST
   });
-
   axios
     .post(`${base_url}/facebooklogin`, {
       access_token: token
@@ -276,3 +275,9 @@ export const validateOtp = (data, cb) => (dispatch) => {
     });
 };
 
+export const logout = (history) => (dispatch) => {
+  window.sessionStorage.clear();
+  history.push("/login");
+  dispatch({ type: types.LOGOUT });
+  message.success("You have successfully logged out. See you soon.");
+};
