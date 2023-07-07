@@ -49,7 +49,7 @@ import ChangePassword from "../Container/Auth/ChangePassword";
 import Test from "../Container/Auth/Test";
 const { Option } = Select;
 
-const { Header, Sider, Content } = Layout;
+const { Content } = Layout;
 
 function MainApp(props) {
 

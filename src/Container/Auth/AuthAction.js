@@ -20,10 +20,9 @@ export const login = ({ email, password }, history, cb) => (dispatch) => {
       password: password,
     })
     .then((res) => {
-      //console.log(res);
-      //console.log('get response');
       dispatch(getUserDetails(res.data.userId));
       history.push("/");
+      console.log(history)
       dispatch({
         type: types.LOGIN_SUCCESS,
         payload: res.data,
