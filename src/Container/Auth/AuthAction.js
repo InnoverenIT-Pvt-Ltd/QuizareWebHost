@@ -216,6 +216,7 @@ export const sendOtpForValidation = (data, cb) => (dispatch) => {
         payload: res.data,
       });
       cb();
+      message.success("Otp has been sent to your registered Email !!")
     })
     .catch((err) => {
       cb()
@@ -239,7 +240,7 @@ export const updatePassword = (data, cb) => (dispatch) => {
         payload: res.data,
       });
       cb();
-      message.success("Password has changed successfully !!")
+      message.success("Password has been changed successfully !!")
     })
     .catch((err) => {
       cb()
@@ -263,6 +264,7 @@ export const validateOtp = (data, cb) => (dispatch) => {
         payload: res.data,
       });
       cb();
+      message.success(res.data.status)
     })
     .catch((err) => {
       cb()
