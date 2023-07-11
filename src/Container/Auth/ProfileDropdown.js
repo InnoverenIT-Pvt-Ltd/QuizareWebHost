@@ -85,25 +85,25 @@ class ProfileDropdown extends Component {
                     />
                 }
             >
-                {imageId ? (
+                {/* {imageId ? (
                     <img
                         src={`${base_url}/image/${imageId}`}
                         style={{ width: 32, height: 32, borderRadius: "50%", lineHeight: "32px", fontSize: "1.2em" }}
                     />
-                ) : (
-                    <Avatar
-                        style={{
-                            backgroundColor: "rgb(148, 179, 228)",
-                            verticalAlign: "middle",
-                            color: "white",
-                            width: "2.1rem",
-                            height: "2.1rem",
-                        }}
-                        size="large"
-                    >
-                        {name && name.split("")[0].toUpperCase()}
-                    </Avatar>
-                )}
+                ) : ( */}
+                <Avatar
+                    style={{
+                        backgroundColor: "rgb(148, 179, 228)",
+                        verticalAlign: "middle",
+                        color: "white",
+                        width: "2.1rem",
+                        height: "2.1rem",
+                    }}
+                    size="large"
+                >
+                    {name && name.split("")[0].toUpperCase()}
+                </Avatar>
+                {/* )} */}
             </StyledDropdown>
         );
     }

@@ -3,7 +3,7 @@ import { Field, Form, Formik } from "formik";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button, Card } from "antd";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import {
   getQuestionList,
   updateQuestionsInQuiz,
@@ -13,10 +13,12 @@ import { InputComponent } from "../../../../Components/Forms/Formik/InputCompone
 function QuestionEdit(props) {
 
   const handleDeleteQuestion = (id) => {
-    props.deleteQuestion(id, handleCallBack, props.finalizeQuiz && props.finalizeQuiz.quizId)
+    props.deleteQuestion(id, handleCallBack)
   }
+  const history = useHistory();
+
   const handleCallBack = () => {
-    props.getQuestionList(props.finalizeQuiz && props.finalizeQuiz.quizId);
+    history.push(`/updateQuizName`)
   }
   return (
     <>
@@ -51,7 +53,7 @@ function QuestionEdit(props) {
           values,
         }) => (
           <Form class=" max-sm:w-full h-h31  m-auto md:mt-12  w-2/5  h-h50  ">
-          <div className="w-full my-2 flex justify-center m-auto ">
+            <div className="w-full my-2 flex justify-center m-auto ">
               <div>
                 {/* Container */}
                 <div>
