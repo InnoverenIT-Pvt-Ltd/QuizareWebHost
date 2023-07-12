@@ -100,7 +100,7 @@ export const facebookLogin = (token, cb) => dispatch => {
     });
 };
 
-export const googleLogin = (tokenId, cb) => dispatch => {
+export const googleLogin = (tokenId, cb, history) => dispatch => {
   dispatch({
     type: types.GOOGLE_LOGIN_REQUEST
   });
@@ -114,6 +114,7 @@ export const googleLogin = (tokenId, cb) => dispatch => {
         type: types.GOOGLE_LOGIN_SUCCESS,
         payload: res.data
       });
+      history.push("/")
       console.log(res.data);
       if (res.data.successInd === true) {
         localStorage.setItem("userCredential", JSON.stringify(res.data));
