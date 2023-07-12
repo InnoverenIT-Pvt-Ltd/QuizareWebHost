@@ -399,7 +399,7 @@ function QuizDetails(props) {
                         </h2>
                         <Card class="mt-4">
                           {item.quizLink ? (
-                            <h2 class="text-xs flex justify-center " style={{ overflowWrap: "break-word" }}>{`http://player.quizledge.no.s3-website.eu-west-3.amazonaws.com${item.quizLink || ""
+                            <h2 class="text-xs flex justify-center " style={{ overflowWrap: "break-word" }}>{`https://player.quizledge.no${item.quizLink || ""
                               }`}</h2>
                           ) : (
                             ""

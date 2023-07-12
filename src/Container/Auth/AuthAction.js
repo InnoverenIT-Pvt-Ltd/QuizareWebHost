@@ -100,7 +100,7 @@ export const facebookLogin = (token, cb) => dispatch => {
     });
 };
 
-export const googleLogin = (tokenId, cb, history) => dispatch => {
+export const googleLogin = (tokenId, history, cb) => dispatch => {
   dispatch({
     type: types.GOOGLE_LOGIN_REQUEST
   });

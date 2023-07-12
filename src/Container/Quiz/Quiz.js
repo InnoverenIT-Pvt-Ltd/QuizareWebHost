@@ -43,7 +43,7 @@ function Quiz(props) {
   useEffect(() => {
     props.getCategory();
   }, []);
-  console.log(props.category);
+  console.log(props.selectedCategory);
 
   const history = useHistory();
 
@@ -74,12 +74,13 @@ function Quiz(props) {
             {
               ...values,
               quizId: props.showQuiz && props.showQuiz.quizId,
-              categoryId: selectedCategory, number: count,
+              categoryId: selectedCategory,
+              number: count,
             },
             props.showQuiz && props.showQuiz.quizId
           );
           resetForm();
-          setSelectedCategory("");
+          // setSelectedCategory("");
           handleCount();
         }}
       >

@@ -32,7 +32,7 @@ function Login(props) {
 
   const responseGoogle = (response) => {
     console.log(response);
-    props.googleLogin(response.tokenId)
+    props.googleLogin(response.tokenId, props.history)
   };
 
   let google = <div>

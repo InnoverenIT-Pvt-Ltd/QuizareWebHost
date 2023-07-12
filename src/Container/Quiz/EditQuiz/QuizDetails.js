@@ -12,7 +12,7 @@ import copy from "copy-to-clipboard";
 // import MainHeader from '../Mainheader';
 
 function QuizDetails(props) {
-  const link = `http://player.quizledge.no.s3-website.eu-west-3.amazonaws.com${props.showQuiz.quizLink || ""}`;
+  const link = `https://player.quizledge.no${props.showQuiz.quizLink || ""}`;
   function copyToClipboard() {
     copy(link);
     console.log(link)
@@ -49,9 +49,8 @@ function QuizDetails(props) {
             <Card style={{ width: "100%" }}>
               {/* <h2 class="text-base">{`${props.showQuiz.quizName || ''}`}{' '}</h2> */}
               {props.showQuiz.quizLink ? (
-                <h2 class="text-base">{`http://player.quizledge.no.s3-website.eu-west-3.amazonaws.com${
-                  props.showQuiz.quizLink || ""
-                }`}</h2>
+                <h2 class="text-base">{`http://player.quizledge.no${props.showQuiz.quizLink || ""
+                  }`}</h2>
               ) : (
                 ""
               )}
@@ -75,40 +74,40 @@ function QuizDetails(props) {
               ) : (
                 <QuizDetailsPlayerTable data={props.showQuiz} />
               )}
-        </div> */} 
-        <div class='flex justify-between mt-4 w-80 md:w-wk'>
-            <div class="w-36">
-              <Button
-                style={{ backgroundColor: "white" }}
-                type="primary"
-                onClick={() => props.closeQuiz(ID, handleCallBack())}
-              >
-                <h3>Close Quiz</h3>
-              </Button>
+        </div> */}
+            <div class='flex justify-between mt-4 w-80 md:w-wk'>
+              <div class="w-36">
+                <Button
+                  style={{ backgroundColor: "white" }}
+                  type="primary"
+                  onClick={() => props.closeQuiz(ID, handleCallBack())}
+                >
+                  <h3>Close Quiz</h3>
+                </Button>
               </div>
               <div>
-              <button
-              className="bg-blue-900 text-white px-4 rounded-md w-36 h-10 "
-              onClick={() => history.push(`/finalize`)}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-28 h-6"
+                <button
+                  className="bg-blue-900 text-white px-4 rounded-md w-36 h-10 "
+                  onClick={() => history.push(`/finalize`)}
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3"
-                  />
-                </svg>
-              </button>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="w-28 h-6"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3"
+                    />
+                  </svg>
+                </button>
               </div>
-              </div>
-           
+            </div>
+
           </div>
         </div>
       </div>
