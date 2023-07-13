@@ -337,7 +337,7 @@ function QuizDetails(props) {
               return (
                 <SwiperSlide >
 
-                  <div class=" max-sm:w-11/12  h-h32   m-auto md:w-1/5  h-h50  ">
+                  <div class=" max-sm:w-w97  h-h32   m-auto md:w-2/5  h-h50  ">
                     <div className="bg-white rounded-2xl shadow-2xl border-solid flex justify-center mt-3 ">
                       <div class=" w-11/12 flex justify-center flex-col  p-4 max-sm:m-0 h-h31 rounded-2xl md:m-auto">
                         <h2 class="text-base   flex justify-center">You are hosting</h2>
@@ -399,7 +399,7 @@ function QuizDetails(props) {
                         </h2>
                         <Card class="mt-4">
                           {item.quizLink ? (
-                            <h2 class="text-xs flex justify-center " style={{ overflowWrap: "break-word" }}>{`https://player.quizledge.no${item.quizLink || ""
+                            <h2 class="text-xs flex justify-center flex-col " style={{ overflowWrap: "break-word" }}>{`https://player.quizledge.no${item.quizLink || ""
                               }`}</h2>
                           ) : (
                             ""

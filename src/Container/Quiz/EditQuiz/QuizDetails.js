@@ -49,7 +49,7 @@ function QuizDetails(props) {
             <Card style={{ width: "100%" }}>
               {/* <h2 class="text-base">{`${props.showQuiz.quizName || ''}`}{' '}</h2> */}
               {props.showQuiz.quizLink ? (
-                <h2 class="text-base">{`http://player.quizledge.no${props.showQuiz.quizLink || ""
+                <h2 class="text-xs flex justify-center flex-col " style={{ overflowWrap: "break-word" }}>{`http://player.quizledge.no${props.showQuiz.quizLink || ""
                   }`}</h2>
               ) : (
                 ""
