@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { useEffect } from "react";
-import { getQuestionList } from "../../QuizAction";
+import { getQuestionList, handleBackToQuiz } from "../../QuizAction";
 import { Card } from "antd";
 import React, { useRef, useState } from "react";
 // Import Swiper React components
@@ -13,15 +13,20 @@ import "swiper/css/navigation";
 import "./styles.css";
 import QuestionEdit from "./QuestionEdit";
 import MainHeader from "../../../../Components/Mainheader";
+import { useHistory } from "react-router-dom";
 
 function SwipeInLibrary(props) {
   useEffect(() => {
     props.getQuestionList(props.showQuiz.quizId);
   }, []);
-
+  const history = useHistory();
+  const backTo = () => {
+    props.handleBackToQuiz()
+    history.push(`/ongoingQuiz`)
+  }
   return (
     <>
-    <MainHeader />
+      <MainHeader />
       <Swiper
         pagination={{
           type: "fraction",
@@ -30,14 +35,15 @@ function SwipeInLibrary(props) {
         modules={[Pagination, Navigation]}
         className="mySwiper"
       >
-        {props.questionList.map((item,index) => {
+        {props.questionList.map((item, index) => {
           return (
             <SwiperSlide key={item}>
               <div class="h-h37">
-                <Card style={{marginTop:"2rem"}}>
-                  <QuestionEdit 
-                  item={item} 
-                  number={index}
+                <Card style={{ marginTop: "2rem" }}>
+                  <QuestionEdit
+                    item={item}
+                    number={index}
+                    backTo={backTo}
                   />
                 </Card>
               </div>
@@ -58,6 +64,7 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       getQuestionList,
+      handleBackToQuiz
     },
     dispatch
   );

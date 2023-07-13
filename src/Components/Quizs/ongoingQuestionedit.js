@@ -5,14 +5,18 @@ import { bindActionCreators } from "redux";
 import { Button, Card } from "antd";
 import {
   getQuestionList,
+  handleBackToQuiz,
   updateQuestionsInQuiz,
 } from "../../Container/Quiz/QuizAction";
 import { InputComponent } from "../../Components/Forms/Formik/InputComponent";
+
+
 function ongoingQuestionedit(props) {
   //   const { item } = props.item;
   //   const [count, setCount] = useState(props.item);
-  //   console.log("id", props.item.id);
-  //   console.log(props.questionNo)
+  //   console.log("id", props.item.id)
+
+  console.log(props.item)
   return (
     <>
       <Formik
@@ -51,11 +55,10 @@ function ongoingQuestionedit(props) {
               <div>
                 {/* Container */}
                 <div>
-                  <Card
+                <div className="bg-white rounded-2xl shadow-2xl border-solid flex justify-center mt-3 flex-col max-sm:w-80 p-4 md:w-w30"
                     style={{
                       WebkitBoxShadow: "0 0 10px 2px rgb(46 46 46 / 39%)",
-                      width: "18rem",
-                      height: "26rem"
+                      
                     }}
                   >
                     <Card style={{ fontSize: 22, alignSelf: "center" }}>
@@ -75,6 +78,7 @@ function ongoingQuestionedit(props) {
                         component={InputComponent}
                         value={`${values.option1}`}
                         name="option1"
+                        style={{ border: "2px solid #07dd07" }}
                         onChangeText={() => handleChange("option1")}
                       />
                     </div>
@@ -105,31 +109,35 @@ function ongoingQuestionedit(props) {
                         onChangeText={handleChange("option4")}
                       />
                     </div>
-                    <div className="flex flex-row justify-center mt-8">
+                    <div className="flex flex-row justify-between mt-4">
                       <Button
                         title={""}
                         type="primary"
                         onClick={() => props.handleDeleteQuestion(props.item.id)}
-                        style={{ width: "7rem" }}
+                        style={{ width: "7rem" , backgroundColor: "white"}}
                       >
-                        Delete
+                        <h3>Delete</h3>
                       </Button>
                       <Button
                         title={""}
                         type="primary"
                         onClick={() => handleSubmit()}
-                        style={{ width: "7rem" }}
+                        style={{ width: "7rem" , backgroundColor: "white"}}
                       >
-                        Update
+                        <h3>Update</h3>
                       </Button>
-                      {/* <Button
-
-
-                    onClick={() => setModalVisible(true)}
-                  
-                  >Add</Button> */}
+                    
                     </div>
-                  </Card>
+                    <div class="mt-2">
+                    <Button
+                        title={""}
+                        type="primary"
+                        style={{ backgroundColor: "white" }}
+                        onClick={() => props.backTo()}
+
+                      ><h3>Back To Quiz</h3></Button>
+                      </div>
+                  </div>
 
                 </div>
 
@@ -157,6 +165,7 @@ const mapDispatchToProps = (dispatch) =>
     {
       getQuestionList,
       updateQuestionsInQuiz,
+      handleBackToQuiz
     },
     dispatch
   );
