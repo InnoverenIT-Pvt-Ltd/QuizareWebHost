@@ -52,7 +52,7 @@ function QuestionEdit(props) {
           errors,
           values,
         }) => (
-          <Form class=" max-sm:w-full h-h31  m-auto md:mt-12  w-wk  h-h50  ">
+          <Form class=" max-sm:w-full h-h34  m-auto md:mt-12   w-wk    ">
             <div className="w-full my-2 flex justify-center m-auto ">
               <div>
                 {/* Container */}
@@ -64,7 +64,7 @@ function QuestionEdit(props) {
                       //height: "max-content"
                     }}
                   >
-                    <div class=" w-full flex justify-center flex-col  p-4 max-sm:m-0 h-h31 rounded-2xl md:w-w30 m-auto">
+                    <div class=" w-full flex justify-center flex-col  p-4 max-sm:m-0 h-h34 rounded-2xl md:w-w30 m-auto">
                       <div style={{ fontSize: 22, alignSelf: "center" }}>
                         <h3 class="flex justify-center text-xl">Question {props.number + 1}</h3>
                       </div>
@@ -131,15 +131,10 @@ function QuestionEdit(props) {
                           >
                             <h3> Delete Question</h3>
                           </Button>
-                          <Button
-                            title={""}
-                            type="primary"
-                            style={{ width: "7rem" }}
-                            onClick={() => props.backTo()}
-
-                          >Back To Quiz</Button>
+                          
 
                         </div>
+                      
                         <div class=" flex flex-col h-24 justify-between mt-4">
                           <Link to="/addquizin">
                             <Button
@@ -162,6 +157,13 @@ function QuestionEdit(props) {
                             </Button>
                           </Link>
                         </div>
+                        <div class="mt-4"><Button
+                            title={""}
+                            type="primary"
+                            style={{ backgroundColor: "white",}}
+                            onClick={() => props.backTo()}
+
+                          ><h3>Back To Quiz</h3></Button></div>
                       </div>
                     </div>
                   </div>
