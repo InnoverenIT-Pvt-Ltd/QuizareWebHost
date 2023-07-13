@@ -56,11 +56,12 @@ class PrivateRoute extends React.Component {
   }
   render() {
     const { component: Component, ...rest } = this.props;
+    console.log("get userdetails", this.props.userDetails)
     return (
       <Route
         {...rest}
         render={(props) =>
-          sessionStorage.getItem("userDetails") ? (
+          this.props.userDetails ? (
             <Component {...props} />
           ) : (
             <Redirect to="/login" />
