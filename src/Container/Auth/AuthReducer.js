@@ -158,6 +158,7 @@ export const authReducer = (state = initialState, action) => {
                 validatingOtp: false,
                 validatingOtpError: true
             };
+
         default:
             return state;
     }

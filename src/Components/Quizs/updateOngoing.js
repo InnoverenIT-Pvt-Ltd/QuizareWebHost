@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { useEffect } from "react";
-import { getQuestionList, deleteQuestion } from "../../Container/Quiz/QuizAction";
+import { getQuestionList, deleteQuestion, handleBackToQuiz } from "../../Container/Quiz/QuizAction";
 import { Card } from "antd";
 import React, { useRef, useState } from "react";
 // Import Swiper React components
@@ -18,7 +18,6 @@ import { Link, withRouter, useHistory } from "react-router-dom";
 
 function UpdateOngoing(props) {
 
-  const [data, setdata] = useState([props.questionList])
   useEffect(() => {
     props.getQuestionList(props.match.params.quizId);
   }, [props.match.params.quizId]);
@@ -33,10 +32,10 @@ function UpdateOngoing(props) {
   const handleCallBack = () => {
     history.push(`/ongoingQuiz`)
   }
-  useEffect(() => {
-    setdata(props.questionList)
-  }, [props.questionList])
-  console.log(data)
+  const backTo = () => {
+    props.handleBackToQuiz()
+    history.push(`/ongoingQuiz`)
+  }
   return (
     <>
       <MainHeader />
@@ -48,17 +47,19 @@ function UpdateOngoing(props) {
         modules={[Pagination, Navigation]}
         className="mySwiper"
       >
-        {data.map((item, i) => {
+        {props.questionList.map((item, i) => {
           console.log(i + 1)
           console.log(item)
           const questionNo = i + 1
           return (
             <SwiperSlide key={item}>
+
               <div class="h-h37">
                 <Card style={{ marginTop: "2rem" }}>
                   <OngoingQuestionedit item={item}
                     questionNo={questionNo}
                     handleDeleteQuestion={handleDeleteQuestion}
+                    backTo={backTo}
                   />
                 </Card>
               </div>
@@ -78,7 +79,8 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       getQuestionList,
-      deleteQuestion
+      deleteQuestion,
+      handleBackToQuiz
     },
 
     dispatch

@@ -515,6 +515,13 @@ export const quizReducer = (state = initialState, action) => {
       return { ...state, addingBugs: false };
     case types.ADD_BUGS_FAILURE:
       return { ...state, addingBugs: false, addingBugsError: true };
+
+    case types.BACK_TO_QUIZ_PAGE:
+      return {
+        ...state,
+        questionList: []
+      };
+
     default:
       return state;
   }

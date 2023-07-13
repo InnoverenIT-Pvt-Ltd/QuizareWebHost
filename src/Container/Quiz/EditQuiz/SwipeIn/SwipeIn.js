@@ -19,12 +19,6 @@ function SwipeIn(props) {
   useEffect(() => {
     props.getQuestionList(props.finalizeQuiz && props.finalizeQuiz.quizId);
   }, []);
-  const [data, setdata] = useState([props.questionList])
-
-  useEffect(() => {
-    setdata(props.questionList)
-  }, [props.questionList])
-  console.log(data)
   return (
     <>
       <MainHeader />
@@ -38,7 +32,7 @@ function SwipeIn(props) {
       >
         <>
           (
-          {data.map((item, index) => {
+          {props.questionList.map((item, index) => {
             return (
               <SwiperSlide key={item}>
                 <div class="h-h37 mt-8">

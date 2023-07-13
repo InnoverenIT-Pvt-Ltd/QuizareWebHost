@@ -796,3 +796,11 @@ export const closeLibraryQuiz = (quizId,) => dispatch => {
       // cb && cb("failuer");
     });
 };
+
+
+export const handleBackToQuiz = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.BACK_TO_QUIZ_PAGE,
+    payload: modalProps,
+  });
+};
