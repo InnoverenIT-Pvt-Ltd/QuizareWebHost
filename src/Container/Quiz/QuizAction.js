@@ -187,24 +187,24 @@ export const updateQuestion = questionId => dispatch => {
 /**
  * delete a question from table
  */
-export const deleteQuestion = (questionId, cb, quizId) => dispatch => {
-  console.log("inside delete question", questionId)
+export const deleteQuestion = (id, cb) => dispatch => {
+  console.log("inside delete question", id)
   dispatch({
-    type: types.DELETE_QUESTION_BY_QUESTION_iD_REQUEST,
+    type: types.DELETE_QUESTION_BY_QUESTION_ID_REQUEST,
   });
   axios
-    .delete(`${base_url}/question/${questionId}`, {
+    .delete(`${base_url}/question/${id}`, {
       headers: {
         Authorization: 'Bearer ' + store.getState().auth.token || '',
       },
     })
     .then(res => {
-      dispatch(getQuestionList(quizId))
       dispatch({
         type: types.DELETE_QUESTION_BY_QUESTION_ID_SUCCESS,
-        payload: questionId,
+        payload: id,
       });
       cb && cb("success");
+      message.success("Question has deleted successfully !!")
     })
     .catch(err => {
       console.log(err);
@@ -613,6 +613,7 @@ export const updateQuestionsInQuiz = (data, questionId, cb) => dispatch => {
         payload: res.data,
       });
       cb && cb('success');
+      message.success("Question has updated successfully !!")
     })
     .catch(err => {
       //console.log(err);

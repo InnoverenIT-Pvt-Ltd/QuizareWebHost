@@ -20,10 +20,9 @@ export const login = ({ email, password }, history, cb) => (dispatch) => {
       password: password,
     })
     .then((res) => {
-      //console.log(res);
-      //console.log('get response');
       dispatch(getUserDetails(res.data.userId));
-      history.push("/create");
+      history.push("/");
+      console.log(history)
       dispatch({
         type: types.LOGIN_SUCCESS,
         payload: res.data,
@@ -70,7 +69,6 @@ export const facebookLogin = (token, cb) => dispatch => {
   dispatch({
     type: types.FACEBOOK_LOGIN_REQUEST
   });
-
   axios
     .post(`${base_url}/facebooklogin`, {
       access_token: token
@@ -102,7 +100,7 @@ export const facebookLogin = (token, cb) => dispatch => {
     });
 };
 
-export const googleLogin = (tokenId, cb) => dispatch => {
+export const googleLogin = (tokenId, history, cb) => dispatch => {
   dispatch({
     type: types.GOOGLE_LOGIN_REQUEST
   });
@@ -116,6 +114,7 @@ export const googleLogin = (tokenId, cb) => dispatch => {
         type: types.GOOGLE_LOGIN_SUCCESS,
         payload: res.data
       });
+      history.push("/")
       console.log(res.data);
       if (res.data.successInd === true) {
         localStorage.setItem("userCredential", JSON.stringify(res.data));
@@ -138,14 +137,23 @@ export const googleLogin = (tokenId, cb) => dispatch => {
     });
 };
 
-export const signUpByUser = (data, cb) => (dispatch) => {
+export const signUpByUser = ({ emailID, password, name, confirmPassword, imageId }, history, cb) => (dispatch) => {
   dispatch({
     type: types.SIGN_UP_BY_USER_REQUEST,
   });
   axios
-    .post(`${login_url}/userDetails/save`, data)
+    .post(`${login_url}/userDetails/save`,
+      {
+        emailID: emailID,
+        password: password,
+        name: name,
+        confirmPassword: confirmPassword,
+        imageId: imageId
+      })
     .then((res) => {
       dispatch(getUserDetails(res.data.userId));
+      history.push("/");
+      message.success("You have registered successfully !!")
       dispatch({
         type: types.SIGN_UP_BY_USER_SUCCESS,
         payload: res.data,
@@ -154,17 +162,7 @@ export const signUpByUser = (data, cb) => (dispatch) => {
     })
     .catch((err) => {
       cb()
-      if (
-        err &&
-        err.response &&
-        err.response.data ===
-        "You have entered an invalid username or password "
-      ) {
-      } else {
-        history.push({
-          pathname: "/",
-        });
-      }
+
       dispatch({
         type: types.SIGN_UP_BY_USER_FAILURE,
         payload: err,
@@ -219,6 +217,7 @@ export const sendOtpForValidation = (data, cb) => (dispatch) => {
         payload: res.data,
       });
       cb();
+      message.success("Otp has been sent to your registered Email !!")
     })
     .catch((err) => {
       cb()
@@ -242,7 +241,7 @@ export const updatePassword = (data, cb) => (dispatch) => {
         payload: res.data,
       });
       cb();
-      message.success("Password has changed successfully !!")
+      message.success("Password has been changed successfully !!")
     })
     .catch((err) => {
       cb()
@@ -266,6 +265,7 @@ export const validateOtp = (data, cb) => (dispatch) => {
         payload: res.data,
       });
       cb();
+      message.success(res.data.status)
     })
     .catch((err) => {
       cb()
@@ -277,3 +277,9 @@ export const validateOtp = (data, cb) => (dispatch) => {
     });
 };
 
+export const logout = (history) => (dispatch) => {
+  window.sessionStorage.clear();
+  history.push("/login");
+  dispatch({ type: types.LOGOUT });
+  message.success("You have successfully logged out. See you soon.");
+};

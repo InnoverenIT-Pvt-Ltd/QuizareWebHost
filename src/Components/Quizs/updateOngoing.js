@@ -14,6 +14,8 @@ import "swiper/css/navigation";
 // import QuestionEdit from "./QuestionEdit";
 import MainHeader from "../../Components/Mainheader";
 import OngoingQuestionedit from "./ongoingQuestionedit";
+import { Link, withRouter, useHistory } from "react-router-dom";
+
 function UpdateOngoing(props) {
 
   const [data, setdata] = useState([props.questionList])
@@ -21,11 +23,15 @@ function UpdateOngoing(props) {
     props.getQuestionList(props.match.params.quizId);
   }, [props.match.params.quizId]);
 
+  const history = useHistory();
+
   const handleDeleteQuestion = (id) => {
-    props.deleteQuestion(id, handleCallBack, props.match.params.quizId)
+    // props.deleteQuestion(id, handleCallBack, props.match.params.quizId)
+    props.deleteQuestion(id, handleCallBack)
+
   }
   const handleCallBack = () => {
-    props.getQuestionList(props.match.params.quizId);
+    history.push(`/ongoingQuiz`)
   }
   useEffect(() => {
     setdata(props.questionList)

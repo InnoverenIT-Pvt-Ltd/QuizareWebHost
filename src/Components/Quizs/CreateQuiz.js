@@ -5,10 +5,6 @@ import { Link, withRouter } from "react-router-dom";
 import { Button, Select, Icon, Tag, Switch, Checkbox } from "antd";
 import { Formik, Form, FastField, Field, FieldArray } from "formik";
 import * as Yup from "yup";
-import { MainWrapper, Spacer } from "../../Components/UI/Elements";
-
-import moment from "moment";
-import SubHeader from "../SubHeader";
 import MainHeader from "../Mainheader";
 
 // import SkillsLoadMore from "./CandidateTable/SkillsLoadMore";
@@ -29,14 +25,7 @@ class CreateQuiz extends Component {
   componentDidMount() { }
 
   render() {
-    const {
-      // user: { userId, firstName, lastName,department },
-      addCandidate,
-      addingCandidate,
-      availableDate,
-    } = this.props;
 
-    // console.log("sec",sectorOption)
     return (
       <>
         <MainHeader />

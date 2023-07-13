@@ -5,7 +5,7 @@ import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import FWLogo from "../../../src/images/Latest.png";
 import Button from "antd/lib/button";
-import { login, generateOtpByEmail, validateOtp } from "./AuthAction";
+import { login } from "./AuthAction";
 import { Input } from "reactstrap";
 import { Link, withRouter } from "react-router-dom";
 import {
@@ -68,14 +68,7 @@ class LoginByMail extends Component {
         return (
             <>
                 <FlexContainer>
-                   <div class="w-full flex-col min-h-screen overflow-auto flex justify-center items-center  ">
-                        {/* <img
-                            className="big-logo"
-                            src={LogoNew}
-                            style={{ width: 200 }}
-                            alt="Tekorero logo"
-                        />
-                        <br /> */}
+                    <div class="w-full flex-col min-h-screen overflow-auto flex justify-center items-center  ">
                         <img
                             className="big-logo"
                             src={FWLogo}
@@ -83,7 +76,7 @@ class LoginByMail extends Component {
                             alt="Tekorero logo"
 
                         />
-                       <div className="bg-white rounded-2xl shadow-2xl border-solid flex justify-center mt-3 flex-col max-sm:w-11/12 h-80 md:w-2/6 ">
+                        <div className="bg-white rounded-2xl shadow-2xl border-solid flex justify-center mt-3 flex-col max-sm:w-11/12 h-80 md:w-2/6 ">
                             <Formik
                                 enableReinitialize
                                 initialValues={{

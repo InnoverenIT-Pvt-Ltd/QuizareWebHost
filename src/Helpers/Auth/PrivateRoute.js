@@ -5,10 +5,10 @@ import { Route, Redirect, withRouter } from "react-router-dom";
 import axios from "axios";
 import { message } from "antd";
 // import {
-//   // setFiscalTimeInterval,
-//   // setFiscalTimeIntervalReport,
-//   // setFiscalTimeIntervalTeam,
-//   // setFiscalTimeIntervalViewport,
+//   setFiscalTimeInterval,
+//   setFiscalTimeIntervalReport,
+//   setFiscalTimeIntervalTeam,
+//   setFiscalTimeIntervalViewport,
 // } from "../../Containers/Auth/AuthAction";
 class PrivateRoute extends React.Component {
   componentDidMount() {
@@ -41,7 +41,7 @@ class PrivateRoute extends React.Component {
         return Promise.reject(error);
       }
     );
-    if (!this.props.token) {
+    if (!this.props.userDetails) {
       this.props.history.push("/login");
       message.error("Your session has expired. Please re-login.");
     }
@@ -50,7 +50,7 @@ class PrivateRoute extends React.Component {
     // }
   }
   componentWillUpdate(nextProps) {
-    if (!nextProps.token) {
+    if (!nextProps.userDetails) {
       this.props.history.push("/login");
     }
   }
@@ -60,7 +60,7 @@ class PrivateRoute extends React.Component {
       <Route
         {...rest}
         render={(props) =>
-          sessionStorage.getItem("token") ? (
+          sessionStorage.getItem("userDetails") ? (
             <Component {...props} />
           ) : (
             <Redirect to="/login" />
@@ -73,7 +73,7 @@ class PrivateRoute extends React.Component {
 
 const mapStateToProps = ({ auth }) => {
   return {
-    token: auth.token || JSON.stringify(sessionStorage.getItem("token")),
+    userDetails: JSON.stringify(sessionStorage.getItem("userDetails")),
   };
 };
 const mapDispatchToProps = (dispatch) =>

@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { useEffect } from "react";
-import { getQuestionList, deleteQuestion } from "../../QuizAction";
+import { getQuestionList } from "../../QuizAction";
 import { Card } from "antd";
 import React, { useRef, useState } from "react";
 // Import Swiper React components
@@ -13,18 +13,14 @@ import "swiper/css/navigation";
 import "./styles.css";
 import QuestionEdit from "./QuestionEdit";
 import MainHeader from "../../../../Components/Mainheader";
+import { BundleLoader } from "../../../../Components/Placeholder";
 
 function SwipeIn(props) {
   useEffect(() => {
-    props.getQuestionList(props.showQuiz.quizId);
+    props.getQuestionList(props.finalizeQuiz && props.finalizeQuiz.quizId);
   }, []);
   const [data, setdata] = useState([props.questionList])
-  const handleDeleteQuestion = (id) => {
-    props.deleteQuestion(id, handleCallBack, props.showQuiz.quizId)
-  }
-  const handleCallBack = () => {
-    props.getQuestionList(props.showQuiz.quizId);
-  }
+
   useEffect(() => {
     setdata(props.questionList)
   }, [props.questionList])
@@ -40,21 +36,25 @@ function SwipeIn(props) {
         modules={[Pagination, Navigation]}
         className="mySwiper"
       >
-        {data.map((item, index) => {
-          return (
-            <SwiperSlide key={item}>
-              <div class="h-h37 mt-8">
+        <>
+          (
+          {data.map((item, index) => {
+            return (
+              <SwiperSlide key={item}>
+                <div class="h-h37 mt-8">
 
-                <QuestionEdit
-                  item={item}
-                  number={index}
-                  handleDeleteQuestion={handleDeleteQuestion}
-                />
+                  <QuestionEdit
+                    item={item}
+                    number={index}
+                  />
 
-              </div>
-            </SwiperSlide>
-          );
-        })}
+                </div>
+              </SwiperSlide>
+            );
+          })
+          }
+          )
+        </>
       </Swiper>
     </>
   );
@@ -62,14 +62,16 @@ function SwipeIn(props) {
 
 const mapStateToProps = ({ quiz }) => ({
   questionList: quiz.questionList,
-  showQuiz: quiz.showQuiz
+  showQuiz: quiz.showQuiz,
+  finalizeQuiz: quiz.finalizeQuiz,
+  deletingQuestion: quiz.deletingQuestion
 });
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       getQuestionList,
-      deleteQuestion
+
     },
     dispatch
   );

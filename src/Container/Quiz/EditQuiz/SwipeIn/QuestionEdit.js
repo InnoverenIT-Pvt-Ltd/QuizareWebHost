@@ -3,17 +3,23 @@ import { Field, Form, Formik } from "formik";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button, Card } from "antd";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import {
   getQuestionList,
   updateQuestionsInQuiz,
+  deleteQuestion
 } from "../../QuizAction";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
 function QuestionEdit(props) {
-  const { item } = props.item;
-  const [count, setCount] = useState(props.item);
-  console.log("id", props.item.id);
-  console.log(props.number + 1)
+
+  const handleDeleteQuestion = (id) => {
+    props.deleteQuestion(id, handleCallBack)
+  }
+  const history = useHistory();
+
+  const handleCallBack = () => {
+    history.push(`/updateQuizName`)
+  }
   return (
     <>
       <Formik
@@ -46,18 +52,19 @@ function QuestionEdit(props) {
           errors,
           values,
         }) => (
-          <Form class=" max-sm:w-full h-h31  m-auto md:mt-12  w-2/5  h-h50  ">
-          <div className="w-full my-2 flex justify-center m-auto ">
+          <Form class=" max-sm:w-full h-h31  m-auto md:mt-12  w-wk  h-h50  ">
+            <div className="w-full my-2 flex justify-center m-auto ">
               <div>
                 {/* Container */}
                 <div>
-                  <Card
+                <div className="bg-white rounded-2xl shadow-2xl border-solid flex justify-center mt-3 flex-col "
                     style={{
                       WebkitBoxShadow: "0 0 10px 2px rgb(46 46 46 / 39%)",
-                      width: "-webkit-fill-available",
-                      height: "max-content"
+                     // width: "-webkit-fill-available",
+                      //height: "max-content"
                     }}
                   >
+                    <div class=" w-full flex justify-center flex-col  p-4 max-sm:m-0 h-h31 rounded-2xl md:w-w30 m-auto">
                     <div style={{ fontSize: 22, alignSelf: "center" }}>
                       <h3 class="flex justify-center text-xl">Question {props.number + 1}</h3>
                     </div>
@@ -118,7 +125,7 @@ function QuestionEdit(props) {
                         <Button
                           title={""}
                           type="primary"
-                          onClick={() => props.handleDeleteQuestion(props.item.id)}
+                          onClick={() => handleDeleteQuestion(props.item.id, handleCallBack)}
                           style={{ width: "9rem", backgroundColor: "white", marginLeft: "0.5rem" }}
                         >
                           <h3> Delete Question</h3>
@@ -146,16 +153,10 @@ function QuestionEdit(props) {
                             <h3>Finalize Quiz</h3>
                           </Button>
                         </Link>
-                        {/* <Button
-
-
-                    onClick={() => setModalVisible(true)}
-                  
-                  >Add</Button> */}
                       </div>
                     </div>
-                  </Card>
-
+                  </div>
+                  </div>
                 </div>
 
                 {/* Buttons */}
@@ -174,7 +175,8 @@ const mapStateToProps = ({ auth, quiz }) => ({
   quizId: quiz.showQuiz.quizId,
   category: quiz.category,
   questionList: quiz.questionList,
-  quizHostId: auth.userDetails.userId
+  quizHostId: auth.userDetails.userId,
+  finalizeQuiz: quiz.finalizeQuiz,
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -182,6 +184,7 @@ const mapDispatchToProps = (dispatch) =>
     {
       getQuestionList,
       updateQuestionsInQuiz,
+      deleteQuestion
     },
     dispatch
   );

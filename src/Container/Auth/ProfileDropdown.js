@@ -9,6 +9,7 @@ import {
     StyledMenu,
     StyledMenuItem,
 } from "../../Components/UI/Antd";
+import { logout } from "../Auth/AuthAction";
 import { ApplicationWrapper, MainWrapper } from "../../Components/UI/Layout";
 
 const ProfileMenu = ({ logout, history }) => (
@@ -29,7 +30,7 @@ const ProfileMenu = ({ logout, history }) => (
                     </a>
                 </StyledMenuItem>
 
-                {/* <StyledMenuItem
+                <StyledMenuItem
                     key="1"
                     style={{
                         marginTop: 0,
@@ -38,10 +39,10 @@ const ProfileMenu = ({ logout, history }) => (
                         paddingBottom: 0,
                     }}
                 >
-                    <a href="#" onClick={() => history.push("/create")}>
-                        Home
+                    <a href="#" onClick={() => history.push("/test")}>
+                        Test
                     </a>
-                </StyledMenuItem> */}
+                </StyledMenuItem>
                 <StyledMenuItem
                     key="3"
                     style={{
@@ -64,7 +65,7 @@ const ProfileMenu = ({ logout, history }) => (
                         paddingBottom: 0,
                     }}
                 >
-                    <a onClick={() => history.push("/")}>Logout</a>
+                    <a onClick={() => logout(history)}>Logout</a>
                 </StyledMenuItem>
             </StyledMenu>
         </MainWrapper>
@@ -84,25 +85,25 @@ class ProfileDropdown extends Component {
                     />
                 }
             >
-                {imageId ? (
+                {/* {imageId ? (
                     <img
                         src={`${base_url}/image/${imageId}`}
                         style={{ width: 32, height: 32, borderRadius: "50%", lineHeight: "32px", fontSize: "1.2em" }}
                     />
-                ) : (
-                    <Avatar
-                        style={{
-                            backgroundColor: "rgb(148, 179, 228)",
-                            verticalAlign: "middle",
-                            color: "white",
-                            width: "2.1rem",
-                            height: "2.1rem",
-                        }}
-                        size="large"
-                    >
-                        {name && name.split("")[0].toUpperCase()}
-                    </Avatar>
-                )}
+                ) : ( */}
+                <Avatar
+                    style={{
+                        backgroundColor: "rgb(148, 179, 228)",
+                        verticalAlign: "middle",
+                        color: "white",
+                        width: "2.1rem",
+                        height: "2.1rem",
+                    }}
+                    size="large"
+                >
+                    {name && name.split("")[0].toUpperCase()}
+                </Avatar>
+                {/* )} */}
             </StyledDropdown>
         );
     }
@@ -113,7 +114,7 @@ const mapStateToProps = ({ auth }) => ({
 });
 const mapDispatchToProps = (dispatch) =>
     bindActionCreators({
-
+        logout
     }, dispatch);
 
 export default withRouter(

@@ -1,143 +1,3 @@
-// import React, { Component } from "react";
-// import { connect } from "react-redux";
-// import { bindActionCreators } from "redux";
-// import { withRouter, Link } from "react-router-dom";
-// import { Formik, Form, Field } from "formik";
-// import * as Yup from "yup";
-// import { Button } from "antd";
-// import { AuthContainer, FormWrapper, Input } from "./styled";
-// import {
-//   Title,
-//   SubTitle,
-//   ValidationError,
-//   HeaderText,
-//   Spacer,
-// } from "../../Components/UI/Elements";
-// import { FlexContainer } from "../../Components/UI/Layout";
-// import FWLogo from "../../Assets/Images/logo1.png";
-// import RandomImageScreen from "./RandomImageScreen";
-// import { forgotPassword } from "./AuthAction";
-
-// /**
-//  * yup validation scheme for set Password
-//  */
-// const ForgotPasswordSchema = Yup.object().shape({
-//   email: Yup.string()
-//     .email("Enter a valid Email")
-//     .required("Input needed!"),
-// });
-
-// class SetPassword extends Component {
-//   handleForgotPassword = ({ email }) => {
-//     const { history } = this.props;
-//     this.props.forgotPassword(email, history);
-//   };
-
-//   InputComponent = ({ field, form: { touched, errors }, ...props }) => (
-//     <div>
-//       <div>
-//         <Input {...field} {...props} />
-//       </div>
-//       {touched[field.name] && errors[field.name] && (
-//         <ValidationError>{errors[field.name]}</ValidationError>
-//       )}
-//     </div>
-//   );
-//   render() {
-//     return (
-//       <>
-//         <FlexContainer>
-//           <AuthContainer
-//             style={{ backgroundColor: "#F5F5F5", flexDirection: "column" }}
-//           >
-//             <img className="big-logo" src={FWLogo} style={{ width: 150 }} />
-//             <br />
-//             <FormWrapper>
-//               <HeaderText color="#1890ff">Forgot password</HeaderText>
-//               <Spacer style={{ marginTop: 20 }} />
-//               <SubTitle>
-//                 Link will be sent to your registered email id{" "}
-//               </SubTitle>
-//               <Spacer style={{ marginTop: 10 }} />
-//               <Formik
-//                 initialValues={{
-//                   email: "",
-//                 }}
-//                 validationSchema={ForgotPasswordSchema}
-//                 onSubmit={(values) => {
-//                   // same shape as initial values
-//                   console.log(values);
-//                   this.handleForgotPassword(values);
-//                 }}
-//               >
-//                 {({ errors, touched, isSubmitting }) => (
-//                   <Form>
-//                     <Field
-//                       name="email"
-//                       placeholder="Enter your email"
-//                       component={this.InputComponent}
-//                     />
-//                     <Spacer />
-
-//                     <Button
-//                       type="primary"
-//                       htmlType="submit"
-//                       loading={isSubmitting}
-//                       style={{ marginLeft: 280, marginTop: 30 }}
-//                       // onClick={this.handleSetPassword}
-//                     >
-//                       Send
-//                     </Button>
-//                   </Form>
-//                 )}
-//               </Formik>
-//               <Spacer style={{ marginBottom: -40 }} />
-//               <Link
-//                 to="/login"
-//                 style={{
-//                   textAlign: "center",
-//                   fontSize: 16,
-//                   marginLeft: "10px",
-//                 }}
-//               >
-//                 Back to login
-//               </Link>
-//             </FormWrapper>
-//             <div
-//               className="footer1"
-//               style={{
-//                 textAlign: "center",
-//                 fontSize: "12x",
-//                 fontFamily: "SFS, Arial, sans-serif",
-//                 position: "absolute",
-//                 bottom: 0,
-//               }}
-//             >
-//               © {new Date().getFullYear()}, {` `} teKorero.com, All rights
-//               reserved.
-//             </div>
-//           </AuthContainer>
-//           <RandomImageScreen />
-//         </FlexContainer>
-//       </>
-//     );
-//   }
-// }
-
-// const mapStateToProps = (state) => ({
-//   user: state.auth.user,
-// });
-
-// const mapDispatchToProps = (dispatch) =>
-//   bindActionCreators({ forgotPassword }, dispatch);
-
-// export default withRouter(
-//   connect(mapStateToProps, mapDispatchToProps)(SetPassword)
-// );
-
-
-
-
 
 import React, { Component } from "react";
 import { connect } from "react-redux";
@@ -150,7 +10,6 @@ import { ValidationError, Title, SubTitle } from "../../Components/UI/Elements";
 import { FlexContainer } from "../../Components/UI/Layout";
 import Button from "antd/lib/button";
 import styled from "styled-components";
-import { EyeInvisibleOutlined, EyeOutlined } from "@ant-design/icons";
 import {
     sendOtpForValidation,
     updatePassword,
@@ -164,16 +23,7 @@ class ForgotPassword extends Component {
         show2: Boolean(),
         show: Boolean(),
     };
-    handleClick = () =>
-        this.setState(({ type, prevState }) => ({
-            type: type === "text" ? "password" : "text",
-            show: !this.state.show,
-        }));
-    handleClick1 = () =>
-        this.setState(({ type1, prevState }) => ({
-            type1: type1 === "text" ? "password" : "text",
-            show1: !this.state.show1,
-        }));
+
     InputComponent = ({ field, form: { touched, errors }, ...props }) => (
         <div>
             <Input {...field} {...props} />
@@ -195,7 +45,7 @@ class ForgotPassword extends Component {
                 <div className="main" style={{ display: "flex", justifyContent: "space-evenly" }}>
                     <div className="forgot_password">
                         <FlexContainer>
-                        <div class="w-full flex-col min-h-screen overflow-auto flex justify-center items-center  ">
+                            <div class="w-full flex-col min-h-screen overflow-auto flex justify-center items-center  ">
                                 <FormWrapper >
                                     <Title style={{ color: "#08cb08" }}>Forgot Password</Title>
                                     <SubTitle>Link will be sent to your registered email id</SubTitle>
@@ -213,6 +63,7 @@ class ForgotPassword extends Component {
                                             this.props.updatePassword(
                                                 {
                                                     ...values,
+                                                    email: values.emailId
                                                 },
                                                 this.callback
                                             );
@@ -304,48 +155,12 @@ class ForgotPassword extends Component {
                                                         <div style={{ width: "100%" }}>
                                                             <Field
                                                                 name="confirmPassword"
-                                                                type={this.state.type1}
                                                                 width={"100%"}
                                                                 placeholder="Confirm new password"
                                                                 component={this.InputComponent}
                                                                 style={{ border: "1px solid lightblue", height: "34px" }}
                                                             />
                                                         </div>
-                                                        {this.state.show1 ? (
-                                                            <EyeOutlined
-                                                                type="eye"
-                                                                onClick={this.handleClick1}
-                                                                style={{
-                                                                    marginLeft: "-1.25em",
-                                                                    marginTop: "1.25em",
-                                                                }}
-                                                            // style={{ size: 24 }}
-                                                            />
-                                                        ) : (
-                                                            <EyeInvisibleOutlined
-                                                                type="eye-invisible"
-                                                                onClick={this.handleClick1}
-                                                                style={{
-                                                                    marginLeft: "-1.25em",
-                                                                    marginTop: "1.25em",
-                                                                }}
-                                                            // style={{ size: 24 }}
-                                                            />
-                                                        )}
-                                                        {/* {values.password.length &&
-                        values.password === values.confirmPassword ? (
-                          <CheckCircleTwoTone
-                            type="check-circle"
-                            theme="twoTone"
-                            twoToneColor="#52c41a"
-                            size={80}
-                            style={{
-                              marginLeft: "1.25em",
-                              marginTop: "0.875em",
-                              fontSize: "1.5625em",
-                            }}
-                          />
-                        ) : null} */}
 
                                                     </div>
 
@@ -379,7 +194,7 @@ class ForgotPassword extends Component {
                                                         <Button
                                                             type="primary"
                                                             htmlType="submit"
-                                                            disabled={values.password.length === values.confirmPassword.length}
+                                                            disabled={(values.password !== values.confirmPassword) || (!values.password.length && !values.confirmPassword.length)}
                                                             // Loading={this.props.changingPassword}
                                                             style={{ width: "10em", height: "2.4em" }}
                                                         // onClick={() => this.props.login('prabeen.strange@gmail.com', 'chicharito14')}

@@ -145,12 +145,15 @@ export const quizReducer = (state = initialState, action) => {
         updateQuestionByIdError: true,
       };
 
-    case types.DELETE_QUESTION_BY_QUESTION_iD_REQUEST:
+    case types.DELETE_QUESTION_BY_QUESTION_ID_REQUEST:
       return { ...state, deletingQuestion: true };
     case types.DELETE_QUESTION_BY_QUESTION_ID_SUCCESS:
       return {
         ...state,
         deletingQuestion: false,
+        questionList: state.questionList.filter(
+          (item) => item.id !== action.payload
+        ),
       };
     case types.DELETE_QUESTION_BY_QUESTION_ID_FAILURE:
       return {

@@ -1,46 +1,47 @@
-import React, {useEffect,useState} from 'react';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import { getQuizNameDetails,getFeedback } from '../../Container/Quiz/QuizAction';
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { getQuizNameDetails, getFeedback } from '../../Container/Quiz/QuizAction';
 import QuizNameList from './QuizNameList';
 import { Formik } from 'formik';
 import QuizDetails from './QuizDetails';
+import { withRouter } from "react-router-dom";
 import MainHeader from '../Mainheader';
 
 function OngoingQuiz(props) {
-    const [item,setItem]=useState(undefined)
-    function handleGetQuizData(data){
-      setItem(data);
-     // alert(data); 
-     props.getQuizNameDetails(data); 
-     props.getFeedback(data);  
-     
-     }
+  const [item, setItem] = useState(undefined)
+  function handleGetQuizData(data) {
+    setItem(data);
+    // alert(data); 
+    props.getQuizNameDetails(data);
+    props.getFeedback(data);
+
+  }
   return (
-   <>
-    <MainHeader/>
-    <Formik>
-      <div class="flex justify-center mt-2 " >        
-        <div class="flex items-center w-11/12 md:w-full" 
-       >
-         {/* <QuizNameList handleGetQuizData={handleGetQuizData} item={item}/> */}
-         <QuizDetails item={item}/>        
-        </div>        
-      </div>
+    <>
+      <MainHeader />
+      <Formik>
+        <div class="flex justify-center mt-2 " >
+          <div class="flex items-center w-11/12 md:w-full"
+          >
+            {/* <QuizNameList handleGetQuizData={handleGetQuizData} item={item}/> */}
+            <QuizDetails item={item} />
+          </div>
+        </div>
       </Formik>
-   </>
+    </>
   )
 }
-const mapStateToProps = (quiz) => ({   
- 
+const mapStateToProps = (quiz) => ({
+
 });
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
-    {     
-      getQuizNameDetails ,
+    {
+      getQuizNameDetails,
       getFeedback
     },
     dispatch,
   );
-export default connect(mapStateToProps, mapDispatchToProps)(OngoingQuiz);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(OngoingQuiz));
