@@ -47,7 +47,7 @@ function Login(props) {
   let content =
     <div>
       <FacebookLogin
-        appId="1216755315881273"
+        appId="1462431934502453"
         autoLoad={false}
         scope="public_profile, email, user_birthday"
         fields="name,email,picture"

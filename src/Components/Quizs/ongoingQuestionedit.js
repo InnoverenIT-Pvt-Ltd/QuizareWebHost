@@ -55,10 +55,10 @@ function ongoingQuestionedit(props) {
               <div>
                 {/* Container */}
                 <div>
-                <div className="bg-white rounded-2xl shadow-2xl border-solid flex justify-center mt-3 flex-col max-sm:w-80 p-4 md:w-w30"
+                  <div className="bg-white rounded-2xl shadow-2xl border-solid flex justify-center mt-3 flex-col max-sm:w-80 p-4 md:w-w30"
                     style={{
                       WebkitBoxShadow: "0 0 10px 2px rgb(46 46 46 / 39%)",
-                      
+
                     }}
                   >
                     <Card style={{ fontSize: 22, alignSelf: "center" }}>
@@ -114,7 +114,7 @@ function ongoingQuestionedit(props) {
                         title={""}
                         type="primary"
                         onClick={() => props.handleDeleteQuestion(props.item.id)}
-                        style={{ width: "7rem" , backgroundColor: "white"}}
+                        style={{ width: "7rem", backgroundColor: "white" }}
                       >
                         <h3>Delete</h3>
                       </Button>
@@ -122,21 +122,21 @@ function ongoingQuestionedit(props) {
                         title={""}
                         type="primary"
                         onClick={() => handleSubmit()}
-                        style={{ width: "7rem" , backgroundColor: "white"}}
+                        style={{ width: "7rem", backgroundColor: "white" }}
                       >
                         <h3>Update</h3>
                       </Button>
-                    
+
                     </div>
                     <div class="mt-2">
-                    <Button
+                      <Button
                         title={""}
                         type="primary"
                         style={{ backgroundColor: "white" }}
                         onClick={() => props.backTo()}
 
                       ><h3>Back To Quiz</h3></Button>
-                      </div>
+                    </div>
                   </div>
 
                 </div>

@@ -131,17 +131,17 @@ function QuestionEdit(props) {
                           >
                             <h3> Delete Question</h3>
                           </Button>
-                          
+
 
                         </div>
-                      
-                        <div class=" flex flex-col h-24 justify-between mt-4">
+
+                        <div class="flex flex-row mt-4 justify-between">
                           <Link to="/addquizin">
                             <Button
                               title={""}
                               type="primary"
                               onClick={() => handleSubmit()}
-                              style={{ backgroundColor: "white" }}
+                              style={{ backgroundColor: "white", width: "9rem" }}
                             >
                               <h3>Add Question</h3>
                             </Button>
@@ -151,19 +151,21 @@ function QuestionEdit(props) {
                               title={""}
                               type="primary"
                               onClick={() => handleSubmit()}
-                              style={{ backgroundColor: "white" }}
+                              style={{ backgroundColor: "white", width: "9rem" }}
                             >
                               <h3>Finalize Quiz</h3>
                             </Button>
                           </Link>
                         </div>
-                        <div class="mt-4"><Button
+                        {/* <div class="mt-2">
+                          <Button
                             title={""}
                             type="primary"
-                            style={{ backgroundColor: "white",}}
+                            style={{ backgroundColor: "white" }}
                             onClick={() => props.backTo()}
 
-                          ><h3>Back To Quiz</h3></Button></div>
+                          ><h3>Back To Quiz</h3></Button>
+                        </div> */}
                       </div>
                     </div>
                   </div>
