@@ -126,13 +126,10 @@ function ongoingQuestionedit(props) {
                       >
                         <h3>Update</h3>
                       </Button>
-
-                    </div>
-                    <div class="mt-2">
                       <Button
                         title={""}
                         type="primary"
-                        style={{ backgroundColor: "white" }}
+                        style={{ backgroundColor: "white", width: "7rem" }}
                         onClick={() => props.backTo()}
 
                       ><h3>Back To Quiz</h3></Button>

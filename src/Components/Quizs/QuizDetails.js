@@ -333,7 +333,7 @@ function QuizDetails(props) {
             className="mySwiper "
           >
             {props.ongoingQuiz.map((item, i) => {
-              const ongoingQuizLink = `http://player.quizledge.no.s3-website.eu-west-3.amazonaws.com${item.quizLink}`
+              const ongoingQuizLink = `http://player.quizledge.no${item.quizLink}`
               return (
                 <SwiperSlide >
 

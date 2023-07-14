@@ -15,6 +15,9 @@ function UpdateQuizName(props) {
   function handleCallBack(data) {
     history.push(`/swipeIn`);
   }
+  function handleBackHost() {
+    history.push(`/finalize`);
+  }
   return (
     <>
       <MainHeader />
@@ -46,7 +49,7 @@ function UpdateQuizName(props) {
           values,
         }) => (
           <Form class="flex justify-center max-sm:w-11/12 mt-8 m-auto md:mt-12  w-2/5 ">
-           <div class="shadow-2xl border-solid w-11/12 flex justify-center items-center  p-1 max-sm:m-0 h-h34 rounded-2xl md:m-auto">
+            <div class="shadow-2xl border-solid w-11/12 flex justify-center items-center  p-1 max-sm:m-0 h-h34 rounded-2xl md:m-auto">
               <div class="w-11/12" >
                 <div>
                   <label>Quiz name</label>
@@ -68,12 +71,20 @@ function UpdateQuizName(props) {
                   // placeholder="Enter Response time per question"
                   />
                 </div>
-                <div class="mt-8">
+                <div class="flex flex-row mt-4 justify-between">
                   <Button
                     type="primary"
-                    style={{ backgroundColor: "white", borderBlockColor: "black", borderRadius: "0", height: "2rem" }}
+                    style={{ width: "10rem", backgroundColor: "white" }}
                     onClick={handleSubmit}
-                  ><h3 class="font-extrabold">Update Quiz</h3></Button>
+                  >
+                    <h3 class="font-extrabold">Update Quiz</h3>
+                  </Button>
+                  <Button
+                    type="primary"
+                    style={{ width: "10rem", backgroundColor: "white" }}
+                    onClick={() => handleBackHost()}>
+                    <h3 class="font-extrabold">Back</h3>
+                  </Button>
                 </div>
               </div>
             </div>
