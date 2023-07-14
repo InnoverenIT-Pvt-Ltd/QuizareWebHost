@@ -98,10 +98,13 @@ function Quiz(props) {
                 {props.showQuiz && props.showQuiz.quizName}
               </h2>
             </div>
-            <div class="flex justify-center mt-3  max-sm:w-3/5 max-sm:ml-20 md:w-80 md:ml-margin40 ">
+            <div class="flex justify-center mt-3  max-sm:w-3/5 max-sm:ml-20 ">
               {count >= 2 ?
 
                 <Button type="primary"
+                  style={{
+                    width: "13rem",
+                  }}
                   onClick={() => {
                     handleSubmit()
                     goToFinalize()

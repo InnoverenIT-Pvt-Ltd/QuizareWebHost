@@ -20,10 +20,10 @@ function SwipeInLibrary(props) {
     props.getQuestionList(props.showQuiz.quizId);
   }, []);
   const history = useHistory();
-  const backTo = () => {
-    props.handleBackToQuiz()
-    history.push(`/ongoingQuiz`)
-  }
+  // const backTo = () => {
+  //   props.handleBackToQuiz()
+  //   history.push(`/updateQuizName`)
+  // }
   return (
     <>
       <MainHeader />
@@ -43,7 +43,7 @@ function SwipeInLibrary(props) {
                   <QuestionEdit
                     item={item}
                     number={index}
-                    backTo={backTo}
+                  // backTo={backTo}
                   />
                 </Card>
               </div>

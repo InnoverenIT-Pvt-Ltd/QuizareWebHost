@@ -100,7 +100,7 @@ export const facebookLogin = (token, cb) => dispatch => {
     });
 };
 
-export const googleLogin = ({ tokenId }, history, cb) => dispatch => {
+export const googleLogin = (tokenId, history, cb) => dispatch => {
   dispatch({
     type: types.GOOGLE_LOGIN_REQUEST
   });
@@ -114,6 +114,7 @@ export const googleLogin = ({ tokenId }, history, cb) => dispatch => {
         type: types.GOOGLE_LOGIN_SUCCESS,
         payload: res.data
       });
+      dispatch(getUserDetails(res.data.userId));
       history.push("/")
       console.log(res.data);
       if (res.data.successInd === true) {

@@ -110,8 +110,11 @@ function QuizIn(props) {
                   {props.showQuiz && props.showQuiz.quizName}
                 </h2>
               </div>
-              <div class="flex justify-center mt-3 ml-20 max-sm:w-3/5 md:w-80 md:ml-margin40 ">
+              <div class="flex justify-center mt-3  max-sm:w-3/5 max-sm:ml-20 ">
                 <Button type="primary"
+                  style={{
+                    width: "13rem",
+                  }}
                   onClick={() => {
                     handleSubmit()
                     goToFinalize()
@@ -217,7 +220,7 @@ function QuizIn(props) {
                         </div>
                         {/* </TouchableOpacity> */}
                       </div>
-                      <div class="flex flex-wrap justify-center mt-2">
+                      <div class=" max-sm:flex flex-wrap justify-center mt-2 md:w-full  md:grid grid-cols-3 justify-items-center">
                         {!!props.category.length &&
                           props.category.map((item) => {
                             return (

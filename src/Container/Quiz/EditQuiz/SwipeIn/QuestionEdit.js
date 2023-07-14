@@ -113,57 +113,55 @@ function QuestionEdit(props) {
                           onChangeText={handleChange("option4")}
                         />
                       </div>
-                      <div>
-                        <div class="flex flex-row mt-4 justify-between">
+                      <div class="flex flex-row mt-4 justify-between">
+                        <Button
+                          title={""}
+                          type="primary"
+                          onClick={() => handleSubmit()}
+                          style={{ width: "9rem", backgroundColor: "white" }}
+                        >
+                          <h3>Update Question</h3>
+                        </Button>
+                        <Button
+                          title={""}
+                          type="primary"
+                          onClick={() => handleDeleteQuestion(props.item.id, handleCallBack)}
+                          style={{ width: "9rem", backgroundColor: "white", marginLeft: "0.5rem" }}
+                        >
+                          <h3> Delete Question</h3>
+                        </Button>
+
+
+                      </div>
+
+                      <div className="flex flex-row justify-between mt-4">
+                        <Link to="/addquizin">
+                          <Button
+                            title={""}
+                            type="primary"
+                            onClick={() => handleSubmit()}
+                            style={{ width: "7rem", backgroundColor: "white" }}
+                          >
+                            <h3>Add Question</h3>
+                          </Button>
+                        </Link>
+                        <Link to="/finalize">
                           <Button
                             title={""}
                             type="primary"
                             onClick={() => handleSubmit()}
                             style={{ width: "9rem", backgroundColor: "white" }}
                           >
-                            <h3>Update Question</h3>
+                            <h3>Finalize Quiz</h3>
                           </Button>
-                          <Button
-                            title={""}
-                            type="primary"
-                            onClick={() => handleDeleteQuestion(props.item.id, handleCallBack)}
-                            style={{ width: "9rem", backgroundColor: "white", marginLeft: "0.5rem" }}
-                          >
-                            <h3> Delete Question</h3>
-                          </Button>
-                          
+                        </Link>
+                        <Button
+                          title={""}
+                          type="primary"
+                          style={{ width: "7rem", backgroundColor: "white" }}
+                          onClick={() => handleCallBack()}
 
-                        </div>
-                      
-                        <div class=" flex flex-col h-24 justify-between mt-4">
-                          <Link to="/addquizin">
-                            <Button
-                              title={""}
-                              type="primary"
-                              onClick={() => handleSubmit()}
-                              style={{ backgroundColor: "white" }}
-                            >
-                              <h3>Add Question</h3>
-                            </Button>
-                          </Link>
-                          <Link to="/finalize">
-                            <Button
-                              title={""}
-                              type="primary"
-                              onClick={() => handleSubmit()}
-                              style={{ backgroundColor: "white" }}
-                            >
-                              <h3>Finalize Quiz</h3>
-                            </Button>
-                          </Link>
-                        </div>
-                        <div class="mt-4"><Button
-                            title={""}
-                            type="primary"
-                            style={{ backgroundColor: "white",}}
-                            onClick={() => props.backTo()}
-
-                          ><h3>Back To Quiz</h3></Button></div>
+                        ><h3>Back To Quiz</h3></Button>
                       </div>
                     </div>
                   </div>

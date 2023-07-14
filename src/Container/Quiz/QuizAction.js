@@ -606,14 +606,14 @@ export const updateQuestionsInQuiz = (data, questionId, cb) => dispatch => {
       },
     })
     .then(res => {
-      // console.log(res.data);
+      message.success("Question has updated successfully !!")
       dispatch(getQuestionList(res.data.quizId));
       dispatch({
         type: types.UPDATE_QUESTIONS_IN_QUIZ_SUCCESS,
         payload: res.data,
       });
       cb && cb('success');
-      message.success("Question has updated successfully !!")
+
     })
     .catch(err => {
       //console.log(err);
