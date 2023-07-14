@@ -114,8 +114,8 @@ export const googleLogin = (tokenId, history, cb) => dispatch => {
         type: types.GOOGLE_LOGIN_SUCCESS,
         payload: res.data
       });
-      history.push("/")
       dispatch(getUserDetails(res.data.userId));
+      history.push("/")
       console.log(res.data);
       if (res.data.successInd === true) {
         localStorage.setItem("userCredential", JSON.stringify(res.data));
