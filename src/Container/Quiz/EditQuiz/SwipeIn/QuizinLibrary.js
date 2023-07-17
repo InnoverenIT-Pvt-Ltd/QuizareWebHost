@@ -110,8 +110,9 @@ function QuizinLibrary(props) {
                   {props.showQuiz && props.showQuiz.quizName}
                 </h2>
               </div>
-              <div class="flex justify-center mt-3 ml-20 w-3/5">
+              <div class="flex justify-center mt-3  max-sm:w-3/5 max-sm:ml-20 ">
                 <Button type="primary"
+                  style={{ width: "20%" }}
                   onClick={() => {
                     handleSubmit()
                     goToFinalize()
@@ -121,10 +122,10 @@ function QuizinLibrary(props) {
                 </Button>
               </div>
               {/* Container */}
-              <Form class=" max-sm:w-11/12  m-auto md:mt-12  w-1/5  h-h50  ">
+              <Form class=" max-sm:w-full  m-auto md:mt-12  w-2/5  h-h50  ">
                 <div className="w-11/12 my-2 flex justify-center m-auto ">
                   <div class="shadow-2xl border-solid w-11/12 flex justify-center flex-col items-center  p-2 max-sm:m-0 h-max rounded-2xl md:m-auto">
-                    <div class=" flex justify-center flex-col">
+                    <div class=" flex justify-center flex-col w-full">
                       <h3 class="flex justify-center text-xl">
                         {" "}
                         Question {questions || null}
@@ -217,7 +218,7 @@ function QuizinLibrary(props) {
                         </div>
                         {/* </TouchableOpacity> */}
                       </div>
-                      <div class="flex flex-wrap justify-center mt-2">
+                      <div class=" max-sm:flex flex-wrap justify-center mt-2 md:w-full  md:grid grid-cols-3 justify-items-center">
                         {!!props.category.length &&
                           props.category.map((item) => {
                             return (

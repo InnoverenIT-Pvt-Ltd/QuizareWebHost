@@ -1,39 +1,32 @@
 import React, { useEffect } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import {
-  BorderBox,
-  FlexContainer,
-  MainWrapper,
-} from "../../../../Components/UI/Layout";
+
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, Navigation } from "swiper";
-import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
-import * as Yup from "yup";
+import { Navigation } from "swiper";
 import {
-  getFinalizeQuiz,
   getLibraryQuiz,
   handleQuizHostModal,
   deleteLibraryQuiz,
   hostQuiz,
-  addQuizName,
   closeLibraryQuiz,
-
   updateQuizNameByQuizId,
 } from "../../QuizAction";
-import { Button, Card, Modal } from "antd";
+import { Button, Modal } from "antd";
 import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import MainHeader from "../../../../Components/Mainheader";
-import { Form, Field, Formik } from "formik";
+import { Form, Formik } from "formik";
 
 const { useState } = React;
 
 function QuizLibrary(props) {
+
+
   const history = useHistory();
   const [duration, setDuration] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -48,7 +41,7 @@ function QuizLibrary(props) {
   const handleOk = () => {
     setIsModalOpen(false);
     history.push(`/hostquiz`);
-    props.updateQuizNameByQuizId(
+    props.hostQuiz(
       {
         duration: duration,
         quizHostId: props.quizHostId,
@@ -56,15 +49,12 @@ function QuizLibrary(props) {
       },
       currentItem.quizId
     );
-    props.hostQuiz(currentItem.quizId);
+    // props.hostQuiz(currentItem.quizId);
   };
   const handleCancel = () => {
     setIsModalOpen(false);
   };
 
-  //   function handleCallBack(data) {
-  //     history.push(`/updateQuizName`);
-  //   }
   console.log(props.libraryQuiz)
   useEffect(() => {
     props.getLibraryQuiz(props.quizHostId);
@@ -74,13 +64,8 @@ function QuizLibrary(props) {
       <MainHeader />
       <Formik>
         <Form class="flex justify-center max-sm:w-11/12 mt-8 m-auto md:mt-12  w-2/5  h-h50  ">
-          {/* <div className="bg-white rounded-rounded2.8 mt-3 "> */}
-
-
           <Swiper
-
             navigation={true}
-
             modules={[Navigation]}
             className="mySwiper "
           >
@@ -148,7 +133,7 @@ function QuizLibrary(props) {
                     </div>
                     <div class="flex flex-row mt-8 justify-between">
                       {/* <Link to="/create"> */}
-                      <Link to={`updateQuizNameLibrary/${item.quizName}/${item.duration}/${item.quizId}`}>
+                      <Link to={`updateQuizNameInLibrary/${item.quizName}/${item.duration}/${item.quizId}`}>
 
                         <Button
                           style={{ width: "9rem", backgroundColor: "white" }}
@@ -178,7 +163,7 @@ function QuizLibrary(props) {
                       {item.quizHostInd === false && (
                         <Button
                           type="primary"
-                          style={{ backgroundColor: "white" }}
+                          style={{ backgroundColor: "white", width: "28rem" }}
                           onClick={() => {
                             showModal();
                             handleSetCurrentItem(item);
@@ -193,7 +178,7 @@ function QuizLibrary(props) {
                       {item.quizHostInd === true && (
                         <Button
                           type="primary"
-                          style={{ backgroundColor: "white" }}
+                          style={{ backgroundColor: "white", width: "28rem" }}
                           // onClick={() =>
                           //  props.handleQuizHostModal(true)
                           // }
@@ -211,7 +196,7 @@ function QuizLibrary(props) {
 
                         <Button
                           type="primary"
-                          style={{ backgroundColor: "white" }}
+                          style={{ backgroundColor: "white", width: "28rem" }}
                         // onClick={() => props.hostQuiz(props.showQuiz.quizId)}
                         >
                           <h3>Add Question</h3>
