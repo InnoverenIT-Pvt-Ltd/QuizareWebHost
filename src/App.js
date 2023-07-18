@@ -1,23 +1,18 @@
 
-
-
-
 import React, { Component, lazy, Suspense } from "react";
 import 'antd/dist/reset.css';
 import { connect } from "react-redux";
-import { Route, Switch, Redirect, withRouter } from "react-router-dom";
-import MainApp from "./Main/MainApp";
-import Login from "./Container/Auth/Login";
-import axios from "axios";
+import { Route, Switch } from "react-router-dom";
 import "./App.css";
 import { BundleLoader } from "./Components/Placeholder";
 import PrivateRoute from "./Helpers/Auth/PrivateRoute";
-// import AddQuiz from "./Components/Quizs/AddQuiz";
+const ForgetPasswordForm = lazy(() => import("./Container/Auth/ForgetPasswordForm"))
+const LoginByMail = lazy(() => import("./Container/Auth/LoginByMail"))
+const SignUpPage = lazy(() => import("./Container/Auth/SignUpPage"))
+const ChangePassword = lazy(() => import("./Container/Auth/ChangePassword"))
+const Login = lazy(() => import("./Container/Auth/Login"))
+const MainApp = lazy(() => import("./Main/MainApp"))
 
-import LoginByMail from "./Container/Auth/LoginByMail";
-import ForgetPasswordForm from "./Container/Auth/ForgetPasswordForm";
-import SignUpPage from "./Container/Auth/SignUpPage";
-import ChangePassword from "./Container/Auth/ChangePassword";
 
 class App extends Component {
   render() {

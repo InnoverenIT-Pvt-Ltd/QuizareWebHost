@@ -37,7 +37,7 @@ function Login(props) {
 
   let google = <div>
     <GoogleLogin
-      clientId="748641779898-e7jjaer4u1mf9kq0u7tcti1iv0i70bq6.apps.googleusercontent.com"
+      clientId="1802272721-jkbu5gabo0qsrq7kh50n5ap7h3979tvb.apps.googleusercontent.com"
       buttonText="Login with Google"
       onSuccess={responseGoogle}
       onFailure={responseGoogle}
