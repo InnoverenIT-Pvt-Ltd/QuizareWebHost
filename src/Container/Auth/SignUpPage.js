@@ -15,6 +15,7 @@ import {
 } from "../../Components/UI/Layout";
 import { Spacer } from "../../Components/UI/Elements";
 import { InputComponent } from "../../Components/Forms/Formik/InputComponent";
+import { Radio } from "@mui/material";
 
 // /**
 //  * yup validation scheme for set Password
@@ -28,14 +29,15 @@ class SignUpPage extends Component {
             <>
                 <FlexContainer>
                 <div class="w-full flex-col  overflow-auto flex justify-center items-center max-sm:h-h36 md:min-h-screen  ">                   
-                        <img
+                        {/* <img
                             className="big-logo"
                             src={FWLogo}
                             style={{ width: 70 }}
                             alt="Tekorero logo"
 
-                        />
-                       <div className="bg-white rounded-2xl shadow-2xl border-solid flex justify-center mt-3 flex-col max-sm:w-11/12 md:w-2/6 ">
+                        /> */}
+                       
+                       <div className="bg-white rounded-rounded2.8 shadow-2xl border-solid flex justify-center mt-3 flex-col max-sm:w-11/12 md:w-2/6 ">
                             <Formik
                                 enableReinitialize
                                 initialValues={{
@@ -69,70 +71,70 @@ class SignUpPage extends Component {
                                     setFieldTouched,
                                 }) => (
                                     <Form className="form-background h-h29">
-                                        <div class="flex justify-center items-center flex-col" >
-                                            <FlexContainer flexWrap="no-wrap">
-                                                <div
-                                                    style={{
-                                                        width: "40%",
-                                                    }}
-                                                >
-                                                    <Field name="imageId" component={Upload} />
-                                                </div>
-                                            </FlexContainer>
-                                            <div style={{ width: "100%", padding: "15px" }}>
+                                        <div class="flex justify-center items-center flex-col p-2" >
+                                           
+                                            <h2 class="text-3xl font-medium">Signup for Quizledge</h2>
+                                            <h3 class="flex justify-start w-wk mt-4 ml-1">Create a profile to start creating</h3>
+                                            <div style={{ width: "100%",marginTop:"0.5rem" }}>
                                                 <Field
                                                     name="name"
                                                     type="text"
-                                                    placeholder="Full Name"
-                                                    style={{ width: "100%", height: "2.5em" }}
+                                                    placeholder="Enter username"
+                                                    style={{ width: "100%", height: "4.2rem",borderRadius:"1.25rem",backgroundColor:"#E4E2E2" }}
                                                     component={InputComponent}
                                                 />
                                             </div>
-                                            <div style={{ width: "100%", padding: "15px" }}>
+                                            <div style={{ width: "100%",marginTop:"0.5rem" }}>
                                                 <Field
                                                     name="emailID"
                                                     type="email"
-                                                    placeholder="Email"
-                                                    style={{ width: "100%", height: "2.5em" }}
+                                                    placeholder="Enter  email"
+                                                    style={{ width: "100%", height: "4.2rem",borderRadius:"1.25rem",backgroundColor:"#E4E2E2" }}
                                                     component={InputComponent}
                                                 />
                                             </div>
-                                            <div style={{ width: "100%", padding: "15px" }}>
+                                            <div style={{ width: "100%",marginTop:"0.5rem" }}>
                                                 <Field
                                                     name="password"
                                                     type="password"
-                                                    placeholder="Password"
-                                                    style={{ width: "100%", height: "2.5em" }}
+                                                    placeholder="Create password"
+                                                    style={{ width: "100%", height: "4.2rem",borderRadius:"1.25rem",backgroundColor:"#E4E2E2" }}
                                                     component={InputComponent}
 
                                                 />
                                             </div>
-                                            <div style={{ width: "100%", padding: "15px" }}>
+                                            <div style={{ width: "100%",marginTop:"0.5rem" }}>
                                                 <Field
                                                     name="confirmPassword"
                                                     type="password"
-                                                    placeholder="Confirm Password"
-                                                    style={{ width: "100%", height: "2.5em" }}
+                                                    placeholder="Confirm password"
+                                                    style={{ width: "100%", height: "4.2rem",borderRadius:"1.25rem",backgroundColor:"#E4E2E2" }}
                                                     component={InputComponent}
 
                                                 />
                                             </div>
-                                            <div style={{ width: "86%", display: "flex", justifyContent: "space-around" }}>
+                                            <div class="flex items-center w-80">
+                                                
+                                            <input id="default-radio-1" type="radio" value="" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"></input>
+                                                <h3 class="ml-2">Accept teams and conditions</h3></div>
+                                           
 
-                                                <Link to="/email">
+                                                {/* <Link to="/email">
                                                     <div
                                                         style={{ color: "#21a1fd", marginTop: "5px" }}
                                                     >Back To Login</div>
-                                                </Link>
+                                                </Link> */}
+                                                  <div class="bg-black rounded-rounded2.8  mt-8 w-64 items-center flex justify-center" >
                                                 <Button
                                                     type="primary"
                                                     htmlType="submit"
                                                     Loading={isSubmitting}
-                                                    style={{ width: "34%", height: "2.5em" }}
+                                                    style={{  height: "5em",backgroundColor:"black",borderRadius:'3rem' }}
                                                 >
-                                                    Sign Up
+                                                  <h3 class="font-medium text-white text-3xl">Register</h3> 
                                                 </Button>
-                                            </div>
+                                                </div>
+                                         
                                         </div>
 
                                     </Form>

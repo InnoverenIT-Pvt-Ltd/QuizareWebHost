@@ -5,7 +5,7 @@ import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import FWLogo from "../../../src/images/Latest.png";
 import Button from "antd/lib/button";
-import { login } from "./AuthAction";
+import { login,facebookLogin, googleLogin } from "./AuthAction";
 import { Input } from "reactstrap";
 import { Link, withRouter } from "react-router-dom";
 import {
@@ -15,6 +15,9 @@ import {
 } from "../../Components/UI/Layout";
 import { Spacer, ValidationError } from "../../Components/UI/Elements";
 import Mainheader from "../../Components/Mainheader";
+import FacebookLogin from "react-facebook-login";
+import { GoogleLogin } from 'react-google-login';
+import FacebookIcon from '@mui/icons-material/Facebook';
 
 // /**
 //  * yup validation scheme for set Password
@@ -23,14 +26,25 @@ import Mainheader from "../../Components/Mainheader";
 class LoginByMail extends Component {
     constructor(props) {
         super(props);
+        this.responseFacebook = this.responseFacebook.bind(this);
+        this.responseGoogle = this.responseGoogle.bind(this);
         this.state = {
             email: "",
             password: "",
             loading: false,
             render: false,
             otp: false,
+            
         };
     }
+    responseFacebook(response) {
+        console.log(response);
+        this.props.facebookLogin(response.accessToken);
+      }
+      responseGoogle(response) {
+        console.log(response);
+        this.props.googleLogin(response.tokenId, this.props.history);
+      }
     submit = (values) => {
         // this.enterLoading();
         this.props.login(values, this.props.history);
@@ -67,16 +81,17 @@ class LoginByMail extends Component {
         console.log(this.props);
         return (
             <>
+          
                 <FlexContainer>
                     <div class="w-full flex-col min-h-screen overflow-auto flex justify-center items-center  ">
-                        <img
+                        {/* <img
                             className="big-logo"
                             src={FWLogo}
                             style={{ width: 70 }}
                             alt="Tekorero logo"
 
-                        />
-                        <div className="bg-white rounded-2xl shadow-2xl border-solid flex justify-center mt-3 flex-col max-sm:w-11/12 h-80 md:w-2/6 ">
+                        /> */}
+                        <div className="bg-white rounded-rounded2.8 shadow-2xl border-solid flex justify-center mt-3 flex-col max-sm:w-11/12 h-h29 md:w-2/6 ">
                             <Formik
                                 enableReinitialize
                                 initialValues={{
@@ -90,17 +105,39 @@ class LoginByMail extends Component {
                                 }}
                             >
                                 {({ errors, touched, isSubmitting, values }) => (
-                                    <Form className="form-background">
-                                        <div
-
-                                            style={{ alignItems: "center", display: "flex", flexDirection: "column" }}
-                                        >
+                                    <Form className="form-background h-h29 rounded-full">
+                                       
+                                       <div class="flex justify-center items-center flex-col p-2 h-h34 rounded-rounded2.8" >
+                                            <h2 class="text-3xl font-medium"> Login to Quizledge</h2>
+                                        <h3 class="ml-6 w-wk flex justify-start mt-4">With Facebook or Google </h3>
+                                        <div class="flex justify-between">
+                                        <div class="w-full h-16 rounded-2xl bg-slate-100">
+        <GoogleLogin
+          clientId="1802272721-jkbu5gabo0qsrq7kh50n5ap7h3979tvb.apps.googleusercontent.com"
+         // buttonText="Login with Google"
+          onSuccess={this.responseGoogle}
+          onFailure={this.responseGoogle}
+          cookiePolicy={'single_host_origin'}
+          style={{width:"5rem"}}
+        />
+      </div>
+      <div class="w-full h-16 rounded-2xl bg-slate-100">
+        <FacebookLogin
+          appId="1462431934502453"
+          autoLoad={false}
+          scope="public_profile, email, user_birthday"
+          fields="name,email,picture"
+          callback={this.responseFacebook}
+        />
+      </div>
+      </div>
+                                            <h3 class="w-wk flex justify-start ml-4">Or a registered email</h3>
                                             <div style={{ width: "100%", padding: "15px" }}>
                                                 <Field
                                                     name="email"
                                                     type="email"
-                                                    placeholder="Email"
-                                                    style={{ width: "100%", height: "2.5em" }}
+                                                    placeholder="Enter  email"
+                                                    style={{ width: "100%", height: "4.2rem",borderRadius:"1.25rem",backgroundColor:"#E4E2E2" }}
                                                     component={this.InputComponent}
                                                 />
                                             </div>
@@ -108,20 +145,35 @@ class LoginByMail extends Component {
                                                 <Field
                                                     name="password"
                                                     type="password"
-                                                    placeholder="Password"
-                                                    style={{ width: "100%", height: "2.5em" }}
+                                                    placeholder="Enter password"
+                                                    style={{ width: "100%", height: "4.2rem",borderRadius:"1.25rem",backgroundColor:"#E4E2E2" }}
                                                     component={this.InputComponent}
 
                                                 />
                                             </div>
-                                            <div style={{ width: "35%" }}>
+                                            <div style={{ display: "flex", justifyContent: "space-around" }}>
+                                {/* <Link
+                                    to="/forgotPassword"
+                                    style={{ textAlign: "center", fontSize: 15, color: "#cb0009", fontWeight: "500" }}
+                                >
+                                    Forgot password?
+                                </Link> */}
+                               
+                                <Link
+                                    to="/signUp"
+                                    style={{ textAlign: "center", fontSize: 15, color: "#0a8bd7", fontWeight: "500" }}
+                                >
+                                  Don’t have an account? Return to register.
+                                </Link>
+                            </div>
+                            <div class="bg-black rounded-rounded2.8  mt-8 w-64 items-center flex justify-center" >
                                                 <Button
                                                     type="primary"
                                                     htmlType="submit"
                                                     Loading={isSubmitting}
-                                                    style={{ width: "100%", height: "2.5em" }}
+                                                    style={{  height: "5em",backgroundColor:"black",borderRadius:'3rem' }}
                                                 >
-                                                    Sign In
+                                                   <h3 class="font-medium text-white text-3xl"> LogIn</h3> 
                                                 </Button>
                                             </div>
                                         </div>
@@ -129,23 +181,8 @@ class LoginByMail extends Component {
                                     </Form>
                                 )}
                             </Formik>
-                            <br />
-                            &nbsp;
-                            <div style={{ display: "flex", justifyContent: "space-around" }}>
-                                <Link
-                                    to="/forgotPassword"
-                                    style={{ textAlign: "center", fontSize: 15, color: "#cb0009", fontWeight: "500" }}
-                                >
-                                    Forgot password?
-                                </Link>
-                                &nbsp;
-                                <Link
-                                    to="/signUp"
-                                    style={{ textAlign: "center", fontSize: 15, color: "#0a8bd7", fontWeight: "500" }}
-                                >
-                                    Sign Up
-                                </Link>
-                            </div>
+                            
+                           
 
                         </div>
                         <Spacer />
@@ -163,6 +200,8 @@ const mapDispatchToProps = (dispatch) =>
     bindActionCreators(
         {
             login,
+            facebookLogin,
+      googleLogin
 
         },
         dispatch
