@@ -56,14 +56,12 @@ function Login(props) {
     </div>
   let loginEmail =
     <Link to="/email">
-      <div style={{
-        backgroundColor: "rgb(81 205 243)",
-        padding: "3px",
-        marginTop: "6px",
-        textAlign: "center",
+      <div class="bg-black rounded-rounded2.8 p-1 mt-1 w-36 items-center flex justify-center">
+        <Button style={{ border: "none", height:"5rem", }}>
+        <h3 class="font-medium text-white text-xl"> Login </h3>
 
-      }}>
-        <Button style={{ border: "none", color: "white" }}>Login By Email</Button>
+
+          </Button>
       </div>
     </Link>
   return (
@@ -81,9 +79,9 @@ function Login(props) {
             setFieldValue,
             setFieldTouched,
           }) => (
-            <Form class=" max-sm:w-4/5 mt-6 m-auto md:mt-7  w-2/5 ">
+            <Form class=" max-sm:w-4/5 mt-2 m-auto md:mt-7  w-2/5 ">
 
-              <div class="shadow-2xl border-solid w-w95 flex justify-center items-center  p-1 max-sm:m-0 h-h34 rounded-2xl md:m-auto">
+              <div class="shadow-2xl border-solid w-w95 flex justify-center items-center  p-1 max-sm:m-0 h-h32 rounded-rounded2.8 md:m-auto">
                 <div>
                   {/* <img
                     className="big-logo"
@@ -93,29 +91,49 @@ function Login(props) {
 
                   /> */}
                   <div class="flex justify-center">
-                    <h3 class="font-extrabold ">Welcome</h3>
+                    <h1 class="font-medium ">Quizledge</h1>
 
+                  </div>
+                  <div class="flex justify-center">
+                  <h4>A world of user generated quizzes</h4>
                   </div>
                   <div class="flex items-center flex-col">
                     {/* <div class="facebook_div"> */}
-                    {content}
+                    {/* {content} */}
                     {/* </div> */}
-                    <div class="mt-4">
-                      {google}
-                      {loginEmail}
-                      {/* <Link to="/select">
-                          <Button type="primary" htmlType="submit" style={{ width: "15rem", height: "2rem", backgroundColor: "white", borderBlockColor: "#126c5e", borderRadius: "0" }}>
-                            <h3 class="font-extrabold">Register with Google</h3></Button>
-                        </Link> */}
-                    </div>
+                  
                   </div>
                 </div>
                 {/* </MainWrapper> */}
               </div>
               {/* </div>       */}
             </Form>
+            
           )}
         </Formik>
+        <div class="flex justify-between p-6">
+        <div >
+                      {/* {google} */}
+                      {loginEmail}
+                      {/* <Link to="/select">
+                          <Button type="primary" htmlType="submit" style={{ width: "15rem", height: "2rem", backgroundColor: "white", borderBlockColor: "#126c5e", borderRadius: "0" }}>
+                            <h3 class="font-extrabold">Register with Google</h3></Button>
+                        </Link> */}
+                    </div>
+                    <div>
+
+                    <Link to="/signUp">
+      <div class="bg-black rounded-rounded2.8 p-1 mt-1 w-36 items-center flex justify-center"
+    >
+        <Button style={{ border: "none", height:"5rem", }}>
+        <h3 class="font-medium text-white text-xl"> Register </h3>
+
+
+          </Button>
+      </div>
+    </Link>
+                    </div>
+                    </div>
       </div>
     </>
   );

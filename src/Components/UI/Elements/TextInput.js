@@ -7,12 +7,12 @@ const TextInput = styled.input.attrs({
   border-radius: 0;
   width:100%;
     // border: 0.0625em solid ${props => props.theme.inputBorderColor};
-     border: 0.0625em solid gainsboro;
+    //  border: 0.0625em solid gainsboro;
     background-color: ${props => props.theme.backgroundColor};
     background-color: 	#FFFFFF;
     color: ${props => props.theme.color};
     //  box-shadow: 0em 0.25em 0.625em -0.25em  ${props => props.theme.boxShadowColor}; 
-     box-shadow:${props => (props.isShadow ? "" : "0em 0.25em 0.625em -0.25em #aaa")} ; 
+    //  box-shadow:${props => (props.isShadow ? "" : "0em 0.25em 0.625em -0.25em #aaa")} ; 
     display: block;
     margin: 0 0 0.2rem 0;
   //  border-radius: 0.3rem ;
@@ -40,7 +40,7 @@ const TextInput = styled.input.attrs({
     }
     @media only screen and (max-width:640px) {
           height: 2rem;
-          border-color: black;
+          // border-color: black;
        }
    `;
 export default TextInput;
