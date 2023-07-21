@@ -13,6 +13,7 @@ import {
   LayoutWrapper,
 } from "../Components/UI/Layout";
 import { BundleLoader } from "../Components/Placeholder";
+import HowtoUse from "../Components/Quizs/HowtoUse";
 const Question1 = lazy(() => import("../Components/Quizs/Question1"))
 const CreateQuiz = lazy(() => import("../Components/Quizs/CreateQuiz"));
 const QuizName = lazy(() => import("../Container/Quiz/QuizName"))
@@ -56,6 +57,7 @@ function MainApp(props) {
               <Route exact path="/changepassword" component={ChangePassword} />
               <Route exact path="/quizzes" component={QuizName} />
               <Route exact path="/addquiz" component={Quiz} />
+              <Route exact path="/how" component={HowtoUse} />
               <Route exact path="/addquizout" component={QuizOut} />
               <Route exact path="/addquizin" component={QuizIn} />
               <Route path="/quizinLibrary/:quizId" component={QuizinLibrary} />

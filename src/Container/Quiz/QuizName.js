@@ -7,6 +7,7 @@ import * as Yup from "yup";
 import { InputComponent } from "../../Components/Forms/Formik/InputComponent";
 import { addQuizName } from './QuizAction';
 import { Button } from 'antd';
+import FWLogo from "../../../src/images/lamp-charge.png";
 import { useHistory } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 import MainHeader from '../../Components/Mainheader';
@@ -60,20 +61,32 @@ function QuizName(props) {
           errors,
           values,
         }) => (
-          <Form class="flex justify-center  max-sm:w-11/12 mt-8 m-auto md:mt-12  w-2/5 ">
+          <Form class="flex justify-center flex-col items-center  max-sm:w-11/12 mt-8 m-auto md:mt-12  w-2/5 ">
 
 
-            <div class="shadow-2xl border-solid w-11/12 flex justify-center items-center  p-1 max-sm:m-0 h-h31 rounded-xl md:w-full m-auto">
+            <div class="shadow-2xl border-solid w-full flex justify-center items-center  p-1 max-sm:m-0 h-h31 rounded-rounded2.8 md:w-full m-auto">
+            
               <div class="flex flex-col items-center ">
+              <h2 class="text-3xl font-medium">Create a new quiz</h2>
+              <div>
+              <img
+                    className="big-logo"
+                    src={FWLogo}
+                    
+                    alt="Tekorero logo"
+
+                  />
+              </div>
                 <div >
-                  <div >
+                  <h3>Start creating by choosing a name for your quiz</h3>
+                  <div class="mt-4">
                     <Field
                       name="quizName"
                       //isColumn
                       component={InputComponent}
                       //onChangeText={handleChange('quizName')}
-                      style={{ textAlign: 'center' }}
-                      placeholder="Enter Quiz Name"
+                      style={{ width: "100%", height: "3rem",borderRadius:"1.25rem",backgroundColor:"#E4E2E2", }}
+                      placeholder="Enter quiz Name"
 
                     />
                   </div>
@@ -92,24 +105,23 @@ function QuizName(props) {
                   style={externalStyle.firstCardText}>
                   Standard                  
                   </Text> */}
-                  <div class="flex mt-4">
-                    {/* <Link to="/addquiz"> */}
-                    <Button
-                      type="primary"
-                      htmlType="submit"
-                      //  Loading={props.addingQuizName}
-                      onClick={handleSubmit}
-                      style={{ width: "16.5rem", backgroundColor: "white", borderBlockColor: "black", borderRadius: "0", height: "2rem" }}
-                    // onClick={() => props.navigation.navigate('Quiz')}
-                    ><h3 class="font-extrabold">Add Quiz</h3></Button>
-                    {/* </Link> */}
-                  </div>
-                  {/* <AntIcon name="enter" color="green" size={40} /> */}
+                 
+                
 
                 </div>
+                
               </div>
+              
             </div>
-
+            <div class="bg-black rounded-rounded2.8  mt-8 w-52 items-center flex justify-center" >
+                   
+                   <Button
+                     type="primary"
+                     htmlType="submit"
+                     onClick={handleSubmit}
+                     style={{  height: "5em",backgroundColor:"black",borderRadius:'3rem',display:"flex",justifyContent:"center",alignItems:"center" }}
+                   > <h3 class="font-medium text-white text-3xl">Create</h3></Button>
+                 </div>
           </Form>
         )}
 

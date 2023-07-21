@@ -83,7 +83,7 @@ class LoginByMail extends Component {
             <>
           
                 <FlexContainer>
-                    <div class="w-full flex-col min-h-screen overflow-auto flex justify-center items-center  ">
+                    <div class="w-full flex-col h-h40 overflow-auto flex justify-center items-center  ">
                         {/* <img
                             className="big-logo"
                             src={FWLogo}

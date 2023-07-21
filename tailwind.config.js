@@ -33,10 +33,12 @@ module.exports = {
 'h29':'27rem',
 'h85':'85rem',
 'h73':'73rem',
-'h32':'32rem'
+'h32':'32rem',
+'h40':'40rem'
           },
           borderRadius:{
-'rounded2.8':'2.8rem'
+'rounded2.8':'2.8rem',
+'rounded3':'3rem'
           },
           flexGrow: {
             '3': '3'
@@ -48,7 +50,9 @@ module.exports = {
             'xsm':'0.85rem'
           },
           colors: {
-            'ShopBlue': '#e0f2fe',
+            'ShopBlue': '#7AB0F7',
+            "quizb":"#5E5E5E",
+            "quizc":"#BBBBBB"
           },
           borderWidth:{
 'border-l-5':'5px'
