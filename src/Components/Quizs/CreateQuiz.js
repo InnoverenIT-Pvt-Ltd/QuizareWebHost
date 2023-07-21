@@ -6,6 +6,7 @@ import { Button, Select, Icon, Tag, Switch, Checkbox } from "antd";
 import { Formik, Form, FastField, Field, FieldArray } from "formik";
 import * as Yup from "yup";
 import MainHeader from "../Mainheader";
+import Collapse from "../Collapse";
 
 // import SkillsLoadMore from "./CandidateTable/SkillsLoadMore";
 const { Option } = Select;
@@ -28,7 +29,7 @@ class CreateQuiz extends Component {
 
     return (
       <>
-        <MainHeader />
+        <Collapse />
         <Formik>
           {({
             values,
@@ -38,64 +39,79 @@ class CreateQuiz extends Component {
             setFieldValue,
             setFieldTouched,
           }) => (
-            <Form class=" max-sm:w-4/5 mt-8 m-auto h-h31 md:mt-12 w-2/5  ">
-              <div class="shadow-2xl border-solid w-w95 flex justify-center flex-col  p-1 max-sm:m-0 h-full rounded-xl md:m-auto">
+            <Form class=" max-sm:w-full mt-8 m-auto h-h31 md:mt-12 w-2/5  ">
+              <div class="shadow-2xl bg-quizc border-solid w-w95 flex justify-center flex-col   max-sm:m-0 h-full  md:m-auto">
                 <div class="flex justify-center">
                   <h3 class="font-extrabold ">Welcome {this.props.user.name}</h3>
                 </div>
                 <div class="flex items-center flex-col">
-                  <div class="mt-8">
+                <div class="  w-wk items-center flex justify-center" >
+                    <Link to="/how">
+                      <Button
+                        //type="primary"
+                        htmlType="submit"
+                        style={{  height: "5em",display:"flex",justifyContent:"center",alignItems:"center" }}
+                      >
+                        <h3 class="font-medium text-white text-lg">How to</h3>
+                      </Button>
+                    </Link>
+                  </div>
+                <div class=" bg-quizb  w-wk items-center flex justify-center" >
                     <Link to="/quizzes">
                       <Button
-                        type="primary"
+                       // type="primary"
                         htmlType="submit"
-                        style={{
-                          width: "15rem",
-                          height: "2rem",
-                          backgroundColor: "white",
-                          borderBlockColor: "blue",
-                          borderRadius: "0",
-                        }}
+                        style={{  height: "5em",display:"flex",justifyContent:"center",alignItems:"center" }}
                       >
-                        <h3 class="font-extrabold">Create a new Quiz</h3>
+                        <h3 class="font-medium text-white text-lg">Create Quiz</h3>
                       </Button>
                     </Link>
                   </div>
-                  <div class="mt-4">
+                  {/* <div class="  w-wk items-center flex justify-center" >
                     <Link to="/ongoingQuiz">
                       <Button
-                        type="primary"
+                        //type="primary"
                         htmlType="submit"
-                        style={{
-                          width: "15rem",
-                          height: "2rem",
-                          backgroundColor: "white",
-                          borderBlockColor: "#126c5e",
-                          borderRadius: "0",
-                        }}
+                        style={{  height: "5em",display:"flex",justifyContent:"center",alignItems:"center" }}
                       >
-                        <h3 class="font-extrabold">Ongoing Quizzes</h3>
+                        <h3 class="font-medium text-white text-lg">Ongoing Quizzes</h3>
                       </Button>
                     </Link>
-                  </div>
-                  <div class="mt-4">
+                  </div> */}
+                  <div class="  w-wk items-center flex justify-center" >
                     <Link to="/quizLibrary">
                       <Button
-                        type="primary"
+                       // type="primary"
                         htmlType="submit"
-                        style={{
-                          width: "15rem",
-                          height: "2rem",
-                          backgroundColor: "white",
-                          borderBlockColor: "#126c5e",
-                          borderRadius: "0",
-                        }}
+                        style={{  height: "5em",display:"flex",justifyContent:"center",alignItems:"center" }}
                       >
-                        <h3 class="font-extrabold">My Quiz Library </h3>
+                         <h3 class="font-medium text-white text-lg">Quiz Library </h3>
                       </Button>
                     </Link>
                   </div>
-                  <div className="flex flex-row mt-4">
+                  <div class=" bg-quizb  w-wk items-center flex justify-center" >
+                    <Link to="/profile">
+                      <Button
+                       // type="primary"
+                        htmlType="submit"
+                        style={{  height: "5em",display:"flex",justifyContent:"center",alignItems:"center" }}
+                      >
+                        <h3 class="font-medium text-white text-lg">My Profile</h3>
+                      </Button>
+                    </Link>
+                  </div>
+                  <div class="  w-wk items-center flex justify-center" >
+                    <Link to="/email">
+                      <Button
+                       // type="primary"
+                        htmlType="submit"
+                        style={{  height: "5em",display:"flex",justifyContent:"center",alignItems:"center" }}
+                      >
+                         <h3 class="font-medium text-white text-lg">Sign Out </h3>
+                      </Button>
+                    </Link>
+                  </div>
+                  {/* <div className="flex flex-row mt-4">
                     <Link to="/report">
                       <button className="bg-blue-900 flex text-white px-4 rounded-sm h-8 justify-center items-center w-60">
                         <svg
@@ -115,7 +131,7 @@ class CreateQuiz extends Component {
                         Report
                       </button>
                     </Link>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </Form>

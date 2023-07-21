@@ -98,26 +98,11 @@ function Quiz(props) {
                 {props.showQuiz && props.showQuiz.quizName}
               </h2>
             </div>
-            <div class="flex justify-center mt-3  max-sm:w-3/5 max-sm:ml-20 ">
-              {count >= 2 ?
-
-                <Button type="primary"
-                  style={{
-                    width: "13rem",
-                  }}
-                  onClick={() => {
-                    handleSubmit()
-                    goToFinalize()
-                  }}
-                >
-                  Finalize Quiz
-                </Button>
-                : ""}
-            </div>
+          
             {/* Container */}
-            <Form class=" max-sm:w-full  m-auto md:mt-12  w-2/5  h-h50  ">
-              <div className="w-11/12 my-2 flex justify-center m-auto ">
-                <div class="shadow-2xl border-solid w-11/12 flex justify-center flex-col items-center  p-2 max-sm:m-0 h-max rounded-2xl md:m-auto">
+            <Form class=" max-sm:w-full flex items-center flex-col  m-auto md:mt-12  w-2/5  h-h50  ">
+              <div className="w-full my-2 flex justify-center m-auto ">
+                <div class="shadow-2xl border-solid w-11/12 flex justify-center flex-col items-center  p-2 max-sm:m-0 h-max rounded-rounded2.8 md:m-auto">
                   <div class=" flex justify-center flex-col w-full">
                     <h3 class="flex justify-center text-xl">
                       {" "}
@@ -133,9 +118,9 @@ function Quiz(props) {
                         <Field
                           component={InputComponent}
                           onChangeText={handleChange("question")}
-                          placeholder="Question"
+                          placeholder="Enter your question"
                           name="question"
-
+                          style={{ width: "100%", height: "5rem",borderRadius:"1.25rem",backgroundColor:"white" }}
                         // onChangeText={handleChange('questionName')}
                         />
                       </div>
@@ -152,9 +137,9 @@ function Quiz(props) {
                           // numberOfLines={5}
                           component={InputComponent}
                           onChangeText={handleChange("option1")}
-                          placeholder="Correct answer"
+                          placeholder="Enter correct answer"
                           name="option1"
-
+                          style={{ width: "100%", height: "4.2rem",borderRadius:"1.25rem",backgroundColor:"#E4E2E2" }}
                         // onChangeText={handleChange('option1')}
                         />
                       </div>
@@ -171,8 +156,9 @@ function Quiz(props) {
                           // numberOfLines={5}
                           component={InputComponent}
                           onChangeText={handleChange("option2")}
-                          placeholder="Option 2"
+                          placeholder="Enter alternative"
                           name="option2"
+                          style={{ width: "100%", height: "4.2rem",borderRadius:"1.25rem",backgroundColor:"#E4E2E2" }}
 
                         // onChangeText={handleChange('option2')}
                         />
@@ -190,8 +176,9 @@ function Quiz(props) {
                           // numberOfLines={5}
                           component={InputComponent}
                           onChangeText={handleChange("option3")}
-                          placeholder="Option 3"
+                          placeholder="Enter alternative"
                           name="option3"
+                          style={{ width: "100%", height: "4.2rem",borderRadius:"1.25rem",backgroundColor:"#E4E2E2" }}
                         />
                       </div>
                       {/* </TouchableOpacity> */}
@@ -203,10 +190,11 @@ function Quiz(props) {
                           // multiline
                           // value={values.option4}
                           // numberOfLines={5}
-                          placeholder="Option 4"
+                          placeholder="Enter alternative"
                           name="option4"
                           component={InputComponent}
                           onChangeText={handleChange("option4")}
+                          style={{ width: "100%", height: "4.2rem",borderRadius:"1.25rem",backgroundColor:"#E4E2E2" }}
                         />
                       </div>
                       {/* </TouchableOpacity> */}
@@ -276,31 +264,38 @@ function Quiz(props) {
                             </Card>
                         </View>           */}
                   </div>
-                </div>
-              </div>
-            </Form>
-            <div class="max-sm: flex flex-row justify-center items-center mt-4 ">
-              <div class="mr-1 ">
+                  <div class="bg-black rounded-rounded2.8  mt-8 w-36 items-center flex justify-center" >
                 <Button
-                  style={{
-                    backgroundColor: "white",
-                    borderColor: "black",
-                    borderRadius: "0.75rem",
-                    width: "5rem",
-                    height: "2.2rem",
-                  }}
+                   style={{  height: "3rem",backgroundColor:"#565656",borderRadius:'3rem' }}
                   type="primary"
-                  // title={'Add New Questions'}
-                  // titleStyle={externalStyle.titleStyle}
-                  // containerStyle={externalStyle.containerStyleBD}
-                  // buttonStyle={externalStyle.buttonStyleAdd}
+                  
                   onClick={handleSubmit}
-                // Loading={props.addingQuestion}
-                // onPress={() => props.navigation.navigate('Quiz Addquestions')}
+                
                 >
-                  <h4 class="">Add </h4>
+                 <h3 class="font-medium text-white text-2xl">Add </h3>
                 </Button>
               </div>
+                </div>
+              
+              </div>
+              <div class="bg-black rounded-rounded3  mt-8 w-52 items-center flex justify-center" >
+              {count >= 1 ?
+
+                <Button type="primary"
+                style={{  height: "5em",backgroundColor:"black",borderRadius:'3rem' }}
+                  onClick={() => {
+                    handleSubmit()
+                    goToFinalize()
+                  }}
+                >
+                <h3 class="font-medium text-white text-4xl">  Finalize</h3>
+                </Button>
+                : ""}
+            </div>
+            </Form>
+          
+            <div class="max-sm: flex flex-row justify-center items-center mt-4 ">
+          
               {/* <div class="mr-1">
                 <Button
                   style={{

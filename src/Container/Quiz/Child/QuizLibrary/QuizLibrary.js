@@ -163,7 +163,7 @@ function QuizLibrary(props) {
                       {item.quizHostInd === false && (
                         <Button
                           type="primary"
-                          style={{ backgroundColor: "white", width: "28rem" }}
+                          style={{ backgroundColor: "white" }}
                           onClick={() => {
                             showModal();
                             handleSetCurrentItem(item);
@@ -178,7 +178,7 @@ function QuizLibrary(props) {
                       {item.quizHostInd === true && (
                         <Button
                           type="primary"
-                          style={{ backgroundColor: "white", width: "28rem" }}
+                          style={{ backgroundColor: "white"}}
                           // onClick={() =>
                           //  props.handleQuizHostModal(true)
                           // }
@@ -196,7 +196,7 @@ function QuizLibrary(props) {
 
                         <Button
                           type="primary"
-                          style={{ backgroundColor: "white", width: "28rem" }}
+                          style={{ backgroundColor: "white"}}
                         // onClick={() => props.hostQuiz(props.showQuiz.quizId)}
                         >
                           <h3>Add Question</h3>

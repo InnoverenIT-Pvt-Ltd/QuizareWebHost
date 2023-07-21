@@ -6,7 +6,7 @@ import { Button, Select, Icon, Tag, Switch, Checkbox, message } from "antd";
 import { Formik, Form, FastField, Field, FieldArray } from "formik";
 import * as Yup from "yup";
 import { GoogleLogin } from 'react-google-login';
-import FWLogo from "../../../src/images/Latest.png";
+import FWLogo from "../../../src/images/note-2.png";
 import { facebookLogin, googleLogin } from "../Auth/AuthAction";
 import FacebookLogin from "react-facebook-login";
 
@@ -83,19 +83,24 @@ function Login(props) {
 
               <div class="shadow-2xl border-solid w-w95 flex justify-center items-center  p-1 max-sm:m-0 h-h32 rounded-rounded2.8 md:m-auto">
                 <div>
-                  {/* <img
-                    className="big-logo"
-                    src={FWLogo}
-                    style={{ width: 50 }}
-                    alt="Tekorero logo"
-
-                  /> */}
+                  
                   <div class="flex justify-center">
                     <h1 class="font-medium ">Quizledge</h1>
 
                   </div>
                   <div class="flex justify-center">
                   <h4>A world of user generated quizzes</h4>
+                  </div>
+
+
+                  <div>
+                    <img
+                    className="big-logo"
+                    src={FWLogo}
+                    
+                    alt="Tekorero logo"
+
+                  />
                   </div>
                   <div class="flex items-center flex-col">
                     {/* <div class="facebook_div"> */}
