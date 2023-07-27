@@ -58,30 +58,36 @@ function FinalizeQuiz(props) {
         <Form class="flex justify-center max-sm:w-11/12 mt-8 m-auto md:mt-12  w-2/5  h-h50  ">
           {/* <div className="bg-white rounded-rounded2.8 mt-3 "> */}
 
-          <div class="shadow-2xl border-solid flex justify-evenly flex-col  p-4 max-sm:m-0 h-h31 w-11/12 rounded-xl  md:m-auto">
-            <h2 class="text-xl mt-4 ml-4 flex justify-center">{`${props.finalizeQuiz.quizName || ""
+          <div class="shadow-2xl p-1 bg-white border-solid flex justify-evenly flex-col max-sm:m-0 h-h26 w-11/12 rounded-rounded3  md:m-auto">
+            <h2 class="text-xl mt-32  flex justify-center">{`${props.finalizeQuiz.quizName || ""
               }`}</h2>
-            <div>
-              <div
-                style={{ boxShadow: "0.01rem 0.01rem 0.12rem 0.01rem" }}
-                className="bg-white rounded-2xl  w-full flex justify-center "
-              >
-                <div class="shadow-2xl border-solid w-full flex justify-center flex-col  p-2  max-sm:m-0 h-28 rounded-2xl md:m-auto">
-                  <div class="flex flex-row">
-                    <h3 class="mr-2">Created:</h3>
+               <hr class="h-px bg-black border-2 w-wk mt-4 border-black"/>
+               <div class="p-4">
+        
+            <div className=" flex justify-between   ">
+                  <div class="flex flex-row w-wk">
+                    <h3 class="">Created:</h3>
                     <h3 class=" leading-5">{`${moment(props.finalizeQuiz.creationDate).format("ll") || ""
                       }`}</h3>
                   </div>
+                  <div class="flex flex-row w-wk">
+                    <h3 class="w-wk">Last edited:</h3>
+                    {/* <h3 class=" leading-5">{`${moment(props.finalizeQuiz.creationDate).format("ll") || ""
+                      }`}</h3> */}
+                  </div>
+                  </div>
+                  <div class="flex flex-row justify-between mt-6">
+                    <div>
                   <h3>
                     Questions: {`${props.finalizeQuiz.noOfQuestions || ""}`}
                   </h3>
+                  </div>
                   <h3 >
                     Categories: {`${props.finalizeQuiz.categories || ""}`}
                   </h3>
-                </div>
-              </div>
-            </div>
-            <div class="flex justify-center mt-4">
+                  </div>
+           
+            <div class="flex justify-center mt-8">
               <h3 class="text-xl ">Select quiz rules</h3>
             </div>
             <div>
@@ -104,11 +110,14 @@ function FinalizeQuiz(props) {
                 </div>
               </div>
             </div>
-            <div class="flex flex-row mt-8 justify-between">
+            
+            </div>
+            <div class="flex flex-row mt-4 justify-between p-4">
               {/* <Link to="/create"> */}
+              <div class=" w-full flex ">
               <Button
-                type="primary"
-                style={{ width: "max-content", backgroundColor: "white", margin: "0" }}
+               // type="primary"
+                style={{  height: "4em",backgroundColor:"grey",borderRadius:'3rem',width:"8rem" }}
                 onClick={() =>
                   props.deleteHostQuiz(
                     props.showQuiz && props.showQuiz.quizId,
@@ -116,35 +125,40 @@ function FinalizeQuiz(props) {
                   )
                 }
               >
-                <h3>Delete This Quiz</h3>
+                <h2 class="text-white text-xl font-medium">Delete</h2>
               </Button>
+              </div>
               {/* </Link> */}
               <Link to="/updateQuizName">
+              <div class="w-full flex ">
                 <Button
-                  style={{ width: "8rem", backgroundColor: "white" }}
-                  type="primary"
+                 style={{  height: "4em",backgroundColor:"grey",borderRadius:'3rem',width:"8rem" }}
+                  //type="primary"
 
                 //   onClick={() => props.navigation.navigate('Quiz Invite')}
                 >
-                  <h3>Edit Quiz</h3>
+                 <h2 class="text-white text-xl font-medium">Edit </h2>
                 </Button>
+                </div>
               </Link>
             </div>
-            <div class=" flex flex-col h-24 justify-between">
               {/* <Link to="/hostquiz"> */}
+              <div class=" p-1 mt-8  items-center flex justify-center"
+>
               <Button
-                type="primary"
-                style={{ backgroundColor: "white" }}
+               // type="primary"
+                style={{  height: "4em",borderRadius:'3rem',width:'10rem',backgroundColor:"black" }}
                 // onClick={() =>
                 //  props.handleQuizHostModal(true)
                 // }
                 onClick={showModal}
               // onClick={() => props.hostQuiz(props.showQuiz.quizId)}
               >
-                <h3>Host This Quiz</h3>
+                <h2 class="text-white text-2xl font-medium">Host </h2>
               </Button>
+              </div>
               {/* </Link> */}
-              <Link to="/addquizin">
+              {/* <Link to="/addquizin">
                 <Button
                   type="primary"
                   style={{ backgroundColor: "white" }}
@@ -152,7 +166,7 @@ function FinalizeQuiz(props) {
                 >
                   <h3>Add Question</h3>
                 </Button>
-              </Link>
+              </Link> */}
               <Modal
                 title="Host Quiz"
                 open={isModalOpen}
@@ -170,7 +184,7 @@ function FinalizeQuiz(props) {
                 </form>
               </Modal>
             </div>
-          </div>
+        
           {/* </div> */}
         </Form>
       </Formik>

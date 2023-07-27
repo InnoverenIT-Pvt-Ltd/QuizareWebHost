@@ -26,6 +26,7 @@ module.exports = {
 'hp':'382px',
 'h8':'22.666667%',
 'h36':'36rem',
+'h26':'26rem',
 'h34':'34rem',
 'h31':'31rem',
 'h33':'33rem',
@@ -34,7 +35,8 @@ module.exports = {
 'h85':'85rem',
 'h73':'73rem',
 'h32':'32rem',
-'h40':'40rem'
+'h40':'40rem',
+'h44':'44rem'
           },
           borderRadius:{
 'rounded2.8':'2.8rem',
@@ -52,7 +54,8 @@ module.exports = {
           colors: {
             'ShopBlue': '#7AB0F7',
             "quizb":"#5E5E5E",
-            "quizc":"#BBBBBB"
+            "quizc":"#BBBBBB",
+            "quizbg":"#F0F0F0"
           },
           borderWidth:{
 'border-l-5':'5px'

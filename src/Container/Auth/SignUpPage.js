@@ -28,7 +28,7 @@ class SignUpPage extends Component {
         return (
             <>
                 <FlexContainer>
-                <div class="w-full flex-col  overflow-auto flex justify-center items-center max-sm:h-h36 md:min-h-screen  ">                   
+                <div class="w-full bg-quizbg flex-col  overflow-auto flex justify-center  items-center max-sm:h-h40 md:min-h-screen  ">                   
                         {/* <img
                             className="big-logo"
                             src={FWLogo}
@@ -37,7 +37,7 @@ class SignUpPage extends Component {
 
                         /> */}
                        
-                       <div className="bg-white rounded-rounded2.8 shadow-2xl border-solid flex justify-center mt-3 flex-col max-sm:w-11/12 md:w-2/6 ">
+                       <div className="bg-white rounded-rounded2.8 shadow-2xl border-solid flex justify-center mt-3 flex-col max-sm:w-11/12 h-h34 md:w-2/6 ">
                             <Formik
                                 enableReinitialize
                                 initialValues={{
@@ -84,16 +84,16 @@ class SignUpPage extends Component {
                                                     component={InputComponent}
                                                 />
                                             </div>
-                                            <div style={{ width: "100%",marginTop:"0.5rem" }}>
+                                            <div class="w-full m-2">
                                                 <Field
                                                     name="emailID"
                                                     type="email"
-                                                    placeholder="Enter  email"
+                                                    placeholder="Enter email"
                                                     style={{ width: "100%", height: "4.2rem",borderRadius:"1.25rem",backgroundColor:"#E4E2E2" }}
                                                     component={InputComponent}
                                                 />
                                             </div>
-                                            <div style={{ width: "100%",marginTop:"0.5rem" }}>
+                                            <div class="w-full m-2">
                                                 <Field
                                                     name="password"
                                                     type="password"
@@ -103,7 +103,7 @@ class SignUpPage extends Component {
 
                                                 />
                                             </div>
-                                            <div style={{ width: "100%",marginTop:"0.5rem" }}>
+                                            <div class="w-full m-2">
                                                 <Field
                                                     name="confirmPassword"
                                                     type="password"
@@ -113,10 +113,10 @@ class SignUpPage extends Component {
 
                                                 />
                                             </div>
-                                            <div class="flex items-center w-80">
+                                            <div class="flex items-center w-80 mt-4">
                                                 
-                                            <input id="default-radio-1" type="radio" value="" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"></input>
-                                                <h3 class="ml-2">Accept teams and conditions</h3></div>
+                                            <input id="default-radio-1" type="checkbox" value="" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"></input>
+                                                <h3 class="ml-2">Accept terms and conditions</h3></div>
                                            
 
                                                 {/* <Link to="/email">
@@ -124,7 +124,7 @@ class SignUpPage extends Component {
                                                         style={{ color: "#21a1fd", marginTop: "5px" }}
                                                     >Back To Login</div>
                                                 </Link> */}
-                                                  <div class="bg-black rounded-rounded2.8  mt-8 w-64 items-center flex justify-center" >
+                                                  <div class="bg-black rounded-rounded2.8 mt-16 w-64 items-center flex justify-center" >
                                                 <Button
                                                     type="primary"
                                                     htmlType="submit"

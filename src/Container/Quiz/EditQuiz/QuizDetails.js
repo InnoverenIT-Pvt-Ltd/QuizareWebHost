@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { closeQuiz, hostQuiz } from "../../../Container/Quiz/QuizAction";
 import { Button, Card } from "antd";
-import { useHistory } from "react-router-dom";
+import { useHistory,Link } from "react-router-dom";
 import { Field, Formik, Form } from "formik";
 // import QuizDetailsPlayerTable from './QuizDetailsPlayerTable';
 import QuizDetailsPlayerTable from "../../../Components/Quizs/QuizDetailsPlayerTable";
@@ -30,23 +30,29 @@ function QuizDetails(props) {
       <MainHeader />
 
       <div class="flex justify-center  items-center max-sm:w-11/12 mt-8 m-auto md:mt-12  w-2/5 ">
-        <div class="shadow-2xl border-solid w-11/12 flex justify-center items-center flex-col  p-1 max-sm:m-0 h-h31 rounded-xl md:m-auto">
+        
+        <div class="shadow-2xl border-solid w-11/12 flex  items-center flex-col  p-1 max-sm:m-0 h-h29 rounded-rounded3 md:m-auto">
+      
+      
+        <div class="flex justify-center">
+            <h2 class="text-base flex justify-center">
+              {`${props.showQuiz.quizName || ""}`}{" "}
+            </h2>
+          </div>
+          <hr class="h-px bg-black border-2 w-wk mt-4 border-black"/>
+
           <div class="w-full flex justify-center items-center">
             <h2 class="text-base  flex justify-center flex-col">
               You are hosting
             </h2>
           </div>
-          <div class="flex justify-center">
-            <h2 class="text-base flex justify-center">
-              {`${props.showQuiz.quizName || ""}`}{" "}
-            </h2>
-          </div>
+        
 
-          <div class="w-full flex justify-center items-center flex-col">
+          <div class="w-full flex justify-center items-center flex-col mt-16">
             <h2 class="text-base mt-2 flex  items-center ">
-              Share URL for others to access.
+            Share URL to invite others to play your quiz
             </h2>
-            <Card style={{ width: "100%" }}>
+            <Card style={{ width: "100%",backgroundColor:"#F0F0F0", borderRadius:'2rem',marginTop:"1rem" }}>
               {/* <h2 class="text-base">{`${props.showQuiz.quizName || ''}`}{' '}</h2> */}
               {props.showQuiz.quizLink ? (
                 <h2 class="text-xs flex justify-center flex-col " style={{ overflowWrap: "break-word" }}>{`http://player.quizledge.no${props.showQuiz.quizLink || ""
@@ -55,17 +61,12 @@ function QuizDetails(props) {
                 ""
               )}
             </Card>
-            <div class="mt-4 w-full">
+            <div class="mt-24 w-full flex justify-center">
               <Button
-                style={{
-                  backgroundColor: "#4096ff",
-                  width: "100%",
-                  borderRadius: "0.4rem",
-                  height: "auto",
-                }}
+                style={{  height: "4em",backgroundColor:"grey",borderRadius:'3rem',width:'10rem' }}
                 onClick={() => copyToClipboard()}
               >
-                <h2 class="text-white">Click to copy the url</h2>
+                <h2 class="text-white text-xl font-medium">Share</h2>
               </Button>
             </div>
             {/* <div>
@@ -75,7 +76,7 @@ function QuizDetails(props) {
                 <QuizDetailsPlayerTable data={props.showQuiz} />
               )}
         </div> */}
-            <div class='flex justify-between mt-4 w-80 md:w-wk'>
+            {/* <div class='flex justify-between mt-4 w-80 md:w-wk'>
               <div class="w-36">
                 <Button
                   style={{ backgroundColor: "white" }}
@@ -106,8 +107,17 @@ function QuizDetails(props) {
                   </svg>
                 </button>
               </div>
-            </div>
+            </div> */}
+<Link to="/quizLibrary">
+<div class="bg-black rounded-rounded2.8 p-1 mt-8 w-60 items-center flex justify-center"
+>
+<Button style={{ border: "none", height:"5rem", }}>
+<h3 class="font-medium text-white text-xl"> Return to Library </h3>
 
+
+</Button>
+</div>
+</Link>
           </div>
         </div>
       </div>
