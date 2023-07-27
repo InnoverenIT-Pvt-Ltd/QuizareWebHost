@@ -12,6 +12,7 @@ import { useHistory } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 import MainHeader from '../../Components/Mainheader';
 import CreateQuiz from '../../Components/Quizs/CreateQuiz';
+import Menu from '../../Components/Quizs/Menu';
 
 const QuizSchema = Yup.object().shape({
 
@@ -34,7 +35,7 @@ function QuizName(props) {
 
   return (
     <>
-      <CreateQuiz class=" overflow-visible" />
+      <Menu/>
       <Formik
         initialValues={{
           duration: "",

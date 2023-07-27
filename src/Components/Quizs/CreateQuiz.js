@@ -124,7 +124,7 @@ const CandidateSchema = Yup.object().shape({
 
   return (
    <>
-    <nav className=" bg-ShopBlue w-full  ">
+    {/* <nav className=" bg-ShopBlue w-full  ">
       
       <div className="flex items-center justify-between h-16 px-4 border-b border-solid border-slate-600">
         <div className="flex-shrink-0 font-bold tracking-wider">
@@ -158,7 +158,8 @@ const CandidateSchema = Yup.object().shape({
         </button>
       </div>
       {showMobileMenu && <Menu />}
-    </nav>
+    </nav> */}
+    <Menu/>
     </>
   );
 }
