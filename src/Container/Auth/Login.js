@@ -9,7 +9,7 @@ import { GoogleLogin } from 'react-google-login';
 import FWLogo from "../../../src/images/note-2.png";
 import { facebookLogin, googleLogin } from "../Auth/AuthAction";
 import FacebookLogin from "react-facebook-login";
-
+import Mainheader from "../../Components/Mainheader";
 const { Option } = Select;
 /**
  * yup validation scheme for creating a contact
@@ -66,8 +66,9 @@ function Login(props) {
     </Link>
   return (
     <>
-      {/* <MainHeader /> */}
-      <div>
+   
+
+      <div class="bg-quizbg ">
         <Formik
 
         >
@@ -79,9 +80,9 @@ function Login(props) {
             setFieldValue,
             setFieldTouched,
           }) => (
-            <Form class=" max-sm:w-4/5 mt-2 m-auto md:mt-7  w-2/5 ">
+            <Form class=" max-sm:w-4/5 flex justify-center flex-col h-h40  m-auto md:mt-7  w-2/5   ">
 
-              <div class="shadow-2xl border-solid w-w95 flex justify-center items-center  p-1 max-sm:m-0 h-h32 rounded-rounded2.8 md:m-auto">
+              <div class="shadow-2xl border-solid w-w95 flex justify-center items-center  p-1 max-sm:m-0 h-h32 rounded-rounded2.8 bg-white md:m-auto">
                 <div>
                   
                   <div class="flex justify-center">
@@ -117,6 +118,19 @@ function Login(props) {
           )}
         </Formik>
         <div class="flex justify-between p-6">
+        <div>
+
+<Link to="/signUp">
+<div class="bg-black rounded-rounded2.8 p-1 mt-1 w-36 items-center flex justify-center"
+>
+<Button style={{ border: "none", height:"5rem", }}>
+<h3 class="font-medium text-white text-xl"> Register </h3>
+
+
+</Button>
+</div>
+</Link>
+</div>
         <div >
                       {/* {google} */}
                       {loginEmail}
@@ -125,21 +139,10 @@ function Login(props) {
                             <h3 class="font-extrabold">Register with Google</h3></Button>
                         </Link> */}
                     </div>
-                    <div>
-
-                    <Link to="/signUp">
-      <div class="bg-black rounded-rounded2.8 p-1 mt-1 w-36 items-center flex justify-center"
-    >
-        <Button style={{ border: "none", height:"5rem", }}>
-        <h3 class="font-medium text-white text-xl"> Register </h3>
-
-
-          </Button>
-      </div>
-    </Link>
-                    </div>
+                  
                     </div>
       </div>
+      
     </>
   );
 }

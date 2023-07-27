@@ -11,6 +11,7 @@ import FWLogo from "../../../src/images/lamp-charge.png";
 import { useHistory } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 import MainHeader from '../../Components/Mainheader';
+import CreateQuiz from '../../Components/Quizs/CreateQuiz';
 
 const QuizSchema = Yup.object().shape({
 
@@ -33,7 +34,7 @@ function QuizName(props) {
 
   return (
     <>
-      <MainHeader />
+      <CreateQuiz class=" overflow-visible" />
       <Formik
         initialValues={{
           duration: "",
@@ -64,7 +65,7 @@ function QuizName(props) {
           <Form class="flex justify-center flex-col items-center  max-sm:w-11/12 mt-8 m-auto md:mt-12  w-2/5 ">
 
 
-            <div class="shadow-2xl border-solid w-full flex justify-center items-center  p-1 max-sm:m-0 h-h31 rounded-rounded2.8 md:w-full m-auto">
+            <div class="shadow-2xl bg-white border-solid w-full flex justify-center items-center  p-1 max-sm:m-0 h-h26 rounded-rounded2.8 md:w-full m-auto">
             
               <div class="flex flex-col items-center ">
               <h2 class="text-3xl font-medium">Create a new quiz</h2>

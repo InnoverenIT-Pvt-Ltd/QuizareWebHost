@@ -2,13 +2,12 @@ import { Formik, Form, FastField, Field, FieldArray } from "formik";
 import React from 'react'
 import Mainheader from "../Mainheader";
 import FWLogo from "../../../src/images/note-2.png";
-import CreateQuiz from "./CreateQuiz";
 
-const HowtoUse = () => {
+const ContactUs = () => {
     return (
         <>
         <div class="bg-quizbg">
-          <CreateQuiz />
+          <Mainheader />
           <Formik>
             {({
               values,
@@ -45,4 +44,4 @@ const HowtoUse = () => {
       );
 }
 
-export default HowtoUse
+export default ContactUs

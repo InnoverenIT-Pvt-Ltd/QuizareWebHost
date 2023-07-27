@@ -52,7 +52,9 @@ class LoginByMail extends Component {
     InputComponent = ({ field, form: { touched, errors }, ...props }) => (
         <div>
             <div>
-                <Input {...field} {...props} />
+                <Input {...field} {...props}
+               
+                />
             </div>
             {touched[field.name] && errors[field.name] && (
                 <ValidationError>{errors[field.name]}</ValidationError>
@@ -83,7 +85,7 @@ class LoginByMail extends Component {
             <>
           
                 <FlexContainer>
-                    <div class="w-full flex-col h-h40 overflow-auto flex justify-center items-center  ">
+                    <div class="w-full flex-col h-h40 overflow-auto flex justify-center  items-center bg-quizbg  ">
                         {/* <img
                             className="big-logo"
                             src={FWLogo}
@@ -91,7 +93,7 @@ class LoginByMail extends Component {
                             alt="Tekorero logo"
 
                         /> */}
-                        <div className="bg-white rounded-rounded2.8 shadow-2xl border-solid flex justify-center mt-3 flex-col max-sm:w-11/12 h-h29 md:w-2/6 ">
+                        <div className="bg-white rounded-rounded2.8 shadow-2xl border-solid flex justify-center mt-3 flex-col max-sm:w-11/12 h-h36 md:w-2/6 ">
                             <Formik
                                 enableReinitialize
                                 initialValues={{
@@ -107,37 +109,41 @@ class LoginByMail extends Component {
                                 {({ errors, touched, isSubmitting, values }) => (
                                     <Form className="form-background h-h29 rounded-full">
                                        
-                                       <div class="flex justify-center items-center flex-col p-2 h-h34 rounded-rounded2.8" >
+                                       <div class="flex justify-center items-center flex-col p-2  rounded-rounded2.8" >
                                             <h2 class="text-3xl font-medium"> Login to Quizledge</h2>
                                         <h3 class="ml-6 w-wk flex justify-start mt-4">With Facebook or Google </h3>
-                                        <div class="flex justify-between">
-                                        <div class="w-full h-16 rounded-2xl bg-slate-100">
-        <GoogleLogin
-          clientId="1802272721-jkbu5gabo0qsrq7kh50n5ap7h3979tvb.apps.googleusercontent.com"
-         // buttonText="Login with Google"
-          onSuccess={this.responseGoogle}
-          onFailure={this.responseGoogle}
-          cookiePolicy={'single_host_origin'}
-          style={{width:"5rem"}}
-        />
-      </div>
-      <div class="w-full h-16 rounded-2xl bg-slate-100">
-        <FacebookLogin
+                                        <div class="flex justify-between flex-col">
+                                        <div class="mt-4" >
+                                        <FacebookLogin
+                                         
           appId="1462431934502453"
           autoLoad={false}
           scope="public_profile, email, user_birthday"
           fields="name,email,picture"
           callback={this.responseFacebook}
         />
+        
+      </div>
+      <div class="mt-3" >
+                                        {/* class="w-full h-16 rounded-2xl bg-slate-100" */}
+                                        <GoogleLogin
+          clientId="1802272721-jkbu5gabo0qsrq7kh50n5ap7h3979tvb.apps.googleusercontent.com"
+          buttonText="  Login with Google  "
+          onSuccess={this.responseGoogle}
+          onFailure={this.responseGoogle}
+          cookiePolicy={'single_host_origin'}
+         
+        />
+      
       </div>
       </div>
-                                            <h3 class="w-wk flex justify-start ml-4">Or a registered email</h3>
+                                            <h3 class="w-wk flex justify-start mt-4 ml-4">Or a registered email</h3>
                                             <div style={{ width: "100%", padding: "15px" }}>
                                                 <Field
                                                     name="email"
                                                     type="email"
                                                     placeholder="Enter  email"
-                                                    style={{ width: "100%", height: "4.2rem",borderRadius:"1.25rem",backgroundColor:"#E4E2E2" }}
+                                                    style={{ width: "100%", height: "4.2rem",borderRadius:"1.25rem",backgroundColor:"#E4E2E2",padding:"10px" }}
                                                     component={this.InputComponent}
                                                 />
                                             </div>
@@ -146,12 +152,12 @@ class LoginByMail extends Component {
                                                     name="password"
                                                     type="password"
                                                     placeholder="Enter password"
-                                                    style={{ width: "100%", height: "4.2rem",borderRadius:"1.25rem",backgroundColor:"#E4E2E2" }}
+                                                    style={{ width: "100%", height: "4.2rem",borderRadius:"1.25rem",backgroundColor:"#E4E2E2",padding:"10px" }}
                                                     component={this.InputComponent}
 
                                                 />
                                             </div>
-                                            <div style={{ display: "flex", justifyContent: "space-around" }}>
+                                            <div class="flex justify-around mt-4">
                                 {/* <Link
                                     to="/forgotPassword"
                                     style={{ textAlign: "center", fontSize: 15, color: "#cb0009", fontWeight: "500" }}
@@ -166,7 +172,7 @@ class LoginByMail extends Component {
                                   Don’t have an account? Return to register.
                                 </Link>
                             </div>
-                            <div class="bg-black rounded-rounded2.8  mt-8 w-64 items-center flex justify-center" >
+                            <div class="bg-black rounded-rounded2.8  mt-24 w-64 items-center flex justify-center" >
                                                 <Button
                                                     type="primary"
                                                     htmlType="submit"

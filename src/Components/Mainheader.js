@@ -25,9 +25,9 @@ function MainHeader(props) {
   return (
     <>
       <div className=" bg-ShopBlue w-full  ">
-        <div class=" border-solid w-w95 h-20  max-sm:m-0 md:m-auto">
+        <div class=" border-solid w-full h-20  max-sm:m-0 md:m-auto">
           <div class="flex justify-center border">
-            <div class="flex flex-row justify-between items-center h-20 w-wk">
+            <div class="flex flex-row items-center h-20 w-wk ml-4">
               {/* <Link to="/create"> */}
               <div className="flex flex-row" onClick={props.clearQuizNameDetails}>
                 {/* {headerName.map((item) => {
@@ -51,13 +51,16 @@ function MainHeader(props) {
               {/* </Link> */}
               <Link to="/">
                   <div style={{ marginTop: "5px" }}>
-                    {/* <HomeIcon /> */}<h2 class="text-2xl text-white">Menu</h2>
+                    {/* <HomeIcon /> */} <img
+                  className="big-logo"
+                  src={FWLogo}
+                  style={{ width: 60}}
+                  alt="Tekorero logo"
+
+                />
                   </div>
                 </Link>
-              <div style={{ display: "flex", justifyContent: "space-around" }}>
-               
-                <ProfileDropdown />
-              </div>
+            
 
               {/* <Link to="/">
                 <div>
@@ -91,6 +94,10 @@ function MainHeader(props) {
                 </Link>
               </div> */}
             </div>
+            <div class="flex items-center mr-2">
+               
+               <ProfileDropdown />
+             </div>
           </div>
         </div>
       </div>
