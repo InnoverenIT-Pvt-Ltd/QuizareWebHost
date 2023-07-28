@@ -4,11 +4,13 @@ import Mainheader from "../Mainheader";
 import FWLogo from "../../../src/images/note-2.png";
 import CreateQuiz from "./CreateQuiz";
 import "swiper/css";
+import { Link, withRouter } from "react-router-dom";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
 import { Button, Modal } from "antd";
+import FWLogo1 from "../../../src/images/Component.png";
 const HowtoUse = () => {
     return (
         <>
@@ -45,7 +47,17 @@ const HowtoUse = () => {
               </Form>
             )}
           </Formik>
-          
+          <Link to ="/quizzes">
+          <div class="flex justify-center" >
+                    <img
+                  className="big-logo"
+                  src={FWLogo1}
+                 
+                  alt="Tekorero logo"
+
+                />
+                </div>
+          </Link>
           </div>
           
         </>
