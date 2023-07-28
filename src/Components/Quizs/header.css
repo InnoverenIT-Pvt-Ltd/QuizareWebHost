@@ -23,10 +23,10 @@
   }
   .nav-options {
     padding-left: 25px;
-    display: grid;
-    grid-template-columns: repeat(3, auto);
-    grid-gap: 50px;
-    list-style-type: none;
+    display: flex;
+    /* grid-template-columns: repeat(3, auto);
+    grid-gap: 50px; */
+    /* list-style-type: none; */
   }
   .mobile-option {
     display: none;

@@ -26,8 +26,8 @@ function MainHeader(props) {
     <>
       <div className=" bg-ShopBlue w-full  ">
         <div class=" border-solid w-full h-20  max-sm:m-0 md:m-auto">
-          <div class="flex justify-center border">
-            <div class="flex flex-row items-center h-20 w-wk ml-4">
+          <div class="flex justify-between border">
+            <div class="flex flex-row items-center h-20 w-wk ml-1">
               {/* <Link to="/create"> */}
               <div className="flex flex-row" onClick={props.clearQuizNameDetails}>
                 {/* {headerName.map((item) => {
@@ -49,7 +49,7 @@ function MainHeader(props) {
                 /> */}
               </div>
               {/* </Link> */}
-              <Link to="/">
+              <Link to="/profileview">
                   <div style={{ marginTop: "5px" }}>
                     {/* <HomeIcon /> */} <img
                   className="big-logo"

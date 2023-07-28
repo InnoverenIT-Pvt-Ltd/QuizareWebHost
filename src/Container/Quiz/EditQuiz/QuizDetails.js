@@ -31,24 +31,33 @@ function QuizDetails(props) {
 
       <div class="flex justify-center  items-center max-sm:w-11/12 mt-8 m-auto md:mt-12  w-2/5 ">
         
-        <div class="shadow-2xl border-solid w-11/12 flex  items-center flex-col  p-1 max-sm:m-0 h-h29 rounded-rounded3 md:m-auto">
+        <div class="shadow-2xl border-solid w-wk flex  items-center flex-col  p-1 max-sm:m-0 h-h29 rounded-rounded3 md:m-auto">
       
       
-        <div class="flex justify-center">
-            <h2 class="text-base flex justify-center">
+        <div class="flex justify-center mt-1">
+            <h2 class="text-2xl flex justify-center">
               {`${props.showQuiz.quizName || ""}`}{" "}
             </h2>
           </div>
           <hr class="h-px bg-black border-2 w-wk mt-4 border-black"/>
 
           <div class="w-full flex justify-center items-center">
-            <h2 class="text-base  flex justify-center flex-col">
-              You are hosting
+            <h2 class="text-base  flex justify-center flex-col mt-3">
+            Your quiz is now running with your selected rules: 
             </h2>
           </div>
         
-
-          <div class="w-full flex justify-center items-center flex-col mt-16">
+          <div class="w-full flex justify-center items-center">
+            <h2 class="text-base  flex justify-center flex-col mt-3">
+           Response Time In seconds:  {`${props.showQuiz.duration || ""}`}{" "}
+            </h2>
+          </div>
+          <div class="w-full flex justify-center items-center">
+            <h2 class="text-base  flex justify-center flex-col mt-3">
+           Scoring system: Standard
+            </h2>
+          </div>
+          <div class="w-full flex justify-center items-center flex-col mt-4">
             <h2 class="text-base mt-2 flex  items-center ">
             Share URL to invite others to play your quiz
             </h2>
@@ -61,7 +70,7 @@ function QuizDetails(props) {
                 ""
               )}
             </Card>
-            <div class="mt-24 w-full flex justify-center">
+            <div class="mt-12 w-full flex justify-center">
               <Button
                 style={{  height: "4em",backgroundColor:"grey",borderRadius:'3rem',width:'10rem' }}
                 onClick={() => copyToClipboard()}
@@ -109,9 +118,9 @@ function QuizDetails(props) {
               </div>
             </div> */}
 <Link to="/quizLibrary">
-<div class="bg-black rounded-rounded2.8 p-1 mt-8 w-60 items-center flex justify-center"
+<div class="bg-black rounded-rounded2.8 p-1 mt-5 w-60 items-center flex justify-center"
 >
-<Button style={{ border: "none", height:"5rem", }}>
+<Button style={{ border: "none", height:"4.5rem", }}>
 <h3 class="font-medium text-white text-xl"> Return to Library </h3>
 
 

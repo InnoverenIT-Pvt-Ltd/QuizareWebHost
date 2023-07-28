@@ -106,7 +106,7 @@ const Menu = () => {
     <div className="header">
       <div className="logo-nav">
         <div className="logo-container">
-        <Link to="/">
+        <Link to="/profileview">
                   <div style={{ marginTop: "5px" }}>
                     <img
                   className="big-logo"
@@ -130,7 +130,7 @@ const Menu = () => {
                       </Button>
                     </Link>
           </li>
-          <li className="option" onClick={closeMobileMenu}>
+          <li className="option  max-sm:bg-quizb" onClick={closeMobileMenu}>
             <Link to="/quizzes">
                       <Button
                      
@@ -142,7 +142,7 @@ const Menu = () => {
                     </Link>
           </li>
           <li className="option" onClick={closeMobileMenu}>
-            <Link to="/quizLibrary">
+            <Link to="/librayHome">
                       <Button
                      
                         htmlType="submit"
@@ -152,8 +152,8 @@ const Menu = () => {
                       </Button>
                     </Link>
           </li>
-          <li className="option mobile-option" onClick={closeMobileMenu}>
-            <Link to="/profile">
+          <li className="option  max-sm:bg-quizb" onClick={closeMobileMenu}>
+            <Link to="/profileview">
                       <Button
                        
                         htmlType="submit"
@@ -163,7 +163,7 @@ const Menu = () => {
                       </Button>
                     </Link>
           </li>
-          <li className="option mobile-option" onClick={closeMobileMenu}>
+          <li className="option " onClick={closeMobileMenu}>
              <Link to="/email">
                       <Button
                       
