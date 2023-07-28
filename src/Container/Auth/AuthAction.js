@@ -21,7 +21,7 @@ export const login = ({ email, password }, history, cb) => (dispatch) => {
     })
     .then((res) => {
       dispatch(getUserDetails(res.data.userId));
-      history.push("/");
+      history.push("/profileview");
       console.log(history)
       dispatch({
         type: types.LOGIN_SUCCESS,

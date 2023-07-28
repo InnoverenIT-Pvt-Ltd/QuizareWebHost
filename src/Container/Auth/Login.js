@@ -80,9 +80,9 @@ function Login(props) {
             setFieldValue,
             setFieldTouched,
           }) => (
-            <Form class=" max-sm:w-4/5 flex justify-center flex-col h-h40  m-auto md:mt-7  w-2/5   ">
+            <Form class=" max-sm:w-4/5 flex justify-center flex-col h-h40  m-auto md:mt-7  w-wk   ">
 
-              <div class="shadow-2xl border-solid w-w95 flex justify-center items-center  p-1 max-sm:m-0 h-h32 rounded-rounded2.8 bg-white md:m-auto">
+              <div class="shadow-2xl border-solid w-w95 flex justify-center items-center  p-1 max-sm:m-0 h-h32 rounded-rounded2.8 bg-white md:m-auto md:w-2/5">
                 <div>
                   
                   <div class="flex justify-center">
@@ -117,7 +117,7 @@ function Login(props) {
             
           )}
         </Formik>
-        <div class="flex justify-between p-6">
+        <div class="flex justify-between p-6 md:justify-evenly">
         <div>
 
 <Link to="/signUp">

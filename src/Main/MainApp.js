@@ -14,6 +14,8 @@ import {
 } from "../Components/UI/Layout";
 import { BundleLoader } from "../Components/Placeholder";
 import HowtoUse from "../Components/Quizs/HowtoUse";
+import profileView from "../Components/Quizs/profileView";
+import LibrayHome from "../Components/Quizs/LibrayHome";
 const Question1 = lazy(() => import("../Components/Quizs/Question1"))
 const CreateQuiz = lazy(() => import("../Components/Quizs/CreateQuiz"));
 const QuizName = lazy(() => import("../Container/Quiz/QuizName"))
@@ -54,6 +56,7 @@ function MainApp(props) {
 
               <Route exact path="/" component={CreateQuiz} />
               <Route exact path="/profile" component={ProfileDropdown} />
+              <Route exact path="/profileview" component={profileView} />
               <Route exact path="/changepassword" component={ChangePassword} />
               <Route exact path="/quizzes" component={QuizName} />
               <Route exact path="/addquiz" component={Quiz} />
@@ -76,6 +79,7 @@ function MainApp(props) {
               <Route exact path="/swipeIn" component={SwipeIn} />
               <Route exact path="/swipeInLibrary/:quizId" component={SwipeInLibrary} />
               <Route exact path="/quizLibrary" component={QuizLibrary} />
+              <Route exact path="/librayHome" component={LibrayHome} />
               <Route exact path="/addquiz" component={Quiz} />
               <Route exact path="/test" component={Test} />
             </Switch>
