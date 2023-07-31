@@ -152,6 +152,16 @@ const Menu = () => {
                       </Button>
                     </Link>
           </li>
+          <li className="option" onClick={closeMobileMenu}>
+          <Link to="/ongoingQuiz">
+                      <Button
+                                               htmlType="submit"
+                       style={{  height: "5em",display:"flex",justifyContent:"center",alignItems:"center" }}
+                       >
+                       <h3 class="font-medium text-white text-lg">Ongoing Quizzes</h3>
+                     </Button>
+                   </Link>
+</li>
           <li className="option  max-sm:bg-quizb" onClick={closeMobileMenu}>
             <Link to="/profileview">
                       <Button

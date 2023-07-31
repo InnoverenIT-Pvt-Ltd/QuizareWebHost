@@ -338,13 +338,14 @@ function QuizDetails(props) {
                 <SwiperSlide >
 
                   <div class=" max-sm:w-w97  h-h32   m-auto md:w-2/5  h-h50  ">
-                    <div className="bg-white rounded-2xl shadow-2xl border-solid flex justify-center mt-3 ">
-                      <div class=" w-11/12 flex justify-center flex-col  p-4 max-sm:m-0 h-h31 rounded-2xl md:m-auto">
-                        <h2 class="text-base   flex justify-center">You are hosting</h2>
+                    <div className="bg-white rounded-rounded3 shadow-2xl border-solid flex justify-center mt-3 ">
+                      <div class=" w-11/12 flex justify-center flex-col  max-sm:m-0 h-h31 rounded-2xl md:m-auto">
+                        <h2 class="text-2xl flex justify-center">Final Scoreboard</h2>
+                        <hr class="h-px bg-black border-2 w-wk mt-2 border-black"/>
                         {/* <h2 class="text-base flex justify-center"> */}
                         {editName === false && item.quizName ? (
-                          <div className="flex flex-row justify-center w-full">
-                            <h2 class="text-base flex justify-center">{item.quizName}</h2>
+                          <div className="flex flex-row  w-full mt-2">
+                            <h2 class="text-xl flex ">{item.quizName}</h2>
                             <div class="ml-2">
                               <button onClick={handleEdit}>
                                 <svg
@@ -405,33 +406,7 @@ function QuizDetails(props) {
                             ""
                           )}
                         </Card>
-                        <div class="flex justify-center mt-1">
-                          {/* <Button
-        style={{
-          backgroundColor: "#4096ff",
-          width: "-webkit-fill-available",
-          borderRadius: "0.4rem",
-          height: "auto",
-        }}
-        onClick={() => copyToClipboard(item.quizLink)}
-      >
-        <h2 class="text-white">Click to copy the url</h2>
-      </Button> */}
-                          <button
-                            type="button"
-                            className="copy-button"
-                            data-link={ongoingQuizLink}
-                            data-clipboard-text={ongoingQuizLink}
-                            style={{
-                              backgroundColor: "#4096ff",
-                              width: "100%",
-                              borderRadius: "0.4rem",
-                              height: "auto",
-                            }}
-                          >
-                            <h2 class="text-white"> Click to copy the url</h2>
-                          </button>
-                        </div>
+                      
                         <h2 class="text-xl mt-2 flex justify-center">
                           Who is playing your quiz?
                         </h2>
@@ -442,14 +417,26 @@ function QuizDetails(props) {
                             <QuizDetailsPlayerTable data={item} />
                           )}
                         </div>
-                        <div class="flex justify-between mt-2">
+                        <div class="mt-12 w-full flex justify-center">
+                        
+                        <button
+                          type="button"
+                          className="copy-button"
+                          data-link={ongoingQuizLink}
+                          data-clipboard-text={ongoingQuizLink}
+                          style={{  height: "4em",backgroundColor:"grey",borderRadius:'3rem',width:'10rem' }}>
+                          <h2 class="text-white text-xl font-medium"> Share </h2>
+                        </button>
+                      </div>
+   
+                        {/* <div class="flex justify-between mt-2">
                           <div class="w-36">
-                            {/* <Link to="/updateOngoing"> */}
+                          
                             <Link to={`updateOngoing/${item.quizId}`}>
                               <Button
                                 style={{ backgroundColor: "white" }}
                                 type="primary"
-                              // onClick={ID}
+                             
                               >
                                 <h3>Edit Quiz</h3>
                               </Button>
@@ -466,7 +453,7 @@ function QuizDetails(props) {
                               </Button>
                             )}
                           </div>
-                        </div>
+                        </div> */}
                         {/* <div class="mt-3">
     {props.quizNameDetails.quizHostInd !==true && (
       <Button
@@ -498,6 +485,16 @@ function QuizDetails(props) {
                       </div>
                     </div>
                   </div>
+                  <Link to="/quizLibrary">
+<div class="  p-1 mt-5  items-center flex justify-center"
+>
+<Button  style={{  height: "5rem",backgroundColor:"black",borderRadius:'3rem',width:'15rem' }}>
+<h3 class="font-medium text-white text-xl"> Return to Library </h3>
+
+
+</Button>
+</div>
+</Link>
                 </SwiperSlide>
               );
             })}
