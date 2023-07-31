@@ -73,7 +73,7 @@ function QuizLibrary(props) {
               return (
                 <SwiperSlide >
 
-                  <div class="shadow-2xl border-solid flex justify-evenly flex-col  p-4 max-sm:m-0 h-h31 w-11/12 rounded-xl  md:m-auto">
+                  <div class="shadow-2xl border-solid flex justify-evenly flex-col  p-4 max-sm:ml-4 h-h31 w-11/12 rounded-xl   md:m-auto">
                     <h2 class="text-xl mt-4 ml-4 flex justify-center">
                       {item.quizName}
                     </h2>
