@@ -17,6 +17,7 @@ import { Spacer, ValidationError } from "../../Components/UI/Elements";
 import { changePassword } from "./AuthAction"
 import InputComponent from "../../Components/Forms/Formik/InputComponent";
 import { createBrowserHistory } from "history";
+import CreateQuiz from "../../Components/Quizs/CreateQuiz";
 
 const history = createBrowserHistory();
 // /**
@@ -32,33 +33,12 @@ class ForgetPasswordForm extends Component {
         console.log(this.props);
         return (
             <>
-                <FlexContainer>
-                    <AuthContainer
-                        style={{
-                            backgroundColor: "#F5F5F5",
-                            width: "50%",
-                            minHeight: "100vh",
-                            flexDirection: "column",
-                            position: "relative",
-                            alignItems: "center",
-                            margin: "auto",
-                        }}
-                    >
-                        {/* <img
-                            className="big-logo"
-                            src={LogoNew}
-                            style={{ width: 200 }}
-                            alt="Tekorero logo"
-                        />
-                        <br /> */}
-                        <img
-                            className="big-logo"
-                            src={FWLogo}
-                            style={{ width: 70 }}
-                            alt="Tekorero logo"
-
-                        />
-                        <MainWrapper style={{ width: "50%" }}>
+             
+                   
+                    
+                     
+                       
+             <CreateQuiz />
                             <Formik
                                 enableReinitialize
                                 initialValues={{
@@ -78,11 +58,8 @@ class ForgetPasswordForm extends Component {
                                 }}
                             >
                                 {({ errors, touched, isSubmitting, values }) => (
-                                    <Form className="form-background">
-                                        <div
-
-                                            style={{ alignItems: "center", display: "flex", flexDirection: "column" }}
-                                        >
+                                     <Form class=" max-sm:w-11/12   mt-8 m-auto h-96 md:mt-12 w-2/5  ">
+                                         <div class="shadow-2xl bg-white rounded-rounded3 border-solid flex justify-center flex-col   max-sm:m-0 h-full  md:m-auto">
                                             <div style={{ width: "100%", padding: "15px" }}>
                                                 <Field
                                                     name="password"
@@ -103,12 +80,13 @@ class ForgetPasswordForm extends Component {
                                                 />
                                             </div>
                                         </div>
-                                        <div style={{ display: "flex", justifyContent: "space-around" }}>
+                                        <div class="flex justify-between mt-8">
                                             <Link
-                                                to="/"
-                                                style={{ textAlign: "center", fontSize: 13, color: "blue", fontWeight: "500" }}
+                                                to="/email"
+                                                
                                             >
-                                                Back To Home
+                                               <Button   style={{  height: "4rem",backgroundColor:"black",borderRadius:'3rem',display:"flex",alignItems:"center",width:"8rem",justifyContent:"center" }}>
+                                                <h3 class="font-medium text-white text-3xl">Back</h3> </Button>
                                             </Link>
                                             <div style={{ width: "40%" }}>
                                                 <Button
@@ -116,9 +94,9 @@ class ForgetPasswordForm extends Component {
                                                     htmlType="submit"
                                                     disabled={values.password === values.confirmPassword ? false : true}
                                                     loading={this.props.changingPassword}
-                                                    style={{ width: "100%", height: "2.5em" }}
+                                                    style={{  height: "4rem",backgroundColor:"black",borderRadius:'3rem',width:"8rem" }}
                                                 >
-                                                    Submit
+                                                   <h3 class="font-medium text-white text-3xl"> Submit</h3>
                                                 </Button>
                                             </div>
 
@@ -128,10 +106,10 @@ class ForgetPasswordForm extends Component {
                                 )}
                             </Formik>
 
-                        </MainWrapper>
-                        <Spacer />
-                    </AuthContainer>
-                </FlexContainer>
+                       
+                   
+                  
+              
             </>
         );
     }
