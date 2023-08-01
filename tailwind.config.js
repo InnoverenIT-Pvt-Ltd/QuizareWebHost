@@ -29,9 +29,12 @@ module.exports = {
 'h26':'26rem',
 'h34':'34rem',
 'h31':'31rem',
+'h30':'30rem',
 'h33':'33rem',
 'h37':'37rem',
-'h29':'27rem',
+'h27':'27rem',
+'h28':'28rem',
+'h29':'29rem',
 'h85':'85rem',
 'h73':'73rem',
 'h32':'32rem',
@@ -50,6 +53,11 @@ module.exports = {
           },
           fontSize:{
             'xsm':'0.85rem'
+          },
+          minHeight: {
+            '1/2': '50%',
+            "m40":"40rem",
+            "wh":'-webkit-fill-available'
           },
           colors: {
             'ShopBlue': '#7AB0F7',

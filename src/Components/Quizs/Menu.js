@@ -106,7 +106,7 @@ const Menu = () => {
     <div className="header">
       <div className="logo-nav">
         <div className="logo-container">
-        <Link to="/profileview">
+        <Link to="/how">
                   <div style={{ marginTop: "5px" }}>
                     <img
                   className="big-logo"
@@ -141,7 +141,7 @@ const Menu = () => {
                       </Button>
                     </Link>
           </li>
-          <li className="option" onClick={closeMobileMenu}>
+          <li className="option " onClick={closeMobileMenu}>
             <Link to="/librayHome">
                       <Button
                      
@@ -152,7 +152,7 @@ const Menu = () => {
                       </Button>
                     </Link>
           </li>
-          <li className="option" onClick={closeMobileMenu}>
+          <li className="option  max-sm:bg-quizb" onClick={closeMobileMenu}>
           <Link to="/ongoingQuiz">
                       <Button
                                                htmlType="submit"
@@ -162,7 +162,7 @@ const Menu = () => {
                      </Button>
                    </Link>
 </li>
-          <li className="option  max-sm:bg-quizb" onClick={closeMobileMenu}>
+          <li className="option " onClick={closeMobileMenu}>
             <Link to="/profileview">
                       <Button
                        
@@ -170,6 +170,17 @@ const Menu = () => {
                         style={{  height: "5em",display:"flex",justifyContent:"center",alignItems:"center" }}
                       >
                         <h3 class="font-medium text-white text-lg">My Profile</h3>
+                      </Button>
+                    </Link>
+          </li>
+          <li className="option  max-sm:bg-quizb " onClick={closeMobileMenu}>
+             <Link to="/changepassword">
+                      <Button
+                      
+                        htmlType="submit"
+                        style={{  height: "5em",display:"flex",justifyContent:"center",alignItems:"center" }}
+                      >
+                         <h3 class="font-medium text-white text-lg"> Change Password </h3>
                       </Button>
                     </Link>
           </li>

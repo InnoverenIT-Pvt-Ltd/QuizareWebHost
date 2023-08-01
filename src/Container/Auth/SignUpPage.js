@@ -28,7 +28,7 @@ class SignUpPage extends Component {
         return (
             <>
                 <FlexContainer>
-                <div class="w-full bg-quizbg flex-col  overflow-auto flex justify-center  items-center max-sm:h-h40 md:min-h-screen  ">                   
+                <div class="w-full bg-quizbg flex-col  overflow-auto flex   items-center max-sm:min-h-m40 md:min-h-screen  ">                   
                         {/* <img
                             className="big-logo"
                             src={FWLogo}
@@ -71,7 +71,7 @@ class SignUpPage extends Component {
                                     setFieldTouched,
                                 }) => (
                                     <Form className="form-background h-h29">
-                                        <div class="flex justify-center items-center flex-col p-2" >
+                                        <div class="flex  items-center flex-col p-2" >
                                            
                                             <h2 class="text-3xl font-medium">Signup for Quizledge</h2>
                                             <h3 class="flex justify-start w-wk mt-4 ml-1">Create a profile to start creating</h3>
@@ -116,7 +116,9 @@ class SignUpPage extends Component {
                                             <div class="flex items-center w-80 mt-4">
                                                 
                                             <input id="default-radio-1" type="checkbox" value="" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"></input>
-                                                <h3 class="ml-2">Accept terms and conditions</h3></div>
+                                                <h3 class="ml-2">Accept terms and conditions</h3>
+                                                
+                                                </div>
                                            
 
                                                 {/* <Link to="/email">
@@ -124,17 +126,25 @@ class SignUpPage extends Component {
                                                         style={{ color: "#21a1fd", marginTop: "5px" }}
                                                     >Back To Login</div>
                                                 </Link> */}
-                                                  <div class="bg-black rounded-rounded2.8 mt-16 w-64 items-center flex justify-center" >
+                                                <div class="flex justify-between">
+                                                  <div class="bg-black rounded-rounded2.8 mt-12 w-40 items-center flex justify-center" >
                                                 <Button
                                                     type="primary"
                                                     htmlType="submit"
                                                     Loading={isSubmitting}
-                                                    style={{  height: "5em",backgroundColor:"black",borderRadius:'3rem' }}
+                                                    style={{  height: "4rem",backgroundColor:"black",borderRadius:'3rem' }}
                                                 >
                                                   <h3 class="font-medium text-white text-3xl">Register</h3> 
                                                 </Button>
+                                               
                                                 </div>
-                                         
+                                                <Link to ="/login">
+                                                <div class="bg-black rounded-rounded2.8 mt-12 w-40 items-center flex justify-center" >
+                                                <Button   style={{  height: "4rem",backgroundColor:"black",borderRadius:'3rem',display:"flex",alignItems:"center" }}>
+                                                <h3 class="font-medium text-white text-3xl">Back</h3> </Button>
+                                                </div>
+                                                </Link>
+                                                </div>
                                         </div>
 
                                     </Form>

@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import HomeIcon from '@mui/icons-material/Home';
 import { bindActionCreators } from "redux";
 import ProfileDropdown from "../Container/Auth/ProfileDropdown";
-
+import Subheader from "../Components/Quizs/Subheader";
 
 function MainHeader(props) {
   const headerName = [
@@ -49,9 +49,9 @@ function MainHeader(props) {
                 /> */}
               </div>
               {/* </Link> */}
-              <Link to="/profileview">
+              <Link to="/how">
                   <div style={{ marginTop: "5px" }}>
-                    {/* <HomeIcon /> */} <img
+                    <img
                   className="big-logo"
                   src={FWLogo}
                   style={{ width: 60}}
@@ -96,7 +96,8 @@ function MainHeader(props) {
             </div>
             <div class="flex items-center mr-2">
                
-               <ProfileDropdown />
+               {/* <ProfileDropdown /> */}
+               <Subheader/>
              </div>
           </div>
         </div>
