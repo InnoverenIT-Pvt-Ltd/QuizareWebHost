@@ -57,7 +57,7 @@ function Login(props) {
   let loginEmail =
     <Link to="/email">
       <div class="bg-black rounded-rounded2.8 p-1 mt-1 w-36 items-center flex justify-center">
-        <Button style={{ border: "none", height:"5rem", }}>
+        <Button style={{ border: "none", height:"4rem", }}>
         <h3 class="font-medium text-white text-xl"> Login </h3>
 
 
@@ -80,9 +80,9 @@ function Login(props) {
             setFieldValue,
             setFieldTouched,
           }) => (
-            <Form class=" max-sm:w-4/5 flex justify-center flex-col h-h40  m-auto md:mt-7  w-wk   ">
+            <Form class=" max-sm:w-4/5 flex justify-center flex-col min-h-wh  m-auto md:mt-7  w-wk   ">
 
-              <div class="shadow-2xl border-solid w-w95 flex justify-center items-center  p-1 max-sm:m-0 h-h32 rounded-rounded2.8 bg-white md:m-auto md:w-2/5">
+              <div class="shadow-2xl border-solid w-w95 flex justify-center items-center mt-4  p-1 max-sm:h-h32 rounded-rounded2.8 bg-white md:m-auto md:w-2/5">
                 <div>
                   
                   <div class="flex justify-center">
@@ -123,7 +123,7 @@ function Login(props) {
 <Link to="/signUp">
 <div class="bg-black rounded-rounded2.8 p-1 mt-1 w-36 items-center flex justify-center"
 >
-<Button style={{ border: "none", height:"5rem", }}>
+<Button style={{ border: "none", height:"4rem", }}>
 <h3 class="font-medium text-white text-xl"> Register </h3>
 
 

@@ -87,32 +87,43 @@ function FinalizeQuiz(props) {
                   </h3>
                   </div>
            
-            <div class="flex justify-center mt-8">
+            {/* <div class="flex justify-center mt-8">
               <h3 class="text-xl ">Select quiz rules</h3>
-            </div>
+            </div> */}
             <div>
               <div
                 style={{ boxShadow: "0.01rem 0.01rem 0.12rem 0.01rem" }}
-                className="bg-white rounded-2xl  w-full flex justify-center ">
-                <div class="shadow-2xl border-solid w-full flex justify-center flex-col  p-2 max-sm:m-0 h-20 rounded-2xl md:m-auto">
-                  <div class="flex flex-row">
+                className="bg-white rounded-2xl mt-4 w-full flex justify-center ">
+                <div class="shadow-2xl border-solid w-full flex justify-center flex-col   p-2 max-sm:m-0 h-20 rounded-2xl md:m-auto">
+                  {/* <div class="flex flex-row">
                     <h2 class="text-base font-bold">Question response time:</h2>
                     &nbsp;
                     <h2 class="text-base font-bold">
                       {`${props.finalizeQuiz.duration || ""}`} seconds
                     </h2>
-                  </div>
-                  <div class="flex flex-row">
+                  </div> */}
+                  {/* <div class="flex flex-row">
                     <h2 class="text-base font-bold">Scoring system:</h2>
                     &nbsp;
                     <h2 class="text-base font-bold">Standard</h2>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
-            
+            <div class="mt-4">
+            <form onSubmit={() => handleOk()}>
+                  <input
+                    className="border border-blue-900 rounded-md px-1 w-full"
+                    name="duration"
+                    value={duration}
+                    onChange={(ev) => setDuration(ev.target.value)}
+                    placeholder="Enter Response time in seconds"
+                    style={{ width: "100%", height: "3rem",borderRadius:"1.25rem",backgroundColor:"#E4E2E2", }}
+                  />
+                </form>
+                </div>
             </div>
-            <div class="flex flex-row mt-4 justify-between p-4">
+            <div class="flex flex-row  justify-between p-4">
               {/* <Link to="/create"> */}
               <div class=" w-full flex ">
               <Button
@@ -151,7 +162,7 @@ function FinalizeQuiz(props) {
                 // onClick={() =>
                 //  props.handleQuizHostModal(true)
                 // }
-                onClick={showModal}
+                onClick={handleOk}
               // onClick={() => props.hostQuiz(props.showQuiz.quizId)}
               >
                 <h2 class="text-white text-2xl font-medium">Host </h2>

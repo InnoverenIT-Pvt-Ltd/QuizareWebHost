@@ -85,7 +85,7 @@ class LoginByMail extends Component {
             <>
           
                 <FlexContainer>
-                    <div class="w-full flex-col h-h40 overflow-auto flex justify-center  items-center bg-quizbg  ">
+                    <div class="w-full flex-col h-h40 overflow-auto flex   items-center bg-quizbg  ">
                         {/* <img
                             className="big-logo"
                             src={FWLogo}
@@ -93,7 +93,7 @@ class LoginByMail extends Component {
                             alt="Tekorero logo"
 
                         /> */}
-                        <div className="bg-white rounded-rounded2.8 shadow-2xl border-solid flex justify-center mt-3 flex-col max-sm:w-11/12 h-h36 md:w-2/6 ">
+                        <div className="bg-white rounded-rounded2.8 shadow-2xl border-solid flex  mt-4 flex-col max-sm:w-11/12 h-h34 md:w-2/6 ">
                             <Formik
                                 enableReinitialize
                                 initialValues={{
@@ -109,7 +109,7 @@ class LoginByMail extends Component {
                                 {({ errors, touched, isSubmitting, values }) => (
                                     <Form className="form-background h-h29 rounded-full">
                                        
-                                       <div class="flex justify-center items-center flex-col p-2  rounded-rounded2.8" >
+                                       <div class="flex mt-4 items-center flex-col p-2  rounded-rounded2.8" >
                                             <h2 class="text-3xl font-medium"> Login to Quizledge</h2>
                                         <h3 class="ml-6 w-wk flex justify-start mt-4">With Facebook or Google </h3>
                                         <div class="flex justify-between flex-col">
@@ -172,16 +172,24 @@ class LoginByMail extends Component {
                                   Don’t have an account? Return to register.
                                 </Link>
                             </div>
-                            <div class="bg-black rounded-rounded2.8  mt-24 w-64 items-center flex justify-center" >
+                            <div class="flex justify-between">
+                            <div class="bg-black rounded-rounded2.8  mt-14 w-40 items-center flex justify-center" >
                                                 <Button
                                                     type="primary"
                                                     htmlType="submit"
                                                     Loading={isSubmitting}
-                                                    style={{  height: "5em",backgroundColor:"black",borderRadius:'3rem' }}
+                                                    style={{  height: "4rem",backgroundColor:"black",borderRadius:'3rem' }}
                                                 >
                                                    <h3 class="font-medium text-white text-3xl"> LogIn</h3> 
                                                 </Button>
                                             </div>
+                                            <Link to ="/login">
+                                                <div class="bg-black rounded-rounded2.8 mt-14 w-40 items-center flex justify-center" >
+                                                <Button   style={{  height: "4rem",backgroundColor:"black",borderRadius:'3rem',display:"flex",alignItems:"center" }}>
+                                                <h3 class="font-medium text-white text-3xl">Back</h3> </Button>
+                                                </div>
+                                                </Link>
+                                                </div>
                                         </div>
 
                                     </Form>

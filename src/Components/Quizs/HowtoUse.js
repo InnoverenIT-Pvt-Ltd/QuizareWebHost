@@ -25,10 +25,10 @@ const HowtoUse = () => {
               setFieldValue,
               setFieldTouched,
             }) => (
-              <Form class=" max-sm:w-11/12   mt-8 m-auto h-h31 md:mt-12 w-2/5  ">
+              <Form class=" max-sm:w-11/12   mt-8 m-auto h-h28 md:mt-12 w-2/5  ">
                 <div class="shadow-2xl bg-white rounded-rounded3 border-solid flex justify-center flex-col   max-sm:m-0 h-full  md:m-auto">
                   <div class="flex justify-center">
-                    <h3 class="font-medium text-2xl ">How to use quizledge </h3>
+                    <h3 class="font-medium text-2xl ">How to use Quizledge </h3>
                     </div>
                     <div class="flex justify-center">
                     <img

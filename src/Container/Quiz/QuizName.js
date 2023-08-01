@@ -88,7 +88,7 @@ function QuizName(props) {
                       component={InputComponent}
                       //onChangeText={handleChange('quizName')}
                       style={{ width: "100%", height: "3rem",borderRadius:"1.25rem",backgroundColor:"#E4E2E2", }}
-                      placeholder="Enter quiz Name"
+                      placeholder="Enter quiz name"
 
                     />
                   </div>

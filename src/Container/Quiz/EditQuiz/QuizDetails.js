@@ -31,7 +31,7 @@ function QuizDetails(props) {
 
       <div class="flex justify-center  items-center max-sm:w-11/12 mt-8 m-auto md:mt-12  w-2/5 ">
         
-        <div class="shadow-2xl border-solid w-wk flex  items-center flex-col  p-1 max-sm:m-0 h-h29 rounded-rounded3 md:m-auto">
+        <div class="shadow-2xl border-solid w-wk flex  items-center flex-col  p-1 max-sm:m-0 h-h27 rounded-rounded3 md:m-auto">
       
       
         <div class="flex justify-center mt-1">
@@ -117,7 +117,7 @@ function QuizDetails(props) {
                 </button>
               </div>
             </div> */}
-<Link to="/quizLibrary">
+<Link to="/librayHome">
 <div class="bg-black rounded-rounded2.8 p-1 mt-5 w-60 items-center flex justify-center"
 >
 <Button style={{ border: "none", height:"4.5rem", }}>
