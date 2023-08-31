@@ -55,7 +55,7 @@ function FinalizeQuiz(props) {
     <>
       <MainHeader />
       <Formik>
-        <Form class="flex justify-center max-sm:w-wk mt-8 m-auto md:mt-12  w-2/5  h-h50  ">
+        <Form class="flex justify-center max-sm:w-wk mt-8 m-auto h-hk md:mt-12  w-2/5  h-h50  ">
           {/* <div className="bg-white rounded-rounded2.8 mt-3 "> */}
 
           <div class="shadow-2xl p-1 bg-white border-solid flex justify-evenly flex-col max-sm:m-0 h-h26 w-11/12 rounded-rounded3  md:m-auto">

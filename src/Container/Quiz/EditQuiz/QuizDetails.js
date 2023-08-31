@@ -25,11 +25,13 @@ function QuizDetails(props) {
   const viewData = props.showQuiz.playerViewDTOs;
   const viewmessage = props.showQuiz.message;
   const ID = props.showQuiz.quizId;
+console.log(props.showQuiz)
   return (
     <>
+    <div class="min-h-screen">
       <MainHeader />
 
-      <div class="flex justify-center  items-center max-sm:w-11/12 mt-8 m-auto md:mt-12  w-2/5 ">
+      <div class="flex justify-center  items-center max-sm:w-11/12 h-hk mt-8 m-auto md:mt-12  w-2/5 ">
         
         <div class="shadow-2xl border-solid w-wk flex  items-center flex-col  p-1 max-sm:m-0 h-h27 rounded-rounded3 md:m-auto">
       
@@ -129,6 +131,7 @@ function QuizDetails(props) {
 </Link>
           </div>
         </div>
+      </div>
       </div>
     </>
   );

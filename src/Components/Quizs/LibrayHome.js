@@ -8,7 +8,7 @@ import { Button, Select, Icon, Tag, Switch, Checkbox } from "antd";
 const LibrayHome = () => {
     return (
         <>
-        <div class="bg-quizbg">
+        <div class="bg-quizbg min-h-screen">
           <CreateQuiz />
           <Formik>
             {({

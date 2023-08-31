@@ -52,13 +52,13 @@ function UpdateQuizInLibrary(props) {
                         <SwiperSlide key={item}>
 
                             <div class="h-h37">
-                                <Card style={{ marginTop: "2rem" }}>
+                               
                                     <EditQuestionOfQuiz item={item}
                                         questionNo={questionNo}
                                         handleDeleteQuestion={handleDeleteQuestion}
                                         backTo={backTo}
                                     />
-                                </Card>
+                               
                             </div>
                         </SwiperSlide>
                     );

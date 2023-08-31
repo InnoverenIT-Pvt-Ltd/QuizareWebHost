@@ -54,6 +54,7 @@ function Quiz(props) {
   }
   return (
     <>
+    <div class="min-h-screen">
       <MainHeader />
       <Formik
         initialValues={{
@@ -102,7 +103,7 @@ function Quiz(props) {
             </div> */}
           
             {/* Container */}
-            <Form class=" max-sm:w-full flex items-center flex-col  m-auto md:mt-12  w-2/5  h-h50  ">
+            <Form class=" max-sm:w-full flex items-center flex-col h-hk  m-auto md:mt-12  w-2/5  h-h50  ">
               <div className="w-full my-2 flex justify-center m-auto ">
                 <div class="shadow-2xl border-solid w-11/12 flex justify-center flex-col items-center  p-2 max-sm:m-0 h-h30 rounded-rounded2.8 md:m-auto">
                   <div class=" flex justify-center flex-col w-full">
@@ -324,6 +325,7 @@ function Quiz(props) {
           </div>
         )}
       </Formik>
+      </div>
     </>
   );
 }

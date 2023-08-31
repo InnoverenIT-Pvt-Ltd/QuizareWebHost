@@ -14,7 +14,7 @@ import FWLogo1 from "../../../src/images/Component.png";
 const HowtoUse = () => {
     return (
         <>
-        <div class="bg-quizbg">
+        <div class="bg-quizbg min-h-screen">
           <CreateQuiz />
           <Formik>
             {({
@@ -25,12 +25,12 @@ const HowtoUse = () => {
               setFieldValue,
               setFieldTouched,
             }) => (
-              <Form class=" max-sm:w-11/12   mt-8 m-auto h-h28 md:mt-12 w-2/5  ">
+              <Form class=" max-sm:w-11/12   mt-8 m-auto h-h26 md:mt-12 w-2/5  ">
                 <div class="shadow-2xl bg-white rounded-rounded3 border-solid flex justify-center flex-col   max-sm:m-0 h-full  md:m-auto">
-                  <div class="flex justify-center">
+                  <div class="flex justify-center mt-8">
                     <h3 class="font-medium text-2xl ">How to use Quizledge </h3>
                     </div>
-                    <div class="flex justify-center">
+                    <div class="flex justify-center ">
                     <img
                     className="big-logo"
                     src={FWLogo}
@@ -48,7 +48,7 @@ const HowtoUse = () => {
             )}
           </Formik>
           <Link to ="/quizzes">
-          <div class="flex justify-center" >
+          <div class="flex justify-center mt-4" >
                     <img
                   className="big-logo"
                   src={FWLogo1}

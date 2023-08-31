@@ -6,7 +6,7 @@ import FWLogo from "../../../src/images/note-2.png";
 const About = () => {
     return (
         <>
-        <div class="bg-quizbg">
+        <div class="bg-quizbg min-h-screen">
           <Mainheader />
           <Formik>
             {({

@@ -61,9 +61,10 @@ function QuizLibrary(props) {
   }, []);
   return (
     <>
+    <div class="min-h-screen">
       <MainHeader />
       <Formik>
-        <Form class="flex justify-center max-sm:w-11/12 mt-8 m-auto md:mt-12  w-2/5  h-h50  ">
+        <Form class="flex justify-center h-h32 max-sm:w-11/12 mt-8 m-auto md:mt-12  w-2/5    ">
           <Swiper
             navigation={true}
             modules={[Navigation]}
@@ -237,6 +238,7 @@ function QuizLibrary(props) {
           {/* </div> */}
         </Form>
       </Formik>
+      </div>
     </>
   );
 }
