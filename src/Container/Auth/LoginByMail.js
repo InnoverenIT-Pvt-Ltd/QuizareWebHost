@@ -85,7 +85,7 @@ class LoginByMail extends Component {
             <>
           
                 <FlexContainer>
-                    <div class="w-full flex-col h-h40 overflow-auto flex   items-center bg-quizbg  ">
+                    <div class="w-full flex-col min-h-screen overflow-auto flex   items-center bg-quizbg  ">
                         {/* <img
                             className="big-logo"
                             src={FWLogo}
@@ -172,8 +172,8 @@ class LoginByMail extends Component {
                                   Don’t have an account? Return to register.
                                 </Link>
                             </div>
-                            <div class="flex justify-between">
-                            <div class="bg-black rounded-rounded2.8  mt-14 w-40 items-center flex justify-center" >
+                            <div class="flex justify-between w-wk">
+                            <div class="bg-black rounded-rounded2.8  mt-14 w-36 items-center flex justify-center" >
                                                 <Button
                                                     type="primary"
                                                     htmlType="submit"
@@ -184,7 +184,7 @@ class LoginByMail extends Component {
                                                 </Button>
                                             </div>
                                             <Link to ="/login">
-                                                <div class="bg-black rounded-rounded2.8 mt-14 w-40 items-center flex justify-center" >
+                                                <div class="bg-black rounded-rounded2.8 mt-14 w-36 items-center flex justify-center" >
                                                 <Button   style={{  height: "4rem",backgroundColor:"black",borderRadius:'3rem',display:"flex",alignItems:"center" }}>
                                                 <h3 class="font-medium text-white text-3xl">Back</h3> </Button>
                                                 </div>

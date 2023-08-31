@@ -26,6 +26,7 @@ module.exports = {
 'hp':'382px',
 'h8':'22.666667%',
 'h36':'36rem',
+'hk':'-webkit-fill-available',
 'h26':'26rem',
 'h34':'34rem',
 'h31':'31rem',

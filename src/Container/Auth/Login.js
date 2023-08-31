@@ -68,7 +68,7 @@ function Login(props) {
     <>
    
 
-      <div class="bg-quizbg ">
+      <div class="bg-quizbg min-h-screen ">
         <Formik
 
         >

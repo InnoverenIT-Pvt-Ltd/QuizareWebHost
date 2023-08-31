@@ -28,7 +28,7 @@ class SignUpPage extends Component {
         return (
             <>
                 <FlexContainer>
-                <div class="w-full bg-quizbg flex-col  overflow-auto flex   items-center max-sm:min-h-m40 md:min-h-screen  ">                   
+                <div class="w-full bg-quizbg flex-col  overflow-auto flex   items-center max-sm:min-h-screen md:min-h-screen  ">                   
                         {/* <img
                             className="big-logo"
                             src={FWLogo}
@@ -126,8 +126,8 @@ class SignUpPage extends Component {
                                                         style={{ color: "#21a1fd", marginTop: "5px" }}
                                                     >Back To Login</div>
                                                 </Link> */}
-                                                <div class="flex justify-between">
-                                                  <div class="bg-black rounded-rounded2.8 mt-12 w-40 items-center flex justify-center" >
+                                                <div class="flex justify-between w-wk">
+                                                  <div class="bg-black rounded-rounded2.8 mt-12 w-36 items-center flex justify-center" >
                                                 <Button
                                                     type="primary"
                                                     htmlType="submit"
@@ -139,7 +139,7 @@ class SignUpPage extends Component {
                                                
                                                 </div>
                                                 <Link to ="/login">
-                                                <div class="bg-black rounded-rounded2.8 mt-12 w-40 items-center flex justify-center" >
+                                                <div class="bg-black rounded-rounded2.8 mt-12 w-36 items-center flex justify-center" >
                                                 <Button   style={{  height: "4rem",backgroundColor:"black",borderRadius:'3rem',display:"flex",alignItems:"center" }}>
                                                 <h3 class="font-medium text-white text-3xl">Back</h3> </Button>
                                                 </div>
