@@ -8,6 +8,8 @@ import { InputComponent } from "../../Components/Forms/Formik/InputComponent";
 import { addQuizName } from './QuizAction';
 import { Button } from 'antd';
 import FWLogo from "../../../src/images/lamp-charge.png";
+import FWLogo1 from "../../../src/images/prev.png";
+import FWLogo2 from "../../../src/images/forw.png";
 import { useHistory } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 import MainHeader from '../../Components/Mainheader';
@@ -115,7 +117,16 @@ function QuizName(props) {
               </div>
               
             </div>
-            <div class="bg-black rounded-rounded2.8  mt-8 w-52 items-center flex justify-center" >
+            <div class="flex justify-center mt-4" >
+            <img
+                  className="big-logo"
+                  src={FWLogo1}
+                 
+                  alt="Tekorero logo"
+                  onClick={props.goToPreviousCard}
+
+                />
+            <div class="bg-black rounded-rounded2.8  mt-4 w-44 items-center flex justify-center" >
                    
                    <Button
                      type="primary"
@@ -124,6 +135,15 @@ function QuizName(props) {
                      style={{  height: "5em",backgroundColor:"black",borderRadius:'3rem',display:"flex",justifyContent:"center",alignItems:"center" }}
                    > <h3 class="font-medium text-white text-3xl">Create</h3></Button>
                  </div>
+                 <img
+                  className="big-logo"
+                  src={FWLogo2}
+                 
+                  alt="Tekorero logo"
+                  onClick={props.goToNextCard}
+
+                />
+                </div>
           </Form>
         )}
 

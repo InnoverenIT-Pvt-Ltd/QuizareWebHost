@@ -2,10 +2,12 @@ import { Formik, Form, FastField, Field, FieldArray } from "formik";
 import React from 'react'
 import Mainheader from "../Mainheader";
 import FWLogo from "../../../src/images/book-square.png";
+import FWLogo1 from "../../../src/images/prev.png";
+import FWLogo2 from "../../../src/images/forw.png";
 import CreateQuiz from "./CreateQuiz";
 import { Link, withRouter } from "react-router-dom";
 import { Button, Select, Icon, Tag, Switch, Checkbox } from "antd";
-const LibrayHome = () => {
+const LibrayHome = (props) => {
     return (
         <>
         <div class="bg-quizbg min-h-screen">
@@ -41,18 +43,36 @@ const LibrayHome = () => {
               </Form>
             )}
           </Formik>
+          <div class="flex justify-center mt-4" >
+          <img
+                  className="big-logo"
+                  src={FWLogo1}
+                 
+                  alt="Tekorero logo"
+                  onClick={props.goToPreviousCard}
+
+                />
           <Link to ="/quizLibrary">
           <div class="rounded-rounded2.8  mt-2  items-center flex justify-center" >
                    
                    <Button
                      htmlType="submit"
-                     style={{  height: "5em",backgroundColor:"black",borderRadius:'3rem',display:"flex",justifyContent:"center",alignItems:"center" }}
+                     style={{  height: "5em",backgroundColor:"black",borderRadius:'3rem',display:"flex",justifyContent:"center",alignItems:"center",width:"12rem" }}
                    > <h3 class="font-medium text-white text-3xl">Browse</h3></Button>
                  </div>
                  </Link>
+                 <img
+                  className="big-logo"
+                  src={FWLogo2}
+                 
+                  alt="Tekorero logo"
+                  onClick={props.goToNextCard}
+
+                />
+                 </div>
           </div>
         </>
       );
 }
 
-export default LibrayHome
+export default withRouter (LibrayHome)

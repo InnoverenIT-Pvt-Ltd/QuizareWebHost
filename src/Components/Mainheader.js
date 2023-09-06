@@ -49,7 +49,7 @@ function MainHeader(props) {
                 /> */}
               </div>
               {/* </Link> */}
-              <Link to="/how">
+              <Link to="/how1">
                   <div style={{ marginTop: "5px" }}>
                     <img
                   className="big-logo"

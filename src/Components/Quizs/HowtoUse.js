@@ -10,8 +10,9 @@ import "swiper/css/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
 import { Button, Modal } from "antd";
-import FWLogo1 from "../../../src/images/Component.png";
-const HowtoUse = () => {
+import FWLogo1 from "../../../src/images/prev.png";
+import FWLogo2 from "../../../src/images/forw.png";
+const HowtoUse = (props) => {
     return (
         <>
         <div class="bg-quizbg min-h-screen">
@@ -47,21 +48,33 @@ const HowtoUse = () => {
               </Form>
             )}
           </Formik>
-          <Link to ="/quizzes">
+         
           <div class="flex justify-center mt-4" >
                     <img
                   className="big-logo"
                   src={FWLogo1}
                  
                   alt="Tekorero logo"
+                  onClick={props.goToPreviousCard}
 
                 />
+            
+      <h3 class="text-4xl flex items-center">Navigate</h3>
+      <img
+                  className="big-logo"
+                  src={FWLogo2}
+                 
+                  alt="Tekorero logo"
+                  onClick={props.goToNextCard}
+
+                />
+     
                 </div>
-          </Link>
+        
           </div>
           
         </>
       );
 }
 
-export default HowtoUse
+export default withRouter(HowtoUse)

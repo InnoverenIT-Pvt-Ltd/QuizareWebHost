@@ -412,14 +412,14 @@ p {
   display: flex;
   justify-content: center;
 }
-.swiper-button-next:after, .swiper-rtl .swiper-button-prev:after {
+/* .swiper-button-next:after, .swiper-rtl .swiper-button-prev:after {
   content: 'next';
   color: transparent;
 }
 .swiper-button-prev:after, .swiper-rtl .swiper-button-next:after {
   content: 'prev';
   color: transparent;
-}
+} */
 
 input {
   border: 1px solid black;
