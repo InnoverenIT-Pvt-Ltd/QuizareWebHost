@@ -6,6 +6,7 @@ import { Route, Switch } from "react-router-dom";
 import "./App.css";
 import { BundleLoader } from "./Components/Placeholder";
 import PrivateRoute from "./Helpers/Auth/PrivateRoute";
+import AppRouter from "./Container/Quiz/EditQuiz/Swipe/AppRouter";
 const ForgetPasswordForm = lazy(() => import("./Container/Auth/ForgetPasswordForm"))
 const LoginByMail = lazy(() => import("./Container/Auth/LoginByMail"))
 const SignUpPage = lazy(() => import("./Container/Auth/SignUpPage"))
@@ -20,6 +21,7 @@ class App extends Component {
     return (
 
       <div>
+       
         <Suspense fallback={<BundleLoader />}>
           <Switch>
             <Route exact path="/login" component={Login} />

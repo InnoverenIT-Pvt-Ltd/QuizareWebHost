@@ -98,15 +98,18 @@ import CloseIcon from '@mui/icons-material/Close';
 import { Link, withRouter } from "react-router-dom";
  import { Button, Select, Icon, Tag, Switch, Checkbox } from "antd";
 
-const Menu = () => {
+const Menu = (props) => {
   const [click, setClick] = useState(false);
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
+  function handleCallBack (data)  {
+    props.history.push(`/how1`);
+  };
   return (
     <div className="header">
       <div className="logo-nav">
         <div className="logo-container">
-        <Link to="/how">
+        <Link to="/how1">
                   <div style={{ marginTop: "5px" }}>
                     <img
                   className="big-logo"
@@ -120,18 +123,19 @@ const Menu = () => {
         </div>
         <ul className={click ? "nav-options active" : "nav-options"}>
           <li className="option" onClick={closeMobileMenu}>
-            <Link to="/how">
+            {/* <Link to="/how1"> */}
                       <Button
                       
                         htmlType="submit"
                         style={{  height: "5em",display:"flex",justifyContent:"center",alignItems:"center" }}
+                        onClick={handleCallBack}
                       >
                         <h3 class="font-medium text-white text-lg">How to</h3>
                       </Button>
-                    </Link>
+                    {/* </Link> */}
           </li>
           <li className="option  max-sm:bg-quizb" onClick={closeMobileMenu}>
-            <Link to="/quizzes">
+            <Link to="/how2">
                       <Button
                      
                         htmlType="submit"
@@ -142,7 +146,7 @@ const Menu = () => {
                     </Link>
           </li>
           <li className="option " onClick={closeMobileMenu}>
-            <Link to="/librayHome">
+            <Link to="/how3">
                       <Button
                      
                         htmlType="submit"
@@ -163,7 +167,7 @@ const Menu = () => {
                    </Link>
 </li>
           <li className="option " onClick={closeMobileMenu}>
-            <Link to="/profileview">
+            <Link to="/how4">
                       <Button
                        
                         htmlType="submit"
@@ -209,4 +213,4 @@ const Menu = () => {
   );
 };
 
-export default Menu;
+export default withRouter (Menu);
