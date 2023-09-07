@@ -117,7 +117,7 @@ function QuizName(props) {
               </div>
               
             </div>
-            <div class="flex justify-center mt-4" >
+            <div class="flex justify-around items-center mt-4" >
             <img
                   className="big-logo"
                   src={FWLogo1}
@@ -126,7 +126,7 @@ function QuizName(props) {
                   onClick={props.goToPreviousCard}
 
                 />
-            <div class="bg-black rounded-rounded2.8  mt-4 w-44 items-center flex justify-center" >
+            <div class="bg-black rounded-rounded2.8   w-44 items-center flex justify-center" >
                    
                    <Button
                      type="primary"
