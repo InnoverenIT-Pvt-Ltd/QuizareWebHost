@@ -1,96 +1,4 @@
-// import { Link, withRouter } from "react-router-dom";
-// import { Button, Select, Icon, Tag, Switch, Checkbox } from "antd";
-// import React from 'react';
-// import { connect } from "react-redux";
-// import { bindActionCreators } from "redux";
-
-// const Menu = (props) => {
-//   return  <div class="flex items-center flex-col bg-quizc">
-//      <div class="flex justify-center mt-4">
-//                    <h3 class="font-extrabold ">Welcome {props.user.name}</h3>
-//                  </div>
-//                 <div class="  w-wk items-center flex justify-center" >
-//                     <Link to="/how">
-//                       <Button
-                      
-//                         htmlType="submit"
-//                         style={{  height: "5em",display:"flex",justifyContent:"center",alignItems:"center" }}
-//                       >
-//                         <h3 class="font-medium text-white text-lg">How to</h3>
-//                       </Button>
-//                     </Link>
-//                   </div>
-//                 <div class=" bg-quizb  w-wk items-center flex justify-center" >
-//                     <Link to="/quizzes">
-//                       <Button
-                     
-//                         htmlType="submit"
-//                         style={{  height: "5em",display:"flex",justifyContent:"center",alignItems:"center" }}
-//                       >
-//                         <h3 class="font-medium text-white text-lg">Create Quiz</h3>
-//                       </Button>
-//                     </Link>
-//                   </div>
-//                   {/* <div class="  w-wk items-center flex justify-center" >
-//                     <Link to="/ongoingQuiz">
-//                       <Button
-                      
-//                         htmlType="submit"
-//                         style={{  height: "5em",display:"flex",justifyContent:"center",alignItems:"center" }}
-//                       >
-//                         <h3 class="font-medium text-white text-lg">Ongoing Quizzes</h3>
-//                       </Button>
-//                     </Link>
-//                   </div> */}
-//                   <div class="  w-wk items-center flex justify-center" >
-//                     <Link to="/quizLibrary">
-//                       <Button
-                     
-//                         htmlType="submit"
-//                         style={{  height: "5em",display:"flex",justifyContent:"center",alignItems:"center" }}
-//                       >
-//                          <h3 class="font-medium text-white text-lg">Quiz Library </h3>
-//                       </Button>
-//                     </Link>
-//                   </div>
-//                   <div class=" bg-quizb  w-wk items-center flex justify-center" >
-//                     <Link to="/profile">
-//                       <Button
-                       
-//                         htmlType="submit"
-//                         style={{  height: "5em",display:"flex",justifyContent:"center",alignItems:"center" }}
-//                       >
-//                         <h3 class="font-medium text-white text-lg">My Profile</h3>
-//                       </Button>
-//                     </Link>
-//                   </div>
-//                   <div class="  w-wk items-center flex justify-center" >
-//                     <Link to="/email">
-//                       <Button
-                      
-//                         htmlType="submit"
-//                         style={{  height: "5em",display:"flex",justifyContent:"center",alignItems:"center" }}
-//                       >
-//                          <h3 class="font-medium text-white text-lg">Sign Out </h3>
-//                       </Button>
-//                     </Link>
-//                   </div>
-                  
-//                 </div> 
-// }
-// const mapStateToProps = ({ auth }) => ({
-//     user: auth.userDetails
-//   });
-  
-//   const mapDispatchToProps = (dispatch) => bindActionCreators({}, dispatch);
-  
-//   export default withRouter(
-//     connect(mapStateToProps, mapDispatchToProps)(Menu)
-//   );
-
-
-  import React, { useState } from "react";
-  import HomeIcon from '@mui/icons-material/Home';
+import React, { useState } from "react"; 
 import FWLogo from "../../../src/images/Latest.png";
 import "./header.css";
 import MenuIcon from '@mui/icons-material/Menu';
@@ -102,6 +10,10 @@ const Menu = (props) => {
   const [click, setClick] = useState(false);
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
+  const handleRefresh = () => {
+    // This function will refresh the page
+    window.location.reload();
+  };
   function handleCallBack (data)  {
     props.history.push(`/how1`);
   };
@@ -124,18 +36,21 @@ const Menu = (props) => {
         <ul className={click ? "nav-options active" : "nav-options"}>
           <li className="option" onClick={closeMobileMenu}>
             {/* <Link to="/how1"> */}
+            <a href="/how1" onClick={handleRefresh}>
                       <Button
                       
                         htmlType="submit"
                         style={{  height: "5em",display:"flex",justifyContent:"center",alignItems:"center" }}
-                        onClick={handleCallBack}
+                        
                       >
                         <h3 class="font-medium text-white text-lg">How to</h3>
                       </Button>
+                      </a>
                     {/* </Link> */}
           </li>
           <li className="option  max-sm:bg-quizb" onClick={closeMobileMenu}>
-            <Link to="/how2">
+            {/* <Link to="/how2"> */}
+            <a href="/how2" onClick={handleRefresh}>
                       <Button
                      
                         htmlType="submit"
@@ -143,10 +58,12 @@ const Menu = (props) => {
                       >
                         <h3 class="font-medium text-white text-lg">Create Quiz</h3>
                       </Button>
-                    </Link>
+                      </a>
+                    {/* </Link> */}
           </li>
           <li className="option " onClick={closeMobileMenu}>
-            <Link to="/how3">
+          <a href="/how3" onClick={handleRefresh}>
+            {/* <Link to="/how3"> */}
                       <Button
                      
                         htmlType="submit"
@@ -154,7 +71,8 @@ const Menu = (props) => {
                       >
                          <h3 class="font-medium text-white text-lg">Quiz Library </h3>
                       </Button>
-                    </Link>
+                    {/* </Link> */}
+                    </a>
           </li>
           <li className="option  max-sm:bg-quizb" onClick={closeMobileMenu}>
           <Link to="/ongoingQuiz">
@@ -167,7 +85,8 @@ const Menu = (props) => {
                    </Link>
 </li>
           <li className="option " onClick={closeMobileMenu}>
-            <Link to="/how4">
+            {/* <Link to="/how4"> */}
+            <a href="/how4" onClick={handleRefresh}>
                       <Button
                        
                         htmlType="submit"
@@ -175,7 +94,8 @@ const Menu = (props) => {
                       >
                         <h3 class="font-medium text-white text-lg">My Profile</h3>
                       </Button>
-                    </Link>
+                    {/* </Link> */}
+                    </a>
           </li>
           <li className="option  max-sm:bg-quizb " onClick={closeMobileMenu}>
              <Link to="/changepassword">
@@ -214,3 +134,56 @@ const Menu = (props) => {
 };
 
 export default withRouter (Menu);
+
+// import React from "react";
+
+// const Menu = () => {
+//   const handleRefresh = () => {
+//     // This function will refresh the page
+//     window.location.reload();
+//   };
+
+//   return (
+//     <div className="header">
+//       <ul>
+//         <li>
+//           <a href="/how1" onClick={handleRefresh}>
+//             How to
+//           </a>
+//         </li>
+//         <li>
+//           <a href="/how2" onClick={handleRefresh}>
+//             Create Quiz
+//           </a>
+//         </li>
+//         <li>
+//           <a href="/how3" onClick={handleRefresh}>
+//             Quiz Library
+//           </a>
+//         </li>
+//         <li>
+//           <a href="/ongoingQuiz" onClick={handleRefresh}>
+//             Ongoing Quizzes
+//           </a>
+//         </li>
+//         <li>
+//           <a href="/how4" onClick={handleRefresh}>
+//             My Profile
+//           </a>
+//         </li>
+//         <li>
+//           <a href="/changepassword" onClick={handleRefresh}>
+//             Change Password
+//           </a>
+//         </li>
+//         <li>
+//           <a href="/email" onClick={handleRefresh}>
+//             Sign Out
+//           </a>
+//         </li>
+//       </ul>
+//     </div>
+//   );
+// };
+
+// export default Menu;

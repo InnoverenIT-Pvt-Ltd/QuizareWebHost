@@ -44,7 +44,7 @@ const { Option } = Select;
                   </div>
                 
               </div>
-              <div class="flex justify-center mt-4" >
+              <div class="flex justify-around mt-4" >
             <img
                   className="big-logo"
                   src={FWLogo1}
@@ -53,10 +53,10 @@ const { Option } = Select;
                   onClick={props.goToPreviousCard}
 
                 />
-            <div class="bg-black rounded-rounded2.8  mt-4 w-44 items-center flex justify-center" >
+            <div class="bg-black rounded-rounded2.8  mt-2 w-44 items-center flex justify-center" >
                    
                    <Button
-                     type="primary"
+                    // type="primary"
                     
                      style={{  height: "5em",backgroundColor:"black",borderRadius:'3rem',display:"flex",justifyContent:"center",alignItems:"center" }}
                    > <h3 class="font-medium text-white text-3xl">TBD</h3></Button>
