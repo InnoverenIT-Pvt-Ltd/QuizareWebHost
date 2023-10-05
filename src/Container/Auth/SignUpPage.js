@@ -37,7 +37,7 @@ class SignUpPage extends Component {
 
                         /> */}
                        
-                       <div className="bg-white rounded-rounded2.8 shadow-2xl border-solid flex justify-center mt-3 flex-col max-sm:w-11/12 h-h34 md:w-2/6 ">
+                       <div className="bg-white rounded-rounded2.8 shadow-2xl border-solid flex justify-center mt-3 flex-col max-sm:w-11/12 h-h34 md:w-2/5 ">
                             <Formik
                                 enableReinitialize
                                 initialValues={{

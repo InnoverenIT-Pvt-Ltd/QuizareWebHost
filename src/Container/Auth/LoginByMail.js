@@ -93,7 +93,7 @@ class LoginByMail extends Component {
                             alt="Tekorero logo"
 
                         /> */}
-                        <div className="bg-white rounded-rounded2.8 shadow-2xl border-solid flex  mt-4 flex-col max-sm:w-11/12 h-h34 md:w-2/6 ">
+                        <div className="bg-white rounded-rounded2.8 shadow-2xl border-solid flex  mt-4 flex-col max-sm:w-11/12 h-h34 md:w-2/5 ">
                             <Formik
                                 enableReinitialize
                                 initialValues={{

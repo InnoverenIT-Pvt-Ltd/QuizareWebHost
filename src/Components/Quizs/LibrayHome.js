@@ -43,7 +43,7 @@ const LibrayHome = (props) => {
               </Form>
             )}
           </Formik>
-          <div class="flex justify-around mt-2" >
+          <div class="flex justify-around mt-2 md:justify-center" >
           <img
                   className="big-logo"
                   src={FWLogo1}
