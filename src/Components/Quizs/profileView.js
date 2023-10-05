@@ -28,7 +28,7 @@ const { Option } = Select;
             setFieldValue,
             setFieldTouched,
           }) => (
-            <Form class=" max-sm:w-11/12   mt-8 m-auto h-h31 md:mt-12 w-2/5  ">
+            <Form class=" max-sm:w-11/12   mt-8 m-auto h-h31 md:mt-12 w-2/5 md:h-[36rem]  ">
             <div class="shadow-2xl bg-white rounded-rounded3 border-solid flex justify-center flex-col   max-sm:m-0 h-96  md:m-auto">
                 <div class="flex justify-center">
                   <h3 class="font-extrabold text-2xl ">Welcome {props.user.name}</h3>

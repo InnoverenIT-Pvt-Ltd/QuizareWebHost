@@ -49,7 +49,7 @@ const HowtoUse = (props) => {
             )}
           </Formik>
          
-          <div class="flex justify-around mt-4" >
+          <div class="flex justify-around mt-4 md:justify-center" >
                     <img
                   className="big-logo"
                   src={FWLogo1}

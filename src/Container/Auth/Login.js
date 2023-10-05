@@ -80,9 +80,9 @@ function Login(props) {
             setFieldValue,
             setFieldTouched,
           }) => (
-            <Form class=" max-sm:w-4/5 flex justify-center flex-col min-h-wh  m-auto md:mt-7  w-wk   ">
+            <Form class=" max-sm:w-4/5 flex justify-center flex-col min-h-wh  m-auto md:w-wk   ">
 
-              <div class="shadow-2xl border-solid w-w95 flex justify-center items-center mt-4  p-1 max-sm:h-h32 rounded-rounded2.8 bg-white md:m-auto md:w-2/5">
+              <div class="shadow-2xl border-solid w-w95 flex justify-center items-center mt-4  p-1 max-sm:h-h32 rounded-rounded2.8 bg-white md:m-auto md:mt-16 md:h-h30 md:w-2/5">
                 <div>
                   
                   <div class="flex justify-center">

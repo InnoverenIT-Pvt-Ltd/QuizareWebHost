@@ -65,7 +65,7 @@ function QuizName(props) {
           errors,
           values,
         }) => (
-          <Form class="flex justify-center flex-col items-center  max-sm:w-11/12 mt-8 m-auto h-hk md:mt-12  w-2/5 ">
+          <Form class="flex justify-center flex-col items-center  max-sm:w-11/12 mt-8 m-auto h-hk md:mt-12  w-2/5 md:h-[80vh] ">
 
 
             <div class="shadow-2xl bg-white border-solid w-full flex justify-center items-center  p-1 max-sm:m-0 h-h26 rounded-rounded2.8 md:w-full m-auto">
