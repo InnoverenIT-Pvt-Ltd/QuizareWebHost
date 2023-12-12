@@ -1,6 +1,6 @@
 import * as types from './QuizActionTypes';
 import axios from 'axios';
-import { base_url } from '../../Config/Auth';
+import { base_url,base_url2 } from '../../Config/Auth';
 import store from '../../Store';
 import { createBrowserHistory } from "history";
 import { message } from "antd";
@@ -803,4 +803,25 @@ export const handleBackToQuiz = (modalProps) => (dispatch) => {
     type: types.BACK_TO_QUIZ_PAGE,
     payload: modalProps,
   });
+};
+
+export const addUserQuery = (query) => dispatch => {
+  dispatch({
+    type: types.ADD_USER_QUERY_REQUEST,
+  });
+axios
+    .post(`${base_url2}/user_query`, 
+    query,)
+    .then(res => {    
+      dispatch({
+        type: types.ADD_USER_QUERY_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: types.ADD_USER_QUERY_FAILURE,
+        payload: err,
+      });
+    });
 };

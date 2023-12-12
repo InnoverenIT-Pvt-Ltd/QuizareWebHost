@@ -59,8 +59,8 @@ import { withRouter } from 'react-router-dom';
 import { useSwipeable } from 'react-swipeable';
 import QuizName from '../../QuizName';
 import HowtoUse from '../../../../Components/Quizs/HowtoUse';
- import ProfileView from '../../../../Components/Quizs/profileView';
-  import LibrayHome from '../../../../Components/Quizs/LibrayHome';
+import ProfileView from '../../../../Components/Quizs/profileView';
+import LibrayHome from '../../../../Components/Quizs/LibrayHome';
 
 const Navigate = ({ cardIndex, history }) => {
   const [currentCard, setCurrentCard] = useState(cardIndex);

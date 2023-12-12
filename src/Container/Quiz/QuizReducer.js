@@ -98,6 +98,9 @@ const initialState = {
 
   updateQuestions: false,
   updateQuestionsError: false,
+
+  addingUserQuery: false, addingUserQueryError: false,
+  userQuery:[],
 };
 
 export const quizReducer = (state = initialState, action) => {
@@ -521,6 +524,16 @@ export const quizReducer = (state = initialState, action) => {
         ...state,
         questionList: []
       };
+
+      case types.ADD_USER_QUERY_REQUEST:
+        return { ...state, addingUserQuery: true };
+      case types.ADD_USER_QUERY_SUCCESS:
+        return { ...state, addingUserQuery: false,
+          userQuery:action.payload,
+        };
+      case types.ADD_USER_QUERY_FAILURE:
+        return { ...state, addingUserQuery: false, addingUserQueryError: true };
+
 
     default:
       return state;

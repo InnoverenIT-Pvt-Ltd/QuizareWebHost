@@ -4,7 +4,6 @@ import { Link, withRouter } from "react-router-dom";
 import FWLogo from "../../src/images/Latest.png";
 import { clearQuizNameDetails } from '../Container/Quiz/QuizAction'
 import { connect } from "react-redux";
-import HomeIcon from '@mui/icons-material/Home';
 import { bindActionCreators } from "redux";
 import ProfileDropdown from "../Container/Auth/ProfileDropdown";
 import Subheader from "../Components/Quizs/Subheader";
