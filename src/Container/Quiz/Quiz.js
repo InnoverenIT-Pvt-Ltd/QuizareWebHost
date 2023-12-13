@@ -10,6 +10,7 @@ import {
   addQuestion,
   getQuizName,
   getCategory,
+  addUserQuery
 } from "./QuizAction";
 import { Button, Card, Input } from "antd";
 import { InputComponent } from "../../Components/Forms/Formik/InputComponent";
@@ -18,11 +19,13 @@ import MainHeader from "../../Components/Mainheader";
 const phoneRegExp =
   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 const QuizzSchema = Yup.object().shape({
-  // question: Yup.string().required("Input needed!"),
-  // option1: Yup.string().required("Input needed!"),
-  // option2: Yup.string().required("Input needed!"),
+  question: Yup.string().required("Input needed!"),
+  option1: Yup.string().required("Input needed!"),
+  option2: Yup.string().required("Input needed!"),
+  option3: Yup.string().required("Input needed!"),
+  option4: Yup.string().required("Input needed!")
 });
-//import AllQuiz from './AllQuiz';
+
 
 function Quiz(props) {
   const [count, setCount] = useState(1);
@@ -52,6 +55,7 @@ function Quiz(props) {
   const goToFinalize = () => {
     history.push(`/finalize`)
   }
+
   return (
     <>
     <div class="min-h-screen">
@@ -246,7 +250,8 @@ function Quiz(props) {
                             </Card>
                         </View>           */}
                   </div>
-                  <div class="bg-black rounded-rounded2.8  mt-2 w-36 items-center flex justify-center" >
+                  <div class="flex justify-around">
+                  <div class="bg-black rounded-rounded2.8  mt-2 w-36 items-center flex " >
                 <Button
                    style={{  height: "3rem",backgroundColor:"#565656",borderRadius:'3rem' }}
                   type="primary"
@@ -256,6 +261,26 @@ function Quiz(props) {
                 >
                  <h3 class="font-medium text-white text-2xl">Add </h3>
                 </Button>
+              </div>
+              <div class="bg-black rounded-rounded2.8  mt-2 w-48 items-center flex " >
+                <Button
+                   style={{  height: "3rem",backgroundColor:"#565656",borderRadius:'3rem' }}
+                  type="primary"
+                  
+                  onClick={()=>{
+                    const query={
+                      request_type: "MCQ",  //Hardcode
+                      user_question: values.question, //qstn dynamic
+                      options_required: "4", //hardcode
+                      userid: props.userId,
+                    quizId:props.showQuiz && props.showQuiz.quizId
+                    }
+                    props.addUserQuery(query)}}
+                
+                >
+                 <h3 class="font-medium text-white text-2xl">Check chatgpt </h3>
+                </Button>
+              </div>
               </div>
                 </div>
               
@@ -335,7 +360,8 @@ const mapStateToProps = ({ auth, quiz }) => ({
   showQuiz: quiz.showQuiz,
   quizId: quiz.showQuiz.quizId,
   category: quiz.category,
-  quizHostId: auth.userDetails.userId
+  quizHostId: auth.userDetails.userId,
+  userId:auth.userDetails.userId
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -345,6 +371,7 @@ const mapDispatchToProps = (dispatch) =>
       addQuestion,
       getQuizName,
       getCategory,
+      addUserQuery
     },
     dispatch
   );
