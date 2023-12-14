@@ -100,7 +100,8 @@ const initialState = {
   updateQuestionsError: false,
 
   addingUserQuery: false, addingUserQueryError: false,
-  userQuery:[],
+  userQuery:{},
+
 };
 
 export const quizReducer = (state = initialState, action) => {
@@ -534,6 +535,10 @@ export const quizReducer = (state = initialState, action) => {
       case types.ADD_USER_QUERY_FAILURE:
         return { ...state, addingUserQuery: false, addingUserQueryError: true };
 
+        case types.HANDLE_CLAER_REDUCER_DATA_LOAD_PROGRESS:
+          return { ...state, 
+            userQuery: {}, 
+          };
 
     default:
       return state;

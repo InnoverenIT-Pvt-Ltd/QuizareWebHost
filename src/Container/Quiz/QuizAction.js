@@ -810,7 +810,7 @@ export const addUserQuery = (query) => dispatch => {
     type: types.ADD_USER_QUERY_REQUEST,
   });
 axios
-    .post(`${base_url2}/user_query`, 
+    .post(`${base_url2}/user_query/`, 
     query,)
     .then(res => {    
       dispatch({
@@ -824,4 +824,10 @@ axios
         payload: err,
       });
     });
+};
+
+export const ClearReducerDataOfLoadProgress = () => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_CLAER_REDUCER_DATA_LOAD_PROGRESS,
+  });
 };
