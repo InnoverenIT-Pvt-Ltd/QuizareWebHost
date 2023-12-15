@@ -805,13 +805,12 @@ export const handleBackToQuiz = (modalProps) => (dispatch) => {
   });
 };
 
-export const addUserQuery = (query) => dispatch => {
+export const addUserQuery = (query) => (dispatch) => {
   dispatch({
     type: types.ADD_USER_QUERY_REQUEST,
   });
 axios
-    .post(`${base_url2}/user_query/`, 
-    query,)
+    .post(`${base_url2}/user_query/`,query,)
     .then(res => {    
       dispatch({
         type: types.ADD_USER_QUERY_SUCCESS,
