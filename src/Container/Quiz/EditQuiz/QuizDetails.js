@@ -120,7 +120,7 @@ console.log(props.showQuiz)
               </div>
             </div> */}
 <Link to="/how3">
-<div class="bg-black rounded-rounded2.8 p-1 mt-5 w-60 items-center flex justify-center"
+<div class="bg-black rounded-rounded2.8 p-1 mt-11 w-60 items-center flex justify-center"
 >
 <Button style={{ border: "none", height:"4.5rem", }}>
 <h3 class="font-medium text-white text-xl"> Return to Library </h3>
