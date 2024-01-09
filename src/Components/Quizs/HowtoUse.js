@@ -26,7 +26,7 @@ const HowtoUse = (props) => {
               setFieldValue,
               setFieldTouched,
             }) => (
-              <Form class=" max-sm:w-11/12   mt-8 m-auto h-h26 md:mt-12 w-2/5  ">
+              <Form class=" max-sm:w-11/12   mt-8 m-auto h-[49vh] md:mt-12 w-2/5  ">
                 <div class="shadow-2xl bg-white rounded-rounded3 border-solid flex justify-center flex-col   max-sm:m-0 h-full  md:m-auto">
                   <div class="flex justify-center mt-8">
                     <h3 class="font-medium text-2xl ">How to use Quizledge </h3>
@@ -45,11 +45,7 @@ const HowtoUse = (props) => {
                     </div>
                 
                 </div>
-              </Form>
-            )}
-          </Formik>
-         
-          <div class="flex justify-around mt-4 md:justify-center" >
+                <div class="flex justify-around mt-4 md:justify-center" >
                     <img
                   className="big-logo"
                   src={FWLogo1}
@@ -70,6 +66,11 @@ const HowtoUse = (props) => {
                 />
      
                 </div>
+              </Form>
+            )}
+          </Formik>
+         
+         
         
           </div>
           

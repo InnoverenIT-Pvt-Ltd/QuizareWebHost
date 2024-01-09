@@ -33,7 +33,7 @@ console.log(props.showQuiz)
 
       <div class="flex justify-center  items-center max-sm:w-11/12 h-hk mt-8 m-auto md:mt-12  w-2/5 ">
         
-        <div class="shadow-2xl border-solid w-wk flex  items-center flex-col  p-1 max-sm:m-0 h-h27 rounded-rounded3 md:m-auto">
+        <div class="shadow-2xl border-solid w-wk flex  items-center flex-col  p-1 max-sm:m-0 h-[26rem] rounded-rounded3 md:m-auto">
       
       
         <div class="flex justify-center mt-1">
@@ -72,7 +72,7 @@ console.log(props.showQuiz)
                 ""
               )}
             </Card>
-            <div class="mt-12 w-full flex justify-center">
+            <div class="mt-8 w-full flex justify-center">
               <Button
                 style={{  height: "4em",backgroundColor:"grey",borderRadius:'3rem',width:'10rem' }}
                 onClick={() => copyToClipboard()}
