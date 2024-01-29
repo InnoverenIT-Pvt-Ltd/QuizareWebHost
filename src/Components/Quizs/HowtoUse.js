@@ -1,5 +1,5 @@
 import { Formik, Form, FastField, Field, FieldArray } from "formik";
-import React from 'react'
+import React, { useState,useEffect } from "react";
 import Mainheader from "../Mainheader";
 import FWLogo from "../../../src/images/note-2.png";
 import CreateQuiz from "./CreateQuiz";
@@ -12,7 +12,23 @@ import { Navigation } from "swiper";
 import { Button, Modal } from "antd";
 import FWLogo1 from "../../../src/images/prev.png";
 import FWLogo2 from "../../../src/images/forw.png";
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 const HowtoUse = (props) => {
+  const [isMobileScreen, setIsMobileScreen] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobileScreen(window.innerWidth <= 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    // Cleanup the event listener on component unmount
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+  if (isMobileScreen) {
     return (
         <>
         <div class="bg-quizbg min-h-screen">
@@ -76,6 +92,53 @@ const HowtoUse = (props) => {
           
         </>
       );
-}
+            }
 
+  return (
+    <>
+    <div class="h-screen w-full ">
+    <header class="bg-white text-white py-4  border-solid border-gray-300 border-2">
+    <label class="text-black text-2xl font-bold">Quizprompter</label> 
+     </header>
+     <div class="flex">
+     <div class="w-[20%] h-screen bg-black flex flex-col">
+     <div class=" h-[15%] flex items-center ">
+      <label class="text-xl text-white font-medium">Create Quizzes</label>
+     </div>
+     <div class="bg-gray-200 border-b border-solid border-white"></div>
+     <div class=" h-[60%] flex flex-col ">
+     <label class="text-sm text-white font-normal">Add quiz</label>
+     <label class="text-sm text-white font-normal">No name quiz WIP</label>
+     <label class="text-sm text-white font-normal">Named quiz WIP</label>
+     <label class="text-base text-white font-normal mt-[7.8rem]">Manage quizzes</label>
+     </div>
+     <div class="bg-gray-200 border-b border-solid border-white"></div>
+     <div class=" h-[60%] flex items-end ">
+     <label class="text-base text-white font-normal ">Settings</label>
+     </div>
+     <div class="bg-gray-200 border-b border-solid border-white"></div>
+     <div class=" h-[60%] "></div>
+     <div class="bg-gray-200 border-b border-solid border-white"></div>
+    </div>
+    <div class="w-[60%] h-screen bg-white flex items-center flex-col">
+    <label class="text-2xl  font-bold mt-6 ">Quiz set name</label>  
+    <div class="w-[22rem] h-[22rem] bg-white border-2 border-solid border-gray-300 shadow-lg mt-8 rounded-xl">
+     
+      </div> 
+      <div class=" mt-8">
+        <a href="/how2" >
+      <AddCircleIcon style={{width:"5rem",height:"5rem",cursor:"pointer"}}/>
+      </a>
+      </div>
+    </div>
+    <div class="w-[20%] h-screen bg-[#D4FFE0]">
+        
+    </div>
+    </div>
+    </div>
+    </>
+  )
+
+  }
 export default withRouter(HowtoUse)
+
