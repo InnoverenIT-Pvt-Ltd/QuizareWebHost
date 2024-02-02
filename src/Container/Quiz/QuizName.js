@@ -15,6 +15,7 @@ import { withRouter } from "react-router-dom";
 import MainHeader from '../../Components/Mainheader';
 import CreateQuiz from '../../Components/Quizs/CreateQuiz';
 import Menu from '../../Components/Quizs/Menu';
+import { Link } from 'react-router-dom/cjs/react-router-dom';
 
 const QuizSchema = Yup.object().shape({
 
@@ -27,7 +28,7 @@ function QuizName(props) {
 
   function handleCallBack(data) {
     if (data === "success") {
-      history.push(`/addquiz`);
+      history.push(`/chatgpt`);
     } else {
       history.push(`/quizzes`);
     }
@@ -127,13 +128,14 @@ function QuizName(props) {
 
                 />
             <div class="bg-black rounded-rounded2.8   w-44 items-center flex justify-center" >
-                   
+                   {/* <Link to="/chatgpt"> */}
                    <Button
                      type="primary"
                      htmlType="submit"
                      onClick={handleSubmit}
-                     style={{  height: "5em",backgroundColor:"black",borderRadius:'3rem',display:"flex",justifyContent:"center",alignItems:"center" }}
+                     style={{  height: "5em",backgroundColor:"black",borderRadius:'3rem',width:"11rem",display:"flex",justifyContent:"center",alignItems:"center" }}
                    > <h3 class="font-medium text-white text-3xl">Create</h3></Button>
+                   {/* </Link> */}
                  </div>
                  <img
                   className="big-logo"

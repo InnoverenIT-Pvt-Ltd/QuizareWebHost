@@ -534,6 +534,37 @@ export const updateQuizNameByQuizId = (data, quizId, cb) => dispatch => {
       // cb && cb();
     });
 };
+
+export const chatGptquiz = (data, cb) => dispatch => {
+ // console.log('inside update question', data);
+  dispatch({
+    type: types.CHAT_GPT_QUIZ_REQUEST,
+  });
+  axios
+    .post(`${base_url2}/user_query`, data, {
+      headers: {
+        Authorization: 'Bearer ' + store.getState().auth.token || '',
+      },
+    })
+    .then(res => {
+      console.log(res.data);
+     // dispatch(getQuizNameList(res.data.quizHostId));
+      dispatch({
+        type: types.CHAT_GPT_QUIZ_SUCCESS,
+        payload: res.data,
+      });
+      cb && cb('success');
+    })
+    .catch(err => {
+      console.log(err);
+      dispatch({
+        type: types.CHAT_GPT_QUIZ_FAILURE,
+        payload: err,
+      });
+      // cb && cb();
+    });
+};
+
 // get the quiz name list in  quiz
 
 export const getQuizNameDetails = quizId => dispatch => {

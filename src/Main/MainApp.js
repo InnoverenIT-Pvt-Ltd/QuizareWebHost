@@ -17,6 +17,7 @@ import HowtoUse from "../Components/Quizs/HowtoUse";
 import profileView from "../Components/Quizs/profileView";
 import LibrayHome from "../Components/Quizs/LibrayHome";
 import Navigate from "../Container/Quiz/EditQuiz/Swipe/Navigate";
+import ChatGPT from "../Container/Quiz/ChatGPT.js";
 const Question1 = lazy(() => import("../Components/Quizs/Question1"))
 const CreateQuiz = lazy(() => import("../Components/Quizs/CreateQuiz"));
 const QuizName = lazy(() => import("../Container/Quiz/QuizName"))
@@ -71,7 +72,7 @@ function MainApp(props) {
               <Route exact path="/how2"  render={() => <Navigate cardIndex={2} />}/>
               <Route exact path="/how3"  render={() => <Navigate cardIndex={3} />}/>
               <Route exact path="/how4"  render={() => <Navigate cardIndex={4} />}/>
-
+              <Route exact path="/chatgpt" component={ChatGPT} />
               <Route exact path="/addquizout" component={QuizOut} />
               <Route exact path="/addquizin" component={QuizIn} />
               <Route path="/quizinLibrary/:quizId" component={QuizinLibrary} />

@@ -92,6 +92,9 @@ const initialState = {
   updateQuizNameQuizId: false,
   updateQuizNameQuizIdError: false,
 
+  chatGptQuiz: false,
+  chatGptQuizError: false,
+
   fetchingQuestionList: false,
   fetchingQuestionListError: false,
   questionList: [],
@@ -346,6 +349,26 @@ export const quizReducer = (state = initialState, action) => {
         updateQuizNameQuizId: false,
         updateQuizNameQuizIdError: true,
       };
+
+
+      case types.CHAT_GPT_QUIZ_REQUEST:
+        return { ...state, chatGptQuiz: true };
+      case types.CHAT_GPT_QUIZ_SUCCESS:
+        return {
+          ...state,
+          chatGptQuiz: false,
+          //showQuiz: action.payload,
+        };
+      case types.CHAT_GPT_QUIZ_FAILURE:
+        return {
+          ...state,
+          chatGptQuiz: false,
+          chatGptQuizError: true,
+        };
+
+
+
+
     // get quizname details
     case types.GET_QUIZ_NAME_DETAILS_GAME_REQUEST:
       return { ...state, fetchingQuizNameDetails: true };
