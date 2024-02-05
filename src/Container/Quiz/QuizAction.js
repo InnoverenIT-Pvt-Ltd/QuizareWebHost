@@ -535,22 +535,20 @@ export const updateQuizNameByQuizId = (data, quizId, cb) => dispatch => {
     });
 };
 
-export const chatGptquiz = (data, cb) => dispatch => {
- // console.log('inside update question', data);
+export const sendQuizResponse = (data, cb) => dispatch => {
   dispatch({
-    type: types.CHAT_GPT_QUIZ_REQUEST,
+    type: types.SEND_QUIZ_RESPONSE_REQUEST,
   });
   axios
-    .post(`${base_url2}/user_query`, data, {
+    .post(`${base_url}/chPR`, data, {
       headers: {
         Authorization: 'Bearer ' + store.getState().auth.token || '',
       },
     })
     .then(res => {
       console.log(res.data);
-     // dispatch(getQuizNameList(res.data.quizHostId));
       dispatch({
-        type: types.CHAT_GPT_QUIZ_SUCCESS,
+        type: types.SEND_QUIZ_RESPONSE_SUCCESS,
         payload: res.data,
       });
       cb && cb('success');
@@ -558,10 +556,9 @@ export const chatGptquiz = (data, cb) => dispatch => {
     .catch(err => {
       console.log(err);
       dispatch({
-        type: types.CHAT_GPT_QUIZ_FAILURE,
+        type: types.SEND_QUIZ_RESPONSE_FAILURE,
         payload: err,
       });
-      // cb && cb();
     });
 };
 

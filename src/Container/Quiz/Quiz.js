@@ -282,7 +282,7 @@ return (
                <h3 class="font-medium text-white text-2xl">Add </h3>
               </Button>
             </div>
-            <div class="bg-black rounded-rounded2.8  mt-2 w-48 items-center flex " >
+            {/* <div class="bg-black rounded-rounded2.8  mt-2 w-48 items-center flex " >
               <Button
                  style={{  height: "3rem",backgroundColor:"#565656",borderRadius:'3rem' }}
                 type="primary"
@@ -300,7 +300,7 @@ return (
               >
                <h3 class="font-medium text-white text-2xl">Check chatgpt </h3>
               </Button>
-            </div>
+            </div> */}
             </div>
               </div>
             
