@@ -105,6 +105,8 @@ const initialState = {
   addingUserQuery: false, addingUserQueryError: false,
   userQuery:{},
 
+  sendingquizResponse: false,
+  sendingquizResponseError:false,
 };
 
 export const quizReducer = (state = initialState, action) => {
@@ -351,19 +353,18 @@ export const quizReducer = (state = initialState, action) => {
       };
 
 
-      case types.CHAT_GPT_QUIZ_REQUEST:
-        return { ...state, chatGptQuiz: true };
-      case types.CHAT_GPT_QUIZ_SUCCESS:
+      case types.SEND_QUIZ_RESPONSE_REQUEST:
+        return { ...state, sendingquizResponse: true };
+      case types.SEND_QUIZ_RESPONSE_SUCCESS:
         return {
           ...state,
-          chatGptQuiz: false,
-          //showQuiz: action.payload,
+          sendingquizResponse: false,
         };
-      case types.CHAT_GPT_QUIZ_FAILURE:
+      case types.SEND_QUIZ_RESPONSE_FAILURE:
         return {
           ...state,
-          chatGptQuiz: false,
-          chatGptQuizError: true,
+          sendingquizResponse: false,
+          sendingquizResponseError: true,
         };
 
 
