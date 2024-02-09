@@ -36,6 +36,12 @@ function UpdateOngoing(props) {
     props.handleBackToQuiz()
     history.push(`/ongoingQuiz`)
   }
+  if(props.fetchingQuestionList){
+    return <div className="custom-loader">
+    <div className="loader">Loading</div>
+  </div>
+  }
+
   return (
     <>
       <MainHeader />
@@ -73,6 +79,7 @@ function UpdateOngoing(props) {
 const mapStateToProps = ({ quiz }) => ({
   questionList: quiz.questionList,
   quizNameDetails: quiz.quizNameDetails,
+  fetchingQuestionList: quiz.fetchingQuestionList,
 });
 
 const mapDispatchToProps = (dispatch) =>

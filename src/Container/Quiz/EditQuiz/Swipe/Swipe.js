@@ -19,6 +19,12 @@ function Swipe(props) {
     props.getQuestionList(props.quizNameDetails.quizId);
   }, []);
  
+  if(props.fetchingQuestionList){
+    return <div className="custom-loader">
+    <div className="loader">Loading</div>
+  </div>
+  }
+  
   return (
     <>
     <MainHeader />
@@ -54,6 +60,7 @@ function Swipe(props) {
 const mapStateToProps = ({ quiz }) => ({
   questionList: quiz.questionList,
   quizNameDetails: quiz.quizNameDetails, 
+  fetchingQuestionList:quiz.fetchingQuestionList
 });
 
 const mapDispatchToProps = (dispatch) =>

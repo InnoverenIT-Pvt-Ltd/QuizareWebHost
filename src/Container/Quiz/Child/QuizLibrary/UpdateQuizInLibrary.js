@@ -33,6 +33,12 @@ function UpdateQuizInLibrary(props) {
         history.push(`/quizLibrary`)
     }
 
+    if(props.fetchingQuestionList){
+        return <div className="custom-loader">
+        <div className="loader">Loading</div>
+      </div>
+      }
+
     return (
         <>
             <MainHeader />
@@ -70,7 +76,8 @@ function UpdateQuizInLibrary(props) {
 const mapStateToProps = ({ quiz }) => ({
     questionList: quiz.questionList,
     quizNameDetails: quiz.quizNameDetails,
-    showQuiz: quiz.showQuiz
+    showQuiz: quiz.showQuiz,
+    fetchingQuestionList: quiz.fetchingQuestionList,
 });
 
 const mapDispatchToProps = (dispatch) =>

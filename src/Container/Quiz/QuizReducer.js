@@ -107,6 +107,7 @@ const initialState = {
 
   sendingquizResponse: false,
   sendingquizResponseError:false,
+  obtainedQuizResponse:{}
 };
 
 export const quizReducer = (state = initialState, action) => {
@@ -359,6 +360,7 @@ export const quizReducer = (state = initialState, action) => {
         return {
           ...state,
           sendingquizResponse: false,
+          obtainedQuizResponse:action.payload
         };
       case types.SEND_QUIZ_RESPONSE_FAILURE:
         return {

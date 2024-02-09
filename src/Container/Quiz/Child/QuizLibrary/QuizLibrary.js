@@ -59,6 +59,11 @@ function QuizLibrary(props) {
   useEffect(() => {
     props.getLibraryQuiz(props.quizHostId);
   }, []);
+  if (props.fetchingLibraryQuiz) {
+    return  <div className="custom-loader">
+    <div className="loader">Loading</div>
+  </div>
+  }
   return (
     <>
     <div class="min-h-screen">
@@ -259,7 +264,8 @@ const mapStateToProps = ({ auth, quiz }) => ({
   addingQuizName: quiz.addingQuizName,
   addingQuizNameError: quiz.addingQuizNameError,
   quizName: quiz.quizName,
-  quizHostId: auth.userDetails.userId
+  quizHostId: auth.userDetails.userId,
+  fetchingLibraryQuiz:quiz.fetchingLibraryQuiz
 });
 
 const mapDispatchToProps = (dispatch) =>

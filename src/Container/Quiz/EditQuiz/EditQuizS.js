@@ -14,13 +14,15 @@ function EditQuizS(props) {
 
     }
   }, []);
-  if (props.fetchingQuestionList) {
-    alert("Hello")
-    return (
-      <div></div>
-    )
+
+  if(props.fetchingQuestionList){
+    return <div className="custom-loader">
+    <div className="loader">Loading</div>
+  </div>
   }
+  
   console.log("component lebel", props.questionList)
+
   return (
     <>
       <div style={{ alignItems: 'center', backgroundColor: 'white' }}>

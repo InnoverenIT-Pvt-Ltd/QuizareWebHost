@@ -19,6 +19,12 @@ function SwipeIn(props) {
   useEffect(() => {
     props.getQuestionList(props.finalizeQuiz && props.finalizeQuiz.quizId);
   }, []);
+
+  if(props.fetchingQuestionList){
+    return <div className="custom-loader">
+    <div className="loader">Loading</div>
+  </div>
+  }
   return (
     <>
       <MainHeader />
@@ -58,7 +64,8 @@ const mapStateToProps = ({ quiz }) => ({
   questionList: quiz.questionList,
   showQuiz: quiz.showQuiz,
   finalizeQuiz: quiz.finalizeQuiz,
-  deletingQuestion: quiz.deletingQuestion
+  deletingQuestion: quiz.deletingQuestion,
+  fetchingQuestionList:quiz.fetchingQuestionList
 });
 
 const mapDispatchToProps = (dispatch) =>
