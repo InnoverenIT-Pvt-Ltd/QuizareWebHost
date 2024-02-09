@@ -24,6 +24,11 @@ function SwipeInLibrary(props) {
   //   props.handleBackToQuiz()
   //   history.push(`/updateQuizName`)
   // }
+if(props.fetchingQuestionList){
+  return <div className="custom-loader">
+  <div className="loader">Loading</div>
+</div>
+}
   return (
     <>
       <MainHeader />
@@ -57,7 +62,8 @@ function SwipeInLibrary(props) {
 
 const mapStateToProps = ({ quiz }) => ({
   questionList: quiz.questionList,
-  showQuiz: quiz.showQuiz
+  showQuiz: quiz.showQuiz,
+  fetchingQuestionList:quiz.fetchingQuestionList
 });
 
 const mapDispatchToProps = (dispatch) =>

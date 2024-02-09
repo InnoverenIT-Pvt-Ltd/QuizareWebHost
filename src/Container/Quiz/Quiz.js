@@ -3,7 +3,7 @@ import { Field, Formik, Form } from "formik";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Yup from "yup";
-import { Link, withRouter, useHistory } from "react-router-dom";
+import { withRouter, useHistory } from "react-router-dom";
 // import MainHeader from '../../Navigation/MainHeader';
 import {
   deleteQuestion,
@@ -13,9 +13,8 @@ import {
   addUserQuery,
   ClearReducerDataOfLoadProgress
 } from "./QuizAction";
-import { Button, Card, Input } from "antd";
+import { Button} from "antd";
 import { InputComponent } from "../../Components/Forms/Formik/InputComponent";
-import SubHeader from "../../Components/SubHeader";
 import MainHeader from "../../Components/Mainheader";
 const phoneRegExp =
   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
