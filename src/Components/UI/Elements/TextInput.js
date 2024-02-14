@@ -38,6 +38,7 @@ const TextInput = styled.input.attrs({
       font-family:Calibri (Body);
       padding-left:3px;
     }
+    word-wrap: break-word;
     @media only screen and (max-width:640px) {
           height: 2rem;
           // border-color: black;
