@@ -458,3 +458,24 @@ input {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+.ant-modal-root .ant-modal-mask {
+  position: fixed;
+  top: 0;
+  inset-inline-end: 0;
+  bottom: 0;
+  inset-inline-start: 0;
+  z-index: 1000;
+  height: 100%;
+  background-color: transparent;
+}
+.ant-modal .ant-modal-content {
+  position: relative;
+  background-color: #ffffff;
+  background-clip: padding-box;
+  border: 0;
+  border-radius: 8px;
+  box-shadow: 0 0px 0px 0, 0 3px 6px -4px transparent, 0 9px 28px 8px transparent;
+  pointer-events: auto;
+  padding: 20px 24px;
+}

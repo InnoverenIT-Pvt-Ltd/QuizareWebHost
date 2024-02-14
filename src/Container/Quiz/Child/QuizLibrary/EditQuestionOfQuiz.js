@@ -9,6 +9,7 @@ import {
     updateQuestionsInQuiz,
 } from "../../../../Container/Quiz/QuizAction";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
+import TextArea from "antd/es/input/TextArea";
 
 
 function EditQuestionofQuiz(props) {
@@ -62,12 +63,12 @@ function EditQuestionofQuiz(props) {
                                             <h3 class="flex justify-center text-xl">Question {props.questionNo || null}</h3>
                                         {/* </Card> */}
                                         <hr class="h-px bg-black border-2 w-wk mt-4 border-black"/>
-                                        <div class="mt-1">
+                                        <div class="mt-1 mb-1">
                                             <Field
                                                
                                                 name="question"
                                                 value={`${values.question}`}
-                                                component={InputComponent}
+                                                component={TextArea}
                                                 onChangeText={() => handleChange("question")}
                                                 style={{ width: "20rem", height: "6rem",borderRadius:"1.25rem",backgroundColor:"white" }}
                                             />

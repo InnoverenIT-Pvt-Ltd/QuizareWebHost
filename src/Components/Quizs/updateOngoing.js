@@ -37,8 +37,8 @@ function UpdateOngoing(props) {
     history.push(`/ongoingQuiz`)
   }
   if(props.fetchingQuestionList){
-    return <div className="custom-loader">
-    <div className="loader">Loading</div>
+    return <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 custom-loader">
+    <div className="loader"></div>
   </div>
   }
 

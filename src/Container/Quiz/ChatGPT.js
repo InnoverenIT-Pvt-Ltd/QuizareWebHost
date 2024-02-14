@@ -4,6 +4,7 @@ import { addUserQuery,sendQuizResponse } from './QuizAction';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import {Link, withRouter,useHistory } from "react-router-dom";
+import Menu from "../../Components/Quizs/Menu";
 
 
 const ChatGPT = (props) => {
@@ -12,7 +13,7 @@ const ChatGPT = (props) => {
 
   const [showCard, setshowCard] = useState(false);
   const [questionReq,setQuestionReq]=useState("");
-
+  const [generationComplete, setGenerationComplete] = useState(false);
 
  function handleSayNo () {
   history.push(`/addquiz`);
@@ -22,34 +23,39 @@ const ChatGPT = (props) => {
             setQuestionReq(q.target.value)
       }; 
 if(props.addingUserQuery){
-  return <div className="custom-loader">
-    <div className="loader">Loading</div>
+  return <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 custom-loader">
+    <div className="loader"></div>
   </div>
 }
   return (
     <>
-    <div class="">
+    <Menu/>
+    <div class="flex items-center justify-center mt-4">
+    <div class="shadow-2xl flex-col  bg-white border-solid w-[95%] flex  items-center  p-4 max-sm:m-0 h-[30rem] rounded-rounded2.8 md:w-full m-auto">
+    <div class=" text-sm font-semibold mt-8">
       Do you Want to use ChatGPT to Generate Questions?
 
     </div>
-    <div class="flex">
-    <Button  type="primary"
+    <div class="flex justify-between w-wk mt-6">
+    <Button style={{width:"10rem"}}  type="primary"
     onClick={() =>    setshowCard(true)}
     > 
     Yes
     </Button>
-    <Button  type="primary" 
+    <Button style={{width:"10rem"}}  type="primary" 
     onClick={() =>    handleSayNo()}
     > No</Button>
     
     
     </div>
+    <div class="mt-4 w-wk">
     {showCard && 
     <>
-    <Input placeholder='How many question'
+    <Input placeholder='How many questions?'
     value={questionReq}
     onChange={handleQuestionRequire}
     />
+    <div class="mt-4 ">
     <Button  type="primary"
     onClick={()=>{
       const query={
@@ -61,14 +67,23 @@ questions_required:questionReq,
         userid: props.userId,
       quizId:props.quizId
       }
-      props.addUserQuery(query);}}> Generate </Button>
+      props.addUserQuery(query);
+      setGenerationComplete(true);
+      }}> Generate </Button>
+      </div>
      &nbsp;
      &nbsp;
      {props.obtainedQuizResponse.length===0 &&(
-     <div className="custom-loader">
-     <div className="loader">Loading</div>
+     <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 custom-loader">
+     <div className="loader"></div>
    </div>)
     }
+    
+
+
+    </>
+}
+{generationComplete && (
 <Link to={`updateQuizNameInLibrary/${props.quizName}/${props.duration}/${props.quizId}`}>
 <Button  type="primary"
     onClick={()=>{
@@ -89,9 +104,10 @@ quizId: props.userQuery.response.user_request.quizId
       props.sendQuizResponse(userPre);}}
     > Submit</Button>
 </Link>
-
-    </>
-}
+ )}
+</div>
+</div>
+</div>
     </>
   )
 }
