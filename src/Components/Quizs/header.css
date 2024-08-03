@@ -1,16 +1,16 @@
 /*Desktop View*/
 .header {
     display: flex;
-    background:#7AB0F7;
+    background:#3B16B7;
     justify-content: space-between;
     align-items: center;
     padding: 0px 40px;
-    height: 80px;
   }
   .logo-nav {
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-between;
+    width: -webkit-fill-available;
   }
   .logo-container {
     display: flex;
@@ -56,10 +56,10 @@
     cursor: pointer;
     align-items: center;
   }
-  .mobile-menu {
+  /* .mobile-menu {
     display: none;
     padding: 0px 10px;
-  }
+  } */
   @media (max-width: 648px) {
     /*Mobile View */
     .header {
@@ -117,7 +117,5 @@
       display: none;
     }
   }
-  .mobile-menu {
-    display: block;
-  }
+
   

@@ -3,8 +3,12 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import FWLogo from "../../../src/images/Latest.png";
 import Button from "antd/lib/button";
+import FWLogo from "../../../src/images/BG elements 1.png";
+import FWLogo1 from "../../../src/images/Headline and subhead.png";
+import FWLogo2 from "../../../src/images/Divider.png";
+import FWLogo3 from "../../../src/images/login.png";
+import FWLogo4 from "../../../src/images/login1.png";
 import { login,facebookLogin, googleLogin } from "./AuthAction";
 import { Input } from "reactstrap";
 import { Link, withRouter } from "react-router-dom";
@@ -93,7 +97,7 @@ class LoginByMail extends Component {
                             alt="Tekorero logo"
 
                         /> */}
-                        <div className="bg-white rounded-rounded2.8 shadow-2xl border-solid flex  mt-4 flex-col max-sm:w-11/12 h-h34 md:w-2/5 ">
+                       <div className="bg-[#3B16B7]  shadow-2xl border-solid flex justify-center mt-3 flex-col max-sm:w-11/12 h-[96vh] md:w-[75%] ">
                             <Formik
                                 enableReinitialize
                                 initialValues={{
@@ -107,12 +111,11 @@ class LoginByMail extends Component {
                                 }}
                             >
                                 {({ errors, touched, isSubmitting, values }) => (
-                                    <Form className="form-background h-h29 rounded-full">
-                                       
-                                       <div class="flex mt-4 items-center flex-col p-2  rounded-rounded2.8" >
-                                            <h2 class="text-3xl font-medium"> Login to Quizledge</h2>
-                                        <h3 class="ml-6 w-wk flex justify-start mt-4">With Facebook or Google </h3>
-                                        <div class="flex justify-between flex-col">
+                                    <Form className="form-background h-h29 flex justify-between items-center p-12">
+                                        
+                                        <div class="flex  items-center rounded-2xl flex-col p-10 border w-[63%] h-[80vh] bg-[#6245C6]" >
+                                            <h2 class="text-3xl font-medium text-white flex justify-start w-wk"> Sign in now</h2>                                  
+                                        {/* <div class="flex justify-between flex-col">
                                         <div class="mt-4" >
                                         <FacebookLogin
                                          
@@ -125,7 +128,7 @@ class LoginByMail extends Component {
         
       </div>
       <div class="mt-3" >
-                                        {/* class="w-full h-16 rounded-2xl bg-slate-100" */}
+                                      
                                         <GoogleLogin
           clientId="1802272721-jkbu5gabo0qsrq7kh50n5ap7h3979tvb.apps.googleusercontent.com"
           buttonText="  Login with Google  "
@@ -136,28 +139,74 @@ class LoginByMail extends Component {
         />
       
       </div>
-      </div>
-                                            <h3 class="w-wk flex justify-start mt-4 ml-4">Or a registered email</h3>
-                                            <div style={{ width: "100%", padding: "15px" }}>
+      </div> */}
+    
+                                            <div class="w-full mt-6">
+                                            <div class="text-white font-normal">Email address</div>
                                                 <Field
                                                     name="email"
                                                     type="email"
                                                     placeholder="Enter  email"
-                                                    style={{ width: "100%", height: "4.2rem",borderRadius:"1.25rem",backgroundColor:"#E4E2E2",padding:"10px" }}
+                                                    style={{ width: "100%", height: "2.2rem",borderRadius:"0.5rem",backgroundColor:"#6245C6",borderColor:"white" }}
                                                     component={this.InputComponent}
                                                 />
                                             </div>
-                                            <div style={{ width: "100%", padding: "15px" }}>
+                                            <div class="w-full mt-2">
+                                            <div class="text-white font-normal">Password</div>
                                                 <Field
                                                     name="password"
                                                     type="password"
                                                     placeholder="Enter password"
-                                                    style={{ width: "100%", height: "4.2rem",borderRadius:"1.25rem",backgroundColor:"#E4E2E2",padding:"10px" }}
+                                                    style={{ width: "100%", height: "2.2rem",borderRadius:"0.5rem",backgroundColor:"#6245C6",borderColor:"white" }}
                                                     component={this.InputComponent}
 
                                                 />
                                             </div>
-                                            <div class="flex justify-around mt-4">
+                                            <div className="mt-8">
+                                            <img
+                            className="big-logo"
+                            src={FWLogo2}                        
+                            alt="Tekorero logo"
+
+                        /> 
+                                            </div>
+                                            <div className="mt-6 flex justify-between w-wk">
+
+                                            <img
+                            className="big-logo"
+                            src={FWLogo4}   
+                            style={{width:"10rem", height:"3rem"}}                     
+                            alt="Tekorero logo"
+
+                        /> 
+                      
+                         <img
+                            className="big-logo"
+                            src={FWLogo3}      
+                            style={{width:"10rem", height:"3rem"}}                    
+                            alt="Tekorero logo"
+
+                        /> 
+                                            </div>
+                                         
+                            <div class="flex  w-wk  items-center mt-8">
+                            <div class="bg-black rounded-rounded2.8   w-36 items-center flex justify-center" >
+                                                <Button
+                                                    type="primary"
+                                                    htmlType="submit"
+                                                    Loading={isSubmitting}
+                                                    style={{  height: "4rem",backgroundColor:"white",borderRadius:'3rem' }}
+                                                >
+                                                   <h3 class="font-medium text-black text-3xl"> Sign in</h3> 
+                                                </Button>
+                                            </div>
+                                            {/* <Link to ="/login">
+                                                <div class="bg-black rounded-rounded2.8 mt-14 w-36 items-center flex justify-center" >
+                                                <Button   style={{  height: "4rem",backgroundColor:"black",borderRadius:'3rem',display:"flex",alignItems:"center" }}>
+                                                <h3 class="font-medium text-white text-3xl">Back</h3> </Button>
+                                                </div>
+                                                </Link> */}
+   
                                 {/* <Link
                                     to="/forgotPassword"
                                     style={{ textAlign: "center", fontSize: 15, color: "#cb0009", fontWeight: "500" }}
@@ -165,33 +214,34 @@ class LoginByMail extends Component {
                                     Forgot password?
                                 </Link> */}
                                
-                                <Link
+                               <div class="ml-2 text-white flex mt-4">
+                                 Already have an ccount?
+                                 <Link
                                     to="/signUp"
                                     style={{ textAlign: "center", fontSize: 15, color: "#0a8bd7", fontWeight: "500" }}
                                 >
-                                  Don’t have an account? Return to register.
+                                  <div className="underline font-medium text-white"> Signup </div> 
                                 </Link>
                             </div>
-                            <div class="flex justify-between w-wk">
-                            <div class="bg-black rounded-rounded2.8  mt-14 w-36 items-center flex justify-center" >
-                                                <Button
-                                                    type="primary"
-                                                    htmlType="submit"
-                                                    Loading={isSubmitting}
-                                                    style={{  height: "4rem",backgroundColor:"black",borderRadius:'3rem' }}
-                                                >
-                                                   <h3 class="font-medium text-white text-3xl"> LogIn</h3> 
-                                                </Button>
-                                            </div>
-                                            <Link to ="/login">
-                                                <div class="bg-black rounded-rounded2.8 mt-14 w-36 items-center flex justify-center" >
-                                                <Button   style={{  height: "4rem",backgroundColor:"black",borderRadius:'3rem',display:"flex",alignItems:"center" }}>
-                                                <h3 class="font-medium text-white text-3xl">Back</h3> </Button>
-                                                </div>
-                                                </Link>
                                                 </div>
                                         </div>
-
+                                        <div class="flex flex-col w-[33%]">
+                                        <div>
+                                        <img
+                            className="big-logo"
+                            src={FWLogo1}
+                            style={{ width: "25rem" }}
+                            alt="Tekorero logo" 
+                            /> 
+                                        </div>
+                                        <div>
+                                         <img
+                            className="big-logo"
+                            src={FWLogo}
+                            style={{ width: "25rem" }}
+                            alt="Tekorero logo" /> 
+                                        </div>
+                                        </div>
                                     </Form>
                                 )}
                             </Formik>

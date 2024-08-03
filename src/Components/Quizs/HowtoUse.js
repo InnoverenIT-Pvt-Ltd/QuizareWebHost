@@ -13,6 +13,7 @@ import { Button, Modal } from "antd";
 import FWLogo1 from "../../../src/images/prev.png";
 import FWLogo2 from "../../../src/images/forw.png";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import Menu from "./Menu";
 const HowtoUse = (props) => {
   const [isMobileScreen, setIsMobileScreen] = useState(window.innerWidth <= 768);
 
@@ -97,11 +98,9 @@ const HowtoUse = (props) => {
   return (
     <>
     <div class="h-screen w-full ">
-    <header class="bg-white text-white py-4  border-solid border-gray-300 border-2">
-    <label class="text-black text-2xl font-bold">Quizprompter</label> 
-     </header>
+   <Menu/>
      <div class="flex">
-     <div class="w-[20%] h-screen bg-black flex flex-col">
+     <div class="w-[20%] h-screen bg-[#6245C6] flex flex-col">
      <div class=" h-[15%] flex items-center ">
       <label class="text-xl text-white font-medium">Create Quizzes</label>
      </div>
@@ -131,7 +130,7 @@ const HowtoUse = (props) => {
       </a>
       </div>
     </div>
-    <div class="w-[20%] h-screen bg-[#D4FFE0]">
+    <div class="w-[20%] h-screen bg-[#6245C6]">
         
     </div>
     </div>
