@@ -471,11 +471,12 @@ input {
 }
 .ant-modal .ant-modal-content {
   position: relative;
-  background-color: #ffffff;
+  background-color: #6929D9;
   background-clip: padding-box;
   border: 0;
   border-radius: 8px;
   box-shadow: 0 0px 0px 0, 0 3px 6px -4px transparent, 0 9px 28px 8px transparent;
   pointer-events: auto;
   padding: 20px 24px;
+  height:18rem
 }

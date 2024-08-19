@@ -7,6 +7,8 @@ const initialState = {
     facebooklogging: false,
     facebookloginError: false,
 
+    processSpareModal:false,
+
     googlelogging: false,
     googleloginError: false,
 
@@ -158,6 +160,9 @@ export const authReducer = (state = initialState, action) => {
                 validatingOtp: false,
                 validatingOtpError: true
             };
+
+            case types.HANDLE_SPARE_PROCESS:
+                return { ...state, processSpareModal: action.payload };
 
         default:
             return state;

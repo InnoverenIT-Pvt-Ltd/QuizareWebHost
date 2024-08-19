@@ -21,6 +21,7 @@ import { Link } from "react-router-dom";
 import moment from "moment";
 import MainHeader from "../../../../Components/Mainheader";
 import { Form, Formik } from "formik";
+import Menu from "../../../../Components/Quizs/Menu";
 
 const { useState } = React;
 
@@ -67,7 +68,7 @@ function QuizLibrary(props) {
   return (
     <>
     <div class="min-h-screen">
-      <MainHeader />
+      <Menu />
       <Formik>
         <Form class="flex justify-center h-h32 max-sm:w-11/12 mt-8 m-auto md:mt-12  w-2/5    ">
           <Swiper

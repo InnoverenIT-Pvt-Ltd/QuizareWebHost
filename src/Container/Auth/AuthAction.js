@@ -284,3 +284,10 @@ export const logout = (history) => (dispatch) => {
   dispatch({ type: types.LOGOUT });
   message.success("You have successfully logged out. See you soon.");
 };
+
+export const handleSpareProcess = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_SPARE_PROCESS,
+    payload: modalProps,
+  });
+};

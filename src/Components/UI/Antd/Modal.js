@@ -32,7 +32,7 @@ const StyledModal = styled(Modal)`
         font-size: 1.3rem;
    }
    .ant-modal-close-x{
-        color: ${props => "#fff"};
+        color: ${props => "#ffffff"};
    }
   
 `;
