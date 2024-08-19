@@ -32,16 +32,9 @@ class SignUpPage extends Component {
         return (
             <>
                 
-                <div class="w-full bg-quizbg flex-col  overflow-auto flex   items-center max-sm:min-h-screen md:min-h-screen  ">                   
-                        {/* <img
-                            className="big-logo"
-                            src={FWLogo}
-                            style={{ width: 70 }}
-                            alt="Tekorero logo"
-
-                        /> */}
+                <div class="w-full bg-quizbg flex-col  overflow-auto flex   items-center max-sm:min-h-screen md:min-h-screen  ">                                        
                        
-                       <div className="bg-[#3B16B7]  shadow-2xl border-solid flex justify-center mt-3 flex-col max-sm:w-11/12 h-[96vh] md:w-[75%] ">
+                       <div className="bg-[#3B16B7]  shadow-2xl border-solid flex md:justify-center mt-3  flex-col max-sm:w-wk max-sm:h-[79vh] max-sm:overflow-x-auto h-[96vh] md:w-[75%] max-sm:mt-0  ">
                             <Formik
                                 enableReinitialize
                                 initialValues={{
@@ -74,8 +67,8 @@ class SignUpPage extends Component {
                                     setFieldValue,
                                     setFieldTouched,
                                 }) => (
-                                    <Form className="form-background h-h29 flex justify-between items-center p-12">
-                                        <div class="flex flex-col w-[33%]">
+                                    <Form className="form-background h-h29 flex  justify-between items-center p-12 max-sm:p-1 max-sm:flex-col">
+                                        <div class="flex flex-col w-[33%] max-sm:w-wk">
                                         <div>
                                         <img
                             className="big-logo"
@@ -83,7 +76,7 @@ class SignUpPage extends Component {
                             style={{ width: "25rem" }}
                             alt="Tekorero logo" /> 
                                         </div>
-                                        <div>
+                                        <div className="max-sm:hidden">
                                          <img
                             className="big-logo"
                             src={FWLogo}
@@ -91,7 +84,7 @@ class SignUpPage extends Component {
                             alt="Tekorero logo" /> 
                                         </div>
                                         </div>
-                                        <div class="flex  items-center rounded-2xl flex-col p-10 border w-[63%] h-[80vh] bg-[#6245C6]" >
+                                        <div class="flex  items-center rounded-2xl flex-col p-10 border md:w-[63%] h-[80vh] bg-[#6245C6] max-sm:p-5 w-full max-sm:mt-4 " >
                                            
                                             <h2 class="text-3xl font-medium font-[Poppins] text-white flex justify-start w-wk">Sign up now</h2>                                
                                             <div className="flex justify-between w-wk mt-4">
@@ -219,7 +212,7 @@ class SignUpPage extends Component {
                             </Formik>
 
                         </div>
-                        <Spacer />
+                       
                     </div>
                 
             </>
