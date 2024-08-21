@@ -35,14 +35,14 @@ class PrivateRoute extends React.Component {
         if (error.response.status == 401) {
           sessionStorage.clear();
           // store.dispatch({ type: LOGOUT });
-          this.props.history.push("/login");
+          this.props.history.push("/email");
           message.error("Your session has expired. Please re-login.");
         }
         return Promise.reject(error);
       }
     );
     if (!this.props.userDetails) {
-      this.props.history.push("/login");
+      this.props.history.push("/email");
       message.error("Your session has expired. Please re-login.");
     }
     // if (sessionStorage.getItem('userDetails')) {
@@ -51,7 +51,7 @@ class PrivateRoute extends React.Component {
   }
   componentWillUpdate(nextProps) {
     if (!nextProps.userDetails) {
-      this.props.history.push("/login");
+      this.props.history.push("/email");
     }
   }
   render() {
@@ -63,7 +63,7 @@ class PrivateRoute extends React.Component {
           sessionStorage.getItem("userDetails") ? (
             <Component {...props} />
           ) : (
-            <Redirect to="/login" />
+            <Redirect to="/email" />
           )
         }
       />

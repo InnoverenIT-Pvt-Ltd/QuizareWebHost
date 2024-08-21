@@ -194,7 +194,7 @@ class SignUpPage extends Component {
                                                
                                                 </div>
                                                 <div className=" font-normal flex text-white ml-5">Already have an ccount?
-                                                <Link to ="/login">
+                                                <Link to ="/email">
                                                      <div className="underline font-medium">Log in </div> 
                                                      </Link>
                                                      </div>
