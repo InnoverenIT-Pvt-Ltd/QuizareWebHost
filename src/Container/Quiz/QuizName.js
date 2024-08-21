@@ -66,14 +66,14 @@ function QuizName(props) {
           errors,
           values,
         }) => (
-          <Form class="flex justify-center flex-col items-center  max-sm:w-11/12 mt-8 m-auto h-[60vh] md:mt-12  w-2/5 md:h-[80vh] ">
+          <Form class="flex justify-center flex-col items-center  max-sm:w-11/12 mt-8 m-auto h-[60vh] md:mt-12 w-4/12 md:h-[80vh] ">
 
 
-            <div class="shadow-2xl bg-white border-solid w-full flex justify-center items-center  p-1 max-sm:m-0 h-h26 rounded-rounded2.8 md:w-full m-auto">
+            <div class="shadow-2xl bg-[#3B16B7] border-solid w-full flex justify-center items-center  p-1 max-sm:m-0 h-80 rounded-xl md:w-full m-auto">
             
               <div class="flex flex-col items-center ">
-              <h2 class="text-3xl font-medium">Create a new quiz</h2>
-              <div>
+              <h2 class="text-3xl font-medium text-white">Name your Project</h2>
+              {/* <div>
               <img
                     className="big-logo"
                     src={FWLogo}
@@ -81,16 +81,16 @@ function QuizName(props) {
                     alt="Tekorero logo"
 
                   />
-              </div>
+              </div> */}
                 <div >
-                  <h3>Start creating by choosing a name for your quiz</h3>
+                  <h3 class="text-sm font-normal text-white mt-6">Start creating by choosing a name for your quiz</h3>
                   <div class="mt-4">
                     <Field
                       name="quizName"
                       //isColumn
                       component={InputComponent}
                       //onChangeText={handleChange('quizName')}
-                      style={{ width: "100%", height: "3rem",borderRadius:"1.25rem",backgroundColor:"#E4E2E2", }}
+                      style={{ width: "100%", height: "2rem",borderRadius:"0.25rem",backgroundColor:"#E4E2E2", }}
                       placeholder="Enter quiz name"
 
                     />
@@ -116,17 +116,8 @@ function QuizName(props) {
                 </div>
                 
               </div>
-              
+            
             </div>
-            <div class="flex justify-around items-center mt-4" >
-            <img
-                  className="big-logo"
-                  src={FWLogo1}
-                 
-                  alt="Tekorero logo"
-                  onClick={props.goToPreviousCard}
-
-                />
             <div class="bg-black rounded-rounded2.8   w-44 items-center flex justify-center" >
                    {/* <Link to="/chatgpt"> */}
                    <Button
@@ -136,6 +127,25 @@ function QuizName(props) {
                      style={{  height: "5em",backgroundColor:"black",borderRadius:'3rem',width:"11rem",display:"flex",justifyContent:"center",alignItems:"center" }}
                    > <h3 class="font-medium text-white text-3xl">Create</h3></Button>
                    {/* </Link> */}
+                 </div> 
+            {/* <div class="flex justify-around items-center mt-4" >
+            <img
+                  className="big-logo"
+                  src={FWLogo1}
+                 
+                  alt="Tekorero logo"
+                  onClick={props.goToPreviousCard}
+
+                />
+            <div class="bg-black rounded-rounded2.8   w-44 items-center flex justify-center" >
+                  
+                   <Button
+                     type="primary"
+                     htmlType="submit"
+                     onClick={handleSubmit}
+                     style={{  height: "5em",backgroundColor:"black",borderRadius:'3rem',width:"11rem",display:"flex",justifyContent:"center",alignItems:"center" }}
+                   > <h3 class="font-medium text-white text-3xl">Create</h3></Button>
+                 
                  </div>
                  <img
                   className="big-logo"
@@ -145,7 +155,7 @@ function QuizName(props) {
                   onClick={props.goToNextCard}
 
                 />
-                </div>
+                </div> */}
           </Form>
         )}
 

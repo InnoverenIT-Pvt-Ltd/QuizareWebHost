@@ -9,7 +9,7 @@ import { connect } from 'react-redux'
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import { Link, withRouter } from "react-router-dom";
- import { Button, Select, Icon, Tag, Switch, Checkbox } from "antd";
+ import { Button, Select, Icon, Tag, Switch, Checkbox, Input } from "antd";
 import ProcessSpareDrawer from "./ProcessSpareDrawer";
 import LibrayEmptyPage from "./LibrayEmptyPage";
 
@@ -39,7 +39,7 @@ const Menu = (props) => {
     <div className="header">
       <div className="logo-nav">
         <div className="logo-container">
-        <Link to="/how1">
+        <Link to="/quizLibrary">
                   <div style={{ marginTop: "5px" }}>
                   <img
                   className="big-logo"
@@ -59,8 +59,8 @@ const Menu = (props) => {
                 </Link>
         </div>
         <ul className={click ? "nav-options active" : "nav-options"}>
-          <li className="option" onClick={closeMobileMenu}>
-            {/* <Link to="/how1"> */}
+          {/* <li className="option" onClick={closeMobileMenu}>
+          
             <a href="/how1" onClick={handleRefresh}>
                       <Button
                       
@@ -71,10 +71,10 @@ const Menu = (props) => {
                         <h3 class="font-medium text-white text-lg">How to</h3>
                       </Button>
                       </a>
-                    {/* </Link> */}
-          </li>
-          <li className="option  max-sm:bg-quizb" onClick={closeMobileMenu}>
-            {/* <Link to="/how2"> */}
+                  
+          </li> */}
+          {/* <li className="option  max-sm:bg-quizb" onClick={closeMobileMenu}>
+           
             <a href="/how2" onClick={handleRefresh}>
                       <Button
                      
@@ -84,11 +84,11 @@ const Menu = (props) => {
                         <h3 class="font-medium text-white text-lg">Create Quiz</h3>
                       </Button>
                       </a>
-                    {/* </Link> */}
-          </li>
-          <li className="option " onClick={closeMobileMenu}>
+                  
+          </li> */}
+          {/* <li className="option " onClick={closeMobileMenu}>
           <a href="/how3" onClick={handleRefresh}>
-            {/* <Link to="/how3"> */}
+           
                       <Button
                      
                         htmlType="submit"
@@ -96,10 +96,10 @@ const Menu = (props) => {
                       >
                          <h3 class="font-medium text-white text-lg">Quiz Library </h3>
                       </Button>
-                    {/* </Link> */}
+                  
                     </a>
-          </li>
-          <li className="option  max-sm:bg-quizb" onClick={closeMobileMenu}>
+          </li> */}
+          {/* <li className="option  max-sm:bg-quizb" onClick={closeMobileMenu}>
           <Link to="/ongoingQuiz">
                       <Button
                                                htmlType="submit"
@@ -108,30 +108,9 @@ const Menu = (props) => {
                        <h3 class="font-medium text-white text-lg">Ongoing Quizzes</h3>
                      </Button>
                    </Link>
-</li>
+</li> */}
 
-<div className="flex items-center mr-4">
-{/* <a href="/how2" > */}
-<Button
- style={{  height: "2rem",display:"flex",justifyContent:"center",alignItems:"center",backgroundColor:"white" }}
- onClick={() => {
-  props.handleSpareProcess(true);
-}}
->
-<h3 class="font-medium  text-lg">Create</h3>
-</Button>
-{/* </a> */}
-</div>
-<div className="flex items-center">
-<Link to="/emptypage">
-<Button
- style={{  height: "2rem",display:"flex",justifyContent:"center",alignItems:"center",backgroundColor:"white" }}
 
->
-<h3 class="font-medium  text-lg">Upgrade</h3>
-</Button>
-</Link>
-</div>
 
           {/* <li className="option " onClick={closeMobileMenu}>
          
@@ -177,6 +156,38 @@ const Menu = (props) => {
                   alt="Tekorero logo"
 
                 /></div> */}
+                <div class=" w-64 max-sm:w-24">
+        <Input
+          placeholder="Search quizzes"
+          width={"100%"}
+         // suffix={suffix}
+          //onPressEnter={handleSearch}
+          //onChange={handleChange}
+       // value={currentData}
+        />
+        </div>
+                <div className="flex">
+                <div className="flex items-center mr-4">
+<Button
+ style={{  height: "2rem",display:"flex",justifyContent:"center",alignItems:"center",backgroundColor:"white" }}
+ onClick={() => {
+  props.handleSpareProcess(true);
+}}
+>
+<h3 class="font-medium  text-lg">Create</h3>
+</Button>
+
+</div>
+<div className="flex items-center mr-4">
+<Link to="/emptypage">
+<Button
+ style={{  height: "2rem",display:"flex",justifyContent:"center",alignItems:"center",backgroundColor:"white" }}
+
+>
+<h3 class="font-medium  text-lg">Upgrade</h3>
+</Button>
+</Link>
+</div>
                <div className="relative inline-block">
       <img
         className="big-logo cursor-pointer"
@@ -209,6 +220,7 @@ const Menu = (props) => {
          
         </div>
       )}
+    </div>
     </div>
       </div>
      

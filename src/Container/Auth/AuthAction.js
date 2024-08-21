@@ -21,7 +21,9 @@ export const login = ({ email, password }, history, cb) => (dispatch) => {
     })
     .then((res) => {
       dispatch(getUserDetails(res.data.userId));
-      history.push("/how1");
+      // history.push("/emptypage");
+      const redirectPath = res.data.noOfQuizes === 0 ? "/emptypage" : "/quizLibrary";
+      history.push(redirectPath);
       console.log(history)
       dispatch({
         type: types.LOGIN_SUCCESS,
@@ -280,7 +282,7 @@ export const validateOtp = (data, cb) => (dispatch) => {
 
 export const logout = (history) => (dispatch) => {
   window.sessionStorage.clear();
-  history.push("/login");
+  history.push("/email");
   dispatch({ type: types.LOGOUT });
   message.success("You have successfully logged out. See you soon.");
 };
