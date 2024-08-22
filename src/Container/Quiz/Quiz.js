@@ -119,7 +119,7 @@ return (
         errors,
         values,
       }) => (
-        <div>
+        <div className="h-[93vh]">
           {/* <div class="flex justify-center mt-2">
             <h2 class="text-2xl">
               {props.showQuiz && props.showQuiz.quizName}
@@ -127,9 +127,11 @@ return (
           </div> */}
         
           {/* Container */}
-          <Form class=" max-sm:w-full flex items-center flex-col h-hk  m-auto md:mt-12  w-2/5  h-h50  ">
-            <div className="w-full my-2 flex justify-center m-auto ">
-              <div class="shadow-2xl border-solid w-11/12 flex justify-center flex-col items-center  p-2 max-sm:m-0 h-h30 rounded-rounded2.8 md:m-auto">
+          <Form class="flex h-hk">
+            <div className="w-[20%] bg-[#6245C6]"></div>
+          <div class=" max-sm:w-full flex items-center flex-col h-hk w-[80%] ">
+            <div className="w-full  flex justify-center ">
+              <div class="w-wk flex justify-center flex-col items-center">
                 <div class=" flex justify-center flex-col w-full">
                   <h3 class="flex justify-center text-xl">
                     {/* {" "}
@@ -141,15 +143,15 @@ return (
                 // we can't use perscentge in reactNative
                 
                   > */}
-                  <div class="mt-4">
+                  <div class="mt-4 p-6">
                     <div>
                       <Field
                         component={InputComponent}
                         // onChangeText={handleChange("question")}
-                        placeholder="Enter your question"
+                        placeholder="Add your question"
                         name="question"
-                        className={isValid(values.question) ? '' : 'invalid'} 
-                        style={{ width: "100%", height: "6rem",borderRadius:"1.25rem",backgroundColor:"white" }}
+                       // className={isValid(values.question) ? '' : 'invalid'} 
+                        style={{ width: "100%", height: "3rem",borderRadius:"0.25rem" }}
                       // onChangeText={handleChange('questionName')}
                       />
                     </div>
@@ -159,17 +161,18 @@ return (
                
                 
                 > */}
-                    <div class="mt-1">
+                <div className="flex justify-between mt-3">
+                    <div class="w-[47.5%]">
                       <Field
                         // multiline
                         // value={values.option1}
                         // numberOfLines={5}
                         component={InputComponent}
                         // onChangeText={handleChange("option1")}
-                        placeholder="Enter correct answer"
+                        placeholder="A.           Add answer 1"
                         name="option1"
-                        className={isValid(values.option1) ? '' : 'invalid'} 
-                        style={{ width: "100%", height: "3.5rem",borderRadius:"1.25rem",backgroundColor:"#E4E2E2" }}
+                        //className={isValid(values.option1) ? '' : 'invalid'} 
+                        style={{ width: "100%", height: "3rem",borderRadius:"0.25rem" }}
                       // onChangeText={handleChange('option1')}
                       />
                     </div>
@@ -179,20 +182,21 @@ return (
                   
                   
                   > */}
-                    <div class="mt-1">
+                     <div class="w-[47.5%]">
                       <Field
                         // multiline
                         // value={values.option2}
                         // numberOfLines={5}
                         component={InputComponent}
                         // onChangeText={handleChange("option2")}
-                        placeholder="Enter alternative"
+                        placeholder="B.           Add answer 2"
                         name="option2"
-                        className={isValid(values.option2) ? '' : 'invalid'} 
-                        style={{ width: "100%", height: "3.5rem",borderRadius:"1.25rem",backgroundColor:"#E4E2E2" }}
+                       // className={isValid(values.option2) ? '' : 'invalid'} 
+                        style={{ width: "100%", height: "3rem",borderRadius:"0.25rem" }}
 
                       // onChangeText={handleChange('option2')}
                       />
+                    </div>
                     </div>
                     {/* </TouchableOpacity>
 
@@ -200,35 +204,37 @@ return (
                 
               
                   > */}
-                    <div class="mt-1">
+                   <div className="flex justify-between mt-3">
+                   <div class="w-[47.5%]">
                       <Field
                         // multiline
                         // value={values.option3}
                         // numberOfLines={5}
                         component={InputComponent}
                         // onChangeText={handleChange("option3")}
-                        placeholder="Enter alternative"
+                        placeholder="C.           Add answer 3 (Optional)"
                         name="option3"
-                        className={isValid(values.option3) ? '' : 'invalid'} 
-                        style={{ width: "100%", height: "3.5rem",borderRadius:"1.25rem",backgroundColor:"#E4E2E2" }}
+                       // className={isValid(values.option3) ? '' : 'invalid'} 
+                        style={{ width: "100%", height: "3rem",borderRadius:"0.25rem" }}
                       />
                     </div>
                     {/* </TouchableOpacity> */}
 
                     {/* <TouchableOpacity
               > */}
-                    <div class="mt-1">
+                     <div class="w-[47.5%]">
                       <Field
                         // multiline
                         // value={values.option4}
                         // numberOfLines={5}
-                        placeholder="Enter alternative"
+                        placeholder="D.           Add answer 4 (Optional)"
                         name="option4"
                         component={InputComponent}
                         // onChangeText={handleChange("option4")}
-                        className={isValid(values.option4) ? '' : 'invalid'} 
-                        style={{ width: "100%", height: "3.5rem",borderRadius:"1.25rem",backgroundColor:"#E4E2E2" }}
+                        //className={isValid(values.option4) ? '' : 'invalid'} 
+                        style={{ width: "100%", height: "3rem",borderRadius:"0.25rem" }}
                       />
+                    </div>
                     </div>
                     {/* </TouchableOpacity> */}
                   </div>
@@ -270,15 +276,15 @@ return (
                           </Card>
                       </View>           */}
                 </div>
-                <div class="flex justify-around">
-                <div class="bg-black rounded-rounded2.8  mt-2 w-36 items-center flex " >
+                <div class="flex justify-between p-6 w-wk">
+                <div class="" >
               <Button
-                 style={{  height: "3rem",backgroundColor:"#565656",borderRadius:'3rem' }}
+                 style={{  height: "3rem",backgroundColor:"#3B16B7",borderRadius:'0.25rem' }}
                 type="primary"
                 onClick={handleSubmit}
               
               >
-               <h3 class="font-medium text-white text-2xl">Add </h3>
+               <h3 class="font-medium text-white text-base">+ Add question </h3>
               </Button>
             </div>
             {/* <div class="bg-black rounded-rounded2.8  mt-2 w-48 items-center flex " >
@@ -300,23 +306,25 @@ return (
                <h3 class="font-medium text-white text-2xl">Check chatgpt </h3>
               </Button>
             </div> */}
-            </div>
-              </div>
-            
-            </div>
-            <div class="bg-black rounded-rounded3  w-52 items-center flex justify-center" >
+            <div class="" >
             {count >= 1 ?
 
               <Button type="primary"
-              style={{  height: "4rem",backgroundColor:"black",borderRadius:'3rem' }}
+              style={{  height: "3rem",backgroundColor:"#3B16B7",borderRadius:'0.25rem' }}
                 onClick={() => {
                   handleSubmit()
                   goToFinalize()
                 }}
               >
-              <h3 class="font-medium text-white text-4xl">  Finalize</h3>
+              <h3 class="font-medium text-white text-xl">  Finalize</h3>
               </Button>
               : ""}
+          </div>
+            </div>
+              </div>
+            
+            </div>
+            
           </div>
           </Form>
         

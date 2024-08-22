@@ -9,6 +9,8 @@ const initialState = {
 
     processSpareModal:false,
 
+    processShareModal:false,
+
     googlelogging: false,
     googleloginError: false,
 
@@ -163,6 +165,9 @@ export const authReducer = (state = initialState, action) => {
 
             case types.HANDLE_SPARE_PROCESS:
                 return { ...state, processSpareModal: action.payload };
+
+                case types.HANDLE_SHARE_PROCESS:
+                    return { ...state, processShareModal: action.payload };
 
         default:
             return state;
