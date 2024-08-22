@@ -293,3 +293,10 @@ export const handleSpareProcess = (modalProps) => (dispatch) => {
     payload: modalProps,
   });
 };
+
+export const handleShareProcess = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_SHARE_PROCESS,
+    payload: modalProps,
+  });
+};

@@ -39,7 +39,7 @@ const Menu = (props) => {
     <div className="header">
       <div className="logo-nav">
         <div className="logo-container">
-        <Link to="/quizLibrary">
+        <Link to={props.user.noOfQuizes === 0 ? "/emptypage" : "/quizLibrary"}>
                   <div style={{ marginTop: "5px" }}>
                   <img
                   className="big-logo"
@@ -239,7 +239,8 @@ const Menu = (props) => {
   );
 };
 const mapStateToProps = ({ auth,  }) => ({
-  processSpareModal: auth.processSpareModal
+  processSpareModal: auth.processSpareModal,
+  user: auth.userDetails
 });
 
 const mapDispatchToProps = (dispatch) =>

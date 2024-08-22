@@ -30,7 +30,7 @@ function FinalizeQuiz(props) {
   };
   const handleOk = () => {
     setIsModalOpen(false);
-    history.push(`/hostquiz`);
+   // history.push(`/hostquiz`);
     props.hostQuiz(
       {
         duration: duration,

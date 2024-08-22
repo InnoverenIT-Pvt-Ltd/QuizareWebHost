@@ -29,14 +29,14 @@ console.log(props.showQuiz)
   return (
     <>
     <div class="min-h-screen">
-      <MainHeader />
+      {/* <MainHeader /> */}
 
-      <div class="flex justify-center  items-center max-sm:w-11/12 h-hk mt-8 m-auto md:mt-12  w-2/5 ">
+      <div class="flex justify-center bg-white  items-center max-sm:w-11/12 h-hk mt-8 m-auto md:mt-12  w-wk ">
         
-        <div class="shadow-2xl border-solid w-wk flex  items-center flex-col  p-1 max-sm:m-0 h-[26rem] rounded-rounded3 md:m-auto">
+        <div class="shadow-2xl border-solid w-wk flex  items-center flex-col  p-1 max-sm:m-0 h-[10rem]  md:m-auto">
       
       
-        <div class="flex justify-center mt-1">
+        {/* <div class="flex justify-center mt-1">
             <h2 class="text-2xl flex justify-center">
               {`${props.showQuiz.quizName || ""}`}{" "}
             </h2>
@@ -58,12 +58,13 @@ console.log(props.showQuiz)
             <h2 class="text-base  flex justify-center flex-col mt-3">
            Scoring system: Standard
             </h2>
-          </div>
+          </div> */}
           <div class="w-full flex justify-center items-center flex-col mt-4">
-            <h2 class="text-base mt-2 flex  items-center ">
-            Share URL to invite others to play your quiz
-            </h2>
-            <Card style={{ width: "100%",backgroundColor:"#F0F0F0", borderRadius:'2rem',marginTop:"1rem" }}>
+            <div class="text-xl mt-2 flex  items-center  font-bold justify-start w-wk ">
+            Share your quiz
+            </div>
+            <div className="flex items-center justify-between w-wk mt-3">
+            <div className="border w-[21rem] h-[2.5rem] border-solid border-gray-400" >
               {/* <h2 class="text-base">{`${props.showQuiz.quizName || ''}`}{' '}</h2> */}
               {props.showQuiz.quizLink ? (
                 <h2 class="text-xs flex justify-center flex-col " style={{ overflowWrap: "break-word" }}>{`http://player.quizledge.no${props.showQuiz.quizLink || ""
@@ -71,14 +72,15 @@ console.log(props.showQuiz)
               ) : (
                 ""
               )}
-            </Card>
-            <div class="mt-8 w-full flex justify-center">
+           </div>
+            <div class="  flex justify-center">
               <Button
-                style={{  height: "4em",backgroundColor:"grey",borderRadius:'3rem',width:'10rem' }}
+                style={{  height: "2.5rem",backgroundColor:"#3B16B7",borderRadius:'0.25rem',width:'10rem' }}
                 onClick={() => copyToClipboard()}
               >
                 <h2 class="text-white text-xl font-medium">Share</h2>
               </Button>
+            </div>
             </div>
             {/* <div>
         {viewData === null ? (
@@ -119,7 +121,7 @@ console.log(props.showQuiz)
                 </button>
               </div>
             </div> */}
-<Link to="/how3">
+{/* <Link to="/how3">
 <div class="bg-black rounded-rounded2.8 p-1 mt-11 w-60 items-center flex justify-center"
 >
 <Button style={{ border: "none", height:"4.5rem", }}>
@@ -128,7 +130,7 @@ console.log(props.showQuiz)
 
 </Button>
 </div>
-</Link>
+</Link> */}
           </div>
         </div>
       </div>
