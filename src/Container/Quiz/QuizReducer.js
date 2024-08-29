@@ -282,6 +282,7 @@ export const quizReducer = (state = initialState, action) => {
       return {
         ...state,
         hostQuizByQuizId: false,
+        finalise:false,
         finalizeQuiz: action.payload,
       };
     case types.HOST_QUIZ_FAILURE:

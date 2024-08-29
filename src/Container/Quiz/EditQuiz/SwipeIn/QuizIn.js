@@ -15,6 +15,7 @@ import { InputComponent } from "../../../../Components/Forms/Formik/InputCompone
 import SubHeader from "../../../../Components/SubHeader";
 import MainHeader from "../../../../Components/Mainheader";
 import { BundleLoader } from "../../../../Components/Placeholder";
+import Finalisedrawer from "../../Finalisedrawer";
 const phoneRegExp =
   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 const QuizzSchema = Yup.object().shape({
@@ -25,6 +26,7 @@ const QuizzSchema = Yup.object().shape({
 //import AllQuiz from './AllQuiz';
 
 function QuizIn(props) {
+  const [finalise, setFinalise]= useState(false)
   useEffect(() => {
     props.getCategory();
     props.getQuizName(props.quizDetails.quizId);
@@ -105,44 +107,34 @@ function QuizIn(props) {
             values,
           }) => (
             <div>
-              <div class="flex justify-center mt-2">
+              {/* <div class="flex justify-center mt-2">
                 <h2 class="text-2xl">
                   {props.showQuiz && props.showQuiz.quizName}
                 </h2>
-              </div>
-              <div class="flex justify-center mt-3  max-sm:w-3/5 max-sm:ml-20 ">
-                <Button type="primary"
-                  style={{
-                    width: "13rem",
-                  }}
-                  onClick={() => {
-                    handleSubmit()
-                    goToFinalize()
-                  }}
-                >
-                  Finalize Quiz
-                </Button>
-              </div>
+              </div> */}
+              
               {/* Container */}
-              <Form class=" max-sm:w-11/12  m-auto md:mt-12  w-2/5  h-h50  ">
-                <div className="w-11/12 my-2 flex justify-center m-auto ">
-                  <div class="shadow-2xl border-solid w-11/12 flex justify-center flex-col items-center  p-2 max-sm:m-0 h-max rounded-2xl md:m-auto">
-                    <div class=" flex justify-center flex-col">
+              <Form class="flex h-hk">
+              <div className="w-[20%] bg-[#6245C6]"></div>
+              <div class=" max-sm:w-full flex items-center flex-col h-[93vh] w-[80%] ">
+              <div className="w-full  flex justify-center flex-col ">
+              <div class="w-wk flex justify-center flex-col items-center">
                       <h3 class="flex justify-center text-xl">
                         {" "}
                         Question {questions || null}
                       </h3>
-
+                      <hr class="h-px bg-black border-2 w-wk mt-4 border-black"/>
                       {/* <TouchableOpacity
                   // we can't use perscentge in reactNative
                   
                     > */}
-                      <div class="mt-4">
+                      <div class="mt-4 w-wk p-4">
                         <div>
                           <Field
                             component={InputComponent}
                             onChangeText={handleChange("question")}
                             placeholder="Question"
+                            style={{ width: "100%", height: "3rem",borderRadius:"0.25rem" }}
                             name="question"
 
                           // onChangeText={handleChange('questionName')}
@@ -154,14 +146,16 @@ function QuizIn(props) {
                  
                   
                   > */}
-                        <div class="mt-1">
+                    <div className="flex justify-between mt-3">
+                    <div class="w-[47.5%]">
                           <Field
                             // multiline
                             // value={values.option1}
                             // numberOfLines={5}
                             component={InputComponent}
                             onChangeText={handleChange("option1")}
-                            placeholder="Correct answer"
+                            placeholder="A.           Add answer 1"
+                            style={{ width: "100%", height: "3rem",borderRadius:"0.25rem" }}
                             name="option1"
 
                           // onChangeText={handleChange('option1')}
@@ -173,18 +167,19 @@ function QuizIn(props) {
                     
                     
                     > */}
-                        <div class="mt-1">
+                        <div class="w-[47.5%]">
                           <Field
                             // multiline
                             // value={values.option2}
                             // numberOfLines={5}
                             component={InputComponent}
                             onChangeText={handleChange("option2")}
-                            placeholder="Option 2"
+                             placeholder="B.           Add answer 2"
                             name="option2"
 
                           // onChangeText={handleChange('option2')}
                           />
+                        </div>
                         </div>
                         {/* </TouchableOpacity>
 
@@ -192,14 +187,16 @@ function QuizIn(props) {
                   
                 
                     > */}
-                        <div class="mt-1">
+                     <div className="flex justify-between mt-3">
+                     <div class="w-[47.5%]">
                           <Field
                             // multiline
                             // value={values.option3}
                             // numberOfLines={5}
                             component={InputComponent}
                             onChangeText={handleChange("option3")}
-                            placeholder="Option 3"
+                          placeholder="C.           Add answer 3 (Optional)"
+                          style={{ width: "100%", height: "3rem",borderRadius:"0.25rem" }}
                             name="option3"
                           />
                         </div>
@@ -207,20 +204,22 @@ function QuizIn(props) {
 
                         {/* <TouchableOpacity
                 > */}
-                        <div class="mt-1">
+                         <div class="w-[47.5%]">
                           <Field
                             // multiline
                             // value={values.option4}
                             // numberOfLines={5}
-                            placeholder="Option 4"
+                           placeholder="D.           Add answer 4 (Optional)"
+                           style={{ width: "100%", height: "3rem",borderRadius:"0.25rem" }}
                             name="option4"
                             component={InputComponent}
                             onChangeText={handleChange("option4")}
                           />
                         </div>
+                        </div>
                         {/* </TouchableOpacity> */}
                       </div>
-                      <div class=" max-sm:flex flex-wrap justify-center mt-2 md:w-full  md:grid grid-cols-3 justify-items-center">
+                      {/* <div class=" max-sm:flex flex-wrap justify-center mt-2 md:w-full  md:grid grid-cols-3 justify-items-center">
                         {!!props.category.length &&
                           props.category.map((item) => {
                             return (
@@ -229,8 +228,7 @@ function QuizIn(props) {
                                   <p
                                     style={{
                                       textAlign: "center",
-                                      //color: '#6949FD',
-                                      //fontSize:16,
+                                     
                                       color:
                                         item.categoryId === selectedCategory
                                           ? "red"
@@ -247,32 +245,8 @@ function QuizIn(props) {
                             );
                           })}
 
-                        {/* <Card containerStyle={externalStyle.containerStyleC}>
-                                <Text
-                                    style={{
-                                        textAlign: 'center',
-                                        color: '#6949FD'
-                                    }}
-                                    onPress={() => alert('Nature')}
-                                >
-                                    Nature
-                                </Text>
-                            </Card>
-                            <Card containerStyle={externalStyle.containerStyleC}>
-                                <Text style={{ textAlign: 'center', color: '#6949FD' }}>Geography</Text>
-                            </Card>
-                            <Card containerStyle={externalStyle.containerStyleC}>
-                                <Text
-                                    style={{
-                                        textAlign: 'center',
-                                        color: '#6949FD'
-                                    }}
-                                    onPress={() => props.navigation.navigate('Quiz History')}
-                                >
-                                    History
-                                </Text>
-                            </Card> */}
-                      </div>
+                       
+                      </div> */}
                       {/* <View style={{ flexDirection: 'row' }}>
                         <Card containerStyle={externalStyle.containerStyleC}>
                                 <Text style={{ textAlign: 'center', color: '#6949FD' }}>Sports</Text>
@@ -285,19 +259,10 @@ function QuizIn(props) {
                             </Card>
                         </View>           */}
                     </div>
-                  </div>
-                </div>
-              </Form>
-              <div class="max-sm: flex flex-row justify-center items-center mt-4 ">
-                <div class="mr-1 ">
+                    <div class="flex justify-between p-6 w-wk">    
+                <div class="">
                   <Button
-                    style={{
-                      backgroundColor: "white",
-                      borderColor: "black",
-                      borderRadius: "0.75rem",
-                      width: "5rem",
-                      height: "2.2rem",
-                    }}
+                    style={{  height: "3rem",backgroundColor:"#3B16B7",borderRadius:'0.25rem' }}
                     type="primary"
                     // title={'Add New Questions'}
                     // titleStyle={externalStyle.titleStyle}
@@ -307,9 +272,22 @@ function QuizIn(props) {
                   // Loading={props.addingQuestion}
                   // onPress={() => props.navigation.navigate('Quiz Addquestions')}
                   >
-                    <h4 class="">Add </h4>
+                     <h3 class="font-medium text-white text-base">+ Add question </h3>
                   </Button>
                 </div>
+                <div class="">
+                <Button type="primary"
+                   style={{  height: "3rem",backgroundColor:"#3B16B7",borderRadius:'0.25rem' }}
+                  onClick={() => {
+                    handleSubmit()
+                    //goToFinalize()
+                    setFinalise(true);
+                  }}
+                >
+                   <h3 class="font-medium text-white text-base">Finalize Quiz</h3>
+                </Button>
+              </div>
+              </div>
                 {/* <div class="mr-1">
                 <Button
                   style={{
@@ -352,11 +330,21 @@ function QuizIn(props) {
                   <h4>Delete </h4>
                 </Button>
               </div> */}
-              </div>
+              
+            
+                  </div>
+                </div>
+              </Form>
+            
               {/* Buttons */}
             </div>
           )}
         </Formik>
+        <Finalisedrawer 
+                showQuiz={props.showQuiz}
+                  finalise={finalise}
+                  setFinalise={setFinalise}
+                />
       </>
       {/* :null} */}
     </>
@@ -387,17 +375,252 @@ const mapDispatchToProps = (dispatch) =>
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(QuizIn));
 
-// import React from 'react';
-// import { Link ,withRouter} from "react-router-dom";
-// import CreateQuiz from '../../Components/Quizs/CreateQuiz';
-// import QuizHost from './QuizHost';
+// import React, { useEffect, useState } from "react";
+// import { Field, Formik, Form } from "formik";
+// import { connect } from "react-redux";
+// import { bindActionCreators } from "redux";
+// import * as Yup from "yup";
+// import { withRouter } from "react-router-dom";
+// import {
+//   deleteQuestion,
+//   addQuestion,
+//   getQuizName,
+//   getCategory,
+//   getQuestionList
+// } from "../../QuizAction";
+// import { Button, Card } from "antd";
+// import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
+// import MainHeader from "../../../../Components/Mainheader";
+// import Finalisedrawer from "../../Finalisedrawer";
 
-// function Quiz() {
+// const QuizzSchema = Yup.object().shape({
+//   question: Yup.string().required("Input needed!"),
+//   option1: Yup.string().required("Input needed!"),
+//   option2: Yup.string().required("Input needed!"),
+// });
+
+// function QuizIn(props) {
+//   const [finalise, setFinalise] = useState(false);
+//   const [selectedQuestionIndex, setSelectedQuestionIndex] = useState(null);
+//   const [questions, setQuestions] = useState(props.showQuiz.noOfQuestions + 1);
+
+//   useEffect(() => {
+//     props.getCategory();
+//     props.getQuizName(props.quizDetails.quizId);
+//     props.getQuestionList(props.showQuiz.quizId);
+//   }, []);
+
+//   useEffect(() => {
+//     setQuestions(props.showQuiz.noOfQuestions + 1);
+//   }, [props.showQuiz.noOfQuestions]);
+
+//   const handleQuestionSelect = (index) => {
+//     setSelectedQuestionIndex(index);
+//   };
+
+//   const handleQuestionContent = (index) => {
+//     if (props.questionList && props.questionList[index]) {
+//       return props.questionList[index];
+//     }
+//     return null;
+//   };
+
 //   return (
-//     <div>
-//       <QuizHost/>
-//     </div>
-//   )
+//     <>
+//       <MainHeader />
+//       <Formik
+//         initialValues={{
+//           quizHostId: props.quizHostId,
+//           quizId: props.showQuiz?.quizId,
+//           categoryId: "",
+//           question: "",
+//           option1: "",
+//           option2: "",
+//           option3: "",
+//           option4: "",
+//         }}
+//         validationSchema={QuizzSchema}
+//         onSubmit={(values, { resetForm }) => {
+//           props.addQuestion({
+//             ...values,
+//             quizId: props.showQuiz?.quizId,
+//             categoryId: "", // update as needed
+//             number: questions,
+//           }, props.showQuiz?.quizId);
+//           resetForm();
+//           setQuestions(questions + 1);
+//         }}
+//       >
+//         {({ handleChange, handleBlur, handleSubmit, errors, values }) => (
+//           <Form className="flex h-full">
+//             <div className="w-[20%] bg-[#6245C6] p-4">
+//               {props.questionList.map((item, i) => (
+//                 <Card
+//                   key={i}
+//                   className={`cursor-pointer mb-2 ${i === selectedQuestionIndex ? 'bg-blue-200' : ''}`}
+//                   onClick={() => handleQuestionSelect(i)}
+//                 >
+//                   Question {i + 1}
+//                 </Card>
+//               ))}
+//             </div>
+//             <div className="w-[80%] flex flex-col h-[93vh]">
+//               <div className="w-full flex flex-col items-center">
+//                 {selectedQuestionIndex !== null && (
+//                   <div className="w-full p-4">
+//                     <h3 className="text-xl">Question {selectedQuestionIndex + 1}</h3>
+//                     <hr className="w-full my-4 border-black" />
+//                     <div>
+//                       {handleQuestionContent(selectedQuestionIndex) && (
+//                         <>
+//                           <p><strong>Question:</strong> {handleQuestionContent(selectedQuestionIndex).question}</p>
+//                           <p><strong>Option A:</strong> {handleQuestionContent(selectedQuestionIndex).option1}</p>
+//                           <p><strong>Option B:</strong> {handleQuestionContent(selectedQuestionIndex).option2}</p>
+//                           {handleQuestionContent(selectedQuestionIndex).option3 && (
+//                             <p><strong>Option C:</strong> {handleQuestionContent(selectedQuestionIndex).option3}</p>
+//                           )}
+//                           {handleQuestionContent(selectedQuestionIndex).option4 && (
+//                             <p><strong>Option D:</strong> {handleQuestionContent(selectedQuestionIndex).option4}</p>
+//                           )}
+//                         </>
+//                       )}
+//                     </div>
+//                   </div>
+//                 )}
+//                 <Formik
+//                   initialValues={{
+//                     quizHostId: props.quizHostId,
+//                     quizId: props.showQuiz?.quizId,
+//                     categoryId: "",
+//                     question: "",
+//                     option1: "",
+//                     option2: "",
+//                     option3: "",
+//                     option4: "",
+//                   }}
+//                   validationSchema={QuizzSchema}
+//                   onSubmit={(values, { resetForm }) => {
+//                     props.addQuestion({
+//                       ...values,
+//                       quizId: props.showQuiz?.quizId,
+//                       categoryId: "", // update as needed
+//                       number: questions,
+//                     }, props.showQuiz?.quizId);
+//                     resetForm();
+//                     setQuestions(questions + 1);
+//                   }}
+//                 >
+//                   {({ handleChange, handleBlur, handleSubmit, errors, values }) => (
+//                     <Form>
+//                       <div className="w-full p-4">
+//                         <div>
+//                           <Field
+//                             component={InputComponent}
+//                             onChange={handleChange("question")}
+//                             placeholder="Question"
+//                             className="w-full h-12 rounded-md"
+//                             name="question"
+//                           />
+//                         </div>
+//                         <div className="flex justify-between mt-3">
+//                           <div className="w-[47.5%]">
+//                             <Field
+//                               component={InputComponent}
+//                               onChange={handleChange("option1")}
+//                               placeholder="A. Add answer 1"
+//                               className="w-full h-12 rounded-md"
+//                               name="option1"
+//                             />
+//                           </div>
+//                           <div className="w-[47.5%]">
+//                             <Field
+//                               component={InputComponent}
+//                               onChange={handleChange("option2")}
+//                               placeholder="B. Add answer 2"
+//                               className="w-full h-12 rounded-md"
+//                               name="option2"
+//                             />
+//                           </div>
+//                         </div>
+//                         <div className="flex justify-between mt-3">
+//                           <div className="w-[47.5%]">
+//                             <Field
+//                               component={InputComponent}
+//                               onChange={handleChange("option3")}
+//                               placeholder="C. Add answer 3 (Optional)"
+//                               className="w-full h-12 rounded-md"
+//                               name="option3"
+//                             />
+//                           </div>
+//                           <div className="w-[47.5%]">
+//                             <Field
+//                               component={InputComponent}
+//                               onChange={handleChange("option4")}
+//                               placeholder="D. Add answer 4 (Optional)"
+//                               className="w-full h-12 rounded-md"
+//                               name="option4"
+//                             />
+//                           </div>
+//                         </div>
+//                       </div>
+//                       <div className="flex justify-between p-6">
+//                         <Button
+//                           style={{ height: "3rem", backgroundColor: "#3B16B7", borderRadius: '0.25rem' }}
+//                           type="primary"
+//                           onClick={handleSubmit}
+//                         >
+//                           <h3 className="font-medium text-white text-base">+ Add question</h3>
+//                         </Button>
+//                         <Button
+//                           type="primary"
+//                           style={{ height: "3rem", backgroundColor: "#3B16B7", borderRadius: '0.25rem' }}
+//                           onClick={() => {
+//                             handleSubmit();
+//                             setFinalise(true);
+//                           }}
+//                         >
+//                           <h3 className="font-medium text-white text-base">Finalize Quiz</h3>
+//                         </Button>
+//                       </div>
+//                     </Form>
+//                   )}
+//                 </Formik>
+//               </div>
+//             </div>
+//           </Form>
+//         )}
+//       </Formik>
+//       <Finalisedrawer
+//         showQuiz={props.showQuiz}
+//         finalise={finalise}
+//         setFinalise={setFinalise}
+//       />
+//     </>
+//   );
 // }
 
-// export default withRouter (Quiz);
+// const mapStateToProps = ({ auth, quiz }) => ({
+//   fetchingQuizName: quiz.fetchingQuizName,
+//   fetchingQuizNameError: quiz.fetchingQuizNameError,
+//   showQuiz: quiz.showQuiz,
+//   quizDetails: quiz.quizDetails,
+//   fetchingQuestionList: quiz.fetchingQuestionList,
+//   quizId: quiz.showQuiz.quizId,
+//   category: quiz.category,
+//   questionList: quiz.questionList,
+//   quizHostId: auth.userDetails.userId
+// });
+
+// const mapDispatchToProps = (dispatch) =>
+//   bindActionCreators(
+//     {
+//       deleteQuestion,
+//       addQuestion,
+//       getQuizName,
+//       getCategory,
+//       getQuestionList
+//     },
+//     dispatch
+//   );
+
+// export default withRouter(connect(mapStateToProps, mapDispatchToProps)(QuizIn));
