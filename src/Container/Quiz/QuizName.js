@@ -66,10 +66,10 @@ function QuizName(props) {
           errors,
           values,
         }) => (
-          <Form class="flex justify-center flex-col items-center  max-sm:w-11/12 mt-8 m-auto h-[60vh] md:mt-12 w-4/12 md:h-[80vh] ">
+          <Form class="flex  justify-center flex-col items-center  max-sm:w-11/12 mt-8 m-auto h-[60vh] md:mt-12 w-4/12 md:h-[80vh] ">
 
 
-            <div class="shadow-2xl bg-[#3B16B7] border-solid w-full flex justify-center items-center  p-1 max-sm:m-0 h-80 rounded-xl md:w-full m-auto">
+            <div class="shadow-2xl bg-[#3B16B7] border-solid w-full flex flex-col justify-center items-center  p-1 max-sm:m-0 h-80 rounded-xl md:w-full m-auto">
             
               <div class="flex flex-col items-center ">
               <h2 class="text-3xl font-medium text-white">Name your Project</h2>
@@ -114,20 +114,20 @@ function QuizName(props) {
                 
 
                 </div>
-                
+             
               </div>
-            
-            </div>
-            <div class="bg-black rounded-rounded2.8   w-44 items-center flex justify-center" >
+              <div class=" rounded  items-center flex justify-center mt-6" >
                    {/* <Link to="/chatgpt"> */}
                    <Button
                      type="primary"
                      htmlType="submit"
                      onClick={handleSubmit}
-                     style={{  height: "5em",backgroundColor:"black",borderRadius:'3rem',width:"11rem",display:"flex",justifyContent:"center",alignItems:"center" }}
-                   > <h3 class="font-medium text-white text-3xl">Create</h3></Button>
+                     style={{  height: "2rem",backgroundColor:"white",borderRadius:'0.25rem',width:"11rem",display:"flex",justifyContent:"center",alignItems:"center" }}
+                   > <h3 class="font-medium text-black text-xl">Create</h3></Button>
                    {/* </Link> */}
                  </div> 
+            </div>
+          
             {/* <div class="flex justify-around items-center mt-4" >
             <img
                   className="big-logo"

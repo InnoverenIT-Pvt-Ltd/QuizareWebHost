@@ -11,11 +11,14 @@ import {
   getQuizName,
   getCategory,
   addUserQuery,
-  ClearReducerDataOfLoadProgress
+  ClearReducerDataOfLoadProgress,
+  getFinalizeQuiz,
+  getQuestionList
 } from "./QuizAction";
 import { Button} from "antd";
 import { InputComponent } from "../../Components/Forms/Formik/InputComponent";
 import MainHeader from "../../Components/Mainheader";
+import Finalisedrawer from "./Finalisedrawer";
 const phoneRegExp =
   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 const QuizzSchema = Yup.object().shape({
@@ -30,6 +33,7 @@ const QuizzSchema = Yup.object().shape({
 function Quiz(props) {
   const [count, setCount] = useState(1);
   const [selectedCategory, setSelectedCategory] = useState("");
+  const [finalise, setFinalise]= useState(false)
   const handleCount = () => setCount(count + 1);
   const handleCategory = (id) => setSelectedCategory(id);
 
@@ -47,6 +51,8 @@ function Quiz(props) {
   }
   useEffect(() => {
     props.getCategory();
+    props.getQuestionList(props.showQuiz.quizId);
+    // props.getFinalizeQuiz(props.showQuiz && props.showQuiz.quizId);
   }, []);
   console.log(props.selectedCategory);
 
@@ -313,7 +319,8 @@ return (
               style={{  height: "3rem",backgroundColor:"#3B16B7",borderRadius:'0.25rem' }}
                 onClick={() => {
                   handleSubmit()
-                  goToFinalize()
+                 // goToFinalize()
+                 setFinalise(true);
                 }}
               >
               <h3 class="font-medium text-white text-xl">  Finalize</h3>
@@ -378,6 +385,11 @@ return (
       )}
     </Formik>
     </div>
+    <Finalisedrawer  
+                showQuiz={props.showQuiz}
+                  finalise={finalise}
+                  setFinalise={setFinalise}
+                />
   </>
 );
 }
@@ -385,6 +397,7 @@ const mapStateToProps = ({ auth, quiz }) => ({
   fetchingQuizName: quiz.fetchingQuizName,
   fetchingQuizNameError: quiz.fetchingQuizNameError,
   showQuiz: quiz.showQuiz,
+  finalizeQuiz: quiz.finalizeQuiz,
   quizId: quiz.showQuiz.quizId,
   category: quiz.category,
   quizHostId: auth.userDetails.userId,
@@ -401,24 +414,12 @@ const mapDispatchToProps = (dispatch) =>
       getQuizName,
       getCategory,
       addUserQuery,
-      ClearReducerDataOfLoadProgress
+      ClearReducerDataOfLoadProgress,
+      getFinalizeQuiz,
+      getQuestionList
     },
     dispatch
   );
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Quiz));
 
-// import React from 'react';
-// import { Link ,withRouter} from "react-router-dom";
-// import CreateQuiz from '../../Components/Quizs/CreateQuiz';
-// import QuizHost from './QuizHost';
-
-// function Quiz() {
-//   return (
-//     <div>
-//       <QuizHost/>
-//     </div>
-//   )
-// }
-
-// export default withRouter (Quiz);

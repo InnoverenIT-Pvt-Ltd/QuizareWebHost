@@ -48,108 +48,108 @@ function EditQuestionofQuiz(props) {
                     errors,
                     values,
                 }) => (
-                    <Form class=" max-sm:w-full flex items-center flex-col h-hk  m-auto md:mt-12  w-2/5  h-h50  ">
-                        <div className="w-full my-2 flex justify-center m-auto ">
-                            <div>
+                    <Form class="flex h-hk w-wk">
+                         
+                         <div class=" max-sm:w-full flex items-center flex-col h-[93vh] w-wk ">
+                         <div className="w-full  flex justify-center flex-col ">
                                 {/* Container */}
-                                <div>
-                                <div class="shadow-2xl border-solid  flex justify-center flex-col items-center  p-2 max-sm:m-0 h-h30 rounded-rounded2.8 md:m-auto"
-                                        // style={{
-                                        //     WebkitBoxShadow: "0 0 10px 2px rgb(46 46 46 / 39%)",
-
-                                        // }}
-                                    >
+                                <div class="w-wk flex justify-center flex-col items-center">
+                               
                                         {/* <Card style={{ fontSize: 22, alignSelf: "center" }}> */}
                                             <h3 class="flex justify-center text-xl">Question {props.questionNo || null}</h3>
                                         {/* </Card> */}
                                         <hr class="h-px bg-black border-2 w-wk mt-4 border-black"/>
-                                        <div class="mt-1 mb-1">
+                                        <div class="mt-4 w-wk p-4">
                                             <Field
                                                
                                                 name="question"
                                                 value={`${values.question}`}
                                                 component={TextArea}
                                                 onChangeText={() => handleChange("question")}
-                                                style={{ width: "20rem", height: "6rem",borderRadius:"1.25rem",backgroundColor:"white" }}
+                                                style={{ width: "100%", height: "3rem",borderRadius:"0.25rem" }}
                                             />
                                         </div>
-                                        <div class="mt-1">
+                                        <div className="flex justify-between  w-wk p-4">
+                                        <div class="w-[47.5%]">
                                             <Field
                                                 component={InputComponent}
                                                 value={`${values.option1}`}
                                                 name="option1"
                                                 onChangeText={() => handleChange("option1")}
-                                                style={{ border: "2px solid #07dd07",width: "20rem", height: "3.5rem",borderRadius:"1.25rem",backgroundColor:"#E4E2E2" }}
+                                                style={{ width: "100%", height: "3rem",borderRadius:"0.25rem" }}
                                             />
                                         </div>
-                                        <div class="mt-1">
+                                        <div class="w-[47.5%]">
                                             <Field
                                                 component={InputComponent}
                                                 value={`${values.option2}`}
                                                 placeholder="Option 2"
                                                 name="option2"
                                                 onChangeText={() => handleChange("option2")}
-                                                style={{width: "20rem", height: "3.5rem",borderRadius:"1.25rem",backgroundColor:"#E4E2E2" }}
+                                                style={{ width: "100%", height: "3rem",borderRadius:"0.25rem" }}
                                             />
                                         </div>
-                                        <div class="mt-1">
+                                        </div>
+                                        <div className="flex justify-between  w-wk p-4">
+                                        <div class="w-[47.5%]">
                                             <Field
                                                 component={InputComponent}
                                                 value={`${values.option3}`}
                                                 placeholder="Option 3"
                                                 name="option3"
                                                 onChangeText={() => handleChange("option3")}
-                                                style={{width: "20rem", height: "3.5rem",borderRadius:"1.25rem",backgroundColor:"#E4E2E2" }}
+                                                style={{ width: "100%", height: "3rem",borderRadius:"0.25rem" }}
                                             />
                                         </div>
-                                        <div class="mt-1">
+                                        <div class="w-[47.5%]">
                                             <Field
                                                 component={InputComponent}
                                                 value={`${values.option4}`}
                                                 placeholder="Option 4"
                                                 name="option4"
                                                 onChangeText={handleChange("option4")}
-                                                style={{ width: "20rem", height: "3.5rem",borderRadius:"1.25rem",backgroundColor:"#E4E2E2" }}
+                                                style={{ width: "100%", height: "3rem",borderRadius:"0.25rem" }}
                                             />
                                         </div>
-                                        <div className="flex flex-row justify-between mt-4">
-                                        <div class="bg-black rounded-rounded2.8  mt-2 w-36 items-center flex justify-center" >
+                                        </div>
+                                        <div class="flex justify-between p-6 w-wk">    
+                                        <div class="" >
                                             <Button
                                                 title={""}
                                                 type="primary"
                                                 onClick={() => props.handleDeleteQuestion(props.item.id)}
-                                                style={{  height: "3rem",backgroundColor:"#565656",borderRadius:'3rem' }}
+                                                style={{  height: "3rem",backgroundColor:"#3B16B7",borderRadius:'0.25rem' }}
                                             >
-                                                 <h3 class="font-medium text-white text-2xl">Delete</h3>
+                                                 <h3 class="font-medium text-white text-base">Delete</h3>
                                             </Button>
                                             </div>
-                                            <div class="bg-black rounded-rounded2.8 ml-2  mt-2 w-36 items-center flex justify-center" >
+                                            <div class="" >
                                             <Button
                                                 title={""}
                                                 type="primary"
                                                 onClick={() => handleSubmit()}
-                                                style={{  height: "3rem",backgroundColor:"#565656",borderRadius:'3rem' }}
+                                                style={{  height: "3rem",backgroundColor:"#3B16B7",borderRadius:'0.25rem' }}
                                             >
-                                                 <h3 class="font-medium text-white text-2xl">Update</h3>
+                                                 <h3 class="font-medium text-white text-base">Update</h3>
                                             </Button>
                                             </div>
                                         </div>
-                                    </div>
+                                        <div class="mt-4" >
+                        <Button
+                                                title={""}
+                                                type="primary"
+                                                style={{  height: "3rem",backgroundColor:"#3B16B7",borderRadius:'0.25rem' }}
+                                                onClick={() => props.backTo()}
+
+                                            ><h3 class="font-medium text-white text-xl">Back To Quiz</h3></Button>
+                                            </div>
 
                                 </div>
 
                                 {/* Buttons */}
                             </div>
                         </div>
-                        <div class="bg-black rounded-rounded2.8  mt-1 w-52 items-center flex justify-center" >
-                        <Button
-                                                title={""}
-                                                type="primary"
-                                                style={{  height: "3.5rem",backgroundColor:"black",borderRadius:'3rem',display:"flex",justifyContent:"center",alignItems:"center" }}
-                                                onClick={() => props.backTo()}
-
-                                            ><h3 class="font-medium text-white text-3xl">Back To Quiz</h3></Button>
-                                            </div>
+                       
                     </Form>
                 )}
             </Formik>

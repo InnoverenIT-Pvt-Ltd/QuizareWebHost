@@ -10,8 +10,9 @@ import {
   deleteQuestion
 } from "../../QuizAction";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
+import Finalisedrawer from "../../Finalisedrawer";
 function QuestionEdit(props) {
-
+  const [finalise, setFinalise]= useState(false)
   const handleDeleteQuestion = (id) => {
     props.deleteQuestion(id, handleCallBack)
   }
@@ -52,127 +53,145 @@ function QuestionEdit(props) {
           errors,
           values,
         }) => (
-          <Form class=" max-sm:w-full h-h34  m-auto md:mt-12   w-wk    ">
-            <div className="w-full my-2 flex justify-center m-auto ">
-              <div>
+          <Form class="flex h-hk w-wk">
+             
+             <div class=" max-sm:w-full flex items-center flex-col h-[93vh] w-wk ">
+            
                 {/* Container */}
-                <div>
-                  <div className="bg-white rounded-2xl shadow-2xl border-solid flex justify-center mt-3 flex-col "
-                    style={{
-                      WebkitBoxShadow: "0 0 10px 2px rgb(46 46 46 / 39%)",
-                      // width: "-webkit-fill-available",
-                      //height: "max-content"
-                    }}
-                  >
-                    <div class=" w-full flex justify-center flex-col  p-4 max-sm:m-0 h-h34 rounded-2xl md:w-w30 m-auto">
+              
+                  
+                    <div class=" w-full flex justify-center flex-col  p-4 max-sm:m-0   md:w-wwk ">
                       <div style={{ fontSize: 22, alignSelf: "center" }}>
                         <h3 class="flex justify-center text-xl">Question {props.number + 1}</h3>
                       </div>
                       <div class="mt-4">
                         <Field
                           name="question"
+                          style={{ width: "100%", height: "3rem",borderRadius:"0.25rem" }}
                           value={`${values.question}`}
                           component={InputComponent}
                           onChangeText={handleChange("question")}
                         />
                       </div>
-                      <div class="mt-1">
+                      <div className="flex justify-between mt-3">
+                      <div class="w-[47.5%]">
                         <Field
                           component={InputComponent}
                           value={`${values.option1}`}
                           placeholder="Correct answer"
-                          style={{ border: "2px solid #07dd07" }}
+                          style={{ width: "100%", height: "3rem",borderRadius:"0.25rem" }}
                           name="option1"
                           onChangeText={handleChange("option1")}
                         />
                       </div>
-                      <div class="mt-1">
+                      <div class="w-[47.5%]">
                         <Field
                           component={InputComponent}
                           value={`${values.option2}`}
+                          style={{ width: "100%", height: "3rem",borderRadius:"0.25rem" }}
                           placeholder="Option 2"
                           name="option2"
                           onChangeText={handleChange("option2")}
                         />
                       </div>
-                      <div class="mt-1">
+                      </div>
+                      <div className="flex justify-between mt-3">
+                      <div class="w-[47.5%]">
                         <Field
                           component={InputComponent}
                           value={`${values.option3}`}
+                          style={{ width: "100%", height: "3rem",borderRadius:"0.25rem" }}
                           placeholder="Option 3"
                           name="option3"
                           onChangeText={handleChange("option3")}
                         />
                       </div>
-                      <div class="mt-1">
+                      <div class="w-[47.5%]">
                         <Field
                           component={InputComponent}
                           value={`${values.option4}`}
+                          style={{ width: "100%", height: "3rem",borderRadius:"0.25rem" }}
                           placeholder="Option 4"
                           name="option4"
                           onChangeText={handleChange("option4")}
                         />
                       </div>
+                      </div>
                       <div class="flex flex-row mt-4 justify-between">
+                        <div>
                         <Button
                           title={""}
                           type="primary"
                           onClick={() => handleSubmit()}
-                          style={{ width: "9rem", backgroundColor: "white" }}
+                          style={{ width: "9rem", backgroundColor: "#3B16B7" }}
                         >
-                          <h3>Update Question</h3>
+                          <h3 className="text-white">Update Question</h3>
                         </Button>
+                        </div>
+                        <div>
                         <Button
                           title={""}
                           type="primary"
                           onClick={() => handleDeleteQuestion(props.item.id, handleCallBack)}
-                          style={{ width: "9rem", backgroundColor: "white", marginLeft: "0.5rem" }}
+                          style={{ width: "9rem", backgroundColor: "#3B16B7" }}
                         >
-                          <h3> Delete Question</h3>
+                          <h3 className="text-white"> Delete Question</h3>
                         </Button>
-
-
-                      </div>
-
-                      <div className="flex flex-row justify-between mt-4">
+                        </div>
+                        <div>
                         <Link to="/addquizin">
                           <Button
                             title={""}
                             type="primary"
                             onClick={() => handleSubmit()}
-                            style={{ width: "7rem", backgroundColor: "white" }}
+                            style={{ width: "9rem", backgroundColor: "#3B16B7" }}
                           >
-                            <h3>Add Question</h3>
-                          </Button>
+                            <h3 className="text-white">Add Question</h3>
+                          </Button>          
                         </Link>
-                        <Link to="/finalize">
+                        </div>
+                        <div>
+                        {/* <Link to="/finalize"> */}
                           <Button
                             title={""}
                             type="primary"
-                            onClick={() => handleSubmit()}
-                            style={{ width: "9rem", backgroundColor: "white" }}
+                            onClick={() => {
+                              handleSubmit()
+                              setFinalise(true);
+                            }}
+                            style={{ width: "9rem", backgroundColor: "#3B16B7" }}
                           >
-                            <h3>Finalize Quiz</h3>
+                            <h3 className="text-white">Finalize Quiz</h3>
                           </Button>
-                        </Link>
+                        {/* </Link> */}
+                        </div>
+                        <div>
                         <Button
                           title={""}
                           type="primary"
-                          style={{ width: "7rem", backgroundColor: "white" }}
+                          style={{ width: "9rem", backgroundColor: "#3B16B7" }}
                           onClick={() => handleCallBack()}
 
-                        ><h3>Back To Quiz</h3></Button>
+                        ><h3 className="text-white">Back To Quiz</h3></Button>
+</div>
                       </div>
+
+                     
                     </div>
-                  </div>
-                </div>
+                  
+               
 
                 {/* Buttons */}
-              </div>
+             
             </div>
           </Form>
         )}
       </Formik>
+      <Finalisedrawer 
+                showQuiz={props.showQuiz}
+                  finalise={finalise}
+                  setFinalise={setFinalise}
+                />
     </>
   );
 }

@@ -128,6 +128,7 @@ export const addQuestion = (quiz, quizId, cb) => dispatch => {
     .then(res => {
       // console.log(res);     
       dispatch(getFinalizeQuiz(quizId));
+      dispatch(getQuestionList(quizId));
       dispatch({
         type: types.ADD_QUESTION_SUCCESS,
         payload: res.data,
