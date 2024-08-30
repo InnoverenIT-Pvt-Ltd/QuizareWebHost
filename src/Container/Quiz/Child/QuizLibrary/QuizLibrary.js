@@ -95,8 +95,8 @@ function QuizLibrary(props) {
                 // <SwiperSlide >
 
                 <div 
-  className="rounded-3xl border-2 bg-cover bg-center shadow-[0_0.25em_0.62em] shadow-[#aaa] h-[12rem] 
-    text-white m-3 p-2 bg-[#3B16B7] w-[28vw] max-sm:w-wk flex flex-col scale-[0.99] hover:scale-100 ease-in duration-100 
+  className="rounded-3xl border-2 bg-cover bg-center shadow-[0_0.25em_0.62em] shadow-[#aaa] h-[11rem] 
+    text-white m-3 p-2 bg-[#3B16B7] w-[26vw] max-sm:w-wk flex justify-between flex-col scale-[0.99] hover:scale-100 ease-in duration-100 
     border-solid leading-3 hover:border hover:border-[#23A0BE] hover:shadow-[#23A0BE]" 
     // style={{ 
     //   backgroundImage: imageUrl ? `url(${imageUrl})` : 'none',
@@ -109,12 +109,15 @@ function QuizLibrary(props) {
                   <div className="flex justify-between  items-center">
                   
                     <div class="flex flex-row">
-                            <h2 class="mr-2 text-base text-white">Created:</h2>
+                           
                             <h2 class=" text-base text-white">
                               {`${moment(item.creationDate).format("ll") || ""
                                 }`}
                             </h2>
                           </div>
+                          <h2 class="text-xl   flex j text-white">
+                      {item.quizName}
+                    </h2>  
                    <div className="flex justify-end"
                     key={item.quizId}
                     onMouseEnter={() => handleMouseEnter(item.quizId)}
@@ -196,28 +199,29 @@ function QuizLibrary(props) {
       )}
     </div>
     </div>
-    </div>           
-                    <div>
-                    
-                    <h2 class="text-xl   flex j text-white">
-                      {item.quizName}
-                    </h2>  
-                         
-                          <div class="flex flex-row">
+    </div>       
+    <div className="flex justify-between items-center absolute bottom-0 w-wk p-2">
+    <div class="flex flex-row">
                             <h2 class=" text-base text-white">
-                              Questions: {`${item.noOfQuestions || ""}`}
+                              {item.quizHostInd === false ? "Closed" : "Hosted"}
                             </h2>
                           </div>
-                          <div class="flex flex-row">
+                    <div>
+                    
+                  
+                         
+                    <div class="flex flex-row">
+  <h2 class="text-base text-white rounded-full border-2 border-white py-1 px-2 w-8 h-8 flex justify-center items-center">
+    {`${item.noOfQuestions || ""}`}
+  </h2>
+</div>
+
+                          {/* <div class="flex flex-row">
                             <h2 class=" text-base text-white">
                               Categories: {`${item.categories && item.categories || ""}`}
                             </h2>
-                          </div>
-                          <div class="flex flex-row">
-                            <h2 class=" text-base text-white">
-                              Status: {item.quizHostInd === false ? "Closed" : "Hosted"}
-                            </h2>
-                          </div>
+                          </div> */}
+                        
                        
                     
                     </div>
@@ -226,19 +230,18 @@ function QuizLibrary(props) {
                      
                         
                           <div class="flex flex-row">
-                            <h2 class="text-base font-bold text-white">Question response time:</h2>
+                            
                             &nbsp;
                             <h2 class="text-base font-bold text-white">
                               {`${item.duration || ""}`} seconds
                             </h2>
                           </div>
                           <div class="flex flex-row">
-                            <h2 class="text-base font-bold text-white">Scoring system:</h2>
-                            &nbsp;
+                           
                             <h2 class="text-base font-bold text-white">Standard</h2>
                           </div>
-                      
-                      
+                         
+                          </div>   
                    
                   
 

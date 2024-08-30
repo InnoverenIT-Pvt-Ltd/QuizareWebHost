@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Modal } from "antd";
 import FinalizeQuiz from "./Child/HostQuizes/FinalizeQuiz";
+import { StyledDrawer } from "../../Components/UI/Antd";
 
 
 
@@ -12,7 +13,7 @@ const Finalisedrawer = (props) => {
 
     return (
         <>
-            <Modal
+            <StyledDrawer
                 title={props.showQuiz && props.showQuiz.quizName}
                 width="30%"
                 height="50%"
@@ -21,12 +22,14 @@ const Finalisedrawer = (props) => {
                 destroyOnClose
                 footer={null}
                   placement="right"
-                  onCancel={() => props.setFinalise(false)}
+                  onClose={() => props.setFinalise(false)}
             >
                 <Suspense fallback={"loading..."}>
-                <FinalizeQuiz/>
+                <FinalizeQuiz
+                setFinalise={props.setFinalise}
+                />
                 </Suspense>
-            </Modal>
+            </StyledDrawer>
         </>
     );
 

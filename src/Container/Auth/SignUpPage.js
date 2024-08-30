@@ -187,15 +187,15 @@ class SignUpPage extends Component {
                                                     type="primary"
                                                     htmlType="submit"
                                                     Loading={isSubmitting}
-                                                    style={{  height: "4rem",backgroundColor:"#FFFFFF",borderRadius:'3rem' }}
+                                                    style={{  height: "3.5rem",backgroundColor:"#FFFFFF",borderRadius:'3rem' }}
                                                 >
-                                                  <h3 class="font-medium text-black text-3xl">Sign up</h3> 
+                                                  <h3 class="font-medium text-black text-xl">Sign up</h3> 
                                                 </Button>
                                                
                                                 </div>
-                                                <div className=" font-normal flex text-white ml-5">Already have an ccount?
+                                                <div className=" font-normal flex text-white ml-5">Already have an Account?
                                                 <Link to ="/email">
-                                                     <div className="underline font-medium">Log in </div> 
+                                                     <div className="underline font-medium ml-1">Log in </div> 
                                                      </Link>
                                                      </div>
                                                 {/* <Link to ="/login">
