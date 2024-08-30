@@ -34,6 +34,5 @@ const StyledModal = styled(Modal)`
    .ant-modal-close-x{
         color: ${props => "#ffffff"};
    }
-  
 `;
 export default StyledModal;

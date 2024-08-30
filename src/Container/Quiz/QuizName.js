@@ -7,7 +7,7 @@ import * as Yup from "yup";
 import { InputComponent } from "../../Components/Forms/Formik/InputComponent";
 import { addQuizName } from './QuizAction';
 import { Button } from 'antd';
-import FWLogo from "../../../src/images/lamp-charge.png";
+import FWLogo from "../../../src/images/linear_background_154 2.jpg";
 import FWLogo1 from "../../../src/images/prev.png";
 import FWLogo2 from "../../../src/images/forw.png";
 import { useHistory } from "react-router-dom";
@@ -68,20 +68,20 @@ function QuizName(props) {
         }) => (
           <Form class="flex  justify-center flex-col items-center  max-sm:w-11/12 mt-8 m-auto h-[60vh] md:mt-12 w-4/12 md:h-[80vh] ">
 
-
-            <div class="shadow-2xl bg-[#3B16B7] border-solid w-full flex flex-col justify-center items-center  p-1 max-sm:m-0 h-80 rounded-xl md:w-full m-auto">
-            
-              <div class="flex flex-col items-center ">
-              <h2 class="text-3xl font-medium text-white">Name your Project</h2>
-              {/* <div>
+              <div>
               <img
                     className="big-logo"
                     src={FWLogo}
-                    
+                    style={{ borderRadius:"0.75rem"}}
                     alt="Tekorero logo"
 
                   />
-              </div> */}
+              </div>
+            <div class="absolute bottom-[8rem] w-full flex flex-col justify-center items-center  max-sm:m-0 h-80  md:w-full m-auto">
+            
+              <div class="flex flex-col items-center ">
+              <h2 class="text-3xl font-medium text-white">Name your Project</h2>
+             
                 <div >
                   <h3 class="text-sm font-normal text-white mt-6">Start creating by choosing a name for your quiz</h3>
                   <div class="mt-4">

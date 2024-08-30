@@ -39,6 +39,7 @@ function FinalizeQuiz(props) {
       },
       props.showQuiz && props.showQuiz.quizId
     );
+    props.setFinalise(false);
     // props.hostQuiz(props.showQuiz && props.showQuiz.quizId);
   };
   const handleCancel = () => {
@@ -55,10 +56,10 @@ function FinalizeQuiz(props) {
     <>
       {/* <MainHeader /> */}
       <Formik>
-        <Form class="flex justify-center   ">
+        <Form class="flex justify-center  h-[60vh]  ">
           {/* <div className="bg-white rounded-rounded2.8 mt-3 "> */}
 
-          <div class="shadow-2xl p-1 w-wk bg-white border-solid flex flex-col">
+          <div class="shadow-2xl p-1 w-wk bg-white border-solid flex flex-col justify-center">
             {/* <h2 class="text-xl mt-32  flex justify-center">{`${props.finalizeQuiz.quizName || ""
               }`}</h2>
                <hr class="h-px bg-black border-2 w-wk mt-4 border-black"/> */}
@@ -82,9 +83,9 @@ function FinalizeQuiz(props) {
                     Questions: {`${props.finalizeQuiz.noOfQuestions || ""}`}
                   </h3>
                   </div>
-                  <h3 >
+                  {/* <h3 >
                     Categories: {`${props.finalizeQuiz.categories || ""}`}
-                  </h3>
+                  </h3> */}
                   </div>
            
             {/* <div class="flex justify-center mt-8">
@@ -141,7 +142,7 @@ function FinalizeQuiz(props) {
               </div>
               {/* </Link> */}
              
-              <div class=" flex ">
+              {/* <div class=" flex ">
               <Link to="/updateQuizName">
                 <Button
                  style={{  height: "2.5rem",backgroundColor:"#3b16b7",borderRadius:'0.25rem',width:"7rem" }}
@@ -152,15 +153,12 @@ function FinalizeQuiz(props) {
                  <h2 class="text-white text-xl font-medium">Edit </h2>
                 </Button>
                 </Link>
-                </div>
-              
-            </div>
-              {/* <Link to="/hostquiz"> */}
-              <div class=" p-1  items-center flex justify-center"
+                </div> */}
+                <div class=" flex "
 >
               <Button
                // type="primary"
-                style={{  height: "2.5rem",borderRadius:'0.25rem',width:'10rem',backgroundColor:"#3b16b7" }}
+                style={{  height: "2.5rem",borderRadius:'0.25rem',width:'7rem',backgroundColor:"#3b16b7" }}
                 // onClick={() =>
                 //  props.handleQuizHostModal(true)
                 // }
@@ -170,6 +168,9 @@ function FinalizeQuiz(props) {
                 <h2 class="text-white text-2xl font-medium">Host </h2>
               </Button>
               </div>
+            </div>
+              {/* <Link to="/hostquiz"> */}
+            
               {/* </Link> */}
               {/* <Link to="/addquizin">
                 <Button

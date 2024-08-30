@@ -195,9 +195,9 @@ class LoginByMail extends Component {
                                                     type="primary"
                                                     htmlType="submit"
                                                     Loading={isSubmitting}
-                                                    style={{  height: "4rem",backgroundColor:"white",borderRadius:'3rem' }}
+                                                    style={{  height: "3.5rem",backgroundColor:"white",borderRadius:'3rem' }}
                                                 >
-                                                   <h3 class="font-medium text-black text-3xl"> Sign in</h3> 
+                                                   <h3 class="font-medium text-black text-xl"> Sign in</h3> 
                                                 </Button>
                                             </div>
                                             {/* <Link to ="/login">
@@ -220,7 +220,7 @@ class LoginByMail extends Component {
                                     to="/signUp"
                                     style={{ textAlign: "center", fontSize: 15, color: "#0a8bd7", fontWeight: "500" }}
                                 >
-                                  <div className="underline font-medium text-white"> Signup </div> 
+                                  <div className="underline font-medium text-white ml-1"> Signup </div> 
                                 </Link>
                             </div>
                                                 </div>

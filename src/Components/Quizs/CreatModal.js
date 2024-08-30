@@ -4,13 +4,23 @@ import { bindActionCreators } from "redux";
 import FWLogo1 from "../../../src/images/Button_Create-ChatGPT.png";
 import FWLogo from "../../../src/images/Button_Create-Blank.png";
 import FWLogo2 from "../../../src/images/Divider.png";
+import FWLogo3 from "../../../src/images/linear_background_154 2.jpg";
 
 const CreatModal = (props) => {
 
 
     return (
         <>
-           <div className="flex flex-col justify-center items-center h-60">
+         <div
+      className="relative" >
+        <img
+                  className="big-logo"
+                  src={FWLogo3}
+                  style={{ width: "28.5rem",borderRadius:"0.75rem"}}
+                  alt="Tekorero logo"
+
+                />
+           <div className=" absolute bottom-20 right-4 text-white  pr-[5.5rem]">
            <a href="/how2" >
            <img
                   className="big-logo"
@@ -36,6 +46,7 @@ const CreatModal = (props) => {
 
                 /> 
                 </a>
+           </div>
            </div>
         </>
     );

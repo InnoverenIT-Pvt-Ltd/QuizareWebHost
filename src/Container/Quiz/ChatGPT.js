@@ -30,22 +30,25 @@ if(props.addingUserQuery){
   return (
     <>
     <Menu/>
-    <div class="flex items-center justify-center mt-4">
-    <div class="shadow-2xl flex-col  bg-white border-solid w-[95%] flex  items-center  p-4 max-sm:m-0 h-[30rem] rounded-rounded2.8 md:w-full m-auto">
+    <div class="flex items-center justify-center mt-4 h-[91vh]">
+    <div class="shadow-2xl flex-col  bg-white border-solid w-[35%] flex  items-center  p-4 max-sm:m-0  rounded-xl  m-auto">
     <div class=" text-sm font-semibold mt-8">
       Do you Want to use ChatGPT to Generate Questions?
 
     </div>
     <div class="flex justify-between w-wk mt-6">
-    <Button style={{width:"10rem"}}  type="primary"
+      <div>
+    <Button  style={{ height: "3rem", backgroundColor: "#3B16B7", borderRadius: '0.25rem' }}  type="primary"
     onClick={() =>    setshowCard(true)}
     > 
     Yes
     </Button>
-    <Button style={{width:"10rem"}}  type="primary" 
+    </div>
+    <div>
+    <Button  style={{ height: "3rem", backgroundColor: "#3B16B7", borderRadius: '0.25rem' }} type="primary" 
     onClick={() =>    handleSayNo()}
     > No</Button>
-    
+    </div>
     
     </div>
     <div class="mt-4 w-wk">
@@ -57,6 +60,7 @@ if(props.addingUserQuery){
     />
     <div class="mt-4 ">
     <Button  type="primary"
+     style={{ height: "3rem", backgroundColor: "#3B16B7", borderRadius: '0.25rem' }}
     onClick={()=>{
       const query={
 
@@ -69,7 +73,7 @@ questions_required:questionReq,
       }
       props.addUserQuery(query);
       setGenerationComplete(true);
-      }}> Generate </Button>
+      }}> <h3 className="font-medium text-white text-xl -mt-4"> Generate v</h3> </Button>
       </div>
      &nbsp;
      &nbsp;
@@ -86,6 +90,7 @@ questions_required:questionReq,
 {generationComplete && (
 <Link to={`updateQuizNameInLibrary/${props.quizName}/${props.duration}/${props.quizId}`}>
 <Button  type="primary"
+  style={{ height: "3rem", backgroundColor: "#3B16B7", borderRadius: '0.25rem' }}
     onClick={()=>{
 const userPre= {
   questionDTOS: props.userQuery.response.ai_response.questions.map((qstn, index) => ({
@@ -102,7 +107,7 @@ const userPre= {
 quizId: props.userQuery.response.user_request.quizId
 }
       props.sendQuizResponse(userPre);}}
-    > Submit</Button>
+    >  <h3 className="font-medium text-white text-xl -mt-4">Submit </h3></Button>
 </Link>
  )}
 </div>

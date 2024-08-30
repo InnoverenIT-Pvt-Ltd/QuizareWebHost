@@ -13,7 +13,7 @@ const ProcessSpareDrawer = (props) => {
         <>
             <Modal
                 //title={props.RowData.imei}
-                width="30%"
+                width="35%"
                 height="50%"
                 visible={props.processSpareModal}
                 closable
