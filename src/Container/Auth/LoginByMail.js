@@ -215,7 +215,7 @@ class LoginByMail extends Component {
                                 </Link> */}
                                
                                <div class="ml-2 text-white flex mt-4">
-                                 Already have an ccount?
+                                 Already have an Account?
                                  <Link
                                     to="/signUp"
                                     style={{ textAlign: "center", fontSize: 15, color: "#0a8bd7", fontWeight: "500" }}
