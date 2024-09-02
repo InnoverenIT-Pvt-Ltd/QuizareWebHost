@@ -77,7 +77,7 @@ function QuizName(props) {
 
                   />
               </div>
-            <div class="absolute bottom-[8rem] w-full flex flex-col justify-center items-center  max-sm:m-0 h-80  md:w-full m-auto">
+            <div class="absolute md:bottom-[8rem] w-full flex flex-col justify-center items-center  max-sm:m-0 h-80  md:w-full m-auto">
             
               <div class="flex flex-col items-center ">
               <h2 class="text-3xl font-medium text-white">Name your Project</h2>

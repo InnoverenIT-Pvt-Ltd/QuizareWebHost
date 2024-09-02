@@ -174,7 +174,7 @@ const Menu = (props) => {
   props.handleSpareProcess(true);
 }}
 >
-<h3 class="font-medium  text-lg">Create</h3>
+<h3 class="font-medium  text-lg max-sm:text-xs">Create</h3>
 </Button>
 
 </div>
@@ -184,7 +184,7 @@ const Menu = (props) => {
  style={{  height: "2rem",display:"flex",justifyContent:"center",alignItems:"center",backgroundColor:"white" }}
 
 >
-<h3 class="font-medium  text-lg">Upgrade</h3>
+<h3 class="font-medium  text-lg max-sm:text-xs">Upgrade</h3>
 </Button>
 </Link>
 </div>
@@ -224,13 +224,13 @@ const Menu = (props) => {
     </div>
       </div>
      
-      <div className="mobile-menu md:hidden" onClick={handleClick}>
+      {/* <div className="mobile-menu md:hidden" onClick={handleClick}>
         {click ? (
           <CloseIcon className="menu-icon" />
         ) : (
           <MenuIcon className="menu-icon" />
         )}
-      </div>
+      </div> */}
       <ProcessSpareDrawer              
                   processSpareModal={props.processSpareModal}
                     handleSpareProcess={props.handleSpareProcess}

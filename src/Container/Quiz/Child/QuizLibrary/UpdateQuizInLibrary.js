@@ -99,8 +99,9 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { useEffect, useState } from "react";
 import { getQuestionList, deleteQuestion, handleBackToQuiz } from "../../../../Container/Quiz/QuizAction";
-import { Card } from "antd";
+import {  Card,Drawer } from "antd";
 import React from "react";
+
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper";
 import "swiper/css";
@@ -113,6 +114,7 @@ import EditQuestionOfQuiz from "./EditQuestionOfQuiz";
 function UpdateQuizInLibrary(props) {
     const [selectedQuestionIndex, setSelectedQuestionIndex] = useState(0);
     const [swiperInstance, setSwiperInstance] = useState(null);
+    const [isDrawerVisible, setIsDrawerVisible] = useState(false);
 
     useEffect(() => {
         props.getQuestionList(props.match.params.quizId);
@@ -138,6 +140,7 @@ function UpdateQuizInLibrary(props) {
         if (swiperInstance) {
             swiperInstance.slideTo(index); // Move to the selected slide
         }
+        setIsDrawerVisible(false);
     };
 
     if (props.fetchingQuestionList) {
@@ -151,8 +154,8 @@ function UpdateQuizInLibrary(props) {
     return (
         <>
             <MainHeader />
-            <div className="flex h-hk w-full">
-                <div className="w-[20%] bg-[#6245C6] p-4">
+            <div className="flex h-hk w-full ">
+                <div className="w-[20%] bg-[#6245C6] p-4 max-sm:hidden">
                     {props.questionList.map((item, i) => (
                         <Card
                             key={i}
@@ -163,7 +166,23 @@ function UpdateQuizInLibrary(props) {
                         </Card>
                     ))}
                 </div>
-                <div className="w-[80%] p-4">
+                <Drawer
+                title="Select a Question"
+                placement="left"
+                onClose={() => setIsDrawerVisible(false)}
+                visible={isDrawerVisible}
+                width={300}
+              > {props.questionList.map((item, i) => (
+                <Card
+                    key={i}
+                    className={`cursor-pointer mb-2 ${i === selectedQuestionIndex ? 'bg-blue-200' : ''}`}
+                    onClick={() => handleQuestionSelect(i)}
+                >
+                    Question {i + 1}
+                </Card>
+            ))}
+            </Drawer>
+                <div className="w-[80%] md:p-4 max-sm:w-wk ">
                     <Swiper
                         onSwiper={setSwiperInstance}
                         pagination={{
@@ -181,6 +200,7 @@ function UpdateQuizInLibrary(props) {
                                     questionNo={i + 1}
                                     handleDeleteQuestion={handleDeleteQuestion}
                                     backTo={backTo}
+                                    setIsDrawerVisible={setIsDrawerVisible}
                                 />
                             </SwiperSlide>
                         ))}

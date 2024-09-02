@@ -64,7 +64,7 @@ console.log(props.showQuiz)
             Share your quiz
             </div>
             <div className="flex items-center justify-between w-wk mt-3">
-            <div className="border w-[21rem] h-[2.5rem] border-solid border-gray-400" >
+            <div className="border w-[21rem] h-[2.5rem] border-solid border-gray-400 max-sm:w-[12rem]" >
               {/* <h2 class="text-base">{`${props.showQuiz.quizName || ''}`}{' '}</h2> */}
               {props.showQuiz.quizLink ? (
                 <h2 class="text-xs flex justify-center flex-col " style={{ overflowWrap: "break-word" }}>{`http://player.quizledge.no${props.showQuiz.quizLink || ""
@@ -75,7 +75,7 @@ console.log(props.showQuiz)
            </div>
             <div class="  flex justify-center">
               <Button
-                style={{  height: "2.5rem",backgroundColor:"#3B16B7",borderRadius:'0.25rem',width:'10rem' }}
+                style={{  height: "2.5rem",backgroundColor:"#3B16B7",borderRadius:'0.25rem',width:'-webkit-fill-available' }}
                 onClick={() => copyToClipboard()}
               >
                 <h2 class="text-white text-xl font-medium">Share</h2>

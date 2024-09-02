@@ -460,7 +460,8 @@ import {
   getFinalizeQuiz,
   getQuestionList,
 } from "./QuizAction";
-import { Button, Card } from "antd";
+import { Button, Card,Drawer } from "antd";
+import { MenuOutlined } from "@ant-design/icons";
 import { InputComponent } from "../../Components/Forms/Formik/InputComponent";
 import MainHeader from "../../Components/Mainheader";
 import Finalisedrawer from "./Finalisedrawer";
@@ -480,6 +481,7 @@ function Quiz(props) {
   const [finalise, setFinalise] = useState(false);
   const [isAddingNewQuestion, setIsAddingNewQuestion] = useState(false);
   const [selectedQuestionIndex, setSelectedQuestionIndex] = useState(0);
+  const [isDrawerVisible, setIsDrawerVisible] = useState(false);
 
   useEffect(() => {
     props.getCategory();
@@ -517,6 +519,7 @@ function Quiz(props) {
 
   const handleQuestionSelect = (index) => {
     setSelectedQuestionIndex(index);
+    setIsDrawerVisible(false);
   };
 
   const history = useHistory();
@@ -589,7 +592,8 @@ function Quiz(props) {
           }) => (
             <div className="h-[93vh] flex">
               {/* 20% Section for Question List */}
-              <div className="w-[20%] bg-[#6245C6] p-4">
+             
+              <div className="w-[20%] bg-[#6245C6] p-4 max-sm:hidden">
                 {props.questionList.map((item, i) => (
                   <Card
                     key={i}
@@ -607,16 +611,48 @@ function Quiz(props) {
                   </Card>
                 ))}
               </div>
-
+              <Drawer
+                title="Select a Question"
+                placement="left"
+                onClose={() => setIsDrawerVisible(false)}
+                visible={isDrawerVisible}
+                width={300}
+              >{props.questionList.map((item, i) => (
+                <Card
+                  key={i}
+                  className={`cursor-pointer mb-2 ${
+                    i === selectedQuestionIndex ? "bg-blue-200" : ""
+                  }`}
+                  onClick={() => handleQuestionSelect(i)}
+                >
+                  <div className="flex flex-col">
+                    <div className="text-base font-semibold">
+                      Question {i + 1}
+                    </div>
+                    <div className="text-sm font-semibold">
+                      {item.question}
+                    </div>
+                  </div>
+                </Card>
+              ))}
+            </Drawer>
               {/* 80% Section for Selected Question */}
-              <div className="max-sm:w-full flex items-center flex-col h-hk w-[80%]">
+              <div className="flex items-center flex-col h-hk w-[80%] max-sm:w-wk">
                 <div className="w-full flex justify-center">
                   <div className="w-wk flex justify-center flex-col items-center">
                     <div className="flex justify-center flex-col w-full">
+                      <div className="flex items-center justify-center md:mt-2">
+                    <Button
+                className="md:hidden"
+                icon={<MenuOutlined className="!text-black"/>}
+                onClick={() => setIsDrawerVisible(true)}
+              > 
+              </Button>
                       <h3 className="flex justify-center text-xl">
                         {props.showQuiz && props.showQuiz.quizName}
                       </h3>
-                      <hr className="h-px bg-black border-2 w-wk mt-4 border-black" />
+                      </div>
+                      <hr className="h-px bg-black border-2 w-wk md:mt-4 border-black" />
                       <div className="mt-4 p-6">
                         <div>
                           <Field
@@ -667,19 +703,20 @@ function Quiz(props) {
                         </div>
                       </div>
                     </div>
-                    <div className="flex justify-between p-6 w-wk">
+                    <div className="flex justify-between p-6 w-wk max-sm:flex-col">
+                      <div className="flex justify-between w-wk ">
                       <div>
                         <Button
-                          style={{ height: "3rem", backgroundColor: "#3B16B7", borderRadius: '0.25rem' }}
+                          style={{ height: "3rem", backgroundColor: "#3B16B7", borderRadius: '0.25rem',width:"9rem" }}
                           type="primary"
                           onClick={handleSubmit}
                         >
                           <h3 className="font-medium text-white text-base">+ Add question</h3>
                         </Button>
                       </div>
-                      <div>
+                      <div className="md:mr-16">
                         <Button
-                          style={{ height: "3rem", backgroundColor: "#3B16B7", borderRadius: '0.25rem' }}
+                          style={{ height: "3rem", backgroundColor: "#3B16B7", borderRadius: '0.25rem',width:"9rem" }}
                           type="primary"
                           onClick={() => handleUpdateQuestion(values)}
                           disabled={!isAnyQuestionCreated}
@@ -689,12 +726,14 @@ function Quiz(props) {
                           </h3>
                         </Button>
                       </div>
-                      <div>
+                      </div>
+                      <div className="flex justify-between w-wk">
+                      <div className="md:ml-16">
                         <Button
                           title={""}
                           type="primary"
                           onClick={() => handleDeleteQuestion(selectedQuestion.id)}
-                          style={{ height: "3rem", backgroundColor: "#3B16B7", borderRadius: '0.25rem' }}
+                          style={{ height: "3rem", backgroundColor: "#3B16B7", borderRadius: '0.25rem',width:"9rem" }}
                           disabled={!isAnyQuestionCreated}
                         >
                            <h3 className="font-medium text-white text-base">Delete Question</h3>
@@ -703,7 +742,7 @@ function Quiz(props) {
                       <div>
                         {count >= 1 &&
                           <Button
-                            style={{ height: "3rem", backgroundColor: "#3B16B7", borderRadius: '0.25rem' }}
+                            style={{ height: "3rem", backgroundColor: "#3B16B7", borderRadius: '0.25rem',width:"9rem" }}
                             type="primary"
                             onClick={() => setFinalise(true)}
                             disabled={!isAnyQuestionCreated}
@@ -711,6 +750,7 @@ function Quiz(props) {
                              <h3 className="font-medium text-white text-base">Finalize</h3>
                           </Button>
                         }
+                      </div>
                       </div>
                     </div>
                   </div>
