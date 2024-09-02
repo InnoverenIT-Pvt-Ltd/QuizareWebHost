@@ -8,12 +8,12 @@ import QuizDetails from "../Container/Quiz/EditQuiz/QuizDetails";
 
 const ProcessShareDrawer = (props) => {
     const { RowData, ...formProps } = props;
-
+    const isMobile = window.innerWidth < 768;
     return (
         <>
             <Modal
                 //title={props.RowData.imei}
-                width="40%"
+                width={isMobile ? "100%" : "40%"}
                 height="50%"
                 visible={props.processShareModal}
                 closable

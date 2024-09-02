@@ -82,13 +82,13 @@ function QuizLibrary(props) {
     <div class="min-h-screen">
       <Menu />
       <Formik>
-        <Form class="flex justify-center h-h32 max-sm:w-11/12 mt-8 m-auto md:mt-12  w-wk    ">
+        <Form class="flex justify-center h-h32 max-sm:w-wk mt-8 m-auto md:mt-12  w-wk max-sm:mt-0    ">
           {/* <Swiper
             navigation={true}
             modules={[Navigation]}
             className="mySwiper "
           > */}
-          <div class="flex flex-wrap h-[86vh] overflow-x-auto w-full max-sm:justify-between max-sm:flex-col max-sm:items-center justify-center">
+          <div class="flex flex-wrap max-sm:flex-nowrap h-[86vh] overflow-x-auto w-full max-sm:justify-between max-sm:flex-col max-sm:items-center justify-center">
             {props.libraryQuiz.map((item, i) => {
               const imageUrl = item.imageId ? <Image imageId={FWLogo2} /> : 'none';
               return (
@@ -182,7 +182,7 @@ function QuizLibrary(props) {
                           <h3>Close This Quiz</h3>
                         </Button>
                       )}
-                       <Link
+                       {/* <Link
                         to={`quizinLibrary/${item.quizId}`}
                       >
 
@@ -193,7 +193,7 @@ function QuizLibrary(props) {
                         >
                           <h3>Add Question</h3>
                         </Button>
-                      </Link>
+                      </Link> */}
 
         </div>
       )}

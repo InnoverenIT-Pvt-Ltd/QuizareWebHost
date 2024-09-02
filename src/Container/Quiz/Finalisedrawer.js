@@ -10,12 +10,12 @@ import { StyledDrawer } from "../../Components/UI/Antd";
 
 const Finalisedrawer = (props) => {
     const { RowData, ...formProps } = props;
-
+    const isMobile = window.innerWidth < 768;
     return (
         <>
             <StyledDrawer
                 title={props.showQuiz && props.showQuiz.quizName}
-                width="30%"
+                width={isMobile ? "80%" : "30%"}
                 height="50%"
                 visible={props.finalise}
                 closable

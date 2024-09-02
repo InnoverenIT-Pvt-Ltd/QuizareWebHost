@@ -97,7 +97,7 @@ class LoginByMail extends Component {
                             alt="Tekorero logo"
 
                         /> */}
-                       <div className="bg-[#3B16B7]  shadow-2xl border-solid flex justify-center mt-3 flex-col max-sm:w-11/12 h-[96vh] md:w-[75%] ">
+                       <div className="bg-[#3B16B7]  shadow-2xl border-solid flex justify-center md:mt-3 flex-col max-sm:w-wk h-[96vh] md:w-[75%] max-sm:justify-start ">
                             <Formik
                                 enableReinitialize
                                 initialValues={{
@@ -111,9 +111,19 @@ class LoginByMail extends Component {
                                 }}
                             >
                                 {({ errors, touched, isSubmitting, values }) => (
-                                    <Form className="form-background h-h29 flex justify-between items-center p-12">
-                                        
-                                        <div class="flex  items-center rounded-2xl flex-col p-10 border w-[63%] h-[80vh] bg-[#6245C6]" >
+                                    <Form className="form-background h-h29 flex justify-between items-center p-12 max-sm:w-wk max-sm:p-1 max-sm:flex-col">
+                                         <div class="flex flex-col w-wk md:hidden ">
+                                        <div>
+                                        <img
+                            className="big-logo"
+                            src={FWLogo1}
+                            style={{ width: "25rem" }}
+                            alt="Tekorero logo" 
+                            /> 
+                                        </div>
+                                       
+                                        </div>
+                                        <div class="flex  items-center rounded-2xl flex-col p-10 border w-[63%] h-[80vh] bg-[#6245C6] max-sm:p-[1.5rem] max-sm:w-wk max-sm:mt-4" >
                                             <h2 class="text-3xl font-medium text-white flex justify-start w-wk"> Sign in now</h2>                                  
                                         {/* <div class="flex justify-between flex-col">
                                         <div class="mt-4" >
@@ -225,7 +235,7 @@ class LoginByMail extends Component {
                             </div>
                                                 </div>
                                         </div>
-                                        <div class="flex flex-col w-[33%]">
+                                        <div class="flex flex-col w-[33%] max-sm:hidden">
                                         <div>
                                         <img
                             className="big-logo"

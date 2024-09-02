@@ -3,6 +3,7 @@ import { Field, Form, Formik } from "formik";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button, Card } from "antd";
+import { MenuOutlined } from "@ant-design/icons";
 import {
     getQuestionList,
     handleBackToQuiz,
@@ -54,9 +55,16 @@ function EditQuestionofQuiz(props) {
                          <div className="w-full  flex justify-center flex-col ">
                                 {/* Container */}
                                 <div class="w-wk flex justify-center flex-col items-center">
-                               
+                                <div className="flex items-center justify-center ">
+                                <Button
+                className="md:hidden"
+                icon={<MenuOutlined className="!text-black"/>}
+                onClick={() => props.setIsDrawerVisible(true)}
+              > 
+              </Button>
                                         {/* <Card style={{ fontSize: 22, alignSelf: "center" }}> */}
                                             <h3 class="flex justify-center text-xl">Question {props.questionNo || null}</h3>
+                                            </div>
                                         {/* </Card> */}
                                         <hr class="h-px bg-black border-2 w-wk mt-4 border-black"/>
                                         <div class="mt-4 w-wk p-4">

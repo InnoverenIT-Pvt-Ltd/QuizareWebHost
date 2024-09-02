@@ -30,8 +30,8 @@ if(props.addingUserQuery){
   return (
     <>
     <Menu/>
-    <div class="flex items-center justify-center mt-4 h-[91vh]">
-    <div class="shadow-2xl flex-col  bg-white border-solid w-[35%] flex  items-center  p-4 max-sm:m-0  rounded-xl  m-auto">
+    <div class="flex items-center justify-center md:mt-4 h-[91vh] max-sm:p-1">
+    <div class="shadow-2xl flex-col  bg-white border-solid w-[35%] max-sm:w-wk flex  items-center  p-4 max-sm:m-0  rounded-xl  m-auto">
     <div class=" text-sm font-semibold mt-8">
       Do you Want to use ChatGPT to Generate Questions?
 

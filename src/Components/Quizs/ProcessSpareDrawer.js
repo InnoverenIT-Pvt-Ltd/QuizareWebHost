@@ -8,12 +8,13 @@ import CreatModal from "./CreatModal";
 
 const ProcessSpareDrawer = (props) => {
     const { RowData, ...formProps } = props;
+    const isMobile = window.innerWidth < 768;
 
     return (
         <>
             <Modal
                 //title={props.RowData.imei}
-                width="35%"
+                 width={isMobile ? "100%" : "35%"}
                 height="50%"
                 visible={props.processSpareModal}
                 closable
