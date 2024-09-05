@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
+import IosShareIcon from '@mui/icons-material/IosShare';
 import FWLogo2 from "../../../../images/image 20.png";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -15,8 +16,9 @@ import {
   hostQuiz,
   closeLibraryQuiz,
   updateQuizNameByQuizId,
+  handleCopy
 } from "../../QuizAction";
-import { Button, Modal } from "antd";
+import { Button, Modal, Tooltip } from "antd";
 import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import moment from "moment";
@@ -24,6 +26,9 @@ import MainHeader from "../../../../Components/Mainheader";
 import { Form, Formik } from "formik";
 import Menu from "../../../../Components/Quizs/Menu";
 import Image from "./Image";
+import { StyledDrawer } from "../../../../Components/UI/Antd";
+import ProcessShareDrawer from "../../../../Components/ProcessShareDrawer";
+import ShareDrawer from "./ShareDrawer";
 
 const { useState } = React;
 
@@ -201,6 +206,14 @@ function QuizLibrary(props) {
     </div>
     </div>       
     <div className="flex justify-between items-center absolute bottom-0 w-wk p-2">
+      <div>
+        <Tooltip title="Share">
+        <IosShareIcon  onClick={() => {
+  props.handleCopy(true);
+  handleSetCurrentItem(item);
+}} className="!cursor-pointer"/>
+        </Tooltip>
+        </div>
     <div class="flex flex-row">
                             <h2 class=" text-base text-white">
                               {item.quizHostInd === false ? "Closed" : "Hosted"}
@@ -317,7 +330,7 @@ function QuizLibrary(props) {
                           <h3>Add Question</h3>
                         </Button>
                       </Link> */}
-                      <Modal
+                      <StyledDrawer
                         title="Host Quiz"
                         open={isModalOpen}
                         onOk={handleOk}
@@ -335,7 +348,7 @@ function QuizLibrary(props) {
                             placeholder="Enter Response time per question"
                           />
                         </form>
-                      </Modal>
+                      </StyledDrawer>
                     </div>
                   </div>
                  
@@ -354,6 +367,11 @@ function QuizLibrary(props) {
         </Form>
       </Formik>
       </div>
+      <ShareDrawer            
+                  copyReduce={props.copyReduce}
+                    handleCopy={props.handleCopy}
+                    currentItem={currentItem}
+                />
     </>
   );
 }
@@ -375,7 +393,8 @@ const mapStateToProps = ({ auth, quiz }) => ({
   addingQuizNameError: quiz.addingQuizNameError,
   quizName: quiz.quizName,
   quizHostId: auth.userDetails.userId,
-  fetchingLibraryQuiz:quiz.fetchingLibraryQuiz
+  fetchingLibraryQuiz:quiz.fetchingLibraryQuiz,
+  copyReduce: quiz.copyReduce,
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -388,6 +407,7 @@ const mapDispatchToProps = (dispatch) =>
       hostQuiz,
       handleQuizHostModal,
       //   addQuizName,
+      handleCopy,
       updateQuizNameByQuizId,
     },
     dispatch

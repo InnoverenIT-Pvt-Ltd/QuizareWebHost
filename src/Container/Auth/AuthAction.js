@@ -3,6 +3,7 @@ import { base_url, login_url } from '../../Config/Auth';
 import axios from 'axios';
 import { message } from "antd"
 import { createBrowserHistory } from "history";
+import Swal from 'sweetalert2'
 
 const history = createBrowserHistory();
 // import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -140,7 +141,7 @@ export const googleLogin = (tokenId, history, cb) => dispatch => {
     });
 };
 
-export const signUpByUser = ({ emailID, password, name, confirmPassword, imageId }, history, cb) => (dispatch) => {
+export const signUpByUser = ({ emailID, password, name, confirmPassword, imageId,lastName }, history, cb) => (dispatch) => {
   dispatch({
     type: types.SIGN_UP_BY_USER_REQUEST,
   });
@@ -150,6 +151,7 @@ export const signUpByUser = ({ emailID, password, name, confirmPassword, imageId
         emailID: emailID,
         password: password,
         name: name,
+        lastName:lastName,
         confirmPassword: confirmPassword,
         imageId: imageId
       })
@@ -157,7 +159,13 @@ export const signUpByUser = ({ emailID, password, name, confirmPassword, imageId
       dispatch(getUserDetails(res.data.userId));
       const redirectPath = res.data.noOfQuizes === 0 ? "/emptypage" : "/quizLibrary";
       history.push(redirectPath);
-      message.success("You have registered successfully !!")
+      Swal.fire({
+        icon: "success",
+        title: "You have registered successfully !!",
+        showConfirmButton: false,
+        timer: 1500
+      });
+      //message.success("You have registered successfully !!")
       dispatch({
         type: types.SIGN_UP_BY_USER_SUCCESS,
         payload: res.data,

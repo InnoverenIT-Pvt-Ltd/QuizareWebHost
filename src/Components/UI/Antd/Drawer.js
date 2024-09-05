@@ -37,7 +37,7 @@ const StyledDrawer = styled(Drawer)`
         
     }
     .ant-drawer-title {
-        color: ${props => props.theme.color};
+        color: #fff;
        
     }
     .anticon {

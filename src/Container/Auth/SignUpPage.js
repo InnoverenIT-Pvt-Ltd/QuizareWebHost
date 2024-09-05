@@ -8,7 +8,9 @@ import FWLogo2 from "../../../src/images/Divider.png";
 import FWLogo3 from "../../../src/images/login.png";
 import FWLogo4 from "../../../src/images/login1.png";
 import Button from "antd/lib/button";
-import { signUpByUser } from "./AuthAction";
+import FacebookLogin from "react-facebook-login";
+import { GoogleLogin } from 'react-google-login';
+import { signUpByUser,facebookLogin, googleLogin } from "./AuthAction";
 import Upload from "../../Components/Forms/Formik/Upload";
 import { Link, withRouter } from "react-router-dom";
 import { message } from "antd"
@@ -28,10 +30,20 @@ import { Radio } from "@mui/material";
 class SignUpPage extends Component {
     constructor(props) {
         super(props);
+        this.responseFacebook = this.responseFacebook.bind(this);
+        this.responseGoogle = this.responseGoogle.bind(this);
         this.state = {
             isChecked:false
         };
     }
+    responseFacebook(response) {
+        console.log(response);
+        this.props.facebookLogin(response.accessToken);
+      }
+      responseGoogle(response) {
+        console.log(response);
+        this.props.googleLogin(response.tokenId, this.props.history);
+      }
     handleSteppriPolInd = (newValue) => {
         this.setState({ isChecked: newValue });
       };
@@ -104,7 +116,7 @@ class SignUpPage extends Component {
                                                     name="name"
                                                     type="text"                    
                                                     placeholder="First name"
-                                                    style={{ width: "100%", height: "2.2rem",borderRadius:"0.5rem",backgroundColor:"#6245C6",borderColor:"white" }}
+                                                    style={{ width: "100%", height: "2.2rem",borderRadius:"0.5rem",backgroundColor:"#6245C6",borderColor:"white",color:"white" }}
                                                     component={InputComponent}
                                                 />
                                             </div>
@@ -114,7 +126,7 @@ class SignUpPage extends Component {
                                                     name="lastName"
                                                     type="text"                                              
                                                     placeholder="Last name"
-                                                    style={{ width: "100%", height: "2.2rem",borderRadius:"0.5rem",backgroundColor:"#6245C6",borderColor:"white" }}
+                                                    style={{ width: "100%", height: "2.2rem",borderRadius:"0.5rem",backgroundColor:"#6245C6",borderColor:"white",color:"white" }}
                                                     component={InputComponent}
                                                 />
                                             </div>
@@ -125,7 +137,7 @@ class SignUpPage extends Component {
                                                     name="emailID"
                                                     type="email"
                                                     placeholder="Enter email"
-                                                    style={{ width: "100%", height: "2.2rem",borderRadius:"0.5rem",backgroundColor:"#6245C6",borderColor:"white" }}
+                                                    style={{ width: "100%", height: "2.2rem",borderRadius:"0.5rem",backgroundColor:"#6245C6",borderColor:"white",color:"white" }}
                                                     component={InputComponent}
                                                 />
                                             </div>
@@ -136,7 +148,7 @@ class SignUpPage extends Component {
                                                     name="password"
                                                     type="password"
                                                     placeholder="Create password"
-                                                    style={{ width: "100%", height: "2.2rem",borderRadius:"0.5rem",backgroundColor:"#6245C6",borderColor:"white" }}
+                                                    style={{ width: "100%", height: "2.2rem",borderRadius:"0.5rem",backgroundColor:"#6245C6",borderColor:"white",color:"white" }}
                                                     component={InputComponent}
 
                                                 />
@@ -147,7 +159,7 @@ class SignUpPage extends Component {
                                                     name="confirmPassword"
                                                     type="password"
                                                     placeholder="Confirm password"
-                                                    style={{ width: "100%", height: "2.2rem",borderRadius:"0.5rem",backgroundColor:"#6245C6",borderColor:"white" }}
+                                                    style={{ width: "100%", height: "2.2rem",borderRadius:"0.5rem",backgroundColor:"#6245C6",borderColor:"white",color:"white" }}
                                                     component={InputComponent}
 
                                                 />
@@ -161,7 +173,7 @@ class SignUpPage extends Component {
 
                         /> 
                                             </div>
-                                            <div className="mt-4 flex justify-between w-wk">
+                                            {/* <div className="mt-4 flex justify-between w-wk">
 
                                             <img
                             className="big-logo"
@@ -177,7 +189,32 @@ class SignUpPage extends Component {
                             alt="Tekorero logo"
 
                         /> 
-                                            </div>
+                                            </div> */}
+                                             <div className="mt-6 flex justify-between w-wk">
+                                        <div class="mt-4" >
+                                        <FacebookLogin
+                                         
+          appId="1462431934502453"
+          autoLoad={false}
+          scope="public_profile, email, user_birthday"
+          fields="name,email,picture"
+          callback={this.responseFacebook}
+        />
+        
+      </div>
+      <div class="mt-3" >
+                                      
+                                        <GoogleLogin
+          clientId="1802272721-jkbu5gabo0qsrq7kh50n5ap7h3979tvb.apps.googleusercontent.com"
+          buttonText="  Login with Google  "
+          onSuccess={this.responseGoogle}
+          onFailure={this.responseGoogle}
+          cookiePolicy={'single_host_origin'}
+         
+        />
+      
+      </div>
+      </div>
                                             <div class="flex items-center w-wk mt-2">
                                                 
                                             <input id="default-radio-1"
@@ -185,7 +222,11 @@ class SignUpPage extends Component {
                                              checked={this.state.isChecked}
                                              onChange={(e) => this.handleSteppriPolInd(e.target.checked)}
                                               class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"></input>
-                                                <h3 class="ml-2 text-white">By creating an account, I agree to our Terms of use and Privacy Policy </h3>
+                                                <h3 class="ml-2 text-white">By creating an account, I agree to our 
+                                                   <Link to="/term"> Terms of use</Link>&nbsp;
+                                                     and
+                                                     <Link to="/privacy"> Privacy Policy </Link>
+                                                      </h3>
                                                 
                                                 </div>
                                            
@@ -241,7 +282,9 @@ const mapStateToProps = ({ auth, job }) => ({
 const mapDispatchToProps = (dispatch) =>
     bindActionCreators(
         {
-            signUpByUser
+            signUpByUser,
+            facebookLogin,
+            googleLogin
         },
         dispatch
     );
