@@ -1,8 +1,9 @@
-import React, { useState } from "react"; 
+import React, { useState,useEffect } from "react"; 
 import FWLogo from "../../../src/images/Vector.png";
 import FWLogo2 from "../../../src/images/Group (1).png";
-import FWLogo1 from "../../../src/images/Group.png";
+import FWLogo1 from "../../../src/images/QP-logo-short_500px.png";
 import "./header.css";
+import {getUserDetails} from "../../Container/Auth/AuthAction"
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
  import {handleSpareProcess} from "../../Container/Auth/AuthAction"
@@ -18,7 +19,9 @@ const Menu = (props) => {
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
   const [isDropdownVisible, setDropdownVisible] = useState(false);
-
+  // useEffect(() => {
+  //  // props.getUserDetails(props.userId)
+  // }, [props.userId]);
   const handleMouseEnter = () => {
     setDropdownVisible(true);
   };
@@ -35,16 +38,18 @@ const Menu = (props) => {
   function handleCallBack (data)  {
     props.history.push(`/how1`);
   };
+  console.log(props.user.noOfQuizes)
   return (
     <div className="header">
       <div className="logo-nav">
         <div className="logo-container">
-        <Link to={props.user.noOfQuizes === 0 ? "/emptypage" : "/quizLibrary"}>
-                  <div style={{ marginTop: "5px" }}>
+        {/* <Link to={props.user.noOfQuizes === 0 ? "/emptypage" : "/quizLibrary"}> */}
+        <a href={props.user.noOfQuizes === 0 ? "/emptypage" : "/quizLibrary"}>
+                  <div >
                   <img
                   className="big-logo"
                   src={FWLogo1}
-                  // style={{ width: 60}}
+                   style={{ width: "2.5rem"}}
                   alt="Tekorero logo"
 
                 />
@@ -56,7 +61,8 @@ const Menu = (props) => {
 
                 /> */}
                   </div>
-                </Link>
+                  </a>
+                {/* </Link> */}
         </div>
         <ul className={click ? "nav-options active" : "nav-options"}>
           {/* <li className="option" onClick={closeMobileMenu}>
@@ -240,14 +246,16 @@ const Menu = (props) => {
 };
 const mapStateToProps = ({ auth,  }) => ({
   processSpareModal: auth.processSpareModal,
-  user: auth.userDetails
+  user: auth.userDetails,
+  userId: auth.userDetails.userId,
 });
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
       {
           
-          handleSpareProcess
+          handleSpareProcess,
+          getUserDetails
       },
       dispatch
   );
@@ -255,55 +263,3 @@ const mapDispatchToProps = (dispatch) =>
 export default connect(mapStateToProps, mapDispatchToProps)(Menu);
 
 
-// import React from "react";
-
-// const Menu = () => {
-//   const handleRefresh = () => {
-//     // This function will refresh the page
-//     window.location.reload();
-//   };
-
-//   return (
-//     <div className="header">
-//       <ul>
-//         <li>
-//           <a href="/how1" onClick={handleRefresh}>
-//             How to
-//           </a>
-//         </li>
-//         <li>
-//           <a href="/how2" onClick={handleRefresh}>
-//             Create Quiz
-//           </a>
-//         </li>
-//         <li>
-//           <a href="/how3" onClick={handleRefresh}>
-//             Quiz Library
-//           </a>
-//         </li>
-//         <li>
-//           <a href="/ongoingQuiz" onClick={handleRefresh}>
-//             Ongoing Quizzes
-//           </a>
-//         </li>
-//         <li>
-//           <a href="/how4" onClick={handleRefresh}>
-//             My Profile
-//           </a>
-//         </li>
-//         <li>
-//           <a href="/changepassword" onClick={handleRefresh}>
-//             Change Password
-//           </a>
-//         </li>
-//         <li>
-//           <a href="/email" onClick={handleRefresh}>
-//             Sign Out
-//           </a>
-//         </li>
-//       </ul>
-//     </div>
-//   );
-// };
-
-// export default Menu;

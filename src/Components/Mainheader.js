@@ -120,7 +120,7 @@
 import React, { useState } from "react"; 
 import FWLogo from "../../src/images/Vector.png";
 import FWLogo2 from "../../src/images/Group (1).png";
-import FWLogo1 from "../../src/images/Group.png";
+import FWLogo1 from "../../src/images/QP-logo-short_500px.png";
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
  import {handleShareProcess} from "../Container/Auth/AuthAction"
@@ -158,11 +158,11 @@ const Menu = (props) => {
         <div className="logo-container">
         {/* <Link to={props.user.noOfQuizes === 0 ? "/emptypage" : "/quizLibrary"}> */}
         <Link to="/quizLibrary">
-                  <div style={{ marginTop: "5px" }}>
+                  <div >
                   <img
                   className="big-logo"
                   src={FWLogo1}
-                  // style={{ width: 60}}
+                  style={{ width: "2.5rem"}}
                   alt="Tekorero logo"
 
                 />

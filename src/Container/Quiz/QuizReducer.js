@@ -75,6 +75,8 @@ const initialState = {
   fetchingCategoryError: false,
   category: [],
 
+  copyReduce:false,
+
   addingCategory: false,
   addingCategoryError: false,
 
@@ -117,6 +119,12 @@ export const quizReducer = (state = initialState, action) => {
         ...state,
         addQuizHostModal: action.payload,
       };
+
+      case types.HANDLE_COPY:
+        return {
+          ...state,
+          copyReduce: action.payload,
+        };
 
     case types.GET_QUESTIONS_REQUEST:
       return { ...state, fetchingQuestions: true };

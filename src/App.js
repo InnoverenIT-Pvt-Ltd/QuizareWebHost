@@ -7,6 +7,8 @@ import "./App.css";
 import { BundleLoader } from "./Components/Placeholder";
 import PrivateRoute from "./Helpers/Auth/PrivateRoute";
 import AppRouter from "./Container/Quiz/EditQuiz/Swipe/AppRouter";
+import Privacy from "./Privacy";
+import Termco from "./Termco";
 const ForgetPasswordForm = lazy(() => import("./Container/Auth/ForgetPasswordForm"))
 const LoginByMail = lazy(() => import("./Container/Auth/LoginByMail"))
 const SignUpPage = lazy(() => import("./Container/Auth/SignUpPage"))
@@ -27,6 +29,8 @@ class App extends Component {
             <Route exact path="/login" component={Login} />
             <Route exact path="/email" component={LoginByMail} />
             <Route exact path="/signUp" component={SignUpPage} />
+            <Route exact path="/privacy" component={Privacy} />
+            <Route exact path="/term" component={Termco} />
             <Route exact path="/changepassword" component={ChangePassword} />
             <Route exact path="/forgotPassword" component={ForgetPasswordForm} />
 

@@ -2,6 +2,7 @@ import * as types from './QuizActionTypes';
 import axios from 'axios';
 import { base_url,base_url2 } from '../../Config/Auth';
 import store from '../../Store';
+import { withRouter } from 'react-router-dom';
 import { createBrowserHistory } from "history";
 import Swal from 'sweetalert2'
 
@@ -12,6 +13,13 @@ const history = createBrowserHistory();
 export const handleQuizHostModal = (modalProps) => (dispatch) => {
   dispatch({
     type: types.HANDLE_QUIZ_HOST_MODAL,
+    payload: modalProps,
+  });
+};
+
+export const handleCopy = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_COPY,
     payload: modalProps,
   });
 };
@@ -388,7 +396,7 @@ export const deleteHostQuiz = (quizId, cb) => dispatch => {
     });
 };
 //Host quiz
-export const hostQuiz = (data, quizId) => dispatch => {
+export const hostQuiz = (data, quizId,history) => dispatch => {
   //console.log('inside update question');
   dispatch({
     type: types.HOST_QUIZ_REQUEST,
@@ -401,6 +409,7 @@ export const hostQuiz = (data, quizId) => dispatch => {
         payload: res.data,
       });
       // cb && cb();
+      window.location.replace("/quizLibrary");
     })
     .catch(err => {
       //console.log(err);

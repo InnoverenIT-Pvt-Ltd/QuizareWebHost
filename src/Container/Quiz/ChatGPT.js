@@ -3,6 +3,7 @@ import { Button, Input } from 'antd'
 import { addUserQuery,sendQuizResponse } from './QuizAction';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import FWLogo from "../../../src/images/linear_background_154 2.jpg";
 import {Link, withRouter,useHistory } from "react-router-dom";
 import Menu from "../../Components/Quizs/Menu";
 
@@ -30,24 +31,33 @@ if(props.addingUserQuery){
   return (
     <>
     <Menu/>
-    <div class="flex items-center justify-center md:mt-4 h-[91vh] max-sm:p-1">
-    <div class="shadow-2xl flex-col  bg-white border-solid w-[35%] max-sm:w-wk flex  items-center  p-4 max-sm:m-0  rounded-xl  m-auto">
-    <div class=" text-sm font-semibold mt-8">
+    <div class="flex  justify-center flex-col items-center  max-sm:w-11/12 mt-8 m-auto h-[60vh] md:mt-12 w-4/12 md:h-[80vh] ">
+    <div>
+              <img
+                    className="big-logo"
+                    src={FWLogo}
+                    style={{ borderRadius:"0.75rem"}}
+                    alt="Tekorero logo"
+
+                  />
+              </div>
+              <div class="absolute md:bottom-[10rem]  flex flex-col justify-center items-center  max-sm:m-0 h-80  m-auto">
+    <div class=" text-sm font-semibold  text-white">
       Do you Want to use ChatGPT to Generate Questions?
 
     </div>
     <div class="flex justify-between w-wk mt-6">
       <div>
-    <Button  style={{ height: "3rem", backgroundColor: "#3B16B7", borderRadius: '0.25rem' }}  type="primary"
+    <Button  style={{  height: "2rem",backgroundColor:"white",borderRadius:'0.25rem',width:"7rem",display:"flex",justifyContent:"center",alignItems:"center" }}  type="primary"
     onClick={() =>    setshowCard(true)}
     > 
-    Yes
+   <h3 class="font-medium text-black text-xl">Yes</h3> 
     </Button>
     </div>
     <div>
-    <Button  style={{ height: "3rem", backgroundColor: "#3B16B7", borderRadius: '0.25rem' }} type="primary" 
+    <Button  style={{  height: "2rem",backgroundColor:"white",borderRadius:'0.25rem',width:"7rem",display:"flex",justifyContent:"center",alignItems:"center" }} type="primary" 
     onClick={() =>    handleSayNo()}
-    > No</Button>
+    > <h3 class="font-medium text-black text-xl">No</h3></Button>
     </div>
     
     </div>
@@ -60,7 +70,7 @@ if(props.addingUserQuery){
     />
     <div class="mt-4 ">
     <Button  type="primary"
-     style={{ height: "3rem", backgroundColor: "#3B16B7", borderRadius: '0.25rem' }}
+     style={{ height: "3rem", backgroundColor: "white", borderRadius: '0.25rem' }}
     onClick={()=>{
       const query={
 
@@ -73,7 +83,7 @@ questions_required:questionReq,
       }
       props.addUserQuery(query);
       setGenerationComplete(true);
-      }}> <h3 className="font-medium text-white text-xl -mt-4"> Generate v</h3> </Button>
+      }}> <h3 className="font-medium  text-xl -mt-4"> Generate v</h3> </Button>
       </div>
      &nbsp;
      &nbsp;

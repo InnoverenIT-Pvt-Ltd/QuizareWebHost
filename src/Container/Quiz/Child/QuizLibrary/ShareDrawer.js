@@ -2,32 +2,32 @@ import React, { lazy, Suspense, useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Modal } from "antd";
-import FinalizeQuiz from "./Child/HostQuizes/FinalizeQuiz";
-import { StyledDrawer } from "../../Components/UI/Antd";
+import ShareQuizDetails from "./ShareQuizDetails";
+import { StyledDrawer } from "../../../../Components/UI/Antd";
 
 
 
-
-const Finalisedrawer = (props) => {
+const ShareDrawer = (props) => {
     const { RowData, ...formProps } = props;
     const isMobile = window.innerWidth < 768;
     return (
         <>
             <StyledDrawer
-                title={props.showQuiz && props.showQuiz.quizName}
-                width={isMobile ? "80%" : "30%"}
-                style={{marginTop:"8rem"}}
+                //title={props.RowData.imei}
+                width={isMobile ? "100%" : "40%"}
                 height="50%"
-                visible={props.finalise}
+                style={{marginTop:"5rem"}}
+                visible={props.copyReduce}
                 closable
                 destroyOnClose
                 footer={null}
                   placement="right"
-                  onClose={() => props.setFinalise(false)}
+                  onClose={() => props.handleCopy(false)}
             >
                 <Suspense fallback={"loading..."}>
-                <FinalizeQuiz
-                setFinalise={props.setFinalise}
+                    
+                <ShareQuizDetails 
+                currentItem={props.currentItem}
                 />
                 </Suspense>
             </StyledDrawer>
@@ -51,5 +51,5 @@ const mapDispatchToProps = (dispatch) =>
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Finalisedrawer);
+)(ShareDrawer);
 

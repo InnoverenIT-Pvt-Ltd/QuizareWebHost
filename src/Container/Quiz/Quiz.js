@@ -705,6 +705,7 @@ function Quiz(props) {
                     </div>
                     <div className="flex justify-between p-6 w-wk max-sm:flex-col">
                       <div className="flex justify-between w-wk ">
+                      
                       <div>
                         <Button
                           style={{ height: "3rem", backgroundColor: "#3B16B7", borderRadius: '0.25rem',width:"9rem" }}
@@ -714,6 +715,8 @@ function Quiz(props) {
                           <h3 className="font-medium text-white text-base">+ Add question</h3>
                         </Button>
                       </div>
+                     
+                      {selectedQuestionIndex >= 0 && isAnyQuestionCreated && (
                       <div className="md:mr-16">
                         <Button
                           style={{ height: "3rem", backgroundColor: "#3B16B7", borderRadius: '0.25rem',width:"9rem" }}
@@ -726,8 +729,10 @@ function Quiz(props) {
                           </h3>
                         </Button>
                       </div>
+                       )}
                       </div>
                       <div className="flex justify-between w-wk">
+                      {selectedQuestionIndex >= 0 && isAnyQuestionCreated && (
                       <div className="md:ml-16">
                         <Button
                           title={""}
@@ -739,6 +744,7 @@ function Quiz(props) {
                            <h3 className="font-medium text-white text-base">Delete Question</h3>
                         </Button>
                       </div>
+                      )}
                       <div>
                         {count >= 1 &&
                           <Button
