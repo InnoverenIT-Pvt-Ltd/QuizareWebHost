@@ -156,7 +156,8 @@ const Menu = (props) => {
     <div className="header">
       <div className="logo-nav">
         <div className="logo-container">
-        <Link to={props.user.noOfQuizes === 0 ? "/emptypage" : "/quizLibrary"}>
+        {/* <Link to={props.user.noOfQuizes === 0 ? "/emptypage" : "/quizLibrary"}> */}
+        <Link to="/quizLibrary">
                   <div style={{ marginTop: "5px" }}>
                   <img
                   className="big-logo"

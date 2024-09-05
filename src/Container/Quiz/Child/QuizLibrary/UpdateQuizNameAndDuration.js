@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom";
 import { updateQuizNameByQuizId } from '../../QuizAction';
 import { Button } from 'antd';
 import FWLogo from "../../../../images/lamp-charge.png";
+import FWLogo2 from "../../../../images/linear_background_154 2.jpg";
 import { InputComponent } from '../../../../Components/Forms/Formik/InputComponent';
 import MainHeader from '../../../../Components/Mainheader';
 function UpdateQuizNameAndDuration(props) {
@@ -45,20 +46,21 @@ function UpdateQuizNameAndDuration(props) {
                     errors,
                     values,
                 }) => (
-                    <Form class="flex justify-center flex-col items-center  max-sm:w-11/12 mt-8 m-auto h-hk md:mt-12  w-2/5 ">
-                        <div class="shadow-2xl bg-white border-solid w-full flex justify-center items-center  p-1 max-sm:m-0 h-h26 rounded-rounded2.8 md:w-full m-auto">
-                            <div class="w-11/12" >
-                                <div class="flex justify-center flex-col items-center">
-                            <h2 class="text-3xl font-medium">Update quiz</h2>
-              <div>
+                    <Form class="flex  justify-center flex-col items-center  max-sm:w-11/12 mt-8 m-auto h-[60vh] md:mt-12 w-4/12 md:h-[80vh] ">
+                         <div>
               <img
                     className="big-logo"
-                    src={FWLogo}
-                    
+                    src={FWLogo2}
+                    style={{ borderRadius:"0.75rem"}}
                     alt="Tekorero logo"
 
                   />
-              </div>  
+              </div>
+              <div class="absolute md:bottom-[12rem] w-full flex flex-col justify-center items-center  max-sm:m-0 h-80  md:w-full m-auto">
+              <div class="flex flex-col items-center ">
+                                <div class="flex justify-center flex-col items-center">
+                                <h2 class="text-3xl font-medium text-white">Update quiz</h2>
+            
               </div>
                             <div class="mt-4">
                                     <Field
@@ -66,7 +68,7 @@ function UpdateQuizNameAndDuration(props) {
                                         onChangeText={handleChange('quizName')}
                                         component={InputComponent}
                                         value={`${values.quizName}`}
-                                        style={{ width: "100%", height: "3rem",borderRadius:"1.25rem",backgroundColor:"#E4E2E2", }}
+                                        style={{ width: "100%", height: "2rem",borderRadius:"0.25rem",backgroundColor:"#E4E2E2", }}
                                     // placeholder="Enter Quiz Name" 
                                     />
                                 </div>
@@ -81,14 +83,15 @@ function UpdateQuizNameAndDuration(props) {
                                 </div> */}
                              
                             </div>
-                        </div>
-                        <div class="bg-black rounded-rounded2.8  mt-8 w-52 items-center flex justify-center" >
+                            <div class=" rounded  items-center flex justify-center mt-6" >
                                     <Button
                                         type="primary"
-                                        style={{  height: "5em",backgroundColor:"black",borderRadius:'3rem',display:"flex",justifyContent:"center",alignItems:"center" }}
+                                        style={{  height: "2rem",backgroundColor:"white",borderRadius:'0.25rem',width:"11rem",display:"flex",justifyContent:"center",alignItems:"center" }}
                                         onClick={handleSubmit}
-                                    ><h3 class="font-medium text-white text-3xl">Update Quiz</h3></Button>
+                                    ><h3 class="font-medium text-black text-xl">Update Quiz</h3></Button>
                                 </div>
+                        </div>
+                       
                     </Form>
                 )}
             </Formik>

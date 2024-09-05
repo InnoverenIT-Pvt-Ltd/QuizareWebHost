@@ -155,7 +155,8 @@ export const signUpByUser = ({ emailID, password, name, confirmPassword, imageId
       })
     .then((res) => {
       dispatch(getUserDetails(res.data.userId));
-      history.push("/");
+      const redirectPath = res.data.noOfQuizes === 0 ? "/emptypage" : "/quizLibrary";
+      history.push(redirectPath);
       message.success("You have registered successfully !!")
       dispatch({
         type: types.SIGN_UP_BY_USER_SUCCESS,

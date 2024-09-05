@@ -507,3 +507,16 @@ input {
   cursor: pointer;
   transition: border-color 0.3s;
 }
+
+.kep-login-facebook {
+  font-family: Helvetica, sans-serif;
+  font-weight: 600;
+  -webkit-font-smoothing: antialiased;
+  color: black;
+  cursor: pointer;
+  display: inline-block;
+  font-size: calc(.27548vw + 12.71074px);
+  text-decoration: none;
+  background-color: white;
+  padding: 0.5rem;
+}
