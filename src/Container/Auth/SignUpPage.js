@@ -26,6 +26,15 @@ import { Radio } from "@mui/material";
 //  */
 
 class SignUpPage extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            isChecked:false
+        };
+    }
+    handleSteppriPolInd = (newValue) => {
+        this.setState({ isChecked: newValue });
+      };
     render() {
         console.log(this.props);
 
@@ -41,6 +50,7 @@ class SignUpPage extends Component {
                                     emailID: "",
                                     password: "",
                                     name: "",
+                                    lastName:"",
                                     confirmPassword: "",
                                     imageId: ""
                                 }}
@@ -101,7 +111,7 @@ class SignUpPage extends Component {
                                             <div className="w-[47.5%]">
                                                 <div class="text-white font-normal">Last name</div>
                                                 <Field
-                                                    name="name"
+                                                    name="lastName"
                                                     type="text"                                              
                                                     placeholder="Last name"
                                                     style={{ width: "100%", height: "2.2rem",borderRadius:"0.5rem",backgroundColor:"#6245C6",borderColor:"white" }}
@@ -170,7 +180,11 @@ class SignUpPage extends Component {
                                             </div>
                                             <div class="flex items-center w-wk mt-2">
                                                 
-                                            <input id="default-radio-1" type="checkbox" value="" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"></input>
+                                            <input id="default-radio-1"
+                                             type="checkbox" value="" name="default-radio"
+                                             checked={this.state.isChecked}
+                                             onChange={(e) => this.handleSteppriPolInd(e.target.checked)}
+                                              class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"></input>
                                                 <h3 class="ml-2 text-white">By creating an account, I agree to our Terms of use and Privacy Policy </h3>
                                                 
                                                 </div>
@@ -188,6 +202,7 @@ class SignUpPage extends Component {
                                                     htmlType="submit"
                                                     Loading={isSubmitting}
                                                     style={{  height: "3.5rem",backgroundColor:"#FFFFFF",borderRadius:'3rem' }}
+                                                    disabled={!this.state.isChecked}
                                                 >
                                                   <h3 class="font-medium text-black text-xl">Sign up</h3> 
                                                 </Button>

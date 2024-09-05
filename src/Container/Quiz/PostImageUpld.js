@@ -5,7 +5,7 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { PlusOutlined } from "@ant-design/icons";
 import { base_url } from "../../Config/Auth";
 import { StyledModal, StyledUpload } from "../../Components/UI/Antd";
-const token = sessionStorage.getItem("token");
+ const token = sessionStorage.getItem("token");
 
 class PostImageUpld extends React.Component {
   state = {
@@ -20,10 +20,10 @@ class PostImageUpld extends React.Component {
       file.flag = true;
       return false;
     }
-    const isLt2M = file.size / 1024 < 150;
+    const isLt2M = file.size / 1024 / 1024 < 1;
     // file.size/1024/1024 <25
     if (!isLt2M) {
-      message.error("Image size must be smaller than 150KB!");
+      message.error("Image size must be smaller than 1MB!");
       file.flag = true;
       return false;
     }

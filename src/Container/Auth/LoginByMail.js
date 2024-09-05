@@ -172,6 +172,11 @@ class LoginByMail extends Component {
 
                                                 />
                                             </div>
+                                            <div className="flex justify-start mt-2 w-wk">
+                                            <Link to="/changepassword">
+                                            <div className="text-white font-semibold">Forgot Password</div>
+                                            </Link>
+                                            </div>
                                             <div className="mt-8">
                                             <img
                             className="big-logo"
@@ -180,7 +185,7 @@ class LoginByMail extends Component {
 
                         /> 
                                             </div>
-                                            <div className="mt-6 flex justify-between w-wk">
+                                            {/* <div className="mt-6 flex justify-between w-wk">
 
                                             <img
                             className="big-logo"
@@ -197,7 +202,32 @@ class LoginByMail extends Component {
                             alt="Tekorero logo"
 
                         /> 
-                                            </div>
+                                            </div> */}
+                                              <div className="mt-6 flex justify-between w-wk">
+                                        <div class="mt-4" >
+                                        <FacebookLogin
+                                         
+          appId="1462431934502453"
+          autoLoad={false}
+          scope="public_profile, email, user_birthday"
+          fields="name,email,picture"
+          callback={this.responseFacebook}
+        />
+        
+      </div>
+      <div class="mt-3" >
+                                      
+                                        <GoogleLogin
+          clientId="1802272721-jkbu5gabo0qsrq7kh50n5ap7h3979tvb.apps.googleusercontent.com"
+          buttonText="  Login with Google  "
+          onSuccess={this.responseGoogle}
+          onFailure={this.responseGoogle}
+          cookiePolicy={'single_host_origin'}
+         
+        />
+      
+      </div>
+      </div>
                                          
                             <div class="flex  w-wk  items-center mt-8">
                             <div class="bg-black rounded-rounded2.8   w-36 items-center flex justify-center" >
