@@ -9,6 +9,10 @@ const initialState = {
 
     processSpareModal:false,
 
+    fetchingLibraySearchData: false,
+    fetchingLibraySearchDataError: false,
+    librarySerachedData:[],
+
     processShareModal:false,
 
     googlelogging: false,
@@ -168,6 +172,24 @@ export const authReducer = (state = initialState, action) => {
 
                 case types.HANDLE_SHARE_PROCESS:
                     return { ...state, processShareModal: action.payload };
+
+                    case types.GET_LIBRAY_SEARCH_REQUEST:
+                              return { ...state, fetchingLibraySearchData: true };
+                            case types.GET_LIBRAY_SEARCH_SUCCESS:
+                              return {
+                                ...state,
+                                fetchingLibraySearchData: false,
+                                 librarySerachedData: action.payload,
+                              };
+                            case types.GET_LIBRAY_SEARCH_FAILURE:
+                              return { ...state, fetchingLibraySearchDataError: true };
+                        
+
+                              case types.HANDLE_CLAER_REDUCER_DATA_LIBRARY:
+                                return { ...state, 
+                                    librarySerachedData: [],  
+                                };
+
 
         default:
             return state;

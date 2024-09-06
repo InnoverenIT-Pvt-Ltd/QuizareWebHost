@@ -1,12 +1,16 @@
-import React, { useState,useEffect } from "react"; 
+import React, { useState,useEffect,useRef } from "react"; 
 import FWLogo from "../../../src/images/Vector.png";
 import FWLogo2 from "../../../src/images/Group (1).png";
 import FWLogo1 from "../../../src/images/QP-logo-short_500px.png";
 import "./header.css";
 import {getUserDetails} from "../../Container/Auth/AuthAction"
 import { bindActionCreators } from 'redux'
+// import { AudioOutlined } from "@ant-design/icons";
+// import SpeechRecognition, {
+//   useSpeechRecognition,
+// } from "react-speech-recognition";
 import { connect } from 'react-redux'
- import {handleSpareProcess} from "../../Container/Auth/AuthAction"
+ import {handleSpareProcess,getLibraySearch,ClearReducerDataOfLibrary} from "../../Container/Auth/AuthAction"
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import { Link, withRouter } from "react-router-dom";
@@ -19,9 +23,102 @@ const Menu = (props) => {
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
   const [isDropdownVisible, setDropdownVisible] = useState(false);
+
+  const [currentData, setCurrentData] = useState("");
+  const [searchOnEnter, setSearchOnEnter] = useState(false);  //Code for Search
+  const [startTime, setStartTime] = useState(null);
+    const [isRecording, setIsRecording] = useState(false); 
+    const minRecordingTime = 3000; // 3 seconds
+    const timerRef = useRef(null);
   // useEffect(() => {
   //  // props.getUserDetails(props.userId)
   // }, [props.userId]);
+
+  // const {
+  //   transcript,
+  //   listening,
+  //   resetTranscript,
+  //   browserSupportsSpeechRecognition,
+  // } = useSpeechRecognition();
+  // console.log(transcript);
+  // useEffect(() => {
+  //   // props.getCustomerRecords();
+  //   if (transcript) {
+  //     console.log(">>>>>>>", transcript);
+  //     setCurrentData(transcript);
+  //   }
+  //   }, [ transcript]);
+  const handleChange = (e) => {
+    setCurrentData(e.target.value);
+
+    if (searchOnEnter && e.target.value.trim() === "") {
+      // setPage(pageNo + 1);
+    //  props.getInvestorsbyId(props.userId, pageNo, "creationdate");
+      props.ClearReducerDataOfLibrary()
+      setSearchOnEnter(false);
+    }
+  };
+
+  const handleSearch = () => {
+    if (currentData.trim() !== "") {
+      props.getLibraySearch(props.quizHostId,currentData);
+     
+      setSearchOnEnter(true);  // Code for Search
+    } else {
+      console.error("Input is empty. Please provide a value.");
+    }
+  };
+  // const handleStartListening = () => {
+  //   setStartTime(Date.now());
+  //   setIsRecording(true);
+  //   SpeechRecognition.startListening();
+  //   if (timerRef.current) {
+  //     clearTimeout(timerRef.current);
+  //   }
+  //   timerRef.current = setTimeout(() => {
+  //     SpeechRecognition.stopListening();
+  //     setIsRecording(false);
+  //   }, minRecordingTime);
+  // };
+  const dummy = ["cloud", "azure", "fgfdg"];
+  // const suffix = (
+  //   <AudioOutlined
+  //     onClick={handleStartListening}
+  //     style={{
+  //       fontSize: 16,
+  //       color: '#1890ff',
+  //     }}
+
+  //   />
+  // );
+  // const handleStopListening = () => {
+  //   SpeechRecognition.stopListening();
+  //   setIsRecording(false);
+  //   if (transcript.trim() !== "") {
+  //     setCurrentData(transcript);
+  //    props.getLibraySearch(props.quizHostId,transcript);
+  //     setSearchOnEnter(true);
+  //   }
+  // };
+  // useEffect(() => {
+  //   if (!listening && isRecording) {
+  //     handleStopListening();
+  //   }
+  // }, [listening]);
+  // useEffect(() => {
+  //   if (isRecording && !listening) {
+  //     // If recording was stopped but less than 5 seconds have passed, restart listening
+  //     const elapsedTime = Date.now() - startTime;
+  //     if (elapsedTime < minRecordingTime) {
+  //       SpeechRecognition.startListening();
+  //     } else {
+  //       setIsRecording(false);
+  //     }
+  //   }
+  // }, [listening, isRecording, startTime]);
+
+
+
   const handleMouseEnter = () => {
     setDropdownVisible(true);
   };
@@ -163,14 +260,14 @@ const Menu = (props) => {
 
                 /></div> */}
                 <div class=" w-64 max-sm:w-24">
-        <Input
-          placeholder="Search quizzes"
-          width={"100%"}
-         // suffix={suffix}
-          //onPressEnter={handleSearch}
-          //onChange={handleChange}
-       // value={currentData}
-        />
+                <Input
+            placeholder="Search Quizes"
+            class="w-96"
+            //suffix={suffix}
+            onPressEnter={handleSearch}
+            onChange={handleChange}
+            value={currentData}
+          />
         </div>
                 <div className="flex">
                 <div className="flex items-center mr-4">
@@ -247,7 +344,8 @@ const Menu = (props) => {
 const mapStateToProps = ({ auth,  }) => ({
   processSpareModal: auth.processSpareModal,
   user: auth.userDetails,
-  userId: auth.userDetails.userId,
+  quizHostId: auth.userDetails.userId,
+
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -255,7 +353,9 @@ const mapDispatchToProps = (dispatch) =>
       {
           
           handleSpareProcess,
-          getUserDetails
+          getUserDetails,
+          getLibraySearch,
+          ClearReducerDataOfLibrary
       },
       dispatch
   );

@@ -309,3 +309,35 @@ export const handleShareProcess = (modalProps) => (dispatch) => {
     payload: modalProps,
   });
 };
+
+export const getLibraySearch = (userId,quizName) => (dispatch) => {
+  dispatch({
+    type: types.GET_LIBRAY_SEARCH_REQUEST,
+  });
+  axios
+    .get(`${base_url}/quiz/search/${userId}/${quizName}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+    
+      dispatch({
+        type: types.GET_LIBRAY_SEARCH_SUCCESS,
+        payload: res.data,
+      });
+    }
+    )
+    .catch((err) => {
+      dispatch({
+        type: types.GET_LIBRAY_SEARCH_FAILURE,
+        payload: err,
+      });
+    });
+}; 
+
+export const ClearReducerDataOfLibrary = () => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_CLAER_REDUCER_DATA_LIBRARY,
+  });
+};
