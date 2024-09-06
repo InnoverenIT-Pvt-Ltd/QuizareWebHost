@@ -29,11 +29,10 @@ import Image from "./Image";
 import { StyledDrawer } from "../../../../Components/UI/Antd";
 import ProcessShareDrawer from "../../../../Components/ProcessShareDrawer";
 import ShareDrawer from "./ShareDrawer";
-import LibrarySearchedData from "./LibrarySearchedData";
 
 const { useState } = React;
 
-function QuizLibrary(props) {
+function LibrarySearchedData(props) {
 
 
   const history = useHistory();
@@ -75,32 +74,22 @@ function QuizLibrary(props) {
   };
 
   console.log(props.libraryQuiz)
-  useEffect(() => {
-    props.getLibraryQuiz(props.quizHostId);
-  }, []);
-  if (props.fetchingLibraryQuiz) {
-    return  <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 custom-loader">
-    <div className="loader"></div>
-  </div>
-  }
+//   useEffect(() => {
+//     props.getLibraryQuiz(props.quizHostId);
+//   }, []);
+//   if (props.fetchingLibraryQuiz) {
+//     return  <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 custom-loader">
+//     <div className="loader"></div>
+//   </div>
+//   }
   return (
     <>
     <div class="min-h-screen">
-      <Menu />
+      {/* <Menu /> */}
       <Formik>
-        <Form class="flex justify-center h-h32 max-sm:w-wk mt-8 m-auto md:mt-12  w-wk max-sm:mt-0    ">
-          {/* <Swiper
-            navigation={true}
-            modules={[Navigation]}
-            className="mySwiper "
-          > */}
-            {props.librarySerachedData.length > 0 ? (
-    <LibrarySearchedData
-    librarySerachedData={props.librarySerachedData}
-    />
-  ) : (
+        <Form class="flex justify-center h-h32 max-sm:w-wk mt-8 m-auto md:mt-12  w-wk max-sm:mt-0 ">       
           <div class="flex flex-wrap max-sm:flex-nowrap h-[86vh] overflow-x-auto w-full max-sm:justify-between max-sm:flex-col max-sm:items-center justify-center">
-            {props.libraryQuiz.map((item, i) => {
+            {props.librarySerachedData.map((item, i) => {
               const imageUrl = item.imageId ? <Image imageId={FWLogo2} /> : 'none';
               return (
                 // <SwiperSlide >
@@ -109,13 +98,8 @@ function QuizLibrary(props) {
   className="rounded-3xl border-2 bg-cover bg-center shadow-[0_0.25em_0.62em] shadow-[#aaa] h-[11rem] 
     text-white m-3 p-2 bg-[#3B16B7] w-[26vw] max-sm:w-wk flex justify-between flex-col scale-[0.99] hover:scale-100 ease-in duration-100 
     border-solid leading-3 hover:border hover:border-[#23A0BE] hover:shadow-[#23A0BE]" 
-    // style={{ 
-    //   backgroundImage: imageUrl ? `url(${imageUrl})` : 'none',
-    //   backgroundColor: imageUrl ? 'transparent' : '#3B16B7'
-    // }}
   
 >
-{/* <Image1 imageId={props.homePage.imageId} /> */} 
 
                   <div className="flex justify-between  items-center">
                   
@@ -147,8 +131,6 @@ function QuizLibrary(props) {
 <Button
   style={{ width: "9rem", backgroundColor: "white" }}
   type="primary"
-
-//   onClick={() => props.navigation.navigate('Quiz Invite')}
 >
   <h3>Edit Quiz</h3>
 </Button>
@@ -173,8 +155,6 @@ function QuizLibrary(props) {
                             handleSetCurrentItem(item);
 
                           }}
-                        // onClick={showModal}
-                        // onClick={() => props.hostQuiz(props.showQuiz.quizId)}
                         >
                           <h3>Host This Quiz</h3>
                         </Button>
@@ -183,29 +163,11 @@ function QuizLibrary(props) {
                         <Button
                           type="primary"
                           style={{ backgroundColor: "white"}}
-                          // onClick={() =>
-                          //  props.handleQuizHostModal(true)
-                          // }
-                          // onClick={showModal}
-                          onClick={() => props.closeLibraryQuiz(item.quizId,)}
-                        // onClick={() => props.hostQuiz(props.showQuiz.quizId)}
+                          onClick={() => props.closeLibraryQuiz(item.quizId,)}     
                         >
                           <h3>Close This Quiz</h3>
                         </Button>
                       )}
-                       {/* <Link
-                        to={`quizinLibrary/${item.quizId}`}
-                      >
-
-                        <Button
-                          type="primary"
-                          style={{ backgroundColor: "white"}}
-                        // onClick={() => props.hostQuiz(props.showQuiz.quizId)}
-                        >
-                          <h3>Add Question</h3>
-                        </Button>
-                      </Link> */}
-
         </div>
       )}
     </div>
@@ -226,28 +188,12 @@ function QuizLibrary(props) {
                             </h2>
                           </div>
                     <div>
-                    
-                  
-                         
                     <div class="flex flex-row">
   <h2 class="text-base text-white rounded-full border-2 border-white py-1 px-2 w-8 h-8 flex justify-center items-center">
     {`${item.noOfQuestions || ""}`}
   </h2>
 </div>
-
-                          {/* <div class="flex flex-row">
-                            <h2 class=" text-base text-white">
-                              Categories: {`${item.categories && item.categories || ""}`}
-                            </h2>
-                          </div> */}
-                        
-                       
-                    
                     </div>
-                  
-                  
-                     
-                        
                           <div class="flex flex-row">
                             
                             &nbsp;
@@ -261,81 +207,8 @@ function QuizLibrary(props) {
                           </div>
                          
                           </div>   
-                   
-                  
 
-
-                    {/* <div class="flex flex-row mt-8 justify-between">
-                    
-                      <Link to={`updateQuizNameInLibrary/${item.quizName}/${item.duration}/${item.quizId}`}>
-
-                        <Button
-                          style={{ width: "9rem", backgroundColor: "white" }}
-                          type="primary"
-
-                          onClick={() => props.navigation.navigate('Quiz Invite')}
-                        >
-                          <h3>Edit Quiz</h3>
-                        </Button>
-                      </Link>
-                      {item.quizHostInd === false && (
-                        <Button
-                          type="primary"
-                          style={{ width: "9rem", backgroundColor: "white", margin: "0" }}
-                          onClick={() =>
-                            props.deleteLibraryQuiz(item.quizId)
-                          }
-                        >
-                          <h3>Delete This Quiz</h3>
-                        </Button>
-                      )}
-
-
-                    </div> */}
-                    <div class=" flex flex-col h-24 justify-between">
-                     
-                      {/* {item.quizHostInd === false && (
-                        <Button
-                          type="primary"
-                          style={{ backgroundColor: "white" }}
-                          onClick={() => {
-                            showModal();
-                            handleSetCurrentItem(item);
-
-                          }}
-                        // onClick={showModal}
-                        // onClick={() => props.hostQuiz(props.showQuiz.quizId)}
-                        >
-                          <h3>Host This Quiz</h3>
-                        </Button>
-                      )} */}
-                      {/* {item.quizHostInd === true && (
-                        <Button
-                          type="primary"
-                          style={{ backgroundColor: "white"}}
-                          // onClick={() =>
-                          //  props.handleQuizHostModal(true)
-                          // }
-                          // onClick={showModal}
-                          onClick={() => props.closeLibraryQuiz(item.quizId,)}
-                        // onClick={() => props.hostQuiz(props.showQuiz.quizId)}
-                        >
-                          <h3>Close This Quiz</h3>
-                        </Button>
-                      )} */}
-                      
-                      {/* <Link
-                        to={`quizinLibrary/${item.quizId}`}
-                      >
-
-                        <Button
-                          type="primary"
-                          style={{ backgroundColor: "white"}}
-                        // onClick={() => props.hostQuiz(props.showQuiz.quizId)}
-                        >
-                          <h3>Add Question</h3>
-                        </Button>
-                      </Link> */}
+                    <div class=" flex flex-col h-24 justify-between">                
                       <StyledDrawer
                         title="Host Quiz"
                         open={isModalOpen}
@@ -364,12 +237,6 @@ function QuizLibrary(props) {
           {/* </Swiper> */}
 
           </div>
-  )}  
-
-
-
-
-          {/* </div> */}
         </Form>
       </Formik>
       </div>
@@ -401,7 +268,6 @@ const mapStateToProps = ({ auth, quiz }) => ({
   quizHostId: auth.userDetails.userId,
   fetchingLibraryQuiz:quiz.fetchingLibraryQuiz,
   copyReduce: quiz.copyReduce,
-  librarySerachedData:auth.librarySerachedData
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -420,4 +286,4 @@ const mapDispatchToProps = (dispatch) =>
     dispatch
   );
 
-export default connect(mapStateToProps, mapDispatchToProps)(QuizLibrary);
+export default connect(mapStateToProps, mapDispatchToProps)(LibrarySearchedData);
