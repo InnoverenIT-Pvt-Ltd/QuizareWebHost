@@ -910,3 +910,143 @@ export const ClearReducerDataOfLoadProgress = () => (dispatch) => {
     type: types.HANDLE_CLAER_REDUCER_DATA_LOAD_PROGRESS,
   });
 };
+
+export const handleQuizStripeModal = (modalProps) => dispatch => {
+  dispatch({
+      type: types.HANDLE_INVENTORY_STRIPE_MODAL,
+      payload: modalProps
+  })
+}
+
+export const addQuizPaymentId = (data, cb) => dispatch => {
+  dispatch({
+    type: types.ADD_QUIZ_PAYMENT_ID_REQUEST
+  });
+
+  axios
+    .post(`${base_url}/stripe/makePayment`, data, { headers: {
+      Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+    },})
+    .then(res => {
+   
+      dispatch({
+        type: types.ADD_QUIZ_PAYMENT_ID_SUCCESS,
+        payload: res.data
+      });
+      cb && cb("success");
+    })
+    .catch(err => {
+  
+      dispatch({
+        type: types.ADD_QUIZ_PAYMENT_ID_FAILURE,
+        payload: err
+      });
+      cb && cb("error");
+    });
+};
+
+export const makeStripePayment = (data,cb) => dispatch => {
+  dispatch({
+      type: types.MAKE_STRIPE_PAYMENT_REQUEST,
+  })
+ 
+   axios.post(`${base_url}/stripe/confirmPayment`,data ,{
+   headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+   
+      .then(res => {
+        
+          dispatch({
+              type: types.MAKE_STRIPE_PAYMENT_SUCCESS,
+              payload: res.data
+          })
+          
+          if (res.data.message === 'status failed') {
+            cb && cb('status failed');
+            console.log("act", res.data.name);
+        } else {
+            cb && cb('success', res.data.orderId);
+
+            // Example usage of data.stripePaymentInd, assuming it's valid
+            console.log(data.stripePaymentInd && localStorage.removeItem('orderPhoneId') );
+        }
+      })
+        
+      .catch(err => {
+
+          dispatch({
+              type: types.MAKE_STRIPE_PAYMENT_FAILURE,
+              payload: err
+          })
+          cb && cb('error')
+      })};
+
+      export const handleSuscrptionModal = (modalProps) => (dispatch) => {
+        dispatch({ type: types.HANDLE_SUSCRIPTION_MODAL, payload: modalProps });
+      };
+
+    
+    
+      export const addSuscrptions = (data,) => (dispatch) => {
+        dispatch({ type: types.UPDATE_SUSCRIPTION_REQUEST });
+        axios
+          .put(`${base_url}/subscription/create`, data, {
+            // headers: {
+            //   Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+            // },
+          })
+          .then((res) => {
+           // dispatch(getSuscrption(orgId))
+            console.log(res);
+            dispatch({
+              type: types.UPDATE_SUSCRIPTION_SUCCESS,
+              payload: res.data,
+            });
+            Swal.fire({
+              icon: 'success',
+              title: 'Info Updated Succefully',
+              showConfirmButton: false,
+              timer: 1500
+            })
+          })
+          .catch((err) => {
+            console.log(err);
+            dispatch({
+              type: types.UPDATE_SUSCRIPTION_FAILURE,
+              payload: err,
+            });
+            Swal.fire({
+              icon: 'error',
+              title: 'Cannot downgrade before the current subscription period',
+              showConfirmButton: false,
+              timer: 1500,
+            })
+          });
+      };
+
+      export const getSuscrption = () => (dispatch) => {
+        dispatch({ type: types.GET_SUSCRIPTION_REQUEST });
+        axios
+          .get(`${base_url}/subscription/getAll`, {
+            headers: {
+              Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+            },
+          })
+          .then((res) => {
+            console.log(res);
+            dispatch({
+              type: types.GET_SUSCRIPTION_SUCCESS,
+              payload: res.data,
+            });
+            // cb();
+          })
+          .catch((err) => {
+            console.log(err);
+            dispatch({
+              type: types.GET_SUSCRIPTION_FAILURE,
+              payload: err,
+            });
+          });
+      };

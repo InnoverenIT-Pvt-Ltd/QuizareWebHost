@@ -9,6 +9,27 @@ const initialState = {
   fetchingFinalizeQuizError: false,
   finalizeQuiz: {},
 
+  
+  fetchingSuscrption: false,
+  fetchingSuscrptionError: false,
+  suscrptionData:[],
+
+  updatingSuscrption: false,
+  updatingSuscrptionError: true,
+
+  addingSuscrpitionModal:false,
+
+  addiNVEStripeModal:false,
+
+  addingQuizPaymentId: false, 
+  addingQuizPaymentIdError: false,
+  paymentQuizDetails:{},
+
+
+  addingMakeStripePayment: false,
+  addingMakeStripePaymentError: false,
+  confirmedQuizPayment:{},
+
   fetchingOngoingQuiz: false,
   fetchingOngoingQuizError: false,
   ongoingQuiz: [],
@@ -574,6 +595,81 @@ export const quizReducer = (state = initialState, action) => {
           return { ...state, 
             userQuery: {}, 
           };
+
+          case types.HANDLE_INVENTORY_STRIPE_MODAL:
+            return { ...state, addiNVEStripeModal: action.payload };
+
+
+            case types.ADD_QUIZ_PAYMENT_ID_REQUEST:
+              return { ...state, addingQuizPaymentId: true };
+            case types.ADD_QUIZ_PAYMENT_ID_SUCCESS:
+              return {
+                ...state,
+                addingQuizPaymentId: false,
+                paymentQuizDetails: action.payload
+              };
+            case types.ADD_QUIZ_PAYMENT_ID_FAILURE:
+              return { ...state, 
+                addingQuizPaymentId: false, 
+                addingQuizPaymentIdError: true };
+
+                case types.MAKE_STRIPE_PAYMENT_REQUEST:
+                  return { ...state, addingMakeStripePayment: true };
+                case types.MAKE_STRIPE_PAYMENT_SUCCESS:
+                  return {
+                    ...state,
+                    addingMakeStripePayment: false,
+                    addiNVEStripeModal:false,
+                    confirmedQuizPayment: action.payload
+                  };
+                case types.MAKE_STRIPE_PAYMENT_FAILURE:
+                  return {
+                    ...state,
+                    addingMakeStripePayment: false,
+                    addingMakeStripePaymentError: true
+                  };
+
+                  case types.HANDLE_SUSCRIPTION_MODAL:
+                    return { ...state, addingSuscrpitionModal: action.payload }; 
+
+                    case types.UPDATE_SUSCRIPTION_REQUEST:
+                      return { ...state, updatingSuscrption: true };
+                    case types.UPDATE_SUSCRIPTION_SUCCESS:
+                      return {
+                        ...state,
+                        updatingSuscrption: false,
+                        addingSuscrpitionModal: false,
+                        // employees: state.employees.map((item) => {
+                        //   if (item.employeeId === action.payload.employeeId) {
+                        //     return action.payload;
+                        //   } else {
+                        //     return item;
+                        //   }
+                        // }),
+                      };
+                    case types.UPDATE_SUSCRIPTION_FAILURE:
+                      return {
+                        ...state,
+                        updatingSuscrption: false,
+                        updatingSuscrptionError: true,
+                      };
+
+
+                      case types.GET_SUSCRIPTION_REQUEST:
+                        return { ...state, fetchingSuscrption: true };
+                      case types.GET_SUSCRIPTION_SUCCESS:
+                        return {
+                          ...state,
+                          fetchingSuscrption: false,
+                          suscrptionData: action.payload,
+                        };
+                      case types.GET_SUSCRIPTION_FAILURE:
+                        return {
+                          ...state,
+                          fetchingSuscrption: false,
+                          fetchingSuscrptionError: true,
+                        };
+            
 
     default:
       return state;
