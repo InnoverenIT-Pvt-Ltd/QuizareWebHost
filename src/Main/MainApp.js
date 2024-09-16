@@ -19,6 +19,7 @@ import LibrayHome from "../Components/Quizs/LibrayHome";
 import Navigate from "../Container/Quiz/EditQuiz/Swipe/Navigate";
 import ChatGPT from "../Container/Quiz/ChatGPT.js";
 import LibrayEmptyPage from "../Components/Quizs/LibrayEmptyPage.js";
+import Upgrade from "./Upgrade.js";
 const Question1 = lazy(() => import("../Components/Quizs/Question1"))
 const CreateQuiz = lazy(() => import("../Components/Quizs/CreateQuiz"));
 const QuizName = lazy(() => import("../Container/Quiz/QuizName"))
@@ -90,6 +91,7 @@ function MainApp(props) {
               <Route exact path="/ongoingQuiz" component={OngoingQuiz} />
               <Route exact path="/swipe" component={Swipe} />
               <Route exact path="/swipeIn" component={SwipeIn} />
+              <Route exact path="/upgrade" component={Upgrade} />
               <Route exact path="/emptypage" component={LibrayEmptyPage} />
               <Route exact path="/swipeInLibrary/:quizId" component={SwipeInLibrary} />
               <Route exact path="/quizLibrary" component={QuizLibrary} />
