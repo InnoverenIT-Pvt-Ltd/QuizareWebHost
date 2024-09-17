@@ -998,7 +998,7 @@ export const makeStripePayment = (data,cb) => dispatch => {
             // },
           })
           .then((res) => {
-           // dispatch(getSuscrption(orgId))
+            dispatch(getSuscrption())
             console.log(res);
             dispatch({
               type: types.UPDATE_SUSCRIPTION_SUCCESS,
@@ -1006,7 +1006,7 @@ export const makeStripePayment = (data,cb) => dispatch => {
             });
             Swal.fire({
               icon: 'success',
-              title: 'Info Updated Succefully',
+              title: 'Suscrption Created Succefully',
               showConfirmButton: false,
               timer: 1500
             })
