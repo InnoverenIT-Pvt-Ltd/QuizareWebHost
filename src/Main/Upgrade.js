@@ -7,6 +7,7 @@ import { Button } from "antd";
 import PaymentQuizModal from "./PaymentQuizModal";
 import MainSuscriptionModal from "./MainSuscriptionModal";
 import { base_url } from "../Config/Auth";
+import Swal from 'sweetalert2'
 
 const Upgrade = (props) => {
     const [subscriptions, setSubscriptions] = useState([]);
@@ -39,23 +40,23 @@ const Upgrade = (props) => {
 
 
 
-    const handleEdit = (id, newName) => {
-        setEditedName((prev) => ({ ...prev, [id]: newName }));
+    const handleEdit = (subscriptionId, newName) => {
+        setEditedName((prev) => ({ ...prev, [subscriptionId]: newName }));
     };
 
-    const handleStartEdit = (id) => {
-        const subscriptionToEdit = subscriptions.find(sub => sub.id === id);
+    const handleStartEdit = (subscriptionId) => {
+        const subscriptionToEdit = subscriptions.find(sub => sub.subscriptionId === subscriptionId);
         setOriginalSubscription(subscriptionToEdit); // Save original data for cancellation
-        setEditedName({ [id]: subscriptionToEdit.subscriptionName });
-        setEditingId(id);
+        setEditedName({ [subscriptionId]: subscriptionToEdit.subscriptionName });
+        setEditingId(subscriptionId);
         setIsEditing(true);
     };
 
-    const handleSave = async (id) => {
-        const subscriptionToUpdate = subscriptions.find(sub => sub.id === id);
+    const handleSave = async (subscriptionId) => {
+        const subscriptionToUpdate = subscriptions.find(sub => sub.subscriptionId === subscriptionId);
         const data = {
             ...subscriptionToUpdate,
-            subscriptionName: editedName[id] || subscriptionToUpdate.subscriptionName,
+            subscriptionName: editedName[subscriptionId] || subscriptionToUpdate.subscriptionName,
         };
 
         try {
@@ -63,14 +64,24 @@ const Upgrade = (props) => {
 
             if (response.status === 200) {
                 const updatedSubscriptions = subscriptions.map((sub) =>
-                    sub.id === id ? { ...sub, subscriptionName: editedName[id] || sub.subscriptionName } : sub
+                    sub.subscriptionId === subscriptionId ? { ...sub, subscriptionName: editedName[subscriptionId] || sub.subscriptionName } : sub
                 );
                 setSubscriptions(updatedSubscriptions);
-                alert("Subscription updated successfully!");
+                Swal.fire({
+                    icon: "success",
+                    title: "Subscription updated successfully!",
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
                 setIsEditing(false);
                 setEditingId(null);
             } else {
-                alert("Failed to update subscription.");
+                Swal.fire({
+                    icon: "error",
+                    title: "Failed to update subscription.",
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
             }
         } catch (error) {
             console.error("Error:", error);
@@ -81,22 +92,33 @@ const Upgrade = (props) => {
     const handleCancel = () => {
         setSubscriptions((prevSubscriptions) =>
             prevSubscriptions.map((sub) =>
-                sub.id === editingId ? originalSubscription : sub
+                sub.subscriptionId === editingId ? originalSubscription : sub
             )
         );
         setIsEditing(false);
         setEditingId(null);
     };
-    const handleDelete = async (id) => {
+    const handleDelete = async (subscriptionId) => {
         try {
-            const response = await axios.delete(`${base_url}/subscription/delete/${id}/${props.userId}`);
+            const response = await axios.delete(`${base_url}/subscription/delete/${subscriptionId}/${props.userId}`);
 
             if (response.status === 200) {
-                const updatedSubscriptions = subscriptions.filter(sub => sub.id !== id);
+                const updatedSubscriptions = subscriptions.filter(sub => sub.subscriptionId !== subscriptionId);
                 setSubscriptions(updatedSubscriptions);
-                alert("Subscription deleted successfully!");
+                // alert("Subscription deleted successfully!");
+                Swal.fire({
+                    icon: "success",
+                    title: "Subscription deleted successfully!",
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
             } else {
-                alert("Failed to delete subscription.");
+                Swal.fire({
+                    icon: "error",
+                    title: "Failed to delete subscription.",
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
             }
         } catch (error) {
             console.error("Error:", error);
@@ -132,7 +154,8 @@ const Upgrade = (props) => {
                                         <div className="flex items-center">
                                             <input
                                                 type="text"
-                                                value={editedName[item.subscriptionId] || item.subscriptionName}
+                                                // value={editedName[item.subscriptionId] || item.subscriptionName}
+                                                value={editedName[item.subscriptionId] }
                                                 onChange={(e) => handleEdit(item.subscriptionId, e.target.value)}
                                                 className="text-2xl h-8 w-20 font-bold text-center border-b-2 border-gray-300 focus:outline-none"
                                             />
@@ -234,210 +257,3 @@ const mapDispatchToProps = (dispatch) =>
     );
 
 export default connect(mapStateToProps, mapDispatchToProps)(Upgrade);
-
-
-
-
-// import React, {Component,useState,useEffect} from "react";
-// import { useHistory } from "react-router-dom";
-// import axios from 'axios';
-// import { connect } from "react-redux";
-// import { bindActionCreators } from 'redux';
-// import BorderColorIcon from "@mui/icons-material/BorderColor";
-// import {handleQuizStripeModal,handleSuscrptionModal,getSuscrption} from "../Container/Quiz/QuizAction";
-// import { Button } from "antd";
-// import PaymentQuizModal from "./PaymentQuizModal";
-// import MainSuscriptionModal from "./MainSuscriptionModal";
-// import { base_url } from "../Config/Auth";
-// const Upgrade = (props) => {
-
-//     const [subscriptions, setSubscriptions] = useState(props.suscrptionData);
-//     const [isEditing, setIsEditing] = useState(false);
-//     const [editedName, setEditedName] = useState(false);
-//     useEffect(()=>{
-//         props.getSuscrption();
-//        },[]) 
-//        const handleEdit = (id, newName) => {
-//         setEditedName((prev) => ({ ...prev, [id]: newName }));
-//       };
-    
-//       const handleSave = async (id) => {
-//         const subscriptionToUpdate = subscriptions.find(sub => sub.id === id);
-//         const data = {
-//           ...subscriptionToUpdate,
-//           subscriptionName: editedName[id] || subscriptionToUpdate.subscriptionName,
-//         };
-    
-//         try {
-//           const response = await axios.put(`${base_url}/subscription/create`, data, {
-//             // headers: {
-//             //   'Content-Type': 'application/json',
-//             // },
-//           });
-    
-//           if (response.status === 200) {
-//             const updatedSubscriptions = subscriptions.map((sub) =>
-//               sub.id === id ? { ...sub, subscriptionName: editedName[id] || sub.subscriptionName } : sub
-//             );
-//             setSubscriptions(updatedSubscriptions);
-//             alert("Subscription updated successfully!");
-//           } else {
-//             alert("Failed to update subscription.");
-//           }
-//         } catch (error) {
-//           console.error("Error:", error);
-//           alert("An error occurred while updating the subscription.");
-//         }
-//         setIsEditing(false);
-//       };
-
-
-//   return (
-//     <div>
-//          <div className="flex items-center flex-col">
-//     {/* <img className="w-20" alt="pay" src={stripe} /> */}
-    
-//     <Button
-//       type="primary"
-//       onClick={() => { props.handleQuizStripeModal(true); }}
-//     >
-//       Checkout
-//     </Button>
-      
-//     <div class=" flex items-center">
-          
-//           <Button
-//             type="primary"
-         
-//             onClick={() => props.handleSuscrptionModal(true)}
-//           >
-//             Add
-//           </Button>
-        
-//         </div>
-// <div>
-
-//      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-//       <div className="max-w-6xl mx-auto py-16">
-//         <h1 className="text-4xl font-bold text-center mb-10">Quizprompter Plans</h1>
-//         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-//           {subscriptions.map((item, i) => (
-//             <div key={i} className={`bg-white shadow-md rounded-lg p-6 w-[17rem] h-[20rem] text-center ${item.isMostPopular ? 'border-2 border-purple-600' : ''}`}>
-                
-//                 {isEditing ? (
-//         <div>
-//           <input
-//             type="text"
-//             value={editedName[item.id] || item.subscriptionName}
-//             onChange={(e) => handleEdit(item.id, e.target.value)}
-//             className="text-2xl font-bold text-center border-b-2 border-gray-300 focus:outline-none"
-//           />
-//           <button
-//             onClick={() => handleSave(item.id)}
-//             className="mt-4 bg-green-500 text-white py-2 px-4 rounded-lg"
-//           >
-//             Save Name
-//           </button>
-//         </div>
-//       ) : (
-//         <div className="flex items-center">
-//           <h2 className="text-2xl font-bold">{item.subscriptionName}</h2>
-//           <button onClick={() => setIsEditing(true)} className="ml-4">
-//             {/* Your edit icon here */}
-//             <svg
-//               xmlns="http://www.w3.org/2000/svg"
-//               className="h-6 w-6 text-gray-600"
-//               fill="none"
-//               viewBox="0 0 24 24"
-//               stroke="currentColor"
-//             >
-//               <path
-//                 strokeLinecap="round"
-//                 strokeLinejoin="round"
-//                 strokeWidth="2"
-//                 d="M15.232 5.232l3.536 3.536M9 13h3v3m-7.828-4.828a4 4 0 105.656 5.656L21 10.828a4 4 0 10-5.656-5.656L7.172 13z"
-//               />
-//             </svg>
-//           </button>
-//         </div>
-//       )}
-//               <p className="text-4xl font-bold">${item.price}<span className="text-lg">/month</span></p>
-//               <button
-//                 className={`mt-6 ${item.isActive ? 'bg-gray-300 text-gray-700' : 'bg-[#3B16B7] text-white'} py-2 px-4 rounded-lg`}
-//                 disabled={item.isActive}>
-//                 {item.isActive ? 'Active Plan' : 'Select This'}
-//               </button>
-//               <ul className="text-left mt-4">
-//                 <li>✓ {item.noOfQuestion} Question</li>
-//                 <li>✓ {item.noOfQuiz} Quiz</li>
-//               </ul>
-
-             
-//             </div>
-//           ))}
-//         </div>
-//       </div>
-//     </div>
-     
-// </div>
-// <div>
-
-// </div>
-//   </div>
-//   <MainSuscriptionModal
-//        handleSuscrptionModal={props.handleSuscrptionModal}
-//        addingSuscrpitionModal={props.addingSuscrpitionModal}
-//        />
-//   <PaymentQuizModal
-//         addiNVEStripeModal={props.addiNVEStripeModal}
-//         handleQuizStripeModal={props.handleQuizStripeModal}
-//       />
-//   </div>
-//   )
-// }
-// const mapStateToProps = ({ quiz, auth }) => ({
-//     addiNVEStripeModal: quiz.addiNVEStripeModal,
-//     userId: auth.userDetails.userId,
-//     suscrptionData:quiz.suscrptionData,
-//     addingSuscrpitionModal: quiz.addingSuscrpitionModal
-//   });
-  
-//   const mapDispatchToProps = (dispatch) =>
-//     bindActionCreators(
-//       {
-        
-//         handleQuizStripeModal,
-//         handleSuscrptionModal,
-//         getSuscrption
-//       },
-//       dispatch
-//     );
-  
-//   export default connect(mapStateToProps, mapDispatchToProps)(Upgrade);
-
-
-  {/* <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-      <div className="max-w-6xl mx-auto py-16">
-        <h1 className="text-4xl font-bold text-center mb-10">Quizprompter Plans</h1>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-          {props.suscrptionData.map((item, i) => (
-            <div key={i} className={`bg-white shadow-md rounded-lg p-6 w-[17rem] h-[20rem] text-center ${item.isMostPopular ? 'border-2 border-purple-600' : ''}`}>
-              <h2 className="text-2xl font-bold">{item.subscriptionName}</h2>
-              <p className="text-4xl font-bold">${item.price}<span className="text-lg">/month</span></p>
-              <button
-                //onClick={() => handleSelectPlan(item.url)}
-                className={`mt-6 ${item.isActive ? 'bg-gray-300 text-gray-700' : 'bg-[#3B16B7] text-white'} py-2 px-4 rounded-lg`}
-                disabled={item.isActive}>
-                {item.isActive ? 'Active Plan' : 'Select This'}
-              </button>
-              <ul className="text-left mt-4">
-               
-                  <li>✓ {item.noOfQuestion} Question</li> 
-                  <li>✓ {item.noOfQuiz}  Quiz</li>
-              </ul>
-             
-            </div>
-          ))}
-        </div>
-      </div>
-    </div> */}

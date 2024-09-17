@@ -50,8 +50,10 @@ call: false,
             subscriptionName:"",
             noOfQuestion:"",
             noOfQuiz:"",
-            subscriptionId:"",
+            subscriptionId: this.props.subscriptionId === "" ? null : this.props.subscriptionId,
             description:"",
+            publishInd:true,
+            liveInd:true,
             userId:this.props.quizHostId
           }}
           // validationSchema={FormSchema}
@@ -126,12 +128,13 @@ call: false,
                       name="noOfQuestion"
                       // label="Name"
                       label="No Of Question"
-                      type="text"
+                      type="number"
                       width={"100%"}
                       component={InputComponent}
                       isColumn
                       inlineLabel
                       isRequired
+                      onChange={(e) => setFieldValue("noOfQuestion", Number(e.target.value))}
                     />
                     </div>
                    
@@ -143,12 +146,13 @@ call: false,
                       name="noOfQuiz"
                       // label="Name"
                       label="Number Of Quiz"
-                      type="text"
+                      type="number"
                       width={"100%"}
                       component={InputComponent}
                       isColumn
                       inlineLabel
                       isRequired
+                      onChange={(e) => setFieldValue("noOfQuiz", Number(e.target.value))}
                     />
                     </div>
                    
