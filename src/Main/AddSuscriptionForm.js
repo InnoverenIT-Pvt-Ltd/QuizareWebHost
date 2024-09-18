@@ -49,7 +49,7 @@ call: false,
           initialValues={{
             subscriptionName:"",
             noOfQuestion:"",
-            noOfQuiz:"",
+            pricePerMonth:"",
             subscriptionId: this.props.subscriptionId === "" ? null : this.props.subscriptionId,
             description:"",
             publishInd:true,
@@ -113,7 +113,7 @@ call: false,
                     <Field
                       name="subscriptionName"
                       // label="Name"
-                      label="Subscription name "
+                      label="Name "
                       type="text"
                       width={"100%"}
                       component={InputComponent}
@@ -127,7 +127,7 @@ call: false,
                   <Field
                       name="noOfQuestion"
                       // label="Name"
-                      label="No Of Question"
+                      label="Number Of Question using ChatGPT"
                       type="number"
                       width={"100%"}
                       component={InputComponent}
@@ -143,16 +143,16 @@ call: false,
                     <div class=" flex justify-between w-wk mt-3 max-sm:w-[30%]">
                     <div>
                   <Field
-                      name="noOfQuiz"
+                      name="pricePerMonth"
                       // label="Name"
-                      label="Number Of Quiz"
+                      label="Price"
                       type="number"
                       width={"100%"}
                       component={InputComponent}
                       isColumn
                       inlineLabel
                       isRequired
-                      onChange={(e) => setFieldValue("noOfQuiz", Number(e.target.value))}
+                     // onChange={(e) => setFieldValue("noOfQuiz", Number(e.target.value))}
                     />
                     </div>
                    

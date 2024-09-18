@@ -461,6 +461,7 @@ import {
   getQuestionList,
 } from "./QuizAction";
 import { Button, Card,Drawer } from "antd";
+import FWLogo2 from "../../../src/images/tabler_bulb.png";
 import { MenuOutlined } from "@ant-design/icons";
 import { InputComponent } from "../../Components/Forms/Formik/InputComponent";
 import MainHeader from "../../Components/Mainheader";
@@ -653,6 +654,17 @@ function Quiz(props) {
                       </h3>
                       </div>
                       <hr className="h-px bg-black border-2 w-wk md:mt-4 border-black" />
+                      <div className="flex items-center w-wk justify-center mt-4">
+                    <div> 
+                    <img
+                  className="big-logo"
+                  src={FWLogo2}
+                  // style={{ width: 60}}
+                  alt="Tekorero logo"
+                /></div>
+                <div className="text-[#3B16B7] text-base mr-2 font-medium">Need help? Generate your questions with AI using </div>
+                <div className="text-[#3B16B7] text-base underline font-bold cursor-pointer"> ChatGPT</div>
+                </div>
                       <div className="mt-4 p-6">
                         <div>
                           <Field
@@ -716,8 +728,9 @@ function Quiz(props) {
                         </Button>
                       </div>
                      
-                      {selectedQuestionIndex >= 0 && isAnyQuestionCreated && (
+                     
                       <div className="md:mr-16">
+                      {selectedQuestionIndex >= 0 && isAnyQuestionCreated && (
                         <Button
                           style={{ height: "3rem", backgroundColor: "#3B16B7", borderRadius: '0.25rem',width:"9rem" }}
                           type="primary"
@@ -728,12 +741,14 @@ function Quiz(props) {
                             Update Question
                           </h3>
                         </Button>
+                          )}
                       </div>
-                       )}
+                     
                       </div>
                       <div className="flex justify-between w-wk">
-                      {selectedQuestionIndex >= 0 && isAnyQuestionCreated && (
+                     
                       <div className="md:ml-16">
+                      {selectedQuestionIndex >= 0 && isAnyQuestionCreated && (
                         <Button
                           title={""}
                           type="primary"
@@ -743,8 +758,9 @@ function Quiz(props) {
                         >
                            <h3 className="font-medium text-white text-base">Delete Question</h3>
                         </Button>
+                          )}
                       </div>
-                      )}
+                    
                       <div>
                         {count >= 1 &&
                           <Button

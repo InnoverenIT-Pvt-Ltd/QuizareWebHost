@@ -259,10 +259,10 @@ const Menu = (props) => {
                   alt="Tekorero logo"
 
                 /></div> */}
-                <div class=" w-64 max-sm:w-24">
+                <div class=" w-80 max-sm:w-24">
                 <Input
-            placeholder="Search Quizes"
-            class="w-96"
+            placeholder="Search Quizes" 
+            class="!w-96 text-white bg-transparent border-white rounded h-8"
             //suffix={suffix}
             onPressEnter={handleSearch}
             onChange={handleChange}

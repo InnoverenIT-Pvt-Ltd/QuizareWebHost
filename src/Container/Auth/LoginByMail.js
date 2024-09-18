@@ -123,8 +123,8 @@ class LoginByMail extends Component {
                                         </div>
                                        
                                         </div>
-                                        <div class="flex  items-center rounded-2xl flex-col p-10 border w-[63%] h-[80vh] bg-[#6245C6] max-sm:p-[1.5rem] max-sm:w-wk max-sm:mt-4" >
-                                            <h2 class="text-3xl font-medium text-white flex justify-start w-wk"> Sign in now</h2>                                  
+                                        <div class="flex  items-center rounded-2xl flex-col p-10 border w-[55%] h-[80vh] bg-[#6245C6] max-sm:p-[1.5rem] max-sm:w-wk max-sm:mt-4" >
+                                            <h2 class="text-3xl font-medium text-white flex justify-start w-wk font-[Poppins]"> Sign in now</h2>                                  
                                         {/* <div class="flex justify-between flex-col">
                                         <div class="mt-4" >
                                         <FacebookLogin
@@ -152,7 +152,7 @@ class LoginByMail extends Component {
       </div> */}
     
                                             <div class="w-full mt-6">
-                                            <div class="text-white font-normal">Email address</div>
+                                            <div class="text-white font-normal font-[Poppins]">Email address</div>
                                                 <Field
                                                     name="email"
                                                     type="email"
@@ -162,7 +162,7 @@ class LoginByMail extends Component {
                                                 />
                                             </div>
                                             <div class="w-full mt-2">
-                                            <div class="text-white font-normal">Password</div>
+                                            <div class="text-white font-normal font-[Poppins]">Password</div>
                                                 <Field
                                                     name="password"
                                                     type="password"
@@ -174,7 +174,7 @@ class LoginByMail extends Component {
                                             </div>
                                             <div className="flex justify-start mt-2 w-wk">
                                             <Link to="/changepassword">
-                                            <div className="text-white font-semibold">Forgot Password</div>
+                                            <div className="text-white font-semibold font-[Poppins]">Forgot Password</div>
                                             </Link>
                                             </div>
                                             <div className="mt-8">
@@ -237,7 +237,7 @@ class LoginByMail extends Component {
                                                     Loading={isSubmitting}
                                                     style={{  height: "3.5rem",backgroundColor:"white",borderRadius:'3rem' }}
                                                 >
-                                                   <h3 class="font-medium text-black text-xl"> Sign in</h3> 
+                                                   <h3 class="font-medium text-black text-xl font-[Poppins]"> Sign in</h3> 
                                                 </Button>
                                             </div>
                                             {/* <Link to ="/login">
@@ -254,18 +254,18 @@ class LoginByMail extends Component {
                                     Forgot password?
                                 </Link> */}
                                
-                               <div class="ml-2 text-white flex mt-4">
+                               <div class="ml-2 text-white flex mt-4 font-[Poppins]">
                                  Already have an Account?
                                  <Link
                                     to="/signUp"
                                     style={{ textAlign: "center", fontSize: 15, color: "#0a8bd7", fontWeight: "500" }}
                                 >
-                                  <div className="underline font-medium text-white ml-1"> Signup </div> 
+                                  <div className="underline font-medium text-white ml-1 font-[Poppins]"> Signup </div> 
                                 </Link>
                             </div>
                                                 </div>
                                         </div>
-                                        <div class="flex flex-col w-[33%] max-sm:hidden">
+                                        <div class="flex flex-col w-[40%] max-sm:hidden">
                                         <div>
                                         <img
                             className="big-logo"

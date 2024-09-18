@@ -16,11 +16,11 @@ const CreatModal = (props) => {
         <img
                   className="big-logo"
                   src={FWLogo3}
-                  style={{ width: "28.5rem",borderRadius:"0.75rem"}}
+                  style={{ width: "40.5rem",borderRadius:"0.75rem"}}
                   alt="Tekorero logo"
 
                 />
-           <div className=" absolute bottom-20 right-4 text-white  md:pr-[5.5rem] 
+           <div className=" absolute bottom-36 right-4 text-white  md:pr-[11.5rem] 
            max-sm:left-20 max-sm:right-20 max-sm:bottom-12">
            <a href="/how2" >
            <img

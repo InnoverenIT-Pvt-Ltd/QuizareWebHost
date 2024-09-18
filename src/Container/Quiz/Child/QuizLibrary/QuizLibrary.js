@@ -87,8 +87,12 @@ function QuizLibrary(props) {
     <>
     <div class="min-h-screen">
       <Menu />
+      <div className="flex justify-center flex-col w-wk items-center">
+      <div className="font-[Poppins] font-bold text-base mt-4 w-[80%]">Your Quizzes</div>
+      <div className="border-2 border-black w-[80%] mt-4"></div>
+      </div>
       <Formik>
-        <Form class="flex justify-center h-h32 max-sm:w-wk mt-8 m-auto md:mt-12  w-wk max-sm:mt-0    ">
+        <Form class="flex justify-center  max-sm:w-wk mt-8 m-auto md:mt-4  w-wk max-sm:mt-0     ">
           {/* <Swiper
             navigation={true}
             modules={[Navigation]}
@@ -99,7 +103,7 @@ function QuizLibrary(props) {
     librarySerachedData={props.librarySerachedData}
     />
   ) : (
-          <div class="flex flex-wrap max-sm:flex-nowrap h-[86vh] overflow-x-auto w-full max-sm:justify-between max-sm:flex-col max-sm:items-center justify-center">
+          <div class="flex flex-wrap max-sm:flex-nowrap h-[82vh] overflow-x-hidden overflow-y-auto w-full max-sm:justify-between max-sm:flex-col max-sm:items-center justify-center">
             {props.libraryQuiz.map((item, i) => {
               const imageUrl = item.imageId ? <Image imageId={FWLogo2} /> : 'none';
               return (
@@ -121,12 +125,12 @@ function QuizLibrary(props) {
                   
                     <div class="flex flex-row">
                            
-                            <h2 class=" text-base text-white">
+                            <h2 class=" text-base text-white font-[Poppins]">
                               {`${moment(item.creationDate).format("ll") || ""
                                 }`}
                             </h2>
                           </div>
-                          <h2 class="text-xl   flex j text-white">
+                          <h2 class="text-xl   flex j text-white font-[Poppins]">
                       {item.quizName}
                     </h2>  
                    <div className="flex justify-end"
@@ -138,7 +142,7 @@ function QuizLibrary(props) {
                     <MoreHorizIcon/>
      {hoveredItemId === item.quizId && (
         <div 
-          className="absolute right-0 mt-2 w-40 bg-white p-2 rounded-md shadow-lg z-10"
+          className="absolute right-0 mt-2 w-40 bg-white p-2 rounded-md shadow-lg z-10 font-[Poppins]"
           onMouseEnter={() => handleMouseEnter(item.quizId)}
           onMouseLeave={handleMouseLeave}
         >
@@ -150,7 +154,7 @@ function QuizLibrary(props) {
 
 //   onClick={() => props.navigation.navigate('Quiz Invite')}
 >
-  <h3>Edit Quiz</h3>
+  <div className="font-[Poppins] text-black">Edit Quiz</div>
 </Button>
 </Link>   
 {item.quizHostInd === false && (
@@ -161,7 +165,7 @@ function QuizLibrary(props) {
                             props.deleteLibraryQuiz(item.quizId)
                           }
                         >
-                          <h3>Delete This Quiz</h3>
+                          <div className="font-[Poppins] text-black">Delete This Quiz</div>
                         </Button>
                       )}     
                        {item.quizHostInd === false && (
@@ -176,7 +180,7 @@ function QuizLibrary(props) {
                         // onClick={showModal}
                         // onClick={() => props.hostQuiz(props.showQuiz.quizId)}
                         >
-                          <h3>Host This Quiz</h3>
+                           <div className="font-[Poppins] text-black ">Host This Quiz</div>
                         </Button>
                       )}
                        {item.quizHostInd === true && (
@@ -190,7 +194,7 @@ function QuizLibrary(props) {
                           onClick={() => props.closeLibraryQuiz(item.quizId,)}
                         // onClick={() => props.hostQuiz(props.showQuiz.quizId)}
                         >
-                          <h3>Close This Quiz</h3>
+                           <div className="font-[Poppins] text-black">Close This Quiz</div>
                         </Button>
                       )}
                        {/* <Link
@@ -221,18 +225,18 @@ function QuizLibrary(props) {
         </Tooltip>
         </div>
     <div class="flex flex-row">
-                            <h2 class=" text-base text-white">
+                            <div class=" text-base text-white font-[Poppins]">
                               {item.quizHostInd === false ? "Closed" : "Hosted"}
-                            </h2>
+                            </div>
                           </div>
                     <div>
                     
                   
                          
                     <div class="flex flex-row">
-  <h2 class="text-base text-white rounded-full border-2 border-white py-1 px-2 w-8 h-8 flex justify-center items-center">
+  <div class="text-base font-[Poppins] text-white rounded-full border-2 border-white py-1 px-2 w-8 h-8 flex justify-center items-center">
     {`${item.noOfQuestions || ""}`}
-  </h2>
+  </div>
 </div>
 
                           {/* <div class="flex flex-row">
@@ -251,13 +255,13 @@ function QuizLibrary(props) {
                           <div class="flex flex-row">
                             
                             &nbsp;
-                            <h2 class="text-base font-bold text-white">
+                            <div class="text-sm font-bold text-white font-[Poppins]">
                               {`${item.duration || ""}`} seconds
-                            </h2>
+                            </div>
                           </div>
                           <div class="flex flex-row">
                            
-                            <h2 class="text-base font-bold text-white">Standard</h2>
+                            <div class="text-sm font-bold text-white font-[Poppins]">Standard</div>
                           </div>
                          
                           </div>   
