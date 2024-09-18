@@ -80,10 +80,10 @@ function QuizName(props) {
             <div class="absolute md:bottom-[8rem] w-full flex flex-col justify-center items-center  max-sm:m-0 h-80  md:w-full m-auto">
             
               <div class="flex flex-col items-center ">
-              <h2 class="text-3xl font-medium text-white">Name your Project</h2>
+              <h2 class="text-3xl font-medium text-white font-[Poppins]">Name your Project</h2>
              
                 <div >
-                  <h3 class="text-sm font-normal text-white mt-6">Start creating by choosing a name for your quiz</h3>
+                  <h3 class="text-sm font-normal text-white mt-6 font-[Poppins]">Start creating by choosing a name for your quiz</h3>
                   <div class="mt-4">
                     <Field
                       name="quizName"
@@ -123,7 +123,7 @@ function QuizName(props) {
                      htmlType="submit"
                      onClick={handleSubmit}
                      style={{  height: "2rem",backgroundColor:"white",borderRadius:'0.25rem',width:"11rem",display:"flex",justifyContent:"center",alignItems:"center" }}
-                   > <h3 class="font-medium text-black text-xl">Create</h3></Button>
+                   > <div class="font-medium text-black text-xl font-[Poppins]">Create</div></Button>
                    {/* </Link> */}
                  </div> 
             </div>

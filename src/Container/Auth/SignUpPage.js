@@ -106,12 +106,12 @@ class SignUpPage extends Component {
                             alt="Tekorero logo" /> 
                                         </div>
                                         </div>
-                                        <div class="flex  items-center rounded-2xl flex-col p-10 border md:w-[63%] h-[80vh] bg-[#6245C6] max-sm:p-5 w-full max-sm:mt-4 " >
+                                        <div class="flex  items-center rounded-2xl flex-col p-10 border md:w-[63%] h-[84vh] bg-[#6245C6] max-sm:p-5 w-full max-sm:mt-4 " >
                                            
                                             <h2 class="text-3xl font-medium font-[Poppins] text-white flex justify-start w-wk">Sign up now</h2>                                
                                             <div className="flex justify-between w-wk mt-4">
                                             <div className="w-[47.5%]">
-                                                <div class="text-white font-normal">First name</div>
+                                                <div class="text-white font-normal font-[Poppins]">First name</div>
                                                 <Field
                                                     name="name"
                                                     type="text"                    
@@ -121,7 +121,7 @@ class SignUpPage extends Component {
                                                 />
                                             </div>
                                             <div className="w-[47.5%]">
-                                                <div class="text-white font-normal">Last name</div>
+                                                <div class="text-white font-normal font-[Poppins]">Last name</div>
                                                 <Field
                                                     name="lastName"
                                                     type="text"                                              
@@ -132,7 +132,7 @@ class SignUpPage extends Component {
                                             </div>
                                             </div>
                                             <div class="w-full mt-2">
-                                            <div class="text-white font-normal">Email address</div>
+                                            <div class="text-white font-normal font-[Poppins]">Email address</div>
                                                 <Field
                                                     name="emailID"
                                                     type="email"
@@ -143,7 +143,7 @@ class SignUpPage extends Component {
                                             </div>
                                             <div className="flex justify-between w-wk mt-2">
                                             <div className="w-[47.5%]">
-                                            <div class="text-white font-normal">Password</div>
+                                            <div class="text-white font-normal font-[Poppins]">Password</div>
                                                 <Field
                                                     name="password"
                                                     type="password"
@@ -154,7 +154,7 @@ class SignUpPage extends Component {
                                                 />
                                             </div>
                                             <div className="w-[47.5%]">
-                                            <div class="text-white font-normal">Confirm password</div>
+                                            <div class="text-white font-normal font-[Poppins]">Confirm password</div>
                                                 <Field
                                                     name="confirmPassword"
                                                     type="password"
@@ -222,7 +222,7 @@ class SignUpPage extends Component {
                                              checked={this.state.isChecked}
                                              onChange={(e) => this.handleSteppriPolInd(e.target.checked)}
                                               class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"></input>
-                                                <h3 class="ml-2 text-white">By creating an account, I agree to our 
+                                                <h3 class="ml-2 text-white font-[Poppins]">By creating an account, I agree to our 
                                                    <Link to="/term"> Terms of use</Link>&nbsp;
                                                      and
                                                      <Link to="/privacy"> Privacy Policy </Link>
@@ -245,13 +245,13 @@ class SignUpPage extends Component {
                                                     style={{  height: "3.5rem",backgroundColor:"#FFFFFF",borderRadius:'3rem' }}
                                                     disabled={!this.state.isChecked}
                                                 >
-                                                  <h3 class="font-medium text-black text-xl">Sign up</h3> 
+                                                  <h3 class="font-medium text-black text-xl font-[Poppins]">Sign up</h3> 
                                                 </Button>
                                                
                                                 </div>
-                                                <div className=" font-normal flex text-white ml-5">Already have an Account?
+                                                <div className=" font-normal flex text-white ml-5 font-[Poppins]">Already have an Account?
                                                 <Link to ="/email">
-                                                     <div className="underline font-medium ml-1">Log in </div> 
+                                                     <div className="underline font-medium ml-1 font-[Poppins]">Log in </div> 
                                                      </Link>
                                                      </div>
                                                 {/* <Link to ="/login">

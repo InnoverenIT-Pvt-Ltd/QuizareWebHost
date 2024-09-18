@@ -19,14 +19,14 @@ const LibrayEmptyPage = (props) => {
            <img
                   className="big-logo"
                   src={FWLogo}
-                  style={{ width: "15rem"}}
+                  style={{ width: "24rem"}}
                   alt="Tekorero logo"
 
                 /> 
-               <div className=" text-base ">Nothing there for now</div>
+               <div className=" text-base font-[Poppins]  font-semibold">Nothing there for now</div>
                 
                 
-                <div className=" text-xs cursor-pointer underline text-[#6245C6]"
+                <div className=" text-xs cursor-pointer underline text-[#6245C6] font-[Poppins] font-medium"
                 onClick={() => {
                     props.handleSpareProcess(true);
                   }}>Create your first quiz</div>
