@@ -282,7 +282,7 @@ const Menu = (props) => {
 
 </div>
 <div className="flex items-center mr-4">
-<Link to="/upgrade">
+<Link to="/selectplan">
 <Button
  style={{  height: "2rem",display:"flex",justifyContent:"center",alignItems:"center",backgroundColor:"white" }}
 

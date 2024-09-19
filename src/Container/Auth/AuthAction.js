@@ -158,7 +158,7 @@ export const signUpByUser = ({ emailID, password, name, confirmPassword, imageId
     .then((res) => {
       dispatch(getUserDetails(res.data.userId));
       const redirectPath = res.data.noOfQuizes === 0 ? "/emptypage" : "/quizLibrary";
-      history.push(redirectPath);
+      history.push("/selectplan");
       Swal.fire({
         icon: "success",
         title: "You have registered successfully !!",
