@@ -123,12 +123,13 @@ import FWLogo2 from "../../src/images/Group (1).png";
 import FWLogo1 from "../../src/images/QP-logo-short_500px.png";
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
- import {handleShareProcess} from "../Container/Auth/AuthAction"
+ import {handleShareProcess,handleUpgrade} from "../Container/Auth/AuthAction"
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import { Link, withRouter } from "react-router-dom";
  import { Button,  } from "antd";
 import ProcessShareDrawer from "./ProcessShareDrawer";
+import UpgradeSpareDrawer from "./Quizs/UpgradeSpareDrawer";
 
 const Menu = (props) => {
   const [click, setClick] = useState(false);
@@ -188,14 +189,16 @@ const Menu = (props) => {
 
 </div>
 <div className="flex items-center mr-4">
-<Link to="/emptypage">
+{/* <Link to="/emptypage"> */}
 <Button
  style={{  height: "2rem",display:"flex",justifyContent:"center",alignItems:"center",backgroundColor:"white" }}
-
+ onClick={() => {
+  props.handleUpgrade(true);
+}}
 >
 <h3 class="font-medium  text-lg max-sm:text-xs">Upgrade</h3>
 </Button>
-</Link>
+{/* </Link> */}
 </div>
                <div className="relative inline-block">
       <img
@@ -244,19 +247,25 @@ const Menu = (props) => {
                   processShareModal={props.processShareModal}
                     handleShareProcess={props.handleShareProcess}
                 />
+                  <UpgradeSpareDrawer              
+                  processUpgradeModal={props.processUpgradeModal}
+                  handleUpgrade={props.handleUpgrade}
+                />
     </div>
   );
 };
 const mapStateToProps = ({ auth,  }) => ({
   processShareModal: auth.processShareModal,
-  user: auth.userDetails
+  user: auth.userDetails,
+  processUpgradeModal:auth.processUpgradeModal
 });
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
       {
           
-          handleShareProcess
+          handleShareProcess,
+          handleUpgrade
       },
       dispatch
   );
