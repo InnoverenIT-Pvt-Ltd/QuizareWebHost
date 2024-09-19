@@ -38,7 +38,7 @@ const CreatModal = (props) => {
                   alt="Tekorero logo"
 
                 /> 
-                <a href="/how2" >
+                <a href="/chatgpt" >
                 <img
                   className="big-logo"
                   src={FWLogo1}

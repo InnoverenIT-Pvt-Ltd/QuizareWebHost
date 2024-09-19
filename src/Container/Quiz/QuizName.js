@@ -28,7 +28,7 @@ function QuizName(props) {
 
   function handleCallBack(data) {
     if (data === "success") {
-      history.push(`/chatgpt`);
+      history.push(`/addquiz`);
     } else {
       history.push(`/quizzes`);
     }

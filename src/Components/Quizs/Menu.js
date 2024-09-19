@@ -10,13 +10,14 @@ import { bindActionCreators } from 'redux'
 //   useSpeechRecognition,
 // } from "react-speech-recognition";
 import { connect } from 'react-redux'
- import {handleSpareProcess,getLibraySearch,ClearReducerDataOfLibrary} from "../../Container/Auth/AuthAction"
+ import {handleSpareProcess,getLibraySearch,ClearReducerDataOfLibrary,handleUpgrade} from "../../Container/Auth/AuthAction"
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import { Link, withRouter } from "react-router-dom";
  import { Button, Select, Icon, Tag, Switch, Checkbox, Input } from "antd";
 import ProcessSpareDrawer from "./ProcessSpareDrawer";
 import LibrayEmptyPage from "./LibrayEmptyPage";
+import UpgradeSpareDrawer from "./UpgradeSpareDrawer";
 
 const Menu = (props) => {
   const [click, setClick] = useState(false);
@@ -262,7 +263,7 @@ const Menu = (props) => {
                 <div class=" w-80 max-sm:w-24">
                 <Input
             placeholder="Search Quizes" 
-            class="!w-96 text-white bg-transparent border-white rounded h-8"
+            className="custom-input"
             //suffix={suffix}
             onPressEnter={handleSearch}
             onChange={handleChange}
@@ -282,14 +283,16 @@ const Menu = (props) => {
 
 </div>
 <div className="flex items-center mr-4">
-<Link to="/selectplan">
+{/* <Link to="/selectplan"> */}
 <Button
  style={{  height: "2rem",display:"flex",justifyContent:"center",alignItems:"center",backgroundColor:"white" }}
-
+ onClick={() => {
+  props.handleUpgrade(true);
+}}
 >
 <h3 class="font-medium  text-lg max-sm:text-xs">Upgrade</h3>
 </Button>
-</Link>
+{/* </Link> */}
 </div>
                <div className="relative inline-block">
       <img
@@ -338,6 +341,10 @@ const Menu = (props) => {
                   processSpareModal={props.processSpareModal}
                     handleSpareProcess={props.handleSpareProcess}
                 />
+                <UpgradeSpareDrawer              
+                  processUpgradeModal={props.processUpgradeModal}
+                  handleUpgrade={props.handleUpgrade}
+                />
     </div>
   );
 };
@@ -345,6 +352,7 @@ const mapStateToProps = ({ auth,  }) => ({
   processSpareModal: auth.processSpareModal,
   user: auth.userDetails,
   quizHostId: auth.userDetails.userId,
+  processUpgradeModal:auth.processUpgradeModal
 
 });
 
@@ -353,6 +361,7 @@ const mapDispatchToProps = (dispatch) =>
       {
           
           handleSpareProcess,
+          handleUpgrade,
           getUserDetails,
           getLibraySearch,
           ClearReducerDataOfLibrary

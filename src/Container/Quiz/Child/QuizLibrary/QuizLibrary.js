@@ -3,6 +3,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import IosShareIcon from '@mui/icons-material/IosShare';
 import FWLogo2 from "../../../../images/image 20.png";
+import FWLogo1 from "../../../../images/linear_background_154 2.jpg";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
@@ -80,7 +81,7 @@ function QuizLibrary(props) {
   }, []);
   if (props.fetchingLibraryQuiz) {
     return  <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 custom-loader">
-    <div className="loader"></div>
+    <div className="loader"><img src={FWLogo1}  width={10000}  style={{ borderRadius:"0.75rem"}} alt="Loading..."  /></div>
   </div>
   }
   return (

@@ -9,6 +9,9 @@ const initialState = {
   fetchingFinalizeQuizError: false,
   finalizeQuiz: {},
 
+  fetchingUpgradeSuscrption: false,
+  fetchingUpgradeSuscrptionError: false,
+  suscrptionUpgradeData:[],
   
   fetchingSuscrption: false,
   fetchingSuscrptionError: false,
@@ -668,6 +671,21 @@ export const quizReducer = (state = initialState, action) => {
                           ...state,
                           fetchingSuscrption: false,
                           fetchingSuscrptionError: true,
+                        };
+
+                        case types.GET_UPGRADE_SUSCRIPTION_REQUEST:
+                        return { ...state, fetchingUpgradeSuscrption: true };
+                      case types.GET_UPGRADE_SUSCRIPTION_SUCCESS:
+                        return {
+                          ...state,
+                          fetchingUpgradeSuscrption: false,
+                          suscrptionUpgradeData: action.payload,
+                        };
+                      case types.GET_UPGRADE_SUSCRIPTION_FAILURE:
+                        return {
+                          ...state,
+                          fetchingUpgradeSuscrption: false,
+                          fetchingUpgradeSuscrptionError: true,
                         };
             
 
