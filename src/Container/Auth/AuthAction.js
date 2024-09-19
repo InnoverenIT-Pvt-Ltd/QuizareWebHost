@@ -158,7 +158,7 @@ export const signUpByUser = ({ emailID, password, name, confirmPassword, imageId
     .then((res) => {
       dispatch(getUserDetails(res.data.userId));
       const redirectPath = res.data.noOfQuizes === 0 ? "/emptypage" : "/quizLibrary";
-      history.push(redirectPath);
+      history.push("/selectplan");
       Swal.fire({
         icon: "success",
         title: "You have registered successfully !!",
@@ -299,6 +299,13 @@ export const logout = (history) => (dispatch) => {
 export const handleSpareProcess = (modalProps) => (dispatch) => {
   dispatch({
     type: types.HANDLE_SPARE_PROCESS,
+    payload: modalProps,
+  });
+};
+
+export const handleUpgrade = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_UPGRADE_PROCESS,
     payload: modalProps,
   });
 };

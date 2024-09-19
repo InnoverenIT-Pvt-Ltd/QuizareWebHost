@@ -46,7 +46,7 @@ if(props.addingUserQuery){
       Do you Want to use ChatGPT to Generate Questions?
 
     </div>
-    <div class="flex justify-between w-wk mt-6">
+    {/* <div class="flex justify-between w-wk mt-6">
       <div>
     <Button  style={{  height: "2rem",backgroundColor:"white",borderRadius:'0.25rem',width:"7rem",display:"flex",justifyContent:"center",alignItems:"center" }}  type="primary"
     onClick={() =>    setshowCard(true)}
@@ -60,13 +60,14 @@ if(props.addingUserQuery){
     > <h3 class="font-medium text-black text-xl">No</h3></Button>
     </div>
     
-    </div>
+    </div> */}
     <div class="mt-4 w-wk">
-    {showCard && 
+    {/* {showCard &&  */}
     <>
     <Input placeholder='How many questions?'
     value={questionReq}
     onChange={handleQuestionRequire}
+    className="custom-input"
     />
     <div class="mt-4 ">
     <Button  type="primary"
@@ -83,7 +84,7 @@ questions_required:questionReq,
       }
       props.addUserQuery(query);
       setGenerationComplete(true);
-      }}> <h3 className="font-medium  text-xl -mt-4"> Generate v</h3> </Button>
+      }}> <h3 className="font-medium  text-xl -mt-4"> Generate </h3> </Button>
       </div>
      &nbsp;
      &nbsp;
@@ -94,9 +95,8 @@ questions_required:questionReq,
     }
     
 
-
     </>
-}
+{/* } */}
 {generationComplete && (
 <Link to={`updateQuizNameInLibrary/${props.quizName}/${props.duration}/${props.quizId}`}>
 <Button  type="primary"

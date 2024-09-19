@@ -1050,3 +1050,28 @@ export const makeStripePayment = (data,cb) => dispatch => {
             });
           });
       };
+
+      export const getUpgradeSuscrption = (userId) => (dispatch) => {
+        dispatch({ type: types.GET_UPGRADE_SUSCRIPTION_REQUEST });
+        axios
+          .get(`${base_url}/subscription/getAll/publish/activePlan/${userId}`, {
+            headers: {
+              Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+            },
+          })
+          .then((res) => {
+            console.log(res);
+            dispatch({
+              type: types.GET_UPGRADE_SUSCRIPTION_SUCCESS,
+              payload: res.data,
+            });
+            // cb();
+          })
+          .catch((err) => {
+            console.log(err);
+            dispatch({
+              type: types.GET_UPGRADE_SUSCRIPTION_FAILURE,
+              payload: err,
+            });
+          });
+      };

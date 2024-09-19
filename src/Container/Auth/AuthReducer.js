@@ -9,6 +9,8 @@ const initialState = {
 
     processSpareModal:false,
 
+    processUpgradeModal:false,
+
     fetchingLibraySearchData: false,
     fetchingLibraySearchDataError: false,
     librarySerachedData:[],
@@ -169,6 +171,9 @@ export const authReducer = (state = initialState, action) => {
 
             case types.HANDLE_SPARE_PROCESS:
                 return { ...state, processSpareModal: action.payload };
+
+                case types.HANDLE_UPGRADE_PROCESS:
+                    return { ...state, processUpgradeModal: action.payload };
 
                 case types.HANDLE_SHARE_PROCESS:
                     return { ...state, processShareModal: action.payload };

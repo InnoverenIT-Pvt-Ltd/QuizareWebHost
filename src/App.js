@@ -9,6 +9,7 @@ import PrivateRoute from "./Helpers/Auth/PrivateRoute";
 import AppRouter from "./Container/Quiz/EditQuiz/Swipe/AppRouter";
 import Privacy from "./Privacy";
 import Termco from "./Termco";
+import SelectPlan from "./Main/SelectPlan";
 const ForgetPasswordForm = lazy(() => import("./Container/Auth/ForgetPasswordForm"))
 const LoginByMail = lazy(() => import("./Container/Auth/LoginByMail"))
 const SignUpPage = lazy(() => import("./Container/Auth/SignUpPage"))
@@ -31,6 +32,7 @@ class App extends Component {
             <Route exact path="/signUp" component={SignUpPage} />
             <Route exact path="/privacy" component={Privacy} />
             <Route exact path="/term" component={Termco} />
+            <Route exact path="/selectplan" component={SelectPlan} />
             <Route exact path="/changepassword" component={ChangePassword} />
             <Route exact path="/forgotPassword" component={ForgetPasswordForm} />
 
