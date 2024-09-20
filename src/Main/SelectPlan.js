@@ -78,7 +78,8 @@ const SelectPlan = (props) => {
                         <h1 className="text-4xl font-bold text-center mb-10 font-[Poppins] text-white">Quizprompter Plans</h1>
                         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
                             {subscriptions.map((item, i) => (
-                                <div key={i} className={`bg-white shadow-md rounded-2xl p-4 w-[17rem] h-[20rem] text-center ${item.recommendInd ? 'border-2 border-purple-600' : ''}`}>
+                                <div key={i} className={`bg-white shadow-md rounded-2xl p-4 w-[17rem] h-[20rem] text-center ${item.recommendInd ? 'border-t-[10px] border-purple-600' : ''}`}>
+                                    <div className="bg-purple-300 w-32 text-purple-600 font-semibold">{item.recommendInd ? "MOST POPULAR" : ''}</div>
                                     <div className="flex items-center">
                                         <h2 className="text-2xl font-bold font-[Poppins]">{item.subscriptionName}</h2>
                                     </div>
