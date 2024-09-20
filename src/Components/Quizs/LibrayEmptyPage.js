@@ -1,12 +1,13 @@
 import React, { lazy, Suspense, useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import {handleSpareProcess} from "../../Container/Auth/AuthAction"
+import {handleSpareProcess,handleUpgrade} from "../../Container/Auth/AuthAction"
 import FWLogo1 from "../../../src/images/Button_Create-ChatGPT.png";
 import FWLogo from "../../../src/images/image 21.png";
 import FWLogo2 from "../../../src/images/Divider.png";
 import Menu from "./Menu";
 import ProcessSpareDrawer from "./ProcessSpareDrawer";
+import UpgradeSpareDrawer from "./UpgradeSpareDrawer";
 
 const LibrayEmptyPage = (props) => {
 
@@ -26,15 +27,38 @@ const LibrayEmptyPage = (props) => {
                <div className=" text-base font-[Poppins]  font-semibold">Nothing there for now</div>
                 
                 
-                <div className=" text-xs cursor-pointer underline text-[#6245C6] font-[Poppins] font-medium"
+                {/* <div className=" text-xs cursor-pointer underline text-[#6245C6] font-[Poppins] font-medium"
                 onClick={() => {
                     props.handleSpareProcess(true);
-                  }}>Create your first quiz</div>
-            
+                  }}>Create your first quiz</div> */}
+               {props.user.subscriptionName === null ? (
+  <div
+    className="text-xs cursor-pointer underline text-[#6245C6] font-[Poppins] font-medium"
+    onClick={() => {
+      props.handleUpgrade(true);
+    }}
+  >
+    Select Subscriptions
+  </div>
+) : (
+  <div
+    className="text-xs cursor-pointer underline text-[#6245C6] font-[Poppins] font-medium"
+    onClick={() => {
+      props.handleSpareProcess(true);
+    }}
+  >
+    Create your first quiz
+  </div>
+)}
+          
            </div>
            <ProcessSpareDrawer              
                   processSpareModal={props.processSpareModal}
                     handleSpareProcess={props.handleSpareProcess}
+                />
+                <UpgradeSpareDrawer              
+                  processUpgradeModal={props.processUpgradeModal}
+                  handleUpgrade={props.handleUpgrade}
                 />
         </>
     );
@@ -43,12 +67,15 @@ const LibrayEmptyPage = (props) => {
 }
 const mapStateToProps = ({ auth}) => ({
     processSpareModal: auth.processSpareModal,
+    user: auth.userDetails,
+    processUpgradeModal:auth.processUpgradeModal
 
 });
 const mapDispatchToProps = (dispatch) =>
     bindActionCreators(
         {
             handleSpareProcess,
+            handleUpgrade
         },
         dispatch
     );
