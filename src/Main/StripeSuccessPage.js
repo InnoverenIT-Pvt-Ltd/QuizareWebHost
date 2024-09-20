@@ -40,15 +40,17 @@ const handlefINISHPayout= async () => {
     }
   }; 
 
+  console.log("sss")
   return (
 <>
+
 {/* {props.codInventryorDr.lengh === 0 ? <h2>Payment Error</h2>: */}
 <div className="oderContainer">
     <div className="box center">
       <CheckCircleFilled style={{ fontSize: "6.6875em", color: "#3066BE" }} />
       <div class = "text-lg">
          Payment made successfully  &nbsp;
-        {props.confirmedPayment.paymentId || ""}
+        {props.confirmedQuizPayment.paymentId || ""}
       </div>
       <h3>
       You will receive a confirmation message shortly. For More Details check
@@ -79,8 +81,8 @@ const handlefINISHPayout= async () => {
    
   );
 }
-const mapStateToProps = ({ customer, auth }) => ({
-  confirmedPayment: customer.confirmedPayment,
+const mapStateToProps = ({ quiz, auth }) => ({
+  confirmedQuizPayment: quiz.confirmedQuizPayment,
   userId: auth.userDetails.userId,
 });
 
