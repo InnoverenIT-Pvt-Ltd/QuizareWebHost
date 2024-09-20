@@ -16,7 +16,7 @@ const SignUpPage = lazy(() => import("./Container/Auth/SignUpPage"))
 const ChangePassword = lazy(() => import("./Container/Auth/ChangePassword"))
 const Login = lazy(() => import("./Container/Auth/Login"))
 const MainApp = lazy(() => import("./Main/MainApp"))
-
+const StripeOutPayLoading =lazy(()=>import("./Main/StripeOutPayLoading"));
 
 class App extends Component {
   render() {
@@ -35,7 +35,7 @@ class App extends Component {
             <Route exact path="/selectplan" component={SelectPlan} />
             <Route exact path="/changepassword" component={ChangePassword} />
             <Route exact path="/forgotPassword" component={ForgetPasswordForm} />
-
+            <Route exact path="/drb/payloading/:stripePaymentId/:paymentId/:subscriptionId/:userId" component={StripeOutPayLoading} />
             {fetchingUserDetails ? (
               <BundleLoader />
             ) : (

@@ -9,6 +9,7 @@ import PaymentQuizModal from "./PaymentQuizModal";
 import MainSuscriptionModal from "./MainSuscriptionModal";
 import { base_url } from "../Config/Auth";
 import Swal from 'sweetalert2';
+import PaymentOutSubscriptionDrawer from "./PaymentOutSubscriptionDrawer";
 
 const SelectPlan = (props) => {
     const [subscriptions, setSubscriptions] = useState([]);
@@ -18,8 +19,10 @@ const SelectPlan = (props) => {
     const [originalSubscription, setOriginalSubscription] = useState({});
     const [selectedPlanId, setSelectedPlanId] = useState(null); // New state to track the selected plan
     const [eachSub, setEachSub] = useState({});
-
     const history = useHistory();
+    const [stripeModalVisible, setstripeModalVisible] = useState(false);
+   
+   
     useEffect(() => {
         const fetchSubscriptions = async () => {
             try {
@@ -70,6 +73,18 @@ const SelectPlan = (props) => {
         }
     };
 
+    const openStripeModal = () => {
+        setstripeModalVisible(true);
+      };
+    
+      const closeStripeModal = () => {
+        setstripeModalVisible(false);
+      };
+      const handleStripeOpen = () => {
+        openStripeModal(); 
+      };
+
+
     return (
         <div>
             <div className="flex items-center flex-col">
@@ -89,7 +104,7 @@ const SelectPlan = (props) => {
                                     <button
                                         className={`mt-6 ${item.isActive || item.subscriptionId === selectedPlanId ? 'bg-gray-300 text-gray-700' : 'bg-[#3B16B7] text-white'} py-2 px-4 rounded-lg w-full`}
                                         onClick={() => {handleSelectPlan(item.subscriptionId);
-                                            props.handleQuizStripeModal(true);
+                                           handleStripeOpen();
                                             setEachSub(item)  
 
                                         }}
@@ -109,10 +124,12 @@ const SelectPlan = (props) => {
                     </div>
                 </div>
             </div>
-            <PaymentQuizModal 
+            
+            <PaymentOutSubscriptionDrawer
              eachSub={eachSub}
-             addiNVEStripeModal={props.addiNVEStripeModal}
-             handleQuizStripeModal={props.handleQuizStripeModal}
+             stripeModalVisible={stripeModalVisible}
+      closeStripeModal={closeStripeModal}
+      handleStripeOpen={handleStripeOpen}
             />
             <MainSuscriptionModal />
         </div>

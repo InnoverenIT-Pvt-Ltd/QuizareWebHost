@@ -5,7 +5,7 @@ import store from '../../Store';
 import { withRouter } from 'react-router-dom';
 import { createBrowserHistory } from "history";
 import Swal from 'sweetalert2'
-
+import {getUserDetails} from "../Auth/AuthAction";
 /**
  * request for adding a quiz name
  */
@@ -945,7 +945,8 @@ export const addQuizPaymentId = (data, cb) => dispatch => {
     });
 };
 
-export const makeStripePayment = (data,cb) => dispatch => {
+export const makeStripePayment = (data,cb) => (dispatch, getState) => {
+  const userId = getState().auth.userDetails.userId;
   dispatch({
       type: types.MAKE_STRIPE_PAYMENT_REQUEST,
   })
@@ -957,7 +958,7 @@ export const makeStripePayment = (data,cb) => dispatch => {
     })
    
       .then(res => {
-        
+        dispatch(getUserDetails(userId));
           dispatch({
               type: types.MAKE_STRIPE_PAYMENT_SUCCESS,
               payload: res.data

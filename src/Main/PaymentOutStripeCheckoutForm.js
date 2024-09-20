@@ -13,7 +13,7 @@ import "./MainApp.scss";
 
 const history = createBrowserHistory();
 
-class QuizCheckoutForm extends React.Component {
+class PaymentOutStripeCheckoutForm extends React.Component {
  
   handleSubmit = async (event) => {
     event.preventDefault();
@@ -63,12 +63,12 @@ class QuizCheckoutForm extends React.Component {
   }
 }
 
-function QuizsCheckoutForm(props) {
+function InjectedCheckoutForm (props) {
 
   return (
     <ElementsConsumer>
       {({ stripe, elements }) => (
-        <QuizCheckoutForm
+        <PaymentOutStripeCheckoutForm
           stripe={stripe}
           elements={elements}
           paymentId={props.paymentId}
@@ -100,5 +100,5 @@ const mapDispatchToProps = (dispatch) =>
     dispatch
   );
 export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(QuizsCheckoutForm)
+  connect(mapStateToProps, mapDispatchToProps)(InjectedCheckoutForm)
 );
