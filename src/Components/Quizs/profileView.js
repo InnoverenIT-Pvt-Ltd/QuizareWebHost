@@ -18,13 +18,13 @@ const { Option } = Select;
 
  function profileView (props) {
   
-
+console.log(props.user.name)
     return (
       <>
         <Menu />
        
         <Formik
-          // enableReinitialize
+           enableReinitialize
           initialValues={{
             name: props.user.name || "",
             emailId: props.user.emailId || "",      
@@ -156,3 +156,5 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({}, dispatch);
 export default withRouter(
   connect(mapStateToProps, mapDispatchToProps)(profileView)
 );
+
+

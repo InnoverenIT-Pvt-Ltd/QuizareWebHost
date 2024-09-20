@@ -34,7 +34,7 @@ const TextInput = styled.input.attrs({
       // box-shadow: 0em 0.25em 0.625em -0.125em  ${props => props.theme.boxShadowColor};
       }
     ::placeholder {
-      color: #737373;
+      color: black;
       font-family:Calibri (Body);
       padding-left:3px;
     }
