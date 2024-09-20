@@ -37,12 +37,13 @@ function StripePayLoading(props) {
       const statusData = location.split("&")[2];
       const finalStatus = statusData.split("=")[1];
       console.log(finalStatus);
-
         props.makeStripePayment({
                           stripePaymentId:props.match.params.stripePaymentId,
                           paymentId: props.match.params.paymentId,
                           paymentType: "Stripe",
                           stripePaymentInd:finalStatus=== "failed" ? false :true,
+                          subscriptionId:props.match.params.subscriptionId,
+                          userId:props.match.params.userId
                         },
                         handleCallback
         );

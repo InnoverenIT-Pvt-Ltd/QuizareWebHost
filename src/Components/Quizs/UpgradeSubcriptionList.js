@@ -19,6 +19,8 @@ const UpgradeSubcriptionList = (props) => {
     const [selectedPlanId, setSelectedPlanId] = useState(null); // New state to track the selected plan
     const history = useHistory();
     const dispatch = useDispatch(); 
+    const [eachSub, setEachSub] = useState({});
+
     useEffect(() => {
         const fetchSubscriptions = async () => {
             try {
@@ -95,6 +97,7 @@ const UpgradeSubcriptionList = (props) => {
                                         className={`mt-6 ${item.activePlanInd || item.subscriptionId === selectedPlanId ? 'bg-gray-300 text-gray-700' : 'bg-[#3B16B7] text-white'} py-2 px-4 rounded-lg w-full`}
                                         onClick={() =>{ handleSelectPlan(item.subscriptionId);
                                             props.handleQuizStripeModal(true);
+                                            setEachSub(item)
                                         }}
                                         disabled={item.activePlanInd || item.subscriptionId === selectedPlanId}
                                     >
@@ -118,6 +121,7 @@ const UpgradeSubcriptionList = (props) => {
         </div>
 
         <PaymentQuizModal
+        eachSub={eachSub}
         addiNVEStripeModal={props.addiNVEStripeModal}
         handleQuizStripeModal={props.handleQuizStripeModal}
     />

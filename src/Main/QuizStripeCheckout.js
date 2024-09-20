@@ -14,12 +14,17 @@ const stripePromise = loadStripe("pk_test_51Pg4N4F9t5MfjsIZrPxRRnon7ENfinC1pcSx6
 
 function QuizStripeCheckout(props) {
 
+
+const price =props.eachSub.pricePerMonth *100 ;
+
+console.log("multi",price)
+
   useEffect(() => {
     let data = {
      // cartId: props.invencartItem.orderPhoneId ? props.invencartItem.orderPhoneId :null,
       currency: "EUR",
-      // amount:props.invencartItem.cartSummary && props.invencartItem.cartSummary.grandTotal,
-      amount:"100",
+      amount:price,
+      // amount:"100",
     };
 
     props.addQuizPaymentId(data);
@@ -38,6 +43,7 @@ function QuizStripeCheckout(props) {
       >
       <QuizCheckoutForm
         handleQuizStripeModal={props.handleQuizStripeModal}
+        eachSub={props.eachSub}
       />
     </Elements>
  } 

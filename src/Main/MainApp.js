@@ -96,7 +96,7 @@ function MainApp(props) {
               <Route exact path="/upgrade" component={Upgrade} />
               <Route exact path="/emptypage" component={LibrayEmptyPage} />
               <Route exact path="/swipeInLibrary/:quizId" component={SwipeInLibrary} />
-              <Route exact path="/drb/payloading/:stripePaymentId/:paymentId" component={StripePayLoading} />
+              <Route exact path="/drb/payloading/:stripePaymentId/:paymentId/:subscriptionId/:userId" component={StripePayLoading} />
               <Route exact path="/drb/stripeSuccess" component={StripeSuccessPage} />
               <Route exact path="/quizLibrary" component={QuizLibrary} />
               {/* <Route exact path="/librayHome" component={LibrayHome} /> */}
