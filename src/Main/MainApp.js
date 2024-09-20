@@ -44,6 +44,8 @@ const ChangePassword = lazy(() => import("../Container/Auth/ChangePassword"));
 const Test = lazy(() => import("../Container/Auth/Test"))
 const UpdateQuizNameAndDuration = lazy(() => import("../Container/Quiz/Child/QuizLibrary/UpdateQuizNameAndDuration"));
 const UpdateQuizInLibrary = lazy(() => import("../Container/Quiz/Child/QuizLibrary/UpdateQuizInLibrary"))
+const StripePayLoading = lazy(() => import("./StripePayLoading"));
+const StripeSuccessPage = lazy(()=>import ("./StripeSuccessPage"));
 
 const { Content } = Layout;
 const routeNameMap = {
@@ -94,6 +96,8 @@ function MainApp(props) {
               <Route exact path="/upgrade" component={Upgrade} />
               <Route exact path="/emptypage" component={LibrayEmptyPage} />
               <Route exact path="/swipeInLibrary/:quizId" component={SwipeInLibrary} />
+              <Route exact path="/drb/payloading/:stripePaymentId/:paymentId" component={StripePayLoading} />
+              <Route exact path="/drb/stripeSuccess" component={StripeSuccessPage} />
               <Route exact path="/quizLibrary" component={QuizLibrary} />
               {/* <Route exact path="/librayHome" component={LibrayHome} /> */}
               <Route exact path="/addquiz" component={Quiz} />
