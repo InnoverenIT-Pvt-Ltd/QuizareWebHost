@@ -5,6 +5,7 @@ import axios from 'axios';
 import FWLogo1 from "../../../src/images/QP-logo-short_500px.png";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import {getUserDetails} from "../../Container/Auth/AuthAction"
 import {  getUpgradeSuscrption, handleQuizStripeModal, } from "../../Container/Quiz/QuizAction";
 import Swal from 'sweetalert2';
 import { base_url } from "../../Config/Auth";
@@ -55,6 +56,7 @@ const UpgradeSubcriptionList = (props) => {
                     timer: 1500
                 });
                 dispatch(getUpgradeSuscrption(props.userId));
+                dispatch(getUserDetails(props.userId));
                // history.push("/emptypage");
             } else {
                 Swal.fire({
@@ -142,6 +144,7 @@ const mapStateToProps = ({ quiz, auth }) => ({
 const mapDispatchToProps = (dispatch) => bindActionCreators({
     getUpgradeSuscrption,
     handleQuizStripeModal,
+    getUserDetails
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(UpgradeSubcriptionList);
