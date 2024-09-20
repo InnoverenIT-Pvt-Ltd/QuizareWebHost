@@ -9,6 +9,8 @@ import {
     makeStripePayment
 } from "../Container/Quiz/QuizAction";
 import { createBrowserHistory } from "history";
+import "./MainApp.scss";
+
 const history = createBrowserHistory();
 
 class QuizCheckoutForm extends React.Component {

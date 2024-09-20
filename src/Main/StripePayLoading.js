@@ -15,7 +15,7 @@ function StripePayLoading(props) {
           icon: 'success',
           title: "Payment Successfull",
         });
-         props.history.push(`/ordersucess/payOutpg`);
+         props.history.push(`/drb/stripeSuccess`);
           } 
           else if(status === 'status failed'){
             Swal.fire({
@@ -89,11 +89,11 @@ function StripePayLoading(props) {
     </>
   );
 }
-  const mapStateToProps = ({ customer, auth }) => ({
-    paymentId: customer.paymentDetails.paymentId,
-    stripePaymentId:customer.paymentDetails.stripePaymentId,
-    shopName:customer.shopName,
-    confirmedPayment:customer.confirmedPayment,
+  const mapStateToProps = ({ auth }) => ({
+    // paymentId: customer.paymentDetails.paymentId,
+    // stripePaymentId:customer.paymentDetails.stripePaymentId,
+    // shopName:customer.shopName,
+    // confirmedPayment:customer.confirmedPayment,
 
   
   });

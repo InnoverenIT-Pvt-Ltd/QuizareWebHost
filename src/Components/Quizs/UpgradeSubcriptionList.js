@@ -5,9 +5,10 @@ import axios from 'axios';
 import FWLogo1 from "../../../src/images/QP-logo-short_500px.png";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import {  getUpgradeSuscrption } from "../../Container/Quiz/QuizAction";
+import {  getUpgradeSuscrption, handleQuizStripeModal, } from "../../Container/Quiz/QuizAction";
 import Swal from 'sweetalert2';
 import { base_url } from "../../Config/Auth";
+import PaymentQuizModal from "../../Main/PaymentQuizModal";
 
 const UpgradeSubcriptionList = (props) => {
     const [subscriptions, setSubscriptions] = useState([]);
@@ -26,7 +27,6 @@ const UpgradeSubcriptionList = (props) => {
                 console.error("Error fetching subscriptions:", error);
             }
         };
-
         fetchSubscriptions();
     }, []); // Empty dependency array ensures this runs only once after initial render
 
@@ -75,6 +75,7 @@ const UpgradeSubcriptionList = (props) => {
       </div>
       }
     return (
+        <>
         <div>
             <div className="flex items-center flex-col">
                 
@@ -92,7 +93,9 @@ const UpgradeSubcriptionList = (props) => {
                                     <p className="text-4xl font-bold flex font-[Poppins]">${item.pricePerMonth}<span className="text-lg">/month</span></p>
                                     <button
                                         className={`mt-6 ${item.activePlanInd || item.subscriptionId === selectedPlanId ? 'bg-gray-300 text-gray-700' : 'bg-[#3B16B7] text-white'} py-2 px-4 rounded-lg w-full`}
-                                        onClick={() => handleSelectPlan(item.subscriptionId)}
+                                        onClick={() =>{ handleSelectPlan(item.subscriptionId);
+                                            props.handleQuizStripeModal(true);
+                                        }}
                                         disabled={item.activePlanInd || item.subscriptionId === selectedPlanId}
                                     >
                                         <div className="font-[Poppins] font-medium">
@@ -113,6 +116,13 @@ const UpgradeSubcriptionList = (props) => {
             </div>
            
         </div>
+
+        <PaymentQuizModal
+        addiNVEStripeModal={props.addiNVEStripeModal}
+        handleQuizStripeModal={props.handleQuizStripeModal}
+    />
+
+    </>
     );
 };
 
@@ -121,11 +131,13 @@ const mapStateToProps = ({ quiz, auth }) => ({
     userId: auth.userDetails.userId,
     suscrptionUpgradeData: quiz.suscrptionUpgradeData,
     addingSuscrpitionModal: quiz.addingSuscrpitionModal,
-    fetchingUpgradeSuscrption: quiz.fetchingUpgradeSuscrption
+    fetchingUpgradeSuscrption: quiz.fetchingUpgradeSuscrption,
+   addiNVEStripeModal: quiz.addiNVEStripeModal,
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
     getUpgradeSuscrption,
+    handleQuizStripeModal,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(UpgradeSubcriptionList);
