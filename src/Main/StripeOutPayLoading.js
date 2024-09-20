@@ -15,7 +15,7 @@ function StripePayLoading(props) {
           icon: 'success',
           title: "Payment Successfull",
         });
-         props.history.push(`/drb/stripeSuccess`);
+         props.history.push(`/emptypage`);
           } 
           else if(status === 'status failed'){
             Swal.fire({

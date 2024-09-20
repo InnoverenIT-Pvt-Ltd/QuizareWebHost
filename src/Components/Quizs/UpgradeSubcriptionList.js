@@ -22,6 +22,7 @@ const UpgradeSubcriptionList = (props) => {
     const dispatch = useDispatch(); 
     const [eachSub, setEachSub] = useState({});
 
+    
     useEffect(() => {
         const fetchSubscriptions = async () => {
             try {
@@ -56,7 +57,7 @@ const UpgradeSubcriptionList = (props) => {
                     timer: 1500
                 });
                 dispatch(getUpgradeSuscrption(props.userId));
-                dispatch(getUserDetails(props.userId));
+                // dispatch(getUserDetails(props.userId));
                // history.push("/emptypage");
             } else {
                 Swal.fire({

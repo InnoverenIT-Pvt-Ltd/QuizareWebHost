@@ -53,18 +53,18 @@ const handlefINISHPayout= async () => {
         {props.confirmedQuizPayment.paymentId || ""}
       </div>
       <h3>
-      You will receive a confirmation message shortly. For More Details check
-          order status on your whatsapp
+      You will receive a confirmation message shortly.
       </h3>
       <FlexContainer justifyContent="center" style={{ width: "100%" }}>
         <div >
         
-          {/* <Button
+        <Link to="/quizLibrary">
+          <Button
           type="primary" 
-        onClick={handlefINISHPayout}
           >
-            Complete
-          </Button> */}
+            Go to Quiz
+          </Button>
+          </Link>
           
         </div>
     
