@@ -43,7 +43,7 @@ if(props.addingUserQuery){
               </div>
               <div class="absolute md:bottom-[10rem]  flex flex-col justify-center items-center  max-sm:m-0 h-80  m-auto">
     <div class=" text-sm font-semibold  text-white">
-      Do you Want to use ChatGPT to Generate Questions?
+      How many Questions?
 
     </div>
     {/* <div class="flex justify-between w-wk mt-6">
@@ -62,9 +62,9 @@ if(props.addingUserQuery){
     
     </div> */}
     <div class="mt-4 w-wk">
-    {/* {showCard &&  */}
+ 
     <>
-    <Input placeholder='How many questions?'
+    <Input 
     value={questionReq}
     onChange={handleQuestionRequire}
     className="custom-input"

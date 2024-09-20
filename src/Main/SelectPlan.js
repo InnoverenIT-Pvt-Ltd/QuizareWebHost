@@ -17,6 +17,8 @@ const SelectPlan = (props) => {
     const [editedName, setEditedName] = useState({});
     const [originalSubscription, setOriginalSubscription] = useState({});
     const [selectedPlanId, setSelectedPlanId] = useState(null); // New state to track the selected plan
+    const [eachSub, setEachSub] = useState({});
+
     const history = useHistory();
     useEffect(() => {
         const fetchSubscriptions = async () => {
@@ -52,7 +54,7 @@ const SelectPlan = (props) => {
                     showConfirmButton: false,
                     timer: 1500
                 });
-                history.push("/emptypage");
+                // history.push("/emptypage");
             } else {
                 Swal.fire({
                     icon: "error",
@@ -86,7 +88,11 @@ const SelectPlan = (props) => {
                                     <p className="text-4xl font-bold flex font-[Poppins]">${item.pricePerMonth}<span className="text-lg">/month</span></p>
                                     <button
                                         className={`mt-6 ${item.isActive || item.subscriptionId === selectedPlanId ? 'bg-gray-300 text-gray-700' : 'bg-[#3B16B7] text-white'} py-2 px-4 rounded-lg w-full`}
-                                        onClick={() => handleSelectPlan(item.subscriptionId)}
+                                        onClick={() => {handleSelectPlan(item.subscriptionId);
+                                            props.handleQuizStripeModal(true);
+                                            setEachSub(item)  
+
+                                        }}
                                         disabled={item.isActive || item.subscriptionId === selectedPlanId}
                                     >
                                         <div className="font-[Poppins] font-medium">{item.subscriptionId === selectedPlanId ? 'Plan Selected' : 'Select Plan'}</div>
@@ -103,7 +109,11 @@ const SelectPlan = (props) => {
                     </div>
                 </div>
             </div>
-            <PaymentQuizModal />
+            <PaymentQuizModal 
+             eachSub={eachSub}
+             addiNVEStripeModal={props.addiNVEStripeModal}
+             handleQuizStripeModal={props.handleQuizStripeModal}
+            />
             <MainSuscriptionModal />
         </div>
     );
