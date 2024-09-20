@@ -9,7 +9,7 @@ import { BundleLoader } from "../Components/Placeholder";
 import QuizCheckoutForm from "./QuizCheckoutForm";
 
 //production pk
-const stripePromise = loadStripe("pk_test_51PqCWlIMpvH6thpXhGRrnLxBQcEJJ0yl9YvCSzFZy8hX1Q1XIdMXM8fM1ar43dlv9uC4IJPkWIsP7dimrUklQMyc007c8UddvV");
+const stripePromise = loadStripe("pk_test_51Pg4N4F9t5MfjsIZrPxRRnon7ENfinC1pcSx6aRw0prlk3qODgIAgXcRXel0NaoI38idFEUDI21QcrL0eNh8Sndf00t7yiYS6E");
                                   
 
 function QuizStripeCheckout(props) {
@@ -34,6 +34,7 @@ function QuizStripeCheckout(props) {
       {props.paymentQuizDetails.clientSecret && 
       <Elements stripe={stripePromise} 
       options={options}
+      
       >
       <QuizCheckoutForm
         handleQuizStripeModal={props.handleQuizStripeModal}

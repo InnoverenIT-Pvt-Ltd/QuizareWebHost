@@ -924,7 +924,7 @@ export const addQuizPaymentId = (data, cb) => dispatch => {
   });
 
   axios
-    .post(`${base_url}/stripe/makePayment`, data, { headers: {
+    .post(`${base_url}/api/v1/stripe/makePayment`, data, { headers: {
       Authorization: "Bearer " + sessionStorage.getItem("token") || "",
     },})
     .then(res => {
@@ -950,7 +950,7 @@ export const makeStripePayment = (data,cb) => dispatch => {
       type: types.MAKE_STRIPE_PAYMENT_REQUEST,
   })
  
-   axios.post(`${base_url}/stripe/confirmPayment`,data ,{
+   axios.post(`${base_url}/api/v1/stripe/confirmPayment`,data ,{
    headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
