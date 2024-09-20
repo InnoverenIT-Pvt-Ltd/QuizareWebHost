@@ -27,8 +27,8 @@ class QuizCheckoutForm extends React.Component {
       elements, 
       
       confirmParams: {
-        //  return_url: `https://hrapp.tekorero.com/DRB/invenloading/${this.props.stripePaymentId}/${this.props.paymentId}` //Korero
-        return_url: `http://localhost:3000/drb/payloading/${this.props.stripePaymentId}/${this.props.paymentId}` // localhostD
+         return_url: `http://host.quizledge.co.s3-website.eu-west-3.amazonaws.com/drb/payloading/${this.props.stripePaymentId}/${this.props.paymentId}/${this.props.eachSub.subscriptionId}/${this.props.eachSub.userId}` //Quiweb
+        // return_url: `http://localhost:3000/drb/payloading/${this.props.stripePaymentId}/${this.props.paymentId}/${this.props.eachSub.subscriptionId}/${this.props.eachSub.userId}` // localhostD
       },
     });
 
@@ -43,7 +43,9 @@ class QuizCheckoutForm extends React.Component {
 
   render() {
     const { stripe } = this.props;
-// console.log(this.props.stripePaymentId)
+
+    console.log(this.props.eachSub) 
+
     return (
       <form onSubmit={this.handleSubmit}>
 <PaymentElement/>
@@ -53,7 +55,7 @@ class QuizCheckoutForm extends React.Component {
           className="StripePayButton"
         >
           Pay 
-           {`100`} {"EUR"}
+          {`${this.props.eachSub.pricePerMonth}  ${"EUR"}`}
           {/* {`${this.props.finalgrandTotalValue} ${this.props.currency}`} {this.props.invencartItem.cartSummary && this.props.invencartItem.cartSummary.grandTotal}*/}
         </button>
       </form>
@@ -76,6 +78,7 @@ function QuizsCheckoutForm(props) {
           finalgrandTotalValue={"100"}
           confirmedQuizPayment={props.confirmedQuizPayment}
           currency={"EUR"}
+          eachSub={props.eachSub}
          
         />
       )}

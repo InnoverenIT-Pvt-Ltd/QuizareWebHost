@@ -10,6 +10,8 @@ import QuizStripeCheckout from "./QuizStripeCheckout";
 
 const PaymentQuizModal = (props) => {
   const { ...formProps } = props;
+
+  
   return (
     <>
       <StyledModal
@@ -27,8 +29,9 @@ const PaymentQuizModal = (props) => {
         <Suspense fallback={<BundleLoader />}>
         <QuizStripeCheckout
          handleQuizStripeModal={props.handleQuizStripeModal}
-         total={"100"}
+         total={props.eachSub.pricePerMonth}
            currency={"EUR"}
+        eachSub={props.eachSub}
         />
         </Suspense>
       </StyledModal>
