@@ -86,9 +86,9 @@ const UpgradeSubcriptionList = (props) => {
                 
 
             <div className="bg-[#3B16B7]  shadow-2xl border-solid flex md:justify-center mt-3  flex-col max-sm:w-wk max-sm:h-[79vh] max-sm:overflow-x-auto h-[96vh] md:w-wk max-sm:mt-0  ">
-                    <div className="max-w-6xl mx-auto py-16">
+                    <div className="max-w-6xl mx-auto py-16 max-sm:flex flex-col items-center">
                         <h1 className="text-4xl font-bold text-center mb-10 font-[Poppins] text-white">Quizprompter Plans</h1>
-                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 overflow-x-auto h-[33rem]">
                             {subscriptions.map((item, i) => (
                                 <div key={i} className={`bg-white shadow-md rounded-2xl p-4 w-[17rem] h-[20rem] text-center ${item.recommendInd ? 'border-t-[10px] border-purple-600' : ''}`}>
                                       <div className="bg-purple-300 w-32 text-purple-600 font-semibold">{item.recommendInd ? "MOST POPULAR" : ''}</div>
