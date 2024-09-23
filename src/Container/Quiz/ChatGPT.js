@@ -90,7 +90,7 @@ if(props.addingUserQuery){
       }}> <h3 className="font-medium  text-xl -mt-4"> Send </h3> </Button>
       </div>
 
-    <div class="mt-4 ">
+    {/* <div class="mt-4 ">
     <Button  type="primary"
      style={{ height: "3rem", backgroundColor: "white", borderRadius: '0.25rem' }}
     onClick={()=>{
@@ -108,7 +108,7 @@ questions_required:questionReq,
       props.addUserQuery(query);
       setGenerationComplete(true);
       }}> <h3 className="font-medium  text-xl -mt-4"> Generate </h3> </Button>
-      </div>
+      </div> */}
      &nbsp;
      &nbsp;
      {props.obtainedQuizResponse.length===0 &&(
