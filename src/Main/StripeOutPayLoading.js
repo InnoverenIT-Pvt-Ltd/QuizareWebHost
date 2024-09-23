@@ -15,7 +15,7 @@ function StripePayLoading(props) {
           icon: 'success',
           title: "Payment Successfull",
         });
-         props.history.push(`/emptypage`);
+         props.history.push(`/quizLibrary`);
           } 
           else if(status === 'status failed'){
             Swal.fire({

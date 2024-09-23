@@ -14,6 +14,7 @@ const ChatGPT = (props) => {
 
   const [showCard, setshowCard] = useState(false);
   const [questionReq,setQuestionReq]=useState("");
+  const [QuizName,setQuizName] =useState("");
   const [generationComplete, setGenerationComplete] = useState(false);
 
  function handleSayNo () {
@@ -64,6 +65,13 @@ if(props.addingUserQuery){
     <div class="mt-4 w-wk">
  
     <>
+    <Input
+    placeholder="Enter quiz name" 
+    value={QuizName}
+    onChange={(e)=> setQuizName(e.target.value)}
+    className="custom-input"
+    />
+<div class="mb-3" />
     <Input 
     value={questionReq}
     onChange={handleQuestionRequire}
