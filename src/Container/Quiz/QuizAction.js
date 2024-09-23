@@ -1076,3 +1076,35 @@ export const makeStripePayment = (data,cb) => (dispatch, getState) => {
             });
           });
       };
+
+      export const checkGenerateQuiz = (QGen,query) => (dispatch) => {
+        dispatch({
+          type: types.CHECK_GENERATE_REQUEST,
+        });
+      axios
+          .post(`${base_url}/quiz/save/usingChatGpt`,QGen)
+          .then(res => {  
+            dispatch(addUserQuery(query))  
+            dispatch({
+              type: types.CHECK_GENERATE_SUCCESS,
+              payload: res.data,
+            });
+            Swal.fire({
+              icon: "success",
+              title: "Question generated !",
+              showConfirmButton: false,
+              timer: 1500
+            });
+          })
+          .catch(err => {
+            // dispatch(addUserQuery(query))  
+            Swal.fire({
+              icon: "error",
+              title: "Sorry you can't create more than 0 quiz using chat Gpt as you have created 0 no. of quiz using Chat GptQuestion generated !", 
+            });
+            dispatch({
+              type: types.CHECK_GENERATE_FAILURE,
+              payload: err,
+            });
+          });
+      };

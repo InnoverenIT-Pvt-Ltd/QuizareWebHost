@@ -133,7 +133,10 @@ const initialState = {
 
   sendingquizResponse: false,
   sendingquizResponseError:false,
-  obtainedQuizResponse:{}
+  obtainedQuizResponse:{},
+
+  checkGenerate: false, checkGenerateError:false,
+  checkQuizGenerate:{},
 };
 
 export const quizReducer = (state = initialState, action) => {
@@ -688,7 +691,16 @@ export const quizReducer = (state = initialState, action) => {
                           fetchingUpgradeSuscrptionError: true,
                         };
             
+                        case types.CHECK_GENERATE_REQUEST:
+                          return { ...state, checkGenerate: true };
+                        case types.CHECK_GENERATE_SUCCESS:
+                          return { ...state, checkGenerate: false,
+                            checkQuizGenerate:action.payload,
+                          };
+                        case types.CHECK_GENERATE_FAILURE:
+                          return { ...state, checkGenerate: false, checkGenerateError: true };
 
+                          
     default:
       return state;
   }
