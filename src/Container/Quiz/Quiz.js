@@ -485,7 +485,7 @@ function Quiz(props) {
   const [isDrawerVisible, setIsDrawerVisible] = useState(false);
 
   useEffect(() => {
-    props.getCategory();
+    // props.getCategory();
     props.getQuestionList(props.showQuiz.quizId);
   }, [props.showQuiz.quizId]);
 
@@ -557,6 +557,7 @@ function Quiz(props) {
                 quizId: props.showQuiz && props.showQuiz.quizId,
                 categoryId: selectedCategory,
                 number: count,
+                type:"Normal",
               },
               props.showQuiz && props.showQuiz.quizId
             );

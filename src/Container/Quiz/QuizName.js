@@ -44,6 +44,7 @@ function QuizName(props) {
           duration: "",
           quizName: "",
           quizHostId: props.quizHostId,
+          type:"Normal"
         }}
         validationSchema={QuizSchema}
         onSubmit={(values, { resetForm }) => {
