@@ -654,7 +654,7 @@ function Quiz(props) {
                       </h3>
                       </div>
                       <hr className="h-px bg-black border-2 w-wk md:mt-4 border-black" />
-                      <div className="flex items-center w-wk justify-center mt-4">
+                      <div className="flex items-center w-wk justify-center mt-4 p-1">
                     <div> 
                     <img
                   className="big-logo"
@@ -665,7 +665,7 @@ function Quiz(props) {
                 <div className="text-[#3B16B7] text-base mr-2 font-medium">Need help? Generate your questions with AI using </div>
                 <div className="text-[#3B16B7] text-base underline font-bold cursor-pointer"> ChatGPT</div>
                 </div>
-                      <div className="mt-4 p-6">
+                      <div className="mt-4 p-1 md:p-6">
                         <div>
                           <Field
                             component={InputComponent}
@@ -715,7 +715,7 @@ function Quiz(props) {
                         </div>
                       </div>
                     </div>
-                    <div className="flex justify-between p-6 w-wk max-sm:flex-col">
+                    <div className="flex justify-between p-1 w-wk max-sm:flex-col md:p-6">
                       <div className="flex justify-between w-wk ">
                       
                       <div>

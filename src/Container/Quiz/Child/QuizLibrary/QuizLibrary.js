@@ -217,6 +217,7 @@ function QuizLibrary(props) {
     </div>
     </div>       
     <div className="flex justify-between items-center absolute bottom-0 w-wk p-2">
+      {item.quizHostInd &&
       <div>
         <Tooltip title="Share">
         <IosShareIcon  onClick={() => {
@@ -225,6 +226,7 @@ function QuizLibrary(props) {
 }} className="!cursor-pointer"/>
         </Tooltip>
         </div>
+            }
     <div class="flex flex-row">
                             <div class=" text-base text-white font-[Poppins]">
                               {item.quizHostInd === false ? "Closed" : "Hosted"}
