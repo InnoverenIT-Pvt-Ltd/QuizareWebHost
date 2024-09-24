@@ -879,13 +879,15 @@ export const handleBackToQuiz = (modalProps) => (dispatch) => {
   });
 };
 
-export const addUserQuery = (query) => (dispatch) => {
+export const addUserQuery = (query,userPre) => (dispatch) => {
   dispatch({
     type: types.ADD_USER_QUERY_REQUEST,
   });
 axios
     .post(`${base_url2}/user_query/`,query,)
-    .then(res => {    
+    .then((res) => {   
+      // await delay(5000);
+      //  dispatch(sendQuizResponse(userPre)); 
       dispatch({
         type: types.ADD_USER_QUERY_SUCCESS,
         payload: res.data,
@@ -1076,15 +1078,15 @@ export const makeStripePayment = (data,cb) => (dispatch, getState) => {
             });
           });
       };
-
       export const checkGenerateQuiz = (QGen,query) => (dispatch) => {
         dispatch({
           type: types.CHECK_GENERATE_REQUEST,
         });
       axios
           .post(`${base_url}/quiz/save/usingChatGpt`,QGen)
-          .then(res => {  
-            dispatch(addUserQuery(query))  
+          .then((res) => { 
+            // await delay(3000);
+            // dispatch(addUserQuery(query));
             dispatch({
               type: types.CHECK_GENERATE_SUCCESS,
               payload: res.data,
@@ -1097,6 +1099,7 @@ export const makeStripePayment = (data,cb) => (dispatch, getState) => {
             });
           })
           .catch(err => {
+            console.log(err)
             // dispatch(addUserQuery(query))  
             Swal.fire({
               icon: "error",
