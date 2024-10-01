@@ -675,9 +675,9 @@ function Quiz(props) {
                             style={{ width: "100%", height: "3rem", borderRadius: "0.25rem" }}
                           />
                         </div>
-                        <div className="mt-12">
+                        {/* <div className="mt-12">
                         <FastField name="imageId" component={PostImageUpld} />
-                        </div>
+                        </div> */}
                         <div className="flex justify-between mt-12">
                           <div className="w-[47.5%]">
                             <Field
