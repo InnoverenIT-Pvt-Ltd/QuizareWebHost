@@ -8,6 +8,7 @@ import FWLogo2 from "../../../src/images/Divider.png";
 import FWLogo3 from "../../../src/images/login.png";
 import FWLogo4 from "../../../src/images/login1.png";
 import Button from "antd/lib/button";
+import * as Yup from "yup";
 import FacebookLogin from "react-facebook-login";
 import { GoogleLogin } from 'react-google-login';
 import { signUpByUser,facebookLogin, googleLogin } from "./AuthAction";
@@ -26,7 +27,13 @@ import { Radio } from "@mui/material";
 // /**
 //  * yup validation scheme for set Password
 //  */
-
+const emailRegex = /^[\w.%+-]+@[^\W]+(?:\.[^\W_]+)+$/;
+const SignSchema = Yup.object().shape({
+    name: Yup.string().required("Input needed!"),
+    emailID: Yup.string()
+    .matches(emailRegex, "Invalid email format")
+    .required("Input needed!"),
+  });
 class SignUpPage extends Component {
     constructor(props) {
         super(props);
@@ -66,7 +73,7 @@ class SignUpPage extends Component {
                                     confirmPassword: "",
                                     imageId: ""
                                 }}
-
+                                validationSchema={SignSchema}
                                 onSubmit={(values, { resetForm }) => {
                                     console.log(values)
                                     if (values.password === values.confirmPassword) {
@@ -190,8 +197,8 @@ class SignUpPage extends Component {
 
                         /> 
                                             </div> */}
-                                             <div className="mt-6 flex justify-between w-wk">
-                                        <div class="mt-4" >
+                                             <div className="flex mt-1 justify-between w-wk">
+                                        <div class="" >
                                         <FacebookLogin
                                          
           appId="1462431934502453"
@@ -202,7 +209,7 @@ class SignUpPage extends Component {
         />
         
       </div>
-      <div class="mt-3" >
+      <div class="" >
                                       
                                         <GoogleLogin
           clientId="1802272721-jkbu5gabo0qsrq7kh50n5ap7h3979tvb.apps.googleusercontent.com"

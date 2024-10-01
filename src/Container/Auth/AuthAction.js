@@ -158,10 +158,11 @@ export const signUpByUser = ({ emailID, password, name, confirmPassword, imageId
     .then((res) => {
       dispatch(getUserDetails(res.data.userId));
       const redirectPath = res.data.noOfQuizes === 0 ? "/emptypage" : "/quizLibrary";
-      history.push("/selectplan");
+      const rightPath = res.data.userInd === true ? "/signUp" : "/selectplan"
+      history.push(rightPath);
       Swal.fire({
         icon: "success",
-        title: "You have registered successfully !!",
+        title: res.data.message || "You have registered successfully !!",
         showConfirmButton: false,
         timer: 1500
       });
