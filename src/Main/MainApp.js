@@ -20,6 +20,7 @@ import Navigate from "../Container/Quiz/EditQuiz/Swipe/Navigate";
 import ChatGPT from "../Container/Quiz/ChatGPT.js";
 import LibrayEmptyPage from "../Components/Quizs/LibrayEmptyPage.js";
 import Upgrade from "./Upgrade.js";
+import ReviewQuiz from "./ReviewQuiz.js";
 const Question1 = lazy(() => import("../Components/Quizs/Question1"))
 const CreateQuiz = lazy(() => import("../Components/Quizs/CreateQuiz"));
 const QuizName = lazy(() => import("../Container/Quiz/QuizName"))
@@ -83,6 +84,7 @@ function MainApp(props) {
               <Route exact path="/finalize" component={FinalizeQuiz} />
               <Route exact path="/updateQuizName" component={UpdateQuizName} />
               <Route exact path="/updateQuizNameInLibrary/:quizName/:duration/:quizId" component={UpdateQuizNameAndDuration} />
+              <Route exact path="/review/:quizName/:duration/:quizId" component={ReviewQuiz} />
               <Route exact path="/updateQuizNameLibrary/:quizName/:duration/:quizId" component={UpdateQuizNameLibrary} />
               <Route exact path="/updateQuiz" component={UpdateQuiz} />
               <Route exact path="/hostquiz" component={QuizDetails} />

@@ -30,7 +30,7 @@ function QuizName(props) {
     if (data === "success") {
       history.push(`/addquiz`);
     } else {
-      history.push(`/quizzes`);
+      history.push(`/how2`);
     }
   }
 

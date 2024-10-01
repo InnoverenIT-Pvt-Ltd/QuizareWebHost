@@ -27,7 +27,7 @@ import MainHeader from "../../../../Components/Mainheader";
 import { Form, Formik } from "formik";
 import Menu from "../../../../Components/Quizs/Menu";
 import Image from "./Image";
-import { StyledDrawer } from "../../../../Components/UI/Antd";
+import { StyledDrawer, StyledModal } from "../../../../Components/UI/Antd";
 import ProcessShareDrawer from "../../../../Components/ProcessShareDrawer";
 import ShareDrawer from "./ShareDrawer";
 import LibrarySearchedData from "./LibrarySearchedData";
@@ -49,7 +49,7 @@ function QuizLibrary(props) {
   const handleMouseLeave = () => {
     setTimeout(() => {
       setHoveredItemId(null);
-    }, 2000); // Adjust the delay as needed
+    }, 200); // Adjust the delay as needed
   };
   const showModal = () => {
     setIsModalOpen(true);
@@ -60,7 +60,7 @@ function QuizLibrary(props) {
   console.log(currentItem)
   const handleOk = () => {
     setIsModalOpen(false);
-    history.push(`/hostquiz`);
+    //history.push(`/hostquiz`);
     props.hostQuiz(
       {
         duration: duration,
@@ -143,21 +143,44 @@ function QuizLibrary(props) {
                     <MoreHorizIcon/>
      {hoveredItemId === item.quizId && (
         <div 
-          className="absolute right-0 mt-2 w-40 bg-white p-2 rounded-md shadow-lg z-10 font-[Poppins]"
+          className="absolute right-0 -mt-[3rem] w-40 bg-white p-2 rounded-md shadow-lg z-10 font-[Poppins]"
           onMouseEnter={() => handleMouseEnter(item.quizId)}
           onMouseLeave={handleMouseLeave}
         >
+            <Link
+                        to={`quizinLibrary/${item.quizId}`}
+                      >
+
+                        <Button
+                          type="primary"
+                          style={{ backgroundColor: "white",height:"2rem"}}
+                        // onClick={() => props.hostQuiz(props.showQuiz.quizId)}
+                        >
+                          <h3>Add Question</h3>
+                        </Button>
+                      </Link>
          <Link to={`updateQuizNameInLibrary/${item.quizName}/${item.duration}/${item.quizId}`}>
 
 <Button
-  style={{ width: "9rem", backgroundColor: "white" }}
+  style={{ width: "9rem", backgroundColor: "white",height:"2rem" }}
   type="primary"
 
 //   onClick={() => props.navigation.navigate('Quiz Invite')}
 >
-  <div className="font-[Poppins] text-black">Edit Quiz</div>
+  <div className="font-[Poppins] text-black">Update Quiz</div>
 </Button>
 </Link>   
+<Link to={`review/${item.quizName}/${item.duration}/${item.quizId}`}>
+
+<Button
+  style={{ width: "9rem", backgroundColor: "white",height:"2rem" }}
+  type="primary"
+
+//   onClick={() => props.navigation.navigate('Quiz Invite')}
+>
+  <div className="font-[Poppins] text-black">Review Quiz</div>
+</Button>
+</Link>  
 {item.quizHostInd === false && (
                         <Button
                           type="primary"
@@ -172,7 +195,7 @@ function QuizLibrary(props) {
                        {item.quizHostInd === false && (
                         <Button
                           type="primary"
-                          style={{ backgroundColor: "white" }}
+                          style={{ backgroundColor: "white",height:"2rem" }}
                           onClick={() => {
                             showModal();
                             handleSetCurrentItem(item);
@@ -187,7 +210,7 @@ function QuizLibrary(props) {
                        {item.quizHostInd === true && (
                         <Button
                           type="primary"
-                          style={{ backgroundColor: "white"}}
+                          style={{ backgroundColor: "white",height:"2rem"}}
                           // onClick={() =>
                           //  props.handleQuizHostModal(true)
                           // }
@@ -198,18 +221,7 @@ function QuizLibrary(props) {
                            <div className="font-[Poppins] text-black">Close This Quiz</div>
                         </Button>
                       )}
-                       {/* <Link
-                        to={`quizinLibrary/${item.quizId}`}
-                      >
-
-                        <Button
-                          type="primary"
-                          style={{ backgroundColor: "white"}}
-                        // onClick={() => props.hostQuiz(props.showQuiz.quizId)}
-                        >
-                          <h3>Add Question</h3>
-                        </Button>
-                      </Link> */}
+                     
 
         </div>
       )}
@@ -343,7 +355,7 @@ function QuizLibrary(props) {
                           <h3>Add Question</h3>
                         </Button>
                       </Link> */}
-                      <StyledDrawer
+                      <StyledModal
                         title="Host Quiz"
                         open={isModalOpen}
                         onOk={handleOk}
@@ -361,7 +373,7 @@ function QuizLibrary(props) {
                             placeholder="Enter Response time per question"
                           />
                         </form>
-                      </StyledDrawer>
+                      </StyledModal>
                     </div>
                   </div>
                  

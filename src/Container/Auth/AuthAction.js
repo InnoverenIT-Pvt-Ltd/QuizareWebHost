@@ -195,8 +195,9 @@ export const changePassword = (data, userId, cb) => (dispatch) => {
         type: types.CHANGE_PASSWORD_SUCCESS,
         payload: res.data,
       });
-      cb();
+     
       message.success(res.data)
+       cb();
     })
     .catch((err) => {
       cb()

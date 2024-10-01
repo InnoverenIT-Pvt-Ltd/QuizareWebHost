@@ -217,10 +217,10 @@ export const deleteQuestion = (id, cb) => dispatch => {
         type: types.DELETE_QUESTION_BY_QUESTION_ID_SUCCESS,
         payload: id,
       });
-      cb && cb("success");
+     // cb && cb("success");
       Swal.fire({
         icon: "success",
-        title: "Question has deleted successfully !!",
+        title: "Question deleted successfully !!",
         showConfirmButton: false,
         timer: 1500
       });
@@ -407,6 +407,12 @@ export const hostQuiz = (data, quizId,history) => dispatch => {
       dispatch({
         type: types.HOST_QUIZ_SUCCESS,
         payload: res.data,
+      });
+      Swal.fire({
+        icon: "success",
+        title: "Quiz Hosted SucessFully",
+        showConfirmButton: false,
+        timer: 1500
       });
       // cb && cb();
       window.location.replace("/quizLibrary");
@@ -666,7 +672,7 @@ export const updateQuestionsInQuiz = (data, questionId, cb) => dispatch => {
     .then(res => {
       Swal.fire({
         icon: "success",
-        title: "Question has updated successfully !!",
+        title: "Question updated successfully !!",
         showConfirmButton: false,
         timer: 1500
       });
@@ -682,6 +688,42 @@ export const updateQuestionsInQuiz = (data, questionId, cb) => dispatch => {
       //console.log(err);
       dispatch({
         type: types.UPDATE_QUESTIONS_IN_QUIZ_FAILURE,
+        payload: err,
+      });
+      // cb && cb();
+    });
+};
+
+export const updateProfile = (data, userId) => dispatch => {
+  // console.log('inside update question',data);
+  dispatch({
+    type: types.UPDATE_PROFILE_IN_QUIZ_REQUEST,
+  });
+  axios
+    .put(`${base_url}/userDetails/update/${userId}`, data, {
+      headers: {
+        Authorization: 'Bearer ' + store.getState().auth.token || '',
+      },
+    })
+    .then(res => {
+      Swal.fire({
+        icon: "success",
+        title: "Profile updated successfully !!",
+        showConfirmButton: false,
+        timer: 1500
+      });
+       dispatch(getUserDetails(res.data.userId));
+      dispatch({
+        type: types.UPDATE_PROFILE_IN_QUIZ_SUCCESS,
+        payload: res.data,
+      });
+      // cb && cb('success');
+
+    })
+    .catch(err => {
+      //console.log(err);
+      dispatch({
+        type: types.UPDATE_PROFILE_IN_QUIZ_FAILURE,
         payload: err,
       });
       // cb && cb();

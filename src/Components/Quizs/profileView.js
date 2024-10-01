@@ -9,6 +9,7 @@ import FWLogo from "../../../src/images/user-square.png";
 import FWLogo1 from "../../../src/images/prev.png";
 import FWLogo2 from "../../../src/images/forw.png";
 import Menu from "./Menu";
+import {updateProfile} from "../../Container/Quiz/QuizAction"
 import InputComponent from "../Forms/Formik/InputComponent";
 import { StyledUpload } from "../UI/Antd";
 import DragableUpload from "../Forms/Formik/DragableUpload";
@@ -17,7 +18,7 @@ const { Option } = Select;
 
 
  function profileView (props) {
-  
+
 console.log(props.user.name)
     return (
       <>
@@ -27,20 +28,20 @@ console.log(props.user.name)
            enableReinitialize
           initialValues={{
             name: props.user.name || "",
-            emailId: props.user.emailId || "",      
-            
+            emailID: props.user.emailId || "",      
+            lastName: props.user.lastName || "",
           }}
          // validationSchema={UpdateLeadsSchema}
           onSubmit={(values, { resetForm }) => {
             console.log(values);
-            // updateLeads(
-            //   {
-            //     ...values,
+            props.updateProfile(
+              {
+                ...values,
                
-            //   },
-            //   props.leadsId,
-            // );
-          //handleReset(resetForm)
+              },
+              props.userId,
+            );
+      //handleReset(resetForm)
           }}
         >
           {({
@@ -65,7 +66,7 @@ console.log(props.user.name)
                           <div class="font-normal text-base  text-[#666666]">Email address</div>
                           <FastField
                             isRequired
-                            name="emailId"
+                            name="emailID"
                             // label="First Name"                    
                             type="text"
                             width={"100%"}
@@ -76,7 +77,7 @@ console.log(props.user.name)
                           />
                         </div>
                         <div class=" w-wk max-sm:w-full ml-2 mt-3">
-                          <div class="font-normal  text-base text-[#666666]">Username</div>
+                          <div class="font-normal  text-base text-[#666666]">First Name</div>
                           <FastField
                             isRequired
                             name="name"
@@ -90,10 +91,10 @@ console.log(props.user.name)
                           />
                         </div>
                         <div class=" w-wk max-sm:w-full ml-2 mt-3">
-                          <div class="font-normal  text-base text-[#666666]">Name</div>
+                          <div class="font-normal  text-base text-[#666666]">Last Name</div>
                           <FastField
                             isRequired
-                            name="name"
+                            name="lastName"
                             // label="First Name"                    
                             type="text"
                             width={"100%"}
@@ -122,7 +123,7 @@ console.log(props.user.name)
                         <Button
                   type="primary"
                   htmlType="submit"
-                  //loading={updateLeadsById}
+                  loading={props.updateProfileData}
                   style={{backgroundColor:"#3B16B7"}}
                 >
                
@@ -147,11 +148,16 @@ console.log(props.user.name)
   
 
 
-const mapStateToProps = ({ auth }) => ({
-  user: auth.userDetails
+const mapStateToProps = ({ auth,quiz }) => ({
+  user: auth.userDetails,
+  updateProfileData:quiz.updateProfileData,
+  userId: auth.userDetails.userId,
 });
 
-const mapDispatchToProps = (dispatch) => bindActionCreators({}, dispatch);
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+
+  updateProfile
+}, dispatch);
 
 export default withRouter(
   connect(mapStateToProps, mapDispatchToProps)(profileView)
