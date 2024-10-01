@@ -15,6 +15,7 @@ import { InputComponent } from "../../../../Components/Forms/Formik/InputCompone
 import SubHeader from "../../../../Components/SubHeader";
 import MainHeader from "../../../../Components/Mainheader";
 import { BundleLoader } from "../../../../Components/Placeholder";
+import Finalisedrawer from "../../Finalisedrawer";
 const phoneRegExp =
   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 const QuizzSchema = Yup.object().shape({
@@ -25,6 +26,7 @@ const QuizzSchema = Yup.object().shape({
 //import AllQuiz from './AllQuiz';
 
 function QuizinLibrary(props) {
+  const [finalise, setFinalise] = useState(false);
   useEffect(() => {
     props.getCategory();
     props.getQuizName(props.match.params.quizId);
@@ -54,9 +56,9 @@ function QuizinLibrary(props) {
 
   const history = useHistory();
 
-  const goToFinalize = () => {
-    history.push(`/finalize`)
-  }
+  // const goToFinalize = () => {
+  //   history.push(`/finalize`)
+  // }
 
   return (
 
@@ -104,37 +106,24 @@ function QuizinLibrary(props) {
             errors,
             values,
           }) => (
-            <div>
+            <div className="h-[91vh]">
               <div class="flex justify-center mt-2">
                 <h2 class="text-2xl">
                   {props.showQuiz && props.showQuiz.quizName}
                 </h2>
               </div>
-              <div class="flex justify-center mt-3  max-sm:w-3/5 max-sm:ml-20 ">
-                <Button type="primary"
-                  style={{ width: "20%" }}
-                  onClick={() => {
-                    handleSubmit()
-                    goToFinalize()
-                  }}
-                >
-                  Finalize Quiz
-                </Button>
-              </div>
-              {/* Container */}
-              <Form class=" max-sm:w-full  m-auto md:mt-12  w-2/5  h-h50  ">
+              <hr className="h-px bg-black border-2 w-wk md:mt-4 border-black" />
+              
+              <Form class=" max-sm:w-full  m-auto md:mt-12  w-wk  h-h50  ">
                 <div className="w-11/12 my-2 flex justify-center m-auto ">
-                  <div class="shadow-2xl border-solid w-11/12 flex justify-center flex-col items-center  p-2 max-sm:m-0 h-max rounded-2xl md:m-auto">
+                  <div class=" border-solid w-wk flex justify-center flex-col items-center  p-2 max-sm:m-0 h-max rounded-2xl md:m-auto">
                     <div class=" flex justify-center flex-col w-full">
                       <h3 class="flex justify-center text-xl">
                         {" "}
                         Question {questions || null}
                       </h3>
-
-                      {/* <TouchableOpacity
-                  // we can't use perscentge in reactNative
-                  
-                    > */}
+                      
+                     
                       <div class="mt-4">
                         <div>
                           <Field
@@ -142,83 +131,56 @@ function QuizinLibrary(props) {
                             onChangeText={handleChange("question")}
                             placeholder="Question"
                             name="question"
-
+                            style={{ width: "100%", height: "3rem", borderRadius: "0.25rem" }}
                           // onChangeText={handleChange('questionName')}
                           />
                         </div>
-                        {/* </TouchableOpacity> */}
-                        {/*               
-                  <TouchableOpacity
-                 
-                  
-                  > */}
-                        <div class="mt-1">
+                        <div className="flex justify-between mt-12">
+                        <div className="w-[47.5%]">
                           <Field
-                            // multiline
-                            // value={values.option1}
-                            // numberOfLines={5}
                             component={InputComponent}
                             onChangeText={handleChange("option1")}
-                            placeholder="Correct answer"
+                            placeholder="A. Add answer 1"
                             name="option1"
-
+                            style={{ width: "100%", height: "3rem", borderRadius: "0.25rem" }}
                           // onChangeText={handleChange('option1')}
                           />
                         </div>
-                        {/* </TouchableOpacity> */}
-
-                        {/* <TouchableOpacity
-                    
-                    
-                    > */}
-                        <div class="mt-1">
+                       
+                        <div className="w-[47.5%]">
                           <Field
-                            // multiline
-                            // value={values.option2}
-                            // numberOfLines={5}
                             component={InputComponent}
                             onChangeText={handleChange("option2")}
-                            placeholder="Option 2"
+                            placeholder="B. Add answer 2"
                             name="option2"
-
+                            style={{ width: "100%", height: "3rem", borderRadius: "0.25rem" }}
                           // onChangeText={handleChange('option2')}
                           />
                         </div>
-                        {/* </TouchableOpacity>
-
-                  <TouchableOpacity
-                  
-                
-                    > */}
-                        <div class="mt-1">
-                          <Field
-                            // multiline
-                            // value={values.option3}
-                            // numberOfLines={5}
+                       </div>
+                       <div className="flex justify-between mt-12">
+                        <div className="w-[47.5%]">
+                          <Field 
                             component={InputComponent}
                             onChangeText={handleChange("option3")}
-                            placeholder="Option 3"
+                           placeholder="B. Add answer 2"
                             name="option3"
+                            style={{ width: "100%", height: "3rem", borderRadius: "0.25rem" }}
                           />
                         </div>
-                        {/* </TouchableOpacity> */}
-
-                        {/* <TouchableOpacity
-                > */}
-                        <div class="mt-1">
+                       
+                        <div className="w-[47.5%]">
                           <Field
-                            // multiline
-                            // value={values.option4}
-                            // numberOfLines={5}
-                            placeholder="Option 4"
+                           placeholder="C. Add answer 3 (Optional)"
                             name="option4"
                             component={InputComponent}
                             onChangeText={handleChange("option4")}
+                            style={{ width: "100%", height: "3rem", borderRadius: "0.25rem" }}
                           />
                         </div>
-                        {/* </TouchableOpacity> */}
+                        </div>
                       </div>
-                      <div class=" max-sm:flex flex-wrap justify-center mt-2 md:w-full  md:grid grid-cols-3 justify-items-center">
+                      {/* <div class=" max-sm:flex flex-wrap justify-center mt-2 md:w-full  md:grid grid-cols-3 justify-items-center">
                         {!!props.category.length &&
                           props.category.map((item) => {
                             return (
@@ -245,32 +207,8 @@ function QuizinLibrary(props) {
                             );
                           })}
 
-                        {/* <Card containerStyle={externalStyle.containerStyleC}>
-                                <Text
-                                    style={{
-                                        textAlign: 'center',
-                                        color: '#6949FD'
-                                    }}
-                                    onPress={() => alert('Nature')}
-                                >
-                                    Nature
-                                </Text>
-                            </Card>
-                            <Card containerStyle={externalStyle.containerStyleC}>
-                                <Text style={{ textAlign: 'center', color: '#6949FD' }}>Geography</Text>
-                            </Card>
-                            <Card containerStyle={externalStyle.containerStyleC}>
-                                <Text
-                                    style={{
-                                        textAlign: 'center',
-                                        color: '#6949FD'
-                                    }}
-                                    onPress={() => props.navigation.navigate('Quiz History')}
-                                >
-                                    History
-                                </Text>
-                            </Card> */}
-                      </div>
+                      
+                      </div> */}
                       {/* <View style={{ flexDirection: 'row' }}>
                         <Card containerStyle={externalStyle.containerStyleC}>
                                 <Text style={{ textAlign: 'center', color: '#6949FD' }}>Sports</Text>
@@ -283,31 +221,30 @@ function QuizinLibrary(props) {
                             </Card>
                         </View>           */}
                     </div>
-                  </div>
-                </div>
-              </Form>
-              <div class="max-sm: flex flex-row justify-center items-center mt-4 ">
+                    <div class="max-sm: flex flex-row w-wk  justify-between items-center mt-4 ">
                 <div class="mr-1 ">
                   <Button
-                    style={{
-                      backgroundColor: "white",
-                      borderColor: "black",
-                      borderRadius: "0.75rem",
-                      width: "5rem",
-                      height: "2.2rem",
-                    }}
+                      style={{ height: "3rem", backgroundColor: "#3B16B7", borderRadius: '0.25rem',width:"9rem" }}
                     type="primary"
-                    // title={'Add New Questions'}
-                    // titleStyle={externalStyle.titleStyle}
-                    // containerStyle={externalStyle.containerStyleBD}
-                    // buttonStyle={externalStyle.buttonStyleAdd}
+                   
                     onClick={handleSubmit}
-                  // Loading={props.addingQuestion}
-                  // onPress={() => props.navigation.navigate('Quiz Addquestions')}
+                 
                   >
-                    <h4 class="">Add </h4>
+                   <h3 className="font-medium text-white text-base">+ Add question</h3>
                   </Button>
                 </div>
+                <div class="">
+                <Button type="primary"
+                  style={{ height: "3rem", backgroundColor: "#3B16B7", borderRadius: '0.25rem',width:"9rem" }}
+                  onClick={() => {
+                    handleSubmit()
+                    // goToFinalize()
+                    setFinalise(true)
+                  }}
+                >
+               <h3 className="font-medium text-white text-base">Finalize</h3>
+                </Button>
+              </div>
                 {/* <div class="mr-1">
                 <Button
                   style={{
@@ -351,7 +288,16 @@ function QuizinLibrary(props) {
                 </Button>
               </div> */}
               </div>
+                  </div>
+                </div>
+              </Form>
+             
               {/* Buttons */}
+              <Finalisedrawer
+        showQuiz={props.showQuiz}
+        finalise={finalise}
+        setFinalise={setFinalise}
+      />
             </div>
           )}
         </Formik>

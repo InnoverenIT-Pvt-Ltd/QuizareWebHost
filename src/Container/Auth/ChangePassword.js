@@ -172,7 +172,9 @@ class ForgetPasswordForm extends Component {
   };
 
   callback = () => {
-    history.push("/create");
+    //history.push("/quizLibrary");
+    const redirectPath = this.props.user.noOfQuizes === 0 ? "/emptypage" : "/quizLibrary";
+    window.location.replace(redirectPath);
   };
 
   render() {

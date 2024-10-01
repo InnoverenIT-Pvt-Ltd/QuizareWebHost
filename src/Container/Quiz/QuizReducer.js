@@ -9,6 +9,9 @@ const initialState = {
   fetchingFinalizeQuizError: false,
   finalizeQuiz: {},
 
+  updateProfileData: false,
+  updateProfileDataError: false,
+
   fetchingUpgradeSuscrption: false,
   fetchingUpgradeSuscrptionError: false,
   suscrptionUpgradeData:[],
@@ -485,6 +488,26 @@ export const quizReducer = (state = initialState, action) => {
         updateQuestions: false,
         updateQuestionsError: true,
       };
+
+      case types.UPDATE_PROFILE_IN_QUIZ_REQUEST:
+        return { ...state, updateProfileData: true };
+      case types.UPDATE_PROFILE_IN_QUIZ_SUCCESS:
+        return {
+          ...state,
+          updateProfileData: false,
+          user: state.user.map((item) => {
+            return item.userId === action.payload.userId
+              ? { ...item, ...action.payload }
+              : item;
+          }),
+          
+        };
+      case types.UPDATE_PROFILE_IN_QUIZ_FAILURE:
+        return {
+          ...state,
+          updateProfileData: false,
+          updateProfileDataError: true,
+        };
 
     // get feedback
     case types.GET_QUIZ_FEEDBACK_REQUEST:

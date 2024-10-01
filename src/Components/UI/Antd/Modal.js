@@ -9,7 +9,7 @@ const StyledModal = styled(Modal)`
         border-radius: ${props => props.modalBorderRadius || ""};
      }
      .ant-modal-header{
-          background-image: linear-gradient(-90deg, #001529, #1890ff);
+          background-color: #3B16B7;
           color: ${props => props.theme.color};
      }
      .ant-modal-body{
