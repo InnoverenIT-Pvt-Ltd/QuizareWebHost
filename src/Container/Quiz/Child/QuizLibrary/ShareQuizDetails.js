@@ -34,14 +34,14 @@ console.log(props.showQuiz)
       
        
           <div class="w-full flex justify-center items-center flex-col mt-4">
-            <div class="text-xl mt-2 flex  items-center  font-bold justify-start w-wk ">
+            <div class="text-xl mt-2 flex  items-center  font-bold justify-start w-wk font-[Poppins] ">
             Share your quiz
             </div>
             <div className="flex items-center justify-between w-wk mt-3">
-            <div className="border w-[21rem] h-[2.5rem] border-solid border-gray-400 max-sm:w-[12rem]" >
+            <div className="border w-[26rem] flex h-[2.5rem] border-solid border-gray-400 max-sm:w-[12rem]" >
               {/* <h2 class="text-base">{`${props.showQuiz.quizName || ''}`}{' '}</h2> */}
               {props.currentItem.quizLink ? (
-                <h2 class="text-xs flex justify-center flex-col " style={{ overflowWrap: "break-word" }}>{`http://player.quizledge.no${props.currentItem.quizLink || ""
+                <h2 class="text-xs flex justify-center flex-col ml-2 font-[Poppins] " style={{ overflowWrap: "break-word" }}>{`http://player.quizledge.no${props.currentItem.quizLink || ""
                   }`}</h2>
               ) : (
                 ""
@@ -52,7 +52,7 @@ console.log(props.showQuiz)
                 style={{  height: "2.5rem",backgroundColor:"#3B16B7",borderRadius:'0.25rem',width:'-webkit-fill-available' }}
                 onClick={() => copyToClipboard()}
               >
-                <h2 class="text-white text-xl font-medium">Share</h2>
+                <h2 class="text-white text-base font-medium font-[Poppins]">Share</h2>
               </Button>
             </div>
             </div>
