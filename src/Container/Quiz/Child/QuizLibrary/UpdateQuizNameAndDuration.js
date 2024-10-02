@@ -56,10 +56,10 @@ function UpdateQuizNameAndDuration(props) {
 
                   />
               </div>
-              <div class="absolute md:bottom-[12rem] w-full flex flex-col justify-center items-center  max-sm:m-0 h-80  md:w-full m-auto">
+              <div class="absolute w-full flex flex-col justify-center items-center  max-sm:m-0 h-80  md:w-full m-auto">
               <div class="flex flex-col items-center ">
                                 <div class="flex justify-center flex-col items-center">
-                                <h2 class="text-3xl font-medium text-white">Update quiz</h2>
+                                <h2 class="text-3xl font-medium text-white">Import from Chatgpt</h2>
             
               </div>
                             <div class="mt-4">
@@ -88,7 +88,7 @@ function UpdateQuizNameAndDuration(props) {
                                         type="primary"
                                         style={{  height: "2rem",backgroundColor:"white",borderRadius:'0.25rem',width:"11rem",display:"flex",justifyContent:"center",alignItems:"center" }}
                                         onClick={handleSubmit}
-                                    ><h3 class="font-medium text-black text-xl">Update Quiz</h3></Button>
+                                    ><h3 class="font-medium text-black text-xl">Submit</h3></Button>
                                 </div>
                         </div>
                        
