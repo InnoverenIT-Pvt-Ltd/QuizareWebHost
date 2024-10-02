@@ -20,8 +20,8 @@ const CreatModal = (props) => {
                   alt="Tekorero logo"
 
                 />
-           <div className=" absolute bottom-36 right-4 text-white  md:pr-[11.5rem] 
-           max-sm:left-20 max-sm:right-20 max-sm:bottom-12">
+           <div className=" absolute bottom-36  text-white  flex items-center justify-center w-wk  flex-col
+            max-sm:bottom-8">
            <a href="/how2" >
            <img
                   className="big-logo"

@@ -31,6 +31,7 @@ import { StyledDrawer, StyledModal } from "../../../../Components/UI/Antd";
 import ProcessShareDrawer from "../../../../Components/ProcessShareDrawer";
 import ShareDrawer from "./ShareDrawer";
 import LibrarySearchedData from "./LibrarySearchedData";
+import QuizDetailsPlayerTable from "../../../../Components/Quizs/QuizDetailsPlayerTable";
 
 const { useState } = React;
 
@@ -181,6 +182,17 @@ function QuizLibrary(props) {
   <div className="font-[Poppins] text-black">Review Quiz</div>
 </Button>
 </Link>  
+
+
+{/* <Button
+  style={{ width: "9rem", backgroundColor: "white",height:"2rem" }}
+  type="primary"
+
+  onClick={() => <QuizDetailsPlayerTable/>}
+>
+  <div className="font-[Poppins] text-black">Table</div>
+</Button> */}
+ 
 {item.quizHostInd === false && (
                         <Button
                           type="primary"
@@ -192,7 +204,7 @@ function QuizLibrary(props) {
                           <div className="font-[Poppins] text-black">Delete This Quiz</div>
                         </Button>
                       )}     
-                       {item.quizHostInd === false && (
+                       {/* {item.quizHostInd === false && (
                         <Button
                           type="primary"
                           style={{ backgroundColor: "white",height:"2rem" }}
@@ -206,8 +218,8 @@ function QuizLibrary(props) {
                         >
                            <div className="font-[Poppins] text-black ">Host This Quiz</div>
                         </Button>
-                      )}
-                       {item.quizHostInd === true && (
+                      )} */}
+                       {/* {item.quizHostInd === true && (
                         <Button
                           type="primary"
                           style={{ backgroundColor: "white",height:"2rem"}}
@@ -220,7 +232,7 @@ function QuizLibrary(props) {
                         >
                            <div className="font-[Poppins] text-black">Close This Quiz</div>
                         </Button>
-                      )}
+                      )} */}
                      
 
         </div>
@@ -241,7 +253,25 @@ function QuizLibrary(props) {
             }
     <div class="flex flex-row">
                             <div class=" text-base text-white font-[Poppins]">
-                              {item.quizHostInd === false ? "Closed" : "Hosted"}
+                              {/* {item.quizHostInd === false ? "Closed" : "Hosted"} */}
+                              {item.quizHostInd ? (
+  <div
+   
+    onClick={() => props.closeLibraryQuiz(item.quizId)}
+  >
+   <div class=" text-base text-white font-[Poppins] cursor-pointer">Close</div>
+  </div>
+) : (
+  <div
+   
+    onClick={() => {
+      showModal();
+      handleSetCurrentItem(item);
+    }}
+  >
+    <div class=" text-base text-white font-[Poppins] cursor-pointer">Host</div>
+  </div>
+)}
                             </div>
                           </div>
                     <div>
