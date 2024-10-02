@@ -57,7 +57,7 @@ const SelectPlan = (props) => {
                     showConfirmButton: false,
                     timer: 1500
                 });
-                // history.push("/emptypage");
+                history.push("/emptypage");
             } else {
                 Swal.fire({
                     icon: "error",
@@ -103,12 +103,13 @@ const SelectPlan = (props) => {
                                     <p className="text-4xl font-bold flex font-[Poppins]">${item.pricePerMonth}<span className="text-lg">/month</span></p>
                                     <button
                                         className={`mt-6 ${item.isActive || item.subscriptionId === selectedPlanId ? 'bg-gray-300 text-gray-700' : 'bg-[#3B16B7] text-white'} py-2 px-4 rounded-lg w-full`}
-                                        onClick={() => {handleSelectPlan(item.subscriptionId);
+                                        onClick={() => {
                                             if (item.pricePerMonth > 0) {
                                                 handleStripeOpen();
-                                            }
+                                                 }
                                             setEachSub(item)  
-
+                                            if (item.pricePerMonth === 0) {
+                                            handleSelectPlan(item.subscriptionId);}
                                         }}
                                         disabled={item.isActive || item.subscriptionId === selectedPlanId}
                                     >

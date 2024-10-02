@@ -1,12 +1,42 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import {makeStripePayment} from "../Container/Quiz/QuizAction";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { withRouter } from "react-router-dom";
 import {message } from "antd";
 import Swal from 'sweetalert2';
+import { base_url } from "../Config/Auth";
+import axios from 'axios';
 
 function StripePayLoading(props) {
+
+  
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null)
+ 
+  const addPostRequest = async () => {
+    setLoading(true);
+    setError(null);
+  
+    try {
+      const response = await axios.post(`${base_url}/userDetails/addSubscription`,{  
+        subscriptionId:props.match.params.subscriptionId,
+        userId: props.userId
+      },
+        {
+          headers: {
+            Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+          },
+        }
+      );
+      setData(response.data);
+    } catch (err) {
+      setError(err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   function handleCallback (status, data,data1) {
     if (status === "success") {
@@ -15,6 +45,7 @@ function StripePayLoading(props) {
           icon: 'success',
           title: "Payment Successfull",
         });
+        addPostRequest();
          props.history.push(`/quizLibrary`);
           } 
           else if(status === 'status failed'){
@@ -22,7 +53,6 @@ function StripePayLoading(props) {
               icon: 'error',
               title: "Payment Failed",
             });
-            // props.history.push(`/${shnm}/payment`);}
             Swal.fire({
               icon: 'error',
               title: "Payment Failed",
@@ -91,11 +121,8 @@ function StripePayLoading(props) {
   );
 }
   const mapStateToProps = ({ auth }) => ({
-    // paymentId: customer.paymentDetails.paymentId,
-    // stripePaymentId:customer.paymentDetails.stripePaymentId,
-    // shopName:customer.shopName,
-    // confirmedPayment:customer.confirmedPayment,
 
+    userId: auth.userDetails.userId,
   
   });
   const mapDispatchToProps = (dispatch) =>
