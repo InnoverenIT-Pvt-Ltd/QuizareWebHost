@@ -534,6 +534,7 @@ input {
 
 .ant-input {
   box-sizing: border-box;
+  color:white;
   margin: 0;
   padding: 4px 11px;
   font-size: 14px;

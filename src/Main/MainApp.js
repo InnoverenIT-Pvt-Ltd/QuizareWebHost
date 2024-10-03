@@ -21,6 +21,7 @@ import ChatGPT from "../Container/Quiz/ChatGPT.js";
 import LibrayEmptyPage from "../Components/Quizs/LibrayEmptyPage.js";
 import Upgrade from "./Upgrade.js";
 import ReviewQuiz from "./ReviewQuiz.js";
+import QuizDetailsPlayerTable from "../Components/Quizs/QuizDetailsPlayerTable.js";
 const Question1 = lazy(() => import("../Components/Quizs/Question1"))
 const CreateQuiz = lazy(() => import("../Components/Quizs/CreateQuiz"));
 const QuizName = lazy(() => import("../Container/Quiz/QuizName"))
@@ -101,6 +102,7 @@ function MainApp(props) {
               <Route exact path="/drb/payloading/:stripePaymentId/:paymentId/:subscriptionId/:userId" component={StripePayLoading} />
               <Route exact path="/drb/stripeSuccess" component={StripeSuccessPage} />
               <Route exact path="/quizLibrary" component={QuizLibrary} />
+              <Route exact path="/playerTable" component={QuizDetailsPlayerTable} />
               {/* <Route exact path="/librayHome" component={LibrayHome} /> */}
               <Route exact path="/addquiz" component={Quiz} />
               <Route exact path="/test" component={Test} />

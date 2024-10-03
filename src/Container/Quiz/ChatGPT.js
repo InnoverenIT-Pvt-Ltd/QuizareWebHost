@@ -306,7 +306,7 @@ const ChatGPT = (props) => {
                               style={{ height: "3rem", backgroundColor: "white", borderRadius: '0.25rem' }}
                               onClick={handleGenerateQuiz}
                           >
-                              <h3 className="font-medium text-xl -mt-4">Generate</h3>
+                              <h3 className="font-medium text-xl ">Generate</h3>
                           </Button>
                       </div>
                   </div>
