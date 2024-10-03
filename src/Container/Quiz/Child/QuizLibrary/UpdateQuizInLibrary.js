@@ -163,6 +163,7 @@ function UpdateQuizInLibrary(props) {
                             onClick={() => handleQuestionSelect(i)}
                         >
                             Question {i + 1}
+                            <div className="text-sm font-semibold">{item.question}</div>
                         </Card>
                     ))}
                 </div>

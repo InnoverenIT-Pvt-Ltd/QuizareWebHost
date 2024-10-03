@@ -32,6 +32,7 @@ import ProcessShareDrawer from "../../../../Components/ProcessShareDrawer";
 import ShareDrawer from "./ShareDrawer";
 import LibrarySearchedData from "./LibrarySearchedData";
 import QuizDetailsPlayerTable from "../../../../Components/Quizs/QuizDetailsPlayerTable";
+import PlayerTableDrawer from "./PlayerTableDrawer";
 
 const { useState } = React;
 
@@ -43,10 +44,14 @@ function QuizLibrary(props) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentItem, setCurrentItem] = useState("");
   const [hoveredItemId, setHoveredItemId] = useState(null);
+  const [open, setOpen] = useState(false);
+
   const handleMouseEnter = (quizId) => {
     setHoveredItemId(quizId);
   };
-
+const handleOpen= ()=>{
+  setOpen(true)
+}
   const handleMouseLeave = () => {
     setTimeout(() => {
       setHoveredItemId(null);
@@ -184,15 +189,22 @@ function QuizLibrary(props) {
 </Link>  
 
 
-{/* <Button
-  style={{ width: "9rem", backgroundColor: "white",height:"2rem" }}
-  type="primary"
 
-  onClick={() => <QuizDetailsPlayerTable/>}
->
-  <div className="font-[Poppins] text-black">Table</div>
-</Button> */}
+  <Button
+    style={{ width: "9rem", backgroundColor: "white",height:"2rem" }}
+    type="primary"
+    onClick={() =>{ handleOpen(true);
+      handleSetCurrentItem(item);
+    }}
+  >
+    <div className="font-[Poppins] text-black">LeaderBoard</div>  
+  </Button>
+
+
+
  
+{/* </Button>
+</Link> */}
 {item.quizHostInd === false && (
                         <Button
                           type="primary"
@@ -422,6 +434,14 @@ function QuizLibrary(props) {
         </Form>
       </Formik>
       </div>
+
+    
+
+ <PlayerTableDrawer           
+ open={open}
+ setOpen={setOpen}
+   currentItem={currentItem}
+/>
       <ShareDrawer            
                   copyReduce={props.copyReduce}
                     handleCopy={props.handleCopy}
