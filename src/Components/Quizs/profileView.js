@@ -72,7 +72,7 @@ console.log(props.user.name)
                             width={"100%"}
                             isColumn
                             component={InputComponent}
-                            style={{ width: "100%", height: "2rem",borderRadius:"0.25rem" }}
+                            style={{ width: "100%", height: "2rem",borderRadius:"0.25rem",color:"black" }}
                             inlineLabel
                           />
                         </div>
@@ -86,7 +86,7 @@ console.log(props.user.name)
                             width={"100%"}
                             isColumn
                             component={InputComponent}
-                            style={{ width: "100%", height: "2rem",borderRadius:"0.25rem" }}
+                            style={{ width: "100%", height: "2rem",borderRadius:"0.25rem",color:"black" }}
                             inlineLabel
                           />
                         </div>
@@ -100,7 +100,7 @@ console.log(props.user.name)
                             width={"100%"}
                             isColumn
                             component={InputComponent}
-                            style={{ width: "100%", height: "2rem",borderRadius:"0.25rem" }}
+                            style={{ width: "100%", height: "2rem",borderRadius:"0.25rem",color:"black" }}
                             inlineLabel
                           />
                         </div>
