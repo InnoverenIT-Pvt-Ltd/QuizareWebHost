@@ -49,6 +49,14 @@ export const addQuizName = (quiz, cb) => dispatch => {
     })
     .catch(err => {
       // console.log(err);
+      let errorMessage = "An error occurred!";
+      
+      if (err.response && err.response.data && err.response.data.details) {
+        errorMessage = err.response.data.details[0] || errorMessage;
+      } else if (err.response && err.response.data && err.response.data.message) {
+        errorMessage = err.response.data.message;
+      }
+
       dispatch({
         type: types.ADD_QUIZ_NAME_FAILURE,
         payload: err,
@@ -56,7 +64,7 @@ export const addQuizName = (quiz, cb) => dispatch => {
       cb && cb("failuer");
       Swal.fire({
         icon: "error",
-        title: "Quiz name already exists!",
+        title: errorMessage,
         showConfirmButton: false,
         timer: 1500
       });
