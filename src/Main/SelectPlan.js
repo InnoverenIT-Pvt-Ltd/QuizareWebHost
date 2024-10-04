@@ -3,9 +3,10 @@ import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
 import axios from 'axios';
 import { useHistory } from "react-router-dom";
-import { handleQuizStripeModal, handleSuscrptionModal, getSuscrption } from "../Container/Quiz/QuizAction";
+import { handleQuizStripeModal, handleSuscrptionModal, getSuscrption, } from "../Container/Quiz/QuizAction";
 import { Button } from "antd";
 import PaymentQuizModal from "./PaymentQuizModal";
+import {getUserDetails} from "../Container/Auth/AuthAction";
 import MainSuscriptionModal from "./MainSuscriptionModal";
 import { base_url } from "../Config/Auth";
 import Swal from 'sweetalert2';
@@ -57,7 +58,9 @@ const SelectPlan = (props) => {
                     showConfirmButton: false,
                     timer: 1500
                 });
-                history.push("/emptypage");
+                props.getUserDetails(props.userId);
+                {props.noOfQuizes > 0 ?
+                   history.push(`/quizLibrary`) : history.push(`/emptypage`)}
             } else {
                 Swal.fire({
                     icon: "error",
@@ -143,12 +146,14 @@ const mapStateToProps = ({ quiz, auth }) => ({
     addiNVEStripeModal: quiz.addiNVEStripeModal,
     userId: auth.userDetails.userId,
     suscrptionData: quiz.suscrptionData,
-    addingSuscrpitionModal: quiz.addingSuscrpitionModal
+    addingSuscrpitionModal: quiz.addingSuscrpitionModal,
+    noOfQuizes:auth.userDetails.noOfQuizes,
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
     handleQuizStripeModal,
     handleSuscrptionModal,
+    getUserDetails,
     getSuscrption,
 }, dispatch);
 
