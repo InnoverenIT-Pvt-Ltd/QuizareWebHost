@@ -7,6 +7,7 @@ import {message } from "antd";
 import Swal from 'sweetalert2';
 import { base_url } from "../Config/Auth";
 import axios from 'axios';
+import {getUserDetails} from "../Container/Auth/AuthAction";
 
 function StripePayLoading(props) {
 
@@ -46,8 +47,10 @@ function StripePayLoading(props) {
           title: "Payment Successfull",
         });
         addPostRequest();
-         props.history.push(`/quizLibrary`);
-          } 
+        props.getUserDetails(props.userId);
+        {props.noOfQuizes > 0 ?
+         props.history.push(`/quizLibrary`) : props.history.push(`/emptypage`)}
+        } 
           else if(status === 'status failed'){
             Swal.fire({
               icon: 'error',
@@ -123,12 +126,14 @@ function StripePayLoading(props) {
   const mapStateToProps = ({ auth }) => ({
 
     userId: auth.userDetails.userId,
+    noOfQuizes:auth.userDetails.noOfQuizes
   
   });
   const mapDispatchToProps = (dispatch) =>
     bindActionCreators(
         {
-            makeStripePayment
+            makeStripePayment,
+            getUserDetails
         },
         dispatch
     );
