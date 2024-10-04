@@ -196,7 +196,7 @@ const Menu = (props) => {
   props.handleUpgrade(true);
 }}
 >
-<h3 class="font-medium  text-lg max-sm:text-xs">Upgrade</h3>
+<h3 class="font-medium  text-lg max-sm:text-xs">  {props.user.subscriptionName === null ? ("Select Plan") : ( props.user.subscriptionName)}</h3>
 </Button>
 {/* </Link> */}
 </div>

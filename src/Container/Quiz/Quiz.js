@@ -1050,6 +1050,7 @@ function Quiz(props) {
                             }}
                           />
                         </div>
+                        {props.showQuiz.chatGptQuestionInd &&
                         <div className="flex items-center w-wk justify-center mt-4 p-1">
                           <div>
                             <img
@@ -1058,6 +1059,8 @@ function Quiz(props) {
                               alt="Tekorero logo"
                             />
                           </div>
+                        
+                          
                           <div className="text-[#3B16B7] text-base mr-2 font-medium">
                             Need help? Generate your Responses with AI using{" "}
                           </div>
@@ -1080,7 +1083,10 @@ function Quiz(props) {
                           
                       
                           </div>
+                         
+
                         </div>
+                        }
                         <div className="flex justify-between mt-12">
                           <div className="w-[47.5%]">
                             <Field
