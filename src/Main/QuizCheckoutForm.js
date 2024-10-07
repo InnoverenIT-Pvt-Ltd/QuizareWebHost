@@ -27,8 +27,8 @@ class QuizCheckoutForm extends React.Component {
       elements, 
       
       confirmParams: {
-         return_url: `https://https://host.quizledge.no/drb/payloading/${this.props.stripePaymentId}/${this.props.paymentId}/${this.props.eachSub.subscriptionId}/${this.props.eachSub.userId}` //Quiweb
-        // return_url: `http://localhost:3000/drb/payloading/${this.props.stripePaymentId}/${this.props.paymentId}/${this.props.eachSub.subscriptionId}/${this.props.eachSub.userId}` // localhostD
+        //  return_url: `http://host.quizledge.no/drb/payloadinginside/${this.props.stripePaymentId}/${this.props.paymentId}/${this.props.eachSub.subscriptionId}/${this.props.eachSub.userId}` //Quiweb
+        return_url: `http://localhost:3000/drb/payloadinginside/${this.props.stripePaymentId}/${this.props.paymentId}/${this.props.eachSub.subscriptionId}/${this.props.eachSub.userId}` // localhostD
       },
     });
 
