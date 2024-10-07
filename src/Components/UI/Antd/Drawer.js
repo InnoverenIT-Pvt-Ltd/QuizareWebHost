@@ -36,9 +36,18 @@ const StyledDrawer = styled(Drawer)`
       
         
     }
+    
     .ant-drawer-title {
         color: #fff;
        
+    }
+             .ant-drawer-header-title {
+        display: flex;
+        flex: 1 1;
+        min-width: 0;
+        min-height: 0;
+        flex-direction: row-reverse;
+        height: 8px;
     }
     .anticon {
    

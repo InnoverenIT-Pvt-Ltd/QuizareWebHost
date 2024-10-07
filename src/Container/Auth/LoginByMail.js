@@ -97,7 +97,7 @@ class LoginByMail extends Component {
                             alt="Tekorero logo"
 
                         /> */}
-                       <div className="bg-[#3B16B7]  shadow-2xl border-solid flex justify-center md:mt-3 flex-col max-sm:w-wk h-[96vh] md:w-[75%] max-sm:justify-start ">
+                       <div className="bg-[#3B16B7]  shadow-2xl border-solid flex justify-center  flex-col h-screen max-sm:w-wk  md:w-wk max-sm:justify-start ">
                             <Formik
                                 enableReinitialize
                                 initialValues={{
@@ -204,7 +204,7 @@ class LoginByMail extends Component {
                         /> 
                                             </div> */}
                                               <div className="mt-6 flex justify-between w-wk">
-                                        <div class="mt-4" >
+                                        
                                         <FacebookLogin
                                          
           appId="1462431934502453"
@@ -214,8 +214,7 @@ class LoginByMail extends Component {
           callback={this.responseFacebook}
         />
         
-      </div>
-      <div class="mt-3" >
+      
                                       
                                         <GoogleLogin
           clientId="1802272721-jkbu5gabo0qsrq7kh50n5ap7h3979tvb.apps.googleusercontent.com"
@@ -226,7 +225,7 @@ class LoginByMail extends Component {
          
         />
       
-      </div>
+      
       </div>
                                          
                             <div class="flex  w-wk  items-center mt-8">

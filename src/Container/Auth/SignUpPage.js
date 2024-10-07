@@ -9,6 +9,8 @@ import FWLogo3 from "../../../src/images/login.png";
 import FWLogo4 from "../../../src/images/login1.png";
 import Button from "antd/lib/button";
 import * as Yup from "yup";
+import { CheckCircleOutlined, EyeInvisibleOutlined, EyeOutlined,
+} from "@ant-design/icons";
 import FacebookLogin from "react-facebook-login";
 import { GoogleLogin } from 'react-google-login';
 import { signUpByUser,facebookLogin, googleLogin } from "./AuthAction";
@@ -40,17 +42,32 @@ class SignUpPage extends Component {
         this.responseFacebook = this.responseFacebook.bind(this);
         this.responseGoogle = this.responseGoogle.bind(this);
         this.state = {
-            isChecked:false
+            isChecked:false,
+            type: "password",
+            type1: "password",
+            show1: Boolean(),
+            show2: Boolean(),
+            show: Boolean(),
         };
     }
-    responseFacebook(response) {
-        console.log(response);
-        this.props.facebookLogin(response.accessToken);
-      }
-      responseGoogle(response) {
-        console.log(response);
-        this.props.googleLogin(response.tokenId, this.props.history);
-      }
+    handleClick = () =>
+        this.setState(({ type, prevState }) => ({
+          type: type === "text" ? "password" : "text",
+          show: !this.state.show,
+        }));
+      handleClick1 = () =>
+        this.setState(({ type1, prevState }) => ({
+          type1: type1 === "text" ? "password" : "text",
+          show1: !this.state.show1,
+        }));
+        responseFacebook(response) {
+            console.log(response);
+            this.props.facebookLogin(response.accessToken);
+          }
+          responseGoogle(response) {
+            console.log(response);
+            this.props.googleLogin(response.tokenId, this.props.history);
+          }
     handleSteppriPolInd = (newValue) => {
         this.setState({ isChecked: newValue });
       };
@@ -62,7 +79,7 @@ class SignUpPage extends Component {
                 
                 <div class="w-full bg-quizbg flex-col  overflow-auto flex   items-center max-sm:min-h-screen md:min-h-screen  ">                                        
                        
-                       <div className="bg-[#3B16B7]  shadow-2xl border-solid flex md:justify-center mt-3  flex-col max-sm:w-wk max-sm:h-[79vh] max-sm:overflow-x-auto h-[96vh] md:w-[75%] max-sm:mt-0  ">
+                       <div className="bg-[#3B16B7]  shadow-2xl border-solid flex md:justify-center   flex-col max-sm:w-wk max-sm:h-[79vh] max-sm:overflow-x-auto h-[100vh] md:w-wk max-sm:mt-0  ">
                             <Formik
                                 enableReinitialize
                                 initialValues={{
@@ -149,7 +166,7 @@ class SignUpPage extends Component {
                                                 />
                                             </div>
                                             <div className="flex justify-between w-wk mt-2">
-                                            <div className="w-[47.5%]">
+                                            {/* <div className="w-[47.5%]">
                                             <div class="text-white font-normal font-[Poppins]">Password</div>
                                                 <Field
                                                     name="password"
@@ -159,8 +176,69 @@ class SignUpPage extends Component {
                                                     component={InputComponent}
 
                                                 />
-                                            </div>
-                                            <div className="w-[47.5%]">
+                                            </div> */}
+                                             <div className="w-[47.5%] ">
+                                             <div class="text-white font-normal font-[Poppins]">Password</div>
+                        <Field
+                          name="password"
+                          type={this.state.type}
+                          placeholder="Create password"
+                          component={this.InputComponent}
+                          style={{ width: "100%", height: "2.2rem",borderRadius:"0.5rem",backgroundColor:"#6245C6",borderColor:"white",color:"white" }}
+                        />
+                     
+                      {this.state.show ? (
+                        <EyeOutlined className=" !text-icon  -ml-5"
+                          type="eye"
+                          onClick={this.handleClick}
+                          
+                        />
+                      ) : (
+                        <EyeInvisibleOutlined className=" !text-icon  -ml-5"
+                          type="eye-invisible"
+                          onClick={this.handleClick}
+                                               
+                        />
+                      )}
+                    </div>
+                  
+
+                    <div  className="w-[47.5%]">
+                   
+                    <div class="text-white font-normal font-[Poppins]">Confirm password</div>
+                          <Field
+                            name="confirmPassword"
+                            type={this.state.type1}
+                            placeholder="Confirm password"
+                            component={this.InputComponent}
+                            style={{ width: "100%", height: "2.2rem",borderRadius:"0.5rem",backgroundColor:"#6245C6",borderColor:"white",color:"white" }}
+
+                          />
+                        
+                        {this.state.show1 ? (
+                          <EyeOutlined  className=" !text-icon  -ml-5"
+                            type="eye"
+                            onClick={this.handleClick1}
+                      
+                          />
+                        ) : (
+                          <EyeInvisibleOutlined  className=" !text-icon  -ml-5"
+                            type="eye-invisible"
+                            onClick={this.handleClick1}
+                            />
+                        )}
+                      
+                      </div>
+                      {/* {values.password.length &&
+                        values.password === values.confirmPassword ? (
+                        <CheckCircleOutlined className="!text-icon"
+                          type="check-circle"
+                          theme="twoTone"
+                          twoToneColor="#52c41a"
+                          
+                        />
+                      ) : null} */}
+                                            {/* <div className="w-[47.5%]">
                                             <div class="text-white font-normal font-[Poppins]">Confirm password</div>
                                                 <Field
                                                     name="confirmPassword"
@@ -170,7 +248,7 @@ class SignUpPage extends Component {
                                                     component={InputComponent}
 
                                                 />
-                                            </div>
+                                            </div> */}
                                             </div>
                                             <div className="mt-6">
                                             <img
@@ -198,7 +276,7 @@ class SignUpPage extends Component {
                         /> 
                                             </div> */}
                                              <div className="flex mt-1 justify-between w-wk">
-                                        <div class="" >
+                                       
                                         <FacebookLogin
                                          
           appId="1462431934502453"
@@ -208,10 +286,10 @@ class SignUpPage extends Component {
           callback={this.responseFacebook}
         />
         
-      </div>
-      <div class="" >
+    
+    
                                       
-                                        <GoogleLogin
+        <GoogleLogin
           clientId="1802272721-jkbu5gabo0qsrq7kh50n5ap7h3979tvb.apps.googleusercontent.com"
           buttonText="  Login with Google  "
           onSuccess={this.responseGoogle}
@@ -220,7 +298,7 @@ class SignUpPage extends Component {
          
         />
       
-      </div>
+     
       </div>
                                             <div class="flex items-center w-wk mt-2">
                                                 

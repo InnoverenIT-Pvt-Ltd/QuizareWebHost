@@ -72,7 +72,7 @@ function EditQuestionofQuiz(props) {
                                                
                                                 name="question"
                                                 value={`${values.question}`}
-                                                component={TextArea}
+                                                component={InputComponent}
                                                 onChangeText={() => handleChange("question")}
                                                 style={{ width: "100%", height: "3rem",borderRadius:"0.25rem" }}
                                             />
@@ -141,8 +141,7 @@ function EditQuestionofQuiz(props) {
                                                  <h3 class="font-medium text-white text-base">Update</h3>
                                             </Button>
                                             </div>
-                                        </div>
-                                        <div class="mt-4" >
+                                            <div class="" >
                         <Button
                                                 title={""}
                                                 type="primary"
@@ -151,6 +150,8 @@ function EditQuestionofQuiz(props) {
 
                                             ><h3 class="font-medium text-white text-xl">Back To Quiz</h3></Button>
                                             </div>
+                                        </div>
+                                        
 
                                 </div>
 

@@ -558,3 +558,11 @@ input {
   color: white;
 }
 
+.custom-popconfirm .ant-popover-buttons {
+  display: flex;
+  justify-content: space-between; /* Space between Yes and No buttons */
+}
+
+.custom-popconfirm .ant-btn {
+  width: 45%; /* Adjust the width of the buttons */
+}

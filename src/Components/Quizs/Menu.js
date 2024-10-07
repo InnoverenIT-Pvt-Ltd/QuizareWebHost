@@ -262,7 +262,7 @@ const Menu = (props) => {
                 /></div> */}
                 <div class=" w-80 max-sm:w-24">
                 <Input
-            placeholder="Search Quizes" 
+            placeholder="Search Quizzes" 
             className="custom-input"
             //suffix={suffix}
             onPressEnter={handleSearch}
