@@ -980,7 +980,7 @@ function Quiz(props) {
             values,
           }) => (
             <div className="h-[93vh] flex">
-              <div className="w-[20%] bg-[#6245C6] p-4 max-sm:hidden">
+              <div className="w-[20%] bg-[#6245C6] p-4 max-sm:hidden overflow-y-auto h-[93vh]" style={{scrollbarWidth:"thin"}}>
                 {props.questionList.map((item, i) => (
                   <Card
                     key={i}
@@ -1091,7 +1091,7 @@ function Quiz(props) {
                           <div className="w-[47.5%]">
                             <Field
                               component={InputComponent}
-                              placeholder="A. Add answer 1"
+                              placeholder="A. Add Correct Answer"
                               name="option1"
                               style={{
                                 width: "100%",

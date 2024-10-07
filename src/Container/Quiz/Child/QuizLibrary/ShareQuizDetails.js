@@ -27,13 +27,13 @@ console.log(props.showQuiz)
     <div class="">
       {/* <MainHeader /> */}
 
-      <div class="flex justify-center bg-white  items-center max-sm:w-11/12 h-hk mt-8 m-auto md:mt-12  w-wk ">
+      <div class="flex justify-center bg-white  items-center max-sm:w-11/12 h-hk  m-auto   w-wk ">
         
-        <div class="shadow-2xl border-solid w-wk flex  items-center flex-col  p-1 max-sm:m-0 h-[10rem]  md:m-auto">
+        <div class="shadow-2xl border-solid w-wk flex  items-center flex-col  p-1 max-sm:m-0 h-[36rem]  md:m-auto">
       
       
        
-          <div class="w-full flex justify-center items-center flex-col mt-4">
+          <div class="w-full flex justify-center items-center flex-col  h-hk ">
             <div class="text-xl mt-2 flex  items-center  font-bold justify-start w-wk font-[Poppins] ">
             Share your quiz
             </div>

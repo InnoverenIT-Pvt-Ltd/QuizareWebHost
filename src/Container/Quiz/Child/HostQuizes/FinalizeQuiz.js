@@ -124,9 +124,9 @@ function FinalizeQuiz(props) {
                 </form>
                 </div>
             </div>
-            <div class="flex flex-row w-wk  justify-between p-1">
+            <div class="flex flex-row w-wk  justify-end  p-1">
               {/* <Link to="/create"> */}
-              <div class="  flex ">
+              {/* <div class="  flex ">
               <Button
                // type="primary"
                style={{  height: "2.5rem",backgroundColor:"#3b16b7",borderRadius:'0.25rem',width:"7rem" }}
@@ -137,9 +137,9 @@ function FinalizeQuiz(props) {
                   )
                 }
               >
-                <h2 class="text-white text-xl font-medium">Delete</h2>
+                <h2 class="text-white text-base font-medium font-[Poppins]">Delete</h2>
               </Button>
-              </div>
+              </div> */}
               {/* </Link> */}
              
               {/* <div class=" flex ">
@@ -165,7 +165,7 @@ function FinalizeQuiz(props) {
                 onClick={handleOk}
               // onClick={() => props.hostQuiz(props.showQuiz.quizId)}
               >
-                <h2 class="text-white text-2xl font-medium">Host </h2>
+                <h2 class="text-white text-base font-medium font-[Poppins]">Host </h2>
               </Button>
               </div>
             </div>

@@ -59,7 +59,7 @@ function UpdateQuizNameAndDuration(props) {
               <div class="absolute w-full flex flex-col justify-center items-center  max-sm:m-0 h-80  md:w-full m-auto">
               <div class="flex flex-col items-center ">
                                 <div class="flex justify-center flex-col items-center">
-                                <h2 class="text-3xl font-medium text-white">Import from Chatgpt</h2>
+                                <h2 class="text-3xl font-medium text-white">Update Quiz</h2>
             
               </div>
                             <div class="mt-4">

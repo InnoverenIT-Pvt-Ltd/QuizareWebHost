@@ -40,7 +40,13 @@ function QuizinLibrary(props) {
   const data = props.showQuiz && props.showQuiz.noOfQuestions
 
   const [questions, setQuestions] = useState(props.showQuiz.noOfQuestions + 1);
-
+  const [selectedQuestionIndex, setSelectedQuestionIndex] = useState(null);
+  const [selectedQuestion, setSelectedQuestion] = useState(null);
+  
+  const handleQuestionSelect = (index) => {
+    setSelectedQuestionIndex(index);
+    setSelectedQuestion(props.questionList[index]);
+  };
 
   function handleQuestion() {
     setQuestions(questions + 1);
@@ -114,8 +120,27 @@ function QuizinLibrary(props) {
               </div>
               <hr className="h-px bg-black border-2 w-wk md:mt-4 border-black" />
               
-              <Form class=" max-sm:w-full  m-auto md:mt-12  w-wk  h-h50  ">
-                <div className="w-11/12 my-2 flex justify-center m-auto ">
+              <Form class=" max-sm:w-full  m-auto   w-wk  h-h50  ">
+            
+                <div className="w-wk  flex justify-center m-auto ">
+                <div className="w-[20%] bg-[#6245C6] p-4 max-sm:hidden overflow-y-auto h-[84vh]" style={{scrollbarWidth:"thin"}}>
+                {props.questionList.map((item, i) => (
+                  <Card
+                    key={i}
+                    className={`cursor-pointer mb-2 ${
+                      i === selectedQuestionIndex ? "bg-blue-200" : ""
+                    }`}
+                   onClick={() => handleQuestionSelect(i)}
+                  >
+                    <div className="flex flex-col">
+                      <div className="text-base font-semibold">
+                        Question {i + 1}
+                      </div>
+                      <div className="text-sm font-semibold">{item.question}</div>
+                    </div>
+                  </Card>
+                ))}
+              </div>
                   <div class=" border-solid w-wk flex justify-center flex-col items-center  p-2 max-sm:m-0 h-max rounded-2xl md:m-auto">
                     <div class=" flex justify-center flex-col w-full">
                       <h3 class="flex justify-center text-xl">
@@ -140,7 +165,7 @@ function QuizinLibrary(props) {
                           <Field
                             component={InputComponent}
                             onChangeText={handleChange("option1")}
-                            placeholder="A. Add answer 1"
+                            placeholder="A. Add Correct Answer"
                             name="option1"
                             style={{ width: "100%", height: "3rem", borderRadius: "0.25rem" }}
                           // onChangeText={handleChange('option1')}
@@ -331,17 +356,4 @@ const mapDispatchToProps = (dispatch) =>
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(QuizinLibrary));
 
-// import React from 'react';
-// import { Link ,withRouter} from "react-router-dom";
-// import CreateQuiz from '../../Components/Quizs/CreateQuiz';
-// import QuizHost from './QuizHost';
 
-// function Quiz() {
-//   return (
-//     <div>
-//       <QuizHost/>
-//     </div>
-//   )
-// }
-
-// export default withRouter (Quiz);

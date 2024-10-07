@@ -19,7 +19,7 @@ import {
   updateQuizNameByQuizId,
   handleCopy
 } from "../../QuizAction";
-import { Button, Modal, Tooltip } from "antd";
+import { Button, Modal, Popconfirm, Tooltip } from "antd";
 import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import moment from "moment";
@@ -205,7 +205,7 @@ const handleOpen= ()=>{
  
 {/* </Button>
 </Link> */}
-{item.quizHostInd === false && (
+{/* {item.quizHostInd === false && (
                         <Button
                           type="primary"
                           style={{ width: "9rem", backgroundColor: "white", margin: "0" }}
@@ -215,7 +215,24 @@ const handleOpen= ()=>{
                         >
                           <div className="font-[Poppins] text-black">Delete This Quiz</div>
                         </Button>
-                      )}     
+                      )}      */}
+                      {item.quizHostInd === false && (
+  <Popconfirm
+    title="Are you sure you want to delete this quiz?"
+    onConfirm={() => props.deleteLibraryQuiz(item.quizId)}
+    okText="Yes"
+    cancelText="No"
+     placement="top"
+    overlayClassName="custom-popconfirm"
+  >
+    <Button
+      type="primary"
+      style={{ width: "9rem", backgroundColor: "white", margin: "0" }}
+    >
+      <div className="font-[Poppins] text-black">Delete This Quiz</div>
+    </Button>
+  </Popconfirm>
+)}
                        {/* {item.quizHostInd === false && (
                         <Button
                           type="primary"
