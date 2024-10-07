@@ -998,7 +998,7 @@ export const addQuizPaymentId = (data, cb) => dispatch => {
 };
 
 export const makeStripePayment = (data,cb) => (dispatch, getState) => {
-  const userId = getState().auth.userDetails.userId;
+  // const userId = getState().auth.userDetails.userId;
   dispatch({
       type: types.MAKE_STRIPE_PAYMENT_REQUEST,
   })
@@ -1010,7 +1010,7 @@ export const makeStripePayment = (data,cb) => (dispatch, getState) => {
     })
    
       .then(res => {
-        dispatch(getUserDetails(userId));
+        // dispatch(getUserDetails(userId));
           dispatch({
               type: types.MAKE_STRIPE_PAYMENT_SUCCESS,
               payload: res.data

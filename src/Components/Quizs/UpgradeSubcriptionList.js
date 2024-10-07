@@ -98,10 +98,14 @@ const UpgradeSubcriptionList = (props) => {
                                     <p className="text-4xl font-bold flex font-[Poppins]">${item.pricePerMonth}<span className="text-lg">/month</span></p>
                                     <button
                                         className={`mt-6 ${item.activePlanInd || item.subscriptionId === selectedPlanId ? 'bg-gray-300 text-gray-700' : 'bg-[#3B16B7] text-white'} py-2 px-4 rounded-lg w-full`}
-                                        onClick={() =>{ handleSelectPlan(item.subscriptionId);
+                                        onClick={() =>{ 
                                             if (item.pricePerMonth > 0) {
                                             props.handleQuizStripeModal(true);
-                                            }
+                                            setEachSub(item)
+                                        }
+                                         setEachSub(item)
+                                         if (item.pricePerMonth === 0) {
+                                            handleSelectPlan(item.subscriptionId);}
                                             setEachSub(item)
                                         }}
                                         disabled={item.activePlanInd || item.subscriptionId === selectedPlanId}

@@ -3,7 +3,6 @@ import {makeStripePayment} from "../Container/Quiz/QuizAction";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { withRouter } from "react-router-dom";
-import {message } from "antd";
 import Swal from 'sweetalert2';
 import { base_url } from "../Config/Auth";
 import axios from 'axios';
@@ -14,7 +13,7 @@ function StripePayLoading(props) {
   
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null)
+  const [error, setError] = useState(null);
  
   const addPostRequest = async () => {
     setLoading(true);
