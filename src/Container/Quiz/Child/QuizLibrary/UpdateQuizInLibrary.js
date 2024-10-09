@@ -198,6 +198,7 @@ function UpdateQuizInLibrary(props) {
                             <SwiperSlide key={i}>
                                 <EditQuestionOfQuiz
                                     item={item}
+                                    quizName={props.match.params.quizName}
                                     questionNo={i + 1}
                                     handleDeleteQuestion={handleDeleteQuestion}
                                     backTo={backTo}

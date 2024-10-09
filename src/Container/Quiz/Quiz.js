@@ -844,12 +844,15 @@ import {
   getFinalizeQuiz,
   getQuestionList,
 } from "./QuizAction";
-import { Button, Card, Drawer } from "antd";
+import {handleShareProcess} from "../Auth/AuthAction";
+import AddIcon from '@mui/icons-material/Add';
+import { Button, Card, Drawer, Tooltip } from "antd";
 import FWLogo2 from "../../../src/images/tabler_bulb.png";
 import { MenuOutlined } from "@ant-design/icons";
 import { InputComponent } from "../../Components/Forms/Formik/InputComponent";
 import MainHeader from "../../Components/Mainheader";
 import Finalisedrawer from "./Finalisedrawer";
+import ProcessShareDrawer from "../../Components/ProcessShareDrawer";
 
 const QuizzSchema = Yup.object().shape({
   question: Yup.string().required("Input needed!"),
@@ -866,6 +869,8 @@ function Quiz(props) {
   const [isAddingNewQuestion, setIsAddingNewQuestion] = useState(false);
   const [selectedQuestionIndex, setSelectedQuestionIndex] = useState(0);
   const [isDrawerVisible, setIsDrawerVisible] = useState(false);
+  const [questionSource, setQuestionSource] = useState("Normal");
+  const [isNewQuestion, setIsNewQuestion] = useState(false);
 
   useEffect(() => {
     props.getQuestionList(props.showQuiz.quizId);
@@ -881,23 +886,37 @@ function Quiz(props) {
   const handleDeleteQuestion = (id) => {
     props.deleteQuestion(id, handleCallBack);
   };
+  const handleAddQuestion = () => {
+    setIsNewQuestion(true); // Enter add mode
+    setSelectedQuestionIndex(null); // Deselect any selected question
+  };
+  // const handleUpdateQuestion = (values) => {
+  //   const selectedQuestion = props.questionList[selectedQuestionIndex];
 
+  //   if (!selectedQuestion) {
+  //     console.error("No question selected");
+  //     return;
+  //   }
+
+  //   const updatedQuestion = {
+  //     ...values,
+  //     id: selectedQuestion.id, // Pass the id of the selected question
+  //     quizId: props.showQuiz && props.showQuiz.quizId, // Pass the quizId
+  //     categoryId: selectedCategory,
+  //   };
+
+  //   props.updateQuestionsInQuiz(updatedQuestion, selectedQuestion.id);
+  // };
   const handleUpdateQuestion = (values) => {
-    const selectedQuestion = props.questionList[selectedQuestionIndex];
-
-    if (!selectedQuestion) {
-      console.error("No question selected");
-      return;
+    if (selectedQuestionIndex >= 0) {
+      const updatedQuestion = {
+        ...values,
+        id: selectedQuestion.id,
+        quizId: props.showQuiz && props.showQuiz.quizId,
+        categoryId: selectedCategory,
+      };
+      props.updateQuestionsInQuiz(updatedQuestion, selectedQuestion.id);
     }
-
-    const updatedQuestion = {
-      ...values,
-      id: selectedQuestion.id, // Pass the id of the selected question
-      quizId: props.showQuiz && props.showQuiz.quizId, // Pass the quizId
-      categoryId: selectedCategory,
-    };
-
-    props.updateQuestionsInQuiz(updatedQuestion, selectedQuestion.id);
   };
 
   const handleQuestionSelect = (index) => {
@@ -947,7 +966,7 @@ function Quiz(props) {
                 quizId: props.showQuiz && props.showQuiz.quizId,
                 categoryId: selectedCategory,
                 number: count,
-                type: "Normal",
+                type: questionSource,
               },
               props.showQuiz && props.showQuiz.quizId
             );
@@ -964,10 +983,10 @@ function Quiz(props) {
                 option4: "",
               },
             });
-
+            setQuestionSource("Normal");
             props.ClearReducerDataOfLoadProgress();
             setCount(count + 1);
-
+            setIsNewQuestion(false);
             setIsAddingNewQuestion(true);
           }}
         >
@@ -980,7 +999,8 @@ function Quiz(props) {
             values,
           }) => (
             <div className="h-[93vh] flex">
-              <div className="w-[20%] bg-[#6245C6] p-4 max-sm:hidden overflow-y-auto h-[93vh]" style={{scrollbarWidth:"thin"}}>
+              <div className="w-[20%] bg-[#6245C6] p-4 max-sm:hidden " style={{scrollbarWidth:"thin"}}>
+              <div className="overflow-y-auto h-[70vh]" style={{scrollbarWidth:"thin"}}>
                 {props.questionList.map((item, i) => (
                   <Card
                     key={i}
@@ -997,6 +1017,40 @@ function Quiz(props) {
                     </div>
                   </Card>
                 ))}
+                </div>
+                 <div className="flex w-wk justify-center">
+                  <Tooltip title="Add Question">
+                        <AddIcon className="!text-[5rem] cursor-pointer !text-white"
+                          onClick={handleAddQuestion}
+                        />
+                        </Tooltip>
+                      </div>
+                      <div className="flex justify-between">
+                      <div>
+                        {count >= 1 &&
+                          <Button
+                            style={{ height: "2.5rem", backgroundColor: "#3B16B7", borderRadius: '0.25rem',width:"5rem" }}
+                            type="primary"
+                            onClick={() => setFinalise(true)}
+                            disabled={!isAnyQuestionCreated}
+                          >
+                             <h3 className="font-medium text-white text-base">Finalize</h3>
+                          </Button>
+                        }
+                      </div>
+                      <div className="">
+<Button
+ type="primary"
+  style={{ height: "2.5rem", backgroundColor: "#3B16B7", borderRadius: '0.25rem',width:"5rem" }}
+ onClick={() => {
+  props.handleShareProcess(true);
+}}
+>
+<h3 className="font-medium text-white text-base">Share</h3>
+</Button>
+
+</div>
+</div>
               </div>
               <Drawer
                 title="Select a Question"
@@ -1005,6 +1059,7 @@ function Quiz(props) {
                 visible={isDrawerVisible}
                 width={300}
               >
+                 <div className="overflow-y-auto h-[53vh]" style={{scrollbarWidth:"thin"}}>
                 {props.questionList.map((item, i) => (
                   <Card
                     key={i}
@@ -1021,6 +1076,40 @@ function Quiz(props) {
                     </div>
                   </Card>
                 ))}
+                </div>
+                 <div className="flex w-wk justify-center">
+                  <Tooltip title="Add Question">
+                        <AddIcon className="!text-[5rem]  cursor-pointer !text-white"
+                          onClick={handleAddQuestion}
+                        />
+                        </Tooltip>
+                      </div>
+                      <div className="flex justify-between">
+                      <div>
+                        {count >= 1 &&
+                          <Button
+                            style={{ height: "2.5rem", backgroundColor: "#3B16B7", borderRadius: '0.25rem',width:"5rem" }}
+                            type="primary"
+                            onClick={() => setFinalise(true)}
+                            disabled={!isAnyQuestionCreated}
+                          >
+                             <h3 className="font-medium text-white text-base">Finalize</h3>
+                          </Button>
+                        }
+                      </div>
+                      <div className="">
+<Button
+ type="primary"
+  style={{ height: "2.5rem", backgroundColor: "#3B16B7", borderRadius: '0.25rem',width:"5rem" }}
+ onClick={() => {
+  props.handleShareProcess(true);
+}}
+>
+<h3 className="font-medium text-white text-base">Share</h3>
+</Button>
+
+</div>
+</div>
               </Drawer>
               <div className="flex items-center flex-col h-hk w-[80%] max-sm:w-wk">
                 <div className="w-full flex justify-center">
@@ -1048,6 +1137,7 @@ function Quiz(props) {
                               height: "3rem",
                               borderRadius: "0.25rem",
                             }}
+                            onBlur={() => handleUpdateQuestion(values)} 
                           />
                         </div>
                         {props.showQuiz.chatGptQuestionInd &&
@@ -1077,6 +1167,7 @@ function Quiz(props) {
                                 quizId: props.showQuiz && props.showQuiz.quizId,
                               };
                               props.addUserQuery(query);
+                              setQuestionSource("ChatGpt");
                             }}
                           >
                            ChatGPT
@@ -1098,6 +1189,7 @@ function Quiz(props) {
                                 height: "3rem",
                                 borderRadius: "0.25rem",
                               }}
+                              onBlur={() => handleUpdateQuestion(values)} 
                             />
                           </div>
                           <div className="w-[47.5%]">
@@ -1110,6 +1202,7 @@ function Quiz(props) {
                                 height: "3rem",
                                 borderRadius: "0.25rem",
                               }}
+                              onBlur={() => handleUpdateQuestion(values)} 
                             />
                           </div>
                         </div>
@@ -1124,6 +1217,7 @@ function Quiz(props) {
                                 height: "3rem",
                                 borderRadius: "0.25rem",
                               }}
+                              onBlur={() => handleUpdateQuestion(values)} 
                             />
                           </div>
                           <div className="w-[47.5%]">
@@ -1136,25 +1230,44 @@ function Quiz(props) {
                                 height: "3rem",
                                 borderRadius: "0.25rem",
                               }}
+                              onBlur={() => handleUpdateQuestion(values)} 
                             />
                           </div>
                         </div>
                       
                         <div className="flex justify-between p-1 w-wk max-sm:flex-col md:p-6">
-                      <div className="flex justify-between w-wk ">
-                      
-                      <div>
-                        <Button
+                   
+                      {/* <div>
+                      <Button
+                              title={isNewQuestion || selectedQuestionIndex >= 0 ? "Save Question" : "Add New Question"}
+                              type="primary"
+                              onClick={() => {
+                                if (isNewQuestion || selectedQuestionIndex >= 0 ) {
+                                  handleSubmit(); // Save the question
+                                } else {
+                                  handleAddQuestion(); // Enter add mode
+                                }
+                              }}
+                              style={{ height: "3rem", backgroundColor: "#3B16B7", borderRadius: '0.25rem' }}
+                            >
+                              <h3 className="font-medium text-white text-base">
+                                {isNewQuestion || selectedQuestionIndex >= 0 ? "Save Question" : "Add New Question"}
+                              </h3>
+                            </Button>
+                                    </div>    */}
+                                    
+                    
+                                  
+                     
+                     
+                  {/* <Button
                           style={{ height: "3rem", backgroundColor: "#3B16B7", borderRadius: '0.25rem',width:"9rem" }}
                           type="primary"
-                          onClick={handleSubmit}
+                          onClick={handleAddQuestion}
                         >
-                          <h3 className="font-medium text-white text-base">+ Add question</h3>
-                        </Button>
-                      </div>
-                     
-                     
-                      <div className="md:mr-16">
+                          <h3 className="font-medium text-white text-base">Add New Question</h3>
+                        </Button> */}
+                      {/* <div className="md:mr-16">
                       {selectedQuestionIndex >= 0 && isAnyQuestionCreated && (
                         <Button
                           style={{ height: "3rem", backgroundColor: "#3B16B7", borderRadius: '0.25rem',width:"9rem" }}
@@ -1168,10 +1281,18 @@ function Quiz(props) {
                         </Button>
                           )}
                       </div>
-                     
-                      </div>
+                      */}
+               
                       <div className="flex justify-between w-wk">
-                     
+                      <div>
+                        <Button
+                          style={{ height: "3rem", backgroundColor: "#3B16B7", borderRadius: '0.25rem',width:"9rem" }}
+                          type="primary"
+                          onClick={handleSubmit}
+                        >
+                          <h3 className="font-medium text-white text-base">Save question</h3>
+                        </Button>
+                      </div>
                       <div className="md:ml-16">
                       {selectedQuestionIndex >= 0 && isAnyQuestionCreated && (
                         <Button
@@ -1186,18 +1307,7 @@ function Quiz(props) {
                           )}
                       </div>
                     
-                      <div>
-                        {count >= 1 &&
-                          <Button
-                            style={{ height: "3rem", backgroundColor: "#3B16B7", borderRadius: '0.25rem',width:"9rem" }}
-                            type="primary"
-                            onClick={() => setFinalise(true)}
-                            disabled={!isAnyQuestionCreated}
-                          >
-                             <h3 className="font-medium text-white text-base">Finalize</h3>
-                          </Button>
-                        }
-                      </div>
+                      
                       </div>
                     </div>
                       </div>
@@ -1214,6 +1324,10 @@ function Quiz(props) {
                   finalise={finalise}
                   setFinalise={setFinalise}
                 />
+                <ProcessShareDrawer            
+                  processShareModal={props.processShareModal}
+                    handleShareProcess={props.handleShareProcess}
+                />
     </>
   );
 }
@@ -1222,6 +1336,7 @@ const mapStateToProps = ({ auth, quiz }) => ({
   fetchingQuizName: quiz.fetchingQuizName,
   fetchingQuizNameError: quiz.fetchingQuizNameError,
   showQuiz: quiz.showQuiz,
+  processShareModal: auth.processShareModal,
   finalizeQuiz: quiz.finalizeQuiz,
   quizId: quiz.showQuiz.quizId,
   category: quiz.category,
@@ -1236,6 +1351,7 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       deleteQuestion,
+      handleShareProcess,
       updateQuestionsInQuiz,
       addQuestion,
       getQuizName,

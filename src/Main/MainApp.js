@@ -22,6 +22,7 @@ import LibrayEmptyPage from "../Components/Quizs/LibrayEmptyPage.js";
 import Upgrade from "./Upgrade.js";
 import ReviewQuiz from "./ReviewQuiz.js";
 import QuizDetailsPlayerTable from "../Components/Quizs/QuizDetailsPlayerTable.js";
+import LibrayCreat from "./LibrayCreat.js";
 const Question1 = lazy(() => import("../Components/Quizs/Question1"))
 const CreateQuiz = lazy(() => import("../Components/Quizs/CreateQuiz"));
 const QuizName = lazy(() => import("../Container/Quiz/QuizName"))
@@ -90,7 +91,7 @@ function MainApp(props) {
               <Route exact path="/updateQuiz" component={UpdateQuiz} />
               <Route exact path="/hostquiz" component={QuizDetails} />
               <Route exact path="/updateOngoing/:quizId" component={updateOngoing} />
-              <Route exact path="/updateQuizInLibrary/:quizId" component={UpdateQuizInLibrary} />
+              <Route exact path="/updateQuizInLibrary/:quizName/:quizId" component={UpdateQuizInLibrary} />
               <Route exact path="/report" component={Report} />
               <Route exact path="/question" component={Question1} />
               <Route exact path="/ongoingQuiz" component={OngoingQuiz} />
@@ -98,6 +99,7 @@ function MainApp(props) {
               <Route exact path="/swipeIn" component={SwipeIn} />
               <Route exact path="/upgrade" component={Upgrade} />
               <Route exact path="/emptypage" component={LibrayEmptyPage} />
+              <Route exact path="/librayCreat" component={LibrayCreat} />
               <Route exact path="/swipeInLibrary/:quizId" component={SwipeInLibrary} />
               <Route exact path="/drb/payloadinginside/:stripePaymentId/:paymentId/:subscriptionId/:userId" component={StripePayLoading} />
               <Route exact path="/drb/stripeSuccess" component={StripeSuccessPage} />
