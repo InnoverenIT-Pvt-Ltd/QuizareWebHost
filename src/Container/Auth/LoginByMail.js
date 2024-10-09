@@ -177,6 +177,41 @@ class LoginByMail extends Component {
                                             <div className="text-white font-semibold font-[Poppins]">Forgot Password</div>
                                             </Link>
                                             </div>
+                                            <div class="flex  w-wk  items-center mt-8">
+                            <div class="bg-black rounded-rounded2.8   w-36 items-center flex justify-center" >
+                                                <Button
+                                                    type="primary"
+                                                    htmlType="submit"
+                                                    Loading={isSubmitting}
+                                                    style={{  height: "3.5rem",backgroundColor:"white",borderRadius:'3rem' }}
+                                                >
+                                                   <h3 class="font-medium text-black text-xl font-[Poppins]"> Sign in</h3> 
+                                                </Button>
+                                            </div>
+                                            {/* <Link to ="/login">
+                                                <div class="bg-black rounded-rounded2.8 mt-14 w-36 items-center flex justify-center" >
+                                                <Button   style={{  height: "4rem",backgroundColor:"black",borderRadius:'3rem',display:"flex",alignItems:"center" }}>
+                                                <h3 class="font-medium text-white text-3xl">Back</h3> </Button>
+                                                </div>
+                                                </Link> */}
+   
+                                {/* <Link
+                                    to="/forgotPassword"
+                                    style={{ textAlign: "center", fontSize: 15, color: "#cb0009", fontWeight: "500" }}
+                                >
+                                    Forgot password?
+                                </Link> */}
+                               
+                               <div class="ml-2 text-white flex mt-4 font-[Poppins]">
+                                 Already have an Account?
+                                 <Link
+                                    to="/signUp"
+                                    style={{ textAlign: "center", fontSize: 15, color: "#0a8bd7", fontWeight: "500" }}
+                                >
+                                  <div className="underline font-medium text-white ml-1 font-[Poppins]"> Signup </div> 
+                                </Link>
+                            </div>
+                                                </div>
                                             <div className="mt-8">
                                             <img
                             className="big-logo"
@@ -228,41 +263,7 @@ class LoginByMail extends Component {
       
       </div>
                                          
-                            <div class="flex  w-wk  items-center mt-8">
-                            <div class="bg-black rounded-rounded2.8   w-36 items-center flex justify-center" >
-                                                <Button
-                                                    type="primary"
-                                                    htmlType="submit"
-                                                    Loading={isSubmitting}
-                                                    style={{  height: "3.5rem",backgroundColor:"white",borderRadius:'3rem' }}
-                                                >
-                                                   <h3 class="font-medium text-black text-xl font-[Poppins]"> Sign in</h3> 
-                                                </Button>
-                                            </div>
-                                            {/* <Link to ="/login">
-                                                <div class="bg-black rounded-rounded2.8 mt-14 w-36 items-center flex justify-center" >
-                                                <Button   style={{  height: "4rem",backgroundColor:"black",borderRadius:'3rem',display:"flex",alignItems:"center" }}>
-                                                <h3 class="font-medium text-white text-3xl">Back</h3> </Button>
-                                                </div>
-                                                </Link> */}
-   
-                                {/* <Link
-                                    to="/forgotPassword"
-                                    style={{ textAlign: "center", fontSize: 15, color: "#cb0009", fontWeight: "500" }}
-                                >
-                                    Forgot password?
-                                </Link> */}
-                               
-                               <div class="ml-2 text-white flex mt-4 font-[Poppins]">
-                                 Already have an Account?
-                                 <Link
-                                    to="/signUp"
-                                    style={{ textAlign: "center", fontSize: 15, color: "#0a8bd7", fontWeight: "500" }}
-                                >
-                                  <div className="underline font-medium text-white ml-1 font-[Poppins]"> Signup </div> 
-                                </Link>
-                            </div>
-                                                </div>
+                          
                                         </div>
                                         <div class="flex flex-col w-[40%] max-sm:hidden">
                                         <div>

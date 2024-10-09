@@ -830,6 +830,8 @@ export const getLibraryQuiz = (userId) => dispatch => {
       },
     })
     .then(res => {
+      //window.location.href = res.data.length === 0 ? '/librayCreat' : '/quizLibrary';
+      history.push(res.data.length === 0 ? '/librayCreat' : '/quizLibrary');
       console.log(res.data);
       dispatch({
         type: types.GET_LIBRARY_QUIZ_SUCCESS,
@@ -853,7 +855,7 @@ export const getLibraryQuiz = (userId) => dispatch => {
 };
 
 
-export const deleteLibraryQuiz = (quizId, cb) => dispatch => {
+export const deleteLibraryQuiz = (quizId,userId, cb) => dispatch => {
   dispatch({
     type: types.DELETE_LIBRARY_FROM_HOST_REQUEST,
   });
@@ -865,7 +867,7 @@ export const deleteLibraryQuiz = (quizId, cb) => dispatch => {
     })
     .then(res => {
       console.log(res.data);
-      // dispatch(getFinalizeQuiz(quizId));
+       dispatch(getLibraryQuiz(userId));
       dispatch({
         type: types.DELETE_LIBRARY_FROM_HOST_SUCCESS,
         payload: quizId,

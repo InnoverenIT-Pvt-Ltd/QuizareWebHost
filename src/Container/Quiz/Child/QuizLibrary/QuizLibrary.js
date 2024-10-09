@@ -153,7 +153,7 @@ const handleOpen= ()=>{
           onMouseEnter={() => handleMouseEnter(item.quizId)}
           onMouseLeave={handleMouseLeave}
         >
-            <Link
+            {/* <Link
                         to={`quizinLibrary/${item.quizId}`}
                       >
 
@@ -164,19 +164,19 @@ const handleOpen= ()=>{
                         >
                           <h3>Add Question</h3>
                         </Button>
-                      </Link>
-         <Link to={`updateQuizNameInLibrary/${item.quizName}/${item.duration}/${item.quizId}`}>
-
+                      </Link> */}
+         {/* <Link to={`updateQuizNameInLibrary/${item.quizName}/${item.duration}/${item.quizId}`}> */}
+         <Link to={`/updateQuizInLibrary/${item.quizName}/${item.quizId}`}>
 <Button
   style={{ width: "9rem", backgroundColor: "white",height:"2rem" }}
   type="primary"
 
 //   onClick={() => props.navigation.navigate('Quiz Invite')}
 >
-  <div className="font-[Poppins] text-black">Update Quiz</div>
+  <div className="font-[Poppins] text-black">Open Quiz</div>
 </Button>
 </Link>   
-<Link to={`review/${item.quizName}/${item.duration}/${item.quizId}`}>
+{/* <Link to={`review/${item.quizName}/${item.duration}/${item.quizId}`}>
 
 <Button
   style={{ width: "9rem", backgroundColor: "white",height:"2rem" }}
@@ -186,11 +186,11 @@ const handleOpen= ()=>{
 >
   <div className="font-[Poppins] text-black">Review Quiz</div>
 </Button>
-</Link>  
+</Link>   */}
 
 
 
-  <Button
+  {/* <Button
     style={{ width: "9rem", backgroundColor: "white",height:"2rem" }}
     type="primary"
     onClick={() =>{ handleOpen(true);
@@ -198,7 +198,7 @@ const handleOpen= ()=>{
     }}
   >
     <div className="font-[Poppins] text-black">LeaderBoard</div>  
-  </Button>
+  </Button> */}
 
 
 
@@ -219,7 +219,7 @@ const handleOpen= ()=>{
                       {item.quizHostInd === false && (
   <Popconfirm
     title="Are you sure you want to delete this quiz?"
-    onConfirm={() => props.deleteLibraryQuiz(item.quizId)}
+    onConfirm={() => props.deleteLibraryQuiz(item.quizId,props.quizHostId)}
     okText="Yes"
     cancelText="No"
      placement="top"

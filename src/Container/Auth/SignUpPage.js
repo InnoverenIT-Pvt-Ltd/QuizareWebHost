@@ -250,57 +250,7 @@ class SignUpPage extends Component {
                                                 />
                                             </div> */}
                                             </div>
-                                            <div className="mt-6">
-                                            <img
-                            className="big-logo"
-                            src={FWLogo2}                        
-                            alt="Tekorero logo"
-
-                        /> 
-                                            </div>
-                                            {/* <div className="mt-4 flex justify-between w-wk">
-
-                                            <img
-                            className="big-logo"
-                            src={FWLogo4}   
-                            style={{width:"10rem", height:"3rem"}}                     
-                            alt="Tekorero logo"
-
-                        /> 
-                         <img
-                            className="big-logo"
-                            src={FWLogo3}      
-                            style={{width:"10rem", height:"3rem"}}                    
-                            alt="Tekorero logo"
-
-                        /> 
-                                            </div> */}
-                                             <div className="flex mt-1 justify-between w-wk">
-                                       
-                                        <FacebookLogin
-                                         
-          appId="1462431934502453"
-          autoLoad={false}
-          scope="public_profile, email, user_birthday"
-          fields="name,email,picture"
-          callback={this.responseFacebook}
-        />
-        
-    
-    
-                                      
-        <GoogleLogin
-          clientId="1802272721-jkbu5gabo0qsrq7kh50n5ap7h3979tvb.apps.googleusercontent.com"
-          buttonText="  Login with Google  "
-          onSuccess={this.responseGoogle}
-          onFailure={this.responseGoogle}
-          cookiePolicy={'single_host_origin'}
-         
-        />
-      
-     
-      </div>
-                                            <div class="flex items-center w-wk mt-2">
+                                            <div class="flex items-center w-wk mt-6">
                                                 
                                             <input id="default-radio-1"
                                              type="checkbox" value="" name="default-radio"
@@ -314,13 +264,6 @@ class SignUpPage extends Component {
                                                       </h3>
                                                 
                                                 </div>
-                                           
-
-                                                {/* <Link to="/email">
-                                                    <div
-                                                        style={{ color: "#21a1fd", marginTop: "5px" }}
-                                                    >Back To Login</div>
-                                                </Link> */}
                                                 <div class="flex  items-center w-wk mt-4">
                                                   <div class="bg-black rounded-rounded2.8  w-36 items-center flex justify-center" >
                                                 <Button
@@ -346,6 +289,48 @@ class SignUpPage extends Component {
                                                 </div>
                                                 </Link> */}
                                                 </div>
+                                            <div className="mt-6">
+                                            <img
+                            className="big-logo"
+                            src={FWLogo2}                        
+                            alt="Tekorero logo"
+
+                        /> 
+                                            </div>
+                                             <div className="flex mt-4 justify-between w-wk">
+                                       
+                                        <FacebookLogin
+                                         
+          appId="1462431934502453"
+          autoLoad={false}
+          scope="public_profile, email, user_birthday"
+          fields="name,email,picture"
+          callback={this.responseFacebook}
+        />
+        
+    
+    
+                                      
+        <GoogleLogin
+          clientId="1802272721-jkbu5gabo0qsrq7kh50n5ap7h3979tvb.apps.googleusercontent.com"
+          buttonText="  Login with Google  "
+          onSuccess={this.responseGoogle}
+          onFailure={this.responseGoogle}
+          cookiePolicy={'single_host_origin'}
+         
+        />
+      
+     
+      </div>
+                                            
+                                           
+
+                                                {/* <Link to="/email">
+                                                    <div
+                                                        style={{ color: "#21a1fd", marginTop: "5px" }}
+                                                    >Back To Login</div>
+                                                </Link> */}
+                                               
                                         </div>
 
                                     </Form>
