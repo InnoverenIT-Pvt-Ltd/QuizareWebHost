@@ -8,12 +8,12 @@ import { StyledDrawer } from "../../../../Components/UI/Antd";
 
 
 const ShareDrawer = (props) => {
-    const { RowData, ...formProps } = props;
+    const { currentItem, ...formProps } = props;
     const isMobile = window.innerWidth < 768;
     return (
         <>
             <StyledDrawer
-                //title={props.RowData.imei}
+                title={currentItem.quizName}
                 width={isMobile ? "100%" : "40%"}
                 height="50%"
                 style={{marginTop:"5rem"}}

@@ -27,7 +27,7 @@ const LibrayCreat = (props) => {
  onClick={() => {
     props.handleSpareProcess(true);
   }}
->Creat Your New Project</div>
+>Create Your New Project</div>
      
                    
                   

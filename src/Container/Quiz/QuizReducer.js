@@ -89,6 +89,9 @@ const initialState = {
   addingQuestion: false,
   addingQuestionError: false,
 
+  addingQuestionQuiz: false,
+  addingQuestionQuizError: false, 
+
   updateQuestionById: false,
   updateQuestionByIdError: false,
 
@@ -177,6 +180,16 @@ export const quizReducer = (state = initialState, action) => {
       return { ...state, addingQuestion: false };
     case types.ADD_QUESTION_FAILURE:
       return { ...state, addingQuestion: false, addingQuestionError: true };
+
+      case types.ADD_QUESTIONQUIZ_REQUEST:
+      return { ...state, addingQuestionQuiz: true };
+    case types.ADD_QUESTIONQUIZ_SUCCESS:
+      return { ...state, addingQuestionQuiz: false };
+    case types.ADD_QUESTIONQUIZ_FAILURE:
+      return { ...state, 
+        addingQuestionQuiz: false,
+         addingQuestionQuizError: true };
+
 
     case types.UPDATE_QUESTION_REQUEST:
       return { ...state, updateQuestionById: true };
