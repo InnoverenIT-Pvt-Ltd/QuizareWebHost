@@ -845,10 +845,12 @@ import {
   getQuestionList,
 } from "./QuizAction";
 import {handleShareProcess} from "../Auth/AuthAction";
+import { Link } from "react-router-dom";
 import AddIcon from '@mui/icons-material/Add';
 import { Button, Card, Drawer, Tooltip } from "antd";
 import FWLogo2 from "../../../src/images/tabler_bulb.png";
 import { MenuOutlined } from "@ant-design/icons";
+import HomeIcon from '@mui/icons-material/Home';
 import { InputComponent } from "../../Components/Forms/Formik/InputComponent";
 import MainHeader from "../../Components/Mainheader";
 import Finalisedrawer from "./Finalisedrawer";
@@ -874,6 +876,7 @@ function Quiz(props) {
 
   useEffect(() => {
     props.getQuestionList(props.showQuiz.quizId);
+    props.getQuizName(props.showQuiz.quizId)
   }, [props.showQuiz.quizId]);
 
   useEffect(() => {
@@ -941,7 +944,8 @@ function Quiz(props) {
       ? props.questionList[selectedQuestionIndex]
       : {};
   const isAnyQuestionCreated = props.questionList.length > 0;
-
+  const openQuestion = props.showQuiz.quizHostInd === true
+console.log(props.showQuiz.quizHostInd)
   return (
     <>
       <div className="min-h-screen">
@@ -1041,6 +1045,7 @@ function Quiz(props) {
                       <div className="">
 <Button
  type="primary"
+ disabled={!openQuestion}
   style={{ height: "2.5rem", backgroundColor: "#3B16B7", borderRadius: '0.25rem',width:"5rem" }}
  onClick={() => {
   props.handleShareProcess(true);
@@ -1079,7 +1084,7 @@ function Quiz(props) {
                 </div>
                  <div className="flex w-wk justify-center">
                   <Tooltip title="Add Question">
-                        <AddIcon className="!text-[5rem]  cursor-pointer !text-white"
+                        <AddIcon className="!text-[5rem]  cursor-pointer "
                           onClick={handleAddQuestion}
                         />
                         </Tooltip>
@@ -1100,6 +1105,7 @@ function Quiz(props) {
                       <div className="">
 <Button
  type="primary"
+ disabled={!openQuestion}
   style={{ height: "2.5rem", backgroundColor: "#3B16B7", borderRadius: '0.25rem',width:"5rem" }}
  onClick={() => {
   props.handleShareProcess(true);
@@ -1140,7 +1146,7 @@ function Quiz(props) {
                             onBlur={() => handleUpdateQuestion(values)} 
                           />
                         </div>
-                        {props.showQuiz.chatGptQuestionInd &&
+                        {props.showQuiz.chatGptQuestionInd && (
                         <div className="flex items-center w-wk justify-center mt-4 p-1">
                           <div>
                             <img
@@ -1177,7 +1183,7 @@ function Quiz(props) {
                          
 
                         </div>
-                        }
+                        )}
                         <div className="flex justify-between mt-12">
                           <div className="w-[47.5%]">
                             <Field
@@ -1293,6 +1299,9 @@ function Quiz(props) {
                           <h3 className="font-medium text-white text-base">Save question</h3>
                         </Button>
                       </div>
+                      <Link to="/quizLibrary">
+                      <HomeIcon className="!text-5xl"/>
+                      </Link>
                       <div className="md:ml-16">
                       {selectedQuestionIndex >= 0 && isAnyQuestionCreated && (
                         <Button
@@ -1336,6 +1345,8 @@ const mapStateToProps = ({ auth, quiz }) => ({
   fetchingQuizName: quiz.fetchingQuizName,
   fetchingQuizNameError: quiz.fetchingQuizNameError,
   showQuiz: quiz.showQuiz,
+  quizDetails:quiz.quizDetails,
+  listOfQuiz: quiz.listOfQuiz,
   processShareModal: auth.processShareModal,
   finalizeQuiz: quiz.finalizeQuiz,
   quizId: quiz.showQuiz.quizId,

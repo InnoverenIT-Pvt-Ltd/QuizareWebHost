@@ -145,6 +145,7 @@ export const addQuestion = (quiz, quizId, cb) => dispatch => {
       // console.log(res);     
       dispatch(getFinalizeQuiz(quizId));
       dispatch(getQuestionList(quizId));
+      dispatch(getQuizName(quizId));
       dispatch({
         type: types.ADD_QUESTION_SUCCESS,
         payload: res.data,
@@ -155,6 +156,41 @@ export const addQuestion = (quiz, quizId, cb) => dispatch => {
       //console.log(err);
       dispatch({
         type: types.ADD_QUESTION_FAILURE,
+        payload: err,
+      });
+      cb && cb("failure");
+    });
+};
+
+export const addQuestionQuiz = (quiz, quizId, cb) => dispatch => {
+
+  console.log('inside add question', quiz);
+  dispatch({
+    type: types.ADD_QUESTIONQUIZ_REQUEST,
+  });
+
+  axios
+    .post(`${base_url}/question/save`, quiz, {
+      headers: {
+        Authorization: 'Bearer ' + store.getState().auth.token || '',
+      },
+    })
+    .then(res => {
+      // console.log(res);     
+      dispatch(getFinalizeQuiz(quizId));
+      dispatch(getQuestionList(quizId));
+      dispatch(getQuizName(quizId));
+      dispatch({
+        type: types.ADD_QUESTIONQUIZ_SUCCESS,
+        payload: res.data,
+      });
+      cb && cb("success");
+      window.location.reload();
+    })
+    .catch(err => {
+      //console.log(err);
+      dispatch({
+        type: types.ADD_QUESTIONQUIZ_FAILURE,
         payload: err,
       });
       cb && cb("failure");
