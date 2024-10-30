@@ -856,13 +856,13 @@ import MainHeader from "../../Components/Mainheader";
 import Finalisedrawer from "./Finalisedrawer";
 import ProcessShareDrawer from "../../Components/ProcessShareDrawer";
 
-const QuizzSchema = Yup.object().shape({
-  question: Yup.string().required("Input needed!"),
-  option1: Yup.string().required("Input needed!"),
-  option2: Yup.string().required("Input needed!"),
-  option3: Yup.string(),
-  option4: Yup.string(),
-});
+// const QuizzSchema = Yup.object().shape({
+//   question: Yup.string().required("Input needed!"),
+//   option1: Yup.string().required("Input needed!"),
+//   option2: Yup.string().required("Input needed!"),
+//   option3: Yup.string(),
+//   option4: Yup.string(),
+// });
 
 function Quiz(props) {
   const [count, setCount] = useState(1);
@@ -962,7 +962,7 @@ console.log(props.showQuiz.quizHostInd)
             option3: checkObj ? options[2].value : selectedQuestion.option3 || "",
             option4: checkObj ? options[3].value : selectedQuestion.option4 || "",
           }}
-          validationSchema={QuizzSchema}
+          // validationSchema={QuizzSchema}
           onSubmit={(values, { resetForm }) => {
             props.addQuestion(
               {
@@ -1144,6 +1144,7 @@ console.log(props.showQuiz.quizHostInd)
                               borderRadius: "0.25rem",
                             }}
                             onBlur={() => handleUpdateQuestion(values)} 
+                            onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
                           />
                         </div>
                         {props.showQuiz.chatGptQuestionInd && (
@@ -1196,6 +1197,7 @@ console.log(props.showQuiz.quizHostInd)
                                 borderRadius: "0.25rem",
                               }}
                               onBlur={() => handleUpdateQuestion(values)} 
+                              onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
                             />
                           </div>
                           <div className="w-[47.5%]">
@@ -1209,6 +1211,7 @@ console.log(props.showQuiz.quizHostInd)
                                 borderRadius: "0.25rem",
                               }}
                               onBlur={() => handleUpdateQuestion(values)} 
+                              onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
                             />
                           </div>
                         </div>
@@ -1224,6 +1227,7 @@ console.log(props.showQuiz.quizHostInd)
                                 borderRadius: "0.25rem",
                               }}
                               onBlur={() => handleUpdateQuestion(values)} 
+                              onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
                             />
                           </div>
                           <div className="w-[47.5%]">
@@ -1237,11 +1241,12 @@ console.log(props.showQuiz.quizHostInd)
                                 borderRadius: "0.25rem",
                               }}
                               onBlur={() => handleUpdateQuestion(values)} 
+                              onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
                             />
                           </div>
                         </div>
                       
-                        <div className="flex justify-between p-1 w-wk max-sm:flex-col md:p-6">
+                        <div className="flex justify-end p-1 w-wk max-sm:flex-col md:p-6">
                    
                       {/* <div>
                       <Button
@@ -1289,8 +1294,8 @@ console.log(props.showQuiz.quizHostInd)
                       </div>
                       */}
                
-                      <div className="flex justify-between w-wk">
-                      <div>
+                      <div className="flex justify-end w-wk">
+                      {/* <div>
                         <Button
                           style={{ height: "3rem", backgroundColor: "#3B16B7", borderRadius: '0.25rem',width:"9rem" }}
                           type="primary"
@@ -1298,10 +1303,8 @@ console.log(props.showQuiz.quizHostInd)
                         >
                           <h3 className="font-medium text-white text-base">Save question</h3>
                         </Button>
-                      </div>
-                      <Link to="/quizLibrary">
-                      <HomeIcon className="!text-5xl"/>
-                      </Link>
+                      </div> */}
+                     
                       <div className="md:ml-16">
                       {selectedQuestionIndex >= 0 && isAnyQuestionCreated && (
                         <Button

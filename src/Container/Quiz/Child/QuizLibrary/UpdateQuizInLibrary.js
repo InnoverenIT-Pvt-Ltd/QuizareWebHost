@@ -155,7 +155,7 @@ console.log(props.questionList)
         <>
             <MainHeader />
             <div className="flex h-hk w-full ">
-                <div className="w-[20%] bg-[#6245C6] p-4 max-sm:hidden">
+                {/* <div className="w-[20%] bg-[#6245C6] p-4 max-sm:hidden">
                 <div className="overflow-y-auto h-[100vh]" style={{scrollbarWidth:"thin"}}>
                     {props.questionList.map((item, i) => (
                         <Card
@@ -184,9 +184,9 @@ console.log(props.questionList)
                     Question {i + 1}
                 </Card>
             ))}
-            </Drawer>
+            </Drawer> */}
             {props.questionList.length === 0 ? (
-                <div className="w-[80%] md:p-4 max-sm:w-wk ">
+                <div className="w-[100%] max-sm:w-wk ">
                     <Swiper
                         onSwiper={setSwiperInstance}
                         pagination={{
@@ -206,13 +206,15 @@ console.log(props.questionList)
                                     handleDeleteQuestion={handleDeleteQuestion}
                                     backTo={backTo}
                                     setIsDrawerVisible={setIsDrawerVisible}
+                                    handleQuestionSelect={handleQuestionSelect}
+                                    selectedQuestionIndex={selectedQuestionIndex}
                                 />
                             </SwiperSlide>
                         {/* ))} */}
                     </Swiper>
                 </div>
                  ) : (
-                    <div className="w-[80%] md:p-4 max-sm:w-wk ">
+                    <div className="w-[100%]  max-sm:w-wk ">
                     <Swiper
                         onSwiper={setSwiperInstance}
                         pagination={{
@@ -231,7 +233,10 @@ console.log(props.questionList)
                                     questionNo={i + 1}
                                     handleDeleteQuestion={handleDeleteQuestion}
                                     backTo={backTo}
+                                    isDrawerVisible={isDrawerVisible}
                                     setIsDrawerVisible={setIsDrawerVisible}
+                                    handleQuestionSelect={handleQuestionSelect}
+                                    selectedQuestionIndex={selectedQuestionIndex}
                                 />
                             </SwiperSlide>
                         ))}
