@@ -193,7 +193,8 @@ import { Field, Form, Formik } from "formik";
 import { connect } from "react-redux";
 import FWLogo2 from "../../../../../src/images/tabler_bulb.png";
 import { bindActionCreators } from "redux";
-import { Button, Card } from "antd";
+import { Button, Card, Drawer,Tooltip } from "antd";
+import AddIcon from '@mui/icons-material/Add';
 import { MenuOutlined } from "@ant-design/icons";
 import {
     getQuestionList,
@@ -202,18 +203,24 @@ import {
     addQuestionQuiz ,
     updateQuizNameByQuizId,
     addUserQuery,
-    getQuizName
+    getQuizName,
+    hostQuiz
 } from "../../../../Container/Quiz/QuizAction";
+import {handleShareProcess} from "../../../Auth/AuthAction";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
 import TextArea from "antd/es/input/TextArea";
+import ProcessShareDrawer from "../../../../Components/ProcessShareDrawer";
+import { StyledModal } from "../../../../Components/UI/Antd";
 
 
 function EditQuestionofQuiz(props) {
     const [isNewQuestion, setIsNewQuestion] = useState(false);
+    const [currentItem, setCurrentItem] = useState("");
+    const [duration, setDuration] = useState("");
     const [quizName, setQuizName] = useState(props.quizName);
     const [isEditingName, setIsEditingName] = useState(false);
     const [questionSource, setQuestionSource] = useState("Normal");
-
+    const [isModalOpen, setIsModalOpen] = useState(false);
     useEffect(() => {
         if (props.questionList.length === 0) {
           setIsNewQuestion(true); // Automatically switch to add mode if no questions
@@ -222,6 +229,28 @@ function EditQuestionofQuiz(props) {
       }, [props.questionList]);
     const handleAddQuestion = () => {
         setIsNewQuestion(true);  // Switch to add mode
+    };
+    function handleSetCurrentItem(item) {
+      setCurrentItem(item);
+    }
+    const showModal = () => {
+      setIsModalOpen(true);
+    };
+    const handleOk = () => {
+      setIsModalOpen(false);
+      //history.push(`/hostquiz`);
+      props.hostQuiz(
+        {
+          duration: duration,
+          quizHostId: props.quizHostId,
+          quizName: props.item.quizName,
+        },
+        props.item.quizId
+      );
+      // props.hostQuiz(currentItem.quizId);
+    };
+    const handleCancel = () => {
+      setIsModalOpen(false);
     };
     const handleUpdateQuestion = (values) => {
        
@@ -244,6 +273,7 @@ function EditQuestionofQuiz(props) {
           const question = checkObj ? props.userQuery.response.ai_response.question : "";
           const options = checkObj ? props.userQuery.response.ai_response.options : [];
     console.log(props.item)
+    console.log(props.selectedQuestionIndex)
     return (
         <>
             <Formik
@@ -327,6 +357,75 @@ function EditQuestionofQuiz(props) {
                     errors,
                     values,
                 }) => (
+                  <>
+                  <div className="flex">
+                   <div className="w-[20%] bg-[#6245C6] p-4 max-sm:hidden">
+                <div className="overflow-y-auto h-[70vh]" style={{scrollbarWidth:"thin"}}>
+                    {props.questionList.map((item, i) => (
+                      console.log(i),
+                        <Card
+                            key={i}
+                            className={`cursor-pointer mb-2 ${i === props.selectedQuestionIndex ? 'bg-blue-200' : ''}`}
+                            onClick={() => props.handleQuestionSelect(i)}
+                        >
+                            Question {i + 1}
+                            <div className="text-sm font-semibold">{item.question}</div>
+                        </Card>
+                    ))}
+                    </div>
+                    <div className="flex w-wk justify-center">
+                  <Tooltip title="Add Question">
+                        <AddIcon className="!text-[5rem] cursor-pointer !text-white"
+                          onClick={handleAddQuestion}
+                        />
+                        </Tooltip>
+                      </div>
+                      <div className="flex justify-between">
+                      <div className="">
+<Button
+ type="primary"
+//  disabled={!openQuestion}
+  style={{ height: "2.5rem", backgroundColor: "#3B16B7", borderRadius: '0.25rem',width:"5rem" }}
+  onClick={() => {
+    showModal();
+    //handleSetCurrentItem(item);
+  }}
+>
+<h3 className="font-medium text-white text-base">Host</h3>
+</Button>
+
+</div> 
+                      <div className="">
+<Button
+ type="primary"
+//  disabled={!openQuestion}
+  style={{ height: "2.5rem", backgroundColor: "#3B16B7", borderRadius: '0.25rem',width:"5rem" }}
+ onClick={() => {
+  props.handleShareProcess(true);
+}}
+>
+<h3 className="font-medium text-white text-base">Share</h3>
+</Button>
+
+</div> 
+</div>
+                </div>
+                <Drawer
+                title="Select a Question"
+                placement="left"
+                onClose={() => props.setIsDrawerVisible(false)}
+                visible={props.isDrawerVisible}
+                width={300}
+              > {props.questionList.map((item, i) => (
+                <Card
+                    key={i}
+                    className={`cursor-pointer mb-2 ${i === props.selectedQuestionIndex ? 'bg-blue-200' : ''}`}
+                    onClick={() => props.handleQuestionSelect(i)}
+                >
+                    Question {i + 1}
+                </Card>
+            ))}
+            </Drawer>
                     <Form class="flex h-hk w-wk">
                          
                          <div class=" max-sm:w-full flex items-center flex-col h-[93vh] w-wk ">
@@ -370,6 +469,8 @@ function EditQuestionofQuiz(props) {
                                                 onChangeText={() => handleChange("question")}
                                                 style={{ width: "100%", height: "3rem",borderRadius:"0.25rem" }}
                                                 onKeyDown={(e) => e.key === 'Enter' && handleUpdateQuestion(values)}
+                                                onKeyUp={(e) => e.key === 'Enter' && handleSubmit()}
+                                              
                                             />
                                         </div>
                                         {props.showQuiz.chatGptQuestionInd && (
@@ -420,6 +521,7 @@ function EditQuestionofQuiz(props) {
                                                 onChangeText={() => handleChange("option1")}
                                                 style={{ width: "100%", height: "3rem",borderRadius:"0.25rem" }}
                                                 onKeyDown={(e) => e.key === 'Enter' && handleUpdateQuestion(values)}
+                                                onKeyUp={(e) => e.key === 'Enter' && handleSubmit()}
                                             />
                                         </div>
                                         <div class="w-[47.5%]">
@@ -431,6 +533,7 @@ function EditQuestionofQuiz(props) {
                                                 onChangeText={() => handleChange("option2")}
                                                 style={{ width: "100%", height: "3rem",borderRadius:"0.25rem" }}
                                                 onKeyDown={(e) => e.key === 'Enter' && handleUpdateQuestion(values)}
+                                                onKeyUp={(e) => e.key === 'Enter' && handleSubmit()}
                                             />
                                         </div>
                                         </div>
@@ -444,6 +547,7 @@ function EditQuestionofQuiz(props) {
                                                 onChangeText={() => handleChange("option3")}
                                                 style={{ width: "100%", height: "3rem",borderRadius:"0.25rem" }}
                                                 onKeyDown={(e) => e.key === 'Enter' && handleUpdateQuestion(values)}
+                                                onKeyUp={(e) => e.key === 'Enter' && handleSubmit()}
                                             />
                                         </div>
                                         <div class="w-[47.5%]">
@@ -455,6 +559,7 @@ function EditQuestionofQuiz(props) {
                                                 onChangeText={handleChange("option4")}
                                                 style={{ width: "100%", height: "3rem",borderRadius:"0.25rem" }}
                                                 onKeyDown={(e) => e.key === 'Enter' && handleUpdateQuestion(values)}
+                                                onKeyUp={(e) => e.key === 'Enter' && handleSubmit()}
                                             />
                                         </div>
                                         </div>
@@ -487,7 +592,7 @@ function EditQuestionofQuiz(props) {
                                             </Button>
                                         </div> */}
                                         <div>
-                                        <Button
+                                        {/* <Button
                                                 title={isNewQuestion ? "Save Question" : "Add New Question"}
                                                 type="primary"
                                                 onClick={() => {
@@ -502,7 +607,21 @@ function EditQuestionofQuiz(props) {
                                                 <h3 className="font-medium text-white text-base font-[Poppins]">
                                                     {isNewQuestion ? "Save Question" : "Add New Question"}
                                                 </h3>
-                                            </Button>
+                                            </Button> */}
+                                            {/* <Button
+                                                title="Add New Question"
+                                                type="primary"
+                                                onClick={() => {
+                                                    
+                                                        handleAddQuestion(); // Enter add mode
+                                                   
+                                                }}
+                                                style={{ height: "3rem", backgroundColor: "#3B16B7", borderRadius: '0.25rem' }}
+                                            >
+                                                <h3 className="font-medium text-white text-base font-[Poppins]">
+                                                    Add New Question
+                                                </h3>
+                                            </Button> */}
                                     </div>    
 
                                             <div class="" >
@@ -523,8 +642,33 @@ function EditQuestionofQuiz(props) {
                         </div>
                        
                     </Form>
+                    </div>
+                    </>
                 )}
             </Formik>
+            <ProcessShareDrawer            
+                  processShareModal={props.processShareModal}
+                    handleShareProcess={props.handleShareProcess}
+                />
+                 <StyledModal
+                        title="Host Quiz"
+                        open={isModalOpen}
+                        onOk={handleOk}
+                        onCancel={handleCancel}
+                      >
+                        <form onSubmit={() =>
+                          handleOk()
+                        }
+                        >
+                          <input
+                            className="border border-blue-900 rounded-md px-1 w-full"
+                            name="duration"
+                            value={duration}
+                            onChange={(ev) => setDuration(ev.target.value)}
+                            placeholder="Enter Response time per question"
+                          />
+                        </form>
+                      </StyledModal>
         </>
     );
 }
@@ -537,7 +681,8 @@ const mapStateToProps = ({ auth, quiz }) => ({
     userQuery:quiz.userQuery,
     addingUserQuery:quiz.addingUserQuery,
     questionList: quiz.questionList,
-    quizHostId: auth.userDetails.userId
+    quizHostId: auth.userDetails.userId,
+    processShareModal: auth.processShareModal,
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -549,7 +694,9 @@ const mapDispatchToProps = (dispatch) =>
             handleBackToQuiz,
             updateQuizNameByQuizId,
             addUserQuery,
-            getQuizName
+            getQuizName,
+            handleShareProcess,
+            hostQuiz
         },
         dispatch
     );

@@ -28,7 +28,7 @@ function QuizDetails(props) {
 console.log(props.showQuiz)
   return (
     <>
-    <div class="min-h-screen">
+    <div class="">
       {/* <MainHeader /> */}
 
       <div class="flex justify-center bg-white  items-center max-sm:w-11/12 h-hk mt-8 m-auto md:mt-12  w-wk ">
@@ -60,14 +60,14 @@ console.log(props.showQuiz)
             </h2>
           </div> */}
           <div class="w-full flex justify-center items-center flex-col mt-4">
-            <div class="text-xl mt-2 flex  items-center  font-bold justify-start w-wk ">
+            <div class="text-xl mt-2 flex font-[Poppins] items-center  font-bold justify-start w-wk ">
             Share your quiz
             </div>
             <div className="flex items-center justify-between w-wk mt-3">
-            <div className="border w-[21rem] h-[2.5rem] border-solid border-gray-400 max-sm:w-[12rem]" >
+            <div className="border w-[24rem] flex h-[2.5rem] border-solid border-gray-400 max-sm:w-[12rem]" >
               {/* <h2 class="text-base">{`${props.showQuiz.quizName || ''}`}{' '}</h2> */}
               {props.showQuiz.quizLink ? (
-                <h2 class="text-xs flex justify-center flex-col " style={{ overflowWrap: "break-word" }}>{`http://player.quizledge.no${props.showQuiz.quizLink || ""
+                <h2 class="text-xs flex justify-center flex-col font-[Poppins] " style={{ overflowWrap: "break-word" }}>{`http://player.quizledge.no${props.showQuiz.quizLink || ""
                   }`}</h2>
               ) : (
                 ""
@@ -78,7 +78,7 @@ console.log(props.showQuiz)
                 style={{  height: "2.5rem",backgroundColor:"#3B16B7",borderRadius:'0.25rem',width:'-webkit-fill-available' }}
                 onClick={() => copyToClipboard()}
               >
-                <h2 class="text-white text-xl font-medium">Share</h2>
+                <h2 class="text-white text-xl font-[Poppins] font-medium">Share</h2>
               </Button>
             </div>
             </div>

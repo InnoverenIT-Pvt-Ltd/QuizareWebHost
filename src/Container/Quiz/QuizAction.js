@@ -714,12 +714,12 @@ export const updateQuestionsInQuiz = (data, questionId, cb) => dispatch => {
       },
     })
     .then(res => {
-      Swal.fire({
-        icon: "success",
-        title: "Question updated successfully !!",
-        showConfirmButton: false,
-        timer: 1500
-      });
+      // Swal.fire({
+      //   icon: "success",
+      //   title: "Question updated successfully !!",
+      //   showConfirmButton: false,
+      //   timer: 1500
+      // });
       dispatch(getQuestionList(res.data.quizId));
       dispatch({
         type: types.UPDATE_QUESTIONS_IN_QUIZ_SUCCESS,

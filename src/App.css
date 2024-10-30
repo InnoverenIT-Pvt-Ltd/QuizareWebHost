@@ -566,3 +566,17 @@ input {
 .custom-popconfirm .ant-btn {
   width: 45%; /* Adjust the width of the buttons */
 }
+
+.ant-drawer .ant-drawer-mask {
+  position: absolute;
+  inset: 0;
+  z-index: 1000;
+  background: transparent;
+  pointer-events: auto;
+}
+.ant-drawer-right>.ant-drawer-content-wrapper {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  box-shadow: 0 0;
+}
