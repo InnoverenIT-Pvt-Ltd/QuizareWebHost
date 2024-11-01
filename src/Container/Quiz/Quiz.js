@@ -844,10 +844,11 @@ import {
   getFinalizeQuiz,
   getQuestionList,
 } from "./QuizAction";
+import Swal from 'sweetalert2'
 import {handleShareProcess} from "../Auth/AuthAction";
 import { Link } from "react-router-dom";
 import AddIcon from '@mui/icons-material/Add';
-import { Button, Card, Drawer, Tooltip } from "antd";
+import { Button, Card, Drawer, Tooltip ,message} from "antd";
 import FWLogo2 from "../../../src/images/tabler_bulb.png";
 import { MenuOutlined } from "@ant-design/icons";
 import HomeIcon from '@mui/icons-material/Home';
@@ -873,10 +874,14 @@ function Quiz(props) {
   const [isDrawerVisible, setIsDrawerVisible] = useState(false);
   const [questionSource, setQuestionSource] = useState("Normal");
   const [isNewQuestion, setIsNewQuestion] = useState(false);
+  
+
+  
 
   useEffect(() => {
     props.getQuestionList(props.showQuiz.quizId);
     props.getQuizName(props.showQuiz.quizId)
+    props.getFinalizeQuiz(props.showQuiz.quizId)
   }, [props.showQuiz.quizId]);
 
   useEffect(() => {
@@ -893,6 +898,7 @@ function Quiz(props) {
     setIsNewQuestion(true); // Enter add mode
     setSelectedQuestionIndex(null); // Deselect any selected question
   };
+
   // const handleUpdateQuestion = (values) => {
   //   const selectedQuestion = props.questionList[selectedQuestionIndex];
 
@@ -946,6 +952,7 @@ function Quiz(props) {
   const isAnyQuestionCreated = props.questionList.length > 0;
   const openQuestion = props.showQuiz.quizHostInd === true
 console.log(props.showQuiz.quizHostInd)
+console.log(props.fetchingFinalizeQuiz)
   return (
     <>
       <div className="min-h-screen">
@@ -1010,7 +1017,9 @@ console.log(props.showQuiz.quizHostInd)
                     key={i}
                     className={`cursor-pointer mb-2 ${
                       i === selectedQuestionIndex ? "bg-blue-200" : ""
-                    }`}
+                    }
+                     ${item.completeInd ? "border-green-500" : "border-red-500"} border-4
+                    `}
                     onClick={() => handleQuestionSelect(i)}
                   >
                     <div className="flex flex-col">
@@ -1036,11 +1045,15 @@ console.log(props.showQuiz.quizHostInd)
                             style={{ height: "2.5rem", backgroundColor: "#3B16B7", borderRadius: '0.25rem',width:"5rem" }}
                             type="primary"
                             onClick={() => setFinalise(true)}
-                            disabled={!isAnyQuestionCreated}
+                            disabled={!isAnyQuestionCreated || !props.questionList.every(item => item.completeInd)}
+    title={!isAnyQuestionCreated || !props.questionList.every(item => item.completeInd)
+      ? "Please complete all red mark questions before finalizing or wait for the process to complete."
+      : ""}
+  
                           >
                              <h3 className="font-medium text-white text-base">Finalize</h3>
                           </Button>
-                        }
+                        }                     
                       </div>
                       <div className="">
 <Button
@@ -1358,7 +1371,9 @@ const mapStateToProps = ({ auth, quiz }) => ({
   userId:auth.userDetails.userId,
   userQuery:quiz.userQuery,
   addingUserQuery:quiz.addingUserQuery,
-  questionList: quiz.questionList
+  questionList: quiz.questionList,
+  fetchingFinalizeQuiz:quiz.fetchingFinalizeQuiz
+
 });
 
 const mapDispatchToProps = (dispatch) =>
