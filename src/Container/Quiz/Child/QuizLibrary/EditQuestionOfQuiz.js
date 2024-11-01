@@ -257,7 +257,7 @@ function EditQuestionofQuiz(props) {
           const updatedQuestion = {
             ...values,
             id:   props.item.id,
-            quizId: props.item.quizId,
+            // quizId: props.item.quizId,
           };
           props.updateQuestionsInQuiz(updatedQuestion, props.item.id);
         }
@@ -365,7 +365,9 @@ function EditQuestionofQuiz(props) {
                       console.log(i),
                         <Card
                             key={i}
-                            className={`cursor-pointer mb-2 ${i === props.selectedQuestionIndex ? 'bg-blue-200' : ''}`}
+                            className={`cursor-pointer mb-2 ${i === props.selectedQuestionIndex ? 'bg-blue-200' : ''}
+                            ${item.completeInd ? "border-green-500" : "border-red-500"} border-4
+                            `}
                             onClick={() => props.handleQuestionSelect(i)}
                         >
                             Question {i + 1}
@@ -384,12 +386,15 @@ function EditQuestionofQuiz(props) {
                       <div className="">
 <Button
  type="primary"
-//  disabled={!openQuestion}
   style={{ height: "2.5rem", backgroundColor: "#3B16B7", borderRadius: '0.25rem',width:"5rem" }}
   onClick={() => {
     showModal();
     //handleSetCurrentItem(item);
   }}
+  disabled={!props.questionList.every(item => item.completeInd)}
+  title={!props.questionList.every(item => item.completeInd)
+    ? "Please complete all red mark questions before finalizing or wait for the process to complete."
+    : ""}
 >
 <h3 className="font-medium text-white text-base">Host</h3>
 </Button>
@@ -469,7 +474,7 @@ function EditQuestionofQuiz(props) {
                                                 onChangeText={() => handleChange("question")}
                                                 style={{ width: "100%", height: "3rem",borderRadius:"0.25rem" }}
                                                 onKeyDown={(e) => e.key === 'Enter' && handleUpdateQuestion(values)}
-                                                onKeyUp={(e) => e.key === 'Enter' && handleSubmit()}
+                                               // onKeyUp={(e) => e.key === 'Enter' && handleSubmit()}
                                               
                                             />
                                         </div>
@@ -521,7 +526,7 @@ function EditQuestionofQuiz(props) {
                                                 onChangeText={() => handleChange("option1")}
                                                 style={{ width: "100%", height: "3rem",borderRadius:"0.25rem" }}
                                                 onKeyDown={(e) => e.key === 'Enter' && handleUpdateQuestion(values)}
-                                                onKeyUp={(e) => e.key === 'Enter' && handleSubmit()}
+                                                //onKeyUp={(e) => e.key === 'Enter' && handleSubmit()}
                                             />
                                         </div>
                                         <div class="w-[47.5%]">
@@ -533,7 +538,7 @@ function EditQuestionofQuiz(props) {
                                                 onChangeText={() => handleChange("option2")}
                                                 style={{ width: "100%", height: "3rem",borderRadius:"0.25rem" }}
                                                 onKeyDown={(e) => e.key === 'Enter' && handleUpdateQuestion(values)}
-                                                onKeyUp={(e) => e.key === 'Enter' && handleSubmit()}
+                                                //onKeyUp={(e) => e.key === 'Enter' && handleSubmit()}
                                             />
                                         </div>
                                         </div>
@@ -547,7 +552,7 @@ function EditQuestionofQuiz(props) {
                                                 onChangeText={() => handleChange("option3")}
                                                 style={{ width: "100%", height: "3rem",borderRadius:"0.25rem" }}
                                                 onKeyDown={(e) => e.key === 'Enter' && handleUpdateQuestion(values)}
-                                                onKeyUp={(e) => e.key === 'Enter' && handleSubmit()}
+                                                //onKeyUp={(e) => e.key === 'Enter' && handleSubmit()}
                                             />
                                         </div>
                                         <div class="w-[47.5%]">
@@ -559,7 +564,7 @@ function EditQuestionofQuiz(props) {
                                                 onChangeText={handleChange("option4")}
                                                 style={{ width: "100%", height: "3rem",borderRadius:"0.25rem" }}
                                                 onKeyDown={(e) => e.key === 'Enter' && handleUpdateQuestion(values)}
-                                                onKeyUp={(e) => e.key === 'Enter' && handleSubmit()}
+                                               // onKeyUp={(e) => e.key === 'Enter' && handleSubmit()}
                                             />
                                         </div>
                                         </div>
@@ -608,20 +613,20 @@ function EditQuestionofQuiz(props) {
                                                     {isNewQuestion ? "Save Question" : "Add New Question"}
                                                 </h3>
                                             </Button> */}
-                                            {/* <Button
-                                                title="Add New Question"
+                                            <Button
+                                                title="Save Question"
                                                 type="primary"
                                                 onClick={() => {
                                                     
-                                                        handleAddQuestion(); // Enter add mode
+                                                        handleSubmit() // Enter add mode
                                                    
                                                 }}
                                                 style={{ height: "3rem", backgroundColor: "#3B16B7", borderRadius: '0.25rem' }}
                                             >
                                                 <h3 className="font-medium text-white text-base font-[Poppins]">
-                                                    Add New Question
+                                                    Save Question
                                                 </h3>
-                                            </Button> */}
+                                            </Button>
                                     </div>    
 
                                             <div class="" >

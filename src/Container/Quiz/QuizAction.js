@@ -369,12 +369,12 @@ export const getFinalizeQuiz = quizId => dispatch => {
         type: types.GET_FINALIZE_QUIZ_FAILURE,
         payload: err,
       });
-      Swal.fire({
-        icon: "error",
-        title: "Please add atleast 1 question!",
-        showConfirmButton: false,
-        timer: 1500
-      });
+      // Swal.fire({
+      //   icon: "error",
+      //   title: "Please add atleast 1 question!",
+      //   showConfirmButton: false,
+      //   timer: 1500
+      // });
     });
 };
 /**
@@ -721,6 +721,7 @@ export const updateQuestionsInQuiz = (data, questionId, cb) => dispatch => {
       //   timer: 1500
       // });
       dispatch(getQuestionList(res.data.quizId));
+      dispatch(getFinalizeQuiz(res.data.quizId));
       dispatch({
         type: types.UPDATE_QUESTIONS_IN_QUIZ_SUCCESS,
         payload: res.data,
