@@ -272,6 +272,7 @@ const Menu = (props) => {
         </div>
                 <div className="flex">
                 <div className="flex items-center mr-4">
+                <a href="/how2" >
 <Button
  style={{  height: "2rem",display:"flex",justifyContent:"center",alignItems:"center",backgroundColor:"white" }}
  onClick={() => {
@@ -280,7 +281,7 @@ const Menu = (props) => {
 >
 <h3 class="font-medium  text-lg max-sm:text-xs">Create</h3>
 </Button>
-
+</a>
 </div>
 <div className="flex items-center mr-4">
 {/* <Link to="/selectplan"> */}
