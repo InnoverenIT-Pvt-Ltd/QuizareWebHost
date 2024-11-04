@@ -221,7 +221,7 @@ const ChatGPT = (props) => {
       };
 
       try {
-          const generateQuizResponse = await axios.post(`${base_url}/quiz/save/usingChatGpt`, QGen); // Update with your endpoint
+          const generateQuizResponse = await axios.post(`${base_url}/quiz/save/usingChatGpt`, QGen); 
           const quizId = generateQuizResponse.data.quizId;
 
 
@@ -240,7 +240,7 @@ const ChatGPT = (props) => {
               type: "ChatGpt",
           };
 
-          const userQueryResponse = await axios.post(`${base_url2}/user_query/`, query); // Update with your endpoint
+          const userQueryResponse = await axios.post(`${base_url2}/user_query/`, query); 
 
        
           const userPre = {
@@ -259,7 +259,7 @@ const ChatGPT = (props) => {
           };
 
 
-          await axios.post(`${base_url}/question/multiple/questionsSave`, userPre); // Update with your endpoint
+          await axios.post(`${base_url}/question/multiple/questionsSave`, userPre); 
           
 
           props.history.push(`/updateQuizNameInLibrary/${quizName}/${generateQuizResponse.data.duration}/${quizId}`);

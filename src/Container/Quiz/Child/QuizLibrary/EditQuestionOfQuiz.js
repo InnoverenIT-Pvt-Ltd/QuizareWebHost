@@ -1,199 +1,9 @@
-// import React from "react";
-// import { Field, Form, Formik } from "formik";
-// import { connect } from "react-redux";
-// import { bindActionCreators } from "redux";
-// import { Button, Card } from "antd";
-// import { MenuOutlined } from "@ant-design/icons";
-// import {
-//     getQuestionList,
-//     handleBackToQuiz,
-//     updateQuestionsInQuiz,
-// } from "../../../../Container/Quiz/QuizAction";
-// import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
-// import TextArea from "antd/es/input/TextArea";
-
-
-// function EditQuestionofQuiz(props) {
-
-//     console.log(props.item)
-//     return (
-//         <>
-//             <Formik
-//                 initialValues={{
-//                     quizHostId: props.quizHostId,
-//                     quizId: props.item.quizId,
-//                     categoryId: props.item.categoryId,
-//                     question: props.item.question,
-//                     option1: props.item.option1,
-//                     option2: props.item.option2,
-//                     option3: props.item.option3,
-//                     option4: props.item.option4,
-//                 }}
-//                 onSubmit={(values, { resetForm }) => {
-//                     props.updateQuestionsInQuiz
-//                         (
-//                             {
-//                                 ...values,
-//                             },
-//                             props.item.id,
-//                             props.quizId
-//                             //(data)=>handleCallBack(data,resetForm)
-//                         );
-//                 }}
-//             >
-//                 {({
-//                     handleChange,
-//                     handleBlur,
-//                     handleSubmit,
-//                     setFieldValue,
-//                     errors,
-//                     values,
-//                 }) => (
-//                     <Form class="flex h-hk w-wk">
-                         
-//                          <div class=" max-sm:w-full flex items-center flex-col h-[93vh] w-wk ">
-//                          <div className="w-full  flex justify-center flex-col ">
-//                                 {/* Container */}
-//                                 <div class="w-wk flex justify-center flex-col items-center">
-//                                 <div className="flex items-center justify-center ">
-//                                 <Button
-//                 className="md:hidden"
-//                 icon={<MenuOutlined className="!text-black"/>}
-//                 onClick={() => props.setIsDrawerVisible(true)}
-//               > 
-//               </Button>
-//                                         {/* <Card style={{ fontSize: 22, alignSelf: "center" }}> */}
-//                                             <h3 class="flex justify-center text-xl">Question {props.questionNo || null}</h3>
-//                                             </div>
-//                                         {/* </Card> */}
-//                                         <hr class="h-px bg-black border-2 w-wk mt-4 border-black"/>
-//                                         <div class="mt-4 w-wk p-4">
-//                                             <Field
-                                               
-//                                                 name="question"
-//                                                 value={`${values.question}`}
-//                                                 component={InputComponent}
-//                                                 onChangeText={() => handleChange("question")}
-//                                                 style={{ width: "100%", height: "3rem",borderRadius:"0.25rem" }}
-//                                             />
-//                                         </div>
-//                                         <div className="flex justify-between  w-wk p-4">
-//                                         <div class="w-[47.5%]">
-//                                             <Field
-//                                                 component={InputComponent}
-//                                                 value={`${values.option1}`}
-//                                                 name="option1"
-//                                                 onChangeText={() => handleChange("option1")}
-//                                                 style={{ width: "100%", height: "3rem",borderRadius:"0.25rem" }}
-//                                             />
-//                                         </div>
-//                                         <div class="w-[47.5%]">
-//                                             <Field
-//                                                 component={InputComponent}
-//                                                 value={`${values.option2}`}
-//                                                 placeholder="Option 2"
-//                                                 name="option2"
-//                                                 onChangeText={() => handleChange("option2")}
-//                                                 style={{ width: "100%", height: "3rem",borderRadius:"0.25rem" }}
-//                                             />
-//                                         </div>
-//                                         </div>
-//                                         <div className="flex justify-between  w-wk p-4">
-//                                         <div class="w-[47.5%]">
-//                                             <Field
-//                                                 component={InputComponent}
-//                                                 value={`${values.option3}`}
-//                                                 placeholder="Option 3"
-//                                                 name="option3"
-//                                                 onChangeText={() => handleChange("option3")}
-//                                                 style={{ width: "100%", height: "3rem",borderRadius:"0.25rem" }}
-//                                             />
-//                                         </div>
-//                                         <div class="w-[47.5%]">
-//                                             <Field
-//                                                 component={InputComponent}
-//                                                 value={`${values.option4}`}
-//                                                 placeholder="Option 4"
-//                                                 name="option4"
-//                                                 onChangeText={handleChange("option4")}
-//                                                 style={{ width: "100%", height: "3rem",borderRadius:"0.25rem" }}
-//                                             />
-//                                         </div>
-//                                         </div>
-//                                         <div class="flex justify-between p-6 w-wk">    
-//                                         <div class="" >
-//                                             <Button
-//                                                 title={""}
-//                                                 type="primary"
-//                                                 onClick={() => props.handleDeleteQuestion(props.item.id)}
-//                                                 style={{  height: "3rem",backgroundColor:"#3B16B7",borderRadius:'0.25rem' }}
-//                                             >
-//                                                  <h3 class="font-medium text-white text-base">Delete</h3>
-//                                             </Button>
-//                                             </div>
-//                                             <div class="" >
-//                                             <Button
-//                                                 title={""}
-//                                                 type="primary"
-//                                                 onClick={() => handleSubmit()}
-//                                                 style={{  height: "3rem",backgroundColor:"#3B16B7",borderRadius:'0.25rem' }}
-//                                             >
-//                                                  <h3 class="font-medium text-white text-base">Update</h3>
-//                                             </Button>
-//                                             </div>
-//                                             <div class="" >
-//                         <Button
-//                                                 title={""}
-//                                                 type="primary"
-//                                                 style={{  height: "3rem",backgroundColor:"#3B16B7",borderRadius:'0.25rem' }}
-//                                                 onClick={() => props.backTo()}
-
-//                                             ><h3 class="font-medium text-white text-xl">Back To Quiz</h3></Button>
-//                                             </div>
-//                                         </div>
-                                        
-
-//                                 </div>
-
-//                                 {/* Buttons */}
-//                             </div>
-//                         </div>
-                       
-//                     </Form>
-//                 )}
-//             </Formik>
-//         </>
-//     );
-// }
-// const mapStateToProps = ({ auth, quiz }) => ({
-//     fetchingQuizName: quiz.fetchingQuizName,
-//     fetchingQuizNameError: quiz.fetchingQuizNameError,
-//     showQuiz: quiz.showQuiz,
-//     quizId: quiz.showQuiz.quizId,
-//     category: quiz.category,
-//     questionList: quiz.questionList,
-//     quizHostId: auth.userDetails.userId
-// });
-
-// const mapDispatchToProps = (dispatch) =>
-//     bindActionCreators(
-//         {
-//             getQuestionList,
-//             updateQuestionsInQuiz,
-//             handleBackToQuiz
-//         },
-//         dispatch
-//     );
-
-// export default connect(mapStateToProps, mapDispatchToProps)(EditQuestionofQuiz);
-
-
 import React, { useState,useEffect } from "react";
 import { Field, Form, Formik } from "formik";
 import { connect } from "react-redux";
 import FWLogo2 from "../../../../../src/images/tabler_bulb.png";
 import { bindActionCreators } from "redux";
-import { Button, Card, Drawer,Tooltip } from "antd";
+import { Button, Card, Drawer,Tooltip,Input } from "antd";
 import AddIcon from '@mui/icons-material/Add';
 import { MenuOutlined } from "@ant-design/icons";
 import {
@@ -211,7 +21,8 @@ import { InputComponent } from "../../../../Components/Forms/Formik/InputCompone
 import TextArea from "antd/es/input/TextArea";
 import ProcessShareDrawer from "../../../../Components/ProcessShareDrawer";
 import { StyledModal } from "../../../../Components/UI/Antd";
-
+import { base_url, base_url2 } from "../../../../Config/Auth";
+import axios from "axios";
 
 function EditQuestionofQuiz(props) {
     const [isNewQuestion, setIsNewQuestion] = useState(false);
@@ -221,6 +32,11 @@ function EditQuestionofQuiz(props) {
     const [isEditingName, setIsEditingName] = useState(false);
     const [questionSource, setQuestionSource] = useState("Normal");
     const [isModalOpen, setIsModalOpen] = useState(false);
+    
+    const [questionReq, setQuestionReq] = useState("");
+    const [showInputQstn, setshowInputQstn] = useState(false);
+    const [error, setError] = useState("");
+
     useEffect(() => {
         if (props.questionList.length === 0) {
           setIsNewQuestion(true); // Automatically switch to add mode if no questions
@@ -252,6 +68,7 @@ function EditQuestionofQuiz(props) {
     const handleCancel = () => {
       setIsModalOpen(false);
     };
+
     const handleUpdateQuestion = (values) => {
        
           const updatedQuestion = {
@@ -274,6 +91,65 @@ function EditQuestionofQuiz(props) {
           const options = checkObj ? props.userQuery.response.ai_response.options : [];
     console.log(props.item)
     console.log(props.selectedQuestionIndex)
+    
+    const handleGenerateQuiz = async () => {
+      setError(""); 
+
+      const QGen = {
+          noOfQstn: questionReq,
+          quizHostId: props.quizHostId,
+          quizName: props.showQuiz.quizName,
+          type: "ChatGpt",
+      };
+
+      try {
+          const generateQuizResponse = await axios.post(`${base_url}/quiz/save/usingChatGpt`, QGen); 
+
+          if (!props.showQuiz.quizId) {
+              throw new Error("Failed to generate quiz. Quiz ID is missing.");
+          }
+          setshowInputQstn(false);
+
+          const query = {
+              user_question:props.showQuiz.quizName,
+              questions_required: questionReq,
+              request_type: "MCQ_Content",
+              options_required: "4",
+              userid: props.quizHostId,
+              quizId: props.showQuiz.quizId,
+              type: "ChatGpt",
+          };
+
+          const userQueryResponse = await axios.post(`${base_url2}/user_query/`, query); 
+
+       
+          const userPre = {
+              questionDTOS: userQueryResponse.data.response.ai_response.questions.map((qstn, index) => ({
+                  liveInd: true,
+                  number: index,
+                  option1: qstn.options[0]?.value || "",
+                  option2: qstn.options[1]?.value || "",
+                  option3: qstn.options[2]?.value || "",
+                  option4: qstn.options[3]?.value || "",
+                  question: qstn.question,
+                  quizId: props.showQuiz.quizId,
+                  type: "ChatGpt",
+              })),
+              quizId: props.showQuiz.quizId,
+          };
+
+
+          await axios.post(`${base_url}/question/multiple/questionsSave`, userPre); 
+          
+
+          // props.history.push(`/updateQuizNameInLibrary/${quizName}/${generateQuizResponse.data.duration}/${quizId}`);
+
+      } catch (err) {
+          console.error(err);
+          setError(err.message || "An error occurred while generating the quiz.");
+      }
+  };
+
     return (
         <>
             <Formik
@@ -479,6 +355,7 @@ function EditQuestionofQuiz(props) {
                                             />
                                         </div>
                                         {props.showQuiz.chatGptQuestionInd && (
+                                          <>
                         <div className="flex items-center w-wk justify-center mt-4 p-1">
                           <div>
                             <img
@@ -515,6 +392,41 @@ function EditQuestionofQuiz(props) {
                          
 
                         </div>
+
+<div className="flex items-center w-wk justify-center mt-2 p-1">
+<div>
+  <img
+    className="big-logo"
+    src={FWLogo2}
+    alt="Tekorero logo"
+  />
+</div>
+
+
+<div className="text-[#3B16B7] text-base mr-2 font-medium">
+  Generate multiple questions with AI using{" "}
+</div>
+<div className="text-[#3B16B7] text-base underline font-bold cursor-pointer"
+
+  onClick={() => {
+    setshowInputQstn(true);
+    
+  }}
+>
+ ChatGPT
+</div>
+</div>
+{showInputQstn && (
+  <Input
+  className="text-black"
+  style={{width:"12rem",color:"black"}}
+  placeholder="Enter No.of Questions"
+  value={questionReq}
+  onChange={(e) => setQuestionReq(e.target.value)}
+  onKeyDown={(e) => e.key === 'Enter' && handleGenerateQuiz()}
+/>
+)}
+</>
                         )}
                                         <div className="flex justify-between  w-wk p-4">
                                         <div class="w-[47.5%]">
@@ -707,3 +619,196 @@ const mapDispatchToProps = (dispatch) =>
     );
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditQuestionofQuiz);
+
+
+
+
+
+// import React from "react";
+// import { Field, Form, Formik } from "formik";
+// import { connect } from "react-redux";
+// import { bindActionCreators } from "redux";
+// import { Button, Card } from "antd";
+// import { MenuOutlined } from "@ant-design/icons";
+// import {
+//     getQuestionList,
+//     handleBackToQuiz,
+//     updateQuestionsInQuiz,
+// } from "../../../../Container/Quiz/QuizAction";
+// import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
+// import TextArea from "antd/es/input/TextArea";
+
+
+// function EditQuestionofQuiz(props) {
+
+//     console.log(props.item)
+//     return (
+//         <>
+//             <Formik
+//                 initialValues={{
+//                     quizHostId: props.quizHostId,
+//                     quizId: props.item.quizId,
+//                     categoryId: props.item.categoryId,
+//                     question: props.item.question,
+//                     option1: props.item.option1,
+//                     option2: props.item.option2,
+//                     option3: props.item.option3,
+//                     option4: props.item.option4,
+//                 }}
+//                 onSubmit={(values, { resetForm }) => {
+//                     props.updateQuestionsInQuiz
+//                         (
+//                             {
+//                                 ...values,
+//                             },
+//                             props.item.id,
+//                             props.quizId
+//                             //(data)=>handleCallBack(data,resetForm)
+//                         );
+//                 }}
+//             >
+//                 {({
+//                     handleChange,
+//                     handleBlur,
+//                     handleSubmit,
+//                     setFieldValue,
+//                     errors,
+//                     values,
+//                 }) => (
+//                     <Form class="flex h-hk w-wk">
+                         
+//                          <div class=" max-sm:w-full flex items-center flex-col h-[93vh] w-wk ">
+//                          <div className="w-full  flex justify-center flex-col ">
+//                                 {/* Container */}
+//                                 <div class="w-wk flex justify-center flex-col items-center">
+//                                 <div className="flex items-center justify-center ">
+//                                 <Button
+//                 className="md:hidden"
+//                 icon={<MenuOutlined className="!text-black"/>}
+//                 onClick={() => props.setIsDrawerVisible(true)}
+//               > 
+//               </Button>
+//                                         {/* <Card style={{ fontSize: 22, alignSelf: "center" }}> */}
+//                                             <h3 class="flex justify-center text-xl">Question {props.questionNo || null}</h3>
+//                                             </div>
+//                                         {/* </Card> */}
+//                                         <hr class="h-px bg-black border-2 w-wk mt-4 border-black"/>
+//                                         <div class="mt-4 w-wk p-4">
+//                                             <Field
+                                               
+//                                                 name="question"
+//                                                 value={`${values.question}`}
+//                                                 component={InputComponent}
+//                                                 onChangeText={() => handleChange("question")}
+//                                                 style={{ width: "100%", height: "3rem",borderRadius:"0.25rem" }}
+//                                             />
+//                                         </div>
+//                                         <div className="flex justify-between  w-wk p-4">
+//                                         <div class="w-[47.5%]">
+//                                             <Field
+//                                                 component={InputComponent}
+//                                                 value={`${values.option1}`}
+//                                                 name="option1"
+//                                                 onChangeText={() => handleChange("option1")}
+//                                                 style={{ width: "100%", height: "3rem",borderRadius:"0.25rem" }}
+//                                             />
+//                                         </div>
+//                                         <div class="w-[47.5%]">
+//                                             <Field
+//                                                 component={InputComponent}
+//                                                 value={`${values.option2}`}
+//                                                 placeholder="Option 2"
+//                                                 name="option2"
+//                                                 onChangeText={() => handleChange("option2")}
+//                                                 style={{ width: "100%", height: "3rem",borderRadius:"0.25rem" }}
+//                                             />
+//                                         </div>
+//                                         </div>
+//                                         <div className="flex justify-between  w-wk p-4">
+//                                         <div class="w-[47.5%]">
+//                                             <Field
+//                                                 component={InputComponent}
+//                                                 value={`${values.option3}`}
+//                                                 placeholder="Option 3"
+//                                                 name="option3"
+//                                                 onChangeText={() => handleChange("option3")}
+//                                                 style={{ width: "100%", height: "3rem",borderRadius:"0.25rem" }}
+//                                             />
+//                                         </div>
+//                                         <div class="w-[47.5%]">
+//                                             <Field
+//                                                 component={InputComponent}
+//                                                 value={`${values.option4}`}
+//                                                 placeholder="Option 4"
+//                                                 name="option4"
+//                                                 onChangeText={handleChange("option4")}
+//                                                 style={{ width: "100%", height: "3rem",borderRadius:"0.25rem" }}
+//                                             />
+//                                         </div>
+//                                         </div>
+//                                         <div class="flex justify-between p-6 w-wk">    
+//                                         <div class="" >
+//                                             <Button
+//                                                 title={""}
+//                                                 type="primary"
+//                                                 onClick={() => props.handleDeleteQuestion(props.item.id)}
+//                                                 style={{  height: "3rem",backgroundColor:"#3B16B7",borderRadius:'0.25rem' }}
+//                                             >
+//                                                  <h3 class="font-medium text-white text-base">Delete</h3>
+//                                             </Button>
+//                                             </div>
+//                                             <div class="" >
+//                                             <Button
+//                                                 title={""}
+//                                                 type="primary"
+//                                                 onClick={() => handleSubmit()}
+//                                                 style={{  height: "3rem",backgroundColor:"#3B16B7",borderRadius:'0.25rem' }}
+//                                             >
+//                                                  <h3 class="font-medium text-white text-base">Update</h3>
+//                                             </Button>
+//                                             </div>
+//                                             <div class="" >
+//                         <Button
+//                                                 title={""}
+//                                                 type="primary"
+//                                                 style={{  height: "3rem",backgroundColor:"#3B16B7",borderRadius:'0.25rem' }}
+//                                                 onClick={() => props.backTo()}
+
+//                                             ><h3 class="font-medium text-white text-xl">Back To Quiz</h3></Button>
+//                                             </div>
+//                                         </div>
+                                        
+
+//                                 </div>
+
+//                                 {/* Buttons */}
+//                             </div>
+//                         </div>
+                       
+//                     </Form>
+//                 )}
+//             </Formik>
+//         </>
+//     );
+// }
+// const mapStateToProps = ({ auth, quiz }) => ({
+//     fetchingQuizName: quiz.fetchingQuizName,
+//     fetchingQuizNameError: quiz.fetchingQuizNameError,
+//     showQuiz: quiz.showQuiz,
+//     quizId: quiz.showQuiz.quizId,
+//     category: quiz.category,
+//     questionList: quiz.questionList,
+//     quizHostId: auth.userDetails.userId
+// });
+
+// const mapDispatchToProps = (dispatch) =>
+//     bindActionCreators(
+//         {
+//             getQuestionList,
+//             updateQuestionsInQuiz,
+//             handleBackToQuiz
+//         },
+//         dispatch
+//     );
+
+// export default connect(mapStateToProps, mapDispatchToProps)(EditQuestionofQuiz);

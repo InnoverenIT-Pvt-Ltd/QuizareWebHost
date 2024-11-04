@@ -1,3 +1,673 @@
+import React, { useEffect, useState } from "react";
+import { Field, Formik, Form, FastField } from "formik";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as Yup from "yup";
+import { withRouter, useHistory } from "react-router-dom";
+import {
+  deleteQuestion,
+  updateQuestionsInQuiz,
+  addQuestion,
+  getQuizName,
+  getCategory,
+  addUserQuery,
+  ClearReducerDataOfLoadProgress,
+  getFinalizeQuiz,
+  getQuestionList,
+} from "./QuizAction";
+import Swal from 'sweetalert2'
+import {handleShareProcess} from "../Auth/AuthAction";
+import { Link } from "react-router-dom";
+import AddIcon from '@mui/icons-material/Add';
+import { Button, Card, Drawer, Tooltip ,message,Input} from "antd";
+import FWLogo2 from "../../../src/images/tabler_bulb.png";
+import { MenuOutlined } from "@ant-design/icons";
+import HomeIcon from '@mui/icons-material/Home';
+import { InputComponent } from "../../Components/Forms/Formik/InputComponent";
+import MainHeader from "../../Components/Mainheader";
+import Finalisedrawer from "./Finalisedrawer";
+import ProcessShareDrawer from "../../Components/ProcessShareDrawer";
+import { base_url, base_url2 } from "../../Config/Auth";
+import axios from "axios";
+
+// const QuizzSchema = Yup.object().shape({
+//   question: Yup.string().required("Input needed!"),
+//   option1: Yup.string().required("Input needed!"),
+//   option2: Yup.string().required("Input needed!"),
+//   option3: Yup.string(),
+//   option4: Yup.string(),
+// });
+
+function Quiz(props) {
+  const [count, setCount] = useState(1);
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [finalise, setFinalise] = useState(false);
+  const [isAddingNewQuestion, setIsAddingNewQuestion] = useState(false);
+  const [selectedQuestionIndex, setSelectedQuestionIndex] = useState(0);
+  const [isDrawerVisible, setIsDrawerVisible] = useState(false);
+  const [questionSource, setQuestionSource] = useState("Normal");
+  const [isNewQuestion, setIsNewQuestion] = useState(false);
+  
+  const [questionReq, setQuestionReq] = useState("");
+  const [showInputQstn, setshowInputQstn] = useState(false);
+  const [error, setError] = useState("");
+  
+
+  useEffect(() => {
+    props.getQuestionList(props.showQuiz.quizId);
+    props.getQuizName(props.showQuiz.quizId)
+    props.getFinalizeQuiz(props.showQuiz.quizId)
+  }, [props.showQuiz.quizId]);
+
+  useEffect(() => {
+    if (isAddingNewQuestion) {
+      setSelectedQuestionIndex(-1); // Reset to indicate a new question
+      setIsAddingNewQuestion(false); // Reset the flag after reinitializing
+    }
+  }, [isAddingNewQuestion]);
+
+  const handleDeleteQuestion = (id) => {
+    props.deleteQuestion(id, handleCallBack);
+  };
+  const handleAddQuestion = () => {
+    setIsNewQuestion(true); // Enter add mode
+    setSelectedQuestionIndex(null); // Deselect any selected question
+  };
+
+  // const handleUpdateQuestion = (values) => {
+  //   const selectedQuestion = props.questionList[selectedQuestionIndex];
+
+  //   if (!selectedQuestion) {
+  //     console.error("No question selected");
+  //     return;
+  //   }
+
+  //   const updatedQuestion = {
+  //     ...values,
+  //     id: selectedQuestion.id, // Pass the id of the selected question
+  //     quizId: props.showQuiz && props.showQuiz.quizId, // Pass the quizId
+  //     categoryId: selectedCategory,
+  //   };
+
+  //   props.updateQuestionsInQuiz(updatedQuestion, selectedQuestion.id);
+  // };
+  const handleUpdateQuestion = (values) => {
+    if (selectedQuestionIndex >= 0) {
+      const updatedQuestion = {
+        ...values,
+        id: selectedQuestion.id,
+        quizId: props.showQuiz && props.showQuiz.quizId,
+        categoryId: selectedCategory,
+      };
+      props.updateQuestionsInQuiz(updatedQuestion, selectedQuestion.id);
+    }
+  };
+
+  const handleQuestionSelect = (index) => {
+    setSelectedQuestionIndex(index);
+    setIsDrawerVisible(false);
+  };
+
+  const history = useHistory();
+
+  const handleCallBack = () => {
+    history.push(`/addquiz`);
+  };
+
+  const checkObj = props.userQuery.hasOwnProperty("status");
+
+  // Get AI response or selected category for question and options
+  const question = checkObj ? props.userQuery.response.ai_response.question : "";
+  const options = checkObj ? props.userQuery.response.ai_response.options : [];
+
+  const selectedQuestion =
+    selectedQuestionIndex >= 0 && props.questionList[selectedQuestionIndex]
+      ? props.questionList[selectedQuestionIndex]
+      : {};
+  const isAnyQuestionCreated = props.questionList.length > 0;
+  const openQuestion = props.showQuiz.quizHostInd === true
+console.log(props.showQuiz.quizHostInd)
+console.log(props.fetchingFinalizeQuiz)
+
+const handleGenerateQuiz = async () => {
+  setError(""); 
+
+  const QGen = {
+      noOfQstn: questionReq,
+      quizHostId: props.quizHostId,
+      quizName: props.showQuiz.quizName,
+      type: "ChatGpt",
+  };
+
+  try {
+      const generateQuizResponse = await axios.post(`${base_url}/quiz/save/usingChatGpt`, QGen); 
+      const quizId = generateQuizResponse.data.quizId;
+
+
+      if (!props.showQuiz.quizId) {
+          throw new Error("Failed to generate quiz. Quiz ID is missing.");
+      }
+      setshowInputQstn(false);
+
+      const query = {
+          user_question:props.showQuiz.quizName,
+          questions_required: questionReq,
+          request_type: "MCQ_Content",
+          options_required: "4",
+          userid: props.quizHostId,
+          quizId: props.showQuiz.quizId,
+          type: "ChatGpt",
+      };
+
+      const userQueryResponse = await axios.post(`${base_url2}/user_query/`, query); 
+
+   
+      const userPre = {
+          questionDTOS: userQueryResponse.data.response.ai_response.questions.map((qstn, index) => ({
+              liveInd: true,
+              number: index,
+              option1: qstn.options[0]?.value || "",
+              option2: qstn.options[1]?.value || "",
+              option3: qstn.options[2]?.value || "",
+              option4: qstn.options[3]?.value || "",
+              question: qstn.question,
+              quizId: props.showQuiz.quizId,
+              type: "ChatGpt",
+          })),
+          quizId: props.showQuiz.quizId,
+      };
+
+
+      await axios.post(`${base_url}/question/multiple/questionsSave`, userPre); 
+      
+
+      // props.history.push(`/updateQuizNameInLibrary/${quizName}/${generateQuizResponse.data.duration}/${quizId}`);
+
+  } catch (err) {
+      console.error(err);
+      setError(err.message || "An error occurred while generating the quiz.");
+  }
+};
+
+  return (
+    <>
+      <div className="min-h-screen">
+        <MainHeader />
+        <Formik
+          enableReinitialize
+          initialValues={{
+            quizHostId: props.quizHostId,
+            quizId: props.showQuiz && props.showQuiz.quizId,
+            categoryId: selectedCategory,
+            question: question || selectedQuestion.question || "",
+            option1: checkObj ? options[0].value : selectedQuestion.option1 || "",
+            option2: checkObj ? options[1].value : selectedQuestion.option2 || "",
+            option3: checkObj ? options[2].value : selectedQuestion.option3 || "",
+            option4: checkObj ? options[3].value : selectedQuestion.option4 || "",
+          }}
+          // validationSchema={QuizzSchema}
+          onSubmit={(values, { resetForm }) => {
+            props.addQuestion(
+              {
+                ...values,
+                quizId: props.showQuiz && props.showQuiz.quizId,
+                categoryId: selectedCategory,
+                number: count,
+                type: questionSource,
+              },
+              props.showQuiz && props.showQuiz.quizId
+            );
+
+            resetForm({
+              values: {
+                quizHostId: props.quizHostId,
+                quizId: props.showQuiz && props.showQuiz.quizId,
+                categoryId: "",
+                question: "",
+                option1: "",
+                option2: "",
+                option3: "",
+                option4: "",
+              },
+            });
+            setQuestionSource("Normal");
+            props.ClearReducerDataOfLoadProgress();
+            setCount(count + 1);
+            setIsNewQuestion(false);
+            setIsAddingNewQuestion(true);
+          }}
+        >
+          {({
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            setFieldValue,
+            errors,
+            values,
+          }) => (
+            <div className="h-[93vh] flex">
+              <div className="w-[20%] bg-[#6245C6] p-4 max-sm:hidden " style={{scrollbarWidth:"thin"}}>
+              <div className="overflow-y-auto h-[70vh]" style={{scrollbarWidth:"thin"}}>
+                {props.questionList.map((item, i) => (
+                  <Card
+                    key={i}
+                    className={`cursor-pointer mb-2 ${
+                      i === selectedQuestionIndex ? "bg-blue-200" : ""
+                    }
+                     ${item.completeInd ? "border-green-500" : "border-red-500"} border-4
+                    `}
+                    onClick={() => handleQuestionSelect(i)}
+                  >
+                    <div className="flex flex-col">
+                      <div className="text-base font-semibold">
+                        Question {i + 1}
+                      </div>
+                      <div className="text-sm font-semibold">{item.question}</div>
+                    </div>
+                  </Card>
+                ))}
+                </div>
+                 <div className="flex w-wk justify-center">
+                  <Tooltip title="Add Question">
+                        <AddIcon className="!text-[5rem] cursor-pointer !text-white"
+                          onClick={handleAddQuestion}
+                        />
+                        </Tooltip>
+                      </div>
+                      <div className="flex justify-between">
+                      <div>
+                        {count >= 1 &&
+                          <Button
+                            style={{ height: "2.5rem", backgroundColor: "#3B16B7", borderRadius: '0.25rem',width:"5rem" }}
+                            type="primary"
+                            onClick={() => setFinalise(true)}
+                            disabled={!isAnyQuestionCreated || !props.questionList.every(item => item.completeInd)}
+    title={!isAnyQuestionCreated || !props.questionList.every(item => item.completeInd)
+      ? "Please complete all red mark questions before finalizing or wait for the process to complete."
+      : ""}
+  
+                          >
+                             <h3 className="font-medium text-white text-base">Finalize</h3>
+                          </Button>
+                        }                     
+                      </div>
+                      <div className="">
+<Button
+ type="primary"
+ disabled={!openQuestion}
+  style={{ height: "2.5rem", backgroundColor: "#3B16B7", borderRadius: '0.25rem',width:"5rem" }}
+ onClick={() => {
+  props.handleShareProcess(true);
+}}
+>
+<h3 className="font-medium text-white text-base">Share</h3>
+</Button>
+
+</div>
+</div>
+              </div>
+              <Drawer
+                title="Select a Question"
+                placement="left"
+                onClose={() => setIsDrawerVisible(false)}
+                visible={isDrawerVisible}
+                width={300}
+              >
+                 <div className="overflow-y-auto h-[53vh]" style={{scrollbarWidth:"thin"}}>
+                {props.questionList.map((item, i) => (
+                  <Card
+                    key={i}
+                    className={`cursor-pointer mb-2 ${
+                      i === selectedQuestionIndex ? "bg-blue-200" : ""
+                    }`}
+                    onClick={() => handleQuestionSelect(i)}
+                  >
+                    <div className="flex flex-col">
+                      <div className="text-base font-semibold">
+                        Question {i + 1}
+                      </div>
+                      <div className="text-sm font-semibold">{item.question}</div>
+                    </div>
+                  </Card>
+                ))}
+                </div>
+                 <div className="flex w-wk justify-center">
+                  <Tooltip title="Add Question">
+                        <AddIcon className="!text-[5rem]  cursor-pointer "
+                          onClick={handleAddQuestion}
+                        />
+                        </Tooltip>
+                      </div>
+                      <div className="flex justify-between">
+                      <div>
+                        {count >= 1 &&
+                          <Button
+                            style={{ height: "2.5rem", backgroundColor: "#3B16B7", borderRadius: '0.25rem',width:"5rem" }}
+                            type="primary"
+                            onClick={() => setFinalise(true)}
+                            disabled={!isAnyQuestionCreated}
+                          >
+                             <h3 className="font-medium text-white text-base">Finalize</h3>
+                          </Button>
+                        }
+                      </div>
+                      <div className="">
+<Button
+ type="primary"
+ disabled={!openQuestion}
+  style={{ height: "2.5rem", backgroundColor: "#3B16B7", borderRadius: '0.25rem',width:"5rem" }}
+ onClick={() => {
+  props.handleShareProcess(true);
+}}
+>
+<h3 className="font-medium text-white text-base">Share</h3>
+</Button>
+
+</div>
+</div>
+              </Drawer>
+              <div className="flex items-center flex-col h-hk w-[80%] max-sm:w-wk">
+                <div className="w-full flex justify-center">
+                  <div className="w-wk flex justify-center flex-col items-center">
+                    <div className="flex justify-center flex-col w-full">
+                      <div className="flex items-center justify-center md:mt-2">
+                        <Button
+                          className="md:hidden"
+                          icon={<MenuOutlined className="!text-black" />}
+                          onClick={() => setIsDrawerVisible(true)}
+                        ></Button>
+                        <h3 className="flex justify-center text-xl">
+                          {props.showQuiz && props.showQuiz.quizName}
+                        </h3>
+                      </div>
+                      <hr className="h-px bg-black border-2 w-wk md:mt-4 border-black" />
+                      <div className="mt-4 p-1 md:p-6">
+                        <div>
+                          <Field
+                            component={InputComponent}
+                            placeholder="Add your question"
+                            name="question"
+                            style={{
+                              width: "100%",
+                              height: "3rem",
+                              borderRadius: "0.25rem",
+                            }}
+                            onBlur={() => handleUpdateQuestion(values)} 
+                            onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
+                          />
+                        </div>
+                        {props.showQuiz.chatGptQuestionInd && (
+                          <>
+                        <div className="flex items-center w-wk justify-center mt-4 p-1">
+                          <div>
+                            <img
+                              className="big-logo"
+                              src={FWLogo2}
+                              alt="Tekorero logo"
+                            />
+                          </div>
+                        
+                          
+                          <div className="text-[#3B16B7] text-base mr-2 font-medium">
+                            Need help? Generate your Responses with AI using{" "}
+                          </div>
+                          <div className="text-[#3B16B7] text-base underline font-bold cursor-pointer"
+                            
+                          
+                          
+                            onClick={() => {
+                              const query = {
+                                request_type: "MCQ",
+                                user_question: values.question,
+                                options_required: "4",
+                                userid: props.userId,
+                                quizId: props.showQuiz && props.showQuiz.quizId,
+                              };
+                              props.addUserQuery(query);
+                              setQuestionSource("ChatGpt");
+                            }}
+                          >
+                           ChatGPT
+                          
+                      
+                          </div>
+                         
+
+                        </div>
+                        <div className="flex items-center w-wk justify-center mt-2 p-1">
+<div>
+  <img
+    className="big-logo"
+    src={FWLogo2}
+    alt="Tekorero logo"
+  />
+</div>
+
+
+<div className="text-[#3B16B7] text-base mr-2 font-medium">
+  Generate multiple questions with AI using{" "}
+</div>
+<div className="text-[#3B16B7] text-base underline font-bold cursor-pointer"
+
+  onClick={() => {
+    setshowInputQstn(true);
+    
+  }}
+>
+ ChatGPT
+</div>
+</div>
+{showInputQstn && (
+  <Input
+  className="text-black"
+  style={{width:"12rem",color:"black"}}
+  placeholder="Enter No.of Questions"
+  value={questionReq}
+  onChange={(e) => setQuestionReq(e.target.value)}
+  onKeyDown={(e) => e.key === 'Enter' && handleGenerateQuiz()}
+/>
+)}
+                        </>
+                        )}
+                        <div className="flex justify-between mt-12">
+                          <div className="w-[47.5%]">
+                            <Field
+                              component={InputComponent}
+                              placeholder="A. Add Correct Answer"
+                              name="option1"
+                              style={{
+                                width: "100%",
+                                height: "3rem",
+                                borderRadius: "0.25rem",
+                              }}
+                              onBlur={() => handleUpdateQuestion(values)} 
+                              onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
+                            />
+                          </div>
+                          <div className="w-[47.5%]">
+                            <Field
+                              component={InputComponent}
+                              placeholder="B. Add answer 2"
+                              name="option2"
+                              style={{
+                                width: "100%",
+                                height: "3rem",
+                                borderRadius: "0.25rem",
+                              }}
+                              onBlur={() => handleUpdateQuestion(values)} 
+                              onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
+                            />
+                          </div>
+                        </div>
+                        <div className="flex justify-between mt-8">
+                          <div className="w-[47.5%]">
+                            <Field
+                              component={InputComponent}
+                              placeholder="C. Add answer 3"
+                              name="option3"
+                              style={{
+                                width: "100%",
+                                height: "3rem",
+                                borderRadius: "0.25rem",
+                              }}
+                              onBlur={() => handleUpdateQuestion(values)} 
+                              onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
+                            />
+                          </div>
+                          <div className="w-[47.5%]">
+                            <Field
+                              component={InputComponent}
+                              placeholder="D. Add answer 4"
+                              name="option4"
+                              style={{
+                                width: "100%",
+                                height: "3rem",
+                                borderRadius: "0.25rem",
+                              }}
+                              onBlur={() => handleUpdateQuestion(values)} 
+                              onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
+                            />
+                          </div>
+                        </div>
+                      
+                        <div className="flex justify-end p-1 w-wk max-sm:flex-col md:p-6">
+                   
+                      {/* <div>
+                      <Button
+                              title={isNewQuestion || selectedQuestionIndex >= 0 ? "Save Question" : "Add New Question"}
+                              type="primary"
+                              onClick={() => {
+                                if (isNewQuestion || selectedQuestionIndex >= 0 ) {
+                                  handleSubmit(); // Save the question
+                                } else {
+                                  handleAddQuestion(); // Enter add mode
+                                }
+                              }}
+                              style={{ height: "3rem", backgroundColor: "#3B16B7", borderRadius: '0.25rem' }}
+                            >
+                              <h3 className="font-medium text-white text-base">
+                                {isNewQuestion || selectedQuestionIndex >= 0 ? "Save Question" : "Add New Question"}
+                              </h3>
+                            </Button>
+                                    </div>    */}
+                                    
+                    
+                                  
+                     
+                     
+                  {/* <Button
+                          style={{ height: "3rem", backgroundColor: "#3B16B7", borderRadius: '0.25rem',width:"9rem" }}
+                          type="primary"
+                          onClick={handleAddQuestion}
+                        >
+                          <h3 className="font-medium text-white text-base">Add New Question</h3>
+                        </Button> */}
+                      {/* <div className="md:mr-16">
+                      {selectedQuestionIndex >= 0 && isAnyQuestionCreated && (
+                        <Button
+                          style={{ height: "3rem", backgroundColor: "#3B16B7", borderRadius: '0.25rem',width:"9rem" }}
+                          type="primary"
+                          onClick={() => handleUpdateQuestion(values)}
+                          disabled={!isAnyQuestionCreated}
+                        >
+                          <h3 className="font-medium text-white text-base">
+                            Update Question
+                          </h3>
+                        </Button>
+                          )}
+                      </div>
+                      */}
+               
+                      <div className="flex justify-end w-wk">
+                      {/* <div>
+                        <Button
+                          style={{ height: "3rem", backgroundColor: "#3B16B7", borderRadius: '0.25rem',width:"9rem" }}
+                          type="primary"
+                          onClick={handleSubmit}
+                        >
+                          <h3 className="font-medium text-white text-base">Save question</h3>
+                        </Button>
+                      </div> */}
+                     
+                      <div className="md:ml-16">
+                      {selectedQuestionIndex >= 0 && isAnyQuestionCreated && (
+                        <Button
+                          title={""}
+                          type="primary"
+                          onClick={() => handleDeleteQuestion(selectedQuestion.id)}
+                          style={{ height: "3rem", backgroundColor: "#3B16B7", borderRadius: '0.25rem',width:"9rem" }}
+                          disabled={!isAnyQuestionCreated}
+                        >
+                           <h3 className="font-medium text-white text-base">Delete Question</h3>
+                        </Button>
+                          )}
+                      </div>
+                    
+                      
+                      </div>
+                    </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+        </Formik>
+      </div>
+      <Finalisedrawer  
+                showQuiz={props.showQuiz}
+                  finalise={finalise}
+                  setFinalise={setFinalise}
+                />
+                <ProcessShareDrawer            
+                  processShareModal={props.processShareModal}
+                    handleShareProcess={props.handleShareProcess}
+                />
+    </>
+  );
+}
+
+const mapStateToProps = ({ auth, quiz }) => ({
+  fetchingQuizName: quiz.fetchingQuizName,
+  fetchingQuizNameError: quiz.fetchingQuizNameError,
+  showQuiz: quiz.showQuiz,
+  quizDetails:quiz.quizDetails,
+  listOfQuiz: quiz.listOfQuiz,
+  processShareModal: auth.processShareModal,
+  finalizeQuiz: quiz.finalizeQuiz,
+  quizId: quiz.showQuiz.quizId,
+  category: quiz.category,
+  quizHostId: auth.userDetails.userId,
+  userId:auth.userDetails.userId,
+  userQuery:quiz.userQuery,
+  addingUserQuery:quiz.addingUserQuery,
+  questionList: quiz.questionList,
+  fetchingFinalizeQuiz:quiz.fetchingFinalizeQuiz
+
+});
+
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      deleteQuestion,
+      handleShareProcess,
+      updateQuestionsInQuiz,
+      addQuestion,
+      getQuizName,
+      getCategory,
+      addUserQuery,
+      ClearReducerDataOfLoadProgress,
+      getFinalizeQuiz,
+      getQuestionList,
+    },
+    dispatch
+  );
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Quiz));
+
+
+
 // import React, { useEffect, useState } from "react";
 // import { Field, Formik, Form } from "formik";
 // import { connect } from "react-redux";
@@ -827,570 +1497,3 @@
 
 // export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Quiz));
 
-import React, { useEffect, useState } from "react";
-import { Field, Formik, Form, FastField } from "formik";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import * as Yup from "yup";
-import { withRouter, useHistory } from "react-router-dom";
-import {
-  deleteQuestion,
-  updateQuestionsInQuiz,
-  addQuestion,
-  getQuizName,
-  getCategory,
-  addUserQuery,
-  ClearReducerDataOfLoadProgress,
-  getFinalizeQuiz,
-  getQuestionList,
-} from "./QuizAction";
-import Swal from 'sweetalert2'
-import {handleShareProcess} from "../Auth/AuthAction";
-import { Link } from "react-router-dom";
-import AddIcon from '@mui/icons-material/Add';
-import { Button, Card, Drawer, Tooltip ,message} from "antd";
-import FWLogo2 from "../../../src/images/tabler_bulb.png";
-import { MenuOutlined } from "@ant-design/icons";
-import HomeIcon from '@mui/icons-material/Home';
-import { InputComponent } from "../../Components/Forms/Formik/InputComponent";
-import MainHeader from "../../Components/Mainheader";
-import Finalisedrawer from "./Finalisedrawer";
-import ProcessShareDrawer from "../../Components/ProcessShareDrawer";
-
-// const QuizzSchema = Yup.object().shape({
-//   question: Yup.string().required("Input needed!"),
-//   option1: Yup.string().required("Input needed!"),
-//   option2: Yup.string().required("Input needed!"),
-//   option3: Yup.string(),
-//   option4: Yup.string(),
-// });
-
-function Quiz(props) {
-  const [count, setCount] = useState(1);
-  const [selectedCategory, setSelectedCategory] = useState("");
-  const [finalise, setFinalise] = useState(false);
-  const [isAddingNewQuestion, setIsAddingNewQuestion] = useState(false);
-  const [selectedQuestionIndex, setSelectedQuestionIndex] = useState(0);
-  const [isDrawerVisible, setIsDrawerVisible] = useState(false);
-  const [questionSource, setQuestionSource] = useState("Normal");
-  const [isNewQuestion, setIsNewQuestion] = useState(false);
-  
-
-  
-
-  useEffect(() => {
-    props.getQuestionList(props.showQuiz.quizId);
-    props.getQuizName(props.showQuiz.quizId)
-    props.getFinalizeQuiz(props.showQuiz.quizId)
-  }, [props.showQuiz.quizId]);
-
-  useEffect(() => {
-    if (isAddingNewQuestion) {
-      setSelectedQuestionIndex(-1); // Reset to indicate a new question
-      setIsAddingNewQuestion(false); // Reset the flag after reinitializing
-    }
-  }, [isAddingNewQuestion]);
-
-  const handleDeleteQuestion = (id) => {
-    props.deleteQuestion(id, handleCallBack);
-  };
-  const handleAddQuestion = () => {
-    setIsNewQuestion(true); // Enter add mode
-    setSelectedQuestionIndex(null); // Deselect any selected question
-  };
-
-  // const handleUpdateQuestion = (values) => {
-  //   const selectedQuestion = props.questionList[selectedQuestionIndex];
-
-  //   if (!selectedQuestion) {
-  //     console.error("No question selected");
-  //     return;
-  //   }
-
-  //   const updatedQuestion = {
-  //     ...values,
-  //     id: selectedQuestion.id, // Pass the id of the selected question
-  //     quizId: props.showQuiz && props.showQuiz.quizId, // Pass the quizId
-  //     categoryId: selectedCategory,
-  //   };
-
-  //   props.updateQuestionsInQuiz(updatedQuestion, selectedQuestion.id);
-  // };
-  const handleUpdateQuestion = (values) => {
-    if (selectedQuestionIndex >= 0) {
-      const updatedQuestion = {
-        ...values,
-        id: selectedQuestion.id,
-        quizId: props.showQuiz && props.showQuiz.quizId,
-        categoryId: selectedCategory,
-      };
-      props.updateQuestionsInQuiz(updatedQuestion, selectedQuestion.id);
-    }
-  };
-
-  const handleQuestionSelect = (index) => {
-    setSelectedQuestionIndex(index);
-    setIsDrawerVisible(false);
-  };
-
-  const history = useHistory();
-
-  const handleCallBack = () => {
-    history.push(`/addquiz`);
-  };
-
-  const checkObj = props.userQuery.hasOwnProperty("status");
-
-  // Get AI response or selected category for question and options
-  const question = checkObj ? props.userQuery.response.ai_response.question : "";
-  const options = checkObj ? props.userQuery.response.ai_response.options : [];
-
-  const selectedQuestion =
-    selectedQuestionIndex >= 0 && props.questionList[selectedQuestionIndex]
-      ? props.questionList[selectedQuestionIndex]
-      : {};
-  const isAnyQuestionCreated = props.questionList.length > 0;
-  const openQuestion = props.showQuiz.quizHostInd === true
-console.log(props.showQuiz.quizHostInd)
-console.log(props.fetchingFinalizeQuiz)
-  return (
-    <>
-      <div className="min-h-screen">
-        <MainHeader />
-        <Formik
-          enableReinitialize
-          initialValues={{
-            quizHostId: props.quizHostId,
-            quizId: props.showQuiz && props.showQuiz.quizId,
-            categoryId: selectedCategory,
-            question: question || selectedQuestion.question || "",
-            option1: checkObj ? options[0].value : selectedQuestion.option1 || "",
-            option2: checkObj ? options[1].value : selectedQuestion.option2 || "",
-            option3: checkObj ? options[2].value : selectedQuestion.option3 || "",
-            option4: checkObj ? options[3].value : selectedQuestion.option4 || "",
-          }}
-          // validationSchema={QuizzSchema}
-          onSubmit={(values, { resetForm }) => {
-            props.addQuestion(
-              {
-                ...values,
-                quizId: props.showQuiz && props.showQuiz.quizId,
-                categoryId: selectedCategory,
-                number: count,
-                type: questionSource,
-              },
-              props.showQuiz && props.showQuiz.quizId
-            );
-
-            resetForm({
-              values: {
-                quizHostId: props.quizHostId,
-                quizId: props.showQuiz && props.showQuiz.quizId,
-                categoryId: "",
-                question: "",
-                option1: "",
-                option2: "",
-                option3: "",
-                option4: "",
-              },
-            });
-            setQuestionSource("Normal");
-            props.ClearReducerDataOfLoadProgress();
-            setCount(count + 1);
-            setIsNewQuestion(false);
-            setIsAddingNewQuestion(true);
-          }}
-        >
-          {({
-            handleChange,
-            handleBlur,
-            handleSubmit,
-            setFieldValue,
-            errors,
-            values,
-          }) => (
-            <div className="h-[93vh] flex">
-              <div className="w-[20%] bg-[#6245C6] p-4 max-sm:hidden " style={{scrollbarWidth:"thin"}}>
-              <div className="overflow-y-auto h-[70vh]" style={{scrollbarWidth:"thin"}}>
-                {props.questionList.map((item, i) => (
-                  <Card
-                    key={i}
-                    className={`cursor-pointer mb-2 ${
-                      i === selectedQuestionIndex ? "bg-blue-200" : ""
-                    }
-                     ${item.completeInd ? "border-green-500" : "border-red-500"} border-4
-                    `}
-                    onClick={() => handleQuestionSelect(i)}
-                  >
-                    <div className="flex flex-col">
-                      <div className="text-base font-semibold">
-                        Question {i + 1}
-                      </div>
-                      <div className="text-sm font-semibold">{item.question}</div>
-                    </div>
-                  </Card>
-                ))}
-                </div>
-                 <div className="flex w-wk justify-center">
-                  <Tooltip title="Add Question">
-                        <AddIcon className="!text-[5rem] cursor-pointer !text-white"
-                          onClick={handleAddQuestion}
-                        />
-                        </Tooltip>
-                      </div>
-                      <div className="flex justify-between">
-                      <div>
-                        {count >= 1 &&
-                          <Button
-                            style={{ height: "2.5rem", backgroundColor: "#3B16B7", borderRadius: '0.25rem',width:"5rem" }}
-                            type="primary"
-                            onClick={() => setFinalise(true)}
-                            disabled={!isAnyQuestionCreated || !props.questionList.every(item => item.completeInd)}
-    title={!isAnyQuestionCreated || !props.questionList.every(item => item.completeInd)
-      ? "Please complete all red mark questions before finalizing or wait for the process to complete."
-      : ""}
-  
-                          >
-                             <h3 className="font-medium text-white text-base">Finalize</h3>
-                          </Button>
-                        }                     
-                      </div>
-                      <div className="">
-<Button
- type="primary"
- disabled={!openQuestion}
-  style={{ height: "2.5rem", backgroundColor: "#3B16B7", borderRadius: '0.25rem',width:"5rem" }}
- onClick={() => {
-  props.handleShareProcess(true);
-}}
->
-<h3 className="font-medium text-white text-base">Share</h3>
-</Button>
-
-</div>
-</div>
-              </div>
-              <Drawer
-                title="Select a Question"
-                placement="left"
-                onClose={() => setIsDrawerVisible(false)}
-                visible={isDrawerVisible}
-                width={300}
-              >
-                 <div className="overflow-y-auto h-[53vh]" style={{scrollbarWidth:"thin"}}>
-                {props.questionList.map((item, i) => (
-                  <Card
-                    key={i}
-                    className={`cursor-pointer mb-2 ${
-                      i === selectedQuestionIndex ? "bg-blue-200" : ""
-                    }`}
-                    onClick={() => handleQuestionSelect(i)}
-                  >
-                    <div className="flex flex-col">
-                      <div className="text-base font-semibold">
-                        Question {i + 1}
-                      </div>
-                      <div className="text-sm font-semibold">{item.question}</div>
-                    </div>
-                  </Card>
-                ))}
-                </div>
-                 <div className="flex w-wk justify-center">
-                  <Tooltip title="Add Question">
-                        <AddIcon className="!text-[5rem]  cursor-pointer "
-                          onClick={handleAddQuestion}
-                        />
-                        </Tooltip>
-                      </div>
-                      <div className="flex justify-between">
-                      <div>
-                        {count >= 1 &&
-                          <Button
-                            style={{ height: "2.5rem", backgroundColor: "#3B16B7", borderRadius: '0.25rem',width:"5rem" }}
-                            type="primary"
-                            onClick={() => setFinalise(true)}
-                            disabled={!isAnyQuestionCreated}
-                          >
-                             <h3 className="font-medium text-white text-base">Finalize</h3>
-                          </Button>
-                        }
-                      </div>
-                      <div className="">
-<Button
- type="primary"
- disabled={!openQuestion}
-  style={{ height: "2.5rem", backgroundColor: "#3B16B7", borderRadius: '0.25rem',width:"5rem" }}
- onClick={() => {
-  props.handleShareProcess(true);
-}}
->
-<h3 className="font-medium text-white text-base">Share</h3>
-</Button>
-
-</div>
-</div>
-              </Drawer>
-              <div className="flex items-center flex-col h-hk w-[80%] max-sm:w-wk">
-                <div className="w-full flex justify-center">
-                  <div className="w-wk flex justify-center flex-col items-center">
-                    <div className="flex justify-center flex-col w-full">
-                      <div className="flex items-center justify-center md:mt-2">
-                        <Button
-                          className="md:hidden"
-                          icon={<MenuOutlined className="!text-black" />}
-                          onClick={() => setIsDrawerVisible(true)}
-                        ></Button>
-                        <h3 className="flex justify-center text-xl">
-                          {props.showQuiz && props.showQuiz.quizName}
-                        </h3>
-                      </div>
-                      <hr className="h-px bg-black border-2 w-wk md:mt-4 border-black" />
-                      <div className="mt-4 p-1 md:p-6">
-                        <div>
-                          <Field
-                            component={InputComponent}
-                            placeholder="Add your question"
-                            name="question"
-                            style={{
-                              width: "100%",
-                              height: "3rem",
-                              borderRadius: "0.25rem",
-                            }}
-                            onBlur={() => handleUpdateQuestion(values)} 
-                            onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
-                          />
-                        </div>
-                        {props.showQuiz.chatGptQuestionInd && (
-                        <div className="flex items-center w-wk justify-center mt-4 p-1">
-                          <div>
-                            <img
-                              className="big-logo"
-                              src={FWLogo2}
-                              alt="Tekorero logo"
-                            />
-                          </div>
-                        
-                          
-                          <div className="text-[#3B16B7] text-base mr-2 font-medium">
-                            Need help? Generate your Responses with AI using{" "}
-                          </div>
-                          <div className="text-[#3B16B7] text-base underline font-bold cursor-pointer"
-                            
-                          
-                          
-                            onClick={() => {
-                              const query = {
-                                request_type: "MCQ",
-                                user_question: values.question,
-                                options_required: "4",
-                                userid: props.userId,
-                                quizId: props.showQuiz && props.showQuiz.quizId,
-                              };
-                              props.addUserQuery(query);
-                              setQuestionSource("ChatGpt");
-                            }}
-                          >
-                           ChatGPT
-                          
-                      
-                          </div>
-                         
-
-                        </div>
-                        )}
-                        <div className="flex justify-between mt-12">
-                          <div className="w-[47.5%]">
-                            <Field
-                              component={InputComponent}
-                              placeholder="A. Add Correct Answer"
-                              name="option1"
-                              style={{
-                                width: "100%",
-                                height: "3rem",
-                                borderRadius: "0.25rem",
-                              }}
-                              onBlur={() => handleUpdateQuestion(values)} 
-                              onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
-                            />
-                          </div>
-                          <div className="w-[47.5%]">
-                            <Field
-                              component={InputComponent}
-                              placeholder="B. Add answer 2"
-                              name="option2"
-                              style={{
-                                width: "100%",
-                                height: "3rem",
-                                borderRadius: "0.25rem",
-                              }}
-                              onBlur={() => handleUpdateQuestion(values)} 
-                              onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
-                            />
-                          </div>
-                        </div>
-                        <div className="flex justify-between mt-8">
-                          <div className="w-[47.5%]">
-                            <Field
-                              component={InputComponent}
-                              placeholder="C. Add answer 3"
-                              name="option3"
-                              style={{
-                                width: "100%",
-                                height: "3rem",
-                                borderRadius: "0.25rem",
-                              }}
-                              onBlur={() => handleUpdateQuestion(values)} 
-                              onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
-                            />
-                          </div>
-                          <div className="w-[47.5%]">
-                            <Field
-                              component={InputComponent}
-                              placeholder="D. Add answer 4"
-                              name="option4"
-                              style={{
-                                width: "100%",
-                                height: "3rem",
-                                borderRadius: "0.25rem",
-                              }}
-                              onBlur={() => handleUpdateQuestion(values)} 
-                              onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
-                            />
-                          </div>
-                        </div>
-                      
-                        <div className="flex justify-end p-1 w-wk max-sm:flex-col md:p-6">
-                   
-                      {/* <div>
-                      <Button
-                              title={isNewQuestion || selectedQuestionIndex >= 0 ? "Save Question" : "Add New Question"}
-                              type="primary"
-                              onClick={() => {
-                                if (isNewQuestion || selectedQuestionIndex >= 0 ) {
-                                  handleSubmit(); // Save the question
-                                } else {
-                                  handleAddQuestion(); // Enter add mode
-                                }
-                              }}
-                              style={{ height: "3rem", backgroundColor: "#3B16B7", borderRadius: '0.25rem' }}
-                            >
-                              <h3 className="font-medium text-white text-base">
-                                {isNewQuestion || selectedQuestionIndex >= 0 ? "Save Question" : "Add New Question"}
-                              </h3>
-                            </Button>
-                                    </div>    */}
-                                    
-                    
-                                  
-                     
-                     
-                  {/* <Button
-                          style={{ height: "3rem", backgroundColor: "#3B16B7", borderRadius: '0.25rem',width:"9rem" }}
-                          type="primary"
-                          onClick={handleAddQuestion}
-                        >
-                          <h3 className="font-medium text-white text-base">Add New Question</h3>
-                        </Button> */}
-                      {/* <div className="md:mr-16">
-                      {selectedQuestionIndex >= 0 && isAnyQuestionCreated && (
-                        <Button
-                          style={{ height: "3rem", backgroundColor: "#3B16B7", borderRadius: '0.25rem',width:"9rem" }}
-                          type="primary"
-                          onClick={() => handleUpdateQuestion(values)}
-                          disabled={!isAnyQuestionCreated}
-                        >
-                          <h3 className="font-medium text-white text-base">
-                            Update Question
-                          </h3>
-                        </Button>
-                          )}
-                      </div>
-                      */}
-               
-                      <div className="flex justify-end w-wk">
-                      {/* <div>
-                        <Button
-                          style={{ height: "3rem", backgroundColor: "#3B16B7", borderRadius: '0.25rem',width:"9rem" }}
-                          type="primary"
-                          onClick={handleSubmit}
-                        >
-                          <h3 className="font-medium text-white text-base">Save question</h3>
-                        </Button>
-                      </div> */}
-                     
-                      <div className="md:ml-16">
-                      {selectedQuestionIndex >= 0 && isAnyQuestionCreated && (
-                        <Button
-                          title={""}
-                          type="primary"
-                          onClick={() => handleDeleteQuestion(selectedQuestion.id)}
-                          style={{ height: "3rem", backgroundColor: "#3B16B7", borderRadius: '0.25rem',width:"9rem" }}
-                          disabled={!isAnyQuestionCreated}
-                        >
-                           <h3 className="font-medium text-white text-base">Delete Question</h3>
-                        </Button>
-                          )}
-                      </div>
-                    
-                      
-                      </div>
-                    </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-        </Formik>
-      </div>
-      <Finalisedrawer  
-                showQuiz={props.showQuiz}
-                  finalise={finalise}
-                  setFinalise={setFinalise}
-                />
-                <ProcessShareDrawer            
-                  processShareModal={props.processShareModal}
-                    handleShareProcess={props.handleShareProcess}
-                />
-    </>
-  );
-}
-
-const mapStateToProps = ({ auth, quiz }) => ({
-  fetchingQuizName: quiz.fetchingQuizName,
-  fetchingQuizNameError: quiz.fetchingQuizNameError,
-  showQuiz: quiz.showQuiz,
-  quizDetails:quiz.quizDetails,
-  listOfQuiz: quiz.listOfQuiz,
-  processShareModal: auth.processShareModal,
-  finalizeQuiz: quiz.finalizeQuiz,
-  quizId: quiz.showQuiz.quizId,
-  category: quiz.category,
-  quizHostId: auth.userDetails.userId,
-  userId:auth.userDetails.userId,
-  userQuery:quiz.userQuery,
-  addingUserQuery:quiz.addingUserQuery,
-  questionList: quiz.questionList,
-  fetchingFinalizeQuiz:quiz.fetchingFinalizeQuiz
-
-});
-
-const mapDispatchToProps = (dispatch) =>
-  bindActionCreators(
-    {
-      deleteQuestion,
-      handleShareProcess,
-      updateQuestionsInQuiz,
-      addQuestion,
-      getQuizName,
-      getCategory,
-      addUserQuery,
-      ClearReducerDataOfLoadProgress,
-      getFinalizeQuiz,
-      getQuestionList,
-    },
-    dispatch
-  );
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Quiz));
