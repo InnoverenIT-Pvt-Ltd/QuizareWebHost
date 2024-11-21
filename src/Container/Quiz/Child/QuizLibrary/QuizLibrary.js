@@ -190,7 +190,7 @@ const handleOpen= ()=>{
 
 
 
-  {/* <Button
+  <Button
     style={{ width: "9rem", backgroundColor: "white",height:"2rem" }}
     type="primary"
     onClick={() =>{ handleOpen(true);
@@ -198,7 +198,7 @@ const handleOpen= ()=>{
     }}
   >
     <div className="font-[Poppins] text-black">LeaderBoard</div>  
-  </Button> */}
+  </Button>
 
 
 
