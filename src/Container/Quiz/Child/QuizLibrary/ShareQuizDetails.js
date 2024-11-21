@@ -52,7 +52,7 @@ console.log(props.showQuiz)
                 style={{  height: "2.5rem",backgroundColor:"#3B16B7",borderRadius:'0.25rem',width:'-webkit-fill-available' }}
                 onClick={() => copyToClipboard()}
               >
-                <h2 class="text-white text-base font-medium font-[Poppins]">Share</h2>
+                <h2 class="text-white text-base font-medium font-[Poppins]">Copy link</h2>
               </Button>
             </div>
             </div>
