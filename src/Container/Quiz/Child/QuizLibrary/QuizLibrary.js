@@ -458,6 +458,7 @@ const handleOpen= ()=>{
  open={open}
  setOpen={setOpen}
    currentItem={currentItem}
+  //  quizHostId = {props.quizHostId}
 />
       <ShareDrawer            
                   copyReduce={props.copyReduce}
