@@ -146,7 +146,7 @@ const Menu = (props) => {
   useEffect(()=>{
   const fetchCounter= async () => {
     try {
-      const response = await axios.get(`${base_url}/counterDummy`,{  headers: {
+      const response = await axios.get(`${base_url}/userDetails/subscription/question/counter/${props.quizHostId}`,{  headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },});
       setcounteRecord(response.data);
@@ -315,8 +315,8 @@ const Menu = (props) => {
 }}
 >
 <h3 class="font-medium  text-lg max-sm:text-xs">  {props.user.subscriptionName === null ? ("Select Plan") : ( props.user.subscriptionName)}</h3>
-<img src={ChatGpt} className="w-6 h-6"/>  
-{/* {`${counteRecord.ctr}/${counteRecord.ctrT}`} */}
+<img src={ChatGpt} className="w-6 h-6"/>  <h3 class="font-medium  text-lg max-sm:text-xs">
+  {`${counteRecord.remainQstnCnt ? `${counteRecord.remainQstnCnt}/${counteRecord.totalQstnCnt ? counteRecord.totalQstnCnt:""}`:""}`}</h3>
 </Button>
 {/* </Link> */}
 </div>
