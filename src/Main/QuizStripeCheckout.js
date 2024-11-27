@@ -9,8 +9,11 @@ import { BundleLoader } from "../Components/Placeholder";
 import QuizCheckoutForm from "./QuizCheckoutForm";
 
 //production pk
-const stripePromise = loadStripe("pk_test_51Pg4N4F9t5MfjsIZrPxRRnon7ENfinC1pcSx6aRw0prlk3qODgIAgXcRXel0NaoI38idFEUDI21QcrL0eNh8Sndf00t7yiYS6E");
-                                  
+// const stripePromise = loadStripe("pk_test_51Pg4N4F9t5MfjsIZrPxRRnon7ENfinC1pcSx6aRw0prlk3qODgIAgXcRXel0NaoI38idFEUDI21QcrL0eNh8Sndf00t7yiYS6E");
+ 
+// Live PK
+const stripePromise = loadStripe("pk_live_51QNWrFKXvqKEeVP5Skd6KcToZEeePZTKvsw98y7tyNZZ0ukB6JeiJXtCh8KWhAzi83FuBOyAbpSmDf2CHm3SMNGx00nxIEzoZ2");
+    
 
 function QuizStripeCheckout(props) {
 

@@ -5,7 +5,6 @@ import axios from 'axios';
 import { useHistory } from "react-router-dom";
 import { handleQuizStripeModal, handleSuscrptionModal, getSuscrption, } from "../Container/Quiz/QuizAction";
 import { Button } from "antd";
-import PaymentQuizModal from "./PaymentQuizModal";
 import {getUserDetails} from "../Container/Auth/AuthAction";
 import MainSuscriptionModal from "./MainSuscriptionModal";
 import { base_url } from "../Config/Auth";
