@@ -12,8 +12,10 @@ import QuizCheckoutForm from "./QuizCheckoutForm";
 // const stripePromise = loadStripe("pk_test_51Pg4N4F9t5MfjsIZrPxRRnon7ENfinC1pcSx6aRw0prlk3qODgIAgXcRXel0NaoI38idFEUDI21QcrL0eNh8Sndf00t7yiYS6E");
  
 // Live PK
-const stripePromise = loadStripe("pk_live_51QNWrFKXvqKEeVP5Skd6KcToZEeePZTKvsw98y7tyNZZ0ukB6JeiJXtCh8KWhAzi83FuBOyAbpSmDf2CHm3SMNGx00nxIEzoZ2");
-    
+// const stripePromise = loadStripe("pk_live_51QNWrFKXvqKEeVP5Skd6KcToZEeePZTKvsw98y7tyNZZ0ukB6JeiJXtCh8KWhAzi83FuBOyAbpSmDf2CHm3SMNGx00nxIEzoZ2");
+
+// Test Pk   
+const stripePromise = loadStripe("pk_test_51QNWrFKXvqKEeVP5x5kvZssbM99qBYlLFqPR7jHLL5q3bJop5dvMOtE7paozArjZJUcCDD9d2ZOEgxlDJ9OojPFz00DumZDakh");
 
 function QuizStripeCheckout(props) {
 

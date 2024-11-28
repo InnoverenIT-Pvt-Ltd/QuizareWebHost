@@ -162,11 +162,11 @@ export const signUpByUser = ({ emailID, password, name, confirmPassword, imageId
       history.push(rightPath);
       Swal.fire({
         icon: "success",
-        title: res.data.message || "You have registered successfully !!",
+        // title: res.data.message || "You have registered successfully !",
+        title:"User with same mail already exists!" || "You have registered successfully !",
         showConfirmButton: false,
         timer: 1500
       });
-      //message.success("You have registered successfully !!")
       dispatch({
         type: types.SIGN_UP_BY_USER_SUCCESS,
         payload: res.data,
@@ -175,7 +175,6 @@ export const signUpByUser = ({ emailID, password, name, confirmPassword, imageId
     })
     .catch((err) => {
       cb()
-
       dispatch({
         type: types.SIGN_UP_BY_USER_FAILURE,
         payload: err,
