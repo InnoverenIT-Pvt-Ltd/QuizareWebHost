@@ -47,7 +47,7 @@ class LoginByMail extends Component {
       }
       responseGoogle(response) {
         console.log(response);
-        this.props.googleLogin(response.tokenId, this.props.history);
+        this.props.googleLogin(response.tokenId, this.props.history); 
       }
     submit = (values) => {
         // this.enterLoading();
@@ -84,7 +84,7 @@ class LoginByMail extends Component {
         clearTimeout(this.timeoutHandle); // This is just necessary in the case that the screen is closed before the timeout fires, otherwise it would cause a memory leak that would trigger the transition regardless, breaking the user experience.
     }
     render() {
-        console.log(this.props);
+        console.log(this.props.tokenId);
         return (
             <>
           
