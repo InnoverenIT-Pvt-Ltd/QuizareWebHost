@@ -53,7 +53,7 @@ const SelectPlan = (props) => {
                 setSelectedPlanId(subscriptionId); // Update state to track selected plan
                 Swal.fire({
                     icon: "success",
-                    title: `Plan ${subscriptions.find(sub => sub.subscriptionId === subscriptionId).subscriptionName} selected successfully!`,
+                    title: `${subscriptions.find(sub => sub.subscriptionId === subscriptionId).subscriptionName} plan selected`,
                     showConfirmButton: false,
                     timer: 1500
                 });
@@ -118,9 +118,9 @@ const SelectPlan = (props) => {
                                         <div className="font-[Poppins] font-medium">{item.subscriptionId === selectedPlanId ? 'Plan Selected' : 'Select Plan'}</div>
                                     </button>
                                     <ul className="text-left mt-4">
-                                        <li className="font-[Poppins]">✓ {item.noOfQuestion} Question</li>
+                                        <li className="font-[Poppins]">✓ {item.noOfQuestion} Questions</li>
                                         {/* <li className="font-[Poppins]">✓ {item.description} </li> */}
-                                        <li className=" font-normal ml-5  font-[Poppins] " dangerouslySetInnerHTML={{ __html:item.description  }} />
+                                        {/* <li className=" font-normal ml-5  font-[Poppins] " dangerouslySetInnerHTML={{ __html:item.description  }} /> */}
                                     </ul>
                                     {item.recommendInd && <div className="absolute top-[-2.5rem] left-[8rem] bg-purple-500 text-white py-1 px-4 text-sm rounded-xl">Most Popular</div>}
                                 </div>
