@@ -1,5 +1,5 @@
-import React, { useEffect, Suspense, useState } from "react";
-import { ElementsConsumer, stripe, PaymentElement } from "@stripe/react-stripe-js";
+import React, {} from "react";
+import { ElementsConsumer,  PaymentElement } from "@stripe/react-stripe-js";
 import { message } from "antd";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
@@ -8,10 +8,8 @@ import {
     handleQuizStripeModal,
     makeStripePayment
 } from "../Container/Quiz/QuizAction";
-import { createBrowserHistory } from "history";
 import "./MainApp.scss";
 
-const history = createBrowserHistory();
 
 class QuizCheckoutForm extends React.Component {
  
@@ -54,9 +52,7 @@ class QuizCheckoutForm extends React.Component {
           disabled={!stripe}
           className="StripePayButton"
         >
-          Pay 
-          {`${this.props.eachSub.pricePerMonth}  ${"EUR"}`}
-          {/* {`${this.props.finalgrandTotalValue} ${this.props.currency}`} {this.props.invencartItem.cartSummary && this.props.invencartItem.cartSummary.grandTotal}*/}
+            {`Pay ${this.props.eachSub.pricePerMonth} ${"EUR"}`}
         </button>
       </form>
     );

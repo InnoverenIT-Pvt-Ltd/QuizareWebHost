@@ -298,9 +298,9 @@ const Menu = (props) => {
                 <a href="/how2" >
 <Button
  style={{  height: "2rem",display:"flex",justifyContent:"center",alignItems:"center",backgroundColor:"white" }}
- onClick={() => {
-  props.handleSpareProcess(true);
-}}
+//  onClick={() => {
+//  props.handleSpareProcess(true);
+// }}
 >
 <h3 class="font-medium  text-lg max-sm:text-xs">Create</h3>
 </Button>
