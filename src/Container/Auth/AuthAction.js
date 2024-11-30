@@ -22,7 +22,6 @@ export const login = ({ email, password }, history, cb) => (dispatch) => {
     })
     .then((res) => {
       dispatch(getUserDetails(res.data.userId));
-      // history.push("/emptypage");
       const redirectPath = res.data.noOfQuizes === 0 ? "/emptypage" : "/quizLibrary";
       history.push(redirectPath);
       console.log(history)
@@ -33,9 +32,14 @@ export const login = ({ email, password }, history, cb) => (dispatch) => {
       cb && cb("success");
     })
     .catch((err) => {
-      //console.log(err && err.response && err.response.data);
+        const errorMessage = err.response.data.details[0]; 
+        console.log(errorMessage)
+        if(errorMessage==="Provide Registered Email Or Do Register"){
+          message.error("Incorrect Username or Password")
+        } else if(errorMessage==="Invalid Credential"){
+          message.error("Pls enter correct username and password")
+        }
       cb && cb("failure");
-      message.error("Oops! something went wrong. Please retry.")
       dispatch({
         type: types.LOGIN_FAILURE,
         payload: err,
