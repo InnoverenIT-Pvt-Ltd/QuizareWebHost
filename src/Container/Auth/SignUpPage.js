@@ -13,7 +13,7 @@ import { CheckCircleOutlined, EyeInvisibleOutlined, EyeOutlined,
 } from "@ant-design/icons";
 import FacebookLogin from "react-facebook-login";
 import { GoogleLogin } from 'react-google-login';
-import { signUpByUser,facebookLogin, googleLogin } from "./AuthAction";
+import { signUpByUser,facebookLogin, connectToGoogle } from "./AuthAction";
 import Upload from "../../Components/Forms/Formik/Upload";
 import { Link, withRouter } from "react-router-dom";
 import { message } from "antd"
@@ -66,7 +66,7 @@ class SignUpPage extends Component {
           }
           responseGoogle(response) {
             console.log(response);
-            this.props.googleLogin(response.tokenId, this.props.history);
+            this.props.connectToGoogle(response.tokenId, this.props.history);
           }
     handleSteppriPolInd = (newValue) => {
         this.setState({ isChecked: newValue });
@@ -354,7 +354,7 @@ const mapDispatchToProps = (dispatch) =>
         {
             signUpByUser,
             facebookLogin,
-            googleLogin
+            connectToGoogle
         },
         dispatch
     );

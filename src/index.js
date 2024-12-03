@@ -10,7 +10,7 @@ import Wrapper from "./Wrapper"
 // NetworkService.setupInterceptors(store);
 
 ReactDOM.render(
-  // <GoogleOAuthProvider clientId="748641779898-e7jjaer4u1mf9kq0u7tcti1iv0i70bq6.apps.googleusercontent.com">
+  
   <Provider store={store}>
     <Wrapper>
       <Router basename={process.env.PUBLIC_URL}>
@@ -18,7 +18,7 @@ ReactDOM.render(
       </Router>
     </Wrapper>
   </Provider>,
-  // </GoogleOAuthProvider>,
+//  </GoogleOAuthProvider>
   document.getElementById("root")
 );
 
