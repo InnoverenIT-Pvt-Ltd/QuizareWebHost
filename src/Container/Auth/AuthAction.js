@@ -107,14 +107,14 @@ export const facebookLogin = (token, cb) => dispatch => {
     });
 };
 
-export const googleLogin = (tokenId, history, cb) => dispatch => {
+export const connectToGoogle = (tokenCredential, history, cb) => dispatch => {
   dispatch({
     type: types.GOOGLE_LOGIN_REQUEST
   });
 
   axios
     .post(`${base_url}/googlelogin`, {
-      idToken: tokenId,
+      idToken: tokenCredential,
     })
     .then(res => {
       dispatch({
@@ -122,7 +122,7 @@ export const googleLogin = (tokenId, history, cb) => dispatch => {
         payload: res.data
       });
       dispatch(getUserDetails(res.data.userId));
-      history.push("/")
+      history.push("/emptypage")
       console.log(res.data);
       if (res.data.successInd === true) {
         localStorage.setItem("userCredential", JSON.stringify(res.data));

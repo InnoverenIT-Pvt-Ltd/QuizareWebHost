@@ -26,7 +26,7 @@ class App extends Component {
        
         <Suspense fallback={<BundleLoader />}>
           <Switch>
-            <Route exact path="/login" component={Login} />
+            {/* <Route exact path="/login" component={Login} /> */}
             <Route exact path="/email" component={LoginByMail} />
             <Route exact path="/signUp" component={SignUpPage} />
             <Route exact path="/privacy" component={Privacy} />

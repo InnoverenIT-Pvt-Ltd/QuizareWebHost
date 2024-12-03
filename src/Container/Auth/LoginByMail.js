@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useEffect,useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Formik, Form, Field } from "formik";
@@ -9,7 +9,7 @@ import FWLogo1 from "../../../src/images/Headline and subhead.png";
 import FWLogo2 from "../../../src/images/Divider.png";
 import FWLogo3 from "../../../src/images/login.png";
 import FWLogo4 from "../../../src/images/login1.png";
-import { login,facebookLogin, googleLogin } from "./AuthAction";
+import { login,facebookLogin, connectToGoogle } from "./AuthAction";
 import { Input } from "reactstrap";
 import { Link, withRouter } from "react-router-dom";
 import {
@@ -20,71 +20,72 @@ import {
 import { Spacer, ValidationError } from "../../Components/UI/Elements";
 import Mainheader from "../../Components/Mainheader";
 import FacebookLogin from "react-facebook-login";
-import { GoogleLogin } from 'react-google-login';
+import { GoogleOAuthProvider,GoogleLogin } from "@react-oauth/google";
+// import { GoogleLogin } from 'react-google-login';
 import FacebookIcon from '@mui/icons-material/Facebook';
 
 // /**
 //  * yup validation scheme for set Password
 //  */
 
-class LoginByMail extends Component {
-    constructor(props) {
-        super(props);
-        this.responseFacebook = this.responseFacebook.bind(this);
-        this.responseGoogle = this.responseGoogle.bind(this);
-        this.state = {
-            email: "",
-            password: "",
-            loading: false,
-            render: false,
-            otp: false,
-            
-        };
-    }
-    responseFacebook(response) {
-        console.log(response);
-        this.props.facebookLogin(response.accessToken);
-      }
-      responseGoogle(response) {
-        console.log(response);
-        this.props.googleLogin(response.tokenId, this.props.history); 
-      }
-    submit = (values) => {
-        // this.enterLoading();
-        this.props.login(values, this.props.history);
-    };
-    InputComponent = ({ field, form: { touched, errors }, ...props }) => (
-        <div>
-            <div>
-                <Input {...field} {...props}
-               
-                />
-            </div>
-            {touched[field.name] && errors[field.name] && (
-                <ValidationError>{errors[field.name]}</ValidationError>
-            )}
-        </div>
-    );
-    componentDidMount() {
-        this.timeoutHandle = setTimeout(() => {
+function LoginByMail (props) {
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [render, setRender] = useState(false);
+    const [otp, setOtp] = useState(false);
+
+    useEffect(() => {
+        const params = props.match.params;
+        if (params.email && params.password) {
+            setEmail(params.email);
+            setPassword(params.password);
+        }
+
+        const timeoutHandle = setTimeout(() => {
             // Add your logic for the transition
         }, 5000);
 
-        console.log("inside cDM login");
-        console.log(this.props);
-        const params = this.props.match.params;
-        if (params.email && params.password) {
-            this.setState({
-                email: params.email,
-                password: params.password,
-            });
-        }
+        return () => {
+            clearTimeout(timeoutHandle); // Clean up the timeout when component unmounts
+        };
+    }, [props.match.params]);
+
+    const responseFacebook = (response) => {
+        console.log(response);
+        props.facebookLogin(response.accessToken);
+    };
+
+    const responseGoogle = (response) => {
+        console.log(response);
+        props.connectToGoogle(response.tokenId, props.history);
+    };
+
+    const submit = (values) => {
+        props.login(values, props.history);
+    };
+
+    const InputComponent = ({ field, form: { touched, errors }, ...props }) => (
+        <div>
+            <div>
+                <input {...field} {...props} />
+            </div>
+            {touched[field.name] && errors[field.name] && (
+                <div>{errors[field.name]}</div>
+            )}
+        </div>
+    );
+
+    const handleGoogleSuccess = (credentialResponse)=>{
+        console.log("Google Login Success",credentialResponse);
+
+        props.connectToGoogle(credentialResponse?.credential, props.history);
+
     }
-    componentWillUnmount() {
-        clearTimeout(this.timeoutHandle); // This is just necessary in the case that the screen is closed before the timeout fires, otherwise it would cause a memory leak that would trigger the transition regardless, breaking the user experience.
+    const handleGoogleError = ()=>{
+        console.log("Google Login Error")
     }
-    render() {
-        console.log(this.props.tokenId);
         return (
             <>
           
@@ -101,13 +102,13 @@ class LoginByMail extends Component {
                             <Formik
                                 enableReinitialize
                                 initialValues={{
-                                    email: this.state.email || "",
-                                    password: this.state.password || "",
+                                    email: email || "",
+                                    password: password || "",
                                     otp: ""
                                 }}
 
                                 onSubmit={(values) => {
-                                    this.submit(values);
+                                    submit(values);
                                 }}
                             >
                                 {({ errors, touched, isSubmitting, values }) => (
@@ -158,7 +159,7 @@ class LoginByMail extends Component {
                                                     type="email"
                                                     placeholder="Enter  email"
                                                     style={{ width: "100%", height: "2.2rem",borderRadius:"0.5rem",backgroundColor:"#6245C6",borderColor:"white" }}
-                                                    component={this.InputComponent}
+                                                    component={InputComponent}
                                                 />
                                             </div>
                                             <div class="w-full mt-2">
@@ -168,7 +169,7 @@ class LoginByMail extends Component {
                                                     type="password"
                                                     placeholder="Enter password"
                                                     style={{ width: "100%", height: "2.2rem",borderRadius:"0.5rem",backgroundColor:"#6245C6",borderColor:"white" }}
-                                                    component={this.InputComponent}
+                                                    component={InputComponent}
 
                                                 />
                                             </div>
@@ -246,21 +247,26 @@ class LoginByMail extends Component {
           autoLoad={false}
           scope="public_profile, email, user_birthday"
           fields="name,email,picture"
-          callback={this.responseFacebook}
+          callback={responseFacebook}
         />
         
       
                                       
-                                        <GoogleLogin
+                                        {/* <GoogleLogin
           clientId="1802272721-jkbu5gabo0qsrq7kh50n5ap7h3979tvb.apps.googleusercontent.com"
           buttonText="  Login with Google  "
-          onSuccess={this.responseGoogle}
-          onFailure={this.responseGoogle}
+          onSuccess={responseGoogle}
+        //   onFailure={responseGoogle}
           cookiePolicy={'single_host_origin'}
-         
-        />
-      
-      
+        /> */}
+     <GoogleOAuthProvider clientId='1802272721-jkbu5gabo0qsrq7kh50n5ap7h3979tvb.apps.googleusercontent.com'>
+     <GoogleLogin
+    buttonText="Login with Google"
+    onSuccess={handleGoogleSuccess}
+    onFailure={handleGoogleError} 
+/>
+     </GoogleOAuthProvider>
+     
       </div>
                                          
                           
@@ -294,8 +300,7 @@ class LoginByMail extends Component {
                 </FlexContainer>
             </>
         );
-    }
-}
+ }
 
 const mapStateToProps = ({ auth, job }) => ({
 
@@ -305,7 +310,7 @@ const mapDispatchToProps = (dispatch) =>
         {
             login,
             facebookLogin,
-      googleLogin
+            connectToGoogle
 
         },
         dispatch

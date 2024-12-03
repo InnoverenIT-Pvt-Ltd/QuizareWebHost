@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react'
 import { LoginSocialFacebook, LoginSocialGoogle } from "reactjs-social-login"
 import { FacebookLoginButton, GoogleLoginButton } from 'react-social-login-buttons'
-import { facebookLogin, googleLogin } from "../Auth/AuthAction";
+import { facebookLogin, connectToGoogle } from "../Auth/AuthAction";
 import { bindActionCreators } from 'redux';
 import { Link, withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
@@ -16,7 +16,7 @@ const Test = (props) => {
     }, [])
     const onLoginToGoogleStart = useCallback(() => {
         console.log(googleResponse)
-        props.googleLogin(googleResponse.tokenId)
+        props.connectToGoogle(googleResponse.tokenId)
     }, [])
 
     return (
@@ -63,7 +63,7 @@ const mapDispatchToProps = (dispatch) =>
     bindActionCreators(
         {
             facebookLogin,
-            googleLogin
+            connectToGoogle
         },
         dispatch
     );
