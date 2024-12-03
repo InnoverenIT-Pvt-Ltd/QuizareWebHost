@@ -54,8 +54,8 @@ class PaymentOutStripeCheckoutForm extends React.Component {
           disabled={!stripe}
           className="StripePayButton"
         >
-          Pay 
-          {`${this.props.eachSub.pricePerMonth}  ${"EUR"}`}
+           
+          {`Pay ${this.props.eachSub.pricePerMonth}  ${"EUR"}`}
           {/* {`${this.props.finalgrandTotalValue} ${this.props.currency}`} {this.props.invencartItem.cartSummary && this.props.invencartItem.cartSummary.grandTotal}*/}
         </button>
       </form>

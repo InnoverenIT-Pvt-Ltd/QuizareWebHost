@@ -257,10 +257,10 @@ class SignUpPage extends Component {
                                              checked={this.state.isChecked}
                                              onChange={(e) => this.handleSteppriPolInd(e.target.checked)}
                                               class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"></input>
-                                                <h3 class="ml-2 text-white font-[Poppins]">By creating an account, I agree to our 
-                                                   <Link to="/term"> Terms of use</Link>&nbsp;
-                                                     and
-                                                     <Link to="/privacy"> Privacy Policy </Link>
+                                                <h3 class="ml-2 text-white font-[Poppins] flex w-[35rem] justify-evenly">By creating an account, I agree to our 
+                                                   <a href="/term" target="blank"> 
+                                                    <div class="underline">Terms of use </div></a> and
+                                                     <a href="/privacy" target="blank">   <div class="underline">Privacy Policy </div></a>
                                                       </h3>
                                                 
                                                 </div>

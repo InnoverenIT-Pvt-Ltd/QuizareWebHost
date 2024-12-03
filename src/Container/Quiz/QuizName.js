@@ -16,6 +16,7 @@ import MainHeader from '../../Components/Mainheader';
 import CreateQuiz from '../../Components/Quizs/CreateQuiz';
 import Menu from '../../Components/Quizs/Menu';
 import { Link } from 'react-router-dom/cjs/react-router-dom';
+import LibrarySearchedData from './Child/QuizLibrary/LibrarySearchedData';
 
 const QuizSchema = Yup.object().shape({
 
@@ -39,6 +40,11 @@ function QuizName(props) {
   return (
     <>
       <Menu/>
+      {props.librarySerachedData.length > 0 ? (
+    <LibrarySearchedData
+    librarySerachedData={props.librarySerachedData}
+    />
+  ) : (
       <Formik
         initialValues={{
           duration: "",
@@ -161,7 +167,7 @@ function QuizName(props) {
         )}
 
       </Formik>
-
+ )}  
     </>
   );
 }
@@ -169,7 +175,8 @@ const mapStateToProps = ({ auth, quiz }) => ({
   addingQuizName: quiz.addingQuizName,
   addingQuizNameError: quiz.addingQuizNameError,
   quizName: quiz.quizName,
-  quizHostId: auth.userDetails.userId
+  quizHostId: auth.userDetails.userId,
+  librarySerachedData:auth.librarySerachedData
 });
 
 const mapDispatchToProps = dispatch =>

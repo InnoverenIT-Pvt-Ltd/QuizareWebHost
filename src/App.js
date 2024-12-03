@@ -6,7 +6,6 @@ import { Route, Switch } from "react-router-dom";
 import "./App.css";
 import { BundleLoader } from "./Components/Placeholder";
 import PrivateRoute from "./Helpers/Auth/PrivateRoute";
-import AppRouter from "./Container/Quiz/EditQuiz/Swipe/AppRouter";
 import Privacy from "./Privacy";
 import Termco from "./Termco";
 import SelectPlan from "./Main/SelectPlan";

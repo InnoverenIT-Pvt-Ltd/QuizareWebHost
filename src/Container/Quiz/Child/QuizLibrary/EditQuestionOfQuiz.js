@@ -92,7 +92,65 @@ function EditQuestionofQuiz(props) {
     console.log(props.item)
     console.log(props.selectedQuestionIndex)
     
-    const handleGenerateQuiz = async () => {
+    const GenerateSingleQuizUsingChatgpt = async () => {
+      setError(""); 
+
+      const QGen = {
+          noOfQstn: "1",
+          quizHostId: props.quizHostId,
+          quizName: props.showQuiz.quizName,
+          type: "ChatGpt",
+      };
+
+      try {
+          const generateQuizResponse = await axios.post(`${base_url}/quiz/save/usingChatGpt`, QGen); 
+
+          if (!props.showQuiz.quizId) {
+              throw new Error("Failed to generate quiz. Quiz ID is missing.");
+          }
+          setshowInputQstn(false);
+
+          const query = {
+              user_question:props.showQuiz.quizName,
+              questions_required: "1",
+              request_type: "MCQ_Content",
+              options_required: "4",
+              userid: props.quizHostId,
+              quizId: props.showQuiz.quizId,
+              type: "ChatGpt",
+          };
+
+          const userQueryResponse = await axios.post(`${base_url2}/user_query/`, query); 
+
+       
+          const userPre = {
+              questionDTOS: userQueryResponse.data.response.ai_response.questions.map((qstn, index) => ({
+                  liveInd: true,
+                  number: index,
+                  option1: qstn.options[0]?.value || "",
+                  option2: qstn.options[1]?.value || "",
+                  option3: qstn.options[2]?.value || "",
+                  option4: qstn.options[3]?.value || "",
+                  question: qstn.question,
+                  quizId: props.showQuiz.quizId,
+                  type: "ChatGpt",
+              })),
+              quizId: props.showQuiz.quizId,
+          };
+
+
+          await axios.post(`${base_url}/question/multiple/questionsSave`, userPre); 
+          
+          props.getQuestionList(props.showQuiz.quizId);
+          // props.history.push(`/updateQuizNameInLibrary/${quizName}/${generateQuizResponse.data.duration}/${quizId}`);
+
+      } catch (err) {
+          console.error(err);
+          setError(err.message || "An error occurred while generating the quiz.");
+      }
+  };
+
+    const GenerateMultipleQuizUsingChatgpt = async () => {
       setError(""); 
 
       const QGen = {
@@ -141,7 +199,7 @@ function EditQuestionofQuiz(props) {
 
           await axios.post(`${base_url}/question/multiple/questionsSave`, userPre); 
           
-
+          props.getQuestionList(props.showQuiz.quizId);
           // props.history.push(`/updateQuizNameInLibrary/${quizName}/${generateQuizResponse.data.duration}/${quizId}`);
 
       } catch (err) {
@@ -374,14 +432,14 @@ function EditQuestionofQuiz(props) {
                           
                           
                             onClick={() => {
-                              const query = {
-                                request_type: "MCQ",
-                                user_question: values.question,
-                                options_required: "4",
-                                userid: props.userId,
-                                quizId: props.item.quizId,
-                              };
-                              props.addUserQuery(query);
+                              // const query = {
+                              //   request_type: "MCQ",
+                              //   user_question: values.question,
+                              //   options_required: "4",
+                              //   userid: props.userId,
+                              //   quizId: props.item.quizId,
+                              // };
+                              GenerateSingleQuizUsingChatgpt();
                               setQuestionSource("ChatGpt");
                             }}
                           >
@@ -423,7 +481,7 @@ function EditQuestionofQuiz(props) {
   placeholder="Enter No.of Questions"
   value={questionReq}
   onChange={(e) => setQuestionReq(e.target.value)}
-  onKeyDown={(e) => e.key === 'Enter' && handleGenerateQuiz()}
+  onKeyDown={(e) => e.key === 'Enter' && GenerateMultipleQuizUsingChatgpt()}
 />
 )}
 </>

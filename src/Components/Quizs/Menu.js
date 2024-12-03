@@ -18,19 +18,25 @@ import { Link, withRouter } from "react-router-dom";
 import ProcessSpareDrawer from "./ProcessSpareDrawer";
 import LibrayEmptyPage from "./LibrayEmptyPage";
 import UpgradeSpareDrawer from "./UpgradeSpareDrawer";
+import ChatGpt from "../../images/chatgpt.png";
+import axios from "axios";
+import { base_url } from "../../Config/Auth";
 
 const Menu = (props) => {
   const [click, setClick] = useState(false);
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
   const [isDropdownVisible, setDropdownVisible] = useState(false);
-
   const [currentData, setCurrentData] = useState("");
   const [searchOnEnter, setSearchOnEnter] = useState(false);  //Code for Search
   const [startTime, setStartTime] = useState(null);
-    const [isRecording, setIsRecording] = useState(false); 
-    const minRecordingTime = 3000; // 3 seconds
-    const timerRef = useRef(null);
+  const [isRecording, setIsRecording] = useState(false); 
+  const minRecordingTime = 3000; // 3 seconds
+  const timerRef = useRef(null);
+  const [counteRecord,setcounteRecord]=useState({});
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
   // useEffect(() => {
   //  // props.getUserDetails(props.userId)
   // }, [props.userId]);
@@ -136,6 +142,23 @@ const Menu = (props) => {
   function handleCallBack (data)  {
     props.history.push(`/how1`);
   };
+
+  useEffect(()=>{
+  const fetchCounter= async () => {
+    try {
+      const response = await axios.get(`${base_url}/userDetails/userDetails/subscription/question/counter/${props.quizHostId}`,{  headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },});
+      setcounteRecord(response.data);
+      setLoading(false);
+    } catch (error) {
+      setError(error);
+      setLoading(false);
+    }
+  }; 
+  fetchCounter();
+},[]);
+
   console.log(props.user.noOfQuizes)
   return (
     <div className="header">
@@ -275,9 +298,9 @@ const Menu = (props) => {
                 <a href="/how2" >
 <Button
  style={{  height: "2rem",display:"flex",justifyContent:"center",alignItems:"center",backgroundColor:"white" }}
- onClick={() => {
-  props.handleSpareProcess(true);
-}}
+//  onClick={() => {
+//  props.handleSpareProcess(true);
+// }}
 >
 <h3 class="font-medium  text-lg max-sm:text-xs">Create</h3>
 </Button>
@@ -292,6 +315,8 @@ const Menu = (props) => {
 }}
 >
 <h3 class="font-medium  text-lg max-sm:text-xs">  {props.user.subscriptionName === null ? ("Select Plan") : ( props.user.subscriptionName)}</h3>
+<img src={ChatGpt} className="w-6 h-6"/>  <h3 class="font-medium  text-lg max-sm:text-xs">
+  {`${counteRecord.usedQstnCnt}/${counteRecord.totalQstnCnt}`}</h3>
 </Button>
 {/* </Link> */}
 </div>
