@@ -10,6 +10,8 @@ import FWLogo2 from "../../../src/images/Divider.png";
 import FWLogo3 from "../../../src/images/login.png";
 import FWLogo4 from "../../../src/images/login1.png";
 import { login,facebookLogin, connectToGoogle } from "./AuthAction";
+import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye"; // Material-UI Icon for visible state
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { Input } from "reactstrap";
 import { Link, withRouter } from "react-router-dom";
 import {
@@ -35,6 +37,10 @@ function LoginByMail (props) {
     const [loading, setLoading] = useState(false);
     const [render, setRender] = useState(false);
     const [otp, setOtp] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
+    const togglePasswordVisibility = () => {
+        setShowPassword((prev) => !prev);
+      };
 
     useEffect(() => {
         const params = props.match.params;
@@ -162,19 +168,35 @@ function LoginByMail (props) {
                                                     component={InputComponent}
                                                 />
                                             </div>
-                                            <div class="w-full mt-2">
-                                            <div class="text-white font-normal font-[Poppins]">Password</div>
-                                                <Field
+                                            <div className="w-full mt-2">
+                                                <div className="text-white font-normal font-[Poppins]">Password</div>
+                                                <div className="relative">
+                                                    <Field
                                                     name="password"
-                                                    type="password"
+                                                    type={showPassword ? "text" : "password"}
                                                     placeholder="Enter password"
-                                                    style={{ width: "100%", height: "2.2rem",borderRadius:"0.5rem",backgroundColor:"#6245C6",borderColor:"white" }}
+                                                    style={{
+                                                        width: "100%",
+                                                        height: "2.2rem",
+                                                        borderRadius: "0.5rem",
+                                                        backgroundColor: "#6245C6",
+                                                        borderColor: "white",
+                                                        paddingRight: "2.5rem", // Space for the toggle button
+                                                    }}
                                                     component={InputComponent}
-
-                                                />
-                                            </div>
+                                                    />
+                                                    <button
+                                                    type="button"
+                                                    className="absolute right-2 top-1/2 transform -translate-y-1/2 text-white"
+                                                    onClick={togglePasswordVisibility}
+                                                    style={{ background: "none", border: "none", cursor: "pointer" }}
+                                                    >
+                                                    {showPassword ? <RemoveRedEyeIcon /> : <VisibilityOffIcon />}
+                                                    </button>
+                                                </div>
+                                                </div>
                                             <div className="flex justify-start mt-2 w-wk">
-                                            <Link to="/changepassword">
+                                            <Link to="/newforgotpassword">
                                             <div className="text-white font-semibold font-[Poppins]">Forgot Password</div>
                                             </Link>
                                             </div>

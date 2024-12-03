@@ -9,6 +9,7 @@ import PrivateRoute from "./Helpers/Auth/PrivateRoute";
 import Privacy from "./Privacy";
 import Termco from "./Termco";
 import SelectPlan from "./Main/SelectPlan";
+const NewForgetPassword = lazy(() => import("./Container/Auth/NewForgetPassword"))
 const ForgetPasswordForm = lazy(() => import("./Container/Auth/ForgetPasswordForm"))
 const LoginByMail = lazy(() => import("./Container/Auth/LoginByMail"))
 const SignUpPage = lazy(() => import("./Container/Auth/SignUpPage"))
@@ -34,6 +35,7 @@ class App extends Component {
             <Route exact path="/selectplan" component={SelectPlan} />
             <Route exact path="/changepassword" component={ChangePassword} />
             <Route exact path="/forgotPassword" component={ForgetPasswordForm} />
+            <Route exact path="/newforgotpassword" component={NewForgetPassword} />
             <Route exact path="/drb/payloading/:stripePaymentId/:paymentId/:subscriptionId/:userId" component={StripeOutPayLoading} />
             {fetchingUserDetails ? (
               <BundleLoader />

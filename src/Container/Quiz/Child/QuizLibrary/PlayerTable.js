@@ -10,6 +10,10 @@ useEffect(() => {
   props.getPlayersDetails(props.data.quizId);
 }, []);
 const playersList = props.playersDetails.player
+const quizData = {
+  hostName: "Suraj Subudhi",
+ 
+};
 const columns = [
     {
       title: "Player",
@@ -30,6 +34,10 @@ const columns = [
   ];
   return (
    <>
+ <div className="flex items-center  my-6">
+      <p className="text-sm font-bold  text-gray-600 mr-2">Hosted By:</p>
+      <h2 className="text-lg font-bold text-gray-500">{quizData.hostName}</h2>
+    </div>
    <StyledTable
    columns={columns}
      dataSource={playersList}
