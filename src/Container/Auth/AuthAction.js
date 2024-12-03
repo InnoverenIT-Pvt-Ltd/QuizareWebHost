@@ -261,7 +261,7 @@ export const updatePassword = (data, cb) => (dispatch) => {
       message.success("Password has been changed successfully !!")
     })
     .catch((err) => {
-      cb()
+      cb();
 
       dispatch({
         type: types.UPDATE_PASSWORD_FAILURE,

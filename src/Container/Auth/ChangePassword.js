@@ -214,7 +214,7 @@ class ForgetPasswordForm extends Component {
                         <Field
                           name="password"
                           type={this.state.showPassword ? "text" : "password"} // Toggle input type
-                          style={{ width: "100%", height: "2rem", borderRadius: "0.25rem" }}
+                          style={{ width: "100%", height: "2rem", borderRadius: "0.25rem", color:"black" }}
                           component={InputComponent}
                         />
                         <button
@@ -235,7 +235,7 @@ class ForgetPasswordForm extends Component {
                         <Field
                           name="confirmPassword"
                           type={this.state.showConfirmPassword ? "text" : "password"} // Toggle input type
-                          style={{ width: "100%", height: "2rem", borderRadius: "0.25rem" }}
+                          style={{ width: "100%", height: "2rem", borderRadius: "0.25rem", color:"black" }}
                           component={InputComponent}
                         />
                         <button
