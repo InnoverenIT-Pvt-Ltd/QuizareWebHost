@@ -7,7 +7,7 @@ import { Formik, Form, FastField, Field, FieldArray } from "formik";
 import * as Yup from "yup";
 import { GoogleLogin } from 'react-google-login';
 import FWLogo from "../../../src/images/note-2.png";
-import { facebookLogin, googleLogin } from "../Auth/AuthAction";
+import { facebookLogin, connectToGoogle } from "../Auth/AuthAction";
 import FacebookLogin from "react-facebook-login";
 import Mainheader from "../../Components/Mainheader";
 const { Option } = Select;
@@ -32,7 +32,7 @@ function Login(props) {
 
   const responseGoogle = (response) => {
     console.log(response);
-    props.googleLogin(response.tokenId, props.history)
+    props.connectToGoogle(response.tokenId, props.history)
   };
 
   let google = <div>
@@ -156,7 +156,7 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       facebookLogin,
-      googleLogin
+      connectToGoogle
     },
     dispatch
   );
