@@ -102,7 +102,11 @@ const SelectPlan = (props) => {
                                     <div className="flex items-center">
                                         <h2 className="text-2xl font-bold font-[Poppins]">{item.subscriptionName}</h2>
                                     </div>
-                                    <p className="text-4xl font-bold flex font-[Poppins]">${item.pricePerMonth}<span className="text-lg">/month</span></p>
+                                    {/* <p className="text-4xl font-bold flex font-[Poppins]">${item.pricePerMonth}<span className="text-lg">/month</span></p> */}
+                                    <p className="text-4xl font-bold flex items-baseline font-[Poppins]">
+                                    ${item.pricePerMonth}
+                                    <span className="text-sm align-baseline  font-[Poppins] text-gray-500">/month</span>
+                                    </p>
                                     <button
                                         className={`mt-6 ${item.isActive || item.subscriptionId === selectedPlanId ? 'bg-gray-300 text-gray-700' : 'bg-[#3B16B7] text-white'} py-2 px-4 rounded-lg w-full`}
                                         onClick={() => {
@@ -118,8 +122,8 @@ const SelectPlan = (props) => {
                                         <div className="font-[Poppins] font-medium">{item.subscriptionId === selectedPlanId ? 'Plan Selected' : 'Select Plan'}</div>
                                     </button>
                                     <ul className="text-left mt-4">
-                                        <li className="font-[Poppins]">✓ {item.noOfQuestion} Questions</li>
-                                        {/* <li className="font-[Poppins]">✓ {item.description} </li> */}
+                                        <li className="font-[Poppins] text-sm">✓ {item.noOfQuestion} Questions</li>
+                                        <li className="font-[Poppins] text-sm">✓ {item.description} </li>
                                         {/* <li className=" font-normal ml-5  font-[Poppins] " dangerouslySetInnerHTML={{ __html:item.description  }} /> */}
                                     </ul>
                                     {item.recommendInd && <div className="absolute top-[-2.5rem] left-[8rem] bg-purple-500 text-white py-1 px-4 text-sm rounded-xl">Most Popular</div>}
@@ -129,7 +133,7 @@ const SelectPlan = (props) => {
                     </div>
                 </div>
             </div>
-            
+                       
             <PaymentOutSubscriptionDrawer
              eachSub={eachSub}
              stripeModalVisible={stripeModalVisible}
