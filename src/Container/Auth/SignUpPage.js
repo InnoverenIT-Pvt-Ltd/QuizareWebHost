@@ -135,32 +135,32 @@ class SignUpPage extends Component {
                                             <h2 class="text-3xl font-medium font-[Poppins] text-white flex justify-start w-wk">Sign up now</h2>                                
                                             <div className="flex justify-between w-wk mt-4">
                                             <div className="w-[47.5%]">
-                                                <div class="text-white font-normal font-[Poppins]">First name</div>
+                                                <div class="text-white font-normal font-[Poppins]">First Name</div>
                                                 <Field
                                                     name="name"
                                                     type="text"                    
-                                                    placeholder="First name"
+                                                    placeholder="First Name"
                                                     style={{ width: "100%", height: "2.2rem",borderRadius:"0.5rem",backgroundColor:"#6245C6",borderColor:"white",color:"white" }}
                                                     component={InputComponent}
                                                 />
                                             </div>
                                             <div className="w-[47.5%]">
-                                                <div class="text-white font-normal font-[Poppins]">Last name</div>
+                                                <div class="text-white font-normal font-[Poppins]">Last Name</div>
                                                 <Field
                                                     name="lastName"
                                                     type="text"                                              
-                                                    placeholder="Last name"
+                                                    placeholder="Last Name"
                                                     style={{ width: "100%", height: "2.2rem",borderRadius:"0.5rem",backgroundColor:"#6245C6",borderColor:"white",color:"white" }}
                                                     component={InputComponent}
                                                 />
                                             </div>
                                             </div>
                                             <div class="w-full mt-2">
-                                            <div class="text-white font-normal font-[Poppins]">Email address</div>
+                                            <div class="text-white font-normal font-[Poppins]">Email Address</div>
                                                 <Field
                                                     name="emailID"
                                                     type="email"
-                                                    placeholder="Enter email"
+                                                    placeholder="Enter Email"
                                                     style={{ width: "100%", height: "2.2rem",borderRadius:"0.5rem",backgroundColor:"#6245C6",borderColor:"white",color:"white" }}
                                                     component={InputComponent}
                                                 />
@@ -182,7 +182,7 @@ class SignUpPage extends Component {
                         <Field
                           name="password"
                           type={this.state.type}
-                          placeholder="Create password"
+                          placeholder="Create Password"
                           component={this.InputComponent}
                           style={{ width: "100%", height: "2.2rem",borderRadius:"0.5rem",backgroundColor:"#6245C6",borderColor:"white",color:"white" }}
                         />
@@ -205,11 +205,11 @@ class SignUpPage extends Component {
 
                     <div  className="w-[47.5%]">
                    
-                    <div class="text-white font-normal font-[Poppins]">Confirm password</div>
+                    <div class="text-white font-normal font-[Poppins]">Confirm Password</div>
                           <Field
                             name="confirmPassword"
                             type={this.state.type1}
-                            placeholder="Confirm password"
+                            placeholder="Confirm Password"
                             component={this.InputComponent}
                             style={{ width: "100%", height: "2.2rem",borderRadius:"0.5rem",backgroundColor:"#6245C6",borderColor:"white",color:"white" }}
 
@@ -258,9 +258,9 @@ class SignUpPage extends Component {
                                              onChange={(e) => this.handleSteppriPolInd(e.target.checked)}
                                               class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"></input>
                                                 <h3 class="ml-2 text-white font-[Poppins] flex w-[35rem] justify-evenly">By creating an account, I agree to our 
-                                                   <a href="/term" target="blank"> 
+                                                   <a href="/term" target="_blank"> 
                                                     <div class="underline">Terms of use </div></a> and
-                                                     <a href="/privacy" target="blank">   <div class="underline">Privacy Policy </div></a>
+                                                     <a href="/privacy" target="_blank">   <div class="underline">Privacy Policy </div></a>
                                                       </h3>
                                                 
                                                 </div>

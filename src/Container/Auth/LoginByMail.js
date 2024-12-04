@@ -159,11 +159,11 @@ function LoginByMail (props) {
       </div> */}
     
                                             <div class="w-full mt-6">
-                                            <div class="text-white font-normal font-[Poppins]">Email address</div>
+                                            <div class="text-white font-normal font-[Poppins]">Email Address</div>
                                                 <Field
                                                     name="email"
                                                     type="email"
-                                                    placeholder="Enter  email"
+                                                    placeholder="Enter Email"
                                                     style={{ width: "100%", height: "2.2rem",borderRadius:"0.5rem",backgroundColor:"#6245C6",borderColor:"white" }}
                                                     component={InputComponent}
                                                 />
@@ -174,7 +174,7 @@ function LoginByMail (props) {
                                                     <Field
                                                     name="password"
                                                     type={showPassword ? "text" : "password"}
-                                                    placeholder="Enter password"
+                                                    placeholder="Enter Password"
                                                     style={{
                                                         width: "100%",
                                                         height: "2.2rem",
@@ -195,7 +195,7 @@ function LoginByMail (props) {
                                                     </button>
                                                 </div>
                                                 </div>
-                                            <div className="flex justify-start mt-2 w-wk">
+                                            <div className="flex justify-start mt-8 w-wk">
                                             <Link to="/newforgotpassword">
                                             <div className="text-white font-semibold font-[Poppins]">Forgot Password</div>
                                             </Link>

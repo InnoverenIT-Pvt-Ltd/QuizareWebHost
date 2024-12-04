@@ -1121,7 +1121,7 @@ export const makeStripePayment = (data,cb) => (dispatch, getState) => {
       export const getSuscrption = () => (dispatch) => {
         dispatch({ type: types.GET_SUSCRIPTION_REQUEST });
         axios
-          .get(`${base_url}/subscription/getAll`, {
+          .get(`${base_url}/subscription/getAll/publish`, {
             headers: {
               Authorization: "Bearer " + sessionStorage.getItem("token") || "",
             },
