@@ -41,14 +41,15 @@ const LibrayEmptyPage = (props) => {
     Select Subscriptions
   </div>
 ) : (
+  <a href="/how2" >
   <div
     className="text-xs cursor-pointer underline text-[#6245C6] font-[Poppins] font-medium"
-    onClick={() => {
-      props.handleSpareProcess(true);
-    }}
+    // onClick={() => {
+    //   props.handleSpareProcess(true);
+    // }}
   >
     Create your first quiz
-  </div>
+  </div></a>
 )}
           
            </div>

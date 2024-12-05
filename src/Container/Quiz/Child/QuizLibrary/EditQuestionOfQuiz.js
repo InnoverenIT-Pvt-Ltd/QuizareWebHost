@@ -5,6 +5,7 @@ import FWLogo2 from "../../../../../src/images/tabler_bulb.png";
 import { bindActionCreators } from "redux";
 import { Button, Card, Drawer,Tooltip,Input } from "antd";
 import AddIcon from '@mui/icons-material/Add';
+import { useHistory } from "react-router-dom";
 import { MenuOutlined } from "@ant-design/icons";
 import {
     getQuestionList,
@@ -14,7 +15,9 @@ import {
     updateQuizNameByQuizId,
     addUserQuery,
     getQuizName,
-    hostQuiz
+    hostQuiz,
+    deleteQuestion,
+
 } from "../../../../Container/Quiz/QuizAction";
 import {handleShareProcess} from "../../../Auth/AuthAction";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
@@ -36,6 +39,9 @@ function EditQuestionofQuiz(props) {
     const [questionReq, setQuestionReq] = useState("");
     const [showInputQstn, setshowInputQstn] = useState(false);
     const [error, setError] = useState("");
+    const [newlyAddedQuestionIndex, setNewlyAddedQuestionIndex] = useState(null);
+
+    const history = useHistory();
 
     useEffect(() => {
         if (props.questionList.length === 0) {
@@ -43,9 +49,12 @@ function EditQuestionofQuiz(props) {
         }
         props.getQuizName(props.item.quizId)
       }, [props.questionList]);
+
     const handleAddQuestion = () => {
-        setIsNewQuestion(true);  // Switch to add mode
+      setIsNewQuestion(true);
+      setNewlyAddedQuestionIndex(props.questionList.length); 
     };
+    
     function handleSetCurrentItem(item) {
       setCurrentItem(item);
     }
@@ -78,6 +87,15 @@ function EditQuestionofQuiz(props) {
           };
           props.updateQuestionsInQuiz(updatedQuestion, props.item.id);
         }
+
+        const handleDeleteQuestion = (item) => {
+          props.deleteQuestion(item.id,callIntoQuiz);
+          
+      };
+  const callIntoQuiz=()=>{
+    history.push(`/updateQuizInLibrary/${props.showQuiz.quizName}/${props.showQuiz.quizId}`);
+  }
+
         const handleUpdateName = () => {
             const updatedName = {
                 quizHostId:props.quizHostId,
@@ -214,8 +232,8 @@ function EditQuestionofQuiz(props) {
              enableReinitialize
                 initialValues={{
                     quizHostId: props.quizHostId,
-                    quizId: props.item.quizId,
-                    categoryId: props.item.categoryId,
+                    quizId: props.quizId,
+                    // categoryId: props.item.categoryId,
                     question: isNewQuestion
       ? checkObj
         ? question
@@ -299,9 +317,13 @@ function EditQuestionofQuiz(props) {
                       console.log(i),
                         <Card
                             key={i}
-                            className={`cursor-pointer mb-2 ${i === props.selectedQuestionIndex ? 'bg-blue-200' : ''}
-                            ${item.completeInd ? "border-green-500" : "border-red-500"} border-4
-                            `}
+                            className={`cursor-pointer mb-2 ${
+                              i === props.selectedQuestionIndex
+                                ? "bg-blue-200"
+                                : ""
+                            } ${i === newlyAddedQuestionIndex ? "border-blue-500" : ""} ${item.completeInd ? "border-green-500" : "border-red-500"} border-4`}
+                            // className={`cursor-pointer mb-2 ${i === props.selectedQuestionIndex ? 'bg-blue-200' : ''}
+                            // ${item.completeInd ? "border-green-500" : "border-red-500"} border-4`}
                             onClick={() => props.handleQuestionSelect(i)}
                         >
                             Question {i + 1}
@@ -546,7 +568,7 @@ function EditQuestionofQuiz(props) {
                                                 <Button
                                                     title={""}
                                                     type="primary"
-                                                    onClick={() => props.handleDeleteQuestion(props.item.id)}
+                                                    onClick={() => handleDeleteQuestion(props.item)}
                                                     style={{  height: "3rem",backgroundColor:"#3B16B7",borderRadius:'0.25rem' }}
                                                 >
                                                      <h3 class="font-medium text-white text-base font-[Poppins]">Delete</h3>
@@ -658,6 +680,7 @@ const mapStateToProps = ({ auth, quiz }) => ({
     questionList: quiz.questionList,
     quizHostId: auth.userDetails.userId,
     processShareModal: auth.processShareModal,
+
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -671,7 +694,8 @@ const mapDispatchToProps = (dispatch) =>
             addUserQuery,
             getQuizName,
             handleShareProcess,
-            hostQuiz
+            hostQuiz,
+            deleteQuestion
         },
         dispatch
     );

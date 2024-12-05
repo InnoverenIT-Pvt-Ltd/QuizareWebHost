@@ -19,10 +19,9 @@ import { Link } from 'react-router-dom/cjs/react-router-dom';
 import LibrarySearchedData from './Child/QuizLibrary/LibrarySearchedData';
 
 const QuizSchema = Yup.object().shape({
-
-  quizName: Yup.string().required("Input needed!"),
-  // duration: Yup.string().required("Input needed!"),
-
+    quizName: Yup.string()
+      .max(60, 'Quiz name cannot be longer than 60 characters')
+      .required('Quiz name is required'),
 });
 function QuizName(props) {
   const history = useHistory();
@@ -34,6 +33,7 @@ function QuizName(props) {
       history.push(`/how2`);
     }
   }
+
 
 
 
@@ -53,8 +53,7 @@ function QuizName(props) {
           type:"Normal"
         }}
         validationSchema={QuizSchema}
-        onSubmit={(values, { resetForm }) => {
-
+        onSubmit={(values,{ }) => {
           props.addQuizName(
             {
               ...values
@@ -64,7 +63,9 @@ function QuizName(props) {
           );
           //resetForm()
         }}
+        
       >
+        
         {({
           handleChange,
           handleBlur,
@@ -72,7 +73,10 @@ function QuizName(props) {
           setFieldValue,
           errors,
           values,
+          touched,
+          isValid,
         }) => (
+          
           <Form class="flex  justify-center flex-col items-center  max-sm:w-11/12 mt-8 m-auto h-[60vh] md:mt-12 w-4/12 md:h-[80vh] ">
 
               <div>
@@ -99,8 +103,8 @@ function QuizName(props) {
                       //onChangeText={handleChange('quizName')}
                       style={{ width: "100%", height: "2rem",borderRadius:"0.25rem",backgroundColor:"#E4E2E2", }}
                       placeholder="Enter quiz name"
-
                     />
+                 
                   </div>
                   {/* <div class="mt-6">
                     <Field
@@ -129,6 +133,7 @@ function QuizName(props) {
                      type="primary"
                      htmlType="submit"
                      onClick={handleSubmit}
+                     disabled={!isValid}
                      style={{  height: "2rem",backgroundColor:"white",borderRadius:'0.25rem',width:"11rem",display:"flex",justifyContent:"center",alignItems:"center" }}
                    > <div class="font-medium text-black text-xl font-[Poppins]">Create</div></Button>
                    {/* </Link> */}

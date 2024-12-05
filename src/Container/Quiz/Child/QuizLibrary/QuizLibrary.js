@@ -33,6 +33,7 @@ import ShareDrawer from "./ShareDrawer";
 import LibrarySearchedData from "./LibrarySearchedData";
 import QuizDetailsPlayerTable from "../../../../Components/Quizs/QuizDetailsPlayerTable";
 import PlayerTableDrawer from "./PlayerTableDrawer";
+import LibrayEmptyPage from "../../../../Components/Quizs/LibrayEmptyPage";
 
 const { useState } = React;
 
@@ -92,8 +93,10 @@ const handleOpen= ()=>{
   }
   return (
     <>
+    {props.libraryQuiz.length > 0 ? (
     <div class="min-h-screen">
       <Menu />
+      
       <div className="flex justify-center flex-col w-wk items-center">
       <div className="font-[Poppins] font-bold text-base mt-4 w-[80%]">Your Quizzes</div>
       <div className="border-2 border-black w-[80%] mt-4"></div>
@@ -450,7 +453,9 @@ const handleOpen= ()=>{
           {/* </div> */}
         </Form>
       </Formik>
-      </div>
+      </div>):(
+        <LibrayEmptyPage/>
+      )}
 
     
 
