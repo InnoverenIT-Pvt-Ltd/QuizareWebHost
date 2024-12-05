@@ -1,292 +1,98 @@
-// import React, { Component } from "react";
-// import { connect } from "react-redux";
-// import { bindActionCreators } from "redux";
-// import { Formik, Form, Field } from "formik";
-// import * as Yup from "yup";
-// import FWLogo from "../../../src/images/Latest.png";
-// import Button from "antd/lib/button";
-// import { login, generateOtpByEmail, validateOtp } from "./AuthAction";
-// import { Input } from "reactstrap";
-// import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
-// import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-// import { EyeOutlined, EyeInvisibleOutlined, } from "@ant-design/icons"; // Eye icons
-// import { Link, withRouter } from "react-router-dom";
-// import {
-//     AuthContainer,
-//     FlexContainer,
-//     MainWrapper,
-// } from "../../Components/UI/Layout";
-// import { Spacer, ValidationError } from "../../Components/UI/Elements";
-// import { changePassword } from "./AuthAction"
-// import InputComponent from "../../Components/Forms/Formik/InputComponent";
-// import { createBrowserHistory } from "history";
-// import CreateQuiz from "../../Components/Quizs/CreateQuiz";
-
-// const history = createBrowserHistory();
-// // /**
-// //  * yup validation scheme for set Password
-// //  */
-
-// class ForgetPasswordForm extends Component {
-    
-//     state = {
-//         showPassword: false, // State to toggle password visibility
-//         showConfirmPassword: false, // State to toggle confirm password visibility
-//       };
-    
-//       togglePasswordVisibility = () => {
-//         this.setState((prevState) => ({
-//           showPassword: !prevState.showPassword,
-//         }));
-//       };
-    
-//       toggleConfirmPasswordVisibility = () => {
-//         this.setState((prevState) => ({
-//           showConfirmPassword: !prevState.showConfirmPassword,
-//         }));
-//       };
-    
-//     //   callback = () => {
-//     //     //history.push("/quizLibrary");
-//     //     history.push("/create")
-//     //     const redirectPath = this.props.user.noOfQuizes === 0 ? "/emptypage" : "/quizLibrary";
-//     //     window.location.replace(redirectPath);
-//     //   };
-//         callback = () => {
-//             history.push("/create")
-//         }
-//     render() {
-//         console.log(this.props);
-//         return (
-//             <>
-             
-                   
-                    
-                     
-                       
-//              {/* <CreateQuiz /> */}
-//                             <Formik
-//                                 enableReinitialize
-//                                 initialValues={{
-//                                     email: this.props.user.emailId || "",
-//                                     password: "",
-//                                     confirmPassword: ""
-//                                 }}
-
-//                                 onSubmit={(values) => {
-//                                     this.props.changePassword(
-//                                         {
-//                                             ...values
-//                                         },
-//                                         this.props.user.userId,
-//                                         this.callback
-//                                     );
-//                                 }}
-//                             >
-//                                 {({ errors, touched, isSubmitting, values }) => (
-//                                      <Form className="max-sm:w-11/12 mt-8 m-auto h-96 md:mt-12 w-2/5">
-//                                      <div className="shadow-2xl bg-white rounded-lg border-solid flex flex-col max-sm:m-0 h-full md:m-auto">
-//                                        <div className="font-semibold text-xl text-[#666666] p-4">
-//                                          Change your Password
-//                                        </div>
-//                                        <div className="h-[2px] bg-[#000000]"></div>
-//                                        <div className="h-full flex w-wk max-sm:w-wk">
-//                                          <div className="w-[60%] mt-3">
-//                                            {/* New Password Field */}
-//                                            <div className="w-wk max-sm:w-full ml-2">
-//                                              <div className="font-normal text-base text-[#666666]">
-//                                                New Password
-//                                              </div>
-//                                              <div className="relative">
-//                                                <Field
-//                                                  name="password"
-//                                                  type={this.state.showPassword ? "text" : "password"} // Toggle type
-//                                                  placeholder="New Password"
-//                                                  style={{
-//                                                    width: "100%",
-//                                                    height: "2rem",
-//                                                    borderRadius: "0.25rem",
-//                                                    color: "black",
-//                                                  }}
-//                                                  component={InputComponent}
-//                                                />
-//                                                {/* Eye Icon */}
-//                                                {this.state.showPassword ? (
-//                                                  <EyeOutlined
-//                                                    className="absolute right-2 top-1/2 transform -translate-y-1/2 text-icon cursor-pointer"
-//                                                    onClick={() =>
-//                                                      this.setState({ showPassword: !this.state.showPassword })
-//                                                    }
-//                                                  />
-//                                                ) : (
-//                                                  <EyeInvisibleOutlined
-//                                                    className="absolute right-2 top-1/2 transform -translate-y-1/2 text-icon cursor-pointer"
-//                                                    onClick={() =>
-//                                                      this.setState({ showPassword: !this.state.showPassword })
-//                                                    }
-//                                                  />
-//                                                )}
-//                                              </div>
-//                                            </div>
-                                   
-//                                            {/* Confirm Password Field */}
-//                                            <div className="w-wk max-sm:w-full ml-2 mt-3">
-//                                              <div className="font-normal text-base text-[#666666]">
-//                                                Confirm New Password
-//                                              </div>
-//                                              <div className="relative">
-//                                                <Field
-//                                                  name="confirmPassword"
-//                                                  type={this.state.showConfirmPassword ? "text" : "password"} // Toggle type
-//                                                  placeholder="Confirm New Password"
-//                                                  style={{
-//                                                    width: "100%",
-//                                                    height: "2rem",
-//                                                    borderRadius: "0.25rem",
-//                                                    color: "black",
-//                                                  }}
-//                                                  component={InputComponent}
-//                                                />
-//                                                {/* Eye Icon */}
-//                                                {this.state.showConfirmPassword ? (
-//                                                  <EyeOutlined
-//                                                    className="absolute right-2 top-1/2 transform -translate-y-1/2 text-icon cursor-pointer"
-//                                                    onClick={() =>
-//                                                      this.setState({
-//                                                        showConfirmPassword: !this.state.showConfirmPassword,
-//                                                      })
-//                                                    }
-//                                                  />
-//                                                ) : (
-//                                                  <EyeInvisibleOutlined
-//                                                    className="absolute right-2 top-1/2 transform -translate-y-1/2 text-icon cursor-pointer"
-//                                                    onClick={() =>
-//                                                      this.setState({
-//                                                        showConfirmPassword: !this.state.showConfirmPassword,
-//                                                      })
-//                                                    }
-//                                                  />
-//                                                )}
-//                                              </div>
-//                                            </div>
-//                                          </div>
-//                                        </div>
-                                   
-//                                        {/* Footer */}
-//                                        <div className="p-4 flex justify-end w-wk">
-//                                          <div className="flex justify-end w-[8rem]">
-//                                            <Button
-//                                              type="primary"
-//                                              htmlType="submit"
-//                                              disabled={values.password !== values.confirmPassword}
-//                                              loading={this.props.changingPassword}
-//                                              style={{ backgroundColor: "#3B16B7" }}
-//                                            >
-//                                              Save
-//                                            </Button>
-//                                          </div>
-//                                        </div>
-//                                      </div>
-//                                    </Form>
-                                   
-//                                 )}
-//                             </Formik>
-
-                       
-                   
-                  
-              
-//             </>
-//         );
-//     }
-// }
-
-// const mapStateToProps = ({ auth, job }) => ({
-//     user: auth.userDetails,
-//     changingPassword: auth.changingPassword
-// });
-// const mapDispatchToProps = (dispatch) =>
-//     bindActionCreators(
-//         {
-//             changePassword
-//         },
-//         dispatch
-//     );
-// export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ForgetPasswordForm));
-
-
-import React, { Component } from "react";
+import React, { useState } from "react";
+import { Formik, Field, Form } from "formik";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Formik, Form, Field } from "formik";
 import { Button } from "antd";
+import InputComponent from "../../Components/Forms/Formik/InputComponent";// Assuming this is a custom component for input fields
+import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { withRouter } from "react-router-dom";
 import { createBrowserHistory } from "history";
 import { updatePassword } from "./AuthAction";
-import InputComponent from "../../Components/Forms/Formik/InputComponent";
-import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { EyeOutlined, EyeInvisibleOutlined, } from "@ant-design/icons"; // Eye icons
 
+import * as Yup from "yup";
 const history = createBrowserHistory();
 
-class ForgetPasswordForm extends Component {
-  state = {
-    showPassword: false, // State to toggle password visibility
-    showConfirmPassword: false, // State to toggle confirm password visibility
+const formSchema = Yup.object().shape({
+  // contactOwner: Yup.string().required("Please Select contact owner"),
+  email: Yup.string().email("Enter a valid Email").required("Eamil required!"),
+  password: Yup.string().required("Enter new pssword"),
+  confirmPassword: Yup.string()
+  .oneOf([Yup.ref("password"), null], "Passwords must match") 
+  .required("Confirm Password is required"),
+});
+
+const ForgetPasswordForm = (props) => {
+  const [showPassword, setShowPassword] = useState(false); 
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false); 
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((prevState) => !prevState);
   };
 
-  togglePasswordVisibility = () => {
-    this.setState((prevState) => ({
-      showPassword: !prevState.showPassword,
-    }));
+  const toggleConfirmPasswordVisibility = () => {
+    setShowConfirmPassword((prevState) => !prevState);
   };
 
-  toggleConfirmPasswordVisibility = () => {
-    this.setState((prevState) => ({
-      showConfirmPassword: !prevState.showConfirmPassword,
-    }));
-  };
-
-  callback = () => {
-    this.props.history.push("/quizLibrary");
-    // const redirectPath = this.props.user.noOfQuizes === 0 ? "/emptypage" : "/quizLibrary";
+  const callback = () => {
+    props.history.push("/quizLibrary");
+    // const redirectPath = props.user.noOfQuizes === 0 ? "/emptypage" : "/quizLibrary";
     // window.location.replace(redirectPath);
   };
 
-  render() {
-    return (
-      <>
-        <Formik
-          enableReinitialize
-          initialValues={{
-            email:  "",
-            password: "",
-            confirmPassword: "",
-          }}
-          onSubmit={(values) => {
-            this.props.updatePassword(
-              {
-                ...values,
-              },
-              
-              this.callback
-            );
-          }}
-        >
-          {({ errors, touched, isSubmitting, values }) => (
-            <Form className="max-sm:w-11/12 mt-8 m-auto h-auto md:mt-12 w-2/5">
-            <div className="shadow-2xl bg-white rounded-lg border-solid flex flex-col max-sm:m-0 h-full md:m-auto">
-              <div className="font-semibold text-xl text-[#666666] p-4">
-                Forget Password  
+  return (
+    <Formik
+      enableReinitialize
+      initialValues={{
+        email: "",
+        password: "",
+        confirmPassword: "",
+      }}
+      validationSchema={formSchema}
+      onSubmit={(values) => {
+        props.updatePassword(
+          {
+            ...values,
+          },
+          callback
+        );
+      }}
+    >
+      {({ errors, touched, isSubmitting, values }) => (
+        <Form className="max-sm:w-11/12 mt-8 m-auto h-auto md:mt-12 w-2/5">
+          <div className="shadow-2xl bg-white rounded-lg border-solid flex flex-col max-sm:m-0 h-full md:m-auto">
+            <div className="font-semibold text-xl text-[#666666] p-4">
+              Forget Password
+            </div>
+            <div className="h-[2px] bg-[#000000]"></div>
+            <div className="h-full flex w-wk max-sm:w-wk flex-col p-4">
+              <div className="w-wk max-sm:w-full mb-3">
+                <div className="font-normal text-base text-[#666666]">Email</div>
+                <Field
+                  name="email"
+                  type="email"
+                  style={{
+                    width: "100%",
+                    height: "2rem",
+                    borderRadius: "0.25rem",
+                    color: "black",
+                  }}
+                  component={InputComponent}
+                />
+                {touched.email && errors.email && (
+                  <div className="text-red-500 text-sm mt-1">{errors.email}</div>
+                )}
               </div>
-              <div className="h-[2px] bg-[#000000]"></div>
-              <div className="h-full flex w-wk max-sm:w-wk flex-col p-4">
-                <div className="w-wk max-sm:w-full mb-3">
-                  <div className="font-normal text-base text-[#666666]">Email</div>
+
+              <div className="w-wk max-sm:w-full">
+                <div className="font-normal text-base text-[#666666]">
+                  New Password
+                </div>
+                <div className="relative">
                   <Field
-                    name="email"
-                    type="email"
+                    name="password"
+                    type={showPassword ? "text" : "password"}
                     style={{
                       width: "100%",
                       height: "2rem",
@@ -295,90 +101,67 @@ class ForgetPasswordForm extends Component {
                     }}
                     component={InputComponent}
                   />
-                </div>
-          
-                <div className="w-wk max-sm:w-full">
-                  <div className="font-normal text-base text-[#666666]">
-                    New Password
-                  </div>
-                  <div className="relative">
-                    <Field
-                      name="password"
-                      type={this.state.showPassword ? "text" : "password"}
-                      style={{
-                        width: "100%",
-                        height: "2rem",
-                        borderRadius: "0.25rem",
-                        color: "black",
-                      }}
-                      component={InputComponent}
-                    />
-                    <button
-                      type="button"
-                      className="absolute right-2 text-lg"
-                      onClick={this.togglePasswordVisibility}
-                    >
-                      {this.state.showPassword ? (
-                        <RemoveRedEyeIcon />
-                      ) : (
-                        <VisibilityOffIcon />
-                      )}
-                    </button>
-                  </div>
-                </div>
-          
-                <div className="w-wk max-sm:w-full mt-3">
-                  <div className="font-normal text-base text-[#666666]">
-                    Confirm New Password
-                  </div>
-                  <div className="relative">
-                    <Field
-                      name="confirmPassword"
-                      type={this.state.showConfirmPassword ? "text" : "password"}
-                      style={{
-                        width: "100%",
-                        height: "2rem",
-                        borderRadius: "0.25rem",
-                        color: "black",
-                      }}
-                      component={InputComponent}
-                    />
-                    <button
-                      type="button"
-                      className="absolute right-2 text-lg"
-                      onClick={this.toggleConfirmPasswordVisibility}
-                    >
-                      {this.state.showConfirmPassword ? (
-                        <RemoveRedEyeIcon />
-                      ) : (
-                        <VisibilityOffIcon />
-                      )}
-                    </button>
-                  </div>
+                  <button
+                    type="button"
+                    className="absolute right-2 text-lg"
+                    onClick={togglePasswordVisibility}
+                  >
+                    {showPassword ? <RemoveRedEyeIcon /> : <VisibilityOffIcon />}
+                  </button>
+                  {touched.password && errors.password && (
+                  <div className="text-red-500 text-sm mt-1">{errors.password}</div>
+                )}
                 </div>
               </div>
-          
-              <div className="p-4 flex justify-end w-wk">
-                <div className="flex justify-end w-[8rem]">
-                  <Button
-                    type="primary"
-                    htmlType="submit"
-                    disabled={values.password !== values.confirmPassword}
-                    loading={this.props.updatingPasswordOfUser}
-                    style={{ backgroundColor: "#3B16B7" }}
+
+              <div className="w-wk max-sm:w-full mt-3">
+                <div className="font-normal text-base text-[#666666]">
+                  Confirm New Password
+                </div>
+                <div className="relative">
+                  <Field
+                    name="confirmPassword"
+                    type={showConfirmPassword ? "text" : "password"}
+                    style={{
+                      width: "100%",
+                      height: "2rem",
+                      borderRadius: "0.25rem",
+                      color: "black",
+                    }}
+                    component={InputComponent}
+                  />
+                  <button
+                    type="button"
+                    className="absolute right-2 text-lg"
+                    onClick={toggleConfirmPasswordVisibility}
                   >
-                    Save
-                  </Button>
+                    {showConfirmPassword ? <RemoveRedEyeIcon /> : <VisibilityOffIcon />}
+                  </button>
+                  {touched.confirmPassword && errors.confirmPassword && (
+                  <div className="text-red-500 text-sm mt-1">{errors.confirmPassword}</div>
+                )}
                 </div>
               </div>
             </div>
-          </Form>
-          
-          )}
-        </Formik>
-      </>
-    );
-  }
+
+            <div className="p-4 flex justify-end w-wk">
+              <div className="flex justify-end w-[8rem]">
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  disabled={values.email==="" || values.password !== values.confirmPassword}
+                  loading={props.updatingPasswordOfUser}
+                  style={{ backgroundColor: "#3B16B7" }}
+                >
+                  Save
+                </Button>
+              </div>
+            </div>
+          </div>
+        </Form>
+      )}
+    </Formik>
+  );
 }
 
 const mapStateToProps = ({ auth }) => ({

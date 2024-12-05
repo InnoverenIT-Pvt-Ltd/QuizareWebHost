@@ -185,7 +185,7 @@ export const addQuestionQuiz = (quiz, quizId, cb) => dispatch => {
         payload: res.data,
       });
       cb && cb("success");
-      window.location.reload();
+      // window.location.reload();
     })
     .catch(err => {
       //console.log(err);
@@ -245,7 +245,7 @@ export const updateQuestion = questionId => dispatch => {
 /**
  * delete a question from table
  */
-export const deleteQuestion = (id, cb) => dispatch => {
+export const deleteQuestion = (id,quizId, cb) => dispatch => {
   console.log("inside delete question", id)
   dispatch({
     type: types.DELETE_QUESTION_BY_QUESTION_ID_REQUEST,
@@ -257,6 +257,9 @@ export const deleteQuestion = (id, cb) => dispatch => {
       },
     })
     .then(res => {
+      // dispatch(getQuestionList(quizId));
+      // dispatch(getFinalizeQuiz(quizId));
+      // dispatch(getQuizName(quizId));
       dispatch({
         type: types.DELETE_QUESTION_BY_QUESTION_ID_SUCCESS,
         payload: id,
@@ -868,7 +871,7 @@ export const getLibraryQuiz = (userId) => dispatch => {
     })
     .then(res => {
       //window.location.href = res.data.length === 0 ? '/librayCreat' : '/quizLibrary';
-      history.push(res.data.length === 0 ? '/librayCreat' : '/quizLibrary');
+      history.push(res.data.length === 0 ? '/emptypage' : '/quizLibrary');
       console.log(res.data);
       dispatch({
         type: types.GET_LIBRARY_QUIZ_SUCCESS,
@@ -882,12 +885,12 @@ export const getLibraryQuiz = (userId) => dispatch => {
         type: types.GET_LIBRARY_QUIZ_FAILURE,
         payload: err,
       });
-      Swal.fire({
-        icon: "error",
-        title: "Please add atleast 1 question!",
-        showConfirmButton: false,
-        timer: 1500
-      });
+      // Swal.fire({
+      //   icon: "error",
+      //   title: "Please add atleast 1 question!",
+      //   showConfirmButton: false,
+      //   timer: 1500
+      // });
     });
 };
 

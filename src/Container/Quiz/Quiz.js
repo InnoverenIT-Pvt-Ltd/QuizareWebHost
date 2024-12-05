@@ -14,6 +14,7 @@ import {
   ClearReducerDataOfLoadProgress,
   getFinalizeQuiz,
   getQuestionList,
+  handleBackToQuiz
 } from "./QuizAction";
 import Swal from 'sweetalert2'
 import {handleShareProcess} from "../Auth/AuthAction";
@@ -248,7 +249,11 @@ const GenerateMultipleQuizChatgpt = async () => {
       setError(err.message || "An error occurred while generating the quiz.");
   }
 };
-
+const backTo = () => {
+  // Navigate back to the quiz library
+  props.handleBackToQuiz();
+  history.push(`/quizLibrary`);
+};
   return (
     <>
       <div className="min-h-screen">
@@ -638,17 +643,7 @@ const GenerateMultipleQuizChatgpt = async () => {
                       </div>
                       */}
                
-                      <div className="flex justify-end w-wk">
-                   <div>
-                        <Button
-                          style={{ height: "3rem", backgroundColor: "#3B16B7", borderRadius: '0.25rem',width:"9rem" }}
-                          type="primary"
-                          onClick={handleSubmit}
-                        >
-                          <h3 className="font-medium text-white text-base">Save question</h3>
-                        </Button>
-                      </div> 
-                     
+                      <div className="flex justify-between w-wk">
                       <div className="md:ml-16">
                       {selectedQuestionIndex >= 0 && isAnyQuestionCreated && (
                         <Button
@@ -662,8 +657,28 @@ const GenerateMultipleQuizChatgpt = async () => {
                         </Button>
                           )}
                       </div>
+
+                   <div>
+                        <Button
+                          style={{ height: "3rem", backgroundColor: "#3B16B7", borderRadius: '0.25rem',width:"9rem" }}
+                          type="primary"
+                          onClick={handleSubmit}
+                        >
+                          <h3 className="font-medium text-white text-base">Save Question</h3>
+                        </Button>
+                      </div> 
+                     
+                     
                     
-                      
+                      <div class="" >
+                        <Button
+                                                title={""}
+                                                type="primary"
+                                                style={{  height: "3rem",backgroundColor:"#3B16B7",borderRadius:'0.25rem' }}
+                                                onClick={() => backTo()}
+
+                                            ><h3 class="font-medium text-white text-base font-[Poppins]">Back To Quiz</h3></Button>
+                                            </div>
                       </div>
                     </div>
                       </div>
@@ -720,6 +735,7 @@ const mapDispatchToProps = (dispatch) =>
       ClearReducerDataOfLoadProgress,
       getFinalizeQuiz,
       getQuestionList,
+      handleBackToQuiz
     },
     dispatch
   );

@@ -122,7 +122,8 @@ export const connectToGoogle = (tokenCredential, history, cb) => dispatch => {
         payload: res.data
       });
       dispatch(getUserDetails(res.data.userId));
-      history.push("/emptypage")
+      const redirectPath = res.data.noOfQuizes === 0 ? "/emptypage" : "/quizLibrary";
+      history.push("/quizLibrary");
       console.log(res.data);
       if (res.data.successInd === true) {
         localStorage.setItem("userCredential", JSON.stringify(res.data));
@@ -167,7 +168,7 @@ export const signUpByUser = ({ emailID, password, name, confirmPassword, imageId
       Swal.fire({
         icon: "success",
         // title: res.data.message || "You have registered successfully !",
-        title:"User with same mail already exists!" || "You have registered successfully !",
+        title:res.data.userInd === true ? "User with same mail already exists!" : "Registration Successfull,Select your plan.",
         showConfirmButton: false,
         timer: 1500
       });
