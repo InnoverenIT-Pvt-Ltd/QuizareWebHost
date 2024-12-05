@@ -112,13 +112,12 @@ import { useHistory } from "react-router-dom";
 import EditQuestionOfQuiz from "./EditQuestionOfQuiz";
 
 function UpdateQuizInLibrary(props) {
-    const [selectedQuestionIndex, setSelectedQuestionIndex] = useState(0);
+    // const [selectedQuestionIndex, setSelectedQuestionIndex] = useState(0);
     const history = useHistory();
 
-    useEffect(() => {
-        // Fetch question list when quiz ID changes
-        props.getQuestionList(props.match.params.quizId);
-    }, [props.match.params.quizId]);
+    // useEffect(() => {
+    //     props.getQuestionList(props.match.params.quizId);
+    // }, [props.match.params.quizId]);
 
     const handleDeleteQuestion = (id) => {
         // Delete question and handle the callback
@@ -135,8 +134,7 @@ function UpdateQuizInLibrary(props) {
     };
 
     const handleQuestionSelect = (index) => {
-        // Update the selected question index
-        setSelectedQuestionIndex(index);
+        // setSelectedQuestionIndex(index);
     };
 
     // if (props.fetchingQuestionList) {
@@ -183,19 +181,19 @@ function UpdateQuizInLibrary(props) {
 
                 {/* Main Content: Selected Question Details */}
                 <div className="w-wk p-6">
-                    {props.questionList.length > 0 ? (
+                   
                         <EditQuestionOfQuiz
-                            item={props.questionList[selectedQuestionIndex]}
+                            // item={props.questionList[selectedQuestionIndex]}
                             quizName={props.match.params.quizName}
-                            questionNo={selectedQuestionIndex + 1}
+                            paramsQuizId={props.match.params.quizId}
+                            // questionNo={selectedQuestionIndex + 1}
                             // handleDeleteQuestion={handleDeleteQuestion}
                             backTo={backTo}
-                            handleQuestionSelect={handleQuestionSelect}
-                            wholeReducerData={props.questionList}
+                            // handleQuestionSelect={handleQuestionSelect}
+                            // wholeReducerData={props.questionList}
+                            // setSelectedQuestionIndex={setSelectedQuestionIndex}
                         />
-                    ) : (
-                        <div className="text-center text-gray-500">No questions available.</div>
-                    )}
+                   
                 </div>
             </div>
         </>

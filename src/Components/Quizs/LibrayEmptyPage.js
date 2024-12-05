@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useEffect } from "react";
+import React, { lazy, Suspense, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {handleSpareProcess,handleUpgrade} from "../../Container/Auth/AuthAction"
@@ -8,9 +8,10 @@ import FWLogo2 from "../../../src/images/Divider.png";
 import Menu from "./Menu";
 import ProcessSpareDrawer from "./ProcessSpareDrawer";
 import UpgradeSpareDrawer from "./UpgradeSpareDrawer";
-
+import ChooseSbscriptionDrawer from "./ChooseSbscriptionDrawer";
 const LibrayEmptyPage = (props) => {
 
+  const[chooseSubOpen,setchooseSubOpen]=useState(false);
 
     return (
         <>
@@ -35,7 +36,7 @@ const LibrayEmptyPage = (props) => {
   <div
     className="text-xs cursor-pointer underline text-[#6245C6] font-[Poppins] font-medium"
     onClick={() => {
-      props.handleUpgrade(true);
+      setchooseSubOpen(true);
     }}
   >
     Select Subscriptions
@@ -57,9 +58,9 @@ const LibrayEmptyPage = (props) => {
                   processSpareModal={props.processSpareModal}
                     handleSpareProcess={props.handleSpareProcess}
                 />
-                <UpgradeSpareDrawer              
-                  processUpgradeModal={props.processUpgradeModal}
-                  handleUpgrade={props.handleUpgrade}
+                <ChooseSbscriptionDrawer              
+                  setchooseSubOpen={setchooseSubOpen}
+                  chooseSubOpen={chooseSubOpen}
                 />
         </>
     );

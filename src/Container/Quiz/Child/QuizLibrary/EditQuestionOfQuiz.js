@@ -39,20 +39,24 @@ function EditQuestionofQuiz(props) {
     const [questionReq, setQuestionReq] = useState("");
     const [showInputQstn, setshowInputQstn] = useState(false);
     const [error, setError] = useState("");
-    const [newlyAddedQuestionIndex, setNewlyAddedQuestionIndex] = useState(null);
-
+    const [selectedQuestionIndex, setSelectedQuestionIndex] = useState(0);
     const history = useHistory();
 
     useEffect(() => {
         if (props.questionList.length === 0) {
           setIsNewQuestion(true); // Automatically switch to add mode if no questions
         }
-        props.getQuizName(props.item.quizId)
+        props.getQuizName(props.paramsQuizId);
       }, [props.questionList]);
+
+      useEffect(() => {
+        props.getQuestionList(props.paramsQuizId);
+      }, [props.paramsQuizId]);
 
     const handleAddQuestion = () => {
       setIsNewQuestion(true);
-      setNewlyAddedQuestionIndex(props.questionList.length); 
+      // setSelectedQuestionIndex(null);
+      setSelectedQuestionIndex(props.questionList.length);
     };
     
     function handleSetCurrentItem(item) {
@@ -88,27 +92,32 @@ function EditQuestionofQuiz(props) {
           props.updateQuestionsInQuiz(updatedQuestion, props.item.id);
         }
 
-        const handleDeleteQuestion = (item) => {
-          props.deleteQuestion(item.id,callIntoQuiz);
+        const handleDeleteQuestion = (id) => {
+          props.deleteQuestion(id,callIntoQuiz);
           
       };
   const callIntoQuiz=()=>{
     history.push(`/updateQuizInLibrary/${props.showQuiz.quizName}/${props.showQuiz.quizId}`);
   }
-
+  const handleQuestionSelect = (index) => {
+    setSelectedQuestionIndex(index);
+};
         const handleUpdateName = () => {
             const updatedName = {
                 quizHostId:props.quizHostId,
-              quizName: quizName, // Use the updated quiz name from local state
+              quizName: quizName,
             };
-            props.updateQuizNameByQuizId(updatedName, props.item.quizId);
-            setIsEditingName(false); // Close the input box after updating
+            props.updateQuizNameByQuizId(updatedName, props.quizId);
+            setIsEditingName(false); 
           };
           const checkObj = props.userQuery.hasOwnProperty("status");
           const question = checkObj ? props.userQuery.response.ai_response.question : "";
           const options = checkObj ? props.userQuery.response.ai_response.options : [];
-    console.log(props.item)
-    console.log(props.selectedQuestionIndex)
+          const selectedQuestion = selectedQuestionIndex >= 0 && props.questionList[selectedQuestionIndex]
+          ? props.questionList[selectedQuestionIndex] : {};
+   
+          // console.log(props.item);
+    console.log(selectedQuestion);
     
     const GenerateSingleQuizUsingChatgpt = async () => {
       setError(""); 
@@ -233,72 +242,41 @@ function EditQuestionofQuiz(props) {
                 initialValues={{
                     quizHostId: props.quizHostId,
                     quizId: props.quizId,
-                    // categoryId: props.item.categoryId,
-                    question: isNewQuestion
-      ? checkObj
-        ? question
-        : "" // if using ChatGPT
-      : props.item.question || "", // else use existing question data
-    option1: isNewQuestion
-      ? checkObj
-        ? options[0]?.value
-        : "" // if using ChatGPT
-      : props.item.option1 || "", // else use existing option1 data
-    option2: isNewQuestion
-      ? checkObj
-        ? options[1]?.value
-        : "" // if using ChatGPT
-      : props.item.option2 || "", // else use existing option2 data
-    option3: isNewQuestion
-      ? checkObj
-        ? options[2]?.value
-        : "" // if using ChatGPT
-      : props.item.option3 || "", // else use existing option3 data
-    option4: isNewQuestion
-      ? checkObj
-        ? options[3]?.value
-        : "" // if using ChatGPT
-      : props.item.option4 || "", 
-                    // question: isNewQuestion ? "" : props.item.question || '',
-                    // option1: isNewQuestion ? "" : props.item.option1 || '',
-                    // option2: isNewQuestion ? "" : props.item.option2 || '',
-                    // option3: isNewQuestion ? "" : props.item.option3 || '',
-                    // option4: isNewQuestion ? "" : props.item.option4 || '',
+                    question: question || selectedQuestion.question || "", 
+                     option1: checkObj ? options[0]?.value : selectedQuestion.option1 || "", 
+    option2: checkObj ? options[1]?.value : selectedQuestion.option2 || "",
+    option3: checkObj ? options[2]?.value : selectedQuestion.option3 || "",
+    option4: checkObj ? options[3]?.value : selectedQuestion.option4 || "", 
+                  
                 }}
                 onSubmit={(values, { resetForm }) => {
                     if (isNewQuestion) {
-                        // Add new question
-                        const newQuestionNo = (props.item.questionNo || 0) + 1;
+                       
+                        const newQuestionNo = (selectedQuestion.questionNo || 0) + 1;
                         props.addQuestionQuiz(
                             {
-                                quizId: props.item.quizId,
+                                quizId: props.quizId,
                                 quizHostId: props.quizHostId,
                                 questionNo: newQuestionNo,
                                 type: questionSource,
-                                // question: values.question,
-                                // option1: values.option1,
-                                // option2: values.option2,
-                                // option3: values.option3,
-                                // option4: values.option4,
                                 question: checkObj ? question : values.question,
         option1: checkObj ? options[0]?.value : values.option1,
         option2: checkObj ? options[1]?.value : values.option2,
         option3: checkObj ? options[2]?.value : values.option3,
         option4: checkObj ? options[3]?.value : values.option4,
                             },
-                            props.item.quizId
+                            props.quizId
                         );
                     } else {
-                        // Update existing question
                         props.updateQuestionsInQuiz(
                             { ...values },
-                            props.item.id,
+                            selectedQuestion.id,
                             props.quizId
                         );
                     }
                     setQuestionSource("Normal");
-                    resetForm();  // Clear form
-                    setIsNewQuestion(false);  // Switch back to update mode
+                    resetForm(); 
+                    setIsNewQuestion(false);  
                 }}
             >
                 {({
@@ -318,13 +296,11 @@ function EditQuestionofQuiz(props) {
                         <Card
                             key={i}
                             className={`cursor-pointer mb-2 ${
-                              i === props.selectedQuestionIndex
-                                ? "bg-blue-200"
-                                : ""
-                            } ${i === newlyAddedQuestionIndex ? "border-blue-500" : ""} ${item.completeInd ? "border-green-500" : "border-red-500"} border-4`}
+                              i === selectedQuestionIndex ? "bg-blue-200 border" : ""} 
+                               ${item.completeInd ? "border-green-500" : "border-red-500"} border-4`}
                             // className={`cursor-pointer mb-2 ${i === props.selectedQuestionIndex ? 'bg-blue-200' : ''}
                             // ${item.completeInd ? "border-green-500" : "border-red-500"} border-4`}
-                            onClick={() => props.handleQuestionSelect(i)}
+                            onClick={() => handleQuestionSelect(i)}
                         >
                             Question {i + 1}
                             <div className="text-sm font-semibold">{item.question}</div>
@@ -359,7 +335,7 @@ function EditQuestionofQuiz(props) {
                       <div className="">
 <Button
  type="primary"
-//  disabled={!openQuestion}
+ disabled={!props.showQuiz.quizHostInd}
   style={{ height: "2.5rem", backgroundColor: "#3B16B7", borderRadius: '0.25rem',width:"5rem" }}
  onClick={() => {
   props.handleShareProcess(true);
@@ -380,8 +356,8 @@ function EditQuestionofQuiz(props) {
               > {props.questionList.map((item, i) => (
                 <Card
                     key={i}
-                    className={`cursor-pointer mb-2 ${i === props.selectedQuestionIndex ? 'bg-blue-200' : ''}`}
-                    onClick={() => props.handleQuestionSelect(i)}
+                    className={`cursor-pointer mb-2 ${i === selectedQuestionIndex ? 'bg-blue-200' : ''}`}
+                    onClick={() => handleQuestionSelect(i)}
                 >
                     Question {i + 1}
                 </Card>
@@ -568,7 +544,7 @@ function EditQuestionofQuiz(props) {
                                                 <Button
                                                     title={""}
                                                     type="primary"
-                                                    onClick={() => handleDeleteQuestion(props.item)}
+                                                    onClick={() => handleDeleteQuestion(selectedQuestion.id)}
                                                     style={{  height: "3rem",backgroundColor:"#3B16B7",borderRadius:'0.25rem' }}
                                                 >
                                                      <h3 class="font-medium text-white text-base font-[Poppins]">Delete</h3>

@@ -871,7 +871,7 @@ export const getLibraryQuiz = (userId) => dispatch => {
     })
     .then(res => {
       //window.location.href = res.data.length === 0 ? '/librayCreat' : '/quizLibrary';
-      history.push(res.data.length === 0 ? '/librayCreat' : '/quizLibrary');
+      history.push(res.data.length === 0 ? '/emptypage' : '/quizLibrary');
       console.log(res.data);
       dispatch({
         type: types.GET_LIBRARY_QUIZ_SUCCESS,
@@ -885,12 +885,12 @@ export const getLibraryQuiz = (userId) => dispatch => {
         type: types.GET_LIBRARY_QUIZ_FAILURE,
         payload: err,
       });
-      Swal.fire({
-        icon: "error",
-        title: "Please add atleast 1 question!",
-        showConfirmButton: false,
-        timer: 1500
-      });
+      // Swal.fire({
+      //   icon: "error",
+      //   title: "Please add atleast 1 question!",
+      //   showConfirmButton: false,
+      //   timer: 1500
+      // });
     });
 };
 
