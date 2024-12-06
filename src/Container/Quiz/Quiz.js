@@ -62,7 +62,7 @@ function Quiz(props) {
 
   useEffect(() => {
     if (isAddingNewQuestion) {
-      setSelectedQuestionIndex(-1); // Reset to indicate a new question
+      // setSelectedQuestionIndex(-1); // Reset to indicate a new question
       setIsAddingNewQuestion(false); // Reset the flag after reinitializing
     }
   }, [isAddingNewQuestion]);
@@ -70,9 +70,10 @@ function Quiz(props) {
   const handleDeleteQuestion = (id) => {
     props.deleteQuestion(id, handleCallBack);
   };
+  const getNewQuestionNumber = () => props.questionList.length + 1;
   const handleAddQuestion = () => {
-    setIsNewQuestion(true); // Enter add mode
-    setSelectedQuestionIndex(null); // Deselect any selected question
+    setIsNewQuestion(true); 
+    setSelectedQuestionIndex(props.questionList.length);
   };
 
   // const handleUpdateQuestion = (values) => {
@@ -107,6 +108,7 @@ function Quiz(props) {
   const handleQuestionSelect = (index) => {
     setSelectedQuestionIndex(index);
     setIsDrawerVisible(false);
+    setIsNewQuestion(false);
   };
 
   const history = useHistory();
@@ -254,6 +256,20 @@ const backTo = () => {
   props.handleBackToQuiz();
   history.push(`/quizLibrary`);
 };
+
+const validateOptions = (values) => {
+  const errors = {};
+
+  const options = [values.option1, values.option2, values.option3, values.option4];
+
+  const uniqueOptions = new Set(options);
+  if (uniqueOptions.size !== options.length) {
+      errors.options = "All options must be different.";
+  }
+
+  return errors;
+}
+
   return (
     <>
       <div className="min-h-screen">
@@ -301,6 +317,7 @@ const backTo = () => {
             setIsNewQuestion(false);
             setIsAddingNewQuestion(true);
           }}
+          validate={validateOptions}
         >
           {({
             handleChange,
@@ -317,10 +334,9 @@ const backTo = () => {
                   <Card
                     key={i}
                     className={`cursor-pointer mb-2 ${
-                      i === selectedQuestionIndex ? "bg-blue-200" : ""
-                    }
-                     ${item.completeInd ? "border-green-500" : "border-red-500"} border-4
-                    `}
+                      i === selectedQuestionIndex ? "bg-blue-200 border" : ""} 
+                      ${i === 0 ? "bg-gray-300" : ""}  
+                      ${item.completeInd ? "border-green-500" : "border-red-500"} border-4`}
                     onClick={() => handleQuestionSelect(i)}
                   >
                     <div className="flex flex-col">
@@ -450,7 +466,9 @@ const backTo = () => {
                         <div>
                           <Field
                             component={InputComponent}
-                            placeholder="Add your question"
+                            placeholder={`Question ${
+                              isNewQuestion ? getNewQuestionNumber() : selectedQuestionIndex + 1
+                            }: Add your question`}
                             name="question"
                             style={{
                               width: "100%",
@@ -526,8 +544,10 @@ const backTo = () => {
   <Input
   className="text-black"
   style={{width:"12rem",color:"black"}}
-  placeholder="Enter No.of Questions"
-  value={questionReq}
+  placeholder={`Question ${
+    isNewQuestion ? getNewQuestionNumber() : selectedQuestionIndex + 1
+  }:Enter No.of Questions`}
+    value={questionReq}
   onChange={(e) => setQuestionReq(e.target.value)}
   onKeyDown={(e) => e.key === 'Enter' && GenerateMultipleQuizChatgpt()}
 />
@@ -548,6 +568,7 @@ const backTo = () => {
                               onBlur={() => handleUpdateQuestion(values)} 
                               onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
                             />
+                             {errors.options && <div className="text-red-500">{errors.options}</div>}
                           </div>
                           <div className="w-[47.5%]">
                             <Field
@@ -562,6 +583,7 @@ const backTo = () => {
                               onBlur={() => handleUpdateQuestion(values)} 
                               onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
                             />
+                             {errors.options && <div className="text-red-500">{errors.options}</div>}
                           </div>
                         </div>
                         <div className="flex justify-between mt-8">
@@ -578,6 +600,7 @@ const backTo = () => {
                               onBlur={() => handleUpdateQuestion(values)} 
                               onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
                             />
+                             {errors.options && <div className="text-red-500">{errors.options}</div>}
                           </div>
                           <div className="w-[47.5%]">
                             <Field
@@ -592,6 +615,7 @@ const backTo = () => {
                               onBlur={() => handleUpdateQuestion(values)} 
                               onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
                             />
+                             {errors.options && <div className="text-red-500">{errors.options}</div>}
                           </div>
                         </div>
                       

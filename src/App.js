@@ -2,7 +2,7 @@
 import React, { Component, lazy, Suspense } from "react";
 import 'antd/dist/reset.css';
 import { connect } from "react-redux";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch,withRouter } from "react-router-dom";
 import "./App.css";
 import { BundleLoader } from "./Components/Placeholder";
 import PrivateRoute from "./Helpers/Auth/PrivateRoute";
@@ -19,6 +19,39 @@ const MainApp = lazy(() => import("./Main/MainApp"))
 const StripeOutPayLoading =lazy(()=>import("./Main/StripeOutPayLoading"));
 
 class App extends Component {
+  componentDidMount() {
+    const { history } = this.props;
+    if (history) {
+      this.unlisten = history.listen((location) => {
+        this.checkLogout(location);
+      });
+    }
+    window.onpopstate = () => {
+      const { location } = this.props;
+      this.checkLogout(location);
+    };
+  }
+
+  componentWillUnmount() {
+    if (this.unlisten) {
+      this.unlisten();
+    }
+    window.onpopstate = null; 
+  }
+
+  checkLogout(location) {
+    const publicRoutes = ['/login', '/signUp', '/email', '/forgotPassword', '/newforgotpassword', '/term', '/privacy'];
+    if (publicRoutes.includes(location.pathname)) {
+      this.handleLogout();
+    }
+  }
+
+  handleLogout = () => {
+    console.log("Logging out...");
+    sessionStorage.removeItem('userDetails');
+    window.location.href = '/email';
+  };
+
   render() {
     const { fetchingUserDetails } = this.props;
     return (
@@ -54,5 +87,5 @@ class App extends Component {
 const mapStateToProps = ({ auth }) => ({
   fetchingUserDetails: auth.fetchingUserDetails,
 });
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps)(withRouter(App));
 
