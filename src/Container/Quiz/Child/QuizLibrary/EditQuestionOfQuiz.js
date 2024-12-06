@@ -53,6 +53,7 @@ function EditQuestionofQuiz(props) {
         props.getQuestionList(props.paramsQuizId);
       }, [props.paramsQuizId]);
 
+      const getNewQuestionNumber = () => props.questionList.length + 1;
     const handleAddQuestion = () => {
       setIsNewQuestion(true);
       // setSelectedQuestionIndex(null);
@@ -101,6 +102,7 @@ function EditQuestionofQuiz(props) {
   }
   const handleQuestionSelect = (index) => {
     setSelectedQuestionIndex(index);
+    setIsNewQuestion(false);
 };
         const handleUpdateName = () => {
             const updatedName = {
@@ -235,6 +237,20 @@ function EditQuestionofQuiz(props) {
       }
   };
 
+  const validateOptions = (values) => {
+    const errors = {};
+
+    const options = [values.option1, values.option2, values.option3, values.option4];
+
+    // Check if all options are unique
+    const uniqueOptions = new Set(options);
+    if (uniqueOptions.size !== options.length) {
+        errors.options = "All options must be different.";
+    }
+
+    return errors;
+}
+
     return (
         <>
             <Formik
@@ -278,6 +294,7 @@ function EditQuestionofQuiz(props) {
                     resetForm(); 
                     setIsNewQuestion(false);  
                 }}
+                validate={validateOptions}
             >
                 {({
                     handleChange,
@@ -297,9 +314,8 @@ function EditQuestionofQuiz(props) {
                             key={i}
                             className={`cursor-pointer mb-2 ${
                               i === selectedQuestionIndex ? "bg-blue-200 border" : ""} 
-                               ${item.completeInd ? "border-green-500" : "border-red-500"} border-4`}
-                            // className={`cursor-pointer mb-2 ${i === props.selectedQuestionIndex ? 'bg-blue-200' : ''}
-                            // ${item.completeInd ? "border-green-500" : "border-red-500"} border-4`}
+                              ${i === 0 ? "bg-gray-300" : ""}  
+                              ${item.completeInd ? "border-green-500" : "border-red-500"} border-4`}
                             onClick={() => handleQuestionSelect(i)}
                         >
                             Question {i + 1}
@@ -396,13 +412,16 @@ function EditQuestionofQuiz(props) {
                                             </div>
                                         {/* </Card> */}
                                         <hr class="h-px bg-black border-2 w-wk mt-4 border-black"/>
+                                      
                                         <div class="mt-4 w-wk p-4">
                                             <Field
                                                
                                                 name="question"
                                                 value={`${values.question}`}
                                                 component={InputComponent}
-                                                  placeholder="Add your question"
+                                                placeholder={`Question ${
+                                                  isNewQuestion ? getNewQuestionNumber() : selectedQuestionIndex + 1
+                                                }: Add your question`}
                                                 onChangeText={() => handleChange("question")}
                                                 style={{ width: "100%", height: "3rem",borderRadius:"0.25rem" }}
                                                 onKeyDown={(e) => e.key === 'Enter' && handleUpdateQuestion(values)}
@@ -496,6 +515,7 @@ function EditQuestionofQuiz(props) {
                                                 onKeyDown={(e) => e.key === 'Enter' && handleUpdateQuestion(values)}
                                                 //onKeyUp={(e) => e.key === 'Enter' && handleSubmit()}
                                             />
+                                            {errors.options && <div className="text-red-500">{errors.options}</div>}
                                         </div>
                                         <div class="w-[47.5%]">
                                             <Field
@@ -508,6 +528,7 @@ function EditQuestionofQuiz(props) {
                                                 onKeyDown={(e) => e.key === 'Enter' && handleUpdateQuestion(values)}
                                                 //onKeyUp={(e) => e.key === 'Enter' && handleSubmit()}
                                             />
+                                             {errors.options && <div className="text-red-500">{errors.options}</div>}
                                         </div>
                                         </div>
                                         <div className="flex justify-between  w-wk p-4">
@@ -522,6 +543,7 @@ function EditQuestionofQuiz(props) {
                                                 onKeyDown={(e) => e.key === 'Enter' && handleUpdateQuestion(values)}
                                                 //onKeyUp={(e) => e.key === 'Enter' && handleSubmit()}
                                             />
+                                            {errors.options && <div className="text-red-500">{errors.options}</div>}
                                         </div>
                                         <div class="w-[47.5%]">
                                             <Field
@@ -534,12 +556,11 @@ function EditQuestionofQuiz(props) {
                                                 onKeyDown={(e) => e.key === 'Enter' && handleUpdateQuestion(values)}
                                                // onKeyUp={(e) => e.key === 'Enter' && handleSubmit()}
                                             />
+                                            {errors.options && <div className="text-red-500">{errors.options}</div>}
                                         </div>
                                         </div>
                                         <div class="flex justify-between p-6 w-wk">  
-                                        {props.questionList.length === 0 ? (  
-                                      ""
-                                             ) : (
+                                        {selectedQuestionIndex !== null && !isNewQuestion && (
                                                 <div class="" >
                                                 <Button
                                                     title={""}

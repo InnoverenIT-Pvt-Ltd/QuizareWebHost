@@ -1,75 +1,51 @@
-import React from "react";
+import React,{useEffect,useState} from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { Route, Redirect, withRouter } from "react-router-dom";
+import { Route, Redirect, useHistory,withRouter } from 'react-router-dom';
 import axios from "axios";
 import { message } from "antd";
-// import {
-//   setFiscalTimeInterval,
-//   setFiscalTimeIntervalReport,
-//   setFiscalTimeIntervalTeam,
-//   setFiscalTimeIntervalViewport,
-// } from "../../Containers/Auth/AuthAction";
-class PrivateRoute extends React.Component {
-  componentDidMount() {
-    if (sessionStorage.getItem("userDetails")) {
-      // this.props.setFiscalTimeInterval(
-      //   JSON.parse(sessionStorage.getItem("userDetails"))
-      // );
-      // this.props.setFiscalTimeIntervalReport(
-      //   JSON.parse(sessionStorage.getItem("userDetails"))
-      // );
-      // this.props.setFiscalTimeIntervalTeam(
-      //   JSON.parse(sessionStorage.getItem("userDetails"))
-      // );
-      // this.props.setFiscalTimeIntervalViewport(
-      //   JSON.parse(sessionStorage.getItem("userDetails"))
-      // );
-    }
-    axios.interceptors.response.use(
-      (response) => {
-        return response;
-      },
+
+const PrivateRoute = ({ component: Component, ...rest }) => {
+  const history = useHistory();
+
+  useEffect(() => {
+    // Set up the response interceptor for expired session handling
+    const responseInterceptor = axios.interceptors.response.use(
+      (response) => response,
       (error) => {
-        //catches if the session ended!
-        if (error.response.status == 401) {
+        if (error.response.status === 401) {
           sessionStorage.clear();
-          // store.dispatch({ type: LOGOUT });
-          this.props.history.push("/email");
+          history.push("/email");
           message.error("Your session has expired. Please re-login.");
         }
         return Promise.reject(error);
       }
     );
-    if (!this.props.userDetails) {
-      this.props.history.push("/email");
+
+    // Check if userDetails are in sessionStorage or redirect
+    if (!sessionStorage.getItem("userDetails")) {
+      history.push("/email");
       message.error("Your session has expired. Please re-login.");
     }
-    // if (sessionStorage.getItem('userDetails')) {
-    //     this.props.setFiscalTimeInterval(sessionStorage.getItem('userDetails'))
-    // }
-  }
-  componentWillUpdate(nextProps) {
-    if (!nextProps.userDetails) {
-      this.props.history.push("/email");
-    }
-  }
-  render() {
-    const { component: Component, ...rest } = this.props;
-    return (
-      <Route
-        {...rest}
-        render={(props) =>
-          sessionStorage.getItem("userDetails") ? (
-            <Component {...props} />
-          ) : (
-            <Redirect to="/email" />
-          )
-        }
-      />
-    );
-  }
-}
+    return () => {
+      axios.interceptors.response.eject(responseInterceptor);
+    };
+  }, [history]);
+
+  return (
+    <Route
+      {...rest}
+      render={(props) =>
+        sessionStorage.getItem("userDetails") ? (
+          <Component {...props} />
+        ) : (
+          <Redirect to="/email" />
+        )
+      }
+    />
+  );
+};
+
 
 const mapStateToProps = ({ auth }) => {
   return {
@@ -79,10 +55,7 @@ const mapStateToProps = ({ auth }) => {
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      // setFiscalTimeInterval,
-      // setFiscalTimeIntervalReport,
-      // setFiscalTimeIntervalTeam,
-      // setFiscalTimeIntervalViewport,
+
     },
     dispatch
   );
