@@ -13,7 +13,7 @@ import { login,facebookLogin, connectToGoogle } from "./AuthAction";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye"; // Material-UI Icon for visible state
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { Input } from "reactstrap";
-import { Link, withRouter } from "react-router-dom";
+import { Link, withRouter,useHistory } from "react-router-dom";
 import {
     AuthContainer,
     FlexContainer,
@@ -31,6 +31,17 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 //  */
 
 function LoginByMail (props) {
+
+    // const history=useHistory();
+    // useEffect(() => {
+    //     const userCredential = sessionStorage.getItem("userDetails");
+      
+    //     if (userCredential) {
+    //       history.push("/quizLibrary");
+    //     } else {
+
+    //     }
+    //   }, [history]);
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
