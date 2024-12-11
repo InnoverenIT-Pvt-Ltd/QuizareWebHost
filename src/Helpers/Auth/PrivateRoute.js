@@ -7,32 +7,39 @@ import { message } from "antd";
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const history = useHistory();
-
+  const [sessionExpired, setSessionExpired] = useState(false);
   useEffect(() => {
-    // Set up the response interceptor for expired session handling
     const responseInterceptor = axios.interceptors.response.use(
       (response) => response,
       (error) => {
         if (error.response.status === 401) {
           sessionStorage.clear();
+          setSessionExpired(true); 
           history.push("/email");
-          message.error("Your session has expired. Please re-login.");
+          return Promise.reject(error);
         }
         return Promise.reject(error);
       }
     );
 
     // Check if userDetails are in sessionStorage or redirect
-    if (!sessionStorage.getItem("userDetails")) {
+    if (!sessionStorage.getItem("userDetails") && window.location.pathname !== "/email") {
+      setSessionExpired(true); // Mark session as expired if no userDetails
       history.push("/email");
-      message.error("Your session has expired. Please re-login.");
     }
     return () => {
       axios.interceptors.response.eject(responseInterceptor);
     };
   }, [history]);
 
+  useEffect(() => {
+    if (sessionExpired) {
+      message.error("Your session has expired. Please re-login.");
+    }
+  }, [sessionExpired]);
+  
   return (
+
     <Route
       {...rest}
       render={(props) =>
