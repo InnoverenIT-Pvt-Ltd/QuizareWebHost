@@ -48,6 +48,7 @@ const StripeOutPayLoading =lazy(()=>import("./Main/StripeOutPayLoading"));
       window.onpopstate = () => {
         window.history.pushState(null, null, window.location.href);  // Prevent going back
         sessionStorage.removeItem('userDetails'); // Clear session storage
+        // window.sessionStorage.clear();
         window.location.replace('/email');  // Redirect to login page
       };
     };
