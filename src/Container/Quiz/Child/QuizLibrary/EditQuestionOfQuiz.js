@@ -26,6 +26,7 @@ import ProcessShareDrawer from "../../../../Components/ProcessShareDrawer";
 import { StyledModal } from "../../../../Components/UI/Antd";
 import { base_url, base_url2 } from "../../../../Config/Auth";
 import axios from "axios";
+import FWLogo1 from "../../../../images/linear_background_154 2.jpg";
 
 function EditQuestionofQuiz(props) {
     const [isNewQuestion, setIsNewQuestion] = useState(false);
@@ -35,7 +36,8 @@ function EditQuestionofQuiz(props) {
     const [isEditingName, setIsEditingName] = useState(false);
     const [questionSource, setQuestionSource] = useState("Normal");
     const [isModalOpen, setIsModalOpen] = useState(false);
-    
+    const [loadingSingle, setLoadingSingle] = useState(false); 
+    const [loadingMultiple, setLoadingMultiple] = useState(false); 
     const [questionReq, setQuestionReq] = useState("");
     const [showInputQstn, setshowInputQstn] = useState(false);
     const [error, setError] = useState("");
@@ -123,6 +125,7 @@ function EditQuestionofQuiz(props) {
     
     const GenerateSingleQuizUsingChatgpt = async () => {
       setError(""); 
+      setLoadingSingle(true);
 
       const QGen = {
           noOfQstn: "1",
@@ -177,11 +180,14 @@ function EditQuestionofQuiz(props) {
           console.error(err);
           setError(err.message || "An error occurred while generating the quiz.");
       }
+      finally {
+        setLoadingSingle(false);
+    } 
   };
 
     const GenerateMultipleQuizUsingChatgpt = async () => {
       setError(""); 
-
+      setLoadingMultiple(true);
       const QGen = {
           noOfQstn: questionReq,
           quizHostId: props.quizHostId,
@@ -235,7 +241,16 @@ function EditQuestionofQuiz(props) {
           console.error(err);
           setError(err.message || "An error occurred while generating the quiz.");
       }
+      finally {
+        setLoadingMultiple(false);
+      }
   };
+
+  if (loadingMultiple) {
+    return <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 custom-loader">
+    <div className="loader"><img src={FWLogo1}  width={10000}  style={{ borderRadius:"0.75rem"}} alt="Loading..."  />
+    </div>
+    </div>;}
 
   const validateOptions = (values) => {
     const errors = {};
@@ -251,6 +266,17 @@ function EditQuestionofQuiz(props) {
     return errors;
 }
 
+// if(props.fetchingQuizName){
+//   return  <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 custom-loader">
+//   <div className="loader"><img src={FWLogo1}  width={10000}  style={{ borderRadius:"0.75rem"}} alt="Loading..."  /></div>
+// </div>;
+// }
+
+if (loadingSingle) {
+  return <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 custom-loader">
+  <div className="loader"><img src={FWLogo1}  width={10000}  style={{ borderRadius:"0.75rem"}} alt="Loading..."  /></div>
+</div>;
+}
     return (
         <>
             <Formik

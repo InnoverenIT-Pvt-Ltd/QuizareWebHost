@@ -79,7 +79,7 @@ class SelectQuizname extends Component {
                 <h3 class="flex justify-center mt-4">Share URl for others to access</h3>
                 <div class="flex justify-center h-16">
                    <Field
-                   placeholder="http://player.quizledge.no"
+                   placeholder="https://player.quizprompter.com"
                    width="13rem"
                    />
                    </div>

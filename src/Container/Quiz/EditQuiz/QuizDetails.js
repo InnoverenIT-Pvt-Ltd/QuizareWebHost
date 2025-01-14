@@ -12,7 +12,7 @@ import copy from "copy-to-clipboard";
 // import MainHeader from '../Mainheader';
 
 function QuizDetails(props) {
-  const link = `https://player.quizledge.no${props.showQuiz.quizLink || ""}`;
+  const link = `https://player.quizprompter.com${props.showQuiz.quizLink || ""}`;
   function copyToClipboard() {
     copy(link);
     console.log(link)
@@ -67,7 +67,7 @@ console.log(props.showQuiz)
             <div className="border w-[24rem] flex h-[2.5rem] border-solid border-gray-400 max-sm:w-[12rem]" >
               {/* <h2 class="text-base">{`${props.showQuiz.quizName || ''}`}{' '}</h2> */}
               {props.showQuiz.quizLink ? (
-                <h2 class="text-xs flex justify-center flex-col font-[Poppins] w-wk" style={{ overflowWrap: "break-word" }}>{`http://player.quizledge.no${props.showQuiz.quizLink || ""
+                <h2 class="text-xs flex justify-center flex-col font-[Poppins] w-wk" style={{ overflowWrap: "break-word" }}>{`https://player.quizprompter.com${props.showQuiz.quizLink || ""
                   }`}</h2>
               ) : (
                 ""

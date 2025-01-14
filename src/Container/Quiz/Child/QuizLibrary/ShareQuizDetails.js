@@ -8,7 +8,7 @@ import copy from "copy-to-clipboard";
 
 
 function ShareQuizDetails(props) {
-  const link = `https://player.quizledge.no${props.currentItem.quizLink || ""}`;
+  const link = `https://player.quizprompter.com${props.currentItem.quizLink || ""}`;
   function copyToClipboard() {
     copy(link);
     console.log(link)
@@ -41,7 +41,7 @@ console.log(props.showQuiz)
             <div className="border w-[26rem] flex h-[2.5rem] border-solid border-gray-400 max-sm:w-[12rem]" >
               {/* <h2 class="text-base">{`${props.showQuiz.quizName || ''}`}{' '}</h2> */}
               {props.currentItem.quizLink ? (
-                <h2 class="text-xs flex justify-center flex-col ml-2 font-[Poppins] " style={{ overflowWrap: "break-word" }}>{`http://player.quizledge.no${props.currentItem.quizLink || ""
+                <h2 class="text-xs flex justify-center flex-col ml-2 font-[Poppins] " style={{ overflowWrap: "break-word" }}>{`https://player.quizprompter.com${props.currentItem.quizLink || ""
                   }`}</h2>
               ) : (
                 ""
