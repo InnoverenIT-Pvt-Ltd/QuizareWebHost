@@ -542,7 +542,7 @@ const validateOptions = (values) => {
 </div>
 {showInputQstn && (
   <Input
-  className="text-black"
+  className="text-black placeholder-red-500"
   style={{width:"12rem",color:"black"}}
   placeholder={`Question ${
     isNewQuestion ? getNewQuestionNumber() : selectedQuestionIndex + 1

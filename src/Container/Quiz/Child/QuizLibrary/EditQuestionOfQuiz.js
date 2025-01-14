@@ -126,11 +126,13 @@ function EditQuestionofQuiz(props) {
     const GenerateSingleQuizUsingChatgpt = async () => {
       setError(""); 
       setLoadingSingle(true);
-
+      const quizNameForBackend = props.showQuiz.quizName;  
+    const uniqueQuestionPrompt = `${quizNameForBackend} - New Unique Question ${Date.now()}`;
+  
       const QGen = {
           noOfQstn: "1",
           quizHostId: props.quizHostId,
-          quizName: props.showQuiz.quizName,
+          quizName: quizNameForBackend,
           type: "ChatGpt",
       };
 
@@ -143,30 +145,30 @@ function EditQuestionofQuiz(props) {
           setshowInputQstn(false);
 
           const query = {
-              user_question:props.showQuiz.quizName,
+              user_question:uniqueQuestionPrompt,
               questions_required: "1",
               request_type: "MCQ_Content",
               options_required: "4",
               userid: props.quizHostId,
               quizId: props.showQuiz.quizId,
               type: "ChatGpt",
+              
           };
 
           const userQueryResponse = await axios.post(`${base_url2}/user_query/`, query); 
-
-       
+          
           const userPre = {
-              questionDTOS: userQueryResponse.data.response.ai_response.questions.map((qstn, index) => ({
-                  liveInd: true,
-                  number: index,
-                  option1: qstn.options[0]?.value || "",
-                  option2: qstn.options[1]?.value || "",
-                  option3: qstn.options[2]?.value || "",
-                  option4: qstn.options[3]?.value || "",
-                  question: qstn.question,
-                  quizId: props.showQuiz.quizId,
-                  type: "ChatGpt",
-              })),
+            questionDTOS: userQueryResponse.data.response.ai_response.questions.map((qstn, index) => ({
+              liveInd: true,
+              number: index,
+              option1: qstn.options[0]?.value || "",
+              option2: qstn.options[1]?.value || "",
+              option3: qstn.options[2]?.value || "",
+              option4: qstn.options[3]?.value || "",
+              question: qstn.question,
+              quizId: props.showQuiz.quizId,
+              type: "ChatGpt",
+            })),
               quizId: props.showQuiz.quizId,
           };
 
@@ -175,6 +177,7 @@ function EditQuestionofQuiz(props) {
           
           props.getQuestionList(props.showQuiz.quizId);
           // props.history.push(`/updateQuizNameInLibrary/${quizName}/${generateQuizResponse.data.duration}/${quizId}`);
+          // handleAddQuestion();
 
       } catch (err) {
           console.error(err);
@@ -188,10 +191,13 @@ function EditQuestionofQuiz(props) {
     const GenerateMultipleQuizUsingChatgpt = async () => {
       setError(""); 
       setLoadingMultiple(true);
+      const quizNameForBackend = props.showQuiz.quizName;  
+    const uniqueQuestionsPrompt = `${quizNameForBackend} - Generate ${questionReq} Unique Questions ${Date.now()}`;
+
       const QGen = {
           noOfQstn: questionReq,
           quizHostId: props.quizHostId,
-          quizName: props.showQuiz.quizName,
+          quizName: quizNameForBackend,
           type: "ChatGpt",
       };
 
@@ -204,7 +210,7 @@ function EditQuestionofQuiz(props) {
           setshowInputQstn(false);
 
           const query = {
-              user_question:props.showQuiz.quizName,
+              user_question:uniqueQuestionsPrompt,
               questions_required: questionReq,
               request_type: "MCQ_Content",
               options_required: "4",
@@ -236,7 +242,7 @@ function EditQuestionofQuiz(props) {
           
           props.getQuestionList(props.showQuiz.quizId);
           // props.history.push(`/updateQuizNameInLibrary/${quizName}/${generateQuizResponse.data.duration}/${quizId}`);
-
+          // handleAddQuestion();
       } catch (err) {
           console.error(err);
           setError(err.message || "An error occurred while generating the quiz.");
@@ -319,6 +325,7 @@ if (loadingSingle) {
                     setQuestionSource("Normal");
                     resetForm(); 
                     setIsNewQuestion(false);  
+
                 }}
                 validate={validateOptions}
             >
@@ -519,7 +526,7 @@ if (loadingSingle) {
 </div>
 {showInputQstn && (
   <Input
-  className="text-black"
+  className="text-black placeholder-red-500"
   style={{width:"12rem",color:"black"}}
   placeholder="Enter No.of Questions"
   value={questionReq}
@@ -633,9 +640,8 @@ if (loadingSingle) {
                                                 type="primary"
                                                 onClick={() => {
                                                     
-                                                        handleSubmit() // Enter add mode
-                                                   
-                                                }}
+                                                        handleSubmit(); // Enter add mode
+                                                      }}
                                                 style={{ height: "3rem", backgroundColor: "#3B16B7", borderRadius: '0.25rem' }}
                                             >
                                                 <h3 className="font-medium text-white text-base font-[Poppins]">
