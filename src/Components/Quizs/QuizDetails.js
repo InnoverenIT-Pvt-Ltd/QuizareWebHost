@@ -40,7 +40,7 @@
 //   const handleCancel = () => {
 //     setIsModalOpen(false);
 //   };
-//   const link = `http://player.quizledge.no.s3-website.eu-west-3.amazonaws.com${
+//   const link = `https://player.quizprompter.com/${
 //     props.quizNameDetails.quizLink || ""
 //   }`;
 //   function copyToClipboard() {
@@ -117,7 +117,7 @@
 //             </h2>
 //             <Card class="mt-4">
 //               {props.quizNameDetails.quizLink ? (
-//                 <h2 class="text-xs flex justify-center "style={{overflowWrap:"break-word"}}>{`http://player.quizledge.no.s3-website.eu-west-3.amazonaws.com${
+//                 <h2 class="text-xs flex justify-center "style={{overflowWrap:"break-word"}}>{`https://player.quizprompter.com/${
 //                   props.quizNameDetails.quizLink || ""
 //                 }`}</h2>
 //               ) : (
@@ -266,7 +266,7 @@ function QuizDetails(props) {
     const clipboard = new Clipboard('.copy-button');
 
     clipboard.on('success', (e) => {
-      // const link = `http://player.quizledge.no.s3-website.eu-west-3.amazonaws.com${copiedLink}`
+      // const link = `https://player.quizprompter.com${copiedLink}`
       const link = e.trigger.getAttribute('data-link');
 
       console.log(link)
@@ -300,7 +300,7 @@ function QuizDetails(props) {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-  // const link = `http://player.quizledge.no.s3-website.eu-west-3.amazonaws.com${move}`;
+  // const link = `https://player.quizprompter.com/${move}`;
   // function copyToClipboard(quizLink) {
   //   setMove(quizLink);
   //   copy(link);
@@ -333,7 +333,7 @@ function QuizDetails(props) {
             className="mySwiper "
           >
             {props.ongoingQuiz.map((item, i) => {
-              const ongoingQuizLink = `http://player.quizledge.no${item.quizLink}`
+              const ongoingQuizLink = `https://player.quizprompter.com${item.quizLink}`
               return (
                 <SwiperSlide >
 
@@ -400,7 +400,7 @@ function QuizDetails(props) {
                         </h2>
                         <Card class="mt-4">
                           {item.quizLink ? (
-                            <h2 class="text-xs flex justify-center flex-col " style={{ overflowWrap: "break-word" }}>{`https://player.quizledge.no${item.quizLink || ""
+                            <h2 class="text-xs flex justify-center flex-col " style={{ overflowWrap: "break-word" }}>{`https://player.quizprompter.com${item.quizLink || ""
                               }`}</h2>
                           ) : (
                             ""
