@@ -30,7 +30,7 @@ import Finalisedrawer from "./Finalisedrawer";
 import ProcessShareDrawer from "../../Components/ProcessShareDrawer";
 import { base_url, base_url2 } from "../../Config/Auth";
 import axios from "axios";
-
+import FWLogo1 from "../../images/linear_background_154 2.jpg";
 // const QuizzSchema = Yup.object().shape({
 //   question: Yup.string().required("Input needed!"),
 //   option1: Yup.string().required("Input needed!"),
@@ -48,7 +48,8 @@ function Quiz(props) {
   const [isDrawerVisible, setIsDrawerVisible] = useState(false);
   const [questionSource, setQuestionSource] = useState("Normal");
   const [isNewQuestion, setIsNewQuestion] = useState(false);
-  
+  const [loadingSingle, setLoadingSingle] = useState(false); 
+  const [loadingMultiple, setLoadingMultiple] = useState(false); 
   const [questionReq, setQuestionReq] = useState("");
   const [showInputQstn, setshowInputQstn] = useState(false);
   const [error, setError] = useState("");
@@ -59,11 +60,9 @@ function Quiz(props) {
     props.getQuizName(props.showQuiz.quizId)
     props.getFinalizeQuiz(props.showQuiz.quizId)
   }, [props.showQuiz.quizId]);
-
   useEffect(() => {
     if (isAddingNewQuestion) {
-      // setSelectedQuestionIndex(-1); // Reset to indicate a new question
-      setIsAddingNewQuestion(false); // Reset the flag after reinitializing
+      setIsAddingNewQuestion(false);
     }
   }, [isAddingNewQuestion]);
 
@@ -132,7 +131,7 @@ function Quiz(props) {
 console.log(props.showQuiz.quizHostInd)
 console.log(props.fetchingFinalizeQuiz)
 
-const generateSingleQuizChatgpt = async () => {
+const generateSingleQuizChatgpt = async (values) => {
   setError(""); 
 
   const QGen = {
@@ -153,7 +152,7 @@ const generateSingleQuizChatgpt = async () => {
       setshowInputQstn(false);
 
       const query = {
-          user_question:props.showQuiz.quizName,
+          user_question:values.question.trim() ? values.question : props.showQuiz.quizName,
           questions_required: "1",
           request_type: "MCQ_Content",
           options_required: "4",
@@ -163,28 +162,50 @@ const generateSingleQuizChatgpt = async () => {
       };
 
       const userQueryResponse = await axios.post(`${base_url2}/user_query/`, query); 
-
-   
-      const userPre = {
-          questionDTOS: userQueryResponse.data.response.ai_response.questions.map((qstn, index) => ({
-              liveInd: true,
-              number: index,
-              option1: qstn.options[0]?.value || "",
-              option2: qstn.options[1]?.value || "",
-              option3: qstn.options[2]?.value || "",
-              option4: qstn.options[3]?.value || "",
-              question: qstn.question,
-              quizId: props.showQuiz.quizId,
-              type: "ChatGpt",
-          })),
+      const existingQuestions = props.questionList || [] ;
+      const newQuestions = userQueryResponse.data.response.ai_response.questions.map((qstn, index) => ({
+        liveInd: true,
+        number: index,
+        option1: qstn.options[0]?.value || "",
+        option2: qstn.options[1]?.value || "",
+        option3: qstn.options[2]?.value || "",
+        option4: qstn.options[3]?.value || "",
+        question: qstn.question,
+        quizId: props.showQuiz.quizId,
+        type: "ChatGpt",
+      }));
+      const existingQuestionsMap = new Set(existingQuestions.map(q => q.question.toLowerCase().trim()));
+      const uniqueQuestions = newQuestions.filter((newQuestion) => {
+        return !existingQuestionsMap.has(newQuestion.question.toLowerCase().trim());
+      });
+      if (uniqueQuestions.length > 0) {
+        const userPre = {
+          questionDTOS: uniqueQuestions, 
           quizId: props.showQuiz.quizId,
-      };
+        };
+
+      // const userPre = {
+      //     questionDTOS: userQueryResponse.data.response.ai_response.questions.map((qstn, index) => ({
+      //         liveInd: true,
+      //         number: index,
+      //         option1: qstn.options[0]?.value || "",
+      //         option2: qstn.options[1]?.value || "",
+      //         option3: qstn.options[2]?.value || "",
+      //         option4: qstn.options[3]?.value || "",
+      //         question: qstn.question,
+      //         quizId: props.showQuiz.quizId,
+      //         type: "ChatGpt",
+      //     })),
+      //     quizId: props.showQuiz.quizId,
+      // };
 
 
       await axios.post(`${base_url}/question/multiple/questionsSave`, userPre); 
-      
       props.getQuestionList(props.showQuiz.quizId);
-      // props.history.push(`/updateQuizNameInLibrary/${quizName}/${generateQuizResponse.data.duration}/${quizId}`);
+    
+    } else {
+      setError("No unique questions were generated.");
+    }
 
   } catch (err) {
       console.error(err);
@@ -192,7 +213,7 @@ const generateSingleQuizChatgpt = async () => {
   }
 };
 
-const GenerateMultipleQuizChatgpt = async () => {
+const GenerateMultipleQuizChatgpt = async (values) => {
   setError(""); 
 
   const QGen = {
@@ -213,7 +234,7 @@ const GenerateMultipleQuizChatgpt = async () => {
       setshowInputQstn(false);
 
       const query = {
-          user_question:props.showQuiz.quizName,
+          user_question:values.question.trim() ? values.question : props.showQuiz.quizName,
           questions_required: questionReq,
           request_type: "MCQ_Content",
           options_required: "4",
@@ -223,36 +244,56 @@ const GenerateMultipleQuizChatgpt = async () => {
       };
 
       const userQueryResponse = await axios.post(`${base_url2}/user_query/`, query); 
-
+      const existingQuestions = props.questionList || [] ;
    
+      const newQuestions = userQueryResponse.data.response.ai_response.questions.map((qstn, index) => ({
+        liveInd: true,
+        number: index,
+        option1: qstn.options[0]?.value || "",
+        option2: qstn.options[1]?.value || "",
+        option3: qstn.options[2]?.value || "",
+        option4: qstn.options[3]?.value || "",
+        question: qstn.question,
+        quizId: props.showQuiz.quizId,
+        type: "ChatGpt",
+      }));
+      const existingQuestionsMap = new Set(existingQuestions.map(q => q.question.toLowerCase().trim()));
+
+    const uniqueQuestions = newQuestions.filter((newQuestion) => {
+      return !existingQuestionsMap.has(newQuestion.question.toLowerCase().trim());
+    });
+
+    if (uniqueQuestions.length > 0) {
       const userPre = {
-          questionDTOS: userQueryResponse.data.response.ai_response.questions.map((qstn, index) => ({
-              liveInd: true,
-              number: index,
-              option1: qstn.options[0]?.value || "",
-              option2: qstn.options[1]?.value || "",
-              option3: qstn.options[2]?.value || "",
-              option4: qstn.options[3]?.value || "",
-              question: qstn.question,
-              quizId: props.showQuiz.quizId,
-              type: "ChatGpt",
-          })),
-          quizId: props.showQuiz.quizId,
+        questionDTOS: uniqueQuestions, 
+        quizId: props.showQuiz.quizId,
       };
 
-
+      // const userPre = {
+      //     questionDTOS: userQueryResponse.data.response.ai_response.questions.map((qstn, index) => ({
+      //         liveInd: true,
+      //         number: index,
+      //         option1: qstn.options[0]?.value || "",
+      //         option2: qstn.options[1]?.value || "",
+      //         option3: qstn.options[2]?.value || "",
+      //         option4: qstn.options[3]?.value || "",
+      //         question: qstn.question,
+      //         quizId: props.showQuiz.quizId,
+      //         type: "ChatGpt",
+      //     })),
+      //     quizId: props.showQuiz.quizId,
+      // };
       await axios.post(`${base_url}/question/multiple/questionsSave`, userPre); 
-      
       props.getQuestionList(props.showQuiz.quizId);
-      // props.history.push(`/updateQuizNameInLibrary/${quizName}/${generateQuizResponse.data.duration}/${quizId}`);
-
+    } else {
+      setError("No unique questions were generated.");
+    }
   } catch (err) {
       console.error(err);
       setError(err.message || "An error occurred while generating the quiz.");
   }
 };
 const backTo = () => {
-  // Navigate back to the quiz library
   props.handleBackToQuiz();
   history.push(`/quizLibrary`);
 };
@@ -270,6 +311,16 @@ const validateOptions = (values) => {
   return errors;
 }
 
+if (loadingSingle) {
+  return <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 custom-loader">
+  <div className="loader"><img src={FWLogo1}  width={10000}  style={{ borderRadius:"0.75rem"}} alt="Loading..."  /></div>
+</div>;
+}
+if (loadingMultiple) {
+  return <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 custom-loader">
+  <div className="loader"><img src={FWLogo1}  width={10000}  style={{ borderRadius:"0.75rem"}} alt="Loading..."  />
+  </div>
+  </div>;}
   return (
     <>
       <div className="min-h-screen">
@@ -280,14 +331,22 @@ const validateOptions = (values) => {
             quizHostId: props.quizHostId,
             quizId: props.showQuiz && props.showQuiz.quizId,
             categoryId: selectedCategory,
-            question: question || selectedQuestion.question || "",
+            question: question ? "" : selectedQuestion.question || "",
             option1: checkObj ? options[0].value : selectedQuestion.option1 || "",
             option2: checkObj ? options[1].value : selectedQuestion.option2 || "",
             option3: checkObj ? options[2].value : selectedQuestion.option3 || "",
             option4: checkObj ? options[3].value : selectedQuestion.option4 || "",
           }}
           // validationSchema={QuizzSchema}
-          onSubmit={(values, { resetForm }) => {
+          onSubmit={(values, { resetForm, }) => {
+            const isDuplicate = props.questionList.some(
+              (item) => item.question.toLowerCase() === values.question.toLowerCase()
+            );
+          
+            if (isDuplicate) {
+              alert("This question already exists.")
+              return; 
+            }
             props.addQuestion(
               {
                 ...values,
@@ -358,6 +417,7 @@ const validateOptions = (values) => {
                       <div className="flex justify-between">
                       <div>
                         {count >= 1 &&
+                        
                           <Button
                             style={{ height: "2.5rem", backgroundColor: "#3B16B7", borderRadius: '0.25rem',width:"5rem" }}
                             type="primary"
@@ -495,18 +555,8 @@ const validateOptions = (values) => {
                             Need help? Generate your Responses with AI using{" "}
                           </div>
                           <div className="text-[#3B16B7] text-base underline font-bold cursor-pointer"
-                            
-                          
-                          
                             onClick={() => {
-                              // const query = {
-                              //   request_type: "MCQ",
-                              //   user_question: values.question,
-                              //   options_required: "4",
-                              //   userid: props.userId,
-                              //   quizId: props.showQuiz && props.showQuiz.quizId,
-                              // };
-                              generateSingleQuizChatgpt();
+                              generateSingleQuizChatgpt(values);
                               setQuestionSource("ChatGpt");
                             }}
                           >
@@ -549,7 +599,7 @@ const validateOptions = (values) => {
   }:Enter No.of Questions`}
     value={questionReq}
   onChange={(e) => setQuestionReq(e.target.value)}
-  onKeyDown={(e) => e.key === 'Enter' && GenerateMultipleQuizChatgpt()}
+  onKeyDown={(e) => e.key === 'Enter' && GenerateMultipleQuizChatgpt(values)}
 />
 )}
                         </>
@@ -686,7 +736,8 @@ const validateOptions = (values) => {
                         <Button
                           style={{ height: "3rem", backgroundColor: "#3B16B7", borderRadius: '0.25rem',width:"9rem" }}
                           type="primary"
-                          onClick={handleSubmit}
+                          onClick={()=>{ handleSubmit();
+                            }}
                         >
                           <h3 className="font-medium text-white text-base">Save Question</h3>
                         </Button>

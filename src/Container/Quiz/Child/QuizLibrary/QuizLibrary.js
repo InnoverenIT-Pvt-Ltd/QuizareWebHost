@@ -312,7 +312,7 @@ const handleOpen= ()=>{
                          
                     <div class="flex flex-row">
   <div class="text-base font-[Poppins] text-white rounded-full border-2 border-white py-1 px-2 w-8 h-8 flex justify-center items-center">
-    {`${item.noOfQuestions || ""}`}
+    {`${item.noOfQuestions }`}
   </div>
 </div>
 

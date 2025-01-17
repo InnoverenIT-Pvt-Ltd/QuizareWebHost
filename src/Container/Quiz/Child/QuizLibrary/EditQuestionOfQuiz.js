@@ -75,9 +75,9 @@ function EditQuestionofQuiz(props) {
         {
           duration: duration,
           quizHostId: props.quizHostId,
-          quizName: props.item.quizName,
+          quizName: props.showQuiz.quizName,
         },
-        props.item.quizId
+        props.showQuiz.quizId
       );
       // props.hostQuiz(currentItem.quizId);
     };
@@ -364,7 +364,7 @@ if (loadingSingle) {
                         </Tooltip>
                       </div>
                       <div className="flex justify-between">
-                      <div className="">
+                      <div className="">           
 <Button
  type="primary"
   style={{ height: "2.5rem", backgroundColor: "#3B16B7", borderRadius: '0.25rem',width:"5rem" }}
@@ -379,7 +379,6 @@ if (loadingSingle) {
 >
 <h3 className="font-medium text-white text-base">Host</h3>
 </Button>
-
 </div> 
                       <div className="">
 <Button

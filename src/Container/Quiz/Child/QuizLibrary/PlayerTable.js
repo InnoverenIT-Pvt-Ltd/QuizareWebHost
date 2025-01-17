@@ -10,10 +10,6 @@ useEffect(() => {
   props.getPlayersDetails(props.data.quizId);
 }, []);
 const playersList = props.playersDetails.player
-const quizData = {
-  hostName: "Suraj Subudhi",
- 
-};
 const columns = [
     {
       title: "Player",
@@ -32,18 +28,18 @@ const columns = [
     },
   
   ];
+  const fullName = (props.user.name || '') + ' ' + (props.user.lastName || '') || 'No Data';
   return (
    <>
  <div className="flex items-center  my-6">
       <p className="text-sm font-bold  text-gray-600 mr-2">Hosted By:</p>
-      <h2 className="text-lg font-bold text-gray-500">{quizData.hostName}</h2>
+      <h2 className="text-lg font-bold text-gray-500">{fullName}</h2>
     </div>
    <StyledTable
    columns={columns}
      dataSource={playersList}
   loading={props.fetchingQuizNameDetails}
    pagination={false}
-  //  scroll={{ y: 100 }}
    />
    </>
   );
@@ -55,6 +51,7 @@ const mapStateToProps = ({auth, quiz}) => ({
   playersDetails:quiz.playersDetails,
   fetchingQuizNameDetails: quiz.fetchingQuizNameDetails,
     fetchingQuizNameDetailsError: quiz.fetchingQuizNameDetailsError,
+    user: auth.userDetails,
   });
   
   const mapDispatchToProps = dispatch =>
