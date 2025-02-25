@@ -478,7 +478,7 @@ function QuizDetails(props) {
                               name="duration"
                               value={duration}
                               onChange={(ev) => setDuration(ev.target.value)}
-                              placeholder="Enter Response time per question"
+                              placeholder="Enter the response time per question in seconds"
                             />
                           </form>
                         </Modal>

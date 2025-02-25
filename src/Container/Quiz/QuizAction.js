@@ -455,14 +455,38 @@ export const hostQuiz = (data, quizId,history) => dispatch => {
         type: types.HOST_QUIZ_SUCCESS,
         payload: res.data,
       });
+      const quizLink = `https://player.quizprompter.com${res.data.quizLink || ""}`;
+
       Swal.fire({
         icon: "success",
-        title: "Quiz Hosted SucessFully",
-        showConfirmButton: false,
-        timer: 1500
+        title: "Quiz Hosted Successfully",
+        html: `
+          <p>Link to be shared:</p>
+          <input id="quizLinkInput" type="text" value="${quizLink}" readonly 
+                 style="width: 100%; padding: 10px; font-size: 14px; border: 1px solid #ccc; border-radius: 4px; margin-bottom: 10px;" />`,
+        showCancelButton: true,
+        cancelButtonText: "Close",
+        confirmButtonText: "Copy Link",
+        preConfirm: () => {
+          const link = document.getElementById("quizLinkInput");
+          navigator.clipboard.writeText(link.value).then(() => {
+            Swal.fire({
+              icon: "success",
+              title: "Link Copied Successfully",
+              text: "The quiz link has been copied to your clipboard.",
+            }).then(() => {
+              window.location.replace("/quizLibrary");
+            });
+          }).catch(err => {
+            Swal.fire({
+              icon: "error",
+              title: "Failed to Copy",
+              text: "Something went wrong while copying the link.",
+            });
+          });
+        }
       });
-      // cb && cb();
-      window.location.replace("/quizLibrary");
+      console.log("hosted", res.data.quizLink);
     })
     .catch(err => {
       //console.log(err);
