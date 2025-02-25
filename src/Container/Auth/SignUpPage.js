@@ -29,11 +29,18 @@ import { Radio } from "@mui/material";
 // /**
 //  * yup validation scheme for set Password
 //  */
+const passwordRegex = /^(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/;
 const emailRegex = /^[\w.%+-]+@[^\W]+(?:\.[^\W_]+)+$/;
 const SignSchema = Yup.object().shape({
     name: Yup.string().required("Input needed!"),
     emailID: Yup.string()
     .matches(emailRegex, "Invalid email format")
+    .required("Input needed!"),
+    password: Yup.string()
+    .matches(passwordRegex, "Password must be at least 8 characters long and contain at least one special character")
+    .required("Input needed!"),
+    confirmPassword: Yup.string()
+    .oneOf([Yup.ref('password'), null], "Passwords must match")
     .required("Input needed!"),
   });
 class SignUpPage extends Component {
@@ -71,8 +78,18 @@ class SignUpPage extends Component {
     handleSteppriPolInd = (newValue) => {
         this.setState({ isChecked: newValue });
       };
+
+       InputComponent = ({ field, form, ...props }) => {
+  return (
+    <div>
+      <input {...field} {...props} />
+      {form.touched[field.name] && form.errors[field.name] && (
+        <div className="error">{form.errors[field.name]}</div>
+      )}
+    </div>
+  );
+};
     render() {
-        console.log(this.props);
 
         return (
             <>
@@ -257,7 +274,7 @@ class SignUpPage extends Component {
                                              checked={this.state.isChecked}
                                              onChange={(e) => this.handleSteppriPolInd(e.target.checked)}
                                               class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"></input>
-                                                <h3 class="ml-2 text-white font-[Poppins] flex w-[35rem] justify-evenly">By creating an account, I agree to our 
+                                                <h3 class="ml-2 text-white font-[Poppins] flex w-[36rem] justify-evenly">By creating an account, you agree to our 
                                                    <a href="/term" target="_blank"> 
                                                     <div class="underline">Terms of use </div></a> and
                                                      <a href="/privacy" target="_blank">   <div class="underline">Privacy Policy </div></a>

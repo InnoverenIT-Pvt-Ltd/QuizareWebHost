@@ -118,7 +118,7 @@ function FinalizeQuiz(props) {
                     name="duration"
                     value={duration}
                     onChange={(ev) => setDuration(ev.target.value)}
-                    placeholder="Enter Response time in seconds"
+                    placeholder="Enter the response time per question in seconds"
                     style={{ width: "100%", height: "2rem",borderRadius:"0.25rem", }}
                   />
                 </form>
@@ -193,7 +193,7 @@ function FinalizeQuiz(props) {
                     name="duration"
                     value={duration}
                     onChange={(ev) => setDuration(ev.target.value)}
-                    placeholder="Enter Response time in seconds"
+                    placeholder="Enter the response time per question in seconds"
                   />
                 </form>
               </Modal>

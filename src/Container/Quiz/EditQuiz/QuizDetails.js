@@ -2,20 +2,22 @@ import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { closeQuiz, hostQuiz } from "../../../Container/Quiz/QuizAction";
-import { Button, Card } from "antd";
-import { useHistory,Link } from "react-router-dom";
-import { Field, Formik, Form } from "formik";
-// import QuizDetailsPlayerTable from './QuizDetailsPlayerTable';
-import QuizDetailsPlayerTable from "../../../Components/Quizs/QuizDetailsPlayerTable";
-import MainHeader from "../../../Components/Mainheader";
+import { Button } from "antd";
+import { useHistory } from "react-router-dom";
 import copy from "copy-to-clipboard";
-// import MainHeader from '../Mainheader';
+import Swal from 'sweetalert2';
 
 function QuizDetails(props) {
   const link = `https://player.quizprompter.com${props.showQuiz.quizLink || ""}`;
   function copyToClipboard() {
     copy(link);
     console.log(link)
+ Swal.fire({
+                    icon: "success",
+                    title: `Link copied successfully`,
+                    showConfirmButton: false,
+                    timer: 1500
+                });
   }
   const history = useHistory();
 
