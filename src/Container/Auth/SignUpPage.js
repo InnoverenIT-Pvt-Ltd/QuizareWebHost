@@ -196,55 +196,62 @@ class SignUpPage extends Component {
                                             </div> */}
                                              <div className="w-[47.5%] ">
                                              <div class="text-white font-normal font-[Poppins]">Password</div>
+                                             <div className="flex">
                         <Field
                           name="password"
                           type={this.state.type}
                           placeholder="Create Password"
                           component={this.InputComponent}
-                          style={{ width: "100%", height: "2.2rem",borderRadius:"0.5rem",backgroundColor:"#6245C6",borderColor:"white",color:"white" }}
+                          style={{ width: "21rem", height: "2.2rem",borderRadius:"0.5rem",backgroundColor:"#6245C6",borderColor:"white",color:"white" }}
                         />
                      
                       {this.state.show ? (
-                        <EyeOutlined className=" !text-icon  -ml-5"
+                        <EyeOutlined className="!text-icon mt-[0.5rem] -ml-5"
                           type="eye"
+                          style={{color:"black"}}
                           onClick={this.handleClick}
                           
                         />
                       ) : (
-                        <EyeInvisibleOutlined className=" !text-icon  -ml-5"
+                        <EyeInvisibleOutlined className=" !text-icon mt-[0.5rem] -ml-5"
                           type="eye-invisible"
+                          style={{color:"black"}}
                           onClick={this.handleClick}
                                                
                         />
                       )}
+                      </div>
                     </div>
                   
 
                     <div  className="w-[47.5%]">
                    
                     <div class="text-white font-normal font-[Poppins]">Confirm Password</div>
+                    <div className="flex">
                           <Field
                             name="confirmPassword"
                             type={this.state.type1}
                             placeholder="Confirm Password"
                             component={this.InputComponent}
-                            style={{ width: "100%", height: "2.2rem",borderRadius:"0.5rem",backgroundColor:"#6245C6",borderColor:"white",color:"white" }}
+                            style={{ width: "21rem", height: "2.2rem",borderRadius:"0.5rem",backgroundColor:"#6245C6",borderColor:"white",color:"white" }}
 
                           />
                         
                         {this.state.show1 ? (
-                          <EyeOutlined  className=" !text-icon  -ml-5"
+                          <EyeOutlined  className="!text-icon mt-[0.5rem] -ml-5"
                             type="eye"
+                            style={{color:"black"}}
                             onClick={this.handleClick1}
                       
                           />
                         ) : (
-                          <EyeInvisibleOutlined  className=" !text-icon  -ml-5"
+                          <EyeInvisibleOutlined  className="!text-icon mt-[0.5rem] -ml-5"
                             type="eye-invisible"
+                            style={{color:"black"}}
                             onClick={this.handleClick1}
                             />
                         )}
-                      
+                       </div>
                       </div>
                       {/* {values.password.length &&
                         values.password === values.confirmPassword ? (
