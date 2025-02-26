@@ -207,7 +207,7 @@ function LoginByMail (props) {
                                                 </div>
                                                 </div>
                                             <div className="flex justify-start mt-8 w-wk">
-                                            <Link to="/newforgotpassword">
+                                            <Link to="/fogotThroughemail">
                                             <div className="text-white font-semibold font-[Poppins]">Forgot Password</div>
                                             </Link>
                                             </div>

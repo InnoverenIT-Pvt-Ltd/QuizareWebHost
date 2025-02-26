@@ -220,6 +220,12 @@ export const changePassword = (data, userId, cb) => (dispatch) => {
         type: types.CHANGE_PASSWORD_FAILURE,
         payload: err,
       });
+      Swal.fire({
+        icon: "error",
+        title:"Something went wrong !",
+        showConfirmButton: false,
+        timer: 1500
+      });
     });
 };
 
@@ -259,7 +265,12 @@ export const updatePassword = (data, cb) => (dispatch) => {
         payload: res.data,
       });
       cb();
-      message.success("Password has been changed successfully !!")
+      Swal.fire({
+        icon: "success",
+        title:"Verification link sent successfully to your registered mail",
+        showConfirmButton: false,
+        timer: 1500
+      });
     })
     .catch((err) => {
       cb();
