@@ -9,6 +9,7 @@ import PrivateRoute from "./Helpers/Auth/PrivateRoute";
 import Privacy from "./Privacy";
 import Termco from "./Termco";
 import SelectPlan from "./Main/SelectPlan";
+import ForgotThroughEmail from "./Container/Auth/ForgotThroughEmail";
 const NewForgetPassword = lazy(() => import("./Container/Auth/NewForgetPassword"))
 const ForgetPasswordForm = lazy(() => import("./Container/Auth/ForgetPasswordForm"))
 const LoginByMail = lazy(() => import("./Container/Auth/LoginByMail"))
@@ -75,8 +76,10 @@ const StripeOutPayLoading =lazy(()=>import("./Main/StripeOutPayLoading"));
               <Route exact path="/term" component={Termco} />
               <Route exact path="/selectplan" component={SelectPlan} />
               <Route exact path="/changepassword" component={ChangePassword} />
-              <Route exact path="/forgotPassword" component={ForgetPasswordForm} />
-              <Route exact path="/newforgotpassword" component={NewForgetPassword} />
+              {/* <Route exact path="/forgotPassword" component={ForgetPasswordForm} />
+              <Route exact path="/newforgotpassword" component={NewForgetPassword} /> */}
+              <Route exact path="/user/forgotPassword/:to" component={ForgetPasswordForm} />
+              <Route exact path="/fogotThroughemail" component={ForgotThroughEmail} />
               <Route exact path="/drb/payloading/:stripePaymentId/:paymentId/:subscriptionId/:userId" component={StripeOutPayLoading} />
               {fetchingUserDetails && !userDetails ? (
                 <BundleLoader />
