@@ -123,16 +123,16 @@ function EditQuestionofQuiz(props) {
           // console.log(props.item);
     console.log(selectedQuestion);
     
-    const GenerateSingleQuizUsingChatgpt = async () => {
+    const GenerateSingleQuizUsingChatgpt = async (values) => {
       setError(""); 
       setLoadingSingle(true);
       const quizNameForBackend = props.showQuiz.quizName;  
-    const uniqueQuestionPrompt = `${quizNameForBackend} - New Unique Question ${Date.now()}`;
+    // const uniqueQuestionPrompt = `${quizNameForBackend} - New Unique Question ${Date.now()}`;
   
       const QGen = {
           noOfQstn: "1",
           quizHostId: props.quizHostId,
-          quizName: quizNameForBackend,
+          quizName: props.showQuiz.quizName,
           type: "ChatGpt",
       };
 
@@ -145,7 +145,7 @@ function EditQuestionofQuiz(props) {
           setshowInputQstn(false);
 
           const query = {
-              user_question:uniqueQuestionPrompt,
+              user_question:values.question.trim() ? values.question : props.showQuiz.quizName,
               questions_required: "1",
               request_type: "MCQ_Content",
               options_required: "4",
@@ -156,29 +156,51 @@ function EditQuestionofQuiz(props) {
           };
 
           const userQueryResponse = await axios.post(`${base_url2}/user_query/`, query); 
-          
-          const userPre = {
-            questionDTOS: userQueryResponse.data.response.ai_response.questions.map((qstn, index) => ({
-              liveInd: true,
-              number: index,
-              option1: qstn.options[0]?.value || "",
-              option2: qstn.options[1]?.value || "",
-              option3: qstn.options[2]?.value || "",
-              option4: qstn.options[3]?.value || "",
-              question: qstn.question,
+          const existingQuestions = props.questionList || [] ;
+          const newQuestions = userQueryResponse.data.response.ai_response.questions.map((qstn, index) => ({
+            liveInd: true,
+            number: index,
+            option1: qstn.options[0]?.value || "",
+            option2: qstn.options[1]?.value || "",
+            option3: qstn.options[2]?.value || "",
+            option4: qstn.options[3]?.value || "",
+            question: qstn.question,
+            quizId: props.showQuiz.quizId,
+            type: "ChatGpt",
+          }));
+          const existingQuestionsMap = new Set(existingQuestions.map(q => q.question.toLowerCase().trim()));
+          const uniqueQuestions = newQuestions.filter((newQuestion) => {
+            return !existingQuestionsMap.has(newQuestion.question.toLowerCase().trim());
+          });
+          if (uniqueQuestions.length > 0) {
+            const userPre = {
+              questionDTOS: uniqueQuestions, 
               quizId: props.showQuiz.quizId,
-              type: "ChatGpt",
-            })),
-              quizId: props.showQuiz.quizId,
-          };
-
-
+            };
+    
+          // const userPre = {
+          //     questionDTOS: userQueryResponse.data.response.ai_response.questions.map((qstn, index) => ({
+          //         liveInd: true,
+          //         number: index,
+          //         option1: qstn.options[0]?.value || "",
+          //         option2: qstn.options[1]?.value || "",
+          //         option3: qstn.options[2]?.value || "",
+          //         option4: qstn.options[3]?.value || "",
+          //         question: qstn.question,
+          //         quizId: props.showQuiz.quizId,
+          //         type: "ChatGpt",
+          //     })),
+          //     quizId: props.showQuiz.quizId,
+          // };
+    
+    
           await axios.post(`${base_url}/question/multiple/questionsSave`, userPre); 
-          
           props.getQuestionList(props.showQuiz.quizId);
-          // props.history.push(`/updateQuizNameInLibrary/${quizName}/${generateQuizResponse.data.duration}/${quizId}`);
-          // handleAddQuestion();
-
+        
+        } else {
+          setError("No unique questions were generated.");
+        }
+    
       } catch (err) {
           console.error(err);
           setError(err.message || "An error occurred while generating the quiz.");
@@ -186,7 +208,7 @@ function EditQuestionofQuiz(props) {
       finally {
         setLoadingSingle(false);
     } 
-  };
+    };
 
     const GenerateMultipleQuizUsingChatgpt = async () => {
       setError(""); 
@@ -257,6 +279,7 @@ function EditQuestionofQuiz(props) {
     <div className="loader"><img src={FWLogo1}  width={10000}  style={{ borderRadius:"0.75rem"}} alt="Loading..."  />
     </div>
     </div>;}
+
 
   const validateOptions = (values) => {
     const errors = {};
@@ -488,7 +511,7 @@ if (loadingSingle) {
                               //   userid: props.userId,
                               //   quizId: props.item.quizId,
                               // };
-                              GenerateSingleQuizUsingChatgpt();
+                              GenerateSingleQuizUsingChatgpt(values);
                               setQuestionSource("ChatGpt");
                             }}
                           >
@@ -525,7 +548,7 @@ if (loadingSingle) {
 </div>
 {showInputQstn && (
   <Input
-  className="text-black placeholder-red-500"
+  className="text-black placeholder-black-500"
   style={{width:"12rem",color:"black"}}
   placeholder="Enter No.of Questions"
   value={questionReq}
