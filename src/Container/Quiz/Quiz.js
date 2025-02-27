@@ -133,7 +133,7 @@ console.log(props.fetchingFinalizeQuiz)
 
 const generateSingleQuizChatgpt = async (values) => {
   setError(""); 
-
+  setLoadingSingle(true);
   const QGen = {
       noOfQstn: "1",
       quizHostId: props.quizHostId,
@@ -211,11 +211,14 @@ const generateSingleQuizChatgpt = async (values) => {
       console.error(err);
       setError(err.message || "An error occurred while generating the quiz.");
   }
+  finally {
+    setLoadingSingle(false);
+} 
 };
 
 const GenerateMultipleQuizChatgpt = async (values) => {
   setError(""); 
-
+  setLoadingMultiple(true);
   const QGen = {
       noOfQstn: questionReq,
       quizHostId: props.quizHostId,
@@ -292,6 +295,9 @@ const GenerateMultipleQuizChatgpt = async (values) => {
       console.error(err);
       setError(err.message || "An error occurred while generating the quiz.");
   }
+  finally {
+    setLoadingMultiple(false);
+  }
 };
 const backTo = () => {
   props.handleBackToQuiz();
@@ -321,6 +327,7 @@ if (loadingMultiple) {
   <div className="loader"><img src={FWLogo1}  width={10000}  style={{ borderRadius:"0.75rem"}} alt="Loading..."  />
   </div>
   </div>;}
+
   return (
     <>
       <div className="min-h-screen">
@@ -591,16 +598,16 @@ if (loadingMultiple) {
 </div>
 </div>
 {showInputQstn && (
+  <div className="flex justify-center">
   <Input
-  className="text-black placeholder-red-500"
+  className="text-black placeholder-black-500"
   style={{width:"12rem",color:"black"}}
-  placeholder={`Question ${
-    isNewQuestion ? getNewQuestionNumber() : selectedQuestionIndex + 1
-  }:Enter No.of Questions`}
+  placeholder={`Enter No.of Questions`}
     value={questionReq}
   onChange={(e) => setQuestionReq(e.target.value)}
   onKeyDown={(e) => e.key === 'Enter' && GenerateMultipleQuizChatgpt(values)}
 />
+</div>
 )}
                         </>
                         )}
