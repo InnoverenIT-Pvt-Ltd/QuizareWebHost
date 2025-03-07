@@ -759,7 +759,7 @@ if (loadingMultiple) {
                                                 style={{  height: "3rem",backgroundColor:"#3B16B7",borderRadius:'0.25rem' }}
                                                 onClick={() => backTo()}
 
-                                            ><h3 class="font-medium text-white text-base font-[Poppins]">Back To Quiz</h3></Button>
+                                            ><h3 class="font-medium text-white text-base font-[Poppins]">Back To Quiz Library</h3></Button>
                                             </div>
                       </div>
                     </div>

@@ -84,7 +84,7 @@ class SignUpPage extends Component {
     <div>
       <input {...field} {...props} />
       {form.touched[field.name] && form.errors[field.name] && (
-        <div className="error">{form.errors[field.name]}</div>
+        <div className="text-[#ff4d4f] font-semibold">{form.errors[field.name]}</div>
       )}
     </div>
   );
@@ -174,11 +174,11 @@ class SignUpPage extends Component {
                                             </div>
                                             <div class="w-full mt-2">
                                             <div class="text-white font-normal font-[Poppins]">Email Address</div>
-                                                <Field
+                                                 <Field
                                                     name="emailID"
                                                     type="email"
                                                     placeholder="Enter Email"
-                                                    style={{ width: "100%", height: "2.2rem",borderRadius:"0.5rem",backgroundColor:"#6245C6",borderColor:"white",color:"white" }}
+                                                    style={{ width: "100%", height: "2.2rem",borderRadius:"0.5rem",backgroundColor:"#6245C6",borderColor:"white" }}
                                                     component={InputComponent}
                                                 />
                                             </div>
